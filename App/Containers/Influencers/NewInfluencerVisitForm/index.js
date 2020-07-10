@@ -1,0 +1,2 @@
+import NewInfluencerVisitForm from './NewInfluencerVisitForm'
+export default NewInfluencerVisitForm
