@@ -956,7 +956,7 @@ function showAppUpdatePromptAndroid(latest_version) {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        { text: "Update", onPress: () => Linking.openURL('https://play.google.com/store/apps/details?id=com.vikasshree')}
+        { text: "Update", onPress: () => Linking.openURL('https://play.google.com/store/apps/details?id=com.heroelectric')}
       ],
       { cancelable: false }
     );

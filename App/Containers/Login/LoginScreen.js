@@ -27,8 +27,8 @@ class LoginScreen extends Component {
             <View style={Style.container}>
                  <View style={Style.buttonBox}>
                     <Image
-                        style={{ width: 100, height: 100 }}
-                        source={require('App/Assets/Images/shreelogo.png')}
+                        style={{ width: 240, height: 150 }}
+                        source={require('App/Assets/Images/herologo.png')}
                     />
                 </View>
                 <View style={Style.action}>

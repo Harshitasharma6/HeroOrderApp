@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 export default StyleSheet.create({
   input: {
-    borderColor: Colors.primary,
+    borderColor: Colors.grey,
     borderRadius: 10,
     borderWidth: 1,
     color: Colors.inputText,

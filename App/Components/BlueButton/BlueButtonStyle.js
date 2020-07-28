@@ -18,11 +18,10 @@ export default StyleSheet.create({
     // borderRadius: 10
 
 
-    backgroundColor: Colors.lightGrey,
-    borderColor: Colors.primary,
+    backgroundColor: Colors.primary,
+    borderColor: 0,
     borderWidth: 0,
     overflow: 'visible',
-    ...ApplicationStyles.buttonShadow,
     borderRadius: 10,
     alignItems: 'center',
     flexDirection: 'row',
@@ -35,7 +34,7 @@ export default StyleSheet.create({
 
   },
   text: {
-    color: Colors.primary,
+    color: Colors.white,
     fontFamily: ApplicationStyles.textMsgFont,
     fontSize: wp('5%'),
     textTransform: 'uppercase',
