@@ -30,7 +30,7 @@ export default StyleSheet.create({
     color: Colors.primary,
     fontFamily: ApplicationStyles.textMsgFont,
     paddingLeft: 5,
-    fontSize: wp('4%')
+    fontSize: wp('4.4%')
   },
   placeholder: {
     color: Colors.inputPlaceholder,

@@ -27,6 +27,10 @@ import SiteVisitListLayout from './Sites/SiteVisitListLayout';
 import FinalObservationLayout from './FinalObservationLayout';
 
 
+//
+import VisitorInfoScreenLayout from './Visitor/VisitorInfoScreenLayout';
+
+
 
 class LayoutScreen extends React.Component {
   getCurrentLayoutScreen() {
@@ -273,8 +277,19 @@ class LayoutScreen extends React.Component {
         customLayoutNode = <VisitSummaryLayout />
         break;
 
-
-              
+      case 'InsightsScreen':
+        customLayoutNode = []
+        break;
+      case 'NewRegistrationFormScreen':
+      case 'TestDriveFeedBackScreen':
+        customLayoutNode = <NewRetailerLayout />
+        break;
+      case 'VisitorInfoScreen':
+      case 'VisitHistoryScreen':
+      case 'AddProductScreen':
+      case 'TestDriveHistoryScreen':
+        customLayoutNode = <VisitorInfoScreenLayout />
+        break;
       default:
         customLayoutNode = [];
 

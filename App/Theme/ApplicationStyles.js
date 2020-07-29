@@ -14,15 +14,13 @@ export default {
 	    shadowColor: "#000",
 	    shadowOffset: {
 	      width: 0,
-	      height: 2,
+	      height: 0,
 	    },
-	    shadowOpacity: 0.25,
-	    shadowRadius: 3.84
 	},
 	formButton: {
 		width: wp('38%'),
-		margin: 20,
-		marginHorizontal: 10,
+		alignSelf: 'center',
+		marginTop: hp('2%'),
 		borderRadius: 10,
 		height: hp('5.5%'),
 		zIndex: 3
@@ -31,8 +29,8 @@ export default {
 	    alignSelf: 'center',
 	    color: Colors.primary,
 	    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Montserrat_b',
-	    fontSize: wp('4.5%'),
-	    marginBottom: hp('3.5%'),
+	    fontSize: wp('5.5%'),
+	    marginBottom: hp('4%'),
 	    textTransform: 'uppercase'
 	},
 	plusIcon: {
@@ -71,5 +69,20 @@ export default {
     	color: Colors.primary, 
 	    fontSize: wp('5%'),
 	    marginRight: 0
-    }
+    },
+    container: {
+	    backgroundColor: Colors.white,
+	    flexDirection: 'row',
+	    flexWrap: 'wrap',
+	    justifyContent: 'center',
+	    alignItems: 'center',
+	    flex: 1,
+	    paddingTop: hp('15%')
+  	},
+  	label: {
+	    color: Colors.primary,
+	    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Montserrat_b',
+	    fontSize: wp('4.5%'),
+	    paddingLeft: wp('.5%'),
+  	}
 }

@@ -53,7 +53,7 @@ export default class EditQuantity extends Component {
 					onPressOut={this.stopTimer}
 					style={Style.actionButtonIcon}>
 					<GenericIcon 
-						name="remove-circle"
+						name="minus-circle"
 						style={Style.actionButtonIcon}
 					/>
 				</TouchableOpacity>
@@ -70,7 +70,7 @@ export default class EditQuantity extends Component {
 					onPressOut={this.stopTimer}
 					style={Style.actionButtonIcon}>
 					<GenericIcon 
-						name="add-circle"
+						name="plus-circle"
 						style={Style.actionButtonIcon}
 					/>
 				</TouchableOpacity>

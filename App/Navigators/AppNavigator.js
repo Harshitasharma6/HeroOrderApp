@@ -1,6 +1,5 @@
 import { createAppContainer, createStackNavigator } from 'react-navigation'
 
-import LoginScreen from 'App/Containers/Login'
 import LoginOtpScreen from 'App/Containers/Login/LoginOtpScreen'
 import SplashScreen from 'App/Containers/SplashScreen/SplashScreen'
 import StartDayScreen from 'App/Containers/StartDay'
@@ -92,6 +91,20 @@ import FinalObservationFormScreen from 'App/Containers/FinalObservations/FinalOb
 import FinalObservationList from 'App/Containers/FinalObservations/FinalObservationList';
 
 
+
+
+
+//Hero app Navigation
+import LoginScreen from 'App/Containers/Login'
+import InsightsScreen from 'App/Containers/Insights'
+import VisitorScreen from 'App/Containers/Visitor'
+import NewRegistrationFormScreen from 'App/Containers/Visitor/NewRegistration'
+import VisitorInfoScreen from 'App/Containers/Visitor/VisitorInfo'
+import VisitHistoryScreen from 'App/Containers/Visitor/VisitHistory'
+import AddProductScreen from 'App/Containers/Visitor/AddProduct'
+import TestDriveHistoryScreen from 'App/Containers/Visitor/TestDriveHistory'
+import TestDriveFeedBackScreen from 'App/Containers/Visitor/TestDriveFeedBack'
+
 /**
  * The root screen contains the application's navigation.
  *
@@ -104,7 +117,6 @@ const StackNavigator = createStackNavigator(
     PresentScreen,
     AbsentScreen,
     CompletedDayScreen,
-    LoginScreen,
     LoginOtpScreen,
     InfluencersListScreen,
     InfluencerInfoScreen,
@@ -176,7 +188,21 @@ const StackNavigator = createStackNavigator(
 
 
     FinalObservationFormScreen,
-    FinalObservationList
+    FinalObservationList,
+
+
+
+
+    //Hero app
+    LoginScreen,
+    VisitorScreen,
+    InsightsScreen,
+    AddProductScreen,
+    VisitorInfoScreen,
+    VisitHistoryScreen,
+    TestDriveHistoryScreen,
+    TestDriveFeedBackScreen,
+    NewRegistrationFormScreen
 
   },
   {

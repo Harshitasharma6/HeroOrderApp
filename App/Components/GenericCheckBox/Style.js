@@ -17,12 +17,11 @@ export default StyleSheet.create({
 	},
 	checkbox: {
 	  	borderRadius: 2, 
-	  	borderColor: Colors.primary, 
-	  	color: Colors.primary
+	  	borderColor: Colors.grey, 
+	  	color: Colors.grey
 	},
 	bottomMargin: {
-	    marginBottom: hp('2%'),
-	    width: '100%'
+	    marginBottom: hp('2%')
   	},
 	inputText: {
 	    borderRadius: 10,
@@ -34,7 +33,7 @@ export default StyleSheet.create({
 	    marginBottom: hp('2%'),
   	},
   	label: {
-	    color: Colors.primary,
+	    color: Colors.grey,
 	    fontFamily: ApplicationStyles.textMsgFont,
 	    fontSize: wp('4%'),
 	    paddingLeft: wp('.5%'),

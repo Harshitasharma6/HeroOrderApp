@@ -127,7 +127,7 @@ const Styles = StyleSheet.create({
     paddingRight: 25,
     marginBottom: 2,
     borderWidth: 1,
-    borderColor: Colors.primary,
+    borderColor: Colors.grey,
     backgroundColor: "rgba(255,255,255,1)",
     borderRadius: 5,
     flexDirection: "row",

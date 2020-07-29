@@ -12,7 +12,6 @@ const Select = ({ selected = '', list = [], onChange = () => { }, style = {}, la
       <Picker 
         note 
         mode={'dropdown'}
-        
         selectedValue={selected} 
         onValueChange={onChange} 
         iosIcon={<GenericIcon name="arrow-down" />}

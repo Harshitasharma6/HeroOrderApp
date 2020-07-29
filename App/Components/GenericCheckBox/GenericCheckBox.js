@@ -14,7 +14,7 @@ const GenericCheckBox = ({ style={}, label, onPress, title, disabled = false, ch
 			    <CheckBox 
 			        style={Style.checkbox} 
 			        checked={checked} 
-			        color={Colors.primary}
+			        color={Colors.grey}
 			        onPress={(event)=> onPress(event)}
 			    />
 		    </View>

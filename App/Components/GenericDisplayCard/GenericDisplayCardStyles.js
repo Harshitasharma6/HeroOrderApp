@@ -50,7 +50,7 @@ export default StyleSheet.create({
   },
   detail: {
     fontFamily: ApplicationStyles.textMsgFont,
-    color: Colors.clr66,
+    color: Colors.primary,
     fontSize: wp('3%'),
     flexWrap: 'wrap',
     flexShrink: 1,

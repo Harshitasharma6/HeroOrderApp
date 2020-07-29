@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import NavigationService from 'App/Services/NavigationService'
 import AppNavigator from 'App/Navigators/AppNavigator'
-import { View, Keyboard, StatusBar } from 'react-native'
+import { View, Keyboard, StatusBar, Alert } from 'react-native'
 import { Root } from "native-base";
 import { connect } from 'react-redux'
 import StartDayActions from 'App/Stores/StartDay/Actions'

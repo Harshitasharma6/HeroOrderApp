@@ -19,13 +19,13 @@ class FooterScreen extends React.Component {
       checkout
     } = this.props
 
-    if ( status != PRESENT || checkout) {
-      HelperService.showToast({
-        message: 'You are not checked-In for today.',
-        duration: 2000
-      });
-      return
-    }
+    // if ( status != PRESENT || checkout) {
+    //   HelperService.showToast({
+    //     message: 'You are not checked-In for today.',
+    //     duration: 2000
+    //   });
+    //   return
+    // }
 
      NavigationService.navigate(screen)
   }  
@@ -91,6 +91,17 @@ class FooterScreen extends React.Component {
       
     let visitsDisabled = status != PRESENT || checkout
     let visitsSummaryDisabled = status != PRESENT || checkout
+
+
+
+    let visitorActive = 
+      currentScreen == 'VisitorScreen' || 
+      currentScreen == 'NewRegistrationFormScreen' ||
+      currentScreen == 'VisitorInfoScreen' ||
+      currentScreen == 'VisitHistoryScreen' ||
+      currentScreen == 'TestDriveHistoryScreen' ||
+      currentScreen == 'AddProductScreen' ||
+      currentScreen == 'TestDriveFeedBackScreen'
  
 
 
@@ -98,35 +109,35 @@ class FooterScreen extends React.Component {
       <Footer style={Style.footerContainer}>
         <FooterTab style={Style.footer}>
         <FooterIcon
-            icon={'stats'}
-            iconText={'Dashboard'}
-            active={settingsActive}
+            icon={'person-add'}
+            iconText={'Visitor'}
+            active={visitorActive} 
             disabled={false}
-            onPress={() => NavigationService.navigate('CommunicationScreen')}
+            onPress={() => this.onHandleClick('VisitorScreen')}
           />
 
           <FooterIcon
-            icon={'today'}
-            iconText={'Visits'}
-            active={visitsActive}
+            icon={'podium'}
+            iconText={'Insights'}
+            active={currentScreen == 'InsightsScreen'}
             disabled={false}
-            onPress={() => this.onHandleClick('CheckInScreen')}
+            onPress={() => this.onHandleClick('InsightsScreen')}
           />
 
           <FooterIcon
-            icon={'paper'}
-            iconText={'Visit Summary'}
+            icon={'notifications'}
+            iconText={'Lead Alerts'}
             active={visitsSummaryActive}
-            disabled={false}
+            disabled={true}
             onPress={() => this.onHandleClick('VisitSummaryList')}
           />
 
         
           <FooterIcon
-            icon={'person'}
-            iconText={'Profile'}
+            icon={'menu'}
+            iconText={'Menu'}
             active={profilesActive}
-            disabled={false}
+            disabled={true}
             onPress={() => NavigationService.navigate('ProfileScreen')}
           />
 

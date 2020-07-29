@@ -5,7 +5,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 export default StyleSheet.create({
  box: {
     alignSelf: 'center',
-    backgroundColor: Colors.clrF1F9FF,
+    backgroundColor: Colors.lightGrey,
     width: wp('92%'),
     marginVertical: 8,
     paddingLeft: wp('3%'),
@@ -23,7 +23,7 @@ export default StyleSheet.create({
     overflow:'hidden'
   },
  title: {
-    color: Colors.button,
+    color: Colors.primary,
     fontFamily: ApplicationStyles.textMsgFont,
     fontSize: wp('5%'),
     marginBottom: 4,
@@ -39,8 +39,7 @@ export default StyleSheet.create({
   actionButton: {
     borderWidth: 1.5, 
     alignSelf: 'center', 
-    backgroundColor: Colors.clrF1F9FF, 
-    borderColor: '#BCE0FD', 
+    backgroundColor: Colors.lightGrey, 
     height: hp('4.5%'),
     width: wp('92%')*.25
   },
@@ -50,10 +49,9 @@ export default StyleSheet.create({
     color: Colors.clr66
   },
   actionButtonIcon: {
-    color: Colors.button, 
+    color: Colors.primary, 
     fontSize: wp('5%'),
-    marginRight: 0, 
-    marginLeft: wp('5%'),
+    marginRight: 0
   },
   quantityContainer: {
     alignSelf: 'flex-end',
@@ -61,5 +59,35 @@ export default StyleSheet.create({
     textAlign: 'right',
     flexDirection: 'row',
     justifyContent: 'flex-end'
+  },
+  priceContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: hp('.5%')
+  },
+  price: {
+    color: '#000000',
+    fontSize: wp('4%'),
+    marginHorizontal: wp('1%'),
+    marginLeft: 0
+  },
+  discountedPrice: {
+    color: Colors.clr66,
+    fontSize: wp('3%'),
+    textDecorationLine: 'line-through',
+    marginHorizontal: wp('1%'),
+  },
+   discountedPriceOff: {
+    color: Colors.green,
+    fontSize: wp('3%'),
+    marginHorizontal: wp('1%'),
+    fontWeight: 'bold'
+  },
+  availableStock: {
+    color: '#EF6331',
+    fontSize: wp('3.5%'),
+    marginHorizontal: wp('1%'),
+    fontWeight: 'bold',
+    marginLeft: 0
   }
 })

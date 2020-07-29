@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, TouchableOpacity, Dimensions} from 'react-native'
+import { Text, View, TouchableOpacity, Dimensions, Image} from 'react-native'
 import Style from './ProductCardStyles'
 import { Icon, Input, Button } from 'native-base'
 import { AREA, PREV_ORDER_VAL, VISIT_THIS_WEEK, MAIN_COMPETETOR } from 'App/Constants'
@@ -11,6 +11,8 @@ import WhiteButton from 'App/Components/WhiteButton'
 import BlueButton from 'App/Components/BlueButton'
 import GenericIcon from 'App/Components/GenericIcon'
 import EditQuantity from 'App/Components/EditQuantity'
+import Price from './Price'
+import AvailableStock from './AvailableStock'
 import _ from 'lodash'
 
 
@@ -19,10 +21,18 @@ import _ from 'lodash'
 const ProductCard = ({data, onPressInfo, quantityInCart, onChangeQuantity}) => (
     <View style={Style.box}>
         <View style={Style.tuple}>
-          <View style={Style.userDtl}>
-            <Text style={Style.title}>{data.product_name__c}</Text>
-           <Text style={Style.desc}>{data.description__c}</Text>
+          <View style={{flexDirection: 'row'}}>
+             <Image
+                style={{ width: 110, height: 120 }}
+                source={require('App/Assets/Images/product.png')}
+            />
+            <View style={{paddingLeft: '4%'}}>
+              <Text style={Style.title}>{data.product_name__c || 'Optima'}</Text>
+              <Price price={data.basic_price__c || 1000} discountPrice={data.discounted_price__c || 900} />
+              {data.available_stock__c != null ? <AvailableStock stock={data.available_stock__c}/> : []}
+            </View>
           </View>
+          
         </View>
         
         
@@ -35,27 +45,14 @@ const ProductCard = ({data, onPressInfo, quantityInCart, onChangeQuantity}) => (
             onPress={onPressInfo}
             textStyle={Style.actionButtonText}>
               <GenericIcon 
-                name="information-circle-outline" 
+                name="info-circle" 
                 style={Style.actionButtonIcon}
               />
           </WhiteButton>
          
-          {
-          //   <WhiteButton 
-          //   selected={false} 
-          //   title={'Image'} 
-          //   disabled={false} 
-          //   style={Style.actionButton} 
-          //   textStyle={Style.actionButtonText}
-          // >
-          //   <GenericIcon 
-          //     name="image" 
-          //     style={Style.actionButtonIcon}
-          //   />
-          // </WhiteButton>
-        }
+          
           <View style={Style.quantityContainer}>
-            <EditQuantity  value={quantityInCart} onChange={(value) => onChangeQuantity(value)} />
+            <EditQuantity  value={quantityInCart} onChange={(value) => onChangeQuantity(value)} key={quantityInCart}/>
           </View>
         </View>
          

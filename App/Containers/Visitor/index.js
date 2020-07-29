@@ -1,28 +1,28 @@
 import React, { Component } from 'react'
-import { View, Text, Image, Keyboard, TouchableOpacity} from 'react-native'
-import { Item, Input, Button, Spinner } from 'native-base'
+import { View, Text, Image, Keyboard} from 'react-native'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import Style from './LoginScreenStyle'
 import BlueButton from 'App/Components/BlueButton'
+import GenericIcon from 'App/Components/GenericIcon'
 import InputMobile from 'App/Components/FormInput/InputMobile'
-import InputPassword from 'App/Components/FormInput/InputPassword'
-import InputText from 'App/Components/FormInput/InputText'
-import { SEND_OTP } from 'App/Constants'
 import NavigationService from 'App/Services/NavigationService'
 import UserActions from 'App/Stores/User/Actions'
-import { Colors } from 'App/Theme';
+import { HelperService } from 'App/Services/Utils/HelperService';
+import Style from './styles';
 
-class LoginScreen extends Component {
+class Visitor extends Component {
     submit = () => {
-        Keyboard.dismiss(); 
-        NavigationService.navigate('InsightsScreen')
+        Keyboard.dismiss();
+        HelperService.showToast({
+            message: 'Register New User!',
+            duration: 2000
+        })
+        NavigationService.navigate('NewRegistrationFormScreen')
         // this.props.loginUser({
         //     username: this.props.username, 
         //     password: this.props.password
         // });  
     }
-   
 
     render() {
         return (
@@ -34,18 +34,12 @@ class LoginScreen extends Component {
                     />
                 </View>
                 <View style={Style.action}>
-                    <InputText 
-                        placeholder={'Username'} 
+                    <InputMobile
+                        label={'Enter Phone Number'} 
+                        placeholder={'Phone Number'} 
                         value={this.props.username} 
                         onChange={(value) => this.props.changeLoginForm({username: value, password: this.props.password})} 
                         error={this.props.validation.username} 
-                    />
-
-                    <InputPassword 
-                        placeholder={'Password'} 
-                        value={this.props.password} 
-                        onChange={(value) => this.props.changeLoginForm({password: value, username: this.props.username})} 
-                        error={this.props.validation.invalid_password} 
                     />
 
                     <BlueButton
@@ -53,9 +47,10 @@ class LoginScreen extends Component {
                         onPress={this.submit}
                         disabled={this.props.userLoginIsLoading}
                         loading={this.props.userLoginIsLoading}
-                        title={'Login'}
-
-                    />
+                        title={'Search'}
+                    >
+                        <GenericIcon name="search" style={Style.buttonIcon}/>
+                    </BlueButton>
                 </View>
             </View>
         )
@@ -77,4 +72,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoginScreen)
+)(Visitor)

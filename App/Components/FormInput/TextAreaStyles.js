@@ -3,7 +3,7 @@ import { Colors, ApplicationStyles } from 'App/Theme'
 
 export default StyleSheet.create({
   input: {
-    borderColor: Colors.primary,
+    borderColor: Colors.grey,
     borderRadius: 10,
     borderWidth: 1,
     color: Colors.inputText,
@@ -30,7 +30,7 @@ export default StyleSheet.create({
     fontFamily: ApplicationStyles.textMsgFont,
   },
   textArea: {
-    borderColor: Colors.border,
+    borderColor: Colors.grey,
     borderRadius: 10,
     borderWidth: 1,
     color: Colors.inputText,

@@ -10,8 +10,8 @@ export default StyleSheet.create({
     alignSelf: 'center'
 	},
   	actionButtonIcon: {
-	    color: Colors.button, 
-	    fontSize: wp('9.5%'),
+	    color: Colors.primary, 
+	    fontSize: wp('9%'),
 	    marginRight: 0, 
 	    alignSelf: 'center',
 	    paddingHorizontal: wp('1%')

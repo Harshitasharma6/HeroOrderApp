@@ -23,7 +23,8 @@ export default StyleSheet.create({
     textAlign: 'center'
   },
   selectedButton: {
-    backgroundColor: Colors.primary
+    backgroundColor: Colors.primary,
+    elevation: 0
   },
   selectedText: {
     color: Colors.white

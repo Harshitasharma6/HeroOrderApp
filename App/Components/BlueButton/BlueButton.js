@@ -13,7 +13,7 @@ const BlueButton = ({ style, textStyle,onPress, title, disabled = false, loading
 	return (
 	  <TouchableOpacity disabled={disabled} style={buttonStyleNode}  onPress={onPress}>
 	   {!loading ? children : []}
-	   {loading ? (<Spinner color={Colors.primary} />) : textNode}
+	   {loading ? (<Spinner color={Colors.white} />) : textNode}
 	  </TouchableOpacity>
 	)
 }

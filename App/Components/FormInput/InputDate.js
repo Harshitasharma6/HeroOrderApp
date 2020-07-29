@@ -14,8 +14,8 @@ const InputDate = ({ placeholder = '', onChange = () => { }, style = {}, value =
                 animationType={"slide"}
                 androidMode={"default"}
                 placeHolderText={placeholder}
-                textStyle={{ color: Colors.button }}
-                placeHolderTextStyle={{ color: "#d3d3d3" }}
+                textStyle={{ color: Colors.grey, fontFamily: ApplicationStyles.textMsgFont }}
+                placeHolderTextStyle={{ color: Colors.grey, fontFamily: ApplicationStyles.textMsgFont }}
                 onDateChange={onChange}
                 minimumDate={moment.now()}
                 disabled={editable}
@@ -30,14 +30,13 @@ const Styles = StyleSheet.create({
         marginBottom: 15
     },
     input: {
-        borderColor: Colors.border,
-        borderRadius: 100,
+        borderColor: Colors.grey,
+        borderRadius: 10,
         borderWidth: 1,
-        color: Colors.inputText,
-        fontFamily: ApplicationStyles.textMediumFont,
+        color: Colors.grey,
+        fontFamily: ApplicationStyles.textMsgFont,
         paddingLeft: 5,
         justifyContent: 'center',
-        alignItems: 'flex-start'
     },
 });
 

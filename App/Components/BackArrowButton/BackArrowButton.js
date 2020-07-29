@@ -8,7 +8,7 @@ import {View, Modal, TouchableOpacity} from 'react-native';
 const BackArrowButton = ({ icon}) => (
 	<TouchableOpacity transparent>
 		<GenericIcon
-	  		name={'arrow-back'}
+	  		name={'arrow-circle-left'}
 	  		onPress={NavigationService.goback}
 	    	style={Style.button}
 		/>
