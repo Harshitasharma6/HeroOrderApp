@@ -15,16 +15,12 @@ import UserActions from 'App/Stores/User/Actions'
 import { Colors, ApplicationStyles } from 'App/Theme';
 import ProductCard from 'App/Components/ProductCard'
 
-class AddProductScreen extends Component {
+class ProductCatalogScreen extends Component {
     render() {
         return (
         	<View style={{paddingRight: '4%', paddingTop: '3%'}}>
-	            <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-	                 <BlueButton title={"Cart"}  style={{width: wp('35%')}} onPress={() => NavigationService.navigate('TestDriveFeedBackScreen')}>
-		            	<GenericIcon name={'cart-plus'} style={{color: Colors.white, fontSize: 23}}/>
-		            </BlueButton>
-	            </View>
-	            <ScrollView style={{marginTop: '6%', marginBottom: '3%'}}>
+	            <Text style={ApplicationStyles.formHeading}>{'Product Catalog'}</Text>
+	            <ScrollView style={{marginBottom: hp('7%')}}>
 	            	<ProductCard 
 						data={{}} 
 						quantityInCart={1}
@@ -85,7 +81,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddProductScreen)
+)(ProductCatalogScreen)
 
 
 

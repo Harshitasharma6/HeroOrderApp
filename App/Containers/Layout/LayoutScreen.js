@@ -282,6 +282,7 @@ class LayoutScreen extends React.Component {
         break;
       case 'NewRegistrationFormScreen':
       case 'TestDriveFeedBackScreen':
+      case 'ProductCatalogScreen':
         customLayoutNode = <NewRetailerLayout />
         break;
       case 'VisitorInfoScreen':

@@ -14,25 +14,25 @@ class InsightsScreen extends Component {
                 <SelectionButton 
                     icon="bar-chart" 
                     title="Dashboard" 
-                    onPress={() => NavigationService.navigate('CounterSelectionScreen')}
+                    //onPress={() => NavigationService.navigate('CounterSelectionScreen')}
                 />
 
                 <SelectionButton 
                     icon="credit-card" 
                     title="Schemes" 
-                    onPress={() => NavigationService.navigate('InfluencersListScreen')}
+                   // onPress={() => NavigationService.navigate('InfluencersListScreen')}
                 />
 
                 <SelectionButton 
                     icon="sitemap" 
                     title="Product Catalog" 
-                    onPress={() => NavigationService.navigate('SiteListScreen')}
+                    onPress={() => NavigationService.navigate('ProductCatalogScreen')}
                 />
 
                 <SelectionButton 
                     icon="users" 
                     title="Customers"
-                    onPress={() => NavigationService.navigate('FinalObservationFormScreen')}
+                    //onPress={() => NavigationService.navigate('FinalObservationFormScreen')}
                 />
             </View>
         );

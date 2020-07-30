@@ -102,6 +102,10 @@ class FooterScreen extends React.Component {
       currentScreen == 'TestDriveHistoryScreen' ||
       currentScreen == 'AddProductScreen' ||
       currentScreen == 'TestDriveFeedBackScreen'
+
+    let insightsActive = 
+      currentScreen == 'InsightsScreen' ||
+      currentScreen == 'ProductCatalogScreen'
  
 
 
@@ -119,7 +123,7 @@ class FooterScreen extends React.Component {
           <FooterIcon
             icon={'podium'}
             iconText={'Insights'}
-            active={currentScreen == 'InsightsScreen'}
+            active={insightsActive}
             disabled={false}
             onPress={() => this.onHandleClick('InsightsScreen')}
           />
