@@ -18,47 +18,47 @@ import ProductCard from 'App/Components/ProductCard'
 class ProductCatalogScreen extends Component {
     render() {
         return (
-        	<View style={{paddingRight: '4%', paddingTop: '3%'}}>
+        	<View style={{padding: '1%', flex: 1}}>
 	            <Text style={ApplicationStyles.formHeading}>{'Product Catalog'}</Text>
-	            <ScrollView style={{marginBottom: hp('7%')}}>
+	            <ScrollView>
 	            	<ProductCard 
 						data={{}} 
 						quantityInCart={1}
+						showEditQuantity={false}
+						onPress={() => NavigationService.navigate('ProductInfoScreen')}
 						onChangeQuantity={(quantity) => {}}
-						onPressInfo={() => {
-							
-						}}
+						onPressInfo={() => NavigationService.navigate('ProductInfoScreen')}
 					/>
 					<ProductCard 
 						data={{}} 
 						quantityInCart={1}
+						showEditQuantity={false}
 						onChangeQuantity={(quantity) => {}}
-						onPressInfo={() => {
-							
-						}}
+						onPress={() => NavigationService.navigate('ProductInfoScreen')}
+						onPressInfo={() => NavigationService.navigate('ProductInfoScreen')}
 					/>
 					<ProductCard 
 						data={{}} 
 						quantityInCart={1}
+						showEditQuantity={false}
 						onChangeQuantity={(quantity) => {}}
-						onPressInfo={() => {
-							
-						}}
+						onPress={() => NavigationService.navigate('ProductInfoScreen')}
+						onPressInfo={() => NavigationService.navigate('ProductInfoScreen')}
 					/><ProductCard 
 						data={{}} 
 						quantityInCart={1}
+						showEditQuantity={false}
 						onChangeQuantity={(quantity) => {}}
-						onPressInfo={() => {
-							
-						}}
+						onPress={() => NavigationService.navigate('ProductInfoScreen')}
+						onPressInfo={() => NavigationService.navigate('ProductInfoScreen')}
 					/>
 					<ProductCard 
 						data={{}} 
 						quantityInCart={1}
+						showEditQuantity={false}
 						onChangeQuantity={(quantity) => {}}
-						onPressInfo={() => {
-							
-						}}
+						onPress={() => NavigationService.navigate('ProductInfoScreen')}
+						onPressInfo={() => NavigationService.navigate('ProductInfoScreen')}
 					/>
 	            </ScrollView>
             </View>

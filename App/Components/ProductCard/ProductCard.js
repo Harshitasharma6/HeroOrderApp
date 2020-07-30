@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, TouchableOpacity, Dimensions, Image} from 'react-native'
+import { Text, View, TouchableOpacity, Dimensions, Image, TouchableWithoutFeedback} from 'react-native'
 import Style from './ProductCardStyles'
 import { Icon, Input, Button } from 'native-base'
 import { AREA, PREV_ORDER_VAL, VISIT_THIS_WEEK, MAIN_COMPETETOR } from 'App/Constants'
@@ -18,7 +18,8 @@ import _ from 'lodash'
 
 
 
-const ProductCard = ({data, onPressInfo, quantityInCart, onChangeQuantity}) => (
+const ProductCard = ({data, onPressInfo, onPress,quantityInCart, onChangeQuantity, showEditQuantity=true}) => (
+  <TouchableWithoutFeedback onPress={onPress}>
     <View style={Style.box}>
         <View style={Style.tuple}>
           <View style={{flexDirection: 'row'}}>
@@ -50,13 +51,16 @@ const ProductCard = ({data, onPressInfo, quantityInCart, onChangeQuantity}) => (
               />
           </WhiteButton>
          
-          
-          <View style={Style.quantityContainer}>
-            <EditQuantity  value={quantityInCart} onChange={(value) => onChangeQuantity(value)} key={quantityInCart}/>
-          </View>
+          {
+            showEditQuantity ? 
+            <View style={Style.quantityContainer}>
+              <EditQuantity  value={quantityInCart} onChange={(value) => onChangeQuantity(value)} key={quantityInCart}/>
+            </View> : []
+          }
         </View>
          
     </View>
+    </TouchableWithoutFeedback>
 )
 
 export default ProductCard

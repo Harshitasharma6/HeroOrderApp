@@ -51,17 +51,17 @@ export default StyleSheet.create({
   detail: {
     fontFamily: ApplicationStyles.textMsgFont,
     color: Colors.primary,
-    fontSize: wp('3%'),
+    fontSize: wp('3.1%'),
     flexWrap: 'wrap',
     flexShrink: 1,
     width: '50%',
     textAlign: 'right',
-    textTransform: 'uppercase',
+    textTransform: 'capitalize',
     marginTop: hp('.5%')
   },
   strip: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   title: {
     color: Colors.primary,
@@ -73,7 +73,8 @@ export default StyleSheet.create({
   ttl: {
     color: Colors.grey,
     fontFamily: ApplicationStyles.textMsgFont,
-    fontSize: wp('3%'),
-    marginTop: hp('.5%')
+    fontSize: wp('3.1%'),
+    marginTop: hp('.5%'),
+    marginBottom: hp('.5%')
   },
 })

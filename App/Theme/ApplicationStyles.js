@@ -84,5 +84,12 @@ export default {
 	    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Montserrat_b',
 	    fontSize: wp('4.5%'),
 	    paddingLeft: wp('.5%'),
+  	},
+  	divider: {
+  		borderBottomWidth: .5,
+        borderColor:Colors.grey,
+        marginVertical:10,
+        width: '100%',
+        alignSelf: 'center'
   	}
 }

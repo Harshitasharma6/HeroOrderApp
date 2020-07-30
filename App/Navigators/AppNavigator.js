@@ -103,8 +103,12 @@ import VisitorInfoScreen from 'App/Containers/Visitor/VisitorInfo'
 import VisitHistoryScreen from 'App/Containers/Visitor/VisitHistory'
 import AddProductScreen from 'App/Containers/Visitor/AddProduct'
 import ProductCatalogScreen from 'App/Containers/Insights/ProductCatalog'
+import ProductInfoScreen from 'App/Containers/Insights/ProductInfo'
 import TestDriveHistoryScreen from 'App/Containers/Visitor/TestDriveHistory'
 import TestDriveFeedBackScreen from 'App/Containers/Visitor/TestDriveFeedBack'
+import AvailableSchemesScreen from 'App/Containers/Insights/AvailableSchemes'
+
+
 
 /**
  * The root screen contains the application's navigation.
@@ -199,13 +203,14 @@ const StackNavigator = createStackNavigator(
     VisitorScreen,
     InsightsScreen,
     AddProductScreen,
+    ProductInfoScreen,
     VisitorInfoScreen,
     VisitHistoryScreen,
     ProductCatalogScreen,
     TestDriveHistoryScreen,
+    AvailableSchemesScreen,
     TestDriveFeedBackScreen,
     NewRegistrationFormScreen
-
   },
   {
     // By default the application will show the splash screen

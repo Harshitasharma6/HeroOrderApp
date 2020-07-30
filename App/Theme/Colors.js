@@ -30,7 +30,7 @@ export default {
   disabled: 'rgba(192,192,192,.1)',
   green: '#24D104',
   red: '#FC466B',
-  blueTextColor: '#7FC4FD',
+  blue: '#2699FB',
   blueHeadingColor: '#008EFF',
   theme: '#D71E22B3',
   grey: '#8b8e8e',
