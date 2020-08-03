@@ -1,6 +1,8 @@
 import React, {PureComponent} from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import Style from './GenericDisplayCardStyles';
+import TextAvatar from 'App/Components/TextAvatar'
+import { HelperService } from 'App/Services/Utils/HelperService';
 
 export default class GenericDisplayCard extends PureComponent { 
   render() {
@@ -10,7 +12,8 @@ export default class GenericDisplayCard extends PureComponent {
       subheading,
       dark,
       style,
-      onPress
+      onPress,
+      showTextAvatar
     } = this.props;
 
     return(
@@ -18,7 +21,8 @@ export default class GenericDisplayCard extends PureComponent {
         <View style={dark ? { ...Style.darkCard, ...style } : { ...Style.card, ...style }}>
           {
             heading ?
-              (<View>
+              (<View style={{flexDirection: 'row', alignItems: 'center'}}>
+                {showTextAvatar ? <TextAvatar value={heading} /> : []}
                 <Text style={dark ? Style.darkTitle : Style.title}>{heading}</Text>
               </View>) : []
           }

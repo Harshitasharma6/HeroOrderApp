@@ -12,9 +12,10 @@ export default Separator;
 
 const Styles = StyleSheet.create({
 	view: {
-		width: '100%', 
 		borderBottomWidth: .5,
-		borderBottomColor: Colors.user,
-		marginVertical: hp('1.5%')
+        borderColor:Colors.grey,
+        marginVertical:10,
+        width: '100%',
+        alignSelf: 'center'
 	}
 });

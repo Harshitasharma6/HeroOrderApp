@@ -6,7 +6,7 @@ export default StyleSheet.create({
   input: {
     color: Colors.grey,
     fontFamily: ApplicationStyles.textMsgFont,
-    fontSize: wp('3.5%')
+    fontSize: wp('3.7%')
   },
   placeholderStyle: {
     color: Colors.inputText,
@@ -27,6 +27,7 @@ export default StyleSheet.create({
   placeHolderIcon: {
     color: Colors.grey,
     marginLeft: 10,
-    marginRight: 10
+    marginRight: 10,
+    fontSize: wp('6%')
   }
 })

@@ -51,7 +51,7 @@ export default StyleSheet.create({
   detail: {
     fontFamily: ApplicationStyles.textMsgFont,
     color: Colors.primary,
-    fontSize: wp('3.1%'),
+    fontSize: wp('3.5%'),
     flexWrap: 'wrap',
     flexShrink: 1,
     width: '50%',
@@ -67,13 +67,12 @@ export default StyleSheet.create({
     color: Colors.primary,
     fontFamily: ApplicationStyles.textMsgFont,
     fontSize: wp('4.5%'),
-    marginBottom: 10,
     textTransform: 'uppercase'
   },
   ttl: {
     color: Colors.grey,
     fontFamily: ApplicationStyles.textMsgFont,
-    fontSize: wp('3.1%'),
+    fontSize: wp('3.5%'),
     marginTop: hp('.5%'),
     marginBottom: hp('.5%')
   },

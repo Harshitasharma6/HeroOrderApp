@@ -60,7 +60,7 @@ export default class SearchBar extends Component {
   				{
   					this.state.focus ? 	
 					    (<GenericIcon
-						    name={'arrow-back'}
+						    name={'arrow-circle-left'}
 						    style={{...Style.placeHolderIcon, ...this.props.IconStyles}}
 						    onPress={() => this.handleBackClick()}
 					    />) :

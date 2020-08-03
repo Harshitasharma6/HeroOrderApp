@@ -29,6 +29,8 @@ import FinalObservationLayout from './FinalObservationLayout';
 
 //
 import VisitorInfoScreenLayout from './Visitor/VisitorInfoScreenLayout';
+import DashboardScreenLayout  from './Insights/Dashboard/Layout'
+import CustomerListLayout from './Insights/Customers/list'
 
 
 
@@ -285,6 +287,7 @@ class LayoutScreen extends React.Component {
       case 'ProductCatalogScreen':
       case 'ProductInfoScreen':
       case 'AvailableSchemesScreen':
+      case 'CustomerInfoScreen':
         customLayoutNode = <NewRetailerLayout />
         break;
       case 'VisitorInfoScreen':
@@ -292,6 +295,13 @@ class LayoutScreen extends React.Component {
       case 'AddProductScreen':
       case 'TestDriveHistoryScreen':
         customLayoutNode = <VisitorInfoScreenLayout />
+        break;
+      case 'DashboardSummaryScreen':
+      case 'DashboardTrendsScreen':
+        customLayoutNode = <DashboardScreenLayout />
+        break;
+      case 'CustomersScreen':
+        customLayoutNode = <CustomerListLayout />
         break;
       default:
         customLayoutNode = [];

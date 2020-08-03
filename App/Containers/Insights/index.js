@@ -14,7 +14,7 @@ class InsightsScreen extends Component {
                 <SelectionButton 
                     icon="bar-chart" 
                     title="Dashboard" 
-                    //onPress={() => NavigationService.navigate('CounterSelectionScreen')}
+                    onPress={() => NavigationService.navigate('DashboardSummaryScreen')}
                 />
 
                 <SelectionButton 
@@ -32,7 +32,7 @@ class InsightsScreen extends Component {
                 <SelectionButton 
                     icon="users" 
                     title="Customers"
-                    //onPress={() => NavigationService.navigate('FinalObservationFormScreen')}
+                    onPress={() => NavigationService.navigate('CustomersScreen')}
                 />
             </View>
         );

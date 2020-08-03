@@ -977,6 +977,31 @@ async function fileExists(path) {
 }
 
 
+const getAvatarTextAndBgColorForVisitType = text => {
+  	var res = text.substring(0, 2);
+	let mapping = [
+	{
+		text: res,
+		bgColor: Colors.lightBg1
+	},
+	 {
+		text: res,
+		bgColor: Colors.lightBg2
+	},
+	{
+		text: res,
+		bgColor: Colors.lightBg3
+	},
+	{
+		text: res,
+		bgColor: Colors.lightBg4
+	}];
+
+	let index =  Math.floor(Math.random() * Math.floor(4));
+	return mapping[index];
+}
+
+
 
 
 
@@ -1053,5 +1078,6 @@ export const HelperService = {
 	checkAppVersion,
 	showAppUpdatePromptAndroid,
 	watchLocation,
-	clearWatchLocation
+	clearWatchLocation,
+	getAvatarTextAndBgColorForVisitType
 }
