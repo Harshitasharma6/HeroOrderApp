@@ -21,7 +21,7 @@ export default class GenericDisplayCard extends PureComponent {
         <View style={dark ? { ...Style.darkCard, ...style } : { ...Style.card, ...style }}>
           {
             heading ?
-              (<View style={{flexDirection: 'row', alignItems: 'center'}}>
+              (<View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 10}}>
                 {showTextAvatar ? <TextAvatar value={heading} /> : []}
                 <Text style={dark ? Style.darkTitle : Style.title}>{heading}</Text>
               </View>) : []

@@ -111,6 +111,20 @@ import DashboardSummaryScreen from 'App/Containers/Insights/Dashboard/Summary'
 import DashboardTrendsScreen from 'App/Containers/Insights/Dashboard/Trends'
 import CustomersScreen from 'App/Containers/Insights/Customers'
 import CustomerInfoScreen from 'App/Containers/Insights/Customers/CustomerInfo'
+import LeadAlertsScreen from 'App/Containers/LeadAlerts'
+import ActionablesScreen from 'App/Containers/LeadAlerts/Actionables'
+import HandoversScreen from 'App/Containers/LeadAlerts/Handovers'
+import OpenHotLeadsScreen from 'App/Containers/LeadAlerts/Actionables/FollowUps/OpenHotLeads'
+import PurchaseDateOverDueScreen from 'App/Containers/LeadAlerts/Actionables/FollowUps/PurchaseDateOverDue'
+import BookingConfirmedScreen from 'App/Containers/LeadAlerts/Actionables/FollowUps/BookingConfirmed'
+import OpenHotAssignedLeadsScreen from 'App/Containers/LeadAlerts/Actionables/FollowUps/OpenHotAssignedLeads'
+import NoActionScreen from 'App/Containers/LeadAlerts/Actionables/FollowUps/NoAction'
+
+//OpenHotLeadsScreen
+//PurchaseDateOverDueScreen
+//BookingConfirmedScreen
+//OpenHotAssignedLeadsScreen
+//NoActionScreen
 
 
 /**
@@ -217,7 +231,15 @@ const StackNavigator = createStackNavigator(
     DashboardSummaryScreen,
     DashboardTrendsScreen,
     CustomersScreen,
-    CustomerInfoScreen
+    CustomerInfoScreen,
+    LeadAlertsScreen,
+    ActionablesScreen,
+    HandoversScreen,
+    OpenHotLeadsScreen,
+    PurchaseDateOverDueScreen,
+    BookingConfirmedScreen,
+    OpenHotAssignedLeadsScreen,
+    NoActionScreen
   },
   {
     // By default the application will show the splash screen

@@ -31,6 +31,8 @@ import FinalObservationLayout from './FinalObservationLayout';
 import VisitorInfoScreenLayout from './Visitor/VisitorInfoScreenLayout';
 import DashboardScreenLayout  from './Insights/Dashboard/Layout'
 import CustomerListLayout from './Insights/Customers/list'
+import LeadAlertsLayout from './LeadAlerts'
+import FollowUpsLayout from './LeadAlerts/FollowUpsLayout'
 
 
 
@@ -288,7 +290,19 @@ class LayoutScreen extends React.Component {
       case 'ProductInfoScreen':
       case 'AvailableSchemesScreen':
       case 'CustomerInfoScreen':
+      case 'LeadAlertsScreen':
         customLayoutNode = <NewRetailerLayout />
+        break;
+      case 'ActionablesScreen':
+      case 'HandoversScreen':
+        customLayoutNode = <LeadAlertsLayout />
+        break;
+      case 'OpenHotLeadsScreen':
+      case 'PurchaseDateOverDueScreen':
+      case 'BookingConfirmedScreen':
+      case 'OpenHotAssignedLeadsScreen':
+      case 'NoActionScreen':
+        customLayoutNode = <FollowUpsLayout />
         break;
       case 'VisitorInfoScreen':
       case 'VisitHistoryScreen':

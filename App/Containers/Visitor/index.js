@@ -29,7 +29,7 @@ class Visitor extends Component {
             <View style={Style.container}>
                  <View style={Style.buttonBox}>
                     <Image
-                        style={{ width: 240, height: 150 }}
+                        style={{ width: 300, height: 150, resizeMode: 'contain' }}
                         source={require('App/Assets/Images/herologo.png')}
                     />
                 </View>

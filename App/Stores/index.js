@@ -12,7 +12,7 @@ import { reducer as checkInReducer} from './CheckIn/Reducers'
 import { reducer as StartDayReducer } from './StartDay/Reducers'
 import { reducer as shreeReducer} from './Shree/Reducers'
 import { reducer as nonShreeReducer} from './NonShree/Reducers'
-
+import { reducer as leadAlertsReducer} from './LeadAlerts/Reducers'
 
 export default () => {
   const rootReducer = combineReducers({
@@ -27,7 +27,7 @@ export default () => {
     startDay: StartDayReducer,
     nonShree: nonShreeReducer,
     shree: shreeReducer,
-
+    leadAlerts: leadAlertsReducer
   });
 
   return configureStore(rootReducer, rootSaga)

@@ -13,6 +13,7 @@ import Geocoder from 'react-native-geocoding';
 import { getDistance, getPreciseDistance } from 'geolib';
 import RNFS from 'react-native-fs'
 import FileViewer from 'react-native-file-viewer';
+import VIForegroundService from '@voximplant/react-native-foreground-service';
 global._watchId = '';
 
 var monthMapping = [
@@ -1002,6 +1003,44 @@ const getAvatarTextAndBgColorForVisitType = text => {
 }
 
 
+async function startForegroundService() {
+	if (Platform.OS !== 'android') {
+        console.log('Only Android platform is supported');
+        return;
+    }
+
+	if (Platform.Version >= 26) {
+        const channelConfig = {
+            id: 'ForegroundServiceChannel',
+            name: 'Notification Channel',
+            description: 'Notification Channel for Foreground Service',
+            enableVibration: false,
+            importance: 2
+        };
+        await VIForegroundService.createNotificationChannel(channelConfig);
+    }
+
+
+    const notificationConfig = {
+        id: 3456,
+        title: 'Foreground Service',
+        text: 'Foreground service is running',
+        icon: 'ic_notification',
+        priority: 0
+    };
+    
+    if (Platform.Version >= 26) {
+        notificationConfig.channelId = 'ForegroundServiceChannel';
+    }
+
+    try {
+        await VIForegroundService.startService(notificationConfig);
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+
 
 
 
@@ -1079,5 +1118,6 @@ export const HelperService = {
 	showAppUpdatePromptAndroid,
 	watchLocation,
 	clearWatchLocation,
-	getAvatarTextAndBgColorForVisitType
+	getAvatarTextAndBgColorForVisitType,
+	startForegroundService
 }

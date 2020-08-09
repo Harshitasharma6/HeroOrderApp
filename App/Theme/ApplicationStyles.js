@@ -33,6 +33,14 @@ export default {
 	    marginBottom: hp('4%'),
 	    textTransform: 'uppercase'
 	},
+	screenHeading: {
+	    alignSelf: 'center',
+	    color: Colors.white,
+	    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Montserrat_b',
+	    fontSize: wp('6%'),
+	    marginBottom: hp('1%'),
+	    textTransform: 'capitalize'
+	},
 	plusIcon: {
         borderRadius: 50,
         bottom: 75,
@@ -91,5 +99,51 @@ export default {
         marginVertical:10,
         width: '100%',
         alignSelf: 'center'
-  	}
+  	},
+  	verticalContainer: {
+  		backgroundColor: Colors.white,
+	    flexDirection: 'column',
+	    justifyContent: 'center',
+	    alignItems: 'center',
+	    flex: 1
+  	},
+  	horizontalContainer: {
+  		backgroundColor: Colors.white,
+	    flexDirection: 'row',
+	    justifyContent: 'center',
+	    alignItems: 'center',
+	    flex: 1
+  	},
+  	 tabs: {
+	   backgroundColor: Colors.white,
+	   color: Colors.white,
+	   marginBottom: 30,
+	   borderBottomWidth: 0,
+	   paddingHorizontal: 10,
+	   borderRadius: 5,
+	   elevation: 0
+	},
+	tabText: {
+	  	color: Colors.primary,
+	  	fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Montserrat_b',
+	  	fontSize: wp('4%'),
+	  	elevation: 0
+	  },
+	  tabHeading: {
+	  	backgroundColor: Colors.lightGrey,
+	  	fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Montserrat_b',
+	  	paddingHorizontal: 0,
+	  	elevation: 0,
+	  	boxShadow: 'none'
+
+	  },
+	  tabUnderLine: {
+	  	backgroundColor: Colors.primary,
+	  	elevation: 0
+	  },
+	  mainTabs: {
+	    marginTop: hp('1%'),
+	    backgroundColor: Colors.white,
+	    elevation: 0
+	  },
 }

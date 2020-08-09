@@ -113,6 +113,16 @@ class FooterScreen extends React.Component {
       currentScreen == 'CustomersScreen' ||
       currentScreen == 'CustomerInfoScreen'
 
+    let leadAlertsActive = 
+      currentScreen == 'LeadAlertsScreen' ||
+      currentScreen == 'ActionablesScreen' ||
+      currentScreen == 'HandoversScreen' ||
+      currentScreen == 'OpenHotLeadsScreen' ||
+      currentScreen == 'PurchaseDateOverDueScreen' ||
+      currentScreen == 'BookingConfirmedScreen' ||
+      currentScreen == 'OpenHotAssignedLeadsScreen' ||
+      currentScreen == 'NoActionScreen'
+
 
     return (
       <Footer style={Style.footerContainer}>
@@ -136,9 +146,9 @@ class FooterScreen extends React.Component {
           <FooterIcon
             icon={'notifications'}
             iconText={'Lead Alerts'}
-            active={visitsSummaryActive}
-            disabled={true}
-            onPress={() => this.onHandleClick('VisitSummaryList')}
+            active={leadAlertsActive}
+            disabled={false}
+            onPress={() => this.onHandleClick('LeadAlertsScreen')}
           />
 
         

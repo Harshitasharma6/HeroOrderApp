@@ -12,7 +12,7 @@ class InsightsScreen extends Component {
         return (
             <View style={ApplicationStyles.container}>
                 <SelectionButton 
-                    icon="bar-chart" 
+                    icon="dashboard" 
                     title="Dashboard" 
                     onPress={() => NavigationService.navigate('DashboardSummaryScreen')}
                 />
