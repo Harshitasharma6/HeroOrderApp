@@ -7,8 +7,8 @@ import { Colors, Metrics, Helpers, Fonts, ApplicationStyles } from 'App/Theme'
 const GenericCheckBox = ({ style={}, label, onPress, title, disabled = false, checked}) => {
 	return (
 	  	<View style={{...Style.bottomMargin, ...Style.checkboxContainer, ...style}} onPress={(event)=> onPress(event)}>
-			<TouchableOpacity onPress={(event)=> onPress(event)}>
-				<Label  style={{...Style.label}} onPress={(event)=> onPress(event)}>{label}</Label>
+			<TouchableOpacity onPress={(event)=> onPress(event)} disabled={checked}>
+				<Label  style={{...Style.label}} >{label}</Label>
 			</TouchableOpacity>
 		    <View>
 			    <CheckBox 
@@ -16,6 +16,7 @@ const GenericCheckBox = ({ style={}, label, onPress, title, disabled = false, ch
 			        checked={checked} 
 			        color={Colors.grey}
 			        onPress={(event)=> onPress(event)}
+			        disabled={checked}
 			    />
 		    </View>
 		</View>

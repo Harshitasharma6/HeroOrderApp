@@ -146,4 +146,9 @@ export default {
 	    backgroundColor: Colors.white,
 	    elevation: 0
 	  },
+	  infoBox: {
+		borderWidth: 2,
+		width: '88%',
+		elevation: 0
+	},
 }

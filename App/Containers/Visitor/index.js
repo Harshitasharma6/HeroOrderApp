@@ -6,25 +6,38 @@ import BlueButton from 'App/Components/BlueButton'
 import GenericIcon from 'App/Components/GenericIcon'
 import InputMobile from 'App/Components/FormInput/InputMobile'
 import NavigationService from 'App/Services/NavigationService'
-import UserActions from 'App/Stores/User/Actions'
+import VisitorActions from 'App/Stores/Visitor/Actions'
 import { HelperService } from 'App/Services/Utils/HelperService';
+import GenericDisplayCard from 'App/Components/GenericDisplayCard'
+import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDisplayCardStrip';
 import Style from './styles';
 
 class Visitor extends Component {
-    submit = () => {
+    componentWillUnmount() {
+        this.props.hideOpenLeadPrompt()
+    }
+    submitForm(){
+        const {
+            form, 
+            submit,
+            hideOpenLeadPrompt
+        } = this.props;
         Keyboard.dismiss();
-        HelperService.showToast({
-            message: 'Register New User!',
-            duration: 2000
-        })
-        NavigationService.navigate('NewRegistrationFormScreen')
-        // this.props.loginUser({
-        //     username: this.props.username, 
-        //     password: this.props.password
-        // });  
+        hideOpenLeadPrompt();
+        submit(form);
     }
 
     render() {
+        const {
+            form, 
+            submit,
+            loading,
+            validation,
+            changeForm,
+            visitorData,
+            showOpenLeadPrompt,
+            hideOpenLeadPrompt
+        } = this.props;
         return (
             <View style={Style.container}>
                  <View style={Style.buttonBox}>
@@ -37,36 +50,51 @@ class Visitor extends Component {
                     <InputMobile
                         label={'Enter Phone Number'} 
                         placeholder={'Phone Number'} 
-                        value={this.props.username} 
-                        onChange={(value) => this.props.changeLoginForm({username: value, password: this.props.password})} 
-                        error={this.props.validation.username} 
+                        value={form.contact_number} 
+                        onChange={(value) => changeForm({edited_field: 'contact_number', edited_value: value})} 
+                        error={validation.invalid && validation.invalid_field == 'contact_number'}
                     />
 
                     <BlueButton
                         style={Style.button}
-                        onPress={this.submit}
-                        disabled={this.props.userLoginIsLoading}
-                        loading={this.props.userLoginIsLoading}
+                        onPress={() => this.submitForm()}
+                        disabled={loading}
+                        loading={loading}
                         title={'Search'}
                     >
                         <GenericIcon name="search" style={Style.buttonIcon}/>
                     </BlueButton>
                 </View>
+                {showOpenLeadPrompt && visitorData.data && visitorData.data.length && visitorData.table == 'Enquiry' ?
+                    <View style={Style.bottomSection}> 
+                        <GenericDisplayCard dark={false}
+                            style={{width: 350}}
+                            heading={`${visitorData.data[0].first_name__c} ${visitorData.data[0].last_name__c}`}
+                            onPress={() => {hideOpenLeadPrompt(); NavigationService.navigate('VisitorInfoScreen')}}
+                            content={[
+                                <GenericDisplayCardStrip key={'Age'} label={'Age'} value={visitorData.data[0].age__c }/>,
+                                <GenericDisplayCardStrip key={'Email'} label={'Email'} value={visitorData.data[0].email_id__c}/>,
+                                  <BlueButton title={'Proceed'} style={Style.proceedAction} textStyle={Style.proceedActionText} onPress={() => {hideOpenLeadPrompt(); NavigationService.navigate('VisitorInfoScreen')}}></BlueButton>
+                            ]}
+                        />
+                </View> : []}
             </View>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-  username: state.user.username,
-  password: state.user.password,
-  userLoginIsLoading: state.user.userLoginIsLoading,
-  validation: state.user.validation
+  loading: state.visitor.loaders.searchCustomerLoader,
+  validation: state.visitor.searchCustomerValidation,
+  form: state.visitor.searchCustomerForm,
+  visitorData: state.visitor.visitorSearchSuccessData,
+  showOpenLeadPrompt: state.visitor.showOpenLeadPrompt
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  loginUser: (data) => dispatch(UserActions.loginUser(data)),
-  changeLoginForm: (data) => dispatch(UserActions.changeLoginForm(data))
+  submit:(params)       => dispatch(VisitorActions.searchCustomer(params)),
+  changeForm:(params)   => dispatch(VisitorActions.changeSearchCustomerForm(params)),
+  hideOpenLeadPrompt:() => dispatch(VisitorActions.hideOpenLeadPrompt())
 });
 
 export default connect(

@@ -864,6 +864,32 @@ function validateBrandForm(params, index) {
 
 
 
+function validateSearchCustomerForm(params) {
+	if (!validatePhoneNumber(params.contact_number)) {
+		return {
+			invalid: true,
+			invalid_field: 'contact_number',
+			error_message: 'Contact Number is not valid.'
+		}
+	}
+	return false;
+}
+
+
+function validateRegisterCustomerForm(params) {
+	// if (!validatePhoneNumber(params.contact_number)) {
+	// 	return {
+	// 		invalid: true,
+	// 		invalid_field: 'contact_number',
+	// 		error_message: 'Contact Number cannot be empty.'
+	// 	}
+	// }
+	return false;
+}
+
+
+
+
 function validatePhoneNumber(number) {
 	if (!number) return false;
 	var phoneNum = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
@@ -903,5 +929,9 @@ export const ValidationService = {
 	validateSiteForm,
 	validateAllBrandForms,
 	validateFinalObservation,
-	validateBrandForm
+	validateBrandForm,
+
+
+	validateSearchCustomerForm,
+	validateRegisterCustomerForm
 }

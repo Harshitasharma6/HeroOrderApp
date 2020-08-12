@@ -40,4 +40,27 @@ export default {
   lightBg2: "#87a0f5",
   lightBg3: "#8fb870",
   lightBg4: "#b89b70",
+
+  lightPink: '#FFD2FB30',
+  darkPink: '#FFD2FBB2',
+  headingBlack: '#343434',
+
+
+  lightSeaGreen: '#C1E8E82E',
+  darkSeaGreen: '#C1E8E8',
+
+
+  lightRedPink: '#F5ADC41F',
+  darkRedPink: '#F5ADC4',
+
+
+  lightYellow: '#F7FFA51C',
+  darkYellow: '#F7FFA5',
+
+
+  lightGreyWhite: '#CBD7E814',
+  darkGreyWhite: '#CBD7E8',
+
+
+  
 }

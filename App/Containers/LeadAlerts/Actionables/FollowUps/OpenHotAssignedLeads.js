@@ -13,6 +13,7 @@ import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDi
 import {ApplicationStyles, Colors} from 'App/Theme'
 import NavigationService from 'App/Services/NavigationService'
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import Styles from './styles'
 
 
 class Segmentation extends Component {
@@ -33,7 +34,7 @@ class Segmentation extends Component {
             data={data}
             renderItem={({ item }) => 
             	<GenericDisplayCard dark={false}
-	              style={{ width: '88%', elevation: 0 }}
+	              style={Styles.infoBoxYellow}
 	              heading={item.name}
 	              showTextAvatar={true}
 	              //onPress={() => NavigationService.navigate('CustomerInfoScreen')}

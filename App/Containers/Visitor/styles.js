@@ -4,7 +4,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 
 export default StyleSheet.create({
   action: {
-    marginTop: 50,
+    marginTop: hp('9%'),
     width: wp('80%'),
     justifyContent: 'center'
   },
@@ -19,16 +19,17 @@ export default StyleSheet.create({
   container: {
     ...Metrics.mediumHorizontalPadding,
     ...Metrics.mediumVerticalPadding,
-    ...Helpers.center,
+    alignItems: 'center',
     backgroundColor: Colors.white,
     flex: 1,
     marginHorizontal: 30,
-    marginVertical: 110,
+    marginVertical: 90,
     paddingBottom: 60,
     shadowColor: Colors.white,
     shadowOffset: { width: 20, height: 30 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
+    position: 'relative'
   },
   link: {
     color: Colors.label,
@@ -55,6 +56,19 @@ export default StyleSheet.create({
   },
   buttonIcon: {
   	color: Colors.white,
-  	fontSize: wp('5.5%')
+  	fontSize: wp('5%')
+  },
+  bottomSection: {
+      justifyContent: 'center',
+      position: 'absolute',
+      bottom: -hp('2%'),
+      width: wp('90%')
+  },
+  proceedAction: {
+    alignSelf: 'flex-end', 
+    marginTop: hp('1%')
+  },
+  proceedActionText: {
+    fontSize: wp('3.8%')
   }
 });

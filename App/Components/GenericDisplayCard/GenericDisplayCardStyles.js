@@ -56,7 +56,6 @@ export default StyleSheet.create({
     flexShrink: 1,
     width: '50%',
     textAlign: 'right',
-    textTransform: 'capitalize',
     marginTop: hp('.5%')
   },
   strip: {

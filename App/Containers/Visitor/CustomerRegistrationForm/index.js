@@ -16,10 +16,11 @@ import InputDate from 'App/Components/FormInput/InputDate';
 import {ApplicationStyles} from 'App/Theme'
 import GenericCheckBox from 'App/Components/GenericCheckBox'
 import VisitorActions from 'App/Stores/Visitor/Actions'
+import CustomerInfoCard from 'App/Containers/Insights/Customers/CustomerInfoCard'
 
 
 
-class NewRegistrationFormScreen extends Component {
+class CustomerRegistrationForm extends Component {
  
 	submit() {
 		// const { 
@@ -49,129 +50,18 @@ class NewRegistrationFormScreen extends Component {
 			validation,
 			occupationList,
             sourceEnquiryList,
-            productsList
+            productsList,
+            visitorData
 		} = this.props;
 		
 		return (
 			<View style={Style.container}>
-				<Text style={ApplicationStyles.formHeading}>{'New Registration'}</Text>
+				<CustomerInfoCard data={visitorData.data[0]}/>
 				<ScrollView 
 					showsVerticalScrollIndicator={false}
 					style={Style.action}
 				>
-
-				 	<InputText
-						style={Style.mb10}
-						placeholder={'First Name'}
-						value={form.first_name}
-						onChange={(value) => changeForm({ edited_field: 'first_name', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'first_name'}
-						label={'First Name*'}
-					/>
-
-					<InputText
-						style={Style.mb10}
-						placeholder={'Last Name'}
-						value={form.last_name}
-						onChange={(value) => changeForm({ edited_field: 'last_name', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'last_name'}
-						label={'Last Name*'}
-					/>
 					
-                    <InputMobile
-						styles={Style.mb10}
-						placeholder={'Contact Number'}
-						value={form.contact_number}
-						onChange={(value) => changeForm({ edited_field: 'contact_number', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'contact_number'}
-						label={'Contact Number*'}
-					/>
-
-					<InputText
-						style={Style.mb10}
-						placeholder={'Email'}
-						value={form.email}
-						onChange={(value) => changeForm({ edited_field: 'email', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'email'}
-						label={'Email'}
-					/>
-
-					<TextArea
-	                    placeholder={'Address'}
-	                    label={'Address'}
-	                    numberOfLines={2}
-	                    style={Style.mb10}
-	                    value={form.address}
-						onChange={(value) => changeForm({ edited_field: 'address', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'address'}
-                	/>
-
-                	<InputNumber
-						styles={Style.mb10}
-						placeholder={'Age'}
-						value={form.age}
-						onChange={(value) => changeForm({ edited_field: 'age', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'age'}
-						label={'Age'}
-					/>
-
-					<InputText
-						style={Style.mb10}
-						placeholder={'Purpose of Buying'}
-						value={form.purpose_of_buying}
-						onChange={(value) => changeForm({ edited_field: 'purpose_of_buying', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'purpose_of_buying'}
-						label={'Purpose of Buying*'}
-					/>
-
-					<InputText
-						style={Style.mb10}
-						placeholder={'Usage'}
-						value={form.usage}
-						onChange={(value) => changeForm({ edited_field: 'usage', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'usage'}
-						label={'Usage*'}
-					/>
-
-					<View style={{width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
-						<Text style={{...ApplicationStyles.label, marginBottom: '1%'}}>Gender</Text>
-						<View style={{flexDirection: 'row', marginBottom: '2%'}}>
-						<GenericCheckBox 
-							style={{marginRight: '5%'}}
-							label={'Male'}
-							checked={form.gender == 'Male'}
-							onPress={(event)=>{
-			                	let value = form.gender == 'Male' ? 'Female' : 'Male';
-				                changeForm({ edited_field: 'gender', edited_value: value });
-			                }}
-						/>
-
-						<GenericCheckBox
-							style={{marginRight: '5%'}} 
-							label={'Female'}
-							checked={form.gender == 'Female'}
-							onPress={(event)=>{
-			                	let value = form.gender == 'Female' ? 'Male' : 'Female';
-				                changeForm({ edited_field: 'gender', edited_value: value });
-			                }}
-						/>
-						</View>
-					</View>
-
-
-					<SearchableDropdown
-				        dataSource={occupationList}
-				        placeHolderText={'Select Occupation'}
-				        selectedValue={form.occupation}
-				        onChange={(value) => changeForm({ edited_field: 'occupation', edited_value: value })}
-				        placeholder={'Type or Select Occupation'}
-				        invalid={false}
-				        labelStyles={{ ...Style.pickerLabel }}
-				        customPickerStyles={{ ...Style.picker }}
-				        label={'Occupation'}
-					/>
-
-
 					<SearchableDropdown
 				        dataSource={productsList}
 				        placeHolderText={'Select Product'}
@@ -202,7 +92,7 @@ class NewRegistrationFormScreen extends Component {
 							label={'Finance'}
 							checked={form.mode_of_purchase == 'Finance'}
 							onPress={(event)=>{
-			                	let value = form.mode_of_purchase == 'Finance' ? 'Cash' : 'Finance';
+			                	let value = form.mode_of_purchase == 'Cash' ? 'Finance' : 'Cash';
 				                changeForm({ edited_field: 'mode_of_purchase', edited_value: value });
 			                }}
 						/>
@@ -229,7 +119,7 @@ class NewRegistrationFormScreen extends Component {
 							label={'No'}
 							checked={form.existing_two_wheeler == 'No'}
 							onPress={(event)=>{
-			                	let value = form.existing_two_wheeler == 'No' ? 'Yes' : 'No';
+			                	let value = form.existing_two_wheeler == 'Yes' ? 'No' : 'Yes';
 				                changeForm({ edited_field: 'existing_two_wheeler', edited_value: value });
 			                }}
 						/>
@@ -255,7 +145,7 @@ class NewRegistrationFormScreen extends Component {
 							label={'No'}
 							checked={form.exchange_required == 'No'}
 							onPress={(event)=>{
-			                	let value = form.exchange_required == 'No' ? 'Yes' : 'No';
+			                	let value = form.exchange_required == 'Yes' ? 'No' : 'Yes';
 				                changeForm({ edited_field: 'exchange_required', edited_value: value });
 			                }}
 						/>
@@ -307,7 +197,7 @@ class NewRegistrationFormScreen extends Component {
 							label={'No'}
 							checked={form.was_test_drive_offered == 'No'}
 							onPress={(event)=>{
-			                	let value = form.was_test_drive_offered == 'No' ? 'Yes' : 'No';
+			                	let value = form.was_test_drive_offered == 'Yes' ? 'No' : 'Yes';
 				                changeForm({ edited_field: 'was_test_drive_offered', edited_value: value });
 			                }}
 						/>
@@ -334,7 +224,8 @@ const mapStateToProps = (state) => ({
 	loader 			            : state.visitor.loaders.registerCustomerLoader,
 	occupationList 				: state.common.occupationList,
   	sourceEnquiryList 			: state.common.sourceEnquiryList,
-  	productsList 				: state.common.productsList
+  	productsList 				: state.common.productsList,
+  	visitorData 				: state.visitor.visitorSearchSuccessData
 });
   
 const mapDispatchToProps = (dispatch) => ({
@@ -345,4 +236,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(NewRegistrationFormScreen)
+)(CustomerRegistrationForm)

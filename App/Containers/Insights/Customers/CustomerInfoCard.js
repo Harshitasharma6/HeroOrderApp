@@ -9,6 +9,43 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 import GenericDisplayCard from 'App/Components/GenericDisplayCard'
 import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDisplayCardStrip';
 
+// accountid: "0019D000009zum3QAA"
+// createddate: "2020-06-25T06:29:18.000Z"
+// department: null
+// email: null
+// emailbounceddate: null
+// emailbouncedreason: null
+// fax: null
+// firstname: "Dinesh"
+// id: 1
+// individualid: null
+// isdeleted: false
+// isemailbounced: false
+// lastname: "Kaushik"
+// mailingcity: null
+// mailingcountry: null
+// mailinggeocodeaccuracy: null
+// mailinglatitude: null
+// mailinglongitude: null
+// mailingpostalcode: null
+// mailingstate: null
+// mailingstreet: null
+// masterrecordid: null
+// middlename: null
+// mobilephone: "9971710994"
+// name: "Dinesh Kaushik"
+// pg_id__c: null
+// phone: null
+// photourl: "/services/images/photo/0039D000007KJE2QAO"
+// reportstoid: null
+// salutation: "Mr."
+// sfid: "0039D000007KJE2QAO"
+// suffix: null
+// systemmodstamp: "2020-08-06T06:17:13.000Z"
+// title: null
+// _hc_err: null
+// _hc_lastop: "SYNCED"
+
 const CustomerInfoCard = ({ onPress, data, id }) => (
     <View style={Styles.box}>
     <View style={{flexDirection: 'row'}}>
@@ -17,22 +54,22 @@ const CustomerInfoCard = ({ onPress, data, id }) => (
           style={{ color: Colors.primary, fontSize:  wp('9%')}}
         />
       <View style={Styles.userDtl}>
-        <Text style={Styles.title}>{'Naina Garg'}</Text>
+        <Text style={Styles.title}>{data.name}</Text>
       </View>
       </View>
       <View style={Styles.btmBox}>
-      	<GenericDisplayCardStrip key={'Age'} label={'Age'} value={'31'} />
-	      <GenericDisplayCardStrip key={'Gender'} label={'Gender'} value={'Male'} />
-	      <GenericDisplayCardStrip key={'Phone'} label={'Phone'} value={'9779897974'} />
-        <GenericDisplayCardStrip key={'Email'} label={'Email'} value={'niru.gupta@gmail.com'} />
-        <GenericDisplayCardStrip key={'Address'} label={'Address'} value={'H No. 123 Palam New Delhi'} />
-        <GenericDisplayCardStrip key={'Occupation'} label={'Occupation'} value={'Employee'} />
+      	<GenericDisplayCardStrip key={'Age'} label={'Age'} value={data.age} />
+	      <GenericDisplayCardStrip key={'Gender'} label={'Gender'} value={data.gender} />
+	      <GenericDisplayCardStrip key={'Phone'} label={'Phone'} value={data.mobilephone} />
+        <GenericDisplayCardStrip key={'Email'} label={'Email'} value={data.email} />
+        <GenericDisplayCardStrip key={'Address'} label={'Address'} value={data.address} />
+        <GenericDisplayCardStrip key={'Occupation'} label={'Occupation'} value={data.occupation} />
       
     </View>
      <View style={{position: 'absolute', right: wp('2%'), top: hp('2%')}}>
        	<GenericIcon name="edit" style={{fontSize: wp('7%'), color: Colors.primary}}/>
        </View>
-       <BlueButton title={'Call'} style={{width: wp('27%'), alignSelf: 'flex-end' }} textStyle={{fontSize: wp('3.8%')}} onPress={() => HelperService.callNumber('9779897974')}><GenericIcon name="phone" style={{fontSize: wp('5%'), color: Colors.white}}/></BlueButton>
+       <BlueButton title={'Call'} style={{width: wp('27%'), alignSelf: 'flex-end' }} textStyle={{fontSize: wp('3.8%')}} onPress={() => HelperService.callNumber(data.mobilephone)}><GenericIcon name="phone" style={{fontSize: wp('5%'), color: Colors.white}}/></BlueButton>
      </View>
 )
 

@@ -42,45 +42,55 @@ class Actionables extends React.Component {
             ref={ref => {this.flatListRef = ref}}
 
            >
-             <WhiteButton
+            <WhiteButton
               title={'Open Hot Leads'}
-              style={Styles.actionButton}
+              style={{...Styles.actionButton, ...Styles.customSelectedStylePink}}
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('1'); this.scrollToIndex(0)}}
               selected={selectedFollowUp == '1'}
+              customSelectedStyle={Styles.customSelectedStylePink}
+              customSelectedTextStyle={Styles.customSelectedTextStyle}
             />
 
             <WhiteButton
               title={'Purchase Date Over Due'}
-              style={Styles.actionButton}
+              style={{...Styles.actionButton, ...Styles.customSelectedStyleSeaGreen}}
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('2');  this.scrollToIndex(1)}}
               selected={selectedFollowUp == '2'}
+              customSelectedStyle={Styles.customSelectedStyleSeaGreen}
+              customSelectedTextStyle={Styles.customSelectedTextStyle}
             />
 
           <WhiteButton
               title={'Booking Confirmed & Finance Required'}
-              style={Styles.actionButton}
+              style={{...Styles.actionButton, ...Styles.customSelectedStyleRedPink}}
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('3');  this.scrollToIndex(2)}}
               selected={selectedFollowUp == '3'}
+              customSelectedStyle={Styles.customSelectedStyleRedPink}
+              customSelectedTextStyle={Styles.customSelectedTextStyle}
             />
 
         
             <WhiteButton
               title={'Open Hot Assigned Leads'}
-              style={Styles.actionButton}
+              style={{...Styles.actionButton, ...Styles.customSelectedStyleYellow}}
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('4');  this.scrollToIndex(3)}}
               selected={selectedFollowUp == '4'}
+              customSelectedStyle={Styles.customSelectedStyleYellow}
+              customSelectedTextStyle={Styles.customSelectedTextStyle}
             />
 
              <WhiteButton
               title={'No Action From Last 1 Week'}
-              style={Styles.actionButton}
+              style={{...Styles.actionButton, ...Styles.customSelectedStyleGreyWhite}}
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('5');  this.scrollToIndex(4)}}
               selected={selectedFollowUp == '5'}
+              customSelectedStyle={Styles.customSelectedStyleGreyWhite}
+              customSelectedTextStyle={Styles.customSelectedTextStyle}
             />            
           </ScrollView>
           <FollowUps /> 
@@ -103,15 +113,10 @@ class Actionables extends React.Component {
               textStyle={Styles.actionButtonText}
               onPress={() => {selectActionable('1')}}
               selected={selectedActionable == '1'}
+              disabled={true}
             />
 
-            <WhiteButton
-              title={"Segmentation"}
-              style={Styles.actionButton}
-              textStyle={Styles.actionButtonText}
-              onPress={() => {selectActionable('2')}}
-              selected={selectedActionable == '2'}
-            />
+           
           </View>
           {visible_node}
         </View>
@@ -175,18 +180,43 @@ const Styles = StyleSheet.create({
     marginLeft: wp('1%'),
     height: hp('5%'),
     minWidth: wp('25%'),
+    elevation: 0
   },
   actionButtonText: {
     fontSize: wp('2.9%'),
-    fontFamily: ApplicationStyles.textMsgFont
+    fontFamily: ApplicationStyles.textMsgFont,
+    color: Colors.headingBlack
   },
   countBadge: {
     position: 'absolute',
     backgroundColor: Colors.button,
     right: 0,
     top: -10
+  },
+  customSelectedTextStyle: {
+    color: Colors.headingBlack
+  },
+  customSelectedStylePink: {
+    backgroundColor: Colors.darkPink
+  },
+
+  customSelectedStyleSeaGreen: {
+    backgroundColor: Colors.darkSeaGreen
+  },
+  
+  customSelectedStyleRedPink: {
+    backgroundColor: Colors.darkRedPink
+  },
+
+  customSelectedStyleYellow: {
+    backgroundColor: Colors.darkYellow
+  },
+
+  customSelectedStyleGreyWhite: {
+    backgroundColor: Colors.darkGreyWhite
   }
 });
+
 
 
 

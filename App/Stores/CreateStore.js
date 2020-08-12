@@ -37,7 +37,7 @@ const sensitiveStorage = createSensitiveStorage({
 
 
 
-const blacklistPaths = ['network', 'common'];
+const blacklistPaths = ['network', 'common', 'visitor'];
 let blacklistTransform = createTransform(
   (inboundState, key) => {
  if (key === 'shree') {

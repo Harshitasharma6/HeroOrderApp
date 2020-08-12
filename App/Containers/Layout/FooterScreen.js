@@ -101,7 +101,8 @@ class FooterScreen extends React.Component {
       currentScreen == 'VisitHistoryScreen' ||
       currentScreen == 'TestDriveHistoryScreen' ||
       currentScreen == 'AddProductScreen' ||
-      currentScreen == 'TestDriveFeedBackScreen'
+      currentScreen == 'TestDriveFeedBackScreen' ||
+      currentScreen == 'CustomerRegistrationFormScreen'
 
     let insightsActive = 
       currentScreen == 'InsightsScreen' ||

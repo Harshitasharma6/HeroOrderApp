@@ -8,6 +8,8 @@ import { SitesTypes } from 'App/Stores/Sites/Actions';
 import { StartDayTypes } from '../Stores/StartDay/Actions'
 import { ShreeTypes } from '../Stores/Shree/Actions';
 import { NonShreeTypes } from '../Stores/NonShree/Actions';
+import { VisitorTypes } from '../Stores/Visitor/Actions';
+
 
 
 import {
@@ -103,6 +105,13 @@ import {
 
 
 
+ import { 
+    watchSearchCustomer,
+    watchRegisterCustomer
+ } from './VisitorSaga'
+
+
+
 
 export default function* root() {
     yield all([
@@ -193,6 +202,14 @@ export default function* root() {
         takeLatest(DashboardTypes.FETCH_COMMUNICATIONS, fetchCommunications),
         takeLatest(DashboardTypes.FETCH_COMMUNICATIONS_ATTACHMENTS, fetchCommunicationsAttachments),
         takeLatest(DashboardTypes.FETCH_COMMUNICATIONS_ATTACHMENTS_DETAILS, fetchCommunicationsAttachmentsDetails),
-        takeLatest(DashboardTypes.FETCH_FINAL_OBSERVATION, fetchFinalObservation)
+        takeLatest(DashboardTypes.FETCH_FINAL_OBSERVATION, fetchFinalObservation),
+
+
+
+
+        //
+
+        fork(watchSearchCustomer),
+        fork(watchRegisterCustomer),
     ]);
 }

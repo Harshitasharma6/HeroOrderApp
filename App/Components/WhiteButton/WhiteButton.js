@@ -4,9 +4,9 @@ import { TouchableOpacity } from 'react-native'
 import Style from './WhiteButtonStyle'
 import { Colors, ApplicationStyles } from 'App/Theme'
 
-const WhiteButton = ({ style, textStyle,onPress, title, disabled = false, loading=false, selected=false, children=[]}) => {
-	let textStyleNode = selected ? { ...Style.text, ...textStyle, ...Style.selectedText} : { ...Style.text, ...textStyle};
-	let buttonStyleNode = selected ? { ...Style.button, ...style, ...Style.selectedButton } : { ...Style.button, ...style };
+const WhiteButton = ({ style, textStyle,onPress, title, disabled = false, loading=false, selected=false, children=[], customSelectedStyle={}, customSelectedTextStyle={}}) => {
+	let textStyleNode = selected ? { ...Style.text, ...textStyle, ...Style.selectedText, ...customSelectedTextStyle} : { ...Style.text, ...textStyle};
+	let buttonStyleNode = selected ? { ...Style.button, ...style, ...Style.selectedButton, ...customSelectedStyle } : { ...Style.button, ...style };
 	let textNode = (<Text style={textStyleNode}>{title}</Text>);
 	textNode = title ? textNode : [];
 

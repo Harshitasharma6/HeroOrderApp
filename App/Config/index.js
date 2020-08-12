@@ -1,16 +1,98 @@
 export const Config = {
-	API_URL: 'https://cnsretailapp.herokuapp.com/',
+	API_URL: 'https://herodealersapp.herokuapp.com/',
 
 	USER_SERVICE: {
-		FETCH_AREAS_URL: 'agents/areas',
-		START_DAY_URL: 'agents/startDay',
-		END_DAY_URL: 'agents/endDay',
-		LOGIN_URL: 'agents/login',
-		MARK_ABSENT_URL: 'agents/markAbsent',
-		FETCH_AGENT_DETAILS: 'agents/detail',
-		CHECK_ATTENDANCE: 'agents/isAttMark',
-		FETCH_ALL_PSM: 'agents/getAllPsm?offset=0&limit=1000'
+		LOGIN: 'login/login'
 	},
+
+	VISITOR_SERVICE: {
+		SEARCH_CUSTOMER:  'customers/search',
+		REGISTER_CUSTOMER:'visitors/create',
+		UPDATE_VISITOR:   'visitors/update',
+	}, 
+
+
+	COMMON_SERVICE: {
+		FETCH_PRODUCTS: '',
+		FETCH_SOURCE_OF_ENQUIRY: '',
+		FETCH_OCCUPATIONS: ''
+	},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	RETAILER_SERVICE: {
 		CREATE: 'sellers/add',
