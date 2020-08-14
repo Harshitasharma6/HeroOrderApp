@@ -8,7 +8,6 @@ import { createTransform, persistReducer, persistStore } from 'redux-persist';
 import { INITIAL_STATE as SHREE_INITIAL_STATE } from './Shree/InitialState';
 import { INITIAL_STATE as DASHBOARD_INITIAL_STATE } from './Dashboard/InitialState';
 import { INITIAL_STATE as NON_SHREE_INITIAL_STATE } from './NonShree/InitialState';
-import { INITIAL_STATE as SITES_INITIAL_STATE } from './Sites/InitialState';
 
 
 const sensitiveStorage = createSensitiveStorage({
@@ -71,16 +70,6 @@ let blacklistTransform = createTransform(
         createNonShreeVisitDetailLoader: NON_SHREE_INITIAL_STATE.createNonShreeVisitDetailLoader,
         createCompetitoreLoader: NON_SHREE_INITIAL_STATE.createCompetitoreLoader,
         fetchPreviousVisitsLoader: NON_SHREE_INITIAL_STATE.fetchPreviousVisitsLoader
-      };
-    }  else if (key === 'sites') {
-      return {
-        ...inboundState,
-        siteSearchFilters: SITES_INITIAL_STATE.siteSearchFilters,
-        fetchSitesLoader: SITES_INITIAL_STATE.fetchSitesLoader,
-        fetchSiteVisitsLoader: SITES_INITIAL_STATE.fetchSiteVisitsLoader,
-        createSiteLoader: SITES_INITIAL_STATE.createSiteLoader,
-        createSiteVisitLoader: SITES_INITIAL_STATE.createSiteVisitLoader,
-        createCompetitorLoader: SITES_INITIAL_STATE.createCompetitorLoader,
       };
     } else if (key === 'dashboard') {
       return {

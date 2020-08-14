@@ -2,7 +2,6 @@ import Loading from 'App/Components/Loading';
 import NoDataFound from 'App/Components/NoDataFound';
 import NavigationService from 'App/Services/NavigationService';
 import { HelperService } from 'App/Services/Utils/HelperService';
-import SitesActions from 'App/Stores/Sites/Actions';
 import { Colors } from '../../../Theme';
 import { Icon } from 'native-base';
 import React, { Component } from 'react';

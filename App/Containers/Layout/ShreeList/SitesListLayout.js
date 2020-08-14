@@ -4,7 +4,6 @@ import { Header } from 'native-base';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
-import SitesActions from 'App/Stores/Sites/Actions';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 

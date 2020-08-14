@@ -48,13 +48,8 @@ class FooterScreen extends React.Component {
       currentScreen === 'ShreeVisitForm' ||
       currentScreen === 'ShreeCountersVisitsList' ||
       currentScreen === 'ShreeCounterVisitForm' ||
-      currentScreen === 'SiteVisitForm' ||
       currentScreen === 'NonShreeCompatitor' ||
       currentScreen === 'NonShreeInfo' ||
-      currentScreen === 'NonShreeSite' ||
-      currentScreen === 'SiteListScreen' ||
-      currentScreen === 'SitesInfoScreen'||
-      currentScreen === 'NewSitesVisit' ||
       currentScreen === 'AddShreeDealerForm' ||
       currentScreen === 'AddShreeRetailerForm'||
       currentScreen === 'CounterSelectionScreen'||
@@ -62,7 +57,6 @@ class FooterScreen extends React.Component {
       currentScreen === 'Payments'||
       currentScreen === 'SalesInfo'||
       currentScreen === 'Outstandings' ||
-      currentScreen === 'NewSites' ||
       currentScreen === 'FinalObservationFormScreen' ||
       currentScreen === 'FinalObservationList' ||
       currentScreen === 'NonShreeVisitForm' ||
@@ -70,8 +64,7 @@ class FooterScreen extends React.Component {
       currentScreen === 'AddNonShreeForm'
 
     let visitsSummaryActive =  
-      currentScreen === 'VisitSummaryList' || 
-      currentScreen === 'VisitSummarySiteList'
+      currentScreen === 'VisitSummaryList'
    
     let profilesActive = currentScreen === 'ProfileScreen';
     

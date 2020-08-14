@@ -3,7 +3,6 @@ import StartDayActions from 'App/Stores/StartDay/Actions'
 import ShreeActions from 'App/Stores/Shree/Actions'
 import UserActions from 'App/Stores/User/Actions'
 import NonShreeActions from 'App/Stores/NonShree/Actions';
-import SiteActions from 'App/Stores/Sites/Actions';
 import { startDayService } from 'App/Services/Api/StartDayService'
 import { HelperService } from 'App/Services/Utils/HelperService'
 import NavigationService from 'App/Services/NavigationService';
@@ -66,7 +65,6 @@ export function* fetchGlobleUserDetail({payload}) {
     yield put(ShreeActions.fetchShree());
     yield put(ShreeActions.fetchShreeRetailers());
     yield put(NonShreeActions.fetchNonShree());
-    yield put(SiteActions.fetchSites());
     yield put(InfluencersActions.fetchInfluencers());
     yield put(ShreeActions.getAllDistricts());
     

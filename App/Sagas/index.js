@@ -3,7 +3,6 @@ import { StartupTypes } from 'App/Stores/Startup/Actions';
 import { UserTypes } from 'App/Stores/User/Actions';
 import { networkSaga, offlineActionTypes } from 'react-native-offline';
 import { all, fork, takeLatest } from 'redux-saga/effects';
-import { SitesTypes } from 'App/Stores/Sites/Actions';
 import { StartDayTypes } from '../Stores/StartDay/Actions'
 import { ShreeTypes } from '../Stores/Shree/Actions';
 import { NonShreeTypes } from '../Stores/NonShree/Actions';
@@ -26,13 +25,7 @@ import {
     runQueue
 } from './OfflineSaga';
 
-import {
-    fetchSites,
-    fetchSiteVisits,
-    watchCreateSiteFormRequest,
-    watchCreateSiteVisitFormRequest,
-    watchCreateCompetitorFormRequest
-} from './SitesSaga';
+
 
 import {
     startup
@@ -123,15 +116,7 @@ export default function* root() {
         takeLatest(UserTypes.MARK_USER_ABSENT, markAbsent),
         takeLatest(UserTypes.CHECK_ATTENDANCE, checkAttendance),
         takeLatest(UserTypes.FETCH_ALL_PSM, fetchAllPsm),
-
-        takeLatest(SitesTypes.FETCH_SITES, fetchSites),
-        takeLatest(SitesTypes.FETCH_SITE_VISITS, fetchSiteVisits),
-
-        fork(watchCreateSiteVisitFormRequest),
-        fork(watchCreateSiteFormRequest),
-        fork(watchCreateCompetitorFormRequest),
-
-        
+  
     
        
         fork(fetchGlobalTokenTaskWatcher),

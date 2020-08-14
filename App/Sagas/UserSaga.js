@@ -10,7 +10,6 @@ import { getConnectionStatus } from 'App/Stores/Common/Selectors'
 import ActionQueuesActions from 'App/Stores/ActionQueues/Actions'
 import { offlineApiCall } from './OfflineSaga'
 import StartupActions from 'App/Stores/Startup/Actions'
-import SiteActions from 'App/Stores/Sites/Actions';
 import {Alert} from 'react-native'
 import StartDayActions from 'App/Stores/StartDay/Actions'
 import { startDayService } from 'App/Services/Api/StartDayService'

@@ -9,15 +9,6 @@ import { createAppContainer, createStackNavigator } from 'react-navigation'
 // import CompletedDayScreen from 'App/Containers/CompletedDay'
 // //import DashboardScreen from 'App/Containers/Dashboard'
 // import ProfileScreen from 'App/Containers/Profile'
-// import SiteListScreen from 'App/Containers/Sites/SitesList/SiteList'
-
-
-// import NewSitesVisit from 'App/Containers/Sites/NewSitesVisit'
-// import NewSites from 'App/Containers/Sites/NewSites'
-
-// import SitesList from 'App/Containers/Sites/SitesList'
-// import SitesInfoScreen from 'App/Containers/Sites/SitesVisitInfoScreen'
-// import SiteVisitForm from 'App/Containers/Sites/SitesVisitForm'
 
 // import InvoiceInfoScreen from 'App/Containers/Invoice'
 
@@ -28,9 +19,6 @@ import { createAppContainer, createStackNavigator } from 'react-navigation'
 // import ShreeListScreen from 'App/Containers/ShreeVisit/ShreeListScreen/ShreeListScreen'
 // import NonShreeListScreen from 'App/Containers/NonShreeVisit/NonShreeListScreen/NonShreeListScreen'
 // import ShreeInfoScreen from 'App/Containers/ShreeVisit/ShreeInfoScreen/ShreeInfoScreen'
-
-// import SitesVisitForm from 'App/Containers/Sites/SitesVisitForm'
-// import SitesVisitList from 'App/Containers/Sites/SitesVisitList'
 
 
 // import ShreeListsScreens from 'App/Containers/Shree/ShreeList/ShreeListsScreens';
@@ -71,7 +59,6 @@ import { createAppContainer, createStackNavigator } from 'react-navigation'
 
 
 // import VisitSummaryList from 'App/Containers/VisitSummarySection/VisitSummaryList';
-// import VisitSummarySiteList from 'App/Containers/VisitSummarySection/VisitSummarySiteList';
 
 
 
@@ -136,12 +123,6 @@ const StackNavigator = createStackNavigator(
     // CompletedDayScreen,
     // LoginOtpScreen,
     // ProfileScreen,
-    // SiteListScreen,
-    // NewSitesVisit,
-    // NewSites,
-    // SitesList,
-    // SitesInfoScreen,
-    // SiteVisitForm,
     
     // InvoiceInfoScreen,
     // ShreeRetailerInfo,
@@ -175,9 +156,6 @@ const StackNavigator = createStackNavigator(
     // NonShreeVisitForm,
     // NonShreeVisitList,
 
-    // SitesVisitForm,
-    // SitesVisitList,
-
     // CounterSelectionScreen,
     // PreviousVisits,
     // Payments,
@@ -187,7 +165,6 @@ const StackNavigator = createStackNavigator(
 
     // VisitSummaryList,
     // VisitSummaryCompetitorList,
-    // VisitSummarySiteList,
 
 
 

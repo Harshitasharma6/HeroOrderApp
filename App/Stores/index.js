@@ -6,7 +6,6 @@ import { reducer as network } from 'react-native-offline';
 import { reducer as UserReducer } from './User/Reducers'
 import { reducer as ActionQueuesReducer } from './ActionQueues/Reducers'
 import { reducer as DashboardReducer } from './Dashboard/Reducers'
-import { reducer as SiteReducer } from './Sites/Reducers'
 import { reducer as checkInReducer} from './CheckIn/Reducers'
 import { reducer as StartDayReducer } from './StartDay/Reducers'
 import { reducer as shreeReducer} from './Shree/Reducers'
@@ -21,7 +20,6 @@ export default () => {
     user: UserReducer,
     dashboard: DashboardReducer,
     actionQueues: ActionQueuesReducer,
-    sites: SiteReducer,
     checkIn: checkInReducer,
     startDay: StartDayReducer,
     nonShree: nonShreeReducer,

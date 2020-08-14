@@ -9,9 +9,7 @@ import { connect } from 'react-redux';
 import DashboardLayout from './DashboardLayout';
 import FooterScreen from './FooterScreen';
 import Drawer from './SideBarLayout/Drawer';
-import NewSitesLayout from './Sites/NewSitesLayout';
-import SiteInfoLayout from './Sites/SitesInfoLayout';
-import SiteListsLayout from './Sites/SitesListLayout';
+
 import NewRetailerLayout from './OrderListLayout';
 import ShreeListLayout from './Shree/ShreeListLayout';
 import ShreeInfoLayout from './Shree/ShreeInfoLayout';
@@ -19,7 +17,6 @@ import VisitSummaryLayout from './Shree/VisitSummaryLayout';
 import NonShreeListLayout from './NonShree/NonShreeListLayout'
 import NonShreeInfoLayout from './NonShree/NonShreeInfoLayout';
 import NonShreeVisitInfoLayout from './NonShree/NonShreeVisitLayout';
-import SiteVisitListLayout from './Sites/SiteVisitListLayout';
 import FinalObservationLayout from './FinalObservationLayout';
 
 
@@ -105,7 +102,6 @@ class LayoutScreen extends React.Component {
       case 'AddShreeRetailerForm':
       case 'AddShreeDealerForm':
       case 'VisitSummaryCompetitorList':
-      case 'NewSites':
       case 'ProfileScreen':
         customLayoutNode = <NewRetailerLayout />;
         break;
@@ -138,15 +134,7 @@ class LayoutScreen extends React.Component {
         customLayoutNode = [];
         break;
 
-      case 'SiteListScreen':
-        customLayoutNode = <SiteListsLayout />
-        break;
-
-      case 'SitesInfoScreen':
-      case 'NewSitesVisit':
-      case 'SiteVisitForm':
-        customLayoutNode = <SiteInfoLayout />
-        break;
+   
 
       case 'TravelUpdateScreen':
       case 'ConvenienceUpdateScreen':
@@ -167,21 +155,7 @@ class LayoutScreen extends React.Component {
         customLayoutNode = []
         break;
 
-      case 'ShreeVisit':
-        customLayoutNode = <NewSitesLayout />
-        break;
-
-      case 'NonShreeVisit':
-        customLayoutNode = <NewSitesLayout />
-        break;
-
-      case 'ShreeListScreen':
-        customLayoutNode = <NewSitesLayout />
-        break;
-
-      case 'NonShreeListScreen':
-        customLayoutNode = <SiteInfoLayout />
-        break;
+     
 
       case 'ShreeListsScreens':
       case 'ShreeRetailersListScreen':
@@ -208,18 +182,14 @@ class LayoutScreen extends React.Component {
 
           
 
-      case 'SitesVisitList':
-        customLayoutNode = <SiteVisitListLayout />
-        break;
+     
 
      
       case 'NonShreeListsScreens':
         customLayoutNode = <NonShreeListLayout />
         break;
 
-      case 'NonShreeSite':
-        customLayoutNode = <NewSitesLayout />
-        break;
+    
 
       case 'NonShreeInfo':
       case 'NonShreeVisitForm':
@@ -227,9 +197,7 @@ class LayoutScreen extends React.Component {
         customLayoutNode = <NonShreeInfoLayout />
         break;
 
-      case 'NonShreeCompatitor':
-        customLayoutNode = <NewSitesLayout />
-        break;
+     
 
       case 'FeedbackScreen':
         customLayoutNode = <DashboardLayout />
@@ -246,7 +214,6 @@ class LayoutScreen extends React.Component {
 
 
       case 'VisitSummaryList': 
-      case 'VisitSummarySiteList': 
 
       case 'InsightsScreen':
         customLayoutNode = []
