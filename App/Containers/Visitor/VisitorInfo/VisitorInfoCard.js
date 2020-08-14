@@ -17,19 +17,19 @@ const VisitorInfoCard = ({ onPress, data, id }) => (
           style={{ color: Colors.primary, fontSize:  wp('9%')}}
         />
       <View style={Styles.userDtl}>
-        <Text style={Styles.title}>{'Niru Gupta'}</Text>
+        <Text style={Styles.title}>{`${data.first_name__c} ${data.last_name__c}`}</Text>
       </View>
       </View>
       <View style={Styles.btmBox}>
-      	<GenericDisplayCardStrip key={'Age'} label={'Age'} value={'31'} />
-	     <GenericDisplayCardStrip key={'Gender'} label={'Email'} value={'Male'} />
-	     <GenericDisplayCardStrip key={'Phone'} label={'Phone'} value={'9779897974'} />
+      	<GenericDisplayCardStrip key={'Age'} label={'Age'} value={data.age__c} />
+	     <GenericDisplayCardStrip key={'Gender'} label={'Gender'} value={data.genders__c} />
+	     <GenericDisplayCardStrip key={'Phone'} label={'Phone'} value={data.contact_number__c} />
       
     </View>
      <View style={{position: 'absolute', right: wp('2%'), top: hp('2%')}}>
        	<GenericIcon name="edit" style={{fontSize: wp('7%'), color: Colors.primary}} onPress={onPress}/>
        </View>
-       <BlueButton title={'Call'} style={{width: wp('27%'), alignSelf: 'flex-end' }} textStyle={{fontSize: wp('3.8%')}} onPress={() => HelperService.callNumber('9779897974')}><GenericIcon name="phone" style={{fontSize: wp('5%'), color: Colors.white}}/></BlueButton>
+       <BlueButton title={'Call'} style={{width: wp('27%'), alignSelf: 'flex-end' }} textStyle={{fontSize: wp('3.8%')}} onPress={() => HelperService.callNumber(data.contact_number__c)}><GenericIcon name="phone" style={{fontSize: wp('5%'), color: Colors.white}}/></BlueButton>
      </View>
 )
 

@@ -20,18 +20,38 @@ import VisitorActions from 'App/Stores/Visitor/Actions'
 
 
 class NewRegistrationFormScreen extends Component {
- 
+	componentDidMount() {
+		const { 
+			changeForm,
+			contact_number
+		} = this.props;
+
+		changeForm({
+			edited_field: 'contact_number',
+			edited_value: contact_number
+		});
+	}
+
+	componentWillUnmount() {
+		const {
+			clearRegistrationForm
+		} = this.props;
+
+		clearRegistrationForm();
+	}
+
 	submit() {
 		const { 
 			submitForm, 
 			form,
 		} = this.props;
 
-		Keyboard.dismiss(); 
-
-		submitForm(form);
-
-		//NavigationService.navigate('VisitorInfoScreen')
+		Keyboard.dismiss();
+		submitForm({
+			...form,
+			sales_person: 'a0O9D000001hLV9UAM',
+			"expected_close_date__c": "2020-08-19"
+		});
 	}
 
     render() {
@@ -328,12 +348,14 @@ const mapStateToProps = (state) => ({
 	loader 			            : state.visitor.loaders.registerCustomerLoader,
 	occupationList 				: state.common.occupationList,
   	sourceEnquiryList 			: state.common.sourceEnquiryList,
-  	productsList 				: state.common.productsList
+  	productsList 				: state.common.productsList,
+  	contact_number              : state.visitor.searchCustomerForm.contact_number
 });
   
 const mapDispatchToProps = (dispatch) => ({
-	changeForm: (params) => dispatch(VisitorActions.changeRegisterCustomerForm(params)),
-	submitForm: (params) => dispatch(VisitorActions.registerCustomer(params)),
+	changeForm: (params)       => dispatch(VisitorActions.changeRegisterCustomerForm(params)),
+	submitForm: (params)       => dispatch(VisitorActions.registerCustomer(params)),
+	clearRegistrationForm: ()  => dispatch(VisitorActions.clearRegistrationForm())
 });
 
 export default connect(

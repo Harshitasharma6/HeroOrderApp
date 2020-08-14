@@ -963,6 +963,12 @@ function showAppUpdatePromptAndroid(latest_version) {
     );
 }
 
+function removeFieldsAndDateReadableFormat(dateString) {
+	let updatedDateString = dateString.split('T');
+	updatedDateString = updatedDateString[0];
+	return updatedDateString;
+}
+
 
 function hasNotch() {
 	return DeviceInfo.hasNotch();
@@ -1119,5 +1125,6 @@ export const HelperService = {
 	watchLocation,
 	clearWatchLocation,
 	getAvatarTextAndBgColorForVisitType,
-	startForegroundService
+	startForegroundService,
+	removeFieldsAndDateReadableFormat
 }

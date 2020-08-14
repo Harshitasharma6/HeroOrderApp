@@ -32,45 +32,20 @@ function searchCustomer({token, dealer_id, contact_number}) {
 
 function registerCustomer(params) {
 	let url = Config.VISITOR_SERVICE.REGISTER_CUSTOMER;
-	const {
-		token,
-		dealer_id
-	} = params;
-
-
-	params = {
-		"first_name": "Saurabh",
-		"last_name": "Verma",
-		"contact_number": "9818508785", 
-		"age":  "28",
-		"gender": "Male",
-		"product_interested": "a029D000002ZFPtQAO",
-		"mode_of_purchase": "Cash",
-		"exchange_required":"No",
-		"source_of_enquiry": "Event",
-		"existing_two_wheeler": "Yes",
-		"purpose_of_buying" : "Nothing",
-		"usage": "Nothing",
-		"expected_close_date__c": "2020-08-19",
-		"sales_person": "a0O9D000001hLV9UAM", // sfid returned in login response  (* mandatory)
-		"email_id__c": "abc@gmail.com",
-		"occupation__c" : "Business",
-		"test_drive_offered__c": "Yes",
-	//"customer_sfid": "0039D000007KJE2QAO"   // pass this if searched user is from contact table
-}
-
+	debugger
 	return apiClient.post(url, params,{
 		headers: {
-			token,
-			dealer_id,
+			token: params.token,
+			dealer_id: params.dealer_id,
 		}
 	}).then((response) => {
+		debugger
 		if (in200s(response.status)) {
-			return response['data'];
+			return response['data']['data'][0];
 		}
 		return null
 	}).catch(error => {
-		//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
+		debugger
 		return null
 	});
 }
@@ -80,16 +55,15 @@ function updateVisitor(params) {
 	url += `?enquiry__c=${params.enquiry}`
 	return apiClient.post(url, params,{
 		headers: {
-			token: params.token,
+			token    : params.token,
 			dealer_id: params.dealer_id,
 		}
 	}).then((response) => {
 		if (in200s(response.status)) {
-			return response['data'];
+			return response['data']['data'][0];
 		}
 		return null
 	}).catch(error => {
-		//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
 		return null
 	});
 }
@@ -97,26 +71,11 @@ function updateVisitor(params) {
 
 function createFeedback(params) {
 	let url = Config.VISITOR_SERVICE.CREATE_FEEDBACK;
-	url += `?enquiry=${params.enquiry}`
-	const {
-		token,
-		dealer_id
-	} = params;
-
-	params = {
-		"vehicle_number": "DL1CV6565",
-		"ride_comfort": "3",
-		"responsiveness_of_vehicle": "3",
-		"dealers_sales_person_sfid": "a0O9D000001hLV9UAM",
-		"ease_of_handling": "4",
-		"overall_experience": "4",
-		"date_of_test_drive": "2020-08-16"
-	}
-
+	url += `?enquiry=${params.enquiry_id}`;
 	return apiClient.post(url, params, {
 		headers: {
-			token,
-			dealer_id,
+			token: params.token,
+			dealer_id: params.dealer_id,
 		}
 	}).then((response) => {
 		if (in200s(response.status)) {
@@ -134,7 +93,7 @@ function getAllVisits(params) {
 	let url = Config.VISITOR_SERVICE.GET_ALL_VISITS;
 	url += `?enquiry__c=${params.enquiry}`
 	url += `&limit=${100}`
-	url += `&offset=${1}`
+	url += `&offset=${0}`
 	return apiClient.get(url, {
 		headers: {
 			token: params.token,
@@ -156,7 +115,7 @@ function getFeedbacks(params) {
 	let url = Config.VISITOR_SERVICE.GET_FEEDBACKS;
 	url += `?enquiry=${params.enquiry}`
 	url += `&limit=${100}`
-	url += `&offset=${1}`
+	url += `&offset=${0}`
 	return apiClient.get(url, {
 		headers: {
 			token: params.token,

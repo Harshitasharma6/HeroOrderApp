@@ -22,7 +22,7 @@ export const INITIAL_STATE = {
 	sourceEnquiryList: [
 		{ id: 'Showroom', name: 'Showroom' },
 		{ id: 'Website', name: 'Website' },
-		{ id: 'Reference', name: 'Event' },
+		{ id: 'Reference', name: 'Reference' },
 		{ id: 'Event', name: 'Event' }
 	],
 

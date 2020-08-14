@@ -8,11 +8,8 @@ import { VisitorService } from 'App/Services/Api/VisitorService';
 import VisitorActions from 'App/Stores/Visitor/Actions';
 import { offlineApiCall } from './OfflineSaga';
 import {Alert} from 'react-native'
-//import { fetchLocation } from './UserSaga';
 import _ from 'lodash';
 
-//watchSearchCustomer
-//searchCustomer
 
 export function* watchSearchCustomer() {
 	while (true) {
@@ -152,6 +149,10 @@ function* searchCustomer(payload) {
 						duration: 2000, 
 						buttonText: 'Okay' 
 					});
+
+					let data = successData.data[0];
+					yield put(VisitorActions.registerCustomerSuccess(data));
+					yield put(VisitorActions.setCurrentEnquiry(data.id));
 					yield put(VisitorActions.showOpenLeadPrompt());
 					break;
 				default: 
@@ -205,7 +206,8 @@ function* registerCustomer(payload) {
 		const successData = yield call(VisitorService.registerCustomer, payload);
 
 		if (successData) { 
-			yield put(VisitorActions.registerCustomerSuccess(payload));
+			yield put(VisitorActions.registerCustomerSuccess(successData));
+			yield put(VisitorActions.setCurrentEnquiry(successData.id));
 			HelperService.showToast({ 
 				message: 'Visitor Registered Successfully!!', 
 				duration: 2000, 
@@ -248,17 +250,18 @@ function* updateVisitor(payload) {
 
 		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
 		payload.dealer_id = '0019D000009zum3QAA'
-		payload.enquiry = 133
 		
 		const successData = yield call(VisitorService.updateVisitor, payload);
 
 		if (successData) { 
-			yield put(VisitorActions.updateVisitorSuccess(payload));
+			yield put(VisitorActions.updateVisitorSuccess(successData));
+			successData
 			HelperService.showToast({ 
 				message: 'Updated Successfully!', 
 				duration: 2000, 
 				buttonText: 'Okay' 
 			});
+			NavigationService.navigate('VisitorInfoScreen')
 		} else {
 			yield put(VisitorActions.registerCustomerFailure())
 			HelperService.showToast({ 
@@ -296,7 +299,7 @@ function* createFeedback(payload) {
 
 		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
 		payload.dealer_id = '0019D000009zum3QAA'
-		payload.enquiry = 133
+		payload.enquiry = payload.enquiry_id
 		
 		const successData = yield call(VisitorService.createFeedback, payload);
 
@@ -338,7 +341,6 @@ export function* getAllVisits({ payload }) {
 		yield put(VisitorActions.getAllVisitsLoading());
 		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
 		payload.dealer_id = '0019D000009zum3QAA'
-		payload.enquiry = 133
 
 		let successData = yield call(VisitorService.getAllVisits, payload);
 		if (successData) {
@@ -365,7 +367,6 @@ export function* getFeedbacks({ payload }) {
 		yield put(VisitorActions.getFeedbacksLoading());
 		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
 		payload.dealer_id = '0019D000009zum3QAA'
-		payload.enquiry = 133
 
 		let successData = yield call(VisitorService.getFeedbacks, payload);
 		if (successData) {

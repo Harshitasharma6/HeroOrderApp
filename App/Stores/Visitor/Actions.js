@@ -20,6 +20,8 @@ const { Types, Creators } = createActions({
 	registerCustomerValidationFailed: ['payload'],
 	showOpenLeadPrompt: null,
 	hideOpenLeadPrompt: null,
+	setRegistrationForm: ['payload'],
+	clearRegistrationForm: null,
 
 
 	updateVisitor: ['payload'],
@@ -46,7 +48,11 @@ const { Types, Creators } = createActions({
 	getFeedbacksSuccess:  ['payload'],
 	getFeedbacksFailure: null,
 	getFeedbacksLoading: null,
-	getFeedbacksLoadingStop: null
+	getFeedbacksLoadingStop: null,
+
+
+	setCurrentEnquiry: ['payload'],
+	clearCurrentEnquiry: null
 });
 
 export const VisitorTypes = Types

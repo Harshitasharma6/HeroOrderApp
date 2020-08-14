@@ -23,12 +23,18 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 class TestDriveFeedBackScreen extends Component {
 	submit() {
 		const { 
+			currentEnquiryId,
 			submitForm, 
 			form
 		} = this.props;
 
 		Keyboard.dismiss(); 
-		submitForm(form);
+		submitForm({
+			...form, 
+			enquiry_id: currentEnquiryId, 
+			dealers_sales_person_sfid: "a0O9D000001hLV9UAM",
+			date_of_test_drive: HelperService.dateReadableFormatWithHyphen()
+		});
 	}
 
     render() {
@@ -37,7 +43,8 @@ class TestDriveFeedBackScreen extends Component {
 			form,
 			submitForm,
 			changeForm, 
-			loader
+			loader,
+			productsList
 		} = this.props;
 		
 		return (
@@ -48,19 +55,17 @@ class TestDriveFeedBackScreen extends Component {
 					style={Style.action}
 				>
 
-					{
-					// 	<SearchableDropdown
-				 //        dataSource={[{id: 'Boss', name: 'Boss'}, {id: 'Admin', name: 'Admin'}, {id: 'Dealer', name: 'Dealer'}]}
-				 //        placeHolderText={'Model Name'}
-				 //        selectedValue={''}
-				 //        onChange={(value) => changeForm({ edited_field: 'occupation', edited_value: value })}
-				 //        placeholder={'Type or Select Model Name'}
-				 //        invalid={false}
-				 //        labelStyles={{ ...Style.pickerLabel }}
-				 //        customPickerStyles={{ ...Style.picker }}
-				 //        label={'Model Name'}
-					// />
-				}
+					<SearchableDropdown
+				        dataSource={productsList}
+				        placeHolderText={'Model Name'}
+				        selectedValue={form.model_sfid}
+				        onChange={(value) => changeForm({ edited_field: 'model_sfid', edited_value: value })}
+				        placeholder={'Type or Select Model Name'}
+				        invalid={validation.invalid && validation.invalid_field == 'model_sfid'}
+				        labelStyles={{ ...Style.pickerLabel }}
+				        customPickerStyles={{ ...Style.picker }}
+				        label={'Model Name*'}
+					/>
 
 				 	<InputText
 						style={Style.mb10}
@@ -107,20 +112,6 @@ class TestDriveFeedBackScreen extends Component {
 						/>
 					</View>
 
-
-					<InputDate
-                        style={Style.mb10}
-                        placeholder={'Date of test drive'}
-                        value={form.date_of_test_drive || 0}
-                        onChange={(value) => {
-                            let formattedDate = HelperService.convertMomentDateToTimestamp(value);
-                            changeForm({ edited_field: 'date_of_test_drive', edited_value: value })
-                        }}
-                        error={validation.invalid && validation.invalid_field == 'date_of_test_drive'}
-                        label={'Date of test drive'}
-                    />
-
-
 					<BlueButton
 						style={{...ApplicationStyles.formButton, width: wp('60%')}}
 						loading={loader}
@@ -138,7 +129,9 @@ class TestDriveFeedBackScreen extends Component {
 const mapStateToProps = (state) => ({
 	validation      			: state.visitor.createFeedbackValidation,
 	form 					 	: state.visitor.feedbackForm,
-	loader 			            : state.visitor.loaders.createFeedbackLoader
+	loader 			            : state.visitor.loaders.createFeedbackLoader,
+	productsList                : state.common.productsList,
+	currentEnquiryId            : state.visitor.currentEnquiryId
 });
   
 const mapDispatchToProps = (dispatch) => ({

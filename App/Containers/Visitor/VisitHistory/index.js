@@ -25,7 +25,7 @@ class VisitHistoryScreen extends Component {
     } = this.props
 
     fetchData({
-      enquiry 
+      enquiry
     });
   }
 
@@ -66,7 +66,7 @@ class VisitHistoryScreen extends Component {
               <GenericDisplayCard dark={false}
                 style={{ width: '88%', elevation: 0 }}
                 content={[
-                  <GenericDisplayCardStrip key={'Visit Date' + item.id} label={'Visit Date'} value={item.visit_date__c}/>,
+                  <GenericDisplayCardStrip key={'Visit Date' + item.id} label={'Visit Date'} value={HelperService.removeFieldsAndDateReadableFormat(item.visit_date__c)}/>,
                   <GenericDisplayCardStrip key={'Visit Day' + item.id} label={'Visit Day'} value={''}/>,
                   <GenericDisplayCardStrip key={'Visit Time' + item.id} label={'Visit Time'} value={''}/>,
                   <GenericDisplayCardStrip key={'Sales Person Name' + item.id} label={'Sales Person Name'} value={item.sales_person__c}
@@ -74,8 +74,8 @@ class VisitHistoryScreen extends Component {
               ]}
             />}
             keyExtractor={item => item.id}
-            refreshing={false}
-            ListEmptyComponent={() => <NoDataFound text={'No Visits Found'} />}
+            onRefresh={() => this.fetchCall()}
+            refreshing={loader}
           />
         );
       } else {
@@ -91,7 +91,7 @@ class VisitHistoryScreen extends Component {
       }
     } else if (loader) {
       visibleNode = <Loading />
-    } else if (data && !data.length && !loader) {
+    } else if ((!data && !loader) || (data && !data.length && !loader)) {
       visibleNode =  (
           <NoDataFound text={'No History Found'}>
             <GenericIcon 

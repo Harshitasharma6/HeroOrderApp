@@ -18,27 +18,100 @@ import GenericCheckBox from 'App/Components/GenericCheckBox'
 import VisitorActions from 'App/Stores/Visitor/Actions'
 import CustomerInfoCard from 'App/Containers/Insights/Customers/CustomerInfoCard'
 
-
+// accountid: "0019D000009zum3QAA"
+// age__c: null
+// createddate: "2020-06-25T06:29:18.000Z"
+// department: null
+// email: null
+// emailbounceddate: null
+// emailbouncedreason: null
+// fax: null
+// firstname: "Dinesh"
+// gender__c: null
+// id: 1
+// individualid: null
+// isdeleted: false
+// isemailbounced: false
+// lastname: "Kaushik"
+// mailingcity: null
+// mailingcountry: null
+// mailinggeocodeaccuracy: null
+// mailinglatitude: null
+// mailinglongitude: null
+// mailingpostalcode: null
+// mailingstate: null
+// mailingstreet: null
+// masterrecordid: null
+// middlename: null
+// mobilephone: "9971710994"
+// name: "Dinesh Kaushik"
+// occupation__c: null
+// pg_id__c: null
+// phone: null
+// photourl: "/services/images/photo/0039D000007KJE2QAO"
+// reportstoid: null
+// salutation: "Mr."
+// sfid: "0039D000007KJE2QAO"
+// suffix: null
+// systemmodstamp: "2020-08-06T06:17:13.000Z"
+// title: null
+// _hc_err: null
+// _hc_lastop: "SYNCED"
 
 class CustomerRegistrationForm extends Component {
- 
+	componentDidMount() {
+		const {
+			changeForm, 
+			visitorData, 
+			setRegistrationForm
+		} = this.props;
+
+		let data = visitorData.data[0];
+		setRegistrationForm(data);
+
+		changeForm({
+			edited_field: 'first_name',
+			edited_value: 'test'
+		});
+
+		changeForm({
+			edited_field: 'last_name',
+			edited_value: 'test'
+		});
+
+		changeForm({
+			edited_field: 'contact_number',
+			edited_value: data.mobilephone
+		});
+
+		changeForm({
+			edited_field: 'age',
+			edited_value: data.age__c
+		});
+	}
+
+	componentWillUnmount() {
+		const {
+			clearRegistrationForm
+		} = this.props;
+
+		clearRegistrationForm();
+	}
+
+
 	submit() {
-		// const { 
-		// 	submitForm, 
-		// 	form,
-		// 	access_token
-		// } = this.props;
+		const { 
+			submitForm, 
+			form,
+		} = this.props;
 
-		// Keyboard.dismiss(); 
-
-		// submitForm({
-		// 	form, 
-		// 	...{
-		// 		access_token: access_token
-		// 	}
-		// });
-
-		NavigationService.navigate('VisitorInfoScreen')
+		Keyboard.dismiss();
+		submitForm({
+			...form,
+			sales_person: 'a0O9D000001hLV9UAM',
+			"expected_close_date__c": "2020-08-19",
+			"customer_sfid": form.sfid
+		});
 	}
 
     render() {
@@ -56,11 +129,28 @@ class CustomerRegistrationForm extends Component {
 		
 		return (
 			<View style={Style.container}>
-				<CustomerInfoCard data={visitorData.data[0]}/>
+				<CustomerInfoCard data={visitorData.data[0]} showEditButton={false}/>
 				<ScrollView 
 					showsVerticalScrollIndicator={false}
 					style={Style.action}
 				>
+					<InputText
+						style={Style.mb10}
+						placeholder={'Purpose of Buying'}
+						value={form.purpose_of_buying}
+						onChange={(value) => changeForm({ edited_field: 'purpose_of_buying', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'purpose_of_buying'}
+						label={'Purpose of Buying*'}
+					/>
+
+					<InputText
+						style={Style.mb10}
+						placeholder={'Usage'}
+						value={form.usage}
+						onChange={(value) => changeForm({ edited_field: 'usage', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'usage'}
+						label={'Usage*'}
+					/>
 					
 					<SearchableDropdown
 				        dataSource={productsList}
@@ -229,8 +319,10 @@ const mapStateToProps = (state) => ({
 });
   
 const mapDispatchToProps = (dispatch) => ({
-	changeForm: (params) => dispatch(VisitorActions.changeRegisterCustomerForm(params)),
-	submitForm: (params) => dispatch(VisitorActions.registerCustomer(params)),
+	changeForm: (params)    	  => dispatch(VisitorActions.changeRegisterCustomerForm(params)),
+	submitForm: (params) 		  => dispatch(VisitorActions.registerCustomer(params)),
+	setRegistrationForm: (params) => dispatch(VisitorActions.setRegistrationForm(params)),
+	clearRegistrationForm: ()     => dispatch(VisitorActions.clearRegistrationForm())
 });
 
 export default connect(

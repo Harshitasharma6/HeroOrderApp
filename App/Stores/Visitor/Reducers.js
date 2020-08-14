@@ -77,6 +77,7 @@ export const searchCustomerValidationFailed = (state, { payload }) => ({
 export const registerCustomerSuccess = (state, {payload}) => ({
   ...state,
   registerCustomerForm: INITIAL_STATE.registerCustomerForm,
+  currentVisitorData: payload,
   loaders: {
   	...state.loaders,
   	registerCustomerLoader: false
@@ -87,6 +88,7 @@ export const registerCustomerSuccess = (state, {payload}) => ({
 export const updateVisitorSuccess = (state, {payload}) => ({
   ...state,
   registerCustomerForm: INITIAL_STATE.registerCustomerForm,
+  currentVisitorData: payload,
   loaders: {
     ...state.loaders,
     registerCustomerLoader: false
@@ -210,10 +212,11 @@ export const changeCreateFeedbackForm = (state, { payload }) => {
   changed_entity[edited_field] = edited_value;
   return {
     ...state,
-    feedbackForm : {
+    feedbackForm: {
       ...state.feedbackForm,
       ...changed_entity
-    }
+    },
+    createFeedbackValidation: INITIAL_STATE.createFeedbackValidation
   }
 };
 
@@ -301,8 +304,28 @@ export const getFeedbacksLoadingStop = (state, {payload}) => ({
   }
 });
 
+export const setCurrentEnquiry = (state, {payload}) => ({
+  ...state,
+  currentEnquiryId: payload
+});
 
 
+export const clearCurrentEnquiry = (state) => ({
+  ...state,
+  currentEnquiryId: ''
+});
+
+
+export const setRegistrationForm = (state, {payload}) => ({
+  ...state,
+  registerCustomerForm: payload
+});
+
+
+export const clearRegistrationForm = (state, {payload}) => ({
+  ...state,
+  registerCustomerForm: INITIAL_STATE.registerCustomerForm
+});
 
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -316,18 +339,20 @@ export const reducer = createReducer(INITIAL_STATE, {
 
 
 
-	[VisitorTypes.REGISTER_CUSTOMER_SUCCESS] 	 		      : registerCustomerSuccess,
-	[VisitorTypes.REGISTER_CUSTOMER_FAILURE] 	 		      : registerCustomerFailure,
+	[VisitorTypes.REGISTER_CUSTOMER_SUCCESS] 	 		: registerCustomerSuccess,
+	[VisitorTypes.REGISTER_CUSTOMER_FAILURE] 	 		: registerCustomerFailure,
 	[VisitorTypes.REGISTER_CUSTOMER_LOADING]            : registerCustomerLoading,
 	[VisitorTypes.REGISTER_CUSTOMER_LOADING_STOP]       : registerCustomerLoadingStop, 
-	[VisitorTypes.CHANGE_REGISTER_CUSTOMER_FORM] 		    : changeRegisterCustomerForm,
+	[VisitorTypes.CHANGE_REGISTER_CUSTOMER_FORM] 		: changeRegisterCustomerForm,
 	[VisitorTypes.REGISTER_CUSTOMER_VALIDATION_FAILED]  : registerCustomerValidationFailed,
 
 
 
   	[VisitorTypes.UPDATE_VISITOR_SUCCESS]               : updateVisitorSuccess,
-	[VisitorTypes.SHOW_OPEN_LEAD_PROMPT]  				      : showOpenLeadPrompt,
-	[VisitorTypes.HIDE_OPEN_LEAD_PROMPT]  				      : hideOpenLeadPrompt,
+	[VisitorTypes.SHOW_OPEN_LEAD_PROMPT]  				: showOpenLeadPrompt,
+	[VisitorTypes.HIDE_OPEN_LEAD_PROMPT]  				: hideOpenLeadPrompt,
+	[VisitorTypes.SET_REGISTRATION_FORM]  				: setRegistrationForm,
+	[VisitorTypes.CLEAR_REGISTRATION_FORM]  		    : clearRegistrationForm,
 
 
 
@@ -350,6 +375,10 @@ export const reducer = createReducer(INITIAL_STATE, {
 	[VisitorTypes.GET_FEEDBACKS_SUCCESS]           : getFeedbacksSuccess,
 	[VisitorTypes.GET_FEEDBACKS_FAILURE]           : getFeedbacksFailure,
 	[VisitorTypes.GET_FEEDBACKS_LOADING]           : getFeedbacksLoading,
-	[VisitorTypes.GET_FEEDBACKS_LOADING_STOP]      : getFeedbacksLoadingStop
+	[VisitorTypes.GET_FEEDBACKS_LOADING_STOP]      : getFeedbacksLoadingStop,
+
+
+	[VisitorTypes.SET_CURRENT_ENQUIRY]      	: setCurrentEnquiry,
+	[VisitorTypes.CLEAR_CURRENT_ENQUIRY]      	: clearCurrentEnquiry
 
 });

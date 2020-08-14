@@ -1,13 +1,13 @@
 import React from 'react'
 import Style from './Style'
-import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
+import { ScrollView, Text, View, TouchableOpacity, Keyboard } from 'react-native';
 import {  Label, Icon, CheckBox } from 'native-base'
 import { Colors, Metrics, Helpers, Fonts, ApplicationStyles } from 'App/Theme'
 
 const GenericCheckBox = ({ style={}, label, onPress, title, disabled = false, checked}) => {
 	return (
 	  	<View style={{...Style.bottomMargin, ...Style.checkboxContainer, ...style}} onPress={(event)=> onPress(event)}>
-			<TouchableOpacity onPress={(event)=> onPress(event)} disabled={checked}>
+			<TouchableOpacity onPress={(event)=> {Keyboard.dismiss();onPress(event)}} disabled={checked}>
 				<Label  style={{...Style.label}} >{label}</Label>
 			</TouchableOpacity>
 		    <View>
@@ -15,7 +15,7 @@ const GenericCheckBox = ({ style={}, label, onPress, title, disabled = false, ch
 			        style={Style.checkbox} 
 			        checked={checked} 
 			        color={Colors.grey}
-			        onPress={(event)=> onPress(event)}
+			        onPress={(event)=> {Keyboard.dismiss(); onPress(event)}}
 			        disabled={checked}
 			    />
 		    </View>
