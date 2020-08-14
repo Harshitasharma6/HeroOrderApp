@@ -6,9 +6,12 @@ export const Config = {
 	},
 
 	VISITOR_SERVICE: {
-		SEARCH_CUSTOMER:  'customers/search',
-		REGISTER_CUSTOMER:'visitors/create',
-		UPDATE_VISITOR:   'visitors/update',
+		SEARCH_CUSTOMER  : 'customers/search',
+		REGISTER_CUSTOMER: 'visitors/create',
+		UPDATE_VISITOR   : 'visitors/updateVisitor',
+		CREATE_FEEDBACK  : 'feedback/create',
+		GET_ALL_VISITS   : 'visit/getAll',
+		GET_FEEDBACKS    : 'feedback/get'
 	}, 
 
 

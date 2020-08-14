@@ -74,16 +74,22 @@ export const searchCustomerValidationFailed = (state, { payload }) => ({
 });
 
 
-
-
-
-
 export const registerCustomerSuccess = (state, {payload}) => ({
   ...state,
   registerCustomerForm: INITIAL_STATE.registerCustomerForm,
   loaders: {
   	...state.loaders,
   	registerCustomerLoader: false
+  }
+});
+
+
+export const updateVisitorSuccess = (state, {payload}) => ({
+  ...state,
+  registerCustomerForm: INITIAL_STATE.registerCustomerForm,
+  loaders: {
+    ...state.loaders,
+    registerCustomerLoader: false
   }
 });
 
@@ -150,26 +156,200 @@ export const hideOpenLeadPrompt = (state) => ({
 });
 
 
+  // [VisitorTypes.CREATE_FEEDBACK_SUCCESS]           : createFeedbackSuccess,
+  // [VisitorTypes.CREATE_FEEDBACK_FAILURE]           : createFeedbackFailure,
+  // [VisitorTypes.CREATE_FEEDBACK_LOADING]           : createFeedbackLoading,
+  // [VisitorTypes.CREATE_FEEDBACK_LOADING_STOP]      : createFeedbackLoadingStop,
+  // [VisitorTypes.CHANGE_CREATE_FEEDBACK_FORM]       : changeCreateFeedbackForm,
+  // [VisitorTypes.CREATE_FEEDBACK_VALIDATION_FAILED] : createFeedbackValidationFailed
+
+
+
+export const createFeedbackSuccess = (state, {payload}) => ({
+  ...state,
+  feedbackForm: INITIAL_STATE.feedbackForm,
+  loaders: {
+    ...state.loaders,
+    createFeedbackLoader: false
+  }
+});
+
+
+export const createFeedbackFailure = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    createFeedbackLoader: false
+  }
+});
+
+export const createFeedbackLoading = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    createFeedbackLoader: true
+  }
+});
+
+export const createFeedbackLoadingStop = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    createFeedbackLoader: false
+  }
+});
+
+
+export const changeCreateFeedbackForm = (state, { payload }) => {
+    const {
+    edited_field,
+    edited_value
+  } = payload;
+
+  let changed_entity = {};
+  changed_entity[edited_field] = edited_value;
+  return {
+    ...state,
+    feedbackForm : {
+      ...state.feedbackForm,
+      ...changed_entity
+    }
+  }
+};
+
+export const createFeedbackValidationFailed = (state, { payload }) => ({
+    ...state,
+    createFeedbackValidation: {
+        ...payload
+    }
+});
+
+
+
+export const getAllVisitsSuccess = (state, {payload}) => ({
+  ...state,
+  visitsMapping: payload,
+  loaders: {
+    ...state.loaders,
+    getAllVisitsLoader: false
+  }
+});
+
+
+export const getAllVisitsFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllVisitsLoader: false
+  }
+});
+
+
+export const getAllVisitsLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllVisitsLoader: true
+  }
+});
+
+
+export const getAllVisitsLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllVisitsLoader: false
+  }
+});
+
+
+
+
+export const getFeedbacksSuccess = (state, {payload}) => ({
+  ...state,
+  feedbacksMapping: payload,
+  loaders: {
+    ...state.loaders,
+    getFeedbacksLoader: false
+  }
+});
+
+
+export const getFeedbacksFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getFeedbacksLoader: false
+  }
+});
+
+
+export const getFeedbacksLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getFeedbacksLoader: true
+  }
+});
+
+
+export const getFeedbacksLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getFeedbacksLoader: false
+  }
+});
+
+
+
 
 
 export const reducer = createReducer(INITIAL_STATE, {
-  	//[UserTypes.USER_LOGIN_LOADING] : searchCustomer,
-	[VisitorTypes.SEARCH_CUSTOMER_SUCCESS] 	: searchCustomerSuccess,
-	[VisitorTypes.SEARCH_CUSTOMER_FAILURE] 	: searchCustomerFailure,
-	[VisitorTypes.SEARCH_CUSTOMER_LOADING] 	: searchCustomerLoading,
-	[VisitorTypes.SEARCH_CUSTOMER_LOADING_STOP]: searchCustomerLoadingStop,
-	[VisitorTypes.CHANGE_SEARCH_CUSTOMER_FORM] : changeSearchCustomerForm,
+	[VisitorTypes.SEARCH_CUSTOMER_SUCCESS] 	         : searchCustomerSuccess,
+	[VisitorTypes.SEARCH_CUSTOMER_FAILURE] 	         : searchCustomerFailure,
+	[VisitorTypes.SEARCH_CUSTOMER_LOADING] 	         : searchCustomerLoading,
+	[VisitorTypes.SEARCH_CUSTOMER_LOADING_STOP]      : searchCustomerLoadingStop,
+	[VisitorTypes.CHANGE_SEARCH_CUSTOMER_FORM]       : changeSearchCustomerForm,
 	[VisitorTypes.SEARCH_CUSTOMER_VALIDATION_FAILED] : searchCustomerValidationFailed,
 
 
 
-	[VisitorTypes.REGISTER_CUSTOMER_SUCCESS] 	 		: registerCustomerSuccess,
-	[VisitorTypes.REGISTER_CUSTOMER_FAILURE] 	 		: registerCustomerFailure,
-	[VisitorTypes.REGISTER_CUSTOMER_LOADING] 	 		: registerCustomerLoading,
-	[VisitorTypes.REGISTER_CUSTOMER_LOADING_STOP]		: registerCustomerLoadingStop, 
-	[VisitorTypes.CHANGE_REGISTER_CUSTOMER_FORM] 		: changeRegisterCustomerForm,
+
+	[VisitorTypes.REGISTER_CUSTOMER_SUCCESS] 	 		      : registerCustomerSuccess,
+	[VisitorTypes.REGISTER_CUSTOMER_FAILURE] 	 		      : registerCustomerFailure,
+	[VisitorTypes.REGISTER_CUSTOMER_LOADING]            : registerCustomerLoading,
+	[VisitorTypes.REGISTER_CUSTOMER_LOADING_STOP]       : registerCustomerLoadingStop, 
+	[VisitorTypes.CHANGE_REGISTER_CUSTOMER_FORM] 		    : changeRegisterCustomerForm,
 	[VisitorTypes.REGISTER_CUSTOMER_VALIDATION_FAILED]  : registerCustomerValidationFailed,
-	[VisitorTypes.SHOW_OPEN_LEAD_PROMPT]  				: showOpenLeadPrompt,
-	[VisitorTypes.HIDE_OPEN_LEAD_PROMPT]  				: hideOpenLeadPrompt
+
+
+
+  	[VisitorTypes.UPDATE_VISITOR_SUCCESS]               : updateVisitorSuccess,
+	[VisitorTypes.SHOW_OPEN_LEAD_PROMPT]  				      : showOpenLeadPrompt,
+	[VisitorTypes.HIDE_OPEN_LEAD_PROMPT]  				      : hideOpenLeadPrompt,
+
+
+
+  	[VisitorTypes.CREATE_FEEDBACK_SUCCESS]           : createFeedbackSuccess,
+  	[VisitorTypes.CREATE_FEEDBACK_FAILURE]           : createFeedbackFailure,
+  	[VisitorTypes.CREATE_FEEDBACK_LOADING]           : createFeedbackLoading,
+  	[VisitorTypes.CREATE_FEEDBACK_LOADING_STOP]      : createFeedbackLoadingStop,
+  	[VisitorTypes.CHANGE_CREATE_FEEDBACK_FORM]       : changeCreateFeedbackForm,
+  	[VisitorTypes.CREATE_FEEDBACK_VALIDATION_FAILED] : createFeedbackValidationFailed,
+
+
+
+  	[VisitorTypes.GET_ALL_VISITS_SUCCESS]           : getAllVisitsSuccess,
+  	[VisitorTypes.GET_ALL_VISITS_FAILURE]           : getAllVisitsFailure,
+  	[VisitorTypes.GET_ALL_VISITS_LOADING]           : getAllVisitsLoading,
+  	[VisitorTypes.GET_ALL_VISITS_LOADING_STOP]      : getAllVisitsLoadingStop,
+
+
+
+	[VisitorTypes.GET_FEEDBACKS_SUCCESS]           : getFeedbacksSuccess,
+	[VisitorTypes.GET_FEEDBACKS_FAILURE]           : getFeedbacksFailure,
+	[VisitorTypes.GET_FEEDBACKS_LOADING]           : getFeedbacksLoading,
+	[VisitorTypes.GET_FEEDBACKS_LOADING_STOP]      : getFeedbacksLoadingStop
 
 });

@@ -27,9 +27,9 @@ export const INITIAL_STATE = {
 	],
 
 	productsList: [
-		{ id: 'Flash LA', name: 'Flash LA' },
-		{ id: 'Optima LA', name: 'Optima LA' },
-		{ id: 'Flash LI', name: 'Flash LI' },
-		{ id: 'Optima LI', name: 'Optima LI' }
+		{ id: 'a029D000002ZFPtQAO', name: 'Flash LA' },
+		{ id: 'a029D000002ZFPtQAO', name: 'Optima LA' },
+		{ id: 'a029D000002ZFPtQAO', name: 'Flash LI' },
+		{ id: 'a029D000002ZFPtQAO', name: 'Optima LI' }
 	],
 }

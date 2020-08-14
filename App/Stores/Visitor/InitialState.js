@@ -4,7 +4,10 @@
 export const INITIAL_STATE = {
 	loaders: {
 		searchCustomerLoader: false,
-		registerCustomerLoader: false
+		registerCustomerLoader: false,
+		createFeedbackLoader: false,
+		getAllVisitsLoader: false,
+		getFeedbacksLoader: false,
 	},
 	searchCustomerForm: {},
 	registerCustomerForm: {},
@@ -13,10 +16,17 @@ export const INITIAL_STATE = {
         invalid: false,
         invalid_field: ''
     },
-
     registerCustomerValidation: {
     	invalid: false,
         invalid_field: ''
     },
-    showOpenLeadPrompt: false
+    createFeedbackValidation: {
+    	invalid: false,
+        invalid_field: ''
+    },
+    showOpenLeadPrompt: false,
+    currentEnquiryId: 133,
+    feedbackForm: {},
+    visitsMapping: {},
+    feedbacksMapping: {}
 }

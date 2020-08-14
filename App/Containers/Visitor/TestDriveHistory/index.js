@@ -5,32 +5,60 @@ import ItemDetail from 'App/Components/ItemDetail'
 import NoDataFound from 'App/Components/NoDataFound'
 import Loading from 'App/Components/Loading'
 import ShreeAction from 'App/Stores/Shree/Actions';
+import VisitorActions from 'App/Stores/Visitor/Actions';
 import { HelperService } from 'App/Services/Utils/HelperService';
 import GenericDisplayCard from 'App/Components/GenericDisplayCard'
 import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDisplayCardStrip';
+import GenericIcon from 'App/Components/GenericIcon'
+import {ApplicationStyles} from 'App/Theme'
 
 class TestDriveHistoryScreen extends Component {
   componentDidMount() {
-    // const {
-    //   dealerId,
-    //   fetchData
-    // } = this.props
-
-    // fetchData({
-    //   dealerId
-    // });
+    this.fetchCall()
   }
 
 
+  fetchCall() {
+    const {
+      enquiry,
+      fetchData
+    } = this.props
+
+    fetchData({
+      enquiry 
+    });
+  }
+
+  // "overall_experience__c": "4",
+  // "name": "Id-00006",
+  // "dealers_sales_person_login_info__c": "a0O9D000001hLV9UAM",
+  // "ease_of_handeling__c": "4",
+  // "vehicle_no__c": "DL1CV6565",
+  // "isdeleted": false,
+  // "systemmodstamp": "2020-08-13T07:04:44.000Z",
+  // "test_drive_date__c": "2020-08-15T18:30:00.000Z",
+  // "createddate": "2020-08-13T07:04:44.000Z",
+  // "responsiveness_of_the_vehicle__c": "3",
+  // "ride_comfort__c": "3",
+  // "sfid": "a0Q9D000005zMlxUAE",
+  // "id": 7,
+  // "_hc_lastop": "SYNCED",
+  // "_hc_err": null,
+  // "pg_id__c": null,
+  // "model_name__c": null,
+  // "dealer__c": "0019D00000A0XjIQAV",
+  // "enquiry__c": "a009D000002ecHDQAY"
+
+
+
+
   getDataNode() {
-    // const {
-    //   data,
-    //   loading
-    // } = this.props;
-    const data = ['1', '2']
-    const dataLength = data.length;
-    
-  
+    const {
+      enquiry,
+      loader,
+      feedbacksMapping
+    } = this.props;
+    const data = feedbacksMapping[enquiry]
     let visibleNode = [];
 
     if (data && data.length) {
@@ -39,29 +67,44 @@ class TestDriveHistoryScreen extends Component {
           <FlatList
             data={data}
             renderItem={({ item }) => 
-            	<GenericDisplayCard dark={false}
-	              style={{ width: '88%', elevation: 0 }}
-	              content={[
-	                <GenericDisplayCardStrip key={'Test Drive Vehicle' + item} label={'Test Drive Vehicle'} value={'Optima LI'}/>,
-	                <GenericDisplayCardStrip key={'Test Drive Date' + item} label={'Test Drive Date'} value={'20/06/2020'}/>,
-	                <GenericDisplayCardStrip key={'Test Drive Time' + item} label={'Test Drive Time'} value={'01:00 PM'}/>,
-	                <GenericDisplayCardStrip key={'Overall Experience' + item} label={'Overall Experience'} value={'5'}/>,
-	                <GenericDisplayCardStrip key={'Sales Person Name' + item} label={'Sales Person Name'} value={'Amit Kumar'}
-	            />
+              <GenericDisplayCard dark={false}
+                style={{ width: '88%', elevation: 0 }}
+                content={[
+                  <GenericDisplayCardStrip key={'Test Drive Vehicle' + item.id} label={'Test Drive Vehicle'} value={item.vehicle_no__c}/>,
+                  <GenericDisplayCardStrip key={'Test Drive Date' + item.id} label={'Test Drive Date'} value={item.test_drive_date__c}/>,
+                  <GenericDisplayCardStrip key={'Test Drive Time' + item.id} label={'Test Drive Time'} value={''}/>,
+                  <GenericDisplayCardStrip key={'Overall Experience' + item.id} label={'Overall Experience'} value={item.overall_experience__c}/>,
+                  <GenericDisplayCardStrip key={'Sales Person Name' + item.id} label={'Sales Person Name'} value={item.dealers_sales_person_login_info__c}
+              />
               ]}
             />}
-            keyExtractor={item => item}
+            keyExtractor={item => item.id}
             refreshing={false}
-            ListEmptyComponent={() => <NoDataFound text={'No History Found'} />}
           />
         );
       } else {
-        visibleNode =<NoDataFound text={'No History Found'} />
+        visibleNode =  (
+          <NoDataFound text={'No History Found'}>
+            <GenericIcon 
+              name={'refresh'}
+              onPress={() => this.fetchCall()}
+              style={{color: Colors.button, fontSize: 35, alignSelf: 'center', padding: 10}}
+            />
+          </NoDataFound>
+        );
       }
-    } else if (false) {
+    } else if (loader) {
       visibleNode = <Loading />
-    } else if (data && !data.length) {
-      visibleNode = <NoDataFound text={'No History Found'} />
+    } else if (data && !data.length && !loader) {
+      visibleNode =  (
+          <NoDataFound text={'No History Found'}>
+            <GenericIcon 
+              name={'refresh'}
+              onPress={() => this.fetchCall()}
+              style={ApplicationStyles.refreshIcon}
+            />
+          </NoDataFound>
+        );
     }
 
     return visibleNode;
@@ -77,16 +120,18 @@ class TestDriveHistoryScreen extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	dealerId: state.shree.selectedShree.id,
-  	data    : state.shree.outstanding,
-  	loading : state.shree.fetchOutstandingLoader
+  loader : state.visitor.loaders.getFeedbacksLoader,
+  enquiry : state.visitor.currentEnquiryId,
+  feedbacksMapping: state.visitor.feedbacksMapping
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchData: (params) 	 => dispatch(ShreeAction.fetchOutstanding(params))
+  fetchData:(params)    => dispatch(VisitorActions.getFeedbacks(params))
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(TestDriveHistoryScreen)
+
+

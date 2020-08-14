@@ -42,7 +42,7 @@ class Visitor extends Component {
             <View style={Style.container}>
                  <View style={Style.buttonBox}>
                     <Image
-                        style={{ width: 300, height: 150, resizeMode: 'contain' }}
+                        style={Style.logo}
                         source={require('App/Assets/Images/herologo.png')}
                     />
                 </View>
@@ -53,6 +53,7 @@ class Visitor extends Component {
                         value={form.contact_number} 
                         onChange={(value) => changeForm({edited_field: 'contact_number', edited_value: value})} 
                         error={validation.invalid && validation.invalid_field == 'contact_number'}
+                        labelStyles={Style.labelStyles}
                     />
 
                     <BlueButton

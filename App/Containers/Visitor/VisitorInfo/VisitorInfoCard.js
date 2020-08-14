@@ -21,13 +21,13 @@ const VisitorInfoCard = ({ onPress, data, id }) => (
       </View>
       </View>
       <View style={Styles.btmBox}>
-      	 <GenericDisplayCardStrip key={'Age'} label={'Age'} value={'31'} />
+      	<GenericDisplayCardStrip key={'Age'} label={'Age'} value={'31'} />
 	     <GenericDisplayCardStrip key={'Gender'} label={'Email'} value={'Male'} />
 	     <GenericDisplayCardStrip key={'Phone'} label={'Phone'} value={'9779897974'} />
       
     </View>
      <View style={{position: 'absolute', right: wp('2%'), top: hp('2%')}}>
-       	<GenericIcon name="edit" style={{fontSize: wp('7%'), color: Colors.primary}}/>
+       	<GenericIcon name="edit" style={{fontSize: wp('7%'), color: Colors.primary}} onPress={onPress}/>
        </View>
        <BlueButton title={'Call'} style={{width: wp('27%'), alignSelf: 'flex-end' }} textStyle={{fontSize: wp('3.8%')}} onPress={() => HelperService.callNumber('9779897974')}><GenericIcon name="phone" style={{fontSize: wp('5%'), color: Colors.white}}/></BlueButton>
      </View>

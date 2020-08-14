@@ -12,6 +12,7 @@ export default class InputMobile extends PureComponent {
         placeholder:'', 
         onChange:( () => { }), 
         styles:{}, 
+        labelStyles: {},
         value:'', 
         error:false, 
         label:'', 
@@ -23,7 +24,8 @@ export default class InputMobile extends PureComponent {
 		const {
 			placeholder, 
 			onChange, 
-			styles, 
+			styles,
+			labelStyles, 
 			value, 
 			error, 
 			label, 
@@ -33,7 +35,7 @@ export default class InputMobile extends PureComponent {
 
     	return (
     		<View>
-				{label ? <Label style={{ ...Style.label }}>{label}</Label> : []}
+				{label ? <Label style={{ ...Style.label, ...labelStyles }}>{label}</Label> : []}
 				<Item style={{ ...Style.item }}>
 					<Input 
 						value={String(value || '')} 

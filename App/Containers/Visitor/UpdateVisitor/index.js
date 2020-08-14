@@ -16,11 +16,10 @@ import InputDate from 'App/Components/FormInput/InputDate';
 import {ApplicationStyles} from 'App/Theme'
 import GenericCheckBox from 'App/Components/GenericCheckBox'
 import VisitorActions from 'App/Stores/Visitor/Actions'
-import CustomerInfoCard from 'App/Containers/Insights/Customers/CustomerInfoCard'
 
 
 
-class CustomerRegistrationForm extends Component {
+class UpdateVisitorScreen extends Component {
  
 	submit() {
 		// const { 
@@ -50,18 +49,129 @@ class CustomerRegistrationForm extends Component {
 			validation,
 			occupationList,
             sourceEnquiryList,
-            productsList,
-            visitorData
+            productsList
 		} = this.props;
 		
 		return (
 			<View style={Style.container}>
-				<CustomerInfoCard data={visitorData.data[0]}/>
+				<Text style={ApplicationStyles.formHeading}>{'Update'}</Text>
 				<ScrollView 
 					showsVerticalScrollIndicator={false}
 					style={Style.action}
 				>
+
+				 	<InputText
+						style={Style.mb10}
+						placeholder={'First Name'}
+						value={form.first_name}
+						onChange={(value) => changeForm({ edited_field: 'first_name', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'first_name'}
+						label={'First Name*'}
+					/>
+
+					<InputText
+						style={Style.mb10}
+						placeholder={'Last Name'}
+						value={form.last_name}
+						onChange={(value) => changeForm({ edited_field: 'last_name', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'last_name'}
+						label={'Last Name*'}
+					/>
 					
+                    <InputMobile
+						styles={Style.mb10}
+						placeholder={'Contact Number'}
+						value={form.contact_number}
+						onChange={(value) => changeForm({ edited_field: 'contact_number', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'contact_number'}
+						label={'Contact Number*'}
+					/>
+
+					<InputText
+						style={Style.mb10}
+						placeholder={'Email'}
+						value={form.email_id__c}
+						onChange={(value) => changeForm({ edited_field: 'email_id__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'email_id__c'}
+						label={'Email'}
+					/>
+
+					<TextArea
+	                    placeholder={'Address'}
+	                    label={'Address'}
+	                    numberOfLines={2}
+	                    style={Style.mb10}
+	                    value={form.address}
+						onChange={(value) => changeForm({ edited_field: 'address', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'address'}
+                	/>
+
+                	<InputNumber
+						styles={Style.mb10}
+						placeholder={'Age'}
+						value={form.age}
+						onChange={(value) => changeForm({ edited_field: 'age', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'age'}
+						label={'Age'}
+					/>
+
+					<InputText
+						style={Style.mb10}
+						placeholder={'Purpose of Buying'}
+						value={form.purpose_of_buying}
+						onChange={(value) => changeForm({ edited_field: 'purpose_of_buying', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'purpose_of_buying'}
+						label={'Purpose of Buying*'}
+					/>
+
+					<InputText
+						style={Style.mb10}
+						placeholder={'Usage'}
+						value={form.usage}
+						onChange={(value) => changeForm({ edited_field: 'usage', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'usage'}
+						label={'Usage*'}
+					/>
+
+					<View style={{width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
+						<Text style={{...ApplicationStyles.label, marginBottom: '1%'}}>Gender</Text>
+						<View style={{flexDirection: 'row', marginBottom: '2%'}}>
+						<GenericCheckBox 
+							style={{marginRight: '5%'}}
+							label={'Male'}
+							checked={form.gender == 'Male'}
+							onPress={(event)=>{
+			                	let value = form.gender == 'Male' ? 'Female' : 'Male';
+				                changeForm({ edited_field: 'gender', edited_value: value });
+			                }}
+						/>
+
+						<GenericCheckBox
+							style={{marginRight: '5%'}} 
+							label={'Female'}
+							checked={form.gender == 'Female'}
+							onPress={(event)=>{
+			                	let value = form.gender == 'Female' ? 'Male' : 'Female';
+				                changeForm({ edited_field: 'gender', edited_value: value });
+			                }}
+						/>
+						</View>
+					</View>
+
+
+					<SearchableDropdown
+				        dataSource={occupationList}
+				        placeHolderText={'Select Occupation'}
+				        selectedValue={form.occupation__c}
+				        onChange={(value) => changeForm({ edited_field: 'occupation__c', edited_value: value })}
+				        placeholder={'Type or Select Occupation'}
+				        invalid={false}
+				        labelStyles={{ ...Style.pickerLabel }}
+				        customPickerStyles={{ ...Style.picker }}
+				        label={'Occupation'}
+					/>
+
+
 					<SearchableDropdown
 				        dataSource={productsList}
 				        placeHolderText={'Select Product'}
@@ -224,16 +334,15 @@ const mapStateToProps = (state) => ({
 	loader 			            : state.visitor.loaders.registerCustomerLoader,
 	occupationList 				: state.common.occupationList,
   	sourceEnquiryList 			: state.common.sourceEnquiryList,
-  	productsList 				: state.common.productsList,
-  	visitorData 				: state.visitor.visitorSearchSuccessData
+  	productsList 				: state.common.productsList
 });
   
 const mapDispatchToProps = (dispatch) => ({
 	changeForm: (params) => dispatch(VisitorActions.changeRegisterCustomerForm(params)),
-	submitForm: (params) => dispatch(VisitorActions.registerCustomer(params)),
+	submitForm: (params) => dispatch(VisitorActions.updateVisitor(params)),
 });
 
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(CustomerRegistrationForm)
+)(UpdateVisitorScreen)

@@ -3,7 +3,7 @@ import { Container, Header, Content, Footer, FooterTab, Button, Icon, Text } fro
 import Style from './RatingsStyles'
 import _ from 'lodash'
 
-const Ratings = ({ style, value}) => {
+const Ratings = ({ style, value, onChange}) => {
 	let i;
 	let visibleNode = [];
 	var ratingNumber = 5;
@@ -27,40 +27,51 @@ const Ratings = ({ style, value}) => {
 		noStarCount = ratingNumber-fullStarCount
 	}
 
+	let index = 1
+
 	for(i=1; i<=fullStarCount; i++) {
+		let rate = index
 		visibleNode.push(
 			<Icon 
 		      name={`ios-star`} 
 		      ios={`ios-star`} 
 		      android={`md-star`} 
 		      style={{...Style.icon}}
-		      key={_.uniqueId()}
+		      key={_.uniqueId() + index}
+		      onPress={() => onChange(rate)}
 	    	/>
 		);
+		index++;
 	}
 
 	for(i=1; i<=halfStarCount; i++) {
+		let rate = index
 		visibleNode.push(
 			<Icon 
 		      name={`ios-star-half`} 
 		      ios={`ios-star-half`} 
 		      android={`md-star-half`} 
 		      style={{...Style.icon}}
-		      key={_.uniqueId()}
+		      key={_.uniqueId() + index}
+		      onPress={() => onChange(rate)}
 	    	/>
 		);
+		index++;
 	}
 
 	for(i=1; i<=noStarCount; i++) {
+		let rate = index
 		visibleNode.push(
 			<Icon 
 		      name={`ios-star-outline`} 
 		      ios={`ios-star-outline`} 
 		      android={`md-star-outline`} 
 		      style={{...Style.icon}}
-		      key={_.uniqueId()}
+		      key={_.uniqueId() + index}
+		      onPress={() => onChange(rate)}
 	    	/>
 		);
+		index++;
 	}
 	
 	return (visibleNode)

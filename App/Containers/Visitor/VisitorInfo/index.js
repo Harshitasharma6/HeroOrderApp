@@ -20,7 +20,7 @@ class VisitorInfoScreen extends Component {
     render() {
         return (
         	<ScrollView style={{marginTop: '4%'}}>
-        		<VisitorInfoCard />
+        		<VisitorInfoCard onPress={() => NavigationService.navigate('UpdateVisitorScreen')}/>
 	            <BlueButton title={"Add test drive feedback"} style={{width: '88%', marginHorizontal: '6%'}} textStyle={{fontSize: 15}} onPress={() => NavigationService.navigate('TestDriveFeedBackScreen')}>
 	            	<GenericIcon name={'plus-circle'} style={{color: Colors.white, fontSize: 20}}/>
 	            </BlueButton>

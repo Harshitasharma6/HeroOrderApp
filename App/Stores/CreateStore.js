@@ -7,7 +7,6 @@ import FilesystemStorage from 'redux-persist-filesystem-storage'
 import { createTransform, persistReducer, persistStore } from 'redux-persist';
 import { INITIAL_STATE as SHREE_INITIAL_STATE } from './Shree/InitialState';
 import { INITIAL_STATE as DASHBOARD_INITIAL_STATE } from './Dashboard/InitialState';
-import { INITIAL_STATE as INFLUENCERS_INITIAL_STATE } from './Influencers/InitialState';
 import { INITIAL_STATE as NON_SHREE_INITIAL_STATE } from './NonShree/InitialState';
 import { INITIAL_STATE as SITES_INITIAL_STATE } from './Sites/InitialState';
 
@@ -57,23 +56,12 @@ let blacklistTransform = createTransform(
         fetchLatestVisitsLoader: SHREE_INITIAL_STATE.fetchLatestVisitsLoader,
         allVisitsLoader: SHREE_INITIAL_STATE.allVisitsLoader,
         allSiteVisitsLoader: SHREE_INITIAL_STATE.allSiteVisitsLoader,
-        allInfluencerVisitsLoader: SHREE_INITIAL_STATE.allInfluencerVisitsLoader,
         createShreeVisitDetailLoader: SHREE_INITIAL_STATE.createShreeVisitDetailLoader,
         allCountersLoader: SHREE_INITIAL_STATE.allCountersLoader,
         allDistrictsLoader: SHREE_INITIAL_STATE.allDistrictsLoader,
         submitShreeVisitFormLoader: SHREE_INITIAL_STATE.submitShreeVisitFormLoader
       };
-    }else if (key === 'influencers') {
-      return {
-        ...inboundState,
-        influencerSearchFilters: INFLUENCERS_INITIAL_STATE.influencerSearchFilters,
-        fetchInfluencersLoader: INFLUENCERS_INITIAL_STATE.fetchInfluencersLoader,
-        fetchInfluencerSiteLoader: INFLUENCERS_INITIAL_STATE.fetchInfluencerSiteLoader,
-        createInfluencerLoader: INFLUENCERS_INITIAL_STATE.createInfluencerLoader,
-        createInfluencerVisitLoader: INFLUENCERS_INITIAL_STATE.createInfluencerVisitLoader,
-        fetchInfluencersVisitLoader: INFLUENCERS_INITIAL_STATE.fetchInfluencersVisitLoader
-      };
-    } else if (key === 'nonShree') {
+    }else if (key === 'nonShree') {
       return {
         ...inboundState,
         nonShreeSearchFilters: NON_SHREE_INITIAL_STATE.nonShreeSearchFilters,

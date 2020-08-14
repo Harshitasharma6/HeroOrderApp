@@ -52,11 +52,6 @@ class FooterScreen extends React.Component {
       currentScreen === 'NonShreeCompatitor' ||
       currentScreen === 'NonShreeInfo' ||
       currentScreen === 'NonShreeSite' ||
-      currentScreen === 'InfluencersListScreen' ||
-      currentScreen === 'InfluencerInfoScreen' ||
-      currentScreen === 'NewInfluencers' ||
-      currentScreen === 'InfluencerVisitsList' ||
-      currentScreen === 'NewInfluencerVisitForm' ||
       currentScreen === 'SiteListScreen' ||
       currentScreen === 'SitesInfoScreen'||
       currentScreen === 'NewSitesVisit' ||
@@ -76,8 +71,7 @@ class FooterScreen extends React.Component {
 
     let visitsSummaryActive =  
       currentScreen === 'VisitSummaryList' || 
-      currentScreen === 'VisitSummarySiteList' || 
-      currentScreen === 'VisitSummaryInfluencerList';
+      currentScreen === 'VisitSummarySiteList'
    
     let profilesActive = currentScreen === 'ProfileScreen';
     
@@ -97,6 +91,7 @@ class FooterScreen extends React.Component {
     let visitorActive = 
       currentScreen == 'VisitorScreen' || 
       currentScreen == 'NewRegistrationFormScreen' ||
+      currentScreen == 'UpdateVisitorScreen' ||
       currentScreen == 'VisitorInfoScreen' ||
       currentScreen == 'VisitHistoryScreen' ||
       currentScreen == 'TestDriveHistoryScreen' ||

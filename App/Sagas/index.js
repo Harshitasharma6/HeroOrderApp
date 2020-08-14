@@ -3,7 +3,6 @@ import { StartupTypes } from 'App/Stores/Startup/Actions';
 import { UserTypes } from 'App/Stores/User/Actions';
 import { networkSaga, offlineActionTypes } from 'react-native-offline';
 import { all, fork, takeLatest } from 'redux-saga/effects';
-import { InfluencersTypes } from 'App/Stores/Influencers/Actions';
 import { SitesTypes } from 'App/Stores/Sites/Actions';
 import { StartDayTypes } from '../Stores/StartDay/Actions'
 import { ShreeTypes } from '../Stores/Shree/Actions';
@@ -22,14 +21,6 @@ import {
     fetchCommunicationsAttachments,
     fetchCommunicationsAttachmentsDetails
 } from './DashboardSaga';
-
-import {
-    extractInfluencerInfoData,
-    fetchInfluencers,
-    watchCreateInfluencerRequest,
-    watchCreateInfluencerVisitFormRequest,
-    fetchInfluencersVisits
-} from './InfluencersSaga';
 
 import {
     runQueue
@@ -107,7 +98,11 @@ import {
 
  import { 
     watchSearchCustomer,
-    watchRegisterCustomer
+    watchRegisterCustomer,
+    watchCreateFeedback,
+    watchUpdateVisitor,
+    getAllVisits,
+    getFeedbacks
  } from './VisitorSaga'
 
 
@@ -136,13 +131,6 @@ export default function* root() {
         fork(watchCreateSiteFormRequest),
         fork(watchCreateCompetitorFormRequest),
 
-
-
-        fork(watchCreateInfluencerRequest),
-        fork(watchCreateInfluencerVisitFormRequest),
-        takeLatest(InfluencersTypes.FETCH_INFLUENCERS, fetchInfluencers),
-        takeLatest(InfluencersTypes.EXTRACT_INFLUENCER_INFO_DATA, extractInfluencerInfoData),
-        takeLatest(InfluencersTypes.FETCH_INFLUENCERS_VISITS, fetchInfluencersVisits),
         
     
        
@@ -208,8 +196,12 @@ export default function* root() {
 
 
         //
-
+        fork(watchUpdateVisitor),
         fork(watchSearchCustomer),
         fork(watchRegisterCustomer),
+        fork(watchCreateFeedback),
+        takeLatest(VisitorTypes.GET_ALL_VISITS, getAllVisits),
+        takeLatest(VisitorTypes.GET_FEEDBACKS, getFeedbacks)
+
     ]);
 }

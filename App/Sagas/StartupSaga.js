@@ -4,7 +4,6 @@ import UserActions from 'App/Stores/User/Actions'
 import StartDayActions from 'App/Stores/StartDay/Actions'
 import ShreeActions from 'App/Stores/Shree/Actions'
 import NonShreeActions from 'App/Stores/NonShree/Actions'
-import InfluencersActions from 'App/Stores/Influencers/Actions';
 import { HelperService } from 'App/Services/Utils/HelperService';
 import {oauth, net} from 'react-native-force';
 import { startDayService } from 'App/Services/Api/StartDayService'

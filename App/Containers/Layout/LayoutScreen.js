@@ -8,9 +8,6 @@ import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { connect } from 'react-redux';
 import DashboardLayout from './DashboardLayout';
 import FooterScreen from './FooterScreen';
-import InfluencerInfoLayout from './Influencers/InfluencerInfoLayout';
-import InfluencerListLayout from './Influencers/InfluencerListLayout';
-import NewInfluencerLayout from './Influencers/NewInfluencerLayout';
 import Drawer from './SideBarLayout/Drawer';
 import NewSitesLayout from './Sites/NewSitesLayout';
 import SiteInfoLayout from './Sites/SitesInfoLayout';
@@ -22,12 +19,10 @@ import VisitSummaryLayout from './Shree/VisitSummaryLayout';
 import NonShreeListLayout from './NonShree/NonShreeListLayout'
 import NonShreeInfoLayout from './NonShree/NonShreeInfoLayout';
 import NonShreeVisitInfoLayout from './NonShree/NonShreeVisitLayout';
-import NewInfluencerVisitFormLayout from './Influencers/NewInfluencerVisitFormLayout';
 import SiteVisitListLayout from './Sites/SiteVisitListLayout';
 import FinalObservationLayout from './FinalObservationLayout';
 
 
-//
 import VisitorInfoScreenLayout from './Visitor/VisitorInfoScreenLayout';
 import DashboardScreenLayout  from './Insights/Dashboard/Layout'
 import CustomerListLayout from './Insights/Customers/list'
@@ -139,27 +134,6 @@ class LayoutScreen extends React.Component {
         customLayoutNode = <AddParticipantListScreenLayout />;
         break;
 
-      case 'InfluencersListScreen':
-        customLayoutNode = <InfluencerListLayout />;
-        break;
-      case 'InfluencerSiteList':
-        customLayoutNode = <InfluencerListLayout />;
-        break;
-
-      case 'InfluencerInfoScreen':
-      case 'InfluencerVisitsList':
-      case 'NewInfluencerVisitForm':
-        customLayoutNode = <InfluencerInfoLayout />;
-        break;
-
-      case 'NewInfluencers':
-        customLayoutNode = <NewInfluencerLayout />;
-        break;
-
-      case 'UpdateInfluencer':
-        customLayoutNode = <NewInfluencerLayout />;
-        break;
-
       case 'ProfileScreen':
         customLayoutNode = [];
         break;
@@ -234,10 +208,6 @@ class LayoutScreen extends React.Component {
 
           
 
-      case 'NewInfluencerVisitForm':
-        customLayoutNode = <NewInfluencerVisitFormLayout />
-        break;
-
       case 'SitesVisitList':
         customLayoutNode = <SiteVisitListLayout />
         break;
@@ -277,14 +247,12 @@ class LayoutScreen extends React.Component {
 
       case 'VisitSummaryList': 
       case 'VisitSummarySiteList': 
-      case 'VisitSummaryInfluencerList': 
-        customLayoutNode = <VisitSummaryLayout />
-        break;
 
       case 'InsightsScreen':
         customLayoutNode = []
         break;
       case 'NewRegistrationFormScreen':
+      case 'UpdateVisitorScreen':
       case 'CustomerRegistrationFormScreen':
       case 'TestDriveFeedBackScreen':
       case 'ProductCatalogScreen':

@@ -4,14 +4,14 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 
 export default StyleSheet.create({
   action: {
-    marginTop: hp('9%'),
+    marginTop: hp('5%'),
     width: wp('80%'),
     justifyContent: 'center'
   },
   button: {
     ...ApplicationStyles.formButton,
     alignSelf: 'center',
-    marginTop: 30
+    marginTop: hp('2.5%')
   },
   buttonBox: {
     ...Helpers.textCenter,
@@ -23,13 +23,14 @@ export default StyleSheet.create({
     backgroundColor: Colors.white,
     flex: 1,
     marginHorizontal: 30,
-    marginVertical: 90,
+    marginVertical: hp('4%'),
     paddingBottom: 60,
     shadowColor: Colors.white,
     shadowOffset: { width: 20, height: 30 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
-    position: 'relative'
+    position: 'relative',
+    height: hp('100%')
   },
   link: {
     color: Colors.label,
@@ -59,9 +60,8 @@ export default StyleSheet.create({
   	fontSize: wp('5%')
   },
   bottomSection: {
-      justifyContent: 'center',
       position: 'absolute',
-      bottom: -hp('2%'),
+      bottom: hp('1%'),
       width: wp('90%')
   },
   proceedAction: {
@@ -70,5 +70,13 @@ export default StyleSheet.create({
   },
   proceedActionText: {
     fontSize: wp('3.8%')
+  },
+  logo: {
+    width: wp('70%'), 
+    height: hp('18%'), 
+    resizeMode: 'contain' 
+  },
+  labelStyles: {
+    fontSize: wp('4%')
   }
 });

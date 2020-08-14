@@ -22,22 +22,16 @@ import VisitorActions from 'App/Stores/Visitor/Actions'
 class NewRegistrationFormScreen extends Component {
  
 	submit() {
-		// const { 
-		// 	submitForm, 
-		// 	form,
-		// 	access_token
-		// } = this.props;
+		const { 
+			submitForm, 
+			form,
+		} = this.props;
 
-		// Keyboard.dismiss(); 
+		Keyboard.dismiss(); 
 
-		// submitForm({
-		// 	form, 
-		// 	...{
-		// 		access_token: access_token
-		// 	}
-		// });
+		submitForm(form);
 
-		NavigationService.navigate('VisitorInfoScreen')
+		//NavigationService.navigate('VisitorInfoScreen')
 	}
 
     render() {
@@ -90,9 +84,9 @@ class NewRegistrationFormScreen extends Component {
 					<InputText
 						style={Style.mb10}
 						placeholder={'Email'}
-						value={form.email}
-						onChange={(value) => changeForm({ edited_field: 'email', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'email'}
+						value={form.email_id__c}
+						onChange={(value) => changeForm({ edited_field: 'email_id__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'email_id__c'}
 						label={'Email'}
 					/>
 
@@ -162,8 +156,8 @@ class NewRegistrationFormScreen extends Component {
 					<SearchableDropdown
 				        dataSource={occupationList}
 				        placeHolderText={'Select Occupation'}
-				        selectedValue={form.occupation}
-				        onChange={(value) => changeForm({ edited_field: 'occupation', edited_value: value })}
+				        selectedValue={form.occupation__c}
+				        onChange={(value) => changeForm({ edited_field: 'occupation__c', edited_value: value })}
 				        placeholder={'Type or Select Occupation'}
 				        invalid={false}
 				        labelStyles={{ ...Style.pickerLabel }}
@@ -181,7 +175,7 @@ class NewRegistrationFormScreen extends Component {
 				        invalid={false}
 				        labelStyles={{ ...Style.pickerLabel }}
 				        customPickerStyles={{ ...Style.picker }}
-				        label={'Product Interested'}
+				        label={'Product Interested*'}
 					/>
 
 					<View style={{width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
@@ -279,36 +273,36 @@ class NewRegistrationFormScreen extends Component {
 					<InputDate
                         style={Style.mb10}
                         placeholder={'Expected Purchase Date'}
-                        value={form.expected_purchase_date}
+                        value={form.expected_close_date__c}
                         onChange={(value) => {
                             let formattedDate = HelperService.convertMomentDateToTimestamp(value);
-                            this.props.changeForm({ edited_field: 'expected_purchase_date', edited_value: value })
+                            this.props.changeForm({ edited_field: 'expected_close_date__c', edited_value: value })
                         }}
-                        error={validation.invalid && validation.invalid_field == 'expected_purchase_date'}
+                        error={validation.invalid && validation.invalid_field == 'expected_close_date__c'}
                         label={'Expected Purchase Date'}
                     />
 
 
                     <View style={{ width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
-						<Text style={{...ApplicationStyles.label, marginBottom: '1%'}}>Was Test Drive Offered?</Text>
+						<Text style={{...ApplicationStyles.label, marginBottom: '1%'}}>Was Test Drive Offered?*</Text>
 						<View style={{flexDirection: 'row', marginBottom: '2%'}}>
 						<GenericCheckBox 
 							style={{marginRight: '5%'}}
 							label={'Yes'}
-							checked={form.was_test_drive_offered == 'Yes'}
+							checked={form.test_drive_offered__c == 'Yes'}
 							onPress={(event)=>{
-			                	let value = form.was_test_drive_offered == 'Yes' ? 'No' : 'Yes';
-				                changeForm({ edited_field: 'was_test_drive_offered', edited_value: value });
+			                	let value = form.test_drive_offered__c == 'Yes' ? 'No' : 'Yes';
+				                changeForm({ edited_field: 'test_drive_offered__c', edited_value: value });
 			                }}
 						/>
 
 						<GenericCheckBox
 							style={{marginHorizontal: '5%'}} 
 							label={'No'}
-							checked={form.was_test_drive_offered == 'No'}
+							checked={form.test_drive_offered__c == 'No'}
 							onPress={(event)=>{
-			                	let value = form.was_test_drive_offered == 'No' ? 'Yes' : 'No';
-				                changeForm({ edited_field: 'was_test_drive_offered', edited_value: value });
+			                	let value = form.test_drive_offered__c == 'No' ? 'Yes' : 'No';
+				                changeForm({ edited_field: 'test_drive_offered__c', edited_value: value });
 			                }}
 						/>
 						</View>

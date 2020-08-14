@@ -18,12 +18,12 @@ export default {
 	    },
 	},
 	formButton: {
-		width: wp('38%'),
 		alignSelf: 'center',
 		marginTop: hp('2%'),
 		borderRadius: 10,
-		height: hp('5.5%'),
-		zIndex: 3
+		height: hp('6%'),
+		zIndex: 3,
+		width: wp('38%')
 	},
 	formHeading: {
 	    alignSelf: 'center',
@@ -151,4 +151,11 @@ export default {
 		width: '88%',
 		elevation: 0
 	},
+
+	refreshIcon: {
+		color: Colors.primary, 
+		fontSize: wp('6%'), 
+		alignSelf: 'center',
+		padding: 10
+	}
 }

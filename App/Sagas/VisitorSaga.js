@@ -63,6 +63,59 @@ export function* watchRegisterCustomer() {
 }
 
 
+export function* watchUpdateVisitor() {
+	while (true) {
+		const { payload } = yield take(VisitorTypes.UPDATE_VISITOR)
+		try {
+			const validationFailed = yield call(ValidationService.validateRegisterCustomerForm, payload);
+			
+			if (validationFailed) {
+				HelperService.showToast({ 
+					message: validationFailed.error_message, 
+					duration: 2000, 
+					buttonText: 'Okay' 
+				});
+
+				yield put(VisitorActions.registerCustomerValidationFailed(validationFailed));
+				continue;
+			}
+		} catch (err) {
+			console.log(err)
+		}
+
+		yield call(updateVisitor, payload)
+	}
+}
+
+
+export function* watchCreateFeedback() {
+	while (true) {
+		const { payload } = yield take(VisitorTypes.CREATE_FEEDBACK)
+		try {
+			const validationFailed = yield call(ValidationService.validateCreateFeedbackForm, payload);
+			
+			if (validationFailed) {
+				HelperService.showToast({ 
+					message: validationFailed.error_message, 
+					duration: 2000, 
+					buttonText: 'Okay' 
+				});
+
+				yield put(VisitorActions.createFeedbackValidationFailed(validationFailed));
+				continue;
+			}
+		} catch (err) {
+			console.log(err)
+		}
+
+		yield call(createFeedback, payload)
+	}
+}
+
+
+
+
+
 function* searchCustomer(payload) {
 	yield put(VisitorActions.searchCustomerLoading());
 	try {
@@ -95,7 +148,7 @@ function* searchCustomer(payload) {
 					break;
 				case 'Enquiry':
 					HelperService.showToast({ 
-						message: 'Open Lead found!', 
+						message: 'Lead already exist!', 
 						duration: 2000, 
 						buttonText: 'Okay' 
 					});
@@ -153,6 +206,12 @@ function* registerCustomer(payload) {
 
 		if (successData) { 
 			yield put(VisitorActions.registerCustomerSuccess(payload));
+			HelperService.showToast({ 
+				message: 'Visitor Registered Successfully!!', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+			NavigationService.navigate('VisitorInfoScreen')
 		} else {
 			yield put(VisitorActions.registerCustomerFailure())
 			HelperService.showToast({ 
@@ -170,3 +229,157 @@ function* registerCustomer(payload) {
 		});
 	}
 }
+
+
+
+function* updateVisitor(payload) {
+	yield put(VisitorActions.registerCustomerLoading());
+	try {
+		const isOnline = yield select(getConnectionStatus);
+		if (!isOnline) {
+			yield put(VisitorActions.registerCustomerFailure());
+			HelperService.showToast({ 
+				message: 'Cannot Update. No Internet connection.', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+			return;
+		}
+
+		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
+		payload.dealer_id = '0019D000009zum3QAA'
+		payload.enquiry = 133
+		
+		const successData = yield call(VisitorService.updateVisitor, payload);
+
+		if (successData) { 
+			yield put(VisitorActions.updateVisitorSuccess(payload));
+			HelperService.showToast({ 
+				message: 'Updated Successfully!', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+		} else {
+			yield put(VisitorActions.registerCustomerFailure())
+			HelperService.showToast({ 
+				message: 'Error!! Update Failed.Verify fields and try again.', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+		}
+	} catch (error) {
+		yield put(VisitorActions.registerCustomerFailure());
+		HelperService.showToast({ 
+			message: 'Error!! Update Failed.Verify fields and try again.', 
+			duration: 2000, 
+			buttonText: 'Okay' 
+		});
+	}
+}
+
+
+
+
+function* createFeedback(payload) {
+	yield put(VisitorActions.createFeedbackLoading());
+	try {
+		const isOnline = yield select(getConnectionStatus);
+		if (!isOnline) {
+			yield put(VisitorActions.createFeedbackFailure());
+			HelperService.showToast({ 
+				message: 'Cannot create Feedback. No Internet connection.', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+			return;
+		}
+
+		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
+		payload.dealer_id = '0019D000009zum3QAA'
+		payload.enquiry = 133
+		
+		const successData = yield call(VisitorService.createFeedback, payload);
+
+		if (successData) { 
+			yield put(VisitorActions.createFeedbackSuccess(payload));
+			HelperService.showToast({ 
+				message: 'Feedback submitted successfully!!', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+		} else {
+			yield put(VisitorActions.createFeedbackFailure())
+			HelperService.showToast({ 
+				message: 'Error!! Feedback Not Created.Verify try again.', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+		}
+	} catch (error) {
+		yield put(VisitorActions.createFeedbackFailure());
+		HelperService.showToast({ 
+			message: 'Error!! Feedback Not Created.Verify try again.', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+		});
+	}
+}
+
+
+
+export function* getAllVisits({ payload }) {
+	const isOnline = yield select(getConnectionStatus);
+	if (!isOnline) {
+		yield put(VisitorActions.doNothing());
+		return;
+	}
+	
+	try {
+		yield put(VisitorActions.getAllVisitsLoading());
+		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
+		payload.dealer_id = '0019D000009zum3QAA'
+		payload.enquiry = 133
+
+		let successData = yield call(VisitorService.getAllVisits, payload);
+		if (successData) {
+			let visitsMapping = yield select(state => state.visitor.visitsMapping);
+			visitsMapping[payload.enquiry] = successData;
+			yield put(VisitorActions.getAllVisitsSuccess(visitsMapping));
+		} else {
+			yield put(VisitorActions.getAllVisitsFailure());
+		}
+	} catch (error) {
+		yield put(VisitorActions.getAllVisitsFailure());
+	}
+}
+
+
+export function* getFeedbacks({ payload }) {
+	const isOnline = yield select(getConnectionStatus);
+	if (!isOnline) {
+		yield put(VisitorActions.doNothing());
+		return;
+	}
+	
+	try {
+		yield put(VisitorActions.getFeedbacksLoading());
+		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
+		payload.dealer_id = '0019D000009zum3QAA'
+		payload.enquiry = 133
+
+		let successData = yield call(VisitorService.getFeedbacks, payload);
+		if (successData) {
+			let feedbacksMapping = yield select(state => state.visitor.feedbacksMapping);
+			feedbacksMapping[payload.enquiry] = successData;
+			yield put(VisitorActions.getFeedbacksSuccess(feedbacksMapping));
+		} else {
+			yield put(VisitorActions.getFeedbacksFailure());
+		}
+	} catch (error) {
+		console.log('error', error)
+		yield put(VisitorActions.getFeedbacksFailure());
+	}
+}
+
+
+

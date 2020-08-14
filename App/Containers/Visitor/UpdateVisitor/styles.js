@@ -1,15 +1,13 @@
 import { StyleSheet } from 'react-native'
 import { Colors, Metrics, Helpers, Fonts, ApplicationStyles } from 'App/Theme'
-import { Left } from 'native-base'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default StyleSheet.create({
   action: {
-    // marginTop: 80,
     width: wp('88%'),
   },
   button: {
-    ...ApplicationStyles.formButton,
+    ...ApplicationStyles.formButton
   },
   container: {
     ...Metrics.tinyHorizontalPadding,
@@ -19,8 +17,7 @@ export default StyleSheet.create({
     flex: 1,
   },
   heading: {
-  ...ApplicationStyles.formHeading,
-  
+    ...ApplicationStyles.formHeading
   },
   link: {
     color: Colors.label,
@@ -42,7 +39,7 @@ export default StyleSheet.create({
   text: {
     color: Colors.white,
     fontFamily: ApplicationStyles.textFont,
-    fontSize: 18,
+    fontSize: 18
   },
 
   selectPickerStyle: {
@@ -59,15 +56,34 @@ export default StyleSheet.create({
     borderRadius: 10,
     width: wp('88%'),
     height: hp('5.7%'),
-    marginBottom: hp('2%'),
+    marginBottom: hp('3%'),
     paddingHorizontal: 8
   },
   pickerLabel: {
     color: Colors.grey,
-    fontFamily: ApplicationStyles.textMsgFont,
+    fontFamily: ApplicationStyles.textFont,
     textAlign: "left",
     width: "99%",
-    fontSize: wp('3.5%'),
-    alignSelf: 'center'
-  }
+    padding: 10,
+    flexDirection: "row"
+  },
+  Compbutton: {
+    marginVertical: 15,
+    marginHorizontal:10,
+    backgroundColor: Colors.white,
+    borderColor: Colors.border,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    zIndex: 2,
+    height: 45,
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 100
+  },
+  Comptext: {
+    color: Colors.button,
+    fontFamily: ApplicationStyles.textFont,
+    fontSize: 18
+  },
 })
