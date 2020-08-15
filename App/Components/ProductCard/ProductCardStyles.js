@@ -66,9 +66,10 @@ export default StyleSheet.create({
     marginTop: hp('.5%')
   },
   price: {
-    color: '#000000',
+    color: Colors.grey,
     fontSize: wp('4%'),
     marginHorizontal: wp('1%'),
+    fontFamily: ApplicationStyles.textMsgFont,
     marginLeft: 0
   },
   discountedPrice: {

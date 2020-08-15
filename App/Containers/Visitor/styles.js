@@ -77,6 +77,5 @@ export default StyleSheet.create({
     resizeMode: 'contain' 
   },
   labelStyles: {
-    fontSize: wp('4%')
   }
 });

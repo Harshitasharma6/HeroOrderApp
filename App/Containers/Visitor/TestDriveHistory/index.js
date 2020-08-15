@@ -29,25 +29,25 @@ class TestDriveHistoryScreen extends Component {
     });
   }
 
-  // "overall_experience__c": "4",
-  // "name": "Id-00006",
-  // "dealers_sales_person_login_info__c": "a0O9D000001hLV9UAM",
-  // "ease_of_handeling__c": "4",
-  // "vehicle_no__c": "DL1CV6565",
-  // "isdeleted": false,
-  // "systemmodstamp": "2020-08-13T07:04:44.000Z",
-  // "test_drive_date__c": "2020-08-15T18:30:00.000Z",
-  // "createddate": "2020-08-13T07:04:44.000Z",
-  // "responsiveness_of_the_vehicle__c": "3",
-  // "ride_comfort__c": "3",
-  // "sfid": "a0Q9D000005zMlxUAE",
-  // "id": 7,
-  // "_hc_lastop": "SYNCED",
-  // "_hc_err": null,
-  // "pg_id__c": null,
-  // "model_name__c": null,
-  // "dealer__c": "0019D00000A0XjIQAV",
-  // "enquiry__c": "a009D000002ecHDQAY"
+//             "overall_experience__c": "4",
+//             "name": "Id-00019",
+//             "dealers_sales_person_login_info__c": "a0O9D000001hLV9UAM",
+//             "ease_of_handeling__c": "4",
+//             "vehicle_no__c": "DL1CV6565",
+//             "isdeleted": false,
+//             "systemmodstamp": "2020-08-15T18:07:50.000Z",
+//             "test_drive_date__c": "2020-08-16T00:00:00.000Z",
+//             "createddate": "2020-08-15T18:07:50.000Z",
+//             "responsiveness_of_the_vehicle__c": "3",
+//             "ride_comfort__c": "3",
+//             "sfid": "a0Q9D000005zjF0UAI",
+//             "id": 20,
+//             "_hc_lastop": "SYNCED",
+//             "_hc_err": null,
+//             "pg_id__c": null,
+//             "model_name__c": "a029D000002ZFPoQAO",
+//             "dealer__c": "0019D00000A0XjIQAV",
+//             "enquiry__c": "a009D000002ecHDQAY"
 
 
 
@@ -72,7 +72,7 @@ class TestDriveHistoryScreen extends Component {
                 content={[
                   <GenericDisplayCardStrip key={'Test Drive Vehicle' + item.id} label={'Test Drive Vehicle'} value={item.vehicle_no__c}/>,
                   <GenericDisplayCardStrip key={'Test Drive Date' + item.id} label={'Test Drive Date'} value={HelperService.removeFieldsAndDateReadableFormat(item.test_drive_date__c)}/>,
-                  <GenericDisplayCardStrip key={'Test Drive Time' + item.id} label={'Test Drive Time'} value={''}/>,
+                  <GenericDisplayCardStrip key={'Test Drive Time' + item.id} label={'Test Drive Time'} value={HelperService.removeFieldsTimeReadableFormat(item.createddate) + ' (UTC)'}/>,
                   <GenericDisplayCardStrip key={'Overall Experience' + item.id} label={'Overall Experience'} value={item.overall_experience__c}/>,
                   <GenericDisplayCardStrip key={'Sales Person Name' + item.id} label={'Sales Person Name'} value={'Anmol Singh'}//change to in future
               />

@@ -18,6 +18,15 @@ import GenericCheckBox from 'App/Components/GenericCheckBox'
 import Ratings from 'App/Components/Ratings'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
+//  "model_name__c": "a029D000002ZFPoQAO", (*mandatory)
+// 	"vehicle_no__c": "DL1CV6565",
+// 	"ride_comfort__c": "3", 	(*mandatory)
+// 	"responsiveness_of_the_vehicle__c": "3", 	(*mandatory)
+// 	"dealers_sales_person_login_info__c": "a0O9D000001hLV9UAM", 	(*mandatory)
+// 	"ease_of_handeling__c": "4", (*mandatory) 
+// 	"overall_experience__c": "4", (*mandatory)
+// 	"date_of_test_drive": "2020-08-16" (*mandatory)
+
 
 
 class TestDriveFeedBackScreen extends Component {
@@ -32,7 +41,7 @@ class TestDriveFeedBackScreen extends Component {
 		submitForm({
 			...form, 
 			enquiry_id: currentEnquiryId, 
-			dealers_sales_person_sfid: "a0O9D000001hLV9UAM",
+			dealers_sales_person_login_info__c: "a0O9D000001hLV9UAM",
 			date_of_test_drive: HelperService.dateReadableFormatWithHyphen()
 		});
 	}
@@ -58,10 +67,10 @@ class TestDriveFeedBackScreen extends Component {
 					<SearchableDropdown
 				        dataSource={productsList}
 				        placeHolderText={'Model Name'}
-				        selectedValue={form.model_sfid}
-				        onChange={(value) => changeForm({ edited_field: 'model_sfid', edited_value: value })}
+				        selectedValue={form.model_name__c}
+				        onChange={(value) => changeForm({ edited_field: 'model_name__c', edited_value: value })}
 				        placeholder={'Type or Select Model Name'}
-				        invalid={validation.invalid && validation.invalid_field == 'model_sfid'}
+				        invalid={validation.invalid && validation.invalid_field == 'model_name__c'}
 				        labelStyles={{ ...Style.pickerLabel }}
 				        customPickerStyles={{ ...Style.picker }}
 				        label={'Model Name*'}
@@ -70,9 +79,9 @@ class TestDriveFeedBackScreen extends Component {
 				 	<InputText
 						style={Style.mb10}
 						placeholder={''}
-						value={form.vehicle_number}
-						onChange={(value) => changeForm({ edited_field: 'vehicle_number', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'vehicle_number'}
+						value={form.vehicle_no__c}
+						onChange={(value) => changeForm({ edited_field: 'vehicle_no__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'vehicle_no__c'}
 						label={'Vehicle No.'}
 					/>
 
@@ -82,16 +91,16 @@ class TestDriveFeedBackScreen extends Component {
 					<Text style={{...ApplicationStyles.label, marginBottom: '1%'}}>Ride Comfort</Text>
 					<View style={{flexDirection: 'row', marginBottom: hp('3%')}}>
 					<Ratings 
-						value={form.ride_comfort || 0} 
-						onChange={(value) => changeForm({ edited_field: 'ride_comfort', edited_value: value })}
+						value={form.ride_comfort__c || 0} 
+						onChange={(value) => changeForm({ edited_field: 'ride_comfort__c', edited_value: value })}
 					/>
 					</View>
 
 					<Text style={{...ApplicationStyles.label, marginBottom: '1%'}}>Ease of Handling</Text>
 						<View style={{flexDirection: 'row', marginBottom: hp('3%')}}>
 					<Ratings 
-						value={form.ease_of_handling || 0} 
-						onChange={(value) => changeForm({ edited_field: 'ease_of_handling', edited_value: value })}
+						value={form.ease_of_handeling__c || 0} 
+						onChange={(value) => changeForm({ edited_field: 'ease_of_handeling__c', edited_value: value })}
 						/>
 					</View>
 
@@ -99,16 +108,16 @@ class TestDriveFeedBackScreen extends Component {
 					<Text style={{...ApplicationStyles.label, marginBottom: '1%'}}>Responsiveness of the Vehicle</Text>
 					<View style={{flexDirection: 'row', marginBottom: hp('3%')}}>
 					<Ratings 
-						value={form.responsiveness_of_vehicle || 0} 
-						onChange={(value) => changeForm({ edited_field: 'responsiveness_of_vehicle', edited_value: value })}
+						value={form.responsiveness_of_the_vehicle__c || 0} 
+						onChange={(value) => changeForm({ edited_field: 'responsiveness_of_the_vehicle__c', edited_value: value })}
 					/>
 					</View>
 
 					<Text style={{...ApplicationStyles.label, marginBottom: '1%'}}>Overall Experience</Text>
 					<View style={{flexDirection: 'row', marginBottom: hp('3%')}}>
 						<Ratings 
-							value={form.overall_experience || 0} 
-							onChange={(value) => changeForm({ edited_field: 'overall_experience', edited_value: value })}
+							value={form.overall_experience__c || 0} 
+							onChange={(value) => changeForm({ edited_field: 'overall_experience__c', edited_value: value })}
 						/>
 					</View>
 

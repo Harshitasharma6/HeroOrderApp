@@ -11,9 +11,11 @@ import ProductsActions from 'App/Stores/Products/Actions';
 import BlueButton from 'App/Components/BlueButton';
 import GenericIcon from 'App/Components/GenericIcon';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import GenericDisplayCard from 'App/Components/GenericDisplayCard'
+import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDisplayCardStrip';
 import NavigationService from 'App/Services/NavigationService'
 
-class AddProductScreen extends Component {
+class ProductsSchemes extends Component {
   componentDidMount() {
     this.fetchCall()
   }
@@ -24,37 +26,40 @@ class AddProductScreen extends Component {
       fetchData
     } = this.props
 
+    const {
+      product_id
+    } = this.props.navigation.state.params;
+
     fetchData({
-      state_id 
+      state_id,
+      product_id
     });
   }
-  // "id": 16,
-  // "sfid": "a029D000002ZFPjQAO",
-  // "name": "Optima ER",
-  // "product_category__c": null,
-  // "bldc_hub_motor_watt__c": null,
-  // "range_in_kmph__c": null,
-  // "top_speed__c": null,
-  // "battery_capacity_in_v_ah__c": null,
-  // "kerb_weight__c": null,
-  // "ground_clearance_in_mm__c": null,
-  // "charging_time__c": null,
-  // "wheel_size_in_inch__c": null,
-  // "color__c": null,
-  // "licence_registration__c": null,
-  // "battery__c": "LI",
-  // "subsidy_amount__c": 17998,
-  // "price__c": 71990,
-  // "state": "Delhi"
+  
 
-  getProductCard(item) {
+  getDataCard(item) {
     return (
-      <ProductCard 
-        data={item} 
-        quantityInCart={0}
-        onChangeQuantity={(quantity) => {}}
-        onPressInfo={() => NavigationService.navigate('AddProductInfoScreen', {data: item})}
-      />
+      <GenericDisplayCard dark={false}
+          style={{ width: '95%', elevation: 0 }}
+          heading={item.scheme_name__c}
+          content={[
+            <GenericDisplayCardStrip 
+            	key={'Scheme Amount' + item.scheme_name__c} 
+            	label={'Scheme Amount'} 
+            	value={HelperService.currencyValue(item.scheme_amount__c)}
+           	/>,
+           	<GenericDisplayCardStrip 
+            	key={'Valid From' + item.scheme_name__c} 
+            	label={'Valid From'} 
+            	value={`${HelperService.removeFieldsAndDateReadableFormat(item.active_from__c)}`}
+           	/>,
+           	<GenericDisplayCardStrip 
+            	key={'Valid Till' + item.scheme_name__c} 
+            	label={'Valid Till'} 
+            	value={`${HelperService.removeFieldsAndDateReadableFormat(item.active_to__c)}`}
+           	/>
+          ]}
+        />
     );
   }
 
@@ -73,15 +78,15 @@ class AddProductScreen extends Component {
         visibleNode = (
           <FlatList
             data={data}
-            renderItem={({ item }) => this.getProductCard(item)}
-            keyExtractor={item => item.id}
+            renderItem={({ item }) => this.getDataCard(item)}
+            keyExtractor={item => item.scheme_name__c}
             onRefresh={() => this.fetchCall()}
             refreshing={loader}
           />
         );
       } else {
         visibleNode =  (
-          <NoDataFound text={'No Products Found'}>
+          <NoDataFound text={'No Schemes Found'}>
             <GenericIcon 
               name={'refresh'}
               onPress={() => this.fetchCall()}
@@ -94,7 +99,7 @@ class AddProductScreen extends Component {
       visibleNode = <Loading />
     } else if (data && !data.length && !loader) {
       visibleNode =  (
-          <NoDataFound text={'No Products Found'}>
+          <NoDataFound text={'No Schemes Found'}>
             <GenericIcon 
               name={'refresh'}
               onPress={() => this.fetchCall()}
@@ -109,12 +114,8 @@ class AddProductScreen extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, paddingTop: 15, paddingHorizontal: 15}}>
-         <View style={{flexDirection: 'row', justifyContent: 'flex-end', marginBottom: hp('1.5%')}}>
-             <BlueButton title={"   Cart "}>
-            <GenericIcon name={'cart-plus'} style={{color: Colors.white, fontSize: wp('6%')}}/>
-          </BlueButton>
-        </View>
+      <View style={{ flex: 1, paddingTop: 15, paddingHorizontal: 10}}>
+        <Text style={ApplicationStyles.formHeading}>{'Available Offers'}</Text>
         {this.getDataNode()}
       </View>
     );
@@ -122,20 +123,20 @@ class AddProductScreen extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  loader   : state.products.loaders.getAllProductsLoader,
+  loader   : state.products.loaders.getProductSchemesLoader,
   enquiry  : state.visitor.currentEnquiryId,
   state_id : state.user.state_c,
-  data     : state.products.productsData
+  data     : state.products.productSchemes
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchData:(params) => dispatch(ProductsActions.getAllProducts(params))
+  fetchData:(params) => dispatch(ProductsActions.getProductSchemes(params))
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddProductScreen)
+)(ProductsSchemes)
 
 
 

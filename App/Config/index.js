@@ -16,9 +16,13 @@ export const Config = {
 
 
 	COMMON_SERVICE: {
-		FETCH_PRODUCTS: '',
-		FETCH_SOURCE_OF_ENQUIRY: '',
 		FETCH_OCCUPATIONS: ''
+	},
+
+
+	PRODUCTS_SERVICE: {
+		FETCH_PRODUCTS: 'products/getAll',
+		FETCH_SCHEMES: 'products/getScheme?product_id=a029D000002ZFPjQAO&state_id=a059D000000tNcxQAE&dealer_id=0019D000009ydMqQAI',
 	},
 
 

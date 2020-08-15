@@ -71,7 +71,7 @@ const Styles = StyleSheet.create({
   label: {
     fontFamily: ApplicationStyles.textMsgFont,
     color: Colors.primary,
-    fontSize: wp('4.2%'),
+    fontSize: wp('4.4%'),
     marginBottom: wp('1.5%'),
     width: '106%',
     textAlign: 'left'

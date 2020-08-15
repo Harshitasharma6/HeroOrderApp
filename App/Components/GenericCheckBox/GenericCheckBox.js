@@ -6,7 +6,7 @@ import { Colors, Metrics, Helpers, Fonts, ApplicationStyles } from 'App/Theme'
 
 const GenericCheckBox = ({ style={}, label, onPress, title, disabled = false, checked}) => {
 	return (
-	  	<View style={{...Style.bottomMargin, ...Style.checkboxContainer, ...style}} onPress={(event)=> onPress(event)}>
+	  	<View style={{...Style.bottomMargin, ...Style.checkboxContainer, ...style}} onPress={(event)=> {Keyboard.dismiss(); onPress(event)}}>
 			<TouchableOpacity onPress={(event)=> {Keyboard.dismiss();onPress(event)}} disabled={checked}>
 				<Label  style={{...Style.label}} >{label}</Label>
 			</TouchableOpacity>

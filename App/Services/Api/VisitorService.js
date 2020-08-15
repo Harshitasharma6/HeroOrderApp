@@ -32,27 +32,24 @@ function searchCustomer({token, dealer_id, contact_number}) {
 
 function registerCustomer(params) {
 	let url = Config.VISITOR_SERVICE.REGISTER_CUSTOMER;
-	debugger
 	return apiClient.post(url, params,{
 		headers: {
 			token: params.token,
 			dealer_id: params.dealer_id,
 		}
 	}).then((response) => {
-		debugger
 		if (in200s(response.status)) {
 			return response['data']['data'][0];
 		}
 		return null
 	}).catch(error => {
-		debugger
 		return null
 	});
 }
 
 function updateVisitor(params) {
 	let url = Config.VISITOR_SERVICE.UPDATE_VISITOR;
-	url += `?enquiry__c=${params.enquiry}`
+	url += `?enquiry_id=${params.enquiry}`
 	return apiClient.post(url, params,{
 		headers: {
 			token    : params.token,

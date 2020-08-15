@@ -6,6 +6,7 @@ const { Types, Creators } = createActions({
 	searchCustomerFailure: null,
 	searchCustomerLoading: null,
 	searchCustomerLoadingStop: null,
+	clearSearchCustomerForm: null,
 	changeSearchCustomerForm: ['payload'],
 	searchCustomerValidationFailed: ['payload'],
 

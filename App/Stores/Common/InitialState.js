@@ -10,6 +10,10 @@ export const INITIAL_STATE = {
 		disable: false
 	},
 
+	loaders: {
+		getAllProductsLoader: false,
+	},
+
 	occupationList: [
 		{ id: 'Business', name: 'Business' },
 		{ id: 'Employee', name: 'Employee' },
@@ -26,10 +30,5 @@ export const INITIAL_STATE = {
 		{ id: 'Event', name: 'Event' }
 	],
 
-	productsList: [
-		{ id: 'a029D000002ZFPtQAO', name: 'Flash LA' },
-		{ id: 'a029D000002ZFPtQAO', name: 'Optima LA' },
-		{ id: 'a029D000002ZFPtQAO', name: 'Flash LI' },
-		{ id: 'a029D000002ZFPtQAO', name: 'Optima LI' }
-	],
+	productsList: []
 }

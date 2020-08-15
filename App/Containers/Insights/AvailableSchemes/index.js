@@ -4,34 +4,73 @@ import { connect } from 'react-redux'
 import ItemDetail from 'App/Components/ItemDetail'
 import NoDataFound from 'App/Components/NoDataFound'
 import Loading from 'App/Components/Loading'
-import ShreeAction from 'App/Stores/Shree/Actions';
 import { HelperService } from 'App/Services/Utils/HelperService';
+import { Colors, ApplicationStyles } from 'App/Theme';
+import ProductCard from 'App/Components/ProductCard'
+import ProductsActions from 'App/Stores/Products/Actions';
+import BlueButton from 'App/Components/BlueButton';
+import GenericIcon from 'App/Components/GenericIcon';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import GenericDisplayCard from 'App/Components/GenericDisplayCard'
 import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDisplayCardStrip';
-import {ApplicationStyles} from 'App/Theme'
+import NavigationService from 'App/Services/NavigationService'
 
-class AvailableSchemesScreen extends Component {
+class AvailableSchemes extends Component {
   componentDidMount() {
-    // const {
-    //   dealerId,
-    //   fetchData
-    // } = this.props
+    this.fetchCall()
+  }
 
-    // fetchData({
-    //   dealerId
-    // });
+  fetchCall() {
+    const {
+      state_id,
+      fetchData
+    } = this.props
+
+    const {
+      product_id
+    } = this.props.navigation.state.params;
+
+    fetchData({
+      state_id,
+      product_id
+    });
+  }
+  
+
+  getDataCard(item) {
+    return (
+      <GenericDisplayCard dark={false}
+          style={{ width: '95%', elevation: 0 }}
+          heading={item.scheme_name__c}
+          content={[
+            <GenericDisplayCardStrip 
+              key={'Scheme Amount' + item.scheme_name__c} 
+              label={'Scheme Amount'} 
+              value={HelperService.currencyValue(item.scheme_amount__c)}
+             />,
+             <GenericDisplayCardStrip 
+              key={'Valid From' + item.scheme_name__c} 
+              label={'Valid From'} 
+              value={`${HelperService.removeFieldsAndDateReadableFormat(item.active_from__c)}`}
+             />,
+             <GenericDisplayCardStrip 
+              key={'Valid Till' + item.scheme_name__c} 
+              label={'Valid Till'} 
+              value={`${HelperService.removeFieldsAndDateReadableFormat(item.active_to__c)}`}
+             />
+          ]}
+        />
+    );
   }
 
 
+
   getDataNode() {
-    // const {
-    //   data,
-    //   loading
-    // } = this.props;
-    const data = [{heading: 'Book your vehicle at just ₹2999/-'}, {heading: 'Exchange Offer'}]
-    const dataLength = data.length;
-    
-  
+    const {
+      enquiry,
+      loader,
+      data
+    } = this.props;
     let visibleNode = [];
 
     if (data && data.length) {
@@ -39,26 +78,35 @@ class AvailableSchemesScreen extends Component {
         visibleNode = (
           <FlatList
             data={data}
-            renderItem={({ item }) => 
-            	<GenericDisplayCard dark={false}
-	              style={{ width: '88%', elevation: 0 }}
-	              heading={item.heading}
-	              content={[
-	                <GenericDisplayCardStrip key={'Scheme Amount' + item.heading} label={'Scheme Amount'} value={HelperService.currencyValue(2000)}/>
-              ]}
-            />}
-            keyExtractor={item => item}
-            refreshing={false}
-            ListEmptyComponent={() => <NoDataFound text={'No Offers Found'} />}
+            renderItem={({ item }) => this.getDataCard(item)}
+            keyExtractor={item => item.scheme_name__c}
+            onRefresh={() => this.fetchCall()}
+            refreshing={loader}
           />
         );
       } else {
-        visibleNode =<NoDataFound text={'No Offers Found'} />
+        visibleNode =  (
+          <NoDataFound text={'No Schemes Found'}>
+            <GenericIcon 
+              name={'refresh'}
+              onPress={() => this.fetchCall()}
+              style={{color: Colors.button, fontSize: 35, alignSelf: 'center', padding: 10}}
+            />
+          </NoDataFound>
+        );
       }
-    } else if (false) {
+    } else if (loader) {
       visibleNode = <Loading />
-    } else if (data && !data.length) {
-      visibleNode = <NoDataFound text={'No Offers Found'} />
+    } else if (data && !data.length && !loader) {
+      visibleNode =  (
+          <NoDataFound text={'No Schemes Found'}>
+            <GenericIcon 
+              name={'refresh'}
+              onPress={() => this.fetchCall()}
+              style={ApplicationStyles.refreshIcon}
+            />
+          </NoDataFound>
+        );
     }
 
     return visibleNode;
@@ -66,8 +114,8 @@ class AvailableSchemesScreen extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, paddingTop: 10 }}>
-      	<Text style={ApplicationStyles.formHeading}>{'Available Offers'}</Text>
+      <View style={{ flex: 1, paddingTop: 15, paddingHorizontal: 10}}>
+        <Text style={ApplicationStyles.formHeading}>{'Available Offers'}</Text>
         {this.getDataNode()}
       </View>
     );
@@ -75,16 +123,20 @@ class AvailableSchemesScreen extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	dealerId: state.shree.selectedShree.id,
-  	data    : state.shree.outstanding,
-  	loading : state.shree.fetchOutstandingLoader
+  loader   : state.products.loaders.getProductSchemesLoader,
+  enquiry  : state.visitor.currentEnquiryId,
+  state_id : state.user.state_c,
+  data     : state.products.productSchemes
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchData: (params) 	 => dispatch(ShreeAction.fetchOutstanding(params))
+  fetchData:(params) => dispatch(ProductsActions.getProductSchemes(params))
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AvailableSchemesScreen)
+)(AvailableSchemes)
+
+
+

@@ -62,7 +62,8 @@ export const changeSearchCustomerForm = (state, { payload }) => {
 	  	...state.searchCustomerForm,
 	  	...changed_entity
 	  },
-	  searchCustomerValidation: INITIAL_STATE.searchCustomerValidation
+	  searchCustomerValidation: INITIAL_STATE.searchCustomerValidation,
+	  showOpenLeadPrompt: false
 	}
 };
 
@@ -71,6 +72,12 @@ export const searchCustomerValidationFailed = (state, { payload }) => ({
     searchCustomerValidation: {
         ...payload
     }
+});
+
+
+export const clearSearchCustomerForm= (state) => ({
+    ...state,
+    searchCustomerForm: INITIAL_STATE.searchCustomerForm
 });
 
 
@@ -333,6 +340,7 @@ export const reducer = createReducer(INITIAL_STATE, {
 	[VisitorTypes.SEARCH_CUSTOMER_FAILURE] 	         : searchCustomerFailure,
 	[VisitorTypes.SEARCH_CUSTOMER_LOADING] 	         : searchCustomerLoading,
 	[VisitorTypes.SEARCH_CUSTOMER_LOADING_STOP]      : searchCustomerLoadingStop,
+	[VisitorTypes.CLEAR_SEARCH_CUSTOMER_FORM]        : clearSearchCustomerForm,
 	[VisitorTypes.CHANGE_SEARCH_CUSTOMER_FORM]       : changeSearchCustomerForm,
 	[VisitorTypes.SEARCH_CUSTOMER_VALIDATION_FAILED] : searchCustomerValidationFailed,
 

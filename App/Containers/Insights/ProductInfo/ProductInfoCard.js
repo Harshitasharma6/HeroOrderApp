@@ -19,9 +19,7 @@ import GenericDisplayCard from 'App/Components/GenericDisplayCard'
 import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDisplayCardStrip';
 
 
-
-
-const ProductInfoCard = ({data, onPressInfo, onPress,quantityInCart, onChangeQuantity, showEditQuantity=true}) => (
+const ProductInfoCard = ({data}) => (
 	<View style={Style.box}>
 		<View style={Style.imageContainer}>
 			<Image
@@ -31,25 +29,21 @@ const ProductInfoCard = ({data, onPressInfo, onPress,quantityInCart, onChangeQua
             />
 		</View>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end'}}>
-          <Text style={Style.title}>{data.product_name__c || 'Optima'}</Text>
-          <Text style={Style.description}>{HelperService.currencyValue(41312)}</Text>
+          <Text style={Style.title}>{data.name}</Text>
+          <Text style={Style.description}>{HelperService.currencyValue(data.price__c)}</Text>
         </View>
         <View style={ApplicationStyles.divider}></View>
         <View>
-        	<Text style={Style.heading}>{(data.product_name__c || 'Optima') + ' Key Highlights'}</Text>
+        	<Text style={Style.heading}>{(data.name) + ' Key Highlights'}</Text>
         </View>
         <View>
-        	<GenericDisplayCardStrip key={'Range'} label={'Range'} value={'50 Km'}/>
-            <GenericDisplayCardStrip key={'Top Speed'} label={'Top Speed'} value={'25 Kmph'}/>
-            <GenericDisplayCardStrip key={'Charging Time'} label={'Charging Time'} value={'8 hours'}/>
-            <GenericDisplayCardStrip key={'Motor Power'} label={'Motor Power'} value={'250W'}/>
+        	<GenericDisplayCardStrip key={'Range'} label={'Range'} value={(data.range_in_kmph__c || '') + ' Km'}/>
+            <GenericDisplayCardStrip key={'Top Speed'} label={'Top Speed'} value={(data.top_speed__c || '') + ' Kmph'}/>
+            <GenericDisplayCardStrip key={'Charging Time'} label={'Charging Time'} value={(data.charging_time__c || '')
+                + ' Hours'}/>
+            <GenericDisplayCardStrip key={'Motor Power'} label={'Motor Power'} value={(data.bldc_hub_motor_watt__c || '') + ' W'}/>
         </View>
-    </View>
-          
-        
-      
-
-        
+    </View>   
 )
 
 export default ProductInfoCard

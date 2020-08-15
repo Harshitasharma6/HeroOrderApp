@@ -58,16 +58,3 @@ export default class InputText extends PureComponent {
   	}
 
 }
-
-
-
-// const InputText = ({ placeholder = '', onChange = () => { }, style = {}, value = '', error = false, label = '', multiline = false, numberOfLines = 4, editable = true, disabled=false }) => (
-// 	<View>
-// 		{label ? <Label style={{ ...Style.label }}>{label}</Label> : []}
-// 		<Item style={{ ...Style.item }}>
-// 			<Input  value={String(value || '')} placeholder={placeholder} style={error ? { ...Style.input, ...Style.inputError, ...style } : { ...Style.input, ...style }} onChangeText={(event) => onChange(event)} placeholderTextColor={Style.placeholder.color} multiline={multiline} numberOfLines={numberOfLines} editable={editable} />
-// 		</Item>
-// 	</View>
-// )
-
-// export default InputText

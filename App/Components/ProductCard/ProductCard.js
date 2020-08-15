@@ -28,8 +28,8 @@ const ProductCard = ({data, onPressInfo, onPress,quantityInCart, onChangeQuantit
                 source={require('App/Assets/Images/product.png')}
             />
             <View style={{paddingLeft: '4%'}}>
-              <Text style={Style.title}>{data.product_name__c || 'Optima'}</Text>
-              <Price price={data.basic_price__c || 1000} discountPrice={data.discounted_price__c || 900} />
+              <Text style={Style.title}>{data.name}</Text>
+              {<Price price={data.price__c} discountPrice={data.discounted_price__c} />}
               {data.available_stock__c != null ? <AvailableStock stock={data.available_stock__c}/> : []}
             </View>
           </View>

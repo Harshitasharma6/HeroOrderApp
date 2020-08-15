@@ -17,6 +17,25 @@ import {ApplicationStyles} from 'App/Theme'
 import GenericCheckBox from 'App/Components/GenericCheckBox'
 import VisitorActions from 'App/Stores/Visitor/Actions'
 
+// "first_name__c": "test 12",	(*mandatory)
+// 	"last_name__c": "enquiry visit test",	(*mandatory)
+// 	"contact_number__c": "1646464944", 	(*mandatory)
+// 	"age__c":  "28",
+// 	"genders__c": "Male",
+// 	"product__c": "a029D000002ZFPtQAO", 	(*mandatory)
+// 	"mode_of_buying__c": "Cash",
+// 	"exchange_required__c":"No",
+// 	"lead_source__c": "Event",
+// 	"existing_two_wheelers__c": "Yes",
+// 	"purpose_of_buying__c" : "Nothing",
+// "usage__c": "Nothing",
+// "expected_close_date__c": "2020-08-19",
+//  "dealers_sales_person__c": "a0O9D000001hLV9UAM",
+// 	"email_id__c": "abc@gmail.com",
+// 	"occupation__c" : "Business",
+// 	"test_drive_offered__c": "Yes",		(*mandatory)
+// 	"customer__c": "0039D000008BMX2QAO",
+// 	"address_line_1__c" : “test address”
 
 
 class NewRegistrationFormScreen extends Component {
@@ -27,7 +46,7 @@ class NewRegistrationFormScreen extends Component {
 		} = this.props;
 
 		changeForm({
-			edited_field: 'contact_number',
+			edited_field: 'contact_number__c',
 			edited_value: contact_number
 		});
 	}
@@ -49,8 +68,7 @@ class NewRegistrationFormScreen extends Component {
 		Keyboard.dismiss();
 		submitForm({
 			...form,
-			sales_person: 'a0O9D000001hLV9UAM',
-			"expected_close_date__c": "2020-08-19"
+			dealers_sales_person__c: 'a0O9D000001hLV9UAM'
 		});
 	}
 
@@ -77,27 +95,27 @@ class NewRegistrationFormScreen extends Component {
 				 	<InputText
 						style={Style.mb10}
 						placeholder={'First Name'}
-						value={form.first_name}
-						onChange={(value) => changeForm({ edited_field: 'first_name', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'first_name'}
+						value={form.first_name__c}
+						onChange={(value) => changeForm({ edited_field: 'first_name__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'first_name__c'}
 						label={'First Name*'}
 					/>
 
 					<InputText
 						style={Style.mb10}
 						placeholder={'Last Name'}
-						value={form.last_name}
-						onChange={(value) => changeForm({ edited_field: 'last_name', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'last_name'}
+						value={form.last_name__c}
+						onChange={(value) => changeForm({ edited_field: 'last_name__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'last_name__c'}
 						label={'Last Name*'}
 					/>
 					
                     <InputMobile
 						styles={Style.mb10}
 						placeholder={'Contact Number'}
-						value={form.contact_number}
-						onChange={(value) => changeForm({ edited_field: 'contact_number', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'contact_number'}
+						value={form.contact_number__c}
+						onChange={(value) => changeForm({ edited_field: 'contact_number__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'contact_number__c'}
 						label={'Contact Number*'}
 					/>
 
@@ -115,35 +133,35 @@ class NewRegistrationFormScreen extends Component {
 	                    label={'Address'}
 	                    numberOfLines={2}
 	                    style={Style.mb10}
-	                    value={form.address}
-						onChange={(value) => changeForm({ edited_field: 'address', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'address'}
+	                    value={form.address_line_1__c}
+						onChange={(value) => changeForm({ edited_field: 'address_line_1__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'address_line_1__c'}
                 	/>
 
                 	<InputNumber
 						styles={Style.mb10}
 						placeholder={'Age'}
-						value={form.age}
-						onChange={(value) => changeForm({ edited_field: 'age', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'age'}
+						value={form.age__c}
+						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'age__c'}
 						label={'Age'}
 					/>
 
 					<InputText
 						style={Style.mb10}
 						placeholder={'Purpose of Buying'}
-						value={form.purpose_of_buying}
-						onChange={(value) => changeForm({ edited_field: 'purpose_of_buying', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'purpose_of_buying'}
+						value={form.purpose_of_buying__c}
+						onChange={(value) => changeForm({ edited_field: 'purpose_of_buying__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'purpose_of_buying__c'}
 						label={'Purpose of Buying*'}
 					/>
 
 					<InputText
 						style={Style.mb10}
 						placeholder={'Usage'}
-						value={form.usage}
-						onChange={(value) => changeForm({ edited_field: 'usage', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'usage'}
+						value={form.usage__c}
+						onChange={(value) => changeForm({ edited_field: 'usage__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'usage__c'}
 						label={'Usage*'}
 					/>
 
@@ -153,20 +171,20 @@ class NewRegistrationFormScreen extends Component {
 						<GenericCheckBox 
 							style={{marginRight: '5%'}}
 							label={'Male'}
-							checked={form.gender == 'Male'}
+							checked={form.genders__c == 'Male'}
 							onPress={(event)=>{
-			                	let value = form.gender == 'Male' ? 'Female' : 'Male';
-				                changeForm({ edited_field: 'gender', edited_value: value });
+			                	let value = form.genders__c == 'Male' ? 'Female' : 'Male';
+				                changeForm({ edited_field: 'genders__c', edited_value: value });
 			                }}
 						/>
 
 						<GenericCheckBox
 							style={{marginRight: '5%'}} 
 							label={'Female'}
-							checked={form.gender == 'Female'}
+							checked={form.genders__c == 'Female'}
 							onPress={(event)=>{
-			                	let value = form.gender == 'Female' ? 'Male' : 'Female';
-				                changeForm({ edited_field: 'gender', edited_value: value });
+			                	let value = form.genders__c == 'Female' ? 'Male' : 'Female';
+				                changeForm({ edited_field: 'genders__c', edited_value: value });
 			                }}
 						/>
 						</View>
@@ -189,8 +207,8 @@ class NewRegistrationFormScreen extends Component {
 					<SearchableDropdown
 				        dataSource={productsList}
 				        placeHolderText={'Select Product'}
-				        selectedValue={form.product_interested}
-				        onChange={(value) => changeForm({ edited_field: 'product_interested', edited_value: value })}
+				        selectedValue={form.product__c}
+				        onChange={(value) => changeForm({ edited_field: 'product__c', edited_value: value })}
 				        placeholder={'Type or Select Product'}
 				        invalid={false}
 				        labelStyles={{ ...Style.pickerLabel }}
@@ -204,20 +222,20 @@ class NewRegistrationFormScreen extends Component {
 						<GenericCheckBox 
 							style={{marginRight: '5%'}}
 							label={'Cash'}
-							checked={form.mode_of_purchase == 'Cash'}
+							checked={form.mode_of_buying__c == 'Cash'}
 							onPress={(event)=>{
-			                	let value = form.mode_of_purchase == 'Cash' ? 'Finance' : 'Cash';
-				                changeForm({ edited_field: 'mode_of_purchase', edited_value: value });
+			                	let value = form.mode_of_buying__c == 'Cash' ? 'Finance' : 'Cash';
+				                changeForm({ edited_field: 'mode_of_buying__c', edited_value: value });
 			                }}
 						/>
 
 						<GenericCheckBox
 							style={{marginRight: '5%'}} 
 							label={'Finance'}
-							checked={form.mode_of_purchase == 'Finance'}
+							checked={form.mode_of_buying__c == 'Finance'}
 							onPress={(event)=>{
-			                	let value = form.mode_of_purchase == 'Finance' ? 'Cash' : 'Finance';
-				                changeForm({ edited_field: 'mode_of_purchase', edited_value: value });
+			                	let value = form.mode_of_buying__c == 'Finance' ? 'Cash' : 'Finance';
+				                changeForm({ edited_field: 'mode_of_buying__c', edited_value: value });
 			                }}
 						/>
 						</View>
@@ -231,20 +249,20 @@ class NewRegistrationFormScreen extends Component {
 						<GenericCheckBox 
 							style={{marginRight: '5%'}}
 							label={'Yes'}
-							checked={form.existing_two_wheeler == 'Yes'}
+							checked={form.existing_two_wheelers__c == 'Yes'}
 							onPress={(event)=>{
-			                	let value = form.existing_two_wheeler == 'Yes' ? 'No' : 'Yes';
-				                changeForm({ edited_field: 'existing_two_wheeler', edited_value: value });
+			                	let value = form.existing_two_wheelers__c == 'Yes' ? 'No' : 'Yes';
+				                changeForm({ edited_field: 'existing_two_wheelers__c', edited_value: value });
 			                }}
 						/>
 
 						<GenericCheckBox
 						style={{marginRight: '5%'}} 
 							label={'No'}
-							checked={form.existing_two_wheeler == 'No'}
+							checked={form.existing_two_wheelers__c == 'No'}
 							onPress={(event)=>{
-			                	let value = form.existing_two_wheeler == 'No' ? 'Yes' : 'No';
-				                changeForm({ edited_field: 'existing_two_wheeler', edited_value: value });
+			                	let value = form.existing_two_wheelers__c == 'No' ? 'Yes' : 'No';
+				                changeForm({ edited_field: 'existing_two_wheelers__c', edited_value: value });
 			                }}
 						/>
 						</View>
@@ -257,20 +275,20 @@ class NewRegistrationFormScreen extends Component {
 						<GenericCheckBox 
 							style={{marginRight: '5%'}}
 							label={'Yes'}
-							checked={form.exchange_required == 'Yes'}
+							checked={form.exchange_required__c == 'Yes'}
 							onPress={(event)=>{
-			                	let value = form.exchange_required == 'Yes' ? 'No' : 'Yes';
-				                changeForm({ edited_field: 'exchange_required', edited_value: value });
+			                	let value = form.exchange_required__c == 'Yes' ? 'No' : 'Yes';
+				                changeForm({ edited_field: 'exchange_required__c', edited_value: value });
 			                }}
 						/>
 
 						<GenericCheckBox
 							style={{marginRight: '5%'}} 
 							label={'No'}
-							checked={form.exchange_required == 'No'}
+							checked={form.exchange_required__c == 'No'}
 							onPress={(event)=>{
-			                	let value = form.exchange_required == 'No' ? 'Yes' : 'No';
-				                changeForm({ edited_field: 'exchange_required', edited_value: value });
+			                	let value = form.exchange_required__c == 'No' ? 'Yes' : 'No';
+				                changeForm({ edited_field: 'exchange_required__c', edited_value: value });
 			                }}
 						/>
 						</View>
@@ -281,8 +299,8 @@ class NewRegistrationFormScreen extends Component {
 					<SearchableDropdown
 				        dataSource={sourceEnquiryList}
 				        placeHolderText={'Select Source'}
-				        selectedValue={form.source_of_enquiry}
-				        onChange={(value) => changeForm({ edited_field: 'source_of_enquiry', edited_value: value })}
+				        selectedValue={form.lead_source__c}
+				        onChange={(value) => changeForm({ edited_field: 'lead_source__c', edited_value: value })}
 				        placeholder={'Type or Select Source'}
 				        invalid={false}
 				        labelStyles={{ ...Style.pickerLabel }}
@@ -293,10 +311,11 @@ class NewRegistrationFormScreen extends Component {
 					<InputDate
                         style={Style.mb10}
                         placeholder={'Expected Purchase Date'}
-                        value={form.expected_close_date__c}
+                        value={HelperService.removeFieldsAndDateReadableFormat(form.expected_close_date__c)}
                         onChange={(value) => {
                             let formattedDate = HelperService.convertMomentDateToTimestamp(value);
-                            this.props.changeForm({ edited_field: 'expected_close_date__c', edited_value: value })
+                            formattedDate = HelperService.dateReadableFormatWithHyphen(formattedDate);
+                            this.props.changeForm({ edited_field: 'expected_close_date__c', edited_value: formattedDate })
                         }}
                         error={validation.invalid && validation.invalid_field == 'expected_close_date__c'}
                         label={'Expected Purchase Date'}

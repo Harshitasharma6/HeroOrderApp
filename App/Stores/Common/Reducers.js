@@ -1,9 +1,3 @@
-/**
- * Reducers specify how the application's state changes in response to actions sent to the store.
- *
- * @see https://redux.js.org/basics/reducers
- */
-
 import { INITIAL_STATE } from './InitialState'
 import { createReducer } from 'reduxsauce'
 import { offlineActionTypes, reducer as network } from "react-native-offline";
@@ -63,12 +57,19 @@ export const enableModal = (state) => ({
 });
 
 
+export const makeProductsSearchableList = (state, { payload }) => ({
+  ...state,
+  productsList: payload
+});
+
+
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [CommonTypes.CONNECTION_CHANGED]: connectionChanged,
-  [CommonTypes.SCREEN_CHANGED]: screenChanged,
-  [CommonTypes.OPEN_MODAL]: openModal,
-  [CommonTypes.CLOSE_MODAL]: closeModal,
-  [CommonTypes.DISABLE_MODAL]: disableModal,
-  [CommonTypes.ENABLE_MODAL]: enableModal
+  [CommonTypes.CONNECTION_CHANGED]           : connectionChanged,
+  [CommonTypes.SCREEN_CHANGED]               : screenChanged,
+  [CommonTypes.OPEN_MODAL]                   : openModal,
+  [CommonTypes.CLOSE_MODAL]                  : closeModal,
+  [CommonTypes.DISABLE_MODAL]                : disableModal,
+  [CommonTypes.ENABLE_MODAL]                 : enableModal,
+  [CommonTypes.MAKE_PRODUCTS_SEARCHABLE_LIST]: makeProductsSearchableList
 });

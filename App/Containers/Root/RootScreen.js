@@ -55,21 +55,8 @@ class RootScreen extends Component {
         'If you have denied permanently then Go "App Permissions" and Turn on "Location" Permission for Shree.'
       );
     }
-
-
-    startup({
-        id,
-        token,
-        startedToday,
-        endedToday,
-        absentToday,
-        retailersOffset,
-        retailersLimit,
-        categoryOffset,
-        categoryLimit,
-        productLimit,
-        productOffset
-      });
+    startup();
+    
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
     this.callDetector = new CallDetectorManager((event, phoneNumber)=> {
       // For iOS event will be either "Connected",
@@ -81,22 +68,15 @@ class RootScreen extends Component {
 
 
       if (event === 'Disconnected') {
-        // Do something call got disconnected
-        console.log('disconnected')
         Alert.alert(
             `${phoneNumber} disconnected`,
         );
       }
       else if (event === 'Connected') {
-        console.log('Connected')
-        Alert.alert(
-           `${phoneNumber} Connected`,
-        );
+
       }
       else if (event === 'Incoming') {
-        Alert.alert(
-          `${phoneNumber} Incoming`,
-        );
+       
       }
       else if (event === 'Dialing') {
       // Do something call got dialing

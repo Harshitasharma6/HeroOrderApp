@@ -11,7 +11,7 @@ const {
 
 
 function getAllProducts(params) {
-  let url = Config.VISITOR_SERVICE.FETCH_PRODUCTS;
+  let url = Config.PRODUCTS_SERVICE.FETCH_PRODUCTS;
   url += `?state_id=${params.state_id}`
   return apiClient.get(url, {
     headers: {
@@ -29,7 +29,27 @@ function getAllProducts(params) {
 }
 
 
+function getProductSchemes(params) {
+  let url = Config.PRODUCTS_SERVICE.FETCH_SCHEMES;
+  url += `?product_id=${params.product_id}&state_id=${params.state_id}`
+  return apiClient.get(url, {
+    headers: {
+      token: params.token
+    }
+  }).then((response) => {
+    if (in200s(response.status)) {
+      return response['data']['data']['scheme'];
+    }
+    return null
+  }).catch(error => {
+    //bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
+    return null
+  });
+}
 
-export const CommonService = {
-  getAllProducts
+
+
+export const ProductsService = {
+  getAllProducts,
+  getProductSchemes
 }

@@ -13,9 +13,9 @@ import { SEND_OTP } from 'App/Constants'
 import NavigationService from 'App/Services/NavigationService'
 import UserActions from 'App/Stores/User/Actions'
 import { Colors, ApplicationStyles } from 'App/Theme';
-import ProductInfoCard from './ProductInfoCard'
+import ProductInfoCard from 'App/Containers/Insights/ProductInfo/ProductInfoCard'
 
-class ProductInfoScreen extends Component {
+class AddProductInfoScreen extends Component {
     render() {
         const {
           data
@@ -23,7 +23,7 @@ class ProductInfoScreen extends Component {
         return (
         	<View style={{flex: 1, paddingVertical: hp('1%'), paddingHorizontal: wp('4%')}}>
 	            <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-	                <WhiteButton title={"Available Offers"}  style={{width: wp('42%'), height: hp('4.5%')}} onPress={() => NavigationService.navigate('AvailableSchemesScreen', {product_id: data.sfid})} textStyle={{color: Colors.blue, textTransform: 'capitalize', fontSize: wp('3.5%')}}>
+	                <WhiteButton title={"Available Offers"}  style={{width: wp('42%'), height: hp('4.5%')}} onPress={() => NavigationService.navigate('AddProductsSchemesScreen', {product_id: data.sfid})} textStyle={{color: Colors.blue, textTransform: 'capitalize', fontSize: wp('3.5%')}}>
 		            	<GenericIcon name={'percent'} style={{color: Colors.blue, fontSize:  wp('4%')}}/>
 		            </WhiteButton>
 	            </View>
@@ -52,4 +52,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProductInfoScreen)
+)(AddProductInfoScreen)

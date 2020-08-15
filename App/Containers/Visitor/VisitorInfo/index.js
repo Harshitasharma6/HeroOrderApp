@@ -15,6 +15,27 @@ import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDi
 import VisitorInfoCard from './VisitorInfoCard';
 
 
+// "first_name__c": "test 12",  (*mandatory)
+//   "last_name__c": "enquiry visit test",  (*mandatory)
+//   "contact_number__c": "1646464944",   (*mandatory)
+//   "age__c":  "28",
+//   "genders__c": "Male",
+//   "product__c": "a029D000002ZFPtQAO",   (*mandatory)
+//   "mode_of_buying__c": "Cash",
+//   "exchange_required__c":"No",
+//   "lead_source__c": "Event",
+//   "existing_two_wheelers__c": "Yes",
+//   "purpose_of_buying__c" : "Nothing",
+// "usage__c": "Nothing",
+// "expected_close_date__c": "2020-08-19",
+//  "dealers_sales_person__c": "a0O9D000001hLV9UAM",
+//   "email_id__c": "abc@gmail.com",
+//   "occupation__c" : "Business",
+//   "test_drive_offered__c": "Yes",    (*mandatory)
+//   "customer__c": "0039D000008BMX2QAO",
+//   "address_line_1__c" : “test address”
+
+
 class VisitorInfoScreen extends Component {
     render() {
     	const {
@@ -33,9 +54,9 @@ class VisitorInfoScreen extends Component {
 	              content={[
 	                <GenericDisplayCardStrip key={'Phone Number' + data.id} label={'Phone Number'} value={data.contact_number__c} />,
 	                <GenericDisplayCardStrip key={'Email'+ data.id} label={'Email'} value={data.email_id__c} />,
-	                  <GenericDisplayCardStrip key={'Address'+ data.id} label={'Address'} value={data.company_address__c || ''} />,
+	                  <GenericDisplayCardStrip key={'Address'+ data.id} label={'Address'} value={data.address_line_1__c || ''} />,
 	                <GenericDisplayCardStrip key={'Occupation'+ data.id} label={'Occupation'} value={data.occupation__c} />,
-	                <GenericDisplayCardStrip key={'Source of Enquiry'+ data.id} label={'Source of Enquiry'} value={data.source_of_enquiry__c} />,
+	                <GenericDisplayCardStrip key={'Source of Enquiry'+ data.id} label={'Source of Enquiry'} value={data.lead_source__c} />,
 	                <GenericDisplayCardStrip key={'Product Interested'+ data.id} label={'Product Interested'} value={HelperService.findMatchingKeyValueInList(productsList, 'id', data.product__c, 'name')} />,
 	                  <GenericDisplayCardStrip key={'Existing Two Wheeler'+ data.id} label={'Existing Two Wheeler'} value={data.existing_two_wheelers__c} />,
 	                <GenericDisplayCardStrip key={'Exchange Required'+ data.id} label={'Exchange Required'} value={data.exchange_required__c} />,

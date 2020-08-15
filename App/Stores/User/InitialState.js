@@ -49,5 +49,8 @@ export const INITIAL_STATE = {
     checkInLong: '',
     checkIn_id:'',
     checkout: false,
-    checkIn_status: false
+    checkIn_status: false,
+
+
+    state__c: "a059D000000tNcxQAE"
 }

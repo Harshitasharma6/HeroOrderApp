@@ -7,7 +7,7 @@ import { StartDayTypes } from '../Stores/StartDay/Actions'
 import { ShreeTypes } from '../Stores/Shree/Actions';
 import { NonShreeTypes } from '../Stores/NonShree/Actions';
 import { VisitorTypes } from '../Stores/Visitor/Actions';
-
+import { ProductsTypes } from '../Stores/Products/Actions';
 
 
 import {
@@ -90,6 +90,12 @@ import {
 
 
  import { 
+    getAllProducts,
+    getProductSchemes
+ } from './ProductsSaga'
+
+
+ import { 
     watchSearchCustomer,
     watchRegisterCustomer,
     watchCreateFeedback,
@@ -166,8 +172,6 @@ export default function* root() {
 
         fork(watchCreateNonShreeRequest),
 
-        
-
 
         fork(watchCreateFeedBackRequest),
         fork(watchFinalObservationForm),
@@ -178,9 +182,10 @@ export default function* root() {
         takeLatest(DashboardTypes.FETCH_FINAL_OBSERVATION, fetchFinalObservation),
 
 
+        takeLatest(ProductsTypes.GET_ALL_PRODUCTS, getAllProducts),
+        takeLatest(ProductsTypes.GET_PRODUCT_SCHEMES, getProductSchemes),
 
-
-        //
+        
         fork(watchUpdateVisitor),
         fork(watchSearchCustomer),
         fork(watchRegisterCustomer),

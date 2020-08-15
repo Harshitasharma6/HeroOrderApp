@@ -9,6 +9,27 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 import GenericDisplayCard from 'App/Components/GenericDisplayCard'
 import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDisplayCardStrip';
 
+
+// "first_name__c": "test 12",  (*mandatory)
+//   "last_name__c": "enquiry visit test",  (*mandatory)
+//   "contact_number__c": "1646464944",   (*mandatory)
+//   "age__c":  "28",
+//   "genders__c": "Male",
+//   "product__c": "a029D000002ZFPtQAO",   (*mandatory)
+//   "mode_of_buying__c": "Cash",
+//   "exchange_required__c":"No",
+//   "lead_source__c": "Event",
+//   "existing_two_wheelers__c": "Yes",
+//   "purpose_of_buying__c" : "Nothing",
+// "usage__c": "Nothing",
+// "expected_close_date__c": "2020-08-19",
+//  "dealers_sales_person__c": "a0O9D000001hLV9UAM",
+//   "email_id__c": "abc@gmail.com",
+//   "occupation__c" : "Business",
+//   "test_drive_offered__c": "Yes",    (*mandatory)
+//   "customer__c": "0039D000008BMX2QAO",
+//   "address_line_1__c" : “test address”
+
 const VisitorInfoCard = ({ onPress, data, id }) => (
     <View style={Styles.box}>
     <View style={{flexDirection: 'row'}}>

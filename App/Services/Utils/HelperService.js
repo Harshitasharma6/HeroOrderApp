@@ -541,7 +541,7 @@ function dateReadableFormat(timestamp) {
 }
 
 function dateReadableFormatWithHyphen(timestamp) {
-	let dateObj = new Date();
+	let dateObj = timestamp ? new Date(timestamp) : new Date();
 	let date = dateObj.getDate();
 	let month = dateObj.getMonth() + 1;
 	let year = dateObj.getFullYear();
@@ -964,8 +964,25 @@ function showAppUpdatePromptAndroid(latest_version) {
 }
 
 function removeFieldsAndDateReadableFormat(dateString) {
+	if (!dateString) { 
+		return
+	}
+
 	let updatedDateString = dateString.split('T');
 	updatedDateString = updatedDateString[0];
+	return updatedDateString;
+}
+
+
+function removeFieldsTimeReadableFormat(dateString) {
+	if (!dateString) { 
+		return
+	}
+	
+	let updatedDateString = dateString.split('T');
+	updatedDateString = updatedDateString[1];
+	updatedDateString = updatedDateString.split('.');
+	updatedDateString = updatedDateString[0]
 	return updatedDateString;
 }
 
@@ -1126,5 +1143,6 @@ export const HelperService = {
 	clearWatchLocation,
 	getAvatarTextAndBgColorForVisitType,
 	startForegroundService,
-	removeFieldsAndDateReadableFormat
+	removeFieldsAndDateReadableFormat,
+	removeFieldsTimeReadableFormat
 }

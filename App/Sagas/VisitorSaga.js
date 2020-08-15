@@ -310,6 +310,7 @@ function* createFeedback(payload) {
 				duration: 2000, 
 				buttonText: 'Okay' 
 			});
+			NavigationService.navigate('VisitorInfoScreen')
 		} else {
 			yield put(VisitorActions.createFeedbackFailure())
 			HelperService.showToast({ 
@@ -344,7 +345,7 @@ export function* getAllVisits({ payload }) {
 
 		let successData = yield call(VisitorService.getAllVisits, payload);
 		if (successData) {
-			let visitsMapping = yield select(state => state.visitor.visitsMapping);
+			let visitsMapping = _.cloneDeep(yield select(state => state.visitor.visitsMapping));
 			visitsMapping[payload.enquiry] = successData;
 			yield put(VisitorActions.getAllVisitsSuccess(visitsMapping));
 		} else {

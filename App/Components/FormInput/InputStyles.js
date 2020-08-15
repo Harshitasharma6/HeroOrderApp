@@ -45,4 +45,12 @@ export default StyleSheet.create({
     fontFamily: ApplicationStyles.textMediumFont,
     paddingLeft: 20,
   },
+  placeHolderTextStyle: {
+    fontFamily: ApplicationStyles.textMsgFont,
+    color: Colors.grey
+  },
+  textStyle: {
+    fontFamily: ApplicationStyles.textMsgFont,
+    color: Colors.grey
+  }
 })

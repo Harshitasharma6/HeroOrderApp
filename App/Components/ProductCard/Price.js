@@ -16,7 +16,9 @@ const Price = ({price, discountPrice}) => (
     	{discountPrice ? <Text style={Style.price}>{HelperService.currencyValue(discountPrice)}</Text> : [] }
 
 
-    	{price ? <Text style={Style.discountedPrice}>{price}</Text> : [] }
+    	{discountPrice && price ? <Text style={Style.discountedPrice}>{price}</Text> : [] }
+
+    	{!discountPrice && price ? <Text style={Style.price}>{HelperService.currencyValue(price)}</Text> : [] }
 
 
    		{discountPrice && price ? <Text style={Style.discountedPriceOff}>{Math.floor(100 - (discountPrice/price)*100) + '% off'}</Text> : [] }

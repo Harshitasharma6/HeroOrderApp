@@ -14,7 +14,13 @@ import Style from './styles';
 
 class Visitor extends Component {
     componentWillUnmount() {
-        this.props.hideOpenLeadPrompt()
+        const {
+            hideOpenLeadPrompt,
+            clearSearchCustomerForm
+        } = this.props;
+
+        hideOpenLeadPrompt();
+        clearSearchCustomerForm();
     }
     submitForm(){
         const {
@@ -93,9 +99,10 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  submit:(params)       => dispatch(VisitorActions.searchCustomer(params)),
-  changeForm:(params)   => dispatch(VisitorActions.changeSearchCustomerForm(params)),
-  hideOpenLeadPrompt:() => dispatch(VisitorActions.hideOpenLeadPrompt())
+  submit:(params)           => dispatch(VisitorActions.searchCustomer(params)),
+  changeForm:(params)       => dispatch(VisitorActions.changeSearchCustomerForm(params)),
+  hideOpenLeadPrompt:()     => dispatch(VisitorActions.hideOpenLeadPrompt()),
+  clearSearchCustomerForm:()=> dispatch(VisitorActions.clearSearchCustomerForm())
 });
 
 export default connect(

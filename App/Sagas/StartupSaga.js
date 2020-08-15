@@ -9,6 +9,8 @@ import {oauth, net} from 'react-native-force';
 import { startDayService } from 'App/Services/Api/StartDayService'
 import {Alert} from 'react-native'
 import { fetchLocation } from './UserSaga';
+import ProductsActions from 'App/Stores/Products/Actions';
+import CommonActions from 'App/Stores/Common/Actions';
 
 
 
@@ -57,7 +59,14 @@ export function* startup({ params }) {
     //   }
 
     // }else {
-      NavigationService.navigateAndReset('LoginScreen')
+
+        let user = yield select(state => state.user); 
+        let state_id = user.state__c;
+        yield put(ProductsActions.getAllProducts({
+            state_id
+        }));
+
+        NavigationService.navigateAndReset('LoginScreen')
     //}
 }
 

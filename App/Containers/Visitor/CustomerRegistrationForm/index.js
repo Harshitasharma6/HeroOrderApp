@@ -18,45 +18,25 @@ import GenericCheckBox from 'App/Components/GenericCheckBox'
 import VisitorActions from 'App/Stores/Visitor/Actions'
 import CustomerInfoCard from 'App/Containers/Insights/Customers/CustomerInfoCard'
 
-// accountid: "0019D000009zum3QAA"
-// age__c: null
-// createddate: "2020-06-25T06:29:18.000Z"
-// department: null
-// email: null
-// emailbounceddate: null
-// emailbouncedreason: null
-// fax: null
-// firstname: "Dinesh"
-// gender__c: null
-// id: 1
-// individualid: null
-// isdeleted: false
-// isemailbounced: false
-// lastname: "Kaushik"
-// mailingcity: null
-// mailingcountry: null
-// mailinggeocodeaccuracy: null
-// mailinglatitude: null
-// mailinglongitude: null
-// mailingpostalcode: null
-// mailingstate: null
-// mailingstreet: null
-// masterrecordid: null
-// middlename: null
-// mobilephone: "9971710994"
-// name: "Dinesh Kaushik"
-// occupation__c: null
-// pg_id__c: null
-// phone: null
-// photourl: "/services/images/photo/0039D000007KJE2QAO"
-// reportstoid: null
-// salutation: "Mr."
-// sfid: "0039D000007KJE2QAO"
-// suffix: null
-// systemmodstamp: "2020-08-06T06:17:13.000Z"
-// title: null
-// _hc_err: null
-// _hc_lastop: "SYNCED"
+// "first_name__c": "test 12",	(*mandatory)
+// 	"last_name__c": "enquiry visit test",	(*mandatory)
+// 	"contact_number__c": "1646464944", 	(*mandatory)
+// 	"age__c":  "28",
+// 	"genders__c": "Male",
+// 	"product__c": "a029D000002ZFPtQAO", 	(*mandatory)
+// 	"mode_of_buying__c": "Cash",
+// 	"exchange_required__c":"No",
+// 	"lead_source__c": "Event",
+// 	"existing_two_wheelers__c": "Yes",
+// 	"purpose_of_buying__c" : "Nothing",
+// "usage__c": "Nothing",
+// "expected_close_date__c": "2020-08-19",
+//  "dealers_sales_person__c": "a0O9D000001hLV9UAM",
+// 	"email_id__c": "abc@gmail.com",
+// 	"occupation__c" : "Business",
+// 	"test_drive_offered__c": "Yes",		(*mandatory)
+// 	"customer__c": "0039D000008BMX2QAO",
+// 	"address_line_1__c" : “test address”
 
 class CustomerRegistrationForm extends Component {
 	componentDidMount() {
@@ -68,26 +48,6 @@ class CustomerRegistrationForm extends Component {
 
 		let data = visitorData.data[0];
 		setRegistrationForm(data);
-
-		changeForm({
-			edited_field: 'first_name',
-			edited_value: 'test'
-		});
-
-		changeForm({
-			edited_field: 'last_name',
-			edited_value: 'test'
-		});
-
-		changeForm({
-			edited_field: 'contact_number',
-			edited_value: data.mobilephone
-		});
-
-		changeForm({
-			edited_field: 'age',
-			edited_value: data.age__c
-		});
 	}
 
 	componentWillUnmount() {
@@ -108,9 +68,8 @@ class CustomerRegistrationForm extends Component {
 		Keyboard.dismiss();
 		submitForm({
 			...form,
-			sales_person: 'a0O9D000001hLV9UAM',
-			"expected_close_date__c": "2020-08-19",
-			"customer_sfid": form.sfid
+			dealers_sales_person__c: 'a0O9D000001hLV9UAM',
+			"customer__c": form.sfid
 		});
 	}
 
@@ -137,26 +96,32 @@ class CustomerRegistrationForm extends Component {
 					<InputText
 						style={Style.mb10}
 						placeholder={'Purpose of Buying'}
-						value={form.purpose_of_buying}
-						onChange={(value) => changeForm({ edited_field: 'purpose_of_buying', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'purpose_of_buying'}
+						value={form.purpose_of_buying__c}
+						onChange={(value) => changeForm({ edited_field: 'purpose_of_buying__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'purpose_of_buying__c'}
 						label={'Purpose of Buying*'}
 					/>
 
 					<InputText
 						style={Style.mb10}
 						placeholder={'Usage'}
-						value={form.usage}
-						onChange={(value) => changeForm({ edited_field: 'usage', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'usage'}
+						value={form.usage__c}
+						onChange={(value) => changeForm({ edited_field: 'usage__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'usage__c'}
 						label={'Usage*'}
 					/>
+
 					
+
+
+					
+
 					<SearchableDropdown
+						key={form.product__c}
 				        dataSource={productsList}
 				        placeHolderText={'Select Product'}
-				        selectedValue={form.product_interested}
-				        onChange={(value) => changeForm({ edited_field: 'product_interested', edited_value: value })}
+				        selectedValue={form.product__c}
+				        onChange={(value) => changeForm({ edited_field: 'product__c', edited_value: value })}
 				        placeholder={'Type or Select Product'}
 				        invalid={false}
 				        labelStyles={{ ...Style.pickerLabel }}
@@ -170,20 +135,20 @@ class CustomerRegistrationForm extends Component {
 						<GenericCheckBox 
 							style={{marginRight: '5%'}}
 							label={'Cash'}
-							checked={form.mode_of_purchase == 'Cash'}
+							checked={form.mode_of_buying__c == 'Cash'}
 							onPress={(event)=>{
-			                	let value = form.mode_of_purchase == 'Cash' ? 'Finance' : 'Cash';
-				                changeForm({ edited_field: 'mode_of_purchase', edited_value: value });
+			                	let value = form.mode_of_buying__c == 'Cash' ? 'Finance' : 'Cash';
+				                changeForm({ edited_field: 'mode_of_buying__c', edited_value: value });
 			                }}
 						/>
 
 						<GenericCheckBox
 							style={{marginRight: '5%'}} 
 							label={'Finance'}
-							checked={form.mode_of_purchase == 'Finance'}
+							checked={form.mode_of_buying__c == 'Finance'}
 							onPress={(event)=>{
-			                	let value = form.mode_of_purchase == 'Finance' ? 'Cash' : 'Finance';
-				                changeForm({ edited_field: 'mode_of_purchase', edited_value: value });
+			                	let value = form.mode_of_buying__c == 'Finance' ? 'Cash' : 'Finance';
+				                changeForm({ edited_field: 'mode_of_buying__c', edited_value: value });
 			                }}
 						/>
 						</View>
@@ -197,20 +162,20 @@ class CustomerRegistrationForm extends Component {
 						<GenericCheckBox 
 							style={{marginRight: '5%'}}
 							label={'Yes'}
-							checked={form.existing_two_wheeler == 'Yes'}
+							checked={form.existing_two_wheelers__c == 'Yes'}
 							onPress={(event)=>{
-			                	let value = form.existing_two_wheeler == 'Yes' ? 'No' : 'Yes';
-				                changeForm({ edited_field: 'existing_two_wheeler', edited_value: value });
+			                	let value = form.existing_two_wheelers__c == 'Yes' ? 'No' : 'Yes';
+				                changeForm({ edited_field: 'existing_two_wheelers__c', edited_value: value });
 			                }}
 						/>
 
 						<GenericCheckBox
 						style={{marginRight: '5%'}} 
 							label={'No'}
-							checked={form.existing_two_wheeler == 'No'}
+							checked={form.existing_two_wheelers__c == 'No'}
 							onPress={(event)=>{
-			                	let value = form.existing_two_wheeler == 'No' ? 'Yes' : 'No';
-				                changeForm({ edited_field: 'existing_two_wheeler', edited_value: value });
+			                	let value = form.existing_two_wheelers__c == 'No' ? 'Yes' : 'No';
+				                changeForm({ edited_field: 'existing_two_wheelers__c', edited_value: value });
 			                }}
 						/>
 						</View>
@@ -223,20 +188,20 @@ class CustomerRegistrationForm extends Component {
 						<GenericCheckBox 
 							style={{marginRight: '5%'}}
 							label={'Yes'}
-							checked={form.exchange_required == 'Yes'}
+							checked={form.exchange_required__c == 'Yes'}
 							onPress={(event)=>{
-			                	let value = form.exchange_required == 'Yes' ? 'No' : 'Yes';
-				                changeForm({ edited_field: 'exchange_required', edited_value: value });
+			                	let value = form.exchange_required__c == 'Yes' ? 'No' : 'Yes';
+				                changeForm({ edited_field: 'exchange_required__c', edited_value: value });
 			                }}
 						/>
 
 						<GenericCheckBox
 							style={{marginRight: '5%'}} 
 							label={'No'}
-							checked={form.exchange_required == 'No'}
+							checked={form.exchange_required__c == 'No'}
 							onPress={(event)=>{
-			                	let value = form.exchange_required == 'No' ? 'Yes' : 'No';
-				                changeForm({ edited_field: 'exchange_required', edited_value: value });
+			                	let value = form.exchange_required__c == 'No' ? 'Yes' : 'No';
+				                changeForm({ edited_field: 'exchange_required__c', edited_value: value });
 			                }}
 						/>
 						</View>
@@ -245,10 +210,11 @@ class CustomerRegistrationForm extends Component {
 
 
 					<SearchableDropdown
+						key={form.lead_source__c}
 				        dataSource={sourceEnquiryList}
 				        placeHolderText={'Select Source'}
-				        selectedValue={form.source_of_enquiry}
-				        onChange={(value) => changeForm({ edited_field: 'source_of_enquiry', edited_value: value })}
+				        selectedValue={form.lead_source__c}
+				        onChange={(value) => changeForm({ edited_field: 'lead_source__c', edited_value: value })}
 				        placeholder={'Type or Select Source'}
 				        invalid={false}
 				        labelStyles={{ ...Style.pickerLabel }}
@@ -259,10 +225,11 @@ class CustomerRegistrationForm extends Component {
 					<InputDate
                         style={Style.mb10}
                         placeholder={'Expected Purchase Date'}
-                        value={form.expected_close_date__c}
-                        onChange={(value) => {
+                        value={HelperService.removeFieldsAndDateReadableFormat(form.expected_close_date__c)}
+                       	onChange={(value) => {
                             let formattedDate = HelperService.convertMomentDateToTimestamp(value);
-                            this.props.changeForm({ edited_field: 'expected_close_date__c', edited_value: value })
+                            formattedDate = HelperService.dateReadableFormatWithHyphen(formattedDate);
+                            this.props.changeForm({ edited_field: 'expected_close_date__c', edited_value: formattedDate })
                         }}
                         error={validation.invalid && validation.invalid_field == 'expected_close_date__c'}
                         label={'Expected Purchase Date'}
@@ -293,6 +260,7 @@ class CustomerRegistrationForm extends Component {
 						/>
 						</View>
 					</View>
+
 
 					<BlueButton
 						style={ApplicationStyles.formButton}
