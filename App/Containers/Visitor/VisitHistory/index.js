@@ -52,31 +52,32 @@ class VisitHistoryScreen extends Component {
       loader,
       visitsMapping
     } = this.props;
-    const data = visitsMapping[enquiry]
-    
-  
-    let visibleNode = [];
 
+    const data = visitsMapping[enquiry];
+    let visibleNode = [];
     if (data && data.length) {
       if (data.length) {
         visibleNode = (
-          <FlatList
-            data={data}
-            renderItem={({ item }) => 
-              <GenericDisplayCard dark={false}
-                style={{ width: '88%', elevation: 0 }}
-                content={[
-                  <GenericDisplayCardStrip key={'Visit Date' + item.id} label={'Visit Date'} value={HelperService.removeFieldsAndDateReadableFormat(item.visit_date__c)}/>,
-                  <GenericDisplayCardStrip key={'Visit Day' + item.id} label={'Visit Day'} value={''}/>,
-                  <GenericDisplayCardStrip key={'Visit Time' + item.id} label={'Visit Time'} value={''}/>,
-                  <GenericDisplayCardStrip key={'Sales Person Name' + item.id} label={'Sales Person Name'} value={item.sales_person__c}
-              />
-              ]}
-            />}
-            keyExtractor={item => item.id}
-            onRefresh={() => this.fetchCall()}
-            refreshing={loader}
-          />
+          <View>
+            <Text style={ApplicationStyles.formHeading}>{`Total Visits: ${data.length}`}</Text>
+            <FlatList
+              data={data}
+              renderItem={({ item }) => 
+                <GenericDisplayCard dark={false}
+                  style={{ width: '88%', elevation: 0 }}
+                  content={[
+                    <GenericDisplayCardStrip key={'Visit Date' + item.id} label={'Visit Date'} value={HelperService.removeFieldsAndDateReadableFormat(item.visit_date__c)}/>,
+                    <GenericDisplayCardStrip key={'Visit Day' + item.id} label={'Visit Day'} value={''}/>,
+                    <GenericDisplayCardStrip key={'Visit Time' + item.id} label={'Visit Time'} value={''}/>,
+                    <GenericDisplayCardStrip key={'Sales Person Name' + item.id} label={'Sales Person Name'} value={item.sales_person__c}
+                />
+                ]}
+              />}
+              keyExtractor={item => item.id}
+              onRefresh={() => this.fetchCall()}
+              refreshing={loader}
+            />
+          </View>
         );
       } else {
         visibleNode =  (

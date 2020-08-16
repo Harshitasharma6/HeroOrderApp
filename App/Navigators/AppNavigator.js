@@ -49,10 +49,8 @@ import { createAppContainer, createStackNavigator } from 'react-navigation'
 
 // import Payments from 'App/Containers/Payments';
 // import SalesInfo from 'App/Containers/SalesInfo';
-// import Outstandings from 'App/Containers/Outstandings';
 
 // import FeedbackScreen from 'App/Containers/DashboardInfo/FeedbackScreen';
-// import OutStandingScreen from 'App/Containers/DashboardInfo/OutStadingScreen';
 // import CommunicationScreen from 'App/Containers/DashboardInfo/CommunicationSceen';
 // import CommunicationsAttachmentsScreen from 'App/Containers/DashboardInfo/CommunicationSceen/CommunicationsAttachmentsScreen';
 
@@ -162,7 +160,6 @@ const StackNavigator = createStackNavigator(
     // PreviousVisits,
     // Payments,
     // SalesInfo,
-    // Outstandings,
     // CompetitorsList,
 
     // VisitSummaryList,
@@ -171,7 +168,6 @@ const StackNavigator = createStackNavigator(
 
 
     // FeedbackScreen,
-    // OutStandingScreen,
     // CommunicationScreen,
     // CommunicationsAttachmentsScreen,
 

@@ -43,7 +43,8 @@ let blacklistTransform = createTransform(
       return {
         ...inboundState,
         searchCustomerForm: VISITOR_INITIAL_STATE.searchCustomerForm,
-       
+        feedbackForm: VISITOR_INITIAL_STATE.feedbackForm,
+        registerCustomerForm: VISITOR_INITIAL_STATE.registerCustomerForm
       };
     } else {
       return inboundState;

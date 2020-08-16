@@ -3,9 +3,9 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import {Platform} from 'react-native'
 
 export default {
-	textFont: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
+	textFont: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto',
 	textMsgFont: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
-	textMediumFont: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
+	textMediumFont: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_medium',
 	button: {
 		backgroundColor: Colors.primary
 	},
@@ -30,7 +30,8 @@ export default {
 	    color: Colors.primary,
 	    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
 	    fontSize: wp('5.5%'),
-	    marginBottom: hp('4%'),
+	    marginBottom: hp('2%'),
+	    marginTop: hp('1%'),
 	    textTransform: 'uppercase'
 	},
 	screenHeading: {

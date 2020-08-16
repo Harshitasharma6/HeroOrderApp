@@ -91,7 +91,8 @@ const Styles = StyleSheet.create({
   title: {
     color: Colors.primary,
     fontSize: wp('4.5%'),
-    fontFamily: ApplicationStyles.textMsgFont
+    fontFamily: ApplicationStyles.textMsgFont,
+    textTransform: 'capitalize'
   },
   ttl: {
     color: Colors.grey,

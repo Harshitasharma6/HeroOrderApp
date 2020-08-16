@@ -15,7 +15,6 @@ import {
     watchCreateFeedBackRequest,
     watchFinalObservationForm,
     fetchFinalObservation,
-    fetchOutStandingAction,
     fetchCommunications,
     fetchCommunicationsAttachments,
     fetchCommunicationsAttachmentsDetails
@@ -61,7 +60,6 @@ import {
     updateLocation,
     createShreeDealer,
     createShreeRetailer,
-    fetchOutstanding,
     fetchPayments,
     fetchPreviousVisits,
     fetchLatestVisits,
@@ -143,7 +141,6 @@ export default function* root() {
         takeLatest(ShreeTypes.FETCH_SHREE_RETAILERS, fetchShreeRetailers),
         takeLatest(ShreeTypes.UPDATE_LOCATION, updateLocation),
         takeLatest(ShreeTypes.UPDATE_POTENTIAL, updatePotential),
-        takeLatest(ShreeTypes.FETCH_OUTSTANDING, fetchOutstanding),
         takeLatest(ShreeTypes.FETCH_PAYMENTS, fetchPayments),
         takeLatest(ShreeTypes.FETCH_PREVIOUS_VISITS, fetchPreviousVisits),
         takeLatest(ShreeTypes.FETCH_LATEST_VISITS, fetchLatestVisits),
@@ -175,7 +172,6 @@ export default function* root() {
 
         fork(watchCreateFeedBackRequest),
         fork(watchFinalObservationForm),
-        takeLatest(DashboardTypes.FETCH_OUT_STANDING_ACTION, fetchOutStandingAction),
         takeLatest(DashboardTypes.FETCH_COMMUNICATIONS, fetchCommunications),
         takeLatest(DashboardTypes.FETCH_COMMUNICATIONS_ATTACHMENTS, fetchCommunicationsAttachments),
         takeLatest(DashboardTypes.FETCH_COMMUNICATIONS_ATTACHMENTS_DETAILS, fetchCommunicationsAttachmentsDetails),

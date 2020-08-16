@@ -93,23 +93,25 @@ class CustomerRegistrationForm extends Component {
 					showsVerticalScrollIndicator={false}
 					style={Style.action}
 				>
-					<InputText
-						style={Style.mb10}
-						placeholder={'Purpose of Buying'}
-						value={form.purpose_of_buying__c}
-						onChange={(value) => changeForm({ edited_field: 'purpose_of_buying__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'purpose_of_buying__c'}
-						label={'Purpose of Buying*'}
-					/>
+					{
+					// 	<InputText
+					// 	style={Style.mb10}
+					// 	placeholder={'Purpose of Buying'}
+					// 	value={form.purpose_of_buying__c}
+					// 	onChange={(value) => changeForm({ edited_field: 'purpose_of_buying__c', edited_value: value })}
+					// 	error={validation.invalid && validation.invalid_field == 'purpose_of_buying__c'}
+					// 	label={'Purpose of Buying*'}
+					// />
 
-					<InputText
-						style={Style.mb10}
-						placeholder={'Usage'}
-						value={form.usage__c}
-						onChange={(value) => changeForm({ edited_field: 'usage__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'usage__c'}
-						label={'Usage*'}
-					/>
+					// <InputText
+					// 	style={Style.mb10}
+					// 	placeholder={'Usage'}
+					// 	value={form.usage__c}
+					// 	onChange={(value) => changeForm({ edited_field: 'usage__c', edited_value: value })}
+					// 	error={validation.invalid && validation.invalid_field == 'usage__c'}
+					// 	label={'Usage*'}
+					// />
+				}
 
 					
 
@@ -232,7 +234,7 @@ class CustomerRegistrationForm extends Component {
                             this.props.changeForm({ edited_field: 'expected_close_date__c', edited_value: formattedDate })
                         }}
                         error={validation.invalid && validation.invalid_field == 'expected_close_date__c'}
-                        label={'Expected Purchase Date'}
+                        label={'Expected Purchase Date*'}
                     />
 
 

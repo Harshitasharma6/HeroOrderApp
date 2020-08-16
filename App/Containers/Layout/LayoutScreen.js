@@ -54,9 +54,6 @@ class LayoutScreen extends React.Component {
         customLayoutNode = <DealerInfoLayout />;
         break;
 
-      case 'DealerOutstandingListScreen':
-        customLayoutNode = <DealerInfoLayout />;
-        break;
 
       case 'DealerInfoScreen':
         customLayoutNode = <DealerInfoLayout />;
@@ -76,9 +73,6 @@ class LayoutScreen extends React.Component {
         customLayoutNode = <DealerInfoLayout />;
         break;
 
-      case 'DealerOutstandingListScreen':
-        customLayoutNode = <DealerInfoLayout />;
-        break;
 
       case 'VisitsScreen':
         customLayoutNode = [];
@@ -170,7 +164,6 @@ class LayoutScreen extends React.Component {
       case 'PreviousVisits':
       case 'Payments':
       case 'SalesInfo':
-      case 'Outstandings':
       case 'CompetitorsList':
         customLayoutNode = <ShreeInfoLayout />
         break;
@@ -200,10 +193,6 @@ class LayoutScreen extends React.Component {
      
 
       case 'FeedbackScreen':
-        customLayoutNode = <DashboardLayout />
-        break;
-
-      case 'OutStandingScreen':
         customLayoutNode = <DashboardLayout />
         break;
 

@@ -63,6 +63,8 @@ class VisitorInfoScreen extends Component {
 	                <GenericDisplayCardStrip key={'Expected Purchase Date'+ data.id} label={'Expected Purchase Date'} value={HelperService.removeFieldsAndDateReadableFormat(data.expected_close_date__c)} />,
 	                <GenericDisplayCardStrip key={'Mode of Purchase'+ data.id} label={'Mode of Purchase'} value={data.mode_of_buying__c} />,
 	                <GenericDisplayCardStrip key={'Test Drice Offered'+ data.id} label={'Test Drive Offered'} value={data.test_drive_offered__c} />,
+	                data.customer_birthday__c ? <GenericDisplayCardStrip key={'Customer Birthday'+ data.id} label={'Customer Birthday'} value={HelperService.removeFieldsAndDateReadableFormat(data.customer_birthday__c)} /> : [],
+	                data.customer_anniversary__c  ? <GenericDisplayCardStrip key={'Customer Anniversary'+ data.id} label={'Customer Anniversary'} value={HelperService.removeFieldsAndDateReadableFormat(data.customer_anniversary__c)} /> : [],
 
 	            ]}
             />

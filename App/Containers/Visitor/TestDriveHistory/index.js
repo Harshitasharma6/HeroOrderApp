@@ -64,24 +64,27 @@ class TestDriveHistoryScreen extends Component {
     if (data && data.length) {
       if (data.length) {
         visibleNode = (
-          <FlatList
-            data={data}
-            renderItem={({ item }) => 
-              <GenericDisplayCard dark={false}
-                style={{ width: '88%', elevation: 0 }}
-                content={[
-                  <GenericDisplayCardStrip key={'Test Drive Vehicle' + item.id} label={'Test Drive Vehicle'} value={item.vehicle_no__c}/>,
-                  <GenericDisplayCardStrip key={'Test Drive Date' + item.id} label={'Test Drive Date'} value={HelperService.removeFieldsAndDateReadableFormat(item.test_drive_date__c)}/>,
-                  <GenericDisplayCardStrip key={'Test Drive Time' + item.id} label={'Test Drive Time'} value={HelperService.removeFieldsTimeReadableFormat(item.createddate) + ' (UTC)'}/>,
-                  <GenericDisplayCardStrip key={'Overall Experience' + item.id} label={'Overall Experience'} value={item.overall_experience__c}/>,
-                  <GenericDisplayCardStrip key={'Sales Person Name' + item.id} label={'Sales Person Name'} value={'Anmol Singh'}//change to in future
-              />
-              ]}
-            />}
-            keyExtractor={item => item.id}
-            onRefresh={() => this.fetchCall()}
-            refreshing={loader}
-          />
+          <View>
+            <Text style={ApplicationStyles.formHeading}>{`Total Test Drives: ${data.length}`}</Text>
+            <FlatList
+              data={data}
+              renderItem={({ item }) => 
+                <GenericDisplayCard dark={false}
+                  style={{ width: '88%', elevation: 0 }}
+                  content={[
+                    <GenericDisplayCardStrip key={'Test Drive Vehicle' + item.id} label={'Test Drive Vehicle'} value={item.vehicle_no__c}/>,
+                    <GenericDisplayCardStrip key={'Test Drive Date' + item.id} label={'Test Drive Date'} value={HelperService.removeFieldsAndDateReadableFormat(item.test_drive_date__c)}/>,
+                    <GenericDisplayCardStrip key={'Test Drive Time' + item.id} label={'Test Drive Time'} value={HelperService.removeFieldsTimeReadableFormat(item.createddate) + ' (UTC)'}/>,
+                    <GenericDisplayCardStrip key={'Overall Experience' + item.id} label={'Overall Experience'} value={item.overall_experience__c}/>,
+                    <GenericDisplayCardStrip key={'Sales Person Name' + item.id} label={'Sales Person Name'} value={item.sales_person_name__c || ''}
+                />
+                ]}
+              />}
+              keyExtractor={item => item.id}
+              onRefresh={() => this.fetchCall()}
+              refreshing={loader}
+            />
+          </View>
         );
       } else {
         visibleNode =  (

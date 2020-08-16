@@ -56,7 +56,6 @@ class FooterScreen extends React.Component {
       currentScreen === 'PreviousVisits'||
       currentScreen === 'Payments'||
       currentScreen === 'SalesInfo'||
-      currentScreen === 'Outstandings' ||
       currentScreen === 'FinalObservationFormScreen' ||
       currentScreen === 'FinalObservationList' ||
       currentScreen === 'NonShreeVisitForm' ||
@@ -70,7 +69,6 @@ class FooterScreen extends React.Component {
     
     let settingsActive = 
       currentScreen === 'FeedbackScreen' ||
-      currentScreen === 'OutStandingScreen' ||
       currentScreen === 'CommunicationScreen' ||
       currentScreen === 'CommunicationsAttachmentsScreen'
 

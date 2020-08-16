@@ -34,7 +34,7 @@ export default StyleSheet.create({
   darkDetail: {
     fontSize: wp('3.5%'),
     color: Colors.clrF1F9FF,
-    fontFamily: ApplicationStyles.textMsgFont
+    fontFamily: ApplicationStyles.textMediumFont
   },
   darkTitle: {
     color: Colors.white,
@@ -49,7 +49,7 @@ export default StyleSheet.create({
     fontFamily: ApplicationStyles.textFont
   },
   detail: {
-    fontFamily: ApplicationStyles.textMsgFont,
+    fontFamily: ApplicationStyles.textMediumFont,
     color: Colors.primary,
     fontSize: wp('3.5%'),
     flexWrap: 'wrap',

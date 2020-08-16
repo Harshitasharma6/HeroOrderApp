@@ -141,7 +141,8 @@ export const changeRegisterCustomerForm = (state, { payload }) => {
 	  registerCustomerForm : {
 	  	...state.registerCustomerForm,
 	  	...changed_entity
-	  }
+	  },
+	  registerCustomerValidation: INITIAL_STATE.registerCustomerValidation
 	}
 };
 

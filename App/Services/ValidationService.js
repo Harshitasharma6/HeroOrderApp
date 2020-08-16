@@ -1,8 +1,5 @@
 
 
-
-
-
 function validateSearchCustomerForm(params) {
 	if (!validatePhoneNumber(params.contact_number)) {
 		return {
@@ -16,67 +13,97 @@ function validateSearchCustomerForm(params) {
 
 
 function validateRegisterCustomerForm(params) {
-	// if (!validatePhoneNumber(params.contact_number)) {
-	// 	return {
-	// 		invalid: true,
-	// 		invalid_field: 'contact_number',
-	// 		error_message: 'Contact Number cannot be empty.'
-	// 	}
-	// }
+	// "first_name__c": "test 12",	(*mandatory)
+	// "last_name__c": "enquiry visit test",	(*mandatory)
+	// "contact_number__c": "1646464944", 	(*mandatory)
+	// "age__c":  "28",
+	// "genders__c": "Male",
+	// "product__c": "a029D000002ZFPtQAO", 	(*mandatory)
+	// "mode_of_buying__c": "Cash",
+	// "exchange_required__c":"No",
+	// "lead_source__c": "Event",
+	// "existing_two_wheelers__c": "Yes",
+	// "purpose_of_buying__c" : "Nothing",
+	// "usage__c": "Nothing",
+	// "expected_close_date__c":     "2020-08-19",  (*mandatory)
+    // "dealers_sales_person__c": "a0O9D000001hLV9UAM",
+	// "email_id__c": "abc@gmail.com",
+	// "occupation__c" : "Business",
+	// "test_drive_offered__c": "Yes",		(*mandatory)
+	// "customer__c": "0039D000008BMX2QAO",
+	// “address_line_1__c” : “test address”
+	if (!validateFieldIsEmpty(params.first_name__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'first_name__c',
+			error_message: 'First Name is empty.'
+		}
+	}
+
+	if (!validateFieldIsEmpty(params.last_name__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'last_name__c',
+			error_message: 'Last Name is empty.'
+		}
+	}
+
+
+	if (!validatePhoneNumber(params.contact_number__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'contact_number__c',
+			error_message: 'Contact Number is not valid.'
+		}
+	}
+
+
+	if (!validateFieldIsEmpty(params.product__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'product__c',
+			error_message: 'Please select product interested'
+		}
+	}
+
+
+	if (!validateFieldIsEmpty(params.expected_close_date__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'expected_close_date__c',
+			error_message: 'Please select Expected Purchase Date'
+		}
+	}
+
+
+	if (!validateFieldIsEmpty(params.test_drive_offered__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'test_drive_offered__c',
+			error_message: 'Please select Was Test Drive Offered or not'
+		}
+	}
+
 	return false;
 }
 
 
 function validateCreateFeedbackForm(params) {
-	// “model_sfid” : “a029D000002ZFPoQAO”,   (*mandatory)
-	// "vehicle_number": "DL1CV6565",
-	// "ride_comfort": "3",    (*mandatory)
-	// "responsiveness_of_vehicle": "3",   (*mandatory)
-	// "dealers_sales_person_sfid": "a0O9D000001hLV9UAM",  (*mandatory)
-	// "ease_of_handling": "4",    (*mandatory)
-	// "overall_experience": "4",        (*mandatory)
-	// "date_of_test_drive": "2020-08-16" ,   (*mandatory)
-	// "enquiry_id": "133"  (*mandatory)
-
-	if (!validateFieldIsEmpty(params.model_sfid)) {
+	// "model_name__c": "a029D000002ZFPoQAO", (*mandatory)
+	// "vehicle_no__c": "DL1CV6565",
+	// "ride_comfort__c": "3", 	(*mandatory)
+	// "responsiveness_of_the_vehicle__c": "3", 	(*mandatory)
+	// "dealers_sales_person_login_info__c": "a0O9D000001hLV9UAM", 	(*mandatory)
+	// "ease_of_handeling__c": "4", (*mandatory) 
+	// "overall_experience__c": "4", (*mandatory)
+	// "date_of_test_drive": "2020-08-16" (*mandatory)
+	if (!validateFieldIsEmpty(params.model_name__c)) {
 		return {
 			invalid: true,
-			invalid_field: 'model_sfid',
+			invalid_field: 'model_name__c',
 			error_message: 'Model name is empty.'
 		}
 	}
-
-	// if (!validateFieldIsEmpty(params.ride_comfort)) {
-	// 	return {
-	// 		invalid_area: true,
-	// 		invalid_field: 'ride_comfort',
-	// 		error_message: 'Please submit Ride Comfort feedback'
-	// 	}
-	// }
-
-	// if (!validateFieldIsEmpty(params.responsiveness_of_vehicle)) {
-	// 	return {
-	// 		invalid_area: true,
-	// 		invalid_field: 'responsiveness_of_vehicle',
-	// 		error_message: 'Please submit responsiveness of vehicle feedback'
-	// 	}
-	// }
-
-	// if (!validateFieldIsEmpty(params.ease_of_handling)) {
-	// 	return {
-	// 		invalid_area: true,
-	// 		invalid_field: 'ease_of_handling',
-	// 		error_message: 'Please submit ease of handling feedback'
-	// 	}
-	// }
-
-	// if (!validateFieldIsEmpty(params.overall_experience)) {
-	// 	return {
-	// 		invalid_area: true,
-	// 		invalid_field: 'overall_experience',
-	// 		error_message: 'Please submit overall experience feedback'
-	// 	}
-	// }
 	return false;
 }
 

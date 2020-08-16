@@ -400,32 +400,6 @@ export function* updatePotential({ payload }) {
 }
 
 
-export function* fetchOutstanding({ payload }) {
-	const isOnline = yield select(getConnectionStatus); 
-	if (!isOnline) {
-		yield put(ShreeActions.doNothing());
-		return;
-	}
-
-	
-	try {
-		yield put(ShreeActions.fetchOutstandingLoading());
-		const startDay = yield select(state => state.startDay);
-		const user = yield select(state => state.user);
-		const userId = user.loginDetails.userId;
-   	 	const access_token = startDay.access_token;
-   	 	const state = startDay.userDetailList.State;
-
-		let successData = yield call(shreeService.fetchOutstanding, {...payload, userId, access_token, state});
-		if (successData) {
-			yield put(ShreeActions.fetchOutstandingSuccess(successData));
-		} else {
-			yield put(ShreeActions.fetchOutstandingFailure());
-		}
-	} catch (error) {
-		yield put(ShreeActions.fetchOutstandingFailure());
-	}
-}
 
 
 export function* fetchPayments({ payload }) {

@@ -228,37 +228,7 @@ export function* sendAttachment(payload) {
 	}
 }	
 
-export function* fetchOutStandingAction({ payload }) {
-	const isOnline = yield select(getConnectionStatus);
-	if (!isOnline) {
-		yield put(DashboardActions.doNothing());
-		return;
-	}
 
-	yield put(DashboardActions.outStandingLoading());
-
-	try {
-
-		const user = yield select(state => state.startDay);
-		const userId = user.userDetailList.Id;
-		const state = user.userDetailList.State;
-		const access_token = user.access_token
-		payload.state = state;
-		payload.userId = userId;
-		payload.access_token = access_token;
-
-		let successData = yield call(dashboardService.fetchOutStandingAction, payload);
-		if (successData) {
-			yield put(DashboardActions.outStandingSuccess(successData));
-		} else {
-			
-			yield put(DashboardActions.outStandingFailure());
-		}
-	} catch (error) {
-		console.log('Error', error)
-		yield put(DashboardActions.outStandingFailure());
-	}
-}
 
 
 export function* fetchCommunications({ payload }) {

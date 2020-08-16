@@ -28,13 +28,12 @@ export const INITIAL_STATE = {
     showOpenLeadPrompt: false,
     currentEnquiryId: 133,
     feedbackForm: {
-    	"model_sfid": '',
-    	"vehicle_number": '',
-		"ride_comfort": 0,
-		"responsiveness_of_vehicle": 0,
-		"ease_of_handling": 0,
-		"overall_experience": 0,
-		"enquiry_id": 0
+		"model_name__c": "",
+		"vehicle_no__c": "",
+		"ride_comfort__c": 0,
+		"responsiveness_of_the_vehicle__c": 0,
+		"ease_of_handeling__c": 0,
+		"overall_experience__c": 0
     },
     visitsMapping: {},
     feedbacksMapping: {}

@@ -196,23 +196,25 @@ class UpdateVisitorScreen extends Component {
 						label={'Age'}
 					/>
 
-					<InputText
-						style={Style.mb10}
-						placeholder={'Purpose of Buying'}
-						value={form.purpose_of_buying__c}
-						onChange={(value) => changeForm({ edited_field: 'purpose_of_buying__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'purpose_of_buying__c'}
-						label={'Purpose of Buying*'}
-					/>
+					{
+					// 	<InputText
+					// 	style={Style.mb10}
+					// 	placeholder={'Purpose of Buying'}
+					// 	value={form.purpose_of_buying__c}
+					// 	onChange={(value) => changeForm({ edited_field: 'purpose_of_buying__c', edited_value: value })}
+					// 	error={validation.invalid && validation.invalid_field == 'purpose_of_buying__c'}
+					// 	label={'Purpose of Buying*'}
+					// />
 
-					<InputText
-						style={Style.mb10}
-						placeholder={'Usage'}
-						value={form.usage__c}
-						onChange={(value) => changeForm({ edited_field: 'usage__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'usage__c'}
-						label={'Usage*'}
-					/>
+					// <InputText
+					// 	style={Style.mb10}
+					// 	placeholder={'Usage'}
+					// 	value={form.usage__c}
+					// 	onChange={(value) => changeForm({ edited_field: 'usage__c', edited_value: value })}
+					// 	error={validation.invalid && validation.invalid_field == 'usage__c'}
+					// 	label={'Usage*'}
+					// />
+				}
 
 					<View style={{width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
 						<Text style={{...ApplicationStyles.label, marginBottom: '1%'}}>Gender</Text>
@@ -370,7 +372,7 @@ class UpdateVisitorScreen extends Component {
                             this.props.changeForm({ edited_field: 'expected_close_date__c', edited_value: formattedDate })
                         }}
                         error={validation.invalid && validation.invalid_field == 'expected_close_date__c'}
-                        label={'Expected Purchase Date'}
+                        label={'Expected Purchase Date*'}
                     />
 
 
@@ -398,6 +400,36 @@ class UpdateVisitorScreen extends Component {
 						/>
 						</View>
 					</View>
+
+
+					<InputDate
+                        style={Style.mb10}
+                        placeholder={'Customer Birthday'}
+                        value={HelperService.removeFieldsAndDateReadableFormat(form.customer_birthday__c)}
+                        onChange={(value) => {
+                            let formattedDate = HelperService.convertMomentDateToTimestamp(value);
+                            formattedDate = HelperService.dateReadableFormatWithHyphen(formattedDate);
+                            this.props.changeForm({ edited_field: 'customer_birthday__c', edited_value: formattedDate })
+                        }}
+                        error={validation.invalid && validation.invalid_field == 'customer_birthday__c'}
+                        label={'Customer Birthday'}
+                    />
+
+
+                    <InputDate
+                        style={Style.mb10}
+                        placeholder={'Customer Anniversary'}
+                        value={HelperService.removeFieldsAndDateReadableFormat(form.customer_anniversary__c)}
+                        onChange={(value) => {
+                            let formattedDate = HelperService.convertMomentDateToTimestamp(value);
+                            formattedDate = HelperService.dateReadableFormatWithHyphen(formattedDate);
+                            this.props.changeForm({ edited_field: 'customer_anniversary__c', edited_value: formattedDate })
+                        }}
+                        error={validation.invalid && validation.invalid_field == 'customer_anniversary__c'}
+                        label={'Customer Anniversary'}
+                    />
+
+
 
 					<BlueButton
 						style={ApplicationStyles.formButton}
