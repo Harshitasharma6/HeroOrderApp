@@ -58,7 +58,7 @@ class VisitHistoryScreen extends Component {
     if (data && data.length) {
       if (data.length) {
         visibleNode = (
-          <View>
+          <View style={{ flex: 1, paddingTop: 10 }}>
             <Text style={ApplicationStyles.formHeading}>{`Total Visits: ${data.length}`}</Text>
             <FlatList
               data={data}
@@ -67,9 +67,9 @@ class VisitHistoryScreen extends Component {
                   style={{ width: '88%', elevation: 0 }}
                   content={[
                     <GenericDisplayCardStrip key={'Visit Date' + item.id} label={'Visit Date'} value={HelperService.removeFieldsAndDateReadableFormat(item.visit_date__c)}/>,
-                    <GenericDisplayCardStrip key={'Visit Day' + item.id} label={'Visit Day'} value={''}/>,
-                    <GenericDisplayCardStrip key={'Visit Time' + item.id} label={'Visit Time'} value={''}/>,
-                    <GenericDisplayCardStrip key={'Sales Person Name' + item.id} label={'Sales Person Name'} value={item.sales_person__c}
+                    <GenericDisplayCardStrip key={'Visit Day' + item.id} label={'Visit Day'} value={HelperService.findDayReadableFormat(item.visit_date__c)}/>,
+                    <GenericDisplayCardStrip key={'Visit Time' + item.id} label={'Visit Time'} value={HelperService.removeFieldsTimeReadableFormat(item.createddate) + ' (UTC)'}/>,
+                    <GenericDisplayCardStrip key={'Sales Person Name' + item.id} label={'Sales Person Name'} value={item.sales_person_name__c || ''}
                 />
                 ]}
               />}

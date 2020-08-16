@@ -88,7 +88,7 @@ function createFeedback(params) {
 
 function getAllVisits(params) {
 	let url = Config.VISITOR_SERVICE.GET_ALL_VISITS;
-	url += `?enquiry__c=${params.enquiry}`
+	url += `?enquiry_id=${params.enquiry}`
 	url += `&limit=${100}`
 	url += `&offset=${0}`
 	return apiClient.get(url, {

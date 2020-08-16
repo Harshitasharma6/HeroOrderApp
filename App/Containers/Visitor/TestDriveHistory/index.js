@@ -56,15 +56,18 @@ class TestDriveHistoryScreen extends Component {
     const {
       enquiry,
       loader,
+      productsList,
       feedbacksMapping
     } = this.props;
     const data = feedbacksMapping[enquiry]
     let visibleNode = [];
 
+    console.log('productsList', productsList)
+
     if (data && data.length) {
       if (data.length) {
         visibleNode = (
-          <View>
+          <View style={{ flex: 1, paddingTop: 10 }}>
             <Text style={ApplicationStyles.formHeading}>{`Total Test Drives: ${data.length}`}</Text>
             <FlatList
               data={data}
@@ -72,7 +75,8 @@ class TestDriveHistoryScreen extends Component {
                 <GenericDisplayCard dark={false}
                   style={{ width: '88%', elevation: 0 }}
                   content={[
-                    <GenericDisplayCardStrip key={'Test Drive Vehicle' + item.id} label={'Test Drive Vehicle'} value={item.vehicle_no__c}/>,
+                    <GenericDisplayCardStrip key={'Model Name' + item.id} label={'Model Name'} value={HelperService.findMatchingKeyValueInList(productsList, 'id', item.model_name__c, 'name')}/>,
+                    item.vehicle_no__c ? <GenericDisplayCardStrip key={'Test Drive Vehicle' + item.id} label={'Test Drive Vehicle'} value={item.vehicle_no__c}/> : [],
                     <GenericDisplayCardStrip key={'Test Drive Date' + item.id} label={'Test Drive Date'} value={HelperService.removeFieldsAndDateReadableFormat(item.test_drive_date__c)}/>,
                     <GenericDisplayCardStrip key={'Test Drive Time' + item.id} label={'Test Drive Time'} value={HelperService.removeFieldsTimeReadableFormat(item.createddate) + ' (UTC)'}/>,
                     <GenericDisplayCardStrip key={'Overall Experience' + item.id} label={'Overall Experience'} value={item.overall_experience__c}/>,
@@ -126,7 +130,8 @@ class TestDriveHistoryScreen extends Component {
 const mapStateToProps = (state) => ({
   loader : state.visitor.loaders.getFeedbacksLoader,
   enquiry : state.visitor.currentEnquiryId,
-  feedbacksMapping: state.visitor.feedbacksMapping
+  feedbacksMapping: state.visitor.feedbacksMapping,
+  productsList: state.common.productsList
 });
 
 const mapDispatchToProps = (dispatch) => ({

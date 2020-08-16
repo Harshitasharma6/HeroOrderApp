@@ -31,6 +31,17 @@ var monthMapping = [
 	'Dec'
 ];
 
+
+var dayMapping = [
+	'Sunday',
+	'Monday',
+	'Tuesday',
+	'Wednesday',
+	'Thursday',
+	'Friday',
+	'Saturday'
+];
+
 function findDayMessage() {
 	var data = [
 		[0, 4, "Night"],
@@ -965,12 +976,27 @@ function showAppUpdatePromptAndroid(latest_version) {
 
 function removeFieldsAndDateReadableFormat(dateString) {
 	if (!dateString) { 
-		return
+		return ''
 	}
 
 	let updatedDateString = dateString.split('T');
 	updatedDateString = updatedDateString[0];
 	return updatedDateString;
+}
+
+function findDayReadableFormat(dateString) {
+	if (!dateString) { 
+		return ''
+	}
+
+	let updatedDateString = dateString.split('T');
+	updatedDateString = updatedDateString[0];
+
+	let dateObj = new Date(updatedDateString);
+
+	let day = dayMapping[dateObj.getDay()];
+
+	return day;
 }
 
 
@@ -1144,5 +1170,6 @@ export const HelperService = {
 	getAvatarTextAndBgColorForVisitType,
 	startForegroundService,
 	removeFieldsAndDateReadableFormat,
-	removeFieldsTimeReadableFormat
+	removeFieldsTimeReadableFormat,
+	findDayReadableFormat
 }
