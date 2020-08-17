@@ -91,7 +91,7 @@ export default class ActionModal extends Component {
 				                onPress={() => {
 				                  close();
 				                }}>
-				                <GenericIcon name={'close-circle'} style={{fontSize: 35, color: Colors.primary}}/>
+				                <GenericIcon name={'times-circle'} style={{fontSize: 35, color: Colors.primary}}/>
 				              </TouchableHighlight>
 			          	</View>
 			          	<View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>

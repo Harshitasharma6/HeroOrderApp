@@ -54,7 +54,7 @@ export function* getProductSchemes({ payload }) {
 		if (successData) {
 			let productSchemes = _.cloneDeep(yield select(state => state.products.productSchemes))
 			productSchemes[payload.product_id] = successData
-			yield put(ProductsActions.getProductSchemesSuccess(successData));
+			yield put(ProductsActions.getProductSchemesSuccess(productSchemes));
 			
 		} else {
 			yield put(ProductsActions.getProductSchemesFailure());
@@ -63,6 +63,81 @@ export function* getProductSchemes({ payload }) {
 		yield put(ProductsActions.getProductSchemesFailure());
 	}
 }
+
+export function* addItemToCart({payload}) {
+	let cart = _.cloneDeep(yield select(state => state.products.cart));
+	let products = cart.products;
+	if (products.length) {
+		HelperService.showToast({ 
+			message: 'Item Already Present in cart !!',
+			duration: 2000, 
+			buttonText: 'Okay' 
+		});
+		return;
+	}
+
+	products.push(payload);
+	cart.products = products;
+	let basicPrice = cart.basicPrice;
+	let taxes      = cart.taxes;
+	let totalAmount= cart.totalAmount;
+	let subsidy    = cart.subsidy;
+	let dealerDiscount = cart.dealerDiscount;
+	let offerAmount= 0
+	let offersApplied = cart.offersApplied;
+	offersApplied.map((obj) => {
+		offerAmount += Number(obj.scheme_amount__c)
+	});
+	
+	cart.offerAmount = offerAmount;
+	cart.basicPrice += Number(payload.price__c);
+	cart.taxes      += Math.round(Number(payload.price__c)*.05);
+	cart.subsidy    += Number(payload.subsidy_amount__c);
+	cart.totalAmount+= cart.basicPrice + cart.taxes  - cart.subsidy - Number(offerAmount) - cart.dealerDiscount
+	yield put(ProductsActions.addItemToCartSuccess(cart));
+}
+
+export function* removeItemFromCart({payload}) {
+	yield put(ProductsActions.removeItemFromCartSuccess());
+}
+
+export function* removeOffer({payload}) {
+	let cart = _.cloneDeep(yield select(state => state.products.cart));
+	let offersApplied = cart.offersApplied;
+	let offerAmount = 0;
+	offersApplied = offersApplied.filter((obj) => obj.scheme_name__c != payload);
+	cart.offersApplied = offersApplied;
+	offersApplied.map((obj) => {
+		offerAmount += Number(obj.scheme_amount__c)
+	});
+	cart.offerAmount = offerAmount;
+	cart.totalAmount = cart.basicPrice + cart.taxes  - cart.subsidy - Number(offerAmount) - cart.dealerDiscount
+	yield put(ProductsActions.removeOfferSuccess(cart));
+}
+
+export function* addOffer({payload}) {
+	let cart = _.cloneDeep(yield select(state => state.products.cart));
+	let offersApplied = cart.offersApplied;
+	let offerAmount = 0;
+	offersApplied.push(payload);
+	cart.offersApplied = offersApplied;
+	offersApplied.map((obj) => {
+		offerAmount += Number(obj.scheme_amount__c)
+	});
+	cart.offerAmount = offerAmount;
+	cart.totalAmount = cart.basicPrice + cart.taxes  - cart.subsidy - Number(offerAmount) - cart.dealerDiscount
+	yield put(ProductsActions.addOfferSuccess(cart));
+}
+
+export function* changeDealerDiscount({payload}) {
+	let cart = _.cloneDeep(yield select(state => state.products.cart));
+	let dealerDiscount = payload;
+	cart.dealerDiscount = dealerDiscount;
+	cart.totalAmount = cart.basicPrice + cart.taxes  - cart.subsidy - cart.offerAmount - dealerDiscount;
+	yield put(ProductsActions.changeDealerDiscountSuccess(cart));
+}
+
+
 
 
 

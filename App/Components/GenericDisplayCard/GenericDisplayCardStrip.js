@@ -8,11 +8,13 @@ import NavigationService from 'App/Services/NavigationService'
 const GenericDisplayCardStrip = ({
   label,
   value,
-  dark
+  dark,
+  labelStyle,
+  valueStyle
 }) => (
     <View style={Style.strip}>
-      	<Text style={dark ? Style.darkTtl : Style.ttl}>{label}</Text>
-      	<Text style={dark ? Style.darkDetail : Style.detail}>{value}</Text>
+      	<Text style={dark ? {...Style.darkTtl, ...labelStyle} : {...Style.ttl, ...labelStyle}}>{label}</Text>
+      	<Text style={dark ? {...Style.darkDetail, ...valueStyle} : {...Style.detail, ...valueStyle}}>{value}</Text>
     </View>
 );
 

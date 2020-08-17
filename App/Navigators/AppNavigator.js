@@ -102,6 +102,7 @@ import PurchaseDateOverDueScreen from 'App/Containers/LeadAlerts/Actionables/Fol
 import BookingConfirmedScreen from 'App/Containers/LeadAlerts/Actionables/FollowUps/BookingConfirmed'
 import OpenHotAssignedLeadsScreen from 'App/Containers/LeadAlerts/Actionables/FollowUps/OpenHotAssignedLeads'
 import NoActionScreen from 'App/Containers/LeadAlerts/Actionables/FollowUps/NoAction'
+import OrderCartScreen from 'App/Containers/Visitor/AddProduct/OrderCart'
 
 //OpenHotLeadsScreen
 //PurchaseDateOverDueScreen
@@ -207,7 +208,8 @@ const StackNavigator = createStackNavigator(
     PurchaseDateOverDueScreen,
     BookingConfirmedScreen,
     OpenHotAssignedLeadsScreen,
-    NoActionScreen
+    NoActionScreen,
+    OrderCartScreen
   },
   {
     // By default the application will show the splash screen

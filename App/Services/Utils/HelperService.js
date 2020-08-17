@@ -536,8 +536,8 @@ function getCompetitorName(params) {
 }
 
 function currencyValue(value) {
-	if (!value) return '₹';
-	return '₹' + value;
+	if (!value) return '₹ ';
+	return '₹ ' + value;
 }
 
 function dateReadableFormat(timestamp) {

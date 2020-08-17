@@ -14,6 +14,7 @@ import NavigationService from 'App/Services/NavigationService'
 import UserActions from 'App/Stores/User/Actions'
 import { Colors, ApplicationStyles } from 'App/Theme';
 import ProductInfoCard from 'App/Containers/Insights/ProductInfo/ProductInfoCard'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 class AddProductInfoScreen extends Component {
     render() {
@@ -24,7 +25,7 @@ class AddProductInfoScreen extends Component {
         	<View style={{flex: 1, paddingVertical: hp('1%'), paddingHorizontal: wp('4%')}}>
 	            <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
 	                <WhiteButton title={"Available Offers"}  style={{width: wp('42%'), height: hp('4.5%')}} onPress={() => NavigationService.navigate('AddProductsSchemesScreen', {product_id: data.sfid})} textStyle={{color: Colors.blue, textTransform: 'capitalize', fontSize: wp('3.5%')}}>
-		            	<GenericIcon name={'percent'} style={{color: Colors.blue, fontSize:  wp('4%')}}/>
+		            	<Icon name={'brightness-percent'} style={{color: Colors.blue, fontSize:  wp('4%')}}/>
 		            </WhiteButton>
 	            </View>
 	            <ScrollView style={{marginTop: hp('2%')}}>

@@ -17,8 +17,7 @@ import _ from 'lodash'
 
 
 
-
-const ProductCard = ({data, onPressInfo, onPress,quantityInCart, onChangeQuantity, showEditQuantity=true}) => (
+const ProductCard = ({data, onPressInfo, onPress,quantityInCart, onChangeQuantity, showEditQuantity=true, showSingleAddToCartAction=false, onPressAddToCart, isAddedInCart, disableAddCart, hideInfoAction=false, showRemoveAction=false, onPressRemoveAction}) => (
   <TouchableWithoutFeedback onPress={onPress}>
     <View style={Style.box}>
         <View style={Style.tuple}>
@@ -33,29 +32,53 @@ const ProductCard = ({data, onPressInfo, onPress,quantityInCart, onChangeQuantit
               {data.available_stock__c != null ? <AvailableStock stock={data.available_stock__c}/> : []}
             </View>
           </View>
-          
         </View>
+        {
+          showRemoveAction ?
+            <View style={Style.removeActionContainer}>
+              <GenericIcon 
+                  name="trash" 
+                  style={Style.removeButtonIcon}
+                  onPress={onPressRemoveAction}
+                />
+            </View>
+           : []
+        }
         
         
         <View style={Style.actionButtonContainer}>
-          <WhiteButton 
-            selected={false} 
-            title={'Info'} 
-            disabled={false}  
-            style={Style.actionButton} 
-            onPress={onPressInfo}
-            textStyle={Style.actionButtonText}>
-              <GenericIcon 
-                name="info-circle" 
-                style={Style.actionButtonIcon}
-              />
-          </WhiteButton>
+        {
+          !hideInfoAction ? 
+            <WhiteButton 
+              selected={false} 
+              title={'Info'} 
+              disabled={false}  
+              style={Style.actionButton} 
+              onPress={onPressInfo}
+              textStyle={Style.actionButtonText}>
+                <GenericIcon 
+                  name="info-circle" 
+                  style={Style.actionButtonIcon}
+                />
+            </WhiteButton> : []
+        }
          
           {
             showEditQuantity ? 
             <View style={Style.quantityContainer}>
               <EditQuantity  value={quantityInCart} onChange={(value) => onChangeQuantity(value)} key={quantityInCart}/>
             </View> : []
+          }
+          {
+            !showEditQuantity && showSingleAddToCartAction ? 
+              <View style={Style.addToCartContainer} >
+                <BlueButton  
+                  title={isAddedInCart ? 'ADDED TO CART' : 'ADD TO CART'}
+                  disabled={disableAddCart} 
+                  textStyle={Style.addToCartButtonText} 
+                  onPress={onPressAddToCart}
+                />
+              </View> : []
           }
         </View>
          

@@ -44,7 +44,6 @@ const VisitorInfoCard = ({ onPress, data, id }) => (
       <View style={Styles.btmBox}>
       	<GenericDisplayCardStrip key={'Age'} label={'Age'} value={data.age__c} />
 	     <GenericDisplayCardStrip key={'Gender'} label={'Gender'} value={data.genders__c} />
-	     <GenericDisplayCardStrip key={'Phone'} label={'Phone'} value={data.contact_number__c} />
       
     </View>
      <View style={{position: 'absolute', right: wp('2%'), top: hp('2%')}}>

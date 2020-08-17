@@ -89,7 +89,12 @@ import {
 
  import { 
     getAllProducts,
-    getProductSchemes
+    getProductSchemes,
+    addItemToCart,
+    removeItemFromCart,
+    changeDealerDiscount,
+    removeOffer,
+    addOffer
  } from './ProductsSaga'
 
 
@@ -180,6 +185,11 @@ export default function* root() {
 
         takeLatest(ProductsTypes.GET_ALL_PRODUCTS, getAllProducts),
         takeLatest(ProductsTypes.GET_PRODUCT_SCHEMES, getProductSchemes),
+        takeLatest(ProductsTypes.ADD_ITEM_TO_CART, addItemToCart),
+        takeLatest(ProductsTypes.REMOVE_ITEM_FROM_CART, removeItemFromCart),
+        takeLatest(ProductsTypes.REMOVE_OFFER, removeOffer),
+        takeLatest(ProductsTypes.ADD_OFFER, addOffer),
+        takeLatest(ProductsTypes.CHANGE_DEALER_DISCOUNT, changeDealerDiscount),
 
         
         fork(watchUpdateVisitor),

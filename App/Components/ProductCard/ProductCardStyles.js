@@ -33,7 +33,7 @@ export default StyleSheet.create({
     flexDirection: 'row', 
     justifyContent: 'space-between', 
     alignItems: 'center', 
-    marginTop: hp('3%'),
+    marginTop: hp('1.5%'),
     width: '100%'
   },
   actionButton: {
@@ -59,6 +59,15 @@ export default StyleSheet.create({
     textAlign: 'right',
     flexDirection: 'row',
     justifyContent: 'flex-end'
+  },
+  addToCartContainer: {
+    alignSelf: 'flex-end',
+    textAlign: 'right',
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
+  },
+  addToCartButtonText: {
+    fontSize: wp('3.5%')
   },
   priceContainer: {
     flexDirection: 'row',
@@ -90,5 +99,15 @@ export default StyleSheet.create({
     marginHorizontal: wp('1%'),
     fontWeight: 'bold',
     marginLeft: 0
+  },
+  removeActionContainer: {
+    position: 'absolute',
+    right: wp('1%'),
+    top: wp('1%')
+  },
+  removeButtonIcon: {
+    color: Colors.primary, 
+    fontSize: wp('6.5%'),
+    padding: 5
   }
 })

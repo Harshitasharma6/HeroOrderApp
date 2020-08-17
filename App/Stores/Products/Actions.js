@@ -7,13 +7,28 @@ const { Types, Creators } = createActions({
   getAllProductsLoading: null,
   getAllProductsLoadingStop: null,
 
-
-
   getProductSchemes: ['payload'],
   getProductSchemesSuccess:  ['payload'],
   getProductSchemesFailure: null,
   getProductSchemesLoading: null,
-  getProductSchemesLoadingStop: null
+  getProductSchemesLoadingStop: null,
+
+
+  addItemToCart: ['payload'],
+  removeItemFromCart: ['payload'],
+  addItemToCartSuccess: ['payload'],
+  removeItemFromCartSuccess: ['payload'],
+  editCart: ['payload'],
+  editCartSuccess: ['payload'],
+  openDealerDiscountEdit: null,
+  closeDealerDiscountEdit: null,
+  changeDealerDiscount: ['payload'],
+  changeDealerDiscountSuccess: ['payload'],
+
+  removeOffer: ['payload'],
+  addOffer: ['payload'],
+  addOfferSuccess: ['payload'],
+  removeOfferSuccess: ['payload']
 
 });
 

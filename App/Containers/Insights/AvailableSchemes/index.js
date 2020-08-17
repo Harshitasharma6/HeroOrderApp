@@ -71,13 +71,20 @@ class AvailableSchemes extends Component {
       loader,
       data
     } = this.props;
+
+    const {
+      product_id
+    } = this.props.navigation.state.params;
+
     let visibleNode = [];
 
-    if (data && data.length) {
-      if (data.length) {
+    let schemes = data ? data[product_id] : []
+
+    if (schemes && schemes.length) {
+      if (schemes.length) {
         visibleNode = (
           <FlatList
-            data={data}
+            data={schemes}
             renderItem={({ item }) => this.getDataCard(item)}
             keyExtractor={item => item.scheme_name__c}
             onRefresh={() => this.fetchCall()}
@@ -97,7 +104,7 @@ class AvailableSchemes extends Component {
       }
     } else if (loader) {
       visibleNode = <Loading />
-    } else if (data && !data.length && !loader) {
+    } else if (schemes && !schemes.length && !loader) {
       visibleNode =  (
           <NoDataFound text={'No Schemes Found'}>
             <GenericIcon 
@@ -125,7 +132,7 @@ class AvailableSchemes extends Component {
 const mapStateToProps = (state) => ({
   loader   : state.products.loaders.getProductSchemesLoader,
   enquiry  : state.visitor.currentEnquiryId,
-  state_id : state.user.state_c,
+  state_id : state.user.state__c,
   data     : state.products.productSchemes
 });
 
