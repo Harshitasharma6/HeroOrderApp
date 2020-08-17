@@ -6,6 +6,51 @@ export default StyleSheet.create({
   action: {
     width: wp('88%'),
   },
+
+  action1:{
+
+    flexDirection:'row',
+    justifyContent: 'space-between',
+    marginBottom: hp('7%'),
+  },
+
+  upperformButton:{
+     
+		alignSelf: 'center',
+		marginTop: hp('2%'),
+		borderRadius: 10,
+		height: hp('4%'),
+		zIndex: 3,
+		width: wp('40%')
+	
+
+  },
+
+  lowerformButton:{
+     
+    alignSelf: 'center',
+    marginTop: hp('2%'),
+    borderRadius: 10,
+    height: hp('6%'),
+    zIndex: 3,
+    width: wp('60%')
+
+
+},
+
+AttachDocButton:{
+     
+    alignSelf: 'center',
+   
+    borderRadius: 10,
+    height: hp('5%'),
+    zIndex: 3,
+    width: wp('50%'),
+    marginLeft: '40%'
+
+
+},
+
   button: {
     ...ApplicationStyles.formButton
   },
@@ -85,5 +130,20 @@ export default StyleSheet.create({
     color: Colors.button,
     fontFamily: ApplicationStyles.textFont,
     fontSize: 18
+  },
+  actionButton: {
+   
+    paddingLeft: wp('6%'),
+    paddingRight: wp('4%'),
+    marginBottom: hp('1%'),
+    marginTop: hp('1%'),
+    marginRight: wp('2%'),
+    marginLeft: wp('1%'),
+    height: hp('5%'),
+    minWidth: wp('25%'),
+  },
+  actionButtonText: {
+    fontSize: wp('2.9%'),
+    fontFamily: ApplicationStyles.textMsgFont
   },
 })

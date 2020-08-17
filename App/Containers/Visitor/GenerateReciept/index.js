@@ -8,15 +8,19 @@ import BlueButton from 'App/Components/BlueButton';
 import Select from 'App/Components/Select';
 import TextArea from 'App/Components/FormInput/TextArea';
 import { connect } from 'react-redux';
+import GenericIcon from 'App/Components/GenericIcon'
 import ShreeActions from 'App/Stores/Shree/Actions';
 import { HelperService } from 'App/Services/Utils/HelperService';
 import NavigationService from 'App/Services/NavigationService'
 import SearchableDropdown from 'App/Components/SearchableDropdown';
 import InputDate from 'App/Components/FormInput/InputDate';
+import WhiteButton from 'App/Components/WhiteButton';
 import {ApplicationStyles} from 'App/Theme'
+import {Colors} from 'App/Theme'
 import GenericCheckBox from 'App/Components/GenericCheckBox'
 import VisitorActions from 'App/Stores/Visitor/Actions'
 import moment from 'moment';
+
 // "first_name__c": "test 12",	(*mandatory)
 // 	"last_name__c": "enquiry visit test",	(*mandatory)
 // 	"contact_number__c": "1646464944", 	(*mandatory)
@@ -74,51 +78,54 @@ class GenerateRecieptformScreen extends Component {
 		
 		return (
 			<View style={Style.container}>
-				<Text style={ApplicationStyles.formHeading}>{'New Registration'}</Text>
+				
 				<ScrollView 
 					showsVerticalScrollIndicator={false}
 					style={Style.action}
 				>
-
+               
 				 	<InputText
 						style={Style.mb10}
-						placeholder={'First Name'}
+						placeholder={'Customer Name'}
 						value={form.first_name__c}
 						onChange={(value) => changeForm({ edited_field: 'first_name__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'first_name__c'}
-						label={'First Name*'}
+						label={'Customer  Name*'}
 					/>
 
-					<InputText
-						style={Style.mb10}
-						placeholder={'Last Name'}
-						value={form.last_name__c}
-						onChange={(value) => changeForm({ edited_field: 'last_name__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'last_name__c'}
-						label={'Last Name*'}
-					/>
 					
+					<View style={{flexDirection:'row', justifyContent: 'space-between'}}>
                     <InputMobile
 						styles={Style.mb10}
 						placeholder={'Contact Number'}
 						value={form.contact_number__c}
 						onChange={(value) => changeForm({ edited_field: 'contact_number__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'contact_number__c'}
-						label={'Contact Number*'}
+						label={'Customer Contact No*'}
 					/>
+
+                    <InputMobile
+						styles={Style.mb10}
+						placeholder={'OTP No.'}
+						value={form.contact_number__c}
+						onChange={(value) => changeForm({ edited_field: 'contact_number__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'contact_number__c'}
+						label={'Enter OTP'}
+					/> 
+                    </View>         
 
 					<InputText
 						style={Style.mb10}
-						placeholder={'Email'}
+						placeholder={'Customer Email'}
 						value={form.email_id__c}
 						onChange={(value) => changeForm({ edited_field: 'email_id__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'email_id__c'}
-						label={'Email'}
+						label={' Customer Email'}
 					/>
 
 					<TextArea
-	                    placeholder={'Address'}
-	                    label={'Address'}
+	                    placeholder={' Customer Address'}
+	                    label={' Customer Address'}
 	                    numberOfLines={2}
 	                    style={Style.mb10}
 	                    value={form.address_line_1__c}
@@ -128,11 +135,11 @@ class GenerateRecieptformScreen extends Component {
 
                 	<InputNumber
 						styles={Style.mb10}
-						placeholder={'Age'}
+						placeholder={'Recieved Advance'}
 						value={form.age__c}
 						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'age__c'}
-						label={'Age'}
+						label={'Recieved Advance'}
 					/>
 
 					{
@@ -155,12 +162,13 @@ class GenerateRecieptformScreen extends Component {
 					// />
 				}
 
-					<View style={{width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
-						<Text style={{...ApplicationStyles.label, marginBottom: '1%'}}>Gender</Text>
-						<View style={{flexDirection: 'row', marginBottom: '2%'}}>
+					<View style={{width: '100%', justifyContent: 'space-between',  flexDirection: 'row', }}>
+						<View>
+                        <Text style={{...ApplicationStyles.label, marginBottom: '2%'}}>Payment Mode</Text>
+						<View style={{flexDirection: 'column', }}>
 						<GenericCheckBox 
 							style={{marginRight: '5%'}}
-							label={'Male'}
+							label={'Digital'}
 							checked={form.genders__c == 'Male'}
 							onPress={(event)=>{
 			                	let value = form.genders__c == 'Male' ? 'Female' : 'Male';
@@ -169,8 +177,17 @@ class GenerateRecieptformScreen extends Component {
 						/>
 
 						<GenericCheckBox
-							style={{marginRight: '5%'}} 
-							label={'Female'}
+							style={{marginRight: '5%', marginLeft:'2.5%',}} 
+							label={'Cash'}
+							checked={form.genders__c == 'Female'}
+							onPress={(event)=>{
+			                	let value = form.genders__c == 'Female' ? 'Male' : 'Female';
+				                changeForm({ edited_field: 'genders__c', edited_value: value });
+			                }}
+						/>
+                        <GenericCheckBox
+							style={{marginRight: '5%', }} 
+							label={'Cheque'}
 							checked={form.genders__c == 'Female'}
 							onPress={(event)=>{
 			                	let value = form.genders__c == 'Female' ? 'Male' : 'Female';
@@ -178,129 +195,23 @@ class GenerateRecieptformScreen extends Component {
 			                }}
 						/>
 						</View>
+                        </View>
+                        <View style={{marginRight:'10%'}}>
+                        <InputNumber
+						styles={Style.mb10}
+						placeholder={'Ref. No.'}
+						value={form.age__c}
+						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'age__c'}
+						label={'Ref. No.'}
+					        />
+
+
+                        </View>
 					</View>
-
-
-					<SearchableDropdown
-				        dataSource={occupationList}
-				        placeHolderText={'Select Occupation'}
-				        selectedValue={form.occupation__c}
-				        onChange={(value) => changeForm({ edited_field: 'occupation__c', edited_value: value })}
-				        placeholder={'Type or Select Occupation'}
-				        invalid={false}
-				        labelStyles={{ ...Style.pickerLabel }}
-				        customPickerStyles={{ ...Style.picker }}
-				        label={'Occupation'}
-					/>
-
-
-					<SearchableDropdown
-				        dataSource={productsList}
-				        placeHolderText={'Select Product'}
-				        selectedValue={form.product__c}
-				        onChange={(value) => changeForm({ edited_field: 'product__c', edited_value: value })}
-				        placeholder={'Type or Select Product'}
-				        invalid={false}
-				        labelStyles={{ ...Style.pickerLabel }}
-				        customPickerStyles={{ ...Style.picker }}
-				        label={'Product Interested*'}
-					/>
-
-					<View style={{width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
-						<Text style={{...ApplicationStyles.label, marginBottom: '1%'}}>Mode of Purchase</Text>
-						<View style={{flexDirection: 'row', marginBottom: '2%'}}>
-						<GenericCheckBox 
-							style={{marginRight: '5%'}}
-							label={'Cash'}
-							checked={form.mode_of_buying__c == 'Cash'}
-							onPress={(event)=>{
-			                	let value = form.mode_of_buying__c == 'Cash' ? 'Finance' : 'Cash';
-				                changeForm({ edited_field: 'mode_of_buying__c', edited_value: value });
-			                }}
-						/>
-
-						<GenericCheckBox
-							style={{marginRight: '5%'}} 
-							label={'Finance'}
-							checked={form.mode_of_buying__c == 'Finance'}
-							onPress={(event)=>{
-			                	let value = form.mode_of_buying__c == 'Finance' ? 'Cash' : 'Finance';
-				                changeForm({ edited_field: 'mode_of_buying__c', edited_value: value });
-			                }}
-						/>
-						</View>
-					</View>
-
-
-
-					<View style={{ width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
-						<Text style={{...ApplicationStyles.label, marginBottom: '1%'}}>Existing Two Wheeler</Text>
-						<View style={{flexDirection: 'row', marginBottom: '2%'}}>
-						<GenericCheckBox 
-							style={{marginRight: '5%'}}
-							label={'Yes'}
-							checked={form.existing_two_wheelers__c == 'Yes'}
-							onPress={(event)=>{
-			                	let value = form.existing_two_wheelers__c == 'Yes' ? 'No' : 'Yes';
-				                changeForm({ edited_field: 'existing_two_wheelers__c', edited_value: value });
-			                }}
-						/>
-
-						<GenericCheckBox
-						style={{marginRight: '5%'}} 
-							label={'No'}
-							checked={form.existing_two_wheelers__c == 'No'}
-							onPress={(event)=>{
-			                	let value = form.existing_two_wheelers__c == 'No' ? 'Yes' : 'No';
-				                changeForm({ edited_field: 'existing_two_wheelers__c', edited_value: value });
-			                }}
-						/>
-						</View>
-					</View>
-
-
-					<View style={{ width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
-						<Text style={{...ApplicationStyles.label, marginBottom: '1%'}}>Exchange Required</Text>
-						<View style={{flexDirection: 'row', marginBottom: '2%'}}>
-						<GenericCheckBox 
-							style={{marginRight: '5%'}}
-							label={'Yes'}
-							checked={form.exchange_required__c == 'Yes'}
-							onPress={(event)=>{
-			                	let value = form.exchange_required__c == 'Yes' ? 'No' : 'Yes';
-				                changeForm({ edited_field: 'exchange_required__c', edited_value: value });
-			                }}
-						/>
-
-						<GenericCheckBox
-							style={{marginRight: '5%'}} 
-							label={'No'}
-							checked={form.exchange_required__c == 'No'}
-							onPress={(event)=>{
-			                	let value = form.exchange_required__c == 'No' ? 'Yes' : 'No';
-				                changeForm({ edited_field: 'exchange_required__c', edited_value: value });
-			                }}
-						/>
-						</View>
-					</View>
-
-
-
-					<SearchableDropdown
-				        dataSource={sourceEnquiryList}
-				        placeHolderText={'Select Source'}
-				        selectedValue={form.lead_source__c}
-				        onChange={(value) => changeForm({ edited_field: 'lead_source__c', edited_value: value })}
-				        placeholder={'Type or Select Source'}
-				        invalid={false}
-				        labelStyles={{ ...Style.pickerLabel }}
-				        customPickerStyles={{ ...Style.picker }}
-				        label={'Source of Enquiry'}
-					/>
-
-					<InputDate
+                    <InputDate
                         style={Style.mb10}
-                        placeholder={'Expected Purchase Date'}
+                        placeholder={'Expected Delievery Date'}
                         value={HelperService.removeFieldsAndDateReadableFormat(form.expected_close_date__c)}
                         onChange={(value) => {
                             let formattedDate = HelperService.convertMomentDateToTimestamp(value);
@@ -308,17 +219,64 @@ class GenerateRecieptformScreen extends Component {
                             this.props.changeForm({ edited_field: 'expected_close_date__c', edited_value: formattedDate })
                         }}
                         error={validation.invalid && validation.invalid_field == 'expected_close_date__c'}
-						label={'Expected Purchase Date*'}
+						label={'Expected Delievery Date*'}
 						mindate={moment.now()}
                     />
 
+<BlueButton title={"ATTACH DOCUMENTS"} style={{width: '50%', marginHorizontal: '50%',}} textStyle={{fontSize: 12}} >
+	            	<GenericIcon name={'photo'} style={{color: Colors.white, fontSize: 15}}/>
+	            </BlueButton>
+
+
 
                     <View style={{ width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
-						<Text style={{...ApplicationStyles.label, marginBottom: '1%'}}>Was Test Drive Offered?*</Text>
-						<View style={{flexDirection: 'row', marginBottom: '2%'}}>
+						
+						<View style={{flexDirection: 'row',  }}>
 						<GenericCheckBox 
 							style={{marginRight: '5%'}}
-							label={'Yes'}
+							label={'Driving License'}
+							checked={form.test_drive_offered__c == 'Yes'}
+							onPress={(event)=>{
+			                	let value = form.test_drive_offered__c == 'Yes' ? 'No' : 'Yes';
+				                changeForm({ edited_field: 'test_drive_offered__c', edited_value: value });
+			                }}
+						/>
+
+						<GenericCheckBox
+							style={{marginHorizontal: '13%'}} 
+							label={'Aadhar Card'}
+							checked={form.test_drive_offered__c == 'No'}
+							onPress={(event)=>{
+			                	let value = form.test_drive_offered__c == 'No' ? 'Yes' : 'No';
+				                changeForm({ edited_field: 'test_drive_offered__c', edited_value: value });
+			                }}
+						/>
+						</View>
+                        <View style={{flexDirection: 'row',  }}>
+						<GenericCheckBox 
+							style={{marginRight: '5%'}}
+							label={'Voter Id Card'}
+							checked={form.test_drive_offered__c == 'Yes'}
+							onPress={(event)=>{
+			                	let value = form.test_drive_offered__c == 'Yes' ? 'No' : 'Yes';
+				                changeForm({ edited_field: 'test_drive_offered__c', edited_value: value });
+			                }}
+						/>
+
+						<GenericCheckBox
+							style={{marginHorizontal: '16%'}} 
+							label={'RC'}
+							checked={form.test_drive_offered__c == 'No'}
+							onPress={(event)=>{
+			                	let value = form.test_drive_offered__c == 'No' ? 'Yes' : 'No';
+				                changeForm({ edited_field: 'test_drive_offered__c', edited_value: value });
+			                }}
+						/>
+						</View>
+                        <View style={{flexDirection: 'row', }}>
+						<GenericCheckBox 
+							style={{marginRight: '5%'}}
+							label={'Acknowledgement'}
 							checked={form.test_drive_offered__c == 'Yes'}
 							onPress={(event)=>{
 			                	let value = form.test_drive_offered__c == 'Yes' ? 'No' : 'Yes';
@@ -328,7 +286,7 @@ class GenerateRecieptformScreen extends Component {
 
 						<GenericCheckBox
 							style={{marginHorizontal: '5%'}} 
-							label={'No'}
+							label={'Insurance '}
 							checked={form.test_drive_offered__c == 'No'}
 							onPress={(event)=>{
 			                	let value = form.test_drive_offered__c == 'No' ? 'Yes' : 'No';
@@ -336,15 +294,27 @@ class GenerateRecieptformScreen extends Component {
 			                }}
 						/>
 						</View>
+                        <View style={{flexDirection: 'row', }}>
+						<GenericCheckBox 
+							style={{marginRight: '5%'}}
+							label={'others'}
+							checked={form.test_drive_offered__c == 'Yes'}
+							onPress={(event)=>{
+			                	let value = form.test_drive_offered__c == 'Yes' ? 'No' : 'Yes';
+				                changeForm({ edited_field: 'test_drive_offered__c', edited_value: value });
+			                }}
+						/>
+
+						
+						</View>
 					</View>
 
-					<BlueButton
-						style={ApplicationStyles.formButton}
-						loading={loader}
-						disabled={loader}
-						title={'SUBMIT'}
-						onPress={() => this.submit()}
-					/>
+                    <WhiteButton
+                        title={'GENERATE BOOKING RECEIPT'}
+                        style={Style.actionButton}
+                        textStyle={Style.actionButtonText}
+             
+                    />
 				</ScrollView>
 			</View>
 		)
