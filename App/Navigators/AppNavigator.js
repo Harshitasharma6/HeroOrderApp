@@ -78,6 +78,8 @@ import SplashScreen from 'App/Containers/SplashScreen/SplashScreen';
 import InsightsScreen from 'App/Containers/Insights';
 import VisitorScreen from 'App/Containers/Visitor';
 import NewRegistrationFormScreen from 'App/Containers/Visitor/NewRegistration'
+import GenerateRecieptformScreen from 'App/Containers/Visitor/GenerateReciept'
+
 import UpdateVisitorScreen from 'App/Containers/Visitor/UpdateVisitor'
 import CustomerRegistrationFormScreen from 'App/Containers/Visitor/CustomerRegistrationForm'
 import VisitorInfoScreen from 'App/Containers/Visitor/VisitorInfo'
@@ -209,7 +211,9 @@ const StackNavigator = createStackNavigator(
     BookingConfirmedScreen,
     OpenHotAssignedLeadsScreen,
     NoActionScreen,
-    OrderCartScreen
+    OrderCartScreen,
+    GenerateRecieptformScreen,
+    
   },
   {
     // By default the application will show the splash screen

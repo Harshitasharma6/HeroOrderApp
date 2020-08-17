@@ -16,6 +16,7 @@ import InputDate from 'App/Components/FormInput/InputDate';
 import {ApplicationStyles} from 'App/Theme'
 import GenericCheckBox from 'App/Components/GenericCheckBox'
 import VisitorActions from 'App/Stores/Visitor/Actions'
+import moment from 'moment';
 
 // address_line_1__c: null
 // age__c: 28
@@ -372,7 +373,8 @@ class UpdateVisitorScreen extends Component {
                             this.props.changeForm({ edited_field: 'expected_close_date__c', edited_value: formattedDate })
                         }}
                         error={validation.invalid && validation.invalid_field == 'expected_close_date__c'}
-                        label={'Expected Purchase Date*'}
+						label={'Expected Purchase Date*'}
+						mindate={moment.now()}
                     />
 
 
@@ -412,7 +414,8 @@ class UpdateVisitorScreen extends Component {
                             this.props.changeForm({ edited_field: 'customer_birthday__c', edited_value: formattedDate })
                         }}
                         error={validation.invalid && validation.invalid_field == 'customer_birthday__c'}
-                        label={'Customer Birthday'}
+						label={'Customer Birthday'}
+						mindate={new Date(1950, 1, 1)}
                     />
 
 
@@ -426,7 +429,8 @@ class UpdateVisitorScreen extends Component {
                             this.props.changeForm({ edited_field: 'customer_anniversary__c', edited_value: formattedDate })
                         }}
                         error={validation.invalid && validation.invalid_field == 'customer_anniversary__c'}
-                        label={'Customer Anniversary'}
+						label={'Customer Anniversary'}
+						mindate={new Date(1950, 1, 1)}
                     />
 
 

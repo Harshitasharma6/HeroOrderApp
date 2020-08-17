@@ -16,7 +16,6 @@ import InputDate from 'App/Components/FormInput/InputDate';
 import {ApplicationStyles} from 'App/Theme'
 import GenericCheckBox from 'App/Components/GenericCheckBox'
 import VisitorActions from 'App/Stores/Visitor/Actions'
-import CustomerInfoCard from 'App/Containers/Insights/Customers/CustomerInfoCard'
 import moment from 'moment';
 // "first_name__c": "test 12",	(*mandatory)
 // 	"last_name__c": "enquiry visit test",	(*mandatory)
@@ -38,26 +37,15 @@ import moment from 'moment';
 // 	"customer__c": "0039D000008BMX2QAO",
 // 	"address_line_1__c" : “test address”
 
-class CustomerRegistrationForm extends Component {
-	componentDidMount() {
-		const {
-			changeForm, 
-			visitorData, 
-			setRegistrationForm
-		} = this.props;
 
-		let data = visitorData.data[0];
-		setRegistrationForm(data);
+class GenerateRecieptformScreen extends Component {
+	componentDidMount() {
+		
 	}
 
 	componentWillUnmount() {
-		const {
-			clearRegistrationForm
-		} = this.props;
-
-		clearRegistrationForm();
+		
 	}
-
 
 	submit() {
 		const { 
@@ -68,8 +56,7 @@ class CustomerRegistrationForm extends Component {
 		Keyboard.dismiss();
 		submitForm({
 			...form,
-			dealers_sales_person__c: 'a0O9D000001hLV9UAM',
-			"customer__c": form.sfid
+			dealers_sales_person__c: 'a0O9D000001hLV9UAM'
 		});
 	}
 
@@ -82,17 +69,72 @@ class CustomerRegistrationForm extends Component {
 			validation,
 			occupationList,
             sourceEnquiryList,
-            productsList,
-            visitorData
+            productsList
 		} = this.props;
 		
 		return (
 			<View style={Style.container}>
-				<CustomerInfoCard data={visitorData.data[0]} showEditButton={false}/>
+				<Text style={ApplicationStyles.formHeading}>{'New Registration'}</Text>
 				<ScrollView 
 					showsVerticalScrollIndicator={false}
 					style={Style.action}
 				>
+
+				 	<InputText
+						style={Style.mb10}
+						placeholder={'First Name'}
+						value={form.first_name__c}
+						onChange={(value) => changeForm({ edited_field: 'first_name__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'first_name__c'}
+						label={'First Name*'}
+					/>
+
+					<InputText
+						style={Style.mb10}
+						placeholder={'Last Name'}
+						value={form.last_name__c}
+						onChange={(value) => changeForm({ edited_field: 'last_name__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'last_name__c'}
+						label={'Last Name*'}
+					/>
+					
+                    <InputMobile
+						styles={Style.mb10}
+						placeholder={'Contact Number'}
+						value={form.contact_number__c}
+						onChange={(value) => changeForm({ edited_field: 'contact_number__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'contact_number__c'}
+						label={'Contact Number*'}
+					/>
+
+					<InputText
+						style={Style.mb10}
+						placeholder={'Email'}
+						value={form.email_id__c}
+						onChange={(value) => changeForm({ edited_field: 'email_id__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'email_id__c'}
+						label={'Email'}
+					/>
+
+					<TextArea
+	                    placeholder={'Address'}
+	                    label={'Address'}
+	                    numberOfLines={2}
+	                    style={Style.mb10}
+	                    value={form.address_line_1__c}
+						onChange={(value) => changeForm({ edited_field: 'address_line_1__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'address_line_1__c'}
+                	/>
+
+                	<InputNumber
+						styles={Style.mb10}
+						placeholder={'Age'}
+						value={form.age__c}
+						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'age__c'}
+						label={'Age'}
+					/>
+
 					{
 					// 	<InputText
 					// 	style={Style.mb10}
@@ -113,13 +155,46 @@ class CustomerRegistrationForm extends Component {
 					// />
 				}
 
-					
+					<View style={{width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
+						<Text style={{...ApplicationStyles.label, marginBottom: '1%'}}>Gender</Text>
+						<View style={{flexDirection: 'row', marginBottom: '2%'}}>
+						<GenericCheckBox 
+							style={{marginRight: '5%'}}
+							label={'Male'}
+							checked={form.genders__c == 'Male'}
+							onPress={(event)=>{
+			                	let value = form.genders__c == 'Male' ? 'Female' : 'Male';
+				                changeForm({ edited_field: 'genders__c', edited_value: value });
+			                }}
+						/>
 
+						<GenericCheckBox
+							style={{marginRight: '5%'}} 
+							label={'Female'}
+							checked={form.genders__c == 'Female'}
+							onPress={(event)=>{
+			                	let value = form.genders__c == 'Female' ? 'Male' : 'Female';
+				                changeForm({ edited_field: 'genders__c', edited_value: value });
+			                }}
+						/>
+						</View>
+					</View>
 
-					
 
 					<SearchableDropdown
-						key={form.product__c}
+				        dataSource={occupationList}
+				        placeHolderText={'Select Occupation'}
+				        selectedValue={form.occupation__c}
+				        onChange={(value) => changeForm({ edited_field: 'occupation__c', edited_value: value })}
+				        placeholder={'Type or Select Occupation'}
+				        invalid={false}
+				        labelStyles={{ ...Style.pickerLabel }}
+				        customPickerStyles={{ ...Style.picker }}
+				        label={'Occupation'}
+					/>
+
+
+					<SearchableDropdown
 				        dataSource={productsList}
 				        placeHolderText={'Select Product'}
 				        selectedValue={form.product__c}
@@ -212,7 +287,6 @@ class CustomerRegistrationForm extends Component {
 
 
 					<SearchableDropdown
-						key={form.lead_source__c}
 				        dataSource={sourceEnquiryList}
 				        placeHolderText={'Select Source'}
 				        selectedValue={form.lead_source__c}
@@ -228,7 +302,7 @@ class CustomerRegistrationForm extends Component {
                         style={Style.mb10}
                         placeholder={'Expected Purchase Date'}
                         value={HelperService.removeFieldsAndDateReadableFormat(form.expected_close_date__c)}
-                       	onChange={(value) => {
+                        onChange={(value) => {
                             let formattedDate = HelperService.convertMomentDateToTimestamp(value);
                             formattedDate = HelperService.dateReadableFormatWithHyphen(formattedDate);
                             this.props.changeForm({ edited_field: 'expected_close_date__c', edited_value: formattedDate })
@@ -264,7 +338,6 @@ class CustomerRegistrationForm extends Component {
 						</View>
 					</View>
 
-
 					<BlueButton
 						style={ApplicationStyles.formButton}
 						loading={loader}
@@ -286,17 +359,16 @@ const mapStateToProps = (state) => ({
 	occupationList 				: state.common.occupationList,
   	sourceEnquiryList 			: state.common.sourceEnquiryList,
   	productsList 				: state.common.productsList,
-  	visitorData 				: state.visitor.visitorSearchSuccessData
+  	contact_number              : state.visitor.searchCustomerForm.contact_number
 });
   
 const mapDispatchToProps = (dispatch) => ({
-	changeForm: (params)    	  => dispatch(VisitorActions.changeRegisterCustomerForm(params)),
-	submitForm: (params) 		  => dispatch(VisitorActions.registerCustomer(params)),
-	setRegistrationForm: (params) => dispatch(VisitorActions.setRegistrationForm(params)),
-	clearRegistrationForm: ()     => dispatch(VisitorActions.clearRegistrationForm())
+	changeForm: (params)       => dispatch(VisitorActions.changeRegisterCustomerForm(params)),
+	submitForm: (params)       => dispatch(VisitorActions.registerCustomer(params)),
+	clearRegistrationForm: ()  => dispatch(VisitorActions.clearRegistrationForm())
 });
 
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(CustomerRegistrationForm)
+)(GenerateRecieptformScreen)
