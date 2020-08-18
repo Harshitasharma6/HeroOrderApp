@@ -261,7 +261,7 @@ class LayoutScreen extends React.Component {
 
 
   getFooterScreenNode() {
-    let footerScreenNode = <FooterScreen />
+    let footerScreenNode = <FooterScreen openDrawer={() => this.props.openDrawer()}/>
     switch (this.props.currentScreen) {
       case 'SplashScreen':
         footerScreenNode = [];
@@ -270,7 +270,7 @@ class LayoutScreen extends React.Component {
         footerScreenNode = [];
         break;
       default:
-        footerScreenNode = <FooterScreen />
+        footerScreenNode = <FooterScreen openDrawer={() => this.props.openDrawer()}/>
     }
 
     return footerScreenNode;

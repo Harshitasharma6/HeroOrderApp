@@ -3,81 +3,62 @@ import NavigationService from 'App/Services/NavigationService';
 import { ApplicationStyles, Colors, Helpers } from 'App/Theme';
 import { ListItem } from 'native-base';
 import React, { Component } from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import BackArrowButton from 'App/Components/BackArrowButton';
+import BlueButton from 'App/Components/BlueButton';
 
 export default class SideBar extends Component {
 	navigate(screen) {
-		NavigationService.navigate(screen);
-		this.props.toggleModal()
+		//NavigationService.navigate(screen);
+		this.props.closeDrawer();
 	}
 
 	render() {
 		return (
-			<View style={{ width: '100%' }}>
+			<View style={{flex: 1, backgroundColor: Colors.white, paddingTop: hp('1%'), paddingBottom: hp('5%') }}>
+				<TouchableOpacity transparent onPress={NavigationService.goback}>
+					<GenericIcon
+				  		name={'arrow-circle-left'}
+				  		onPress={() => this.props.closeDrawer()}
+				    	style={Styles.backArrowButton}
+					/>
+				</TouchableOpacity>
 				<View style={Styles.buttonBox}>
 					<Image
-						style={{ width: 100, height: 100 }}
-						source={require('App/Assets/Images/logo.png')}
+						style={{ width: 300, height: 100, resizeMode: 'contain' }}
+						source={require('App/Assets/Images/herologo.png')}
 					/>
 				</View>
-				<ScrollView>
+				<ScrollView style={{paddingBottom: hp('3%') }}>
 					<ListItem style={Styles.listItemDivider} onPress={() => this.navigate('ProfileScreen')}>
-						<GenericIcon name={'person'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{' Profile'}</Text>
+						<GenericIcon name={'user-circle-o'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Profile'}</Text>
 					</ListItem>
 
 					<ListItem style={Styles.listItemDivider} onPress={() => this.navigate('OrdersListScreen')}>
-						<GenericIcon name={'cart'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{' Orders'}</Text>
+						<GenericIcon name={'user-o'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Dealer Salesperson'}</Text>
 					</ListItem>
 
 					<ListItem style={Styles.listItemDivider} onPress={() => this.navigate('EventList')}>
-						<GenericIcon name={'calendar'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{' Events'}</Text>
+						<GenericIcon name={'calendar'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Scheme Claim'}</Text>
 					</ListItem>
 
 					<ListItem style={Styles.listItemDivider} onPress={() => this.navigate('InfluencersListScreen')}>
-						<GenericIcon name={'people'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{' Influencers'}</Text>
+						<GenericIcon name={'users'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Sub Dealers'}</Text>
 					</ListItem>
-
-					<ListItem style={Styles.listItemDivider} onPress={() => this.navigate('SiteListScreen')}>
-						<GenericIcon name={'list'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{' Sites'}</Text>
-					</ListItem>
-
-					<ListItem style={Styles.listItemDivider} onPress={
-						() => this.navigate('LocalExpenseTabScreen')
-						// () => HelperService.showToast({ message: 'Coming soon', duration: 1000, buttonText: '' })
-					}>
-						<GenericIcon name={'wallet'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{' Local Expense'}</Text>
-					</ListItem>
-
-					<ListItem style={Styles.listItemDivider} onPress={
-						() => this.navigate('TourTabScreen')
-						// () => HelperService.showToast({ message: 'Coming soon', duration: 1000, buttonText: '' })
-					}>
-						<GenericIcon name={'car'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{' Tour'}</Text>
-					</ListItem>
-
-					<ListItem style={Styles.listItemDivider} onPress={
-						() => this.navigate('OutstationExpenseTabScreen')
-						// () => HelperService.showToast({ message: 'Coming soon', duration: 1000, buttonText: '' })
-					}>
-						<GenericIcon name={'wallet'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{' Outstation Expense'}</Text>
-					</ListItem>
-
 				</ScrollView>
-			</View >
+				<BlueButton title={'Logout'} style={{...ApplicationStyles.formButton}} />
+			</View>
 		);
 	}
 }
 
-// RetailerList
-// SiteListScreen
 const Styles = StyleSheet.create({
 	buttonBox: {
 		...Helpers.textCenter,
 		alignItems: 'center',
-		backgroundColor: Colors.user,
-		height: hp('20%'),
-		paddingTop: hp('4%')
+		backgroundColor: Colors.white,
+		height: hp('16%')
 	},
 	logo: {
 		width: hp('10%'),
@@ -85,13 +66,14 @@ const Styles = StyleSheet.create({
 	},
 	selectedListItemText: {
 		fontFamily: ApplicationStyles.textMsgFont,
-		fontSize: wp('4%'),
-		color: Colors.button
+		fontSize: wp('4.2%'),
+		color: Colors.grey,
+		textTransform: 'uppercase'
 	},
 	listItemIcon: {
 		fontFamily: ApplicationStyles.textFont,
 		fontSize: wp('4.5%'),
-		color: Colors.button,
+		color: Colors.primary,
 		marginHorizontal: 15
 	},
 	selectedListItemIcon: {
@@ -107,11 +89,21 @@ const Styles = StyleSheet.create({
 		backgroundColor: Colors.white
 	},
 	listItemDivider: {
-		backgroundColor: Colors.clrF1F9FF,
+		backgroundColor: Colors.lightGrey,
 		paddingHorizontal: 0,
-		marginHorizontal: 0,
-		marginLeft: 0,
-		paddingTop: 20,
-		paddingBottom: 20
+		marginLeft: '5%',
+		paddingTop: hp('2%'),
+		paddingBottom: hp('2%'),
+		width: '90%',
+		elevation: 5,
+		marginBottom: hp('.5%'),
+		marginTop: hp('.5%'),
+		borderRadius: 5
+	},
+	backArrowButton: {
+		color: Colors.primary,
+	   paddingRight: 10,
+	   paddingLeft: 5,
+	   fontSize: wp('8%')
 	}
 });

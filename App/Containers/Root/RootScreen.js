@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import NavigationService from 'App/Services/NavigationService'
 import AppNavigator from 'App/Navigators/AppNavigator'
-import { View, Keyboard, StatusBar, Alert } from 'react-native'
+import { View, Keyboard, StatusBar, Alert, Text } from 'react-native'
 import { Root } from "native-base";
 import { connect } from 'react-redux'
 import StartDayActions from 'App/Stores/StartDay/Actions'
@@ -17,8 +17,11 @@ import { KeyboardAvoidingView, SafeAreaView } from 'react-native';
 import Layout from 'App/Containers/Layout/LayoutScreen';
 import CallDetectorManager from 'react-native-call-detection'
 import VIForegroundService from '@voximplant/react-native-foreground-service';
+import { Drawer } from 'native-base';
+import SideBar from 'App/Containers/Layout/SideBarLayout/SideBar';
 
 class RootScreen extends Component {
+
   async componentDidMount() {
     const {
       id,
@@ -120,6 +123,14 @@ class RootScreen extends Component {
       Keyboard.dismiss()
   };
 
+  closeDrawer(){
+    this.drawer._root.close()
+  };
+
+  openDrawer(){
+    this.drawer._root.open()
+  };
+
   // gets the current screen from navigation state
   getActiveRouteName(navigationState) {
     if (!navigationState) {
@@ -132,15 +143,6 @@ class RootScreen extends Component {
     }
     return route.routeName;
   }
-
-
-  // componentDidCatch(error, info) {
-  //   // Display fallback UI
-  //   // You can also log the error to an error reporting service
-  //   // logErrorToMyService(error, info);
-  //   bugsnag.notify(new Error(error));
-  //   //console.log('Error:--', error)
-  // }
 
   render() {
     const {
@@ -157,7 +159,12 @@ class RootScreen extends Component {
           <Root>
           <StatusBar barStyle="dark-content"/>
           <SafeAreaView style={{flex: 1}}>
-            <Layout>
+            <Drawer
+              ref={(ref) => { this.drawer = ref; }}
+              content={<SideBar closeDrawer={() => this.closeDrawer()}/>}
+              side="right"
+              >
+            <Layout openDrawer={() => this.openDrawer()}>
               <View style={Helpers.fill}>
                 <NetworkStatusBanner
                   isConnected={this.props.isConnected}
@@ -185,6 +192,7 @@ class RootScreen extends Component {
                 />
               </View>
             </Layout>
+             </Drawer>
             </SafeAreaView>
           </Root>
         

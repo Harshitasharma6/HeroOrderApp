@@ -30,13 +30,15 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   footer: {
-  	backgroundColor:  Colors.white
+  	backgroundColor:  Colors.white,
+     zIndex: 5
   },
   footerContainer: {
       backgroundColor:  Colors.white,
       textAlign: 'center',
       alignItems: 'center',
       justifyContent: 'center',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      zIndex: 5
   }
 })

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { Colors, Fonts, ApplicationStyles } from 'App/Theme'
 import { Footer, FooterTab } from 'native-base'
@@ -12,23 +12,16 @@ import { PRESENT} from 'App/Constants';
 
 
 class FooterScreen extends React.Component {
-
   onHandleClick(screen) {
      const {
       status,
       checkout
-    } = this.props
+    } = this.props;
 
-    // if ( status != PRESENT || checkout) {
-    //   HelperService.showToast({
-    //     message: 'You are not checked-In for today.',
-    //     duration: 2000
-    //   });
-    //   return
-    // }
+    NavigationService.navigate(screen);
 
-     NavigationService.navigate(screen)
-  }  
+  }
+
 
 
   render() {
@@ -80,6 +73,7 @@ class FooterScreen extends React.Component {
 
 
     return (
+
       <Footer style={Style.footerContainer}>
         <FooterTab style={Style.footer}>
         <FooterIcon
@@ -110,9 +104,8 @@ class FooterScreen extends React.Component {
           <FooterIcon
             icon={'menu'}
             iconText={'Menu'}
-            active={profilesActive}
-            disabled={true}
-            onPress={() => NavigationService.navigate('ProfileScreen')}
+            disabled={false}
+            onPress={() => this.props.openDrawer()}
           />
 
         </FooterTab>
