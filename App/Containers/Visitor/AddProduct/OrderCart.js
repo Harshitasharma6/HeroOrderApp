@@ -111,7 +111,10 @@ class OrderCartScreen extends Component {
 						message: 'Booking Confirmed', 
 						duration: 2000, 
 						buttonText: 'Okay' 
-					}); removeItemFromCart() ; NavigationService.navigate('AddProductScreen')}}
+          }); removeItemFromCart() ; NavigationService.navigate('AddProductScreen');
+          NavigationService.navigate('GenerateRecieptformScreen');
+        
+        }}
 		      	/>
 		    </ScrollView>
 	    );

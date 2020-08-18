@@ -79,6 +79,9 @@ import InsightsScreen from 'App/Containers/Insights';
 import VisitorScreen from 'App/Containers/Visitor';
 import NewRegistrationFormScreen from 'App/Containers/Visitor/NewRegistration'
 import CustomerCallFormScreen from 'App/Containers/Visitor/CustomerCallForm'
+import GenerateRecieptformScreen from 'App/Containers/Visitor/GenerateReciept'
+import GenerateInvoiceformScreen from  'App/Containers/Visitor/GenerateInvoice'
+import InvoiceDetailformScreen from  'App/Containers/Visitor/InvoiceDetail'
 import UpdateVisitorScreen from 'App/Containers/Visitor/UpdateVisitor'
 import CustomerRegistrationFormScreen from 'App/Containers/Visitor/CustomerRegistrationForm'
 import VisitorInfoScreen from 'App/Containers/Visitor/VisitorInfo'
@@ -211,7 +214,14 @@ const StackNavigator = createStackNavigator(
     OpenHotAssignedLeadsScreen,
     NoActionScreen,
     OrderCartScreen,
+<<<<<<< HEAD
     CustomerCallFormScreen
+=======
+    GenerateRecieptformScreen,
+    GenerateInvoiceformScreen ,
+    InvoiceDetailformScreen ,
+    
+>>>>>>> origin/master
   },
   {
     // By default the application will show the splash screen

@@ -16,7 +16,7 @@ import InputDate from 'App/Components/FormInput/InputDate';
 import {ApplicationStyles} from 'App/Theme'
 import GenericCheckBox from 'App/Components/GenericCheckBox'
 import VisitorActions from 'App/Stores/Visitor/Actions'
-
+import moment from 'moment';
 // "first_name__c": "test 12",	(*mandatory)
 // 	"last_name__c": "enquiry visit test",	(*mandatory)
 // 	"contact_number__c": "1646464944", 	(*mandatory)
@@ -320,7 +320,8 @@ class NewRegistrationFormScreen extends Component {
                             this.props.changeForm({ edited_field: 'expected_close_date__c', edited_value: formattedDate })
                         }}
                         error={validation.invalid && validation.invalid_field == 'expected_close_date__c'}
-                        label={'Expected Purchase Date*'}
+						label={'Expected Purchase Date*'}
+						mindate={moment.now()}
                     />
 
 
