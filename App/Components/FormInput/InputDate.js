@@ -6,7 +6,7 @@ import Style from './InputStyles';
 import moment from 'moment';
 import { HelperService } from 'App/Services/Utils/HelperService';
 
-const InputDate = ({ placeholder = '', onChange = () => { }, style = {}, value = '', error = false, label = '', editable = false }) => (
+const InputDate = ({ placeholder = '', onChange = () => { }, style = {}, value = '', error = false, label = '', editable = false , mindate=''}) => (
     <>
         {label ? <Label style={{ ...Style.label }}>{label}</Label> : []}
         <View style={error ? { ...Style.input, ...Style.inputError, ...Styles.container } : { ...Styles.input, ...Styles.container }}>
@@ -19,7 +19,7 @@ const InputDate = ({ placeholder = '', onChange = () => { }, style = {}, value =
                     textStyle={Style.textStyle}
                     placeHolderTextStyle={Style.placeHolderTextStyle}
                     onDateChange={onChange}
-                    minimumDate={moment.now()}
+                    minimumDate={mindate}
                     disabled={editable}
                 />
             </View>
