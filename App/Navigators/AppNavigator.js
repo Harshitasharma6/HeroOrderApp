@@ -108,6 +108,7 @@ import NoActionScreen from 'App/Containers/LeadAlerts/Actionables/FollowUps/NoAc
 import OrderCartScreen from 'App/Containers/Visitor/AddProduct/OrderCart'
 import WarrantyRegistrationformScreen from 'App/Containers/WarrantyRegistration'
 import SubDealerFormScreen from 'App/Containers/AddSubDealer'
+import ProfileScreen from 'App/Containers/Profile'
 
 //OpenHotLeadsScreen
 //PurchaseDateOverDueScreen
@@ -220,6 +221,7 @@ const StackNavigator = createStackNavigator(
     InvoiceDetailformScreen ,
     WarrantyRegistrationformScreen,
     SubDealerFormScreen,
+    ProfileScreen,
     
   },
   {

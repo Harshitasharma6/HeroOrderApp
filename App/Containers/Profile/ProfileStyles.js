@@ -16,7 +16,7 @@ export default StyleSheet.create({
     // ...Metrics.smallBottomMargin,
     marginVertical: 12,
     marginHorizontal:10,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.primary,
     borderColor: Colors.lightGrey,
     borderStyle: 'solid',
     borderWidth: 1,
@@ -27,7 +27,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 10,
     width: wp('60%'),
-    elevation: 5,
+   
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
