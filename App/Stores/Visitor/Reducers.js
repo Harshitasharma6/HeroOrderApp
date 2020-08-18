@@ -166,15 +166,6 @@ export const hideOpenLeadPrompt = (state) => ({
 });
 
 
-  // [VisitorTypes.CREATE_FEEDBACK_SUCCESS]           : createFeedbackSuccess,
-  // [VisitorTypes.CREATE_FEEDBACK_FAILURE]           : createFeedbackFailure,
-  // [VisitorTypes.CREATE_FEEDBACK_LOADING]           : createFeedbackLoading,
-  // [VisitorTypes.CREATE_FEEDBACK_LOADING_STOP]      : createFeedbackLoadingStop,
-  // [VisitorTypes.CHANGE_CREATE_FEEDBACK_FORM]       : changeCreateFeedbackForm,
-  // [VisitorTypes.CREATE_FEEDBACK_VALIDATION_FAILED] : createFeedbackValidationFailed
-
-
-
 export const createFeedbackSuccess = (state, {payload}) => ({
   ...state,
   feedbackForm: INITIAL_STATE.feedbackForm,
@@ -332,62 +323,134 @@ export const setRegistrationForm = (state, {payload}) => ({
 
 export const clearRegistrationForm = (state, {payload}) => ({
   ...state,
-  registerCustomerForm: INITIAL_STATE.registerCustomerForm
+  registerCustomerForm: INITIAL_STATE.registerCustomerForm,
+  registerCustomerCallForm: INITIAL_STATE.registerCustomerCallForm
 });
 
 
+
+
+
+
+export const registerCustomerCallSuccess = (state, {payload}) => ({
+  ...state,
+  registerCustomerCallForm: INITIAL_STATE.registerCustomerCallForm,
+  loaders: {
+    ...state.loaders,
+    registerCustomerCallLoader: false
+  }
+});
+
+export const registerCustomerCallFailure = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    registerCustomerCallLoader: false
+  }
+});
+
+export const registerCustomerCallLoading = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    registerCustomerCallLoader: true
+  }
+});
+
+export const registerCustomerCallLoadingStop = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    registerCustomerCallLoader: false
+  }
+});
+
+
+export const changeRegisterCustomerCallForm = (state, { payload }) => {
+    const {
+    edited_field,
+    edited_value
+  } = payload;
+
+  let changed_entity = {};
+  changed_entity[edited_field] = edited_value;
+  return {
+    ...state,
+    registerCustomerCallForm : {
+      ...state.registerCustomerCallForm,
+      ...changed_entity
+    },
+    registerCustomerCallValidation: INITIAL_STATE.registerCustomerCallValidation
+  }
+};
+
+export const clearRegisterCustomerCallForm = (state, {payload}) => ({
+  ...state,
+  registerCustomerCallForm: INITIAL_STATE.registerCustomerCallForm
+});
+
+export const registerCustomerCallValidationFailed = (state, {payload}) => ({
+  ...state,
+    registerCustomerCallValidation: {
+        ...payload
+    }
+});
+
+
+  // [VisitorTypes.REGISTER_CUSTOMER_CALL_SUCCESS]        : registerCustomerCallSuccess,
+  // [VisitorTypes.REGISTER_CUSTOMER_CALL_FAILURE]        : registerCustomerCallFailure,
+  // [VisitorTypes.REGISTER_CUSTOMER_CALL_LOADING]        : registerCustomerCallLoading,
+  // [VisitorTypes.REGISTER_CUSTOMER_CALL_LOADING_STOP]   : registerCustomerCallLoadingStop,
+  // [VisitorTypes.CHANGE_REGISTER_CUSTOMER_CALL_FORM]    : changeRegisterCustomerCallForm
+
+
 export const reducer = createReducer(INITIAL_STATE, {
-	[VisitorTypes.SEARCH_CUSTOMER_SUCCESS] 	         : searchCustomerSuccess,
-	[VisitorTypes.SEARCH_CUSTOMER_FAILURE] 	         : searchCustomerFailure,
-	[VisitorTypes.SEARCH_CUSTOMER_LOADING] 	         : searchCustomerLoading,
-	[VisitorTypes.SEARCH_CUSTOMER_LOADING_STOP]      : searchCustomerLoadingStop,
-	[VisitorTypes.CLEAR_SEARCH_CUSTOMER_FORM]        : clearSearchCustomerForm,
-	[VisitorTypes.CHANGE_SEARCH_CUSTOMER_FORM]       : changeSearchCustomerForm,
-	[VisitorTypes.SEARCH_CUSTOMER_VALIDATION_FAILED] : searchCustomerValidationFailed,
+	[VisitorTypes.SEARCH_CUSTOMER_SUCCESS] 	             : searchCustomerSuccess,
+	[VisitorTypes.SEARCH_CUSTOMER_FAILURE] 	             : searchCustomerFailure,
+	[VisitorTypes.SEARCH_CUSTOMER_LOADING] 	             : searchCustomerLoading,
+	[VisitorTypes.SEARCH_CUSTOMER_LOADING_STOP]          : searchCustomerLoadingStop,
+	[VisitorTypes.CLEAR_SEARCH_CUSTOMER_FORM]            : clearSearchCustomerForm,
+	[VisitorTypes.CHANGE_SEARCH_CUSTOMER_FORM]           : changeSearchCustomerForm,
+	[VisitorTypes.SEARCH_CUSTOMER_VALIDATION_FAILED]     : searchCustomerValidationFailed,
 
+	[VisitorTypes.REGISTER_CUSTOMER_SUCCESS] 	 		       : registerCustomerSuccess,
+	[VisitorTypes.REGISTER_CUSTOMER_FAILURE] 	 		       : registerCustomerFailure,
+	[VisitorTypes.REGISTER_CUSTOMER_LOADING]             : registerCustomerLoading,
+	[VisitorTypes.REGISTER_CUSTOMER_LOADING_STOP]        : registerCustomerLoadingStop, 
+	[VisitorTypes.CHANGE_REGISTER_CUSTOMER_FORM] 		     : changeRegisterCustomerForm,
+	[VisitorTypes.REGISTER_CUSTOMER_VALIDATION_FAILED]   : registerCustomerValidationFailed,
 
+  [VisitorTypes.UPDATE_VISITOR_SUCCESS]                : updateVisitorSuccess,
+	[VisitorTypes.SHOW_OPEN_LEAD_PROMPT]  				       : showOpenLeadPrompt,
+	[VisitorTypes.HIDE_OPEN_LEAD_PROMPT]  				       : hideOpenLeadPrompt,
+	[VisitorTypes.SET_REGISTRATION_FORM]  				       : setRegistrationForm,
+	[VisitorTypes.CLEAR_REGISTRATION_FORM]  		         : clearRegistrationForm,
 
+  [VisitorTypes.CREATE_FEEDBACK_SUCCESS]               : createFeedbackSuccess,
+  [VisitorTypes.CREATE_FEEDBACK_FAILURE]               : createFeedbackFailure,
+  [VisitorTypes.CREATE_FEEDBACK_LOADING]               : createFeedbackLoading,
+  [VisitorTypes.CREATE_FEEDBACK_LOADING_STOP]          : createFeedbackLoadingStop,
+  [VisitorTypes.CHANGE_CREATE_FEEDBACK_FORM]           : changeCreateFeedbackForm,
+  [VisitorTypes.CREATE_FEEDBACK_VALIDATION_FAILED]     : createFeedbackValidationFailed,
 
-	[VisitorTypes.REGISTER_CUSTOMER_SUCCESS] 	 		: registerCustomerSuccess,
-	[VisitorTypes.REGISTER_CUSTOMER_FAILURE] 	 		: registerCustomerFailure,
-	[VisitorTypes.REGISTER_CUSTOMER_LOADING]            : registerCustomerLoading,
-	[VisitorTypes.REGISTER_CUSTOMER_LOADING_STOP]       : registerCustomerLoadingStop, 
-	[VisitorTypes.CHANGE_REGISTER_CUSTOMER_FORM] 		: changeRegisterCustomerForm,
-	[VisitorTypes.REGISTER_CUSTOMER_VALIDATION_FAILED]  : registerCustomerValidationFailed,
+  [VisitorTypes.GET_ALL_VISITS_SUCCESS]                : getAllVisitsSuccess,
+  [VisitorTypes.GET_ALL_VISITS_FAILURE]                : getAllVisitsFailure,
+  [VisitorTypes.GET_ALL_VISITS_LOADING]                : getAllVisitsLoading,
+  [VisitorTypes.GET_ALL_VISITS_LOADING_STOP]           : getAllVisitsLoadingStop,
 
+	[VisitorTypes.GET_FEEDBACKS_SUCCESS]                 : getFeedbacksSuccess,
+	[VisitorTypes.GET_FEEDBACKS_FAILURE]                 : getFeedbacksFailure,
+	[VisitorTypes.GET_FEEDBACKS_LOADING]                 : getFeedbacksLoading,
+	[VisitorTypes.GET_FEEDBACKS_LOADING_STOP]            : getFeedbacksLoadingStop,
 
+	[VisitorTypes.SET_CURRENT_ENQUIRY]      	           : setCurrentEnquiry,
+	[VisitorTypes.CLEAR_CURRENT_ENQUIRY]      	         : clearCurrentEnquiry,
 
-  	[VisitorTypes.UPDATE_VISITOR_SUCCESS]               : updateVisitorSuccess,
-	[VisitorTypes.SHOW_OPEN_LEAD_PROMPT]  				: showOpenLeadPrompt,
-	[VisitorTypes.HIDE_OPEN_LEAD_PROMPT]  				: hideOpenLeadPrompt,
-	[VisitorTypes.SET_REGISTRATION_FORM]  				: setRegistrationForm,
-	[VisitorTypes.CLEAR_REGISTRATION_FORM]  		    : clearRegistrationForm,
-
-
-
-  	[VisitorTypes.CREATE_FEEDBACK_SUCCESS]           : createFeedbackSuccess,
-  	[VisitorTypes.CREATE_FEEDBACK_FAILURE]           : createFeedbackFailure,
-  	[VisitorTypes.CREATE_FEEDBACK_LOADING]           : createFeedbackLoading,
-  	[VisitorTypes.CREATE_FEEDBACK_LOADING_STOP]      : createFeedbackLoadingStop,
-  	[VisitorTypes.CHANGE_CREATE_FEEDBACK_FORM]       : changeCreateFeedbackForm,
-  	[VisitorTypes.CREATE_FEEDBACK_VALIDATION_FAILED] : createFeedbackValidationFailed,
-
-
-
-  	[VisitorTypes.GET_ALL_VISITS_SUCCESS]           : getAllVisitsSuccess,
-  	[VisitorTypes.GET_ALL_VISITS_FAILURE]           : getAllVisitsFailure,
-  	[VisitorTypes.GET_ALL_VISITS_LOADING]           : getAllVisitsLoading,
-  	[VisitorTypes.GET_ALL_VISITS_LOADING_STOP]      : getAllVisitsLoadingStop,
-
-
-
-	[VisitorTypes.GET_FEEDBACKS_SUCCESS]           : getFeedbacksSuccess,
-	[VisitorTypes.GET_FEEDBACKS_FAILURE]           : getFeedbacksFailure,
-	[VisitorTypes.GET_FEEDBACKS_LOADING]           : getFeedbacksLoading,
-	[VisitorTypes.GET_FEEDBACKS_LOADING_STOP]      : getFeedbacksLoadingStop,
-
-
-	[VisitorTypes.SET_CURRENT_ENQUIRY]      	: setCurrentEnquiry,
-	[VisitorTypes.CLEAR_CURRENT_ENQUIRY]      	: clearCurrentEnquiry
+  [VisitorTypes.REGISTER_CUSTOMER_CALL_SUCCESS]        : registerCustomerCallSuccess,
+  [VisitorTypes.REGISTER_CUSTOMER_CALL_FAILURE]        : registerCustomerCallFailure,
+  [VisitorTypes.REGISTER_CUSTOMER_CALL_LOADING]        : registerCustomerCallLoading,
+  [VisitorTypes.REGISTER_CUSTOMER_CALL_LOADING_STOP]   : registerCustomerCallLoadingStop,
+  [VisitorTypes.CHANGE_REGISTER_CUSTOMER_CALL_FORM]    : changeRegisterCustomerCallForm,
+  [VisitorTypes.REGISTER_CUSTOMER_CALL_VALIDATION_FAILED]: registerCustomerCallValidationFailed
 
 });

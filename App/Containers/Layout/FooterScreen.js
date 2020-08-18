@@ -38,46 +38,10 @@ class FooterScreen extends React.Component {
       currentScreen
     } = this.props
 
-    let visitsActive =
-      currentScreen === 'CheckInScreen' ||
-      currentScreen === 'CounterSelectionScreen'||
-      currentScreen === 'ShreeListsScreens'||
-      currentScreen === 'ShreeRetailersListScreen' ||
-      currentScreen === 'NonShreeListsScreens' ||
-      currentScreen === 'ShreeInfo' ||
-      currentScreen === 'ShreeVisitForm' ||
-      currentScreen === 'ShreeCountersVisitsList' ||
-      currentScreen === 'ShreeCounterVisitForm' ||
-      currentScreen === 'NonShreeCompatitor' ||
-      currentScreen === 'NonShreeInfo' ||
-      currentScreen === 'AddShreeDealerForm' ||
-      currentScreen === 'AddShreeRetailerForm'||
-      currentScreen === 'CounterSelectionScreen'||
-      currentScreen === 'PreviousVisits'||
-      currentScreen === 'Payments'||
-      currentScreen === 'SalesInfo'||
-      currentScreen === 'FinalObservationFormScreen' ||
-      currentScreen === 'FinalObservationList' ||
-      currentScreen === 'NonShreeVisitForm' ||
-      currentScreen === 'NonShreeVisitList' ||
-      currentScreen === 'AddNonShreeForm'
 
-    let visitsSummaryActive =  
-      currentScreen === 'VisitSummaryList'
    
     let profilesActive = currentScreen === 'ProfileScreen';
-    
-    let settingsActive = 
-      currentScreen === 'FeedbackScreen' ||
-      currentScreen === 'CommunicationScreen' ||
-      currentScreen === 'CommunicationsAttachmentsScreen'
-
-
-      
-    let visitsDisabled = status != PRESENT || checkout
-    let visitsSummaryDisabled = status != PRESENT || checkout
-
-
+   
 
     let visitorActive = 
       currentScreen == 'VisitorScreen' || 
@@ -91,7 +55,8 @@ class FooterScreen extends React.Component {
       currentScreen == 'CustomerRegistrationFormScreen' ||
       currentScreen == 'AddProductInfoScreen' ||
       currentScreen == 'AddProductsSchemesScreen' ||
-      currentScreen == 'OrderCartScreen'
+      currentScreen == 'OrderCartScreen' || 
+      currentScreen == 'CustomerCallFormScreen'
 
     let insightsActive = 
       currentScreen == 'InsightsScreen' ||

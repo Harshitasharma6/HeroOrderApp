@@ -60,6 +60,31 @@ export function* watchRegisterCustomer() {
 }
 
 
+export function* watchRegisterCustomerCall() {
+	while (true) {
+		const { payload } = yield take(VisitorTypes.REGISTER_CUSTOMER_CALL)
+		try {
+			const validationFailed = yield call(ValidationService.validateRegisterCustomerCallForm, payload);
+		
+			if (validationFailed) {
+				HelperService.showToast({ 
+					message: validationFailed.error_message, 
+					duration: 2000, 
+					buttonText: 'Okay' 
+				});
+
+				yield put(VisitorActions.registerCustomerCallValidationFailed(validationFailed));
+				continue;
+			}
+		} catch (err) {
+			console.log(err)
+		}
+
+		yield call(registerCustomerCall, payload)
+	}
+}
+
+
 export function* watchUpdateVisitor() {
 	while (true) {
 		const { payload } = yield take(VisitorTypes.UPDATE_VISITOR)
@@ -226,6 +251,49 @@ function* registerCustomer(payload) {
 		yield put(VisitorActions.registerCustomerFailure());
 		HelperService.showToast({ 
 			message: 'Error!! Customer Registration Failed.Verify fields and try again.', 
+			duration: 2000, 
+			buttonText: 'Okay' 
+		});
+	}
+}
+
+function* registerCustomerCall(payload) {
+	yield put(VisitorActions.registerCustomerCallLoading());
+	try {
+		const isOnline = yield select(getConnectionStatus);
+		if (!isOnline) {
+			yield put(VisitorActions.registerCustomerCallFailure());
+			HelperService.showToast({ 
+				message: 'Cannot Registration. No Internet connection.', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+			return;
+		}
+
+		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
+		payload.dealer_id = '0019D000009zum3QAA'
+		const successData = yield call(VisitorService.registerCustomerCall, payload);
+
+		if (successData) { 
+			yield put(VisitorActions.registerCustomerCallSuccess(successData));
+			HelperService.showToast({ 
+				message: 'Call Registered Successfully!!', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+		} else {
+			yield put(VisitorActions.registerCustomerCallFailure())
+			HelperService.showToast({ 
+				message: 'Error!! Call Registration Failed.Verify fields and try again.', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+		}
+	} catch (error) {
+		yield put(VisitorActions.registerCustomerCallFailure());
+		HelperService.showToast({ 
+			message: 'Error!! Call Registration Failed.Verify fields and try again.', 
 			duration: 2000, 
 			buttonText: 'Okay' 
 		});

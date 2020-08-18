@@ -6,6 +6,7 @@ import { Root } from "native-base";
 import { connect } from 'react-redux'
 import StartDayActions from 'App/Stores/StartDay/Actions'
 import StartupActions from 'App/Stores/Startup/Actions'
+import VisitorActions from 'App/Stores/Visitor/Actions'
 import CommonActions from 'App/Stores/Common/Actions'
 import { PropTypes } from 'prop-types'
 import { Helpers } from 'App/Theme'
@@ -23,6 +24,7 @@ class RootScreen extends Component {
       id,
       token,
       startup,
+      changeForm,
       startedToday,
       endedToday,
       absentToday,
@@ -41,7 +43,7 @@ class RootScreen extends Component {
     if (!permission) {
       Alert.alert(
         "Storage permission Denied.",
-        'If you have denied permanently then Go "App Permissions" and Turn on "Storage" Permission for Shree.'
+        'If you have denied permanently then Go "App Permissions" and Turn on "Storage" Permission for HeroElectric.'
       );
     }
 
@@ -52,59 +54,60 @@ class RootScreen extends Component {
     }else {
       Alert.alert(
         "Location permission Denied.Cannot Proceed",
-        'If you have denied permanently then Go "App Permissions" and Turn on "Location" Permission for Shree.'
+        'If you have denied permanently then Go "App Permissions" and Turn on "Location" Permission for HeroElectric.'
       );
     }
+
     startup();
-    
+
+    let phoneStatePermission = await HelperService.requestPhoneStatePermission();
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
-    this.callDetector = new CallDetectorManager((event, phoneNumber)=> {
-      // For iOS event will be either "Connected",
-      // "Disconnected","Dialing" and "Incoming"
+    if (phoneStatePermission) {
+        this.callDetector = new CallDetectorManager((event, phoneNumber)=> {
+          if (event === 'Disconnected') {
+            Alert.alert(
+              `Do you want to register the recent call from number ${phoneNumber} ?`,
+              'Pressing Yes will take you to screen where you can create record for this call.',
+              [
+                {
+                  text: 'Cancel',
+                  onPress: () => console.log('Cancel Pressed'),
+                  style: 'cancel'
+                },
+                { text: 'Yes', onPress: () => {changeForm({edited_field: 'contact_number__c', edited_value: phoneNumber}); NavigationService.navigate('CustomerCallFormScreen') }}
+              ],
+              { cancelable: false }
+            );
+          }
+          else if (event === 'Connected') {
 
-      // For Android event will be either "Offhook",
-      // "Disconnected", "Incoming" or "Missed"
-      // phoneNumber should store caller/called number
-
-
-      if (event === 'Disconnected') {
-        Alert.alert(
-            `${phoneNumber} disconnected`,
-        );
-      }
-      else if (event === 'Connected') {
-
-      }
-      else if (event === 'Incoming') {
-       
-      }
-      else if (event === 'Dialing') {
-      // Do something call got dialing
-      // This clause will only be executed for iOS
-      }
-      else if (event === 'Offhook') {
-      //Device call state: Off-hook.
-      // At least one call exists that is dialing,
-      // active, or on hold,
-      // and no calls are ringing or waiting.
-      // This clause will only be executed for Android
-      }
-      else if (event === 'Missed') {
-          // Do something call got missed
-          // This clause will only be executed for Android
-      }
-    },
-    true, // if you want to read the phone number of the incoming call [ANDROID], otherwise false
-    ()=>{}, // callback if your permission got denied [ANDROID] [only if you want to read incoming number] default: console.error
-    {
-    title: 'Phone State Permission',
-    message: 'This app needs access to your phone state in order to react and/or to adapt to incoming calls.'
-    } // a custom permission request message to explain to your user, why you need the permission [recommended] - this is the default one
-    );
-
-    HelperService.startForegroundService()
-
-
+          }
+          else if (event === 'Incoming') {
+            
+          }
+          else if (event === 'Dialing') {
+         
+          }
+          else if (event === 'Offhook') {
+         
+          }
+          else if (event === 'Missed') {
+          }
+        },
+        true, 
+        ()=>{},
+        {
+          title: 'Phone State Permission',
+          message: 'This app needs access to your phone state in order to react and/or to adapt to incoming calls.'
+        }
+      );
+    }else {
+      Alert.alert(
+        "Phone State and Call Logs Permission",
+        'If you have denied permanently then Go "App Permissions" and Turn on "Call Log" and "Phone State" Permission for HeroElectric.'
+      );
+    }
+    HelperService.startForegroundService();
   }
 
   componentWillUnmount() {
@@ -211,11 +214,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  startup: (params)                  => dispatch(StartupActions.startup(params)),
-  screenChanged: (previousRouteName) => dispatch(CommonActions.screenChanged(previousRouteName)),
-  closeModal:()                      => dispatch(CommonActions.closeModal()),
+  startup: (params)                   => dispatch(StartupActions.startup(params)),
+  screenChanged: (previousRouteName)  => dispatch(CommonActions.screenChanged(previousRouteName)),
+  closeModal:()                       => dispatch(CommonActions.closeModal()),
   fetchCurrentLocationSuccess:(params)=> dispatch(StartDayActions.fetchCurrentLocationSuccess(params)),
-
+  changeForm: (params)                => dispatch(VisitorActions.changeRegisterCustomerCallForm(params))
 })
 
 export default connect(

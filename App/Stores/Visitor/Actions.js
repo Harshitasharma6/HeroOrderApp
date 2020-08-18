@@ -53,7 +53,16 @@ const { Types, Creators } = createActions({
 
 
 	setCurrentEnquiry: ['payload'],
-	clearCurrentEnquiry: null
+	clearCurrentEnquiry: null,
+
+
+	registerCustomerCall: ['payload'],
+	registerCustomerCallSuccess:  ['payload'],
+	registerCustomerCallFailure: null,
+	registerCustomerCallLoading: null,
+	registerCustomerCallLoadingStop: null,
+	changeRegisterCustomerCallForm: ['payload'],
+	registerCustomerCallValidationFailed: ['payload']
 });
 
 export const VisitorTypes = Types

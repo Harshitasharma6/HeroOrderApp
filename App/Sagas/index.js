@@ -101,6 +101,7 @@ import {
  import { 
     watchSearchCustomer,
     watchRegisterCustomer,
+    watchRegisterCustomerCall,
     watchCreateFeedback,
     watchUpdateVisitor,
     getAllVisits,
@@ -195,6 +196,7 @@ export default function* root() {
         fork(watchUpdateVisitor),
         fork(watchSearchCustomer),
         fork(watchRegisterCustomer),
+        fork(watchRegisterCustomerCall),
         fork(watchCreateFeedback),
         takeLatest(VisitorTypes.GET_ALL_VISITS, getAllVisits),
         takeLatest(VisitorTypes.GET_FEEDBACKS, getFeedbacks)

@@ -8,9 +8,11 @@ export const INITIAL_STATE = {
 		createFeedbackLoader: false,
 		getAllVisitsLoader: false,
 		getFeedbacksLoader: false,
+		registerCustomerCallLoader: false
 	},
 	searchCustomerForm: {},
 	registerCustomerForm: {},
+	registerCustomerCallForm: {},
 	currentVisitorData: {},
 	visitorSearchSuccessData: {},
 	searchCustomerValidation: {
@@ -22,6 +24,10 @@ export const INITIAL_STATE = {
         invalid_field: ''
     },
     createFeedbackValidation: {
+    	invalid: false,
+        invalid_field: ''
+    },
+    registerCustomerCallValidation: {
     	invalid: false,
         invalid_field: ''
     },

@@ -108,6 +108,11 @@ function validateCreateFeedbackForm(params) {
 }
 
 
+function validateRegisterCustomerCallForm(params) {
+	return false;
+}
+
+
 
 
 function validatePhoneNumber(number) {
@@ -138,5 +143,6 @@ function validateFieldIsEmpty(value) {
 export const ValidationService = {
 	validateSearchCustomerForm,
 	validateRegisterCustomerForm,
-	validateCreateFeedbackForm
+	validateCreateFeedbackForm,
+	validateRegisterCustomerCallForm
 }

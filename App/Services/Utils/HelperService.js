@@ -278,6 +278,33 @@ async function requestMultipleStoragePermission() {
 	return storagePermission;
 }
 
+
+async function requestPhoneStatePermission() {
+	let permission = false;
+	if (Platform.OS === 'android') {
+		try {
+			const granted = await PermissionsAndroid.requestMultiple(
+			      [
+			     	PermissionsAndroid.PERMISSIONS.READ_CALL_LOG,
+    				PermissionsAndroid.PERMISSIONS.READ_PHONE_STATE
+			      ]
+      		);
+      		
+			if (granted['android.permission.READ_CALL_LOG'] && granted['android.permission.READ_PHONE_STATE'] === 'granted') {
+				permission = true
+			} else {
+				permission = false
+			}
+		} catch (err) {
+			permission = false
+		}
+	} else if (Platform.OS === 'ios') {
+		permission = true;
+	}
+
+	return permission;
+}
+
 async function requestStoragePermission() {
 	let storagePermission = false;
 	if (Platform.OS === 'android') {
@@ -1171,5 +1198,6 @@ export const HelperService = {
 	startForegroundService,
 	removeFieldsAndDateReadableFormat,
 	removeFieldsTimeReadableFormat,
-	findDayReadableFormat
+	findDayReadableFormat,
+	requestPhoneStatePermission
 }
