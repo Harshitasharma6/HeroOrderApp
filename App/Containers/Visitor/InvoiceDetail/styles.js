@@ -81,7 +81,6 @@ AttachDocButton:{
     justifyContent: 'center',
     padding: 0
   },
-  
   text: {
     color: Colors.white,
     fontFamily: ApplicationStyles.textFont,
@@ -139,9 +138,10 @@ AttachDocButton:{
     marginBottom: hp('1%'),
     marginTop: hp('1%'),
     marginRight: wp('2%'),
-    marginLeft: wp('1%'),
-    height: hp('5%'),
+    marginLeft: wp('22.5%'),
+    height: hp('6%'),
     minWidth: wp('25%'),
+    width: wp('45%')
   },
   actionButtonText: {
     fontSize: wp('2.9%'),

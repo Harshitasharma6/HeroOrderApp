@@ -9,13 +9,8 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 import { connect } from 'react-redux';
 
 
-class VisitorRecieptScreenLayout extends React.Component {
-  scrollToIndex(index){
-    let distanceToBeScrolled = (index)*wp('23%');
-    if (this.flatListRef){
-      this.flatListRef.scrollTo({x: distanceToBeScrolled, y: 0, animated: true});
-    }
-  }
+class VisitorInvoiceDetailScreenLayout extends React.Component {
+ 
 
   render() {
     const {
@@ -28,35 +23,7 @@ class VisitorRecieptScreenLayout extends React.Component {
         	<View style={{paddingTop: hp('1%'), paddingBottom: hp('1%')}}>
         		<BackArrowButton />
         	</View>
-          <View 
-            
-            style={Styles.container}
-          
-           >
-           	<WhiteButton
-              title={'PAY FOR BOOKING'}
-              style={Styles.actionButton}
-              textStyle={Styles.actionButtonText}
-              onPress={() => {NavigationService.navigate('GenerateRecieptformScreen'); }}
-              selected={currentScreen == 'GenerateRecieptformScreen'}
-            />
-
-            <WhiteButton
-              title={'PAY FULL'}
-              style={Styles.actionButton1}
-              textStyle={Styles.actionButtonText}
-              onPress={() => {NavigationService.navigate('GenerateInvoiceformScreen'); }}
-              selected={currentScreen == 'GenerateInvoiceformScreen'}
-            
-            />
-
          
-
-        
-            
-           
-            
-          </View>
         </Header>
         {this.props.children}
       </View>
@@ -75,7 +42,7 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps
-)(VisitorRecieptScreenLayout)
+)(VisitorInvoiceDetailScreenLayout)
 
 
 const Styles = StyleSheet.create({
@@ -85,7 +52,7 @@ const Styles = StyleSheet.create({
   },
   header: {
     alignItems: 'flex-start',
-    height: hp('17%'),
+    height: hp('10%'),
     flexDirection: 'column',
     justifyContent: 'center'
   },
@@ -104,7 +71,7 @@ const Styles = StyleSheet.create({
     marginBottom: hp('1%'),
     marginTop: hp('1%'),
     marginRight: wp('2%'),
-    marginLeft: wp('3%'),
+    marginLeft: wp('1%'),
     height: hp('5%'),
     minWidth: wp('25%'),
   },
@@ -114,10 +81,10 @@ const Styles = StyleSheet.create({
     paddingRight: wp('4%'),
     marginBottom: hp('1%'),
     marginTop: hp('1%'),
-    marginRight: wp('4%'),
+    marginRight: wp('2%'),
     marginLeft: wp('20%'),
     height: hp('5%'),
-    minWidth: wp('32%'),
+    minWidth: wp('30%'),
   },
   actionButtonText: {
     fontSize: wp('2.9%'),
@@ -130,8 +97,3 @@ const Styles = StyleSheet.create({
     top: -10
   }
 });
-
-
-
-
-

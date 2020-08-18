@@ -22,6 +22,7 @@ import FinalObservationLayout from './FinalObservationLayout';
 
 import VisitorInfoScreenLayout from './Visitor/VisitorInfoScreenLayout';
 import VisitorRecieptScreenLayout from './Visitor/VisitorRecieptScreenLayout'
+import VisitorInvoiceDetailScreenLayout from './Visitor/VisitorInvoiceDetailScreenLayout'
 import DashboardScreenLayout  from './Insights/Dashboard/Layout'
 import CustomerListLayout from './Insights/Customers/list'
 import LeadAlertsLayout from './LeadAlerts'
@@ -80,8 +81,13 @@ class LayoutScreen extends React.Component {
         break;
 
         case 'GenerateRecieptformScreen':
+        case 'GenerateInvoiceformScreen':
           customLayoutNode = <VisitorRecieptScreenLayout/>;
-          break;  
+          break;
+          
+         case 'InvoiceDetailformScreen' :
+          customLayoutNode = <VisitorInvoiceDetailScreenLayout/>;
+          break; 
 
       case 'DashboardScreen':
         customLayoutNode = <DashboardLayout/>;

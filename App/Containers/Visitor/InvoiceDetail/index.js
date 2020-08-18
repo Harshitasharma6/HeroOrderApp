@@ -42,7 +42,7 @@ import moment from 'moment';
 // 	"address_line_1__c" : “test address”
 
 
-class GenerateRecieptformScreen extends Component {
+class InvoiceDetailformScreen extends Component {
 	componentDidMount() {
 		
 	}
@@ -84,7 +84,31 @@ class GenerateRecieptformScreen extends Component {
 					style={Style.action}
 				>
                
-				 	<InputText
+				
+			   <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
+					<InputNumber
+						styles={Style.mb10}
+						placeholder={'Tally Invoice No.'}
+						value={form.age__c}
+						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'age__c'}
+						label={'Tally Invoice No.'}
+					/>
+					<InputNumber
+						styles={Style.mb10}
+						placeholder={' GSTIN No.'}
+						value={form.age__c}
+						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'age__c'}
+						label={'Customer GSTIN No.'}
+					/>
+
+
+                    </View>  
+
+
+
+			   <InputText
 						style={Style.mb10}
 						placeholder={'Customer Name'}
 						value={form.first_name__c}
@@ -93,17 +117,16 @@ class GenerateRecieptformScreen extends Component {
 						label={'Customer  Name*'}
 					/>
 
-					
-					<View style={{flexDirection:'row',}}>
-                    <InputMobile
+			   <View style={{flexDirection:'row', }}>
+			   <InputMobile
 						styles={Style.mb10}
-						placeholder={'Contact Number'}
+						placeholder={'Customer Phone No'}
 						value={form.contact_number__c}
 						onChange={(value) => changeForm({ edited_field: 'contact_number__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'contact_number__c'}
-						label={'Customer Contact No*'}
+						label={'Customer Phone No*'}
 					/>
-					<View style={{marginLeft:'7%', width:'40%'}}>
+					<View style={{marginLeft:'5%', width:'45%'}}>
 					<InputNumber
 						styles={Style.mb10}
 						placeholder={'Enter OTP'}
@@ -112,36 +135,90 @@ class GenerateRecieptformScreen extends Component {
 						error={validation.invalid && validation.invalid_field == 'age__c'}
 						label={' Enter OTP'}
 					/>
+
 					</View>
-                    </View>         
+                    </View>  
+
+
+			 	  <InputText
+						style={Style.mb10}
+						placeholder={'Customer Email'}
+						value={form.first_name__c}
+						onChange={(value) => changeForm({ edited_field: 'first_name__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'first_name__c'}
+						label={'Customer  Email'}
+					/>
+				 	<InputText
+						style={Style.mb10}
+						placeholder={'Customer Address'}
+						value={form.first_name__c}
+						onChange={(value) => changeForm({ edited_field: 'first_name__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'first_name__c'}
+						label={'Customer  Address'}
+					/>
+
+					
+					<View style={{flexDirection:'row', }}>
+						<View style={{width:'45%'}}>
+					<InputNumber
+						styles={Style.mb10}
+						placeholder={'Motor No.'}
+						value={form.age__c}
+						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'age__c'}
+						label={'Motor No.'}
+					/>
+					</View>
+					<View style={{width:'45%', marginLeft:'9%'}}>
+					<InputNumber
+						styles={Style.mb10}
+						placeholder={'Charger No.'}
+						value={form.age__c}
+						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'age__c'}
+						label={'Charger No. *'}
+					/>
+
+					</View>
+                    </View>  
+
+					<InputNumber
+						styles={Style.mb10}
+						placeholder={' Battery No. *'}
+						value={form.age__c}
+						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'age__c'}
+						label={'Battery No. *'}
+					/>
+
 
 					<InputText
 						style={Style.mb10}
-						placeholder={'Customer Email'}
+						placeholder={'Make of Battery'}
 						value={form.email_id__c}
 						onChange={(value) => changeForm({ edited_field: 'email_id__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'email_id__c'}
-						label={' Customer Email'}
+						label={' Make of Battery'}
 					/>
 
-						<InputText
+					<InputText
 						style={Style.mb10}
-						placeholder={'Customer Address'}
+						placeholder={'Type of Battery'}
 						value={form.email_id__c}
 						onChange={(value) => changeForm({ edited_field: 'email_id__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'email_id__c'}
-						label={'Customer Address'}
-					/>
+						label={'Type of Battery'}
+					/>	
 
 					
 
                 	<InputNumber
 						styles={Style.mb10}
-						placeholder={'Recieved Advance'}
+						placeholder={'Capacity of Each Battery'}
 						value={form.age__c}
 						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'age__c'}
-						label={'Recieved Advance'}
+						label={'Capacity of Each Battery'}
 					/>
 
 					{
@@ -163,77 +240,22 @@ class GenerateRecieptformScreen extends Component {
 					// 	label={'Usage*'}
 					// />
 				}
-
-					<View style={{width: '100%',   flexDirection: 'row', marginBottom:'4%' }}>
-						<View>
-                        <Text style={{...ApplicationStyles.label, marginBottom: '2%'}}>Payment Mode</Text>
-						
-						<GenericCheckBox 
-							style={{marginRight: '5%', marginBottom:'0%'}}
-							style1={{marginLeft:'7%'}}
-							label={'Digital'}
-							checked={form.genders__c == 'Male'}
-							onPress={(event)=>{
-			                	let value = form.genders__c == 'Male' ? 'Female' : 'Male';
-				                changeForm({ edited_field: 'genders__c', edited_value: value });
-			                }}
-						/>
-
-						<GenericCheckBox
-							style={{marginRight: '5%', marginBottom:'0%'}} 
-							style1={{marginLeft:'14%'}}
-							label={'Cash'}
-							checked={form.genders__c == 'Female'}
-							onPress={(event)=>{
-			                	let value = form.genders__c == 'Female' ? 'Male' : 'Female';
-				                changeForm({ edited_field: 'genders__c', edited_value: value });
-			                }}
-						/>
-                        <GenericCheckBox
-							style={{marginRight: '5%',marginBottom:'0%' }} 
-							label={'Cheque'}
-							checked={form.genders__c == 'Female'}
-							onPress={(event)=>{
-			                	let value = form.genders__c == 'Female' ? 'Male' : 'Female';
-				                changeForm({ edited_field: 'genders__c', edited_value: value });
-			                }}
-						/>
-						
-                        </View>
-                        <View style={{marginRight:'10%', marginLeft: '18%', width:'45%'}}>
-                        <InputNumber
-						styles={Style.mb10}
-						placeholder={'Ref. No.'}
+				<InputNumber
+						styles={Style.mb10, {marginBottom:'1%'}}
+						placeholder={'Owners Handbook No.'}
 						value={form.age__c}
 						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'age__c'}
-						label={'Ref. No.'}
-					        />
-
-
-                        </View>
-					</View>
-                    <InputDate
-                        style={Style.mb10}
-                        placeholder={'Expected Delievery Date'}
-                        value={HelperService.removeFieldsAndDateReadableFormat(form.expected_close_date__c)}
-                        onChange={(value) => {
-                            let formattedDate = HelperService.convertMomentDateToTimestamp(value);
-                            formattedDate = HelperService.dateReadableFormatWithHyphen(formattedDate);
-                            this.props.changeForm({ edited_field: 'expected_close_date__c', edited_value: formattedDate })
-                        }}
-                        error={validation.invalid && validation.invalid_field == 'expected_close_date__c'}
-						label={'Expected Delievery Date*'}
-						mindate={moment.now()}
-                    />
+						label={'Owners Handbook No.'}
+					/>
+					
+                   
 
 <BlueButton title={"ATTACH DOCUMENTS"} style={{width: '50%', marginHorizontal: '50%',}} textStyle={{fontSize: 12}} >
 	            	<GenericIcon name={'photo'} style={{color: Colors.white, fontSize: 15}}/>
 	            </BlueButton>
 
-
-
-                    <View style={{ width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start', marginTop:'4%'}}>
+				<View style={{ width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start', marginTop:'2%'}}>
 						
 						<View style={{flexDirection: 'row',  }}>
 						<GenericCheckBox 
@@ -317,11 +339,13 @@ class GenerateRecieptformScreen extends Component {
 						
 						</View>
 					</View>
-					<View style={{marginTop: '5%'}}>
-					<BlueButton title={"GENERATE BOOKING RECIEPT"} style={{width: '60%', marginHorizontal: '22%',}} textStyle={{fontSize: 12}} >
+
+                    
+						<View style={{marginTop:'3%'}}>
+                    <BlueButton title={"SAVE"} style={{width: '40%', marginHorizontal: '30.5%',}} textStyle={{fontSize: 12}} >
 	            	
 	            </BlueButton>
-                    </View>
+			</View>
 				</ScrollView>
 			</View>
 		)
@@ -348,4 +372,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(GenerateRecieptformScreen)
+)(InvoiceDetailformScreen)
