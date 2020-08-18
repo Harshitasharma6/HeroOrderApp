@@ -106,6 +106,8 @@ import BookingConfirmedScreen from 'App/Containers/LeadAlerts/Actionables/Follow
 import OpenHotAssignedLeadsScreen from 'App/Containers/LeadAlerts/Actionables/FollowUps/OpenHotAssignedLeads'
 import NoActionScreen from 'App/Containers/LeadAlerts/Actionables/FollowUps/NoAction'
 import OrderCartScreen from 'App/Containers/Visitor/AddProduct/OrderCart'
+import WarrantyRegistrationformScreen from 'App/Containers/WarrantyRegistration'
+import SubDealerFormScreen from 'App/Containers/AddSubDealer'
 
 //OpenHotLeadsScreen
 //PurchaseDateOverDueScreen
@@ -216,6 +218,8 @@ const StackNavigator = createStackNavigator(
     GenerateRecieptformScreen,
     GenerateInvoiceformScreen ,
     InvoiceDetailformScreen ,
+    WarrantyRegistrationformScreen,
+    SubDealerFormScreen,
     
   },
   {
