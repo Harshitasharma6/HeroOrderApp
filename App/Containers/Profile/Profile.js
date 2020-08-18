@@ -70,10 +70,10 @@ class ProfileScreen extends Component {
     } else {
       visibleNode = (
         <ScrollView style={Style.box}>
-          <AgentInfo heading={'Contact No.'} value={data.Phone || data.MobilePhone} />
-          <AgentInfo heading={'Employee ID'} value={data.Employment_Code__c} />
-          <AgentInfo heading={'Username'} value={data.Username} />
-          <AgentInfo heading={'State'} value={data.State || data.User_State__c} />
+          <AgentInfo heading={'Contact No.'}  value={'8839592379'} />
+          <AgentInfo heading={'Employee ID'}  value={'100'} />
+          <AgentInfo heading={'Username'}  value={'Lav Agrawal'}/>
+          <AgentInfo heading={'State'}  value={'U.P'} />
         </ScrollView>
       );
     }
@@ -81,11 +81,11 @@ class ProfileScreen extends Component {
     return (
       <View style={Style.header }>
         <View style={{ flex: 1, paddingBottom: 10 }}>
-            {data ? <ProfileCard data={data} /> : []}
+            <ProfileCard data={data} /> 
             {visibleNode}
         </View>
-        {
-          (checkIn_id && !checkout && status == 'Present') ? 
+        
+       
           <BlueButton
              style={{ ...Style.button }}
              loading={fetchCheckOutLoader}
@@ -93,8 +93,8 @@ class ProfileScreen extends Component {
              title={'CheckOut'}
              disabled ={fetchCheckOutLoader} 
           >
-          </BlueButton> : []
-        }
+          </BlueButton> 
+       
       </View>
     )
   }

@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 import DashboardLayout from './DashboardLayout';
 import FooterScreen from './FooterScreen';
 import Drawer from './SideBarLayout/Drawer';
-
 import NewRetailerLayout from './OrderListLayout';
 import ShreeListLayout from './Shree/ShreeListLayout';
 import ShreeInfoLayout from './Shree/ShreeInfoLayout';
@@ -18,8 +17,6 @@ import NonShreeListLayout from './NonShree/NonShreeListLayout'
 import NonShreeInfoLayout from './NonShree/NonShreeInfoLayout';
 import NonShreeVisitInfoLayout from './NonShree/NonShreeVisitLayout';
 import FinalObservationLayout from './FinalObservationLayout';
-
-
 import VisitorInfoScreenLayout from './Visitor/VisitorInfoScreenLayout';
 import VisitorRecieptScreenLayout from './Visitor/VisitorRecieptScreenLayout'
 import VisitorInvoiceDetailScreenLayout from './Visitor/VisitorInvoiceDetailScreenLayout'
@@ -231,6 +228,8 @@ class LayoutScreen extends React.Component {
       case 'AddProductsSchemesScreen':
       case 'OrderCartScreen':
       case 'CustomerCallFormScreen':
+      case  'WarrantyRegistrationformScreen':
+      case  'SubDealerFormScreen':  
         customLayoutNode = <NewRetailerLayout />
         break;
       case 'ActionablesScreen':

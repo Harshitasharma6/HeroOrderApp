@@ -107,6 +107,9 @@ import BookingConfirmedScreen from 'App/Containers/LeadAlerts/Actionables/Follow
 import OpenHotAssignedLeadsScreen from 'App/Containers/LeadAlerts/Actionables/FollowUps/OpenHotAssignedLeads'
 import NoActionScreen from 'App/Containers/LeadAlerts/Actionables/FollowUps/NoAction'
 import OrderCartScreen from 'App/Containers/Visitor/AddProduct/OrderCart'
+import WarrantyRegistrationformScreen from 'App/Containers/WarrantyRegistration'
+import SubDealerFormScreen from 'App/Containers/AddSubDealer'
+import ProfileScreen from 'App/Containers/Profile'
 
 //OpenHotLeadsScreen
 //PurchaseDateOverDueScreen
@@ -214,14 +217,13 @@ const StackNavigator = createStackNavigator(
     OpenHotAssignedLeadsScreen,
     NoActionScreen,
     OrderCartScreen,
-<<<<<<< HEAD
-    CustomerCallFormScreen
-=======
+    CustomerCallFormScreen,
     GenerateRecieptformScreen,
     GenerateInvoiceformScreen ,
     InvoiceDetailformScreen ,
-    
->>>>>>> origin/master
+    WarrantyRegistrationformScreen,
+    SubDealerFormScreen,
+    ProfileScreen
   },
   {
     // By default the application will show the splash screen

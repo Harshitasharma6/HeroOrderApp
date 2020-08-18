@@ -7,11 +7,13 @@ import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity } from "rea
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import BackArrowButton from 'App/Components/BackArrowButton';
 import BlueButton from 'App/Components/BlueButton';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class SideBar extends Component {
 	navigate(screen) {
-		//NavigationService.navigate(screen);
 		this.props.closeDrawer();
+		NavigationService.navigate(screen);
+		
 	}
 
 	render() {
@@ -40,14 +42,14 @@ export default class SideBar extends Component {
 					</ListItem>
 
 					<ListItem style={Styles.listItemDivider} onPress={() => this.navigate('EventList')}>
-						<GenericIcon name={'calendar'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Scheme Claim'}</Text>
+						<Icon name={'brightness-percent'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Scheme Claim'}</Text>
 					</ListItem>
 
 					<ListItem style={Styles.listItemDivider} onPress={() => this.navigate('InfluencersListScreen')}>
 						<GenericIcon name={'users'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Sub Dealers'}</Text>
 					</ListItem>
 				</ScrollView>
-				<BlueButton title={'Logout'} style={{...ApplicationStyles.formButton}} />
+
 			</View>
 		);
 	}
@@ -66,13 +68,13 @@ const Styles = StyleSheet.create({
 	},
 	selectedListItemText: {
 		fontFamily: ApplicationStyles.textMsgFont,
-		fontSize: wp('4.2%'),
+		fontSize: wp('4.1%'),
 		color: Colors.grey,
 		textTransform: 'uppercase'
 	},
 	listItemIcon: {
 		fontFamily: ApplicationStyles.textFont,
-		fontSize: wp('4.5%'),
+		fontSize: wp('5%'),
 		color: Colors.primary,
 		marginHorizontal: 15
 	},
