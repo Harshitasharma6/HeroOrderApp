@@ -251,7 +251,7 @@ class InvoiceDetailformScreen extends Component {
 					
                    
 
-<BlueButton title={"ATTACH DOCUMENTS"} style={{width: '50%', marginHorizontal: '50%',}} textStyle={{fontSize: 12}} >
+<BlueButton title={"ATTACH DOCUMENTS"} style={{width: '53%', marginHorizontal: '46%',}} textStyle={{fontSize: 12}} >
 	            	<GenericIcon name={'photo'} style={{color: Colors.white, fontSize: 15}}/>
 	            </BlueButton>
 
