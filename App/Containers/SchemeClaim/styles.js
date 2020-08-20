@@ -9,6 +9,20 @@ export default StyleSheet.create({
     marginTop:'8.5%',
    
   },
+  plusIcon: {
+    borderRadius: 50,
+   bottom:75,
+  position: 'absolute',
+  right: 25,
+  borderRadius: 50,
+  height: hp('7.5%'),
+  width: wp('15%'),
+  right:20,
+  backgroundColor: Colors.primary,
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center'
+},
 
   button: {
     ...ApplicationStyles.formButton

@@ -133,6 +133,18 @@ class SchemeClaimFormScreen extends Component {
                      {this.getDataNode()}
                
 				</ScrollView>
+        <TouchableOpacity
+                    style={Style.plusIcon}
+                    onPress={() => {
+          NavigationService.navigate('SchemeClaimformScreen');
+        
+        }}
+					>
+					<GenericIcon
+						name='plus-circle'
+						style={{ color: Colors.white, fontSize: 40, alignSelf: 'center' }}
+					/>
+				</TouchableOpacity>   
 			</View>
 		)
 	}

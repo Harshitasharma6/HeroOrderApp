@@ -71,6 +71,54 @@ AttachDocButton:{
       textTransform: 'uppercase',
       marginBottom: hp('4%'),
   },
+  middleheading: {
+    alignSelf: 'flex-start',
+    color: Colors.grey,
+    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
+    fontSize: wp('3.5%'),
+   
+    marginTop: hp('0%'),
+     
+      marginBottom: hp('0%'),
+
+  },
+
+  middleheading1: {
+    alignSelf: 'flex-start',
+    color: Colors.black,
+    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
+    fontSize: wp('3%'),
+   
+    marginTop: hp('0%'),
+    marginRight:wp('5%'),
+     
+      marginBottom: hp('0%'),
+
+  },
+  middletext: {
+    alignSelf: 'flex-start',
+    color: Colors.primary,
+    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
+    fontSize: wp('4.5%'),
+   
+    marginTop: hp('2%'),
+     
+      marginBottom: hp('0%'),
+    marginLeft:wp('2%')
+
+  },
+  middletext1: {
+    alignSelf: 'flex-start',
+    color: Colors.primary,
+    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
+    fontSize: wp('4.5%'),
+   
+    marginTop: hp('0%'),
+     
+      marginBottom: hp('0%'),
+    marginLeft:wp('2%')
+
+  },
   link: {
     color: Colors.label,
     flexDirection: 'row',
@@ -143,15 +191,36 @@ AttachDocButton:{
    
     paddingLeft: wp('6%'),
     paddingRight: wp('4%'),
-    marginBottom: hp('1%'),
-    marginTop: hp('1%'),
+    marginBottom: hp('2%'),
+    marginTop: hp('2%'),
     marginRight: wp('2%'),
     marginLeft: wp('1%'),
-    height: hp('5%'),
-    minWidth: wp('25%'),
+    height: hp('4%'),
+    minWidth: wp('30%'),
+    backgroundColor: Colors.lightGrey,
+    borderWidth: 1,
+    borderColor: Colors.black
   },
   actionButtonText: {
     fontSize: wp('2.9%'),
-    fontFamily: ApplicationStyles.textMsgFont
+    fontFamily: ApplicationStyles.textMsgFont,
+    color:Colors.black
+  },
+  actionButton1: {
+   
+    paddingLeft: wp('6%'),
+    paddingRight: wp('4%'),
+    marginBottom: hp('2%'),
+    marginTop: hp('2%'),
+    marginRight: wp('2%'),
+    marginLeft: wp('1%'),
+    height: hp('6%'),
+    minWidth: wp('30%'),
+    
+  },
+  actionButtonText1: {
+    fontSize: wp('2.9%'),
+    fontFamily: ApplicationStyles.textMsgFont,
+    
   },
 })
