@@ -110,6 +110,10 @@ import OrderCartScreen from 'App/Containers/Visitor/AddProduct/OrderCart'
 import WarrantyRegistrationformScreen from 'App/Containers/WarrantyRegistration'
 import SubDealerFormScreen from 'App/Containers/AddSubDealer'
 import ProfileScreen from 'App/Containers/Profile'
+import DealerSalespersonFormScreen from 'App/Containers/DealerSalesperson'
+import SchemeClaimFormScreen from 'App/Containers/SchemeClaim'
+import SubDealerInfoScreen from 'App/Containers/SubDealerInfo'
+import SchemeClaimformScreen from 'App/Containers/SchemeClaim/AddSchemeClaim'
 
 //OpenHotLeadsScreen
 //PurchaseDateOverDueScreen
@@ -223,7 +227,11 @@ const StackNavigator = createStackNavigator(
     InvoiceDetailformScreen ,
     WarrantyRegistrationformScreen,
     SubDealerFormScreen,
-    ProfileScreen
+    ProfileScreen,
+    DealerSalespersonFormScreen,
+    SchemeClaimFormScreen,
+    SubDealerInfoScreen,
+    SchemeClaimformScreen,
   },
   {
     // By default the application will show the splash screen

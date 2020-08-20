@@ -5,6 +5,7 @@ import InputText from 'App/Components/FormInput/InputText';
 import InputMobile from 'App/Components/FormInput/InputMobile';
 import InputNumber from 'App/Components/FormInput/InputNumber';
 import BlueButton from 'App/Components/BlueButton';
+import WhiteButton from 'App/Components/WhiteButton';
 import Select from 'App/Components/Select';
 import TextArea from 'App/Components/FormInput/TextArea';
 import { connect } from 'react-redux';
@@ -14,7 +15,7 @@ import { HelperService } from 'App/Services/Utils/HelperService';
 import NavigationService from 'App/Services/NavigationService'
 import SearchableDropdown from 'App/Components/SearchableDropdown';
 import InputDate from 'App/Components/FormInput/InputDate';
-import WhiteButton from 'App/Components/WhiteButton';
+
 import {ApplicationStyles} from 'App/Theme'
 import {Colors} from 'App/Theme'
 import GenericCheckBox from 'App/Components/GenericCheckBox'
@@ -42,7 +43,7 @@ import moment from 'moment';
 // 	"address_line_1__c" : “test address”
 
 
-class WarrantyRegistrationformScreen extends Component {
+class SchemeClaimformScreen extends Component {
 	componentDidMount() {
 		
 	}
@@ -78,11 +79,42 @@ class WarrantyRegistrationformScreen extends Component {
 		
 		return (
 			<View style={Style.container}>
-					<Text style={Style.heading}>{'WARRANTY REGISTRATION'}</Text>
+					<Text style={Style.heading}>{'SCHEME CLAIM FORM'}</Text>
 				<ScrollView 
 					showsVerticalScrollIndicator={false}
 					style={Style.action}
 				>
+
+                        <SearchableDropdown
+						
+				        
+				        placeHolderText={'Select Scheme'}
+				        selectedValue={form.occupation__c}
+				        onChange={(value) => changeForm({ edited_field: 'occupation__c', edited_value: value })}
+				        placeholder={'Select Scheme'}
+				        invalid={false}
+				        labelStyles={{ ...Style.pickerLabel }}
+				        customPickerStyles={{ ...Style.picker }}
+				        label={'Scheme Applicable*'}
+					/>
+
+                    <InputNumber
+						styles={Style.mb10}
+						placeholder={'Online Order No.'}
+						value={form.age__c}
+						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'age__c'}
+						label={'Online Order No.* (For Online Schemes only)'}
+					/>
+
+                    <InputNumber
+						styles={Style.mb10}
+						placeholder={'Refrence  No.'}
+						value={form.age__c}
+						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'age__c'}
+						label={'Reference No.* (For Refrence Schemes only)'}
+					/>
                
 				 	<InputText
 						style={Style.mb10}
@@ -104,40 +136,7 @@ class WarrantyRegistrationformScreen extends Component {
 						label={'Customer Mobile*'}
 					/>
 					
-                         
-
-					<InputText
-						style={Style.mb10}
-						placeholder={'Model Purchased'}
-						value={form.email_id__c}
-						onChange={(value) => changeForm({ edited_field: 'email_id__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'email_id__c'}
-						label={'Model Purchased*'}
-					/>
-
-                    <View style={{flexDirection:'row', }}>
-						<View style={{width:'45%'}}>
-					<InputNumber
-						styles={Style.mb10}
-						placeholder={'Pincode'}
-						value={form.age__c}
-						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'age__c'}
-						label={'Pincode*'}
-					/>
-					</View>
-					<View style={{width:'45%', marginLeft:'9%'}}>
-					<InputNumber
-						styles={Style.mb10}
-						placeholder={'State'}
-						value={form.age__c}
-						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'age__c'}
-						label={'State*'}
-					/>
-
-					</View>
-                    </View>  
+                          
 
 					{
 					// 	<InputText
@@ -173,39 +172,9 @@ class WarrantyRegistrationformScreen extends Component {
 						mindate={moment.now()}
                     />
 
-                    <InputNumber
-						styles={Style.mb10}
-						placeholder={'Battery No.'}
-						value={form.age__c}
-						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'age__c'}
-						label={'Battery No.*'}
-					/>
-
-                    <InputNumber
-						styles={Style.mb10}
-						placeholder={'Chassis No.'}
-						value={form.age__c}
-						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'age__c'}
-						label={'Chassis No.*'}
-					/>
-
-
-                     <SearchableDropdown
-						
-				        
-				        placeHolderText={'Select Color'}
-				        selectedValue={form.occupation__c}
-				        onChange={(value) => changeForm({ edited_field: 'occupation__c', edited_value: value })}
-				        placeholder={'Select Color'}
-				        invalid={false}
-				        labelStyles={{ ...Style.pickerLabel }}
-				        customPickerStyles={{ ...Style.picker }}
-				        label={'Model Color'}
-					/>
+                    
                     <View style={{width: '100%', justifyContent: 'space-between', alignItems: 'flex-start', flexDirection:'row'}}>
-						<Text style={{...ApplicationStyles.label, marginBottom: '1%', marginRight:'4%'}}>Finace  Through Bajaj*</Text>
+						<Text style={{...ApplicationStyles.label, marginBottom: '1%', marginRight:'4%'}}>Registered For Warranty*</Text>
 						<View style={{flexDirection: 'row', marginBottom: '2%'}}>
 						<GenericCheckBox 
                             style={{marginRight: '10%', }}
@@ -229,22 +198,121 @@ class WarrantyRegistrationformScreen extends Component {
 						/>
 						</View>
 					</View>
-					
+					<Text style={Style.middleheading}>{'If Not Registered Please Register Before Submission of Claim.'}</Text>
                     
-
-
-
-
-
-                    
-
-						
-						
-					<View style={{marginTop: '5%', marginBottom:'1%'}}>
-					<BlueButton title={"SUBMIT"} style={{width: '60%', marginHorizontal: '22%',}} textStyle={{fontSize: 12}} >
+                    <View style={{marginTop: '0%', marginBottom:'1%'}}>
+					<BlueButton title={"Register"} style={{width: '40%', marginHorizontal: '59%',}} textStyle={{fontSize: 12}}   onPress={() => {
+          NavigationService.navigate('WarrantyRegistrationformScreen');
+        
+        }}>
 	            	
 	            </BlueButton>
+               
                     </View>
+                    <View style={{flexDirection:'row', justifyContent:'space-between', marginTop:'4%'}}>
+                    <Text style={Style.middletext}>{'Invoice Copy*'}</Text>
+                    <WhiteButton
+                     title={'Choose File'}
+                    style={Style.actionButton}
+                     textStyle={Style.actionButtonText}
+             
+                     />
+                     </View>
+
+                     <InputNumber
+						styles={Style.mb10}
+						placeholder={'Invoice No.'}
+						value={form.age__c}
+						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'age__c'}
+						label={'Invoice No.*'}
+					/>
+
+                     <View style={{flexDirection:'row', justifyContent:'space-between', marginTop:'0%', marginBottom:'2%'}}>
+                    <View>
+                    <Text style={Style.middletext}>{'Customer'}</Text>
+                    <Text style={Style.middletext1}>{'Acknowledgement'}</Text>
+                    </View>
+                    <WhiteButton
+                     title={'Choose File'}
+                    style={Style.actionButton}
+                     textStyle={Style.actionButtonText}
+             
+                     />
+                     </View>
+                     <Text style={Style.middletext}>{'Customer Id*(Any two)'}</Text>
+                     <View style={{flexDirection:'row', justifyContent:'space-between'}}> 
+                     <WhiteButton
+                     title={'Choose File'}
+                    style={Style.actionButton}
+                     textStyle={Style.actionButtonText}
+             
+                     />  
+                     <WhiteButton
+                     title={'Choose File'}
+                    style={Style.actionButton}
+                     textStyle={Style.actionButtonText}
+             
+                     />   
+
+                     </View>
+
+                     <InputNumber
+						styles={Style.mb10}
+						placeholder={'Id No.'}
+						value={form.age__c}
+						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'age__c'}
+						label={'Id No. Mentioned as per ID Card 1*'}
+					/>
+                    <InputNumber
+						styles={Style.mb10}
+						placeholder={'Id No.'}
+						value={form.age__c}
+						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'age__c'}
+						label={'Id No. Mentioned as per ID Card 2*'}
+					/>
+                    <InputNumber
+						styles={Style.mb10}
+						placeholder={'Claim Amount'}
+						value={form.age__c}
+						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'age__c'}
+						label={'Claim Amount*'}
+					/>
+                    <View style={{flexDirection:'row'}}>
+                    <GenericCheckBox
+							style={{marginRight: '5%'}} 
+							
+							checked={form.genders__c == 'Female'}
+							onPress={(event)=>{
+			                	let value = form.genders__c == 'Female' ? 'Male' : 'Female';
+				                changeForm({ edited_field: 'genders__c', edited_value: value });
+			                }}
+						/>
+                <View style={{maxWidth:'90%'}}>
+                <Text style={Style.middleheading1}>{'I/We hereby confirm that the information Provided here is accurate, correct and complete and the documents submitted along with this claim form are genuine'}</Text>    
+                </View>
+                </View>
+
+                <View style={{flexDirection:'row', justifyContent:'space-around',marginTop:'5%'}}>
+                <WhiteButton
+                     title={'SAVE AS DRAFT'}
+                    style={Style.actionButton1}
+                     textStyle={Style.actionButtonText1}
+             
+                     />  
+                     <WhiteButton
+                     title={'SUBMIT'}
+                    style={Style.actionButton1}
+                     textStyle={Style.actionButtonText1}
+             
+                     />   
+
+
+                </View>
+                   
 				</ScrollView>
 			</View>
 		)
@@ -271,4 +339,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(WarrantyRegistrationformScreen )
+)(SchemeClaimformScreen)

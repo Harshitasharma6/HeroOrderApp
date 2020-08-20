@@ -37,16 +37,19 @@ export default class SideBar extends Component {
 						<GenericIcon name={'user-circle-o'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Profile'}</Text>
 					</ListItem>
 
-					<ListItem style={Styles.listItemDivider} onPress={() => this.navigate('OrdersListScreen')}>
+					<ListItem style={Styles.listItemDivider} onPress={() => this.navigate('DealerSalespersonFormScreen')}>
 						<GenericIcon name={'user-o'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Dealer Salesperson'}</Text>
 					</ListItem>
 
-					<ListItem style={Styles.listItemDivider} onPress={() => this.navigate('EventList')}>
+					<ListItem style={Styles.listItemDivider} onPress={() => this.navigate('SchemeClaimFormScreen')}>
 						<Icon name={'brightness-percent'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Scheme Claim'}</Text>
 					</ListItem>
 
-					<ListItem style={Styles.listItemDivider} onPress={() => this.navigate('InfluencersListScreen')}>
+					<ListItem style={Styles.listItemDivider} onPress={() => this.navigate('SubDealerInfoScreen')}>
 						<GenericIcon name={'users'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Sub Dealers'}</Text>
+					</ListItem>
+					<ListItem style={Styles.listItemDivider} >
+						<GenericIcon name={'user-circle-o'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Log Out'}</Text>
 					</ListItem>
 				</ScrollView>
 

@@ -8,6 +8,7 @@ import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { connect } from 'react-redux';
 import DashboardLayout from './DashboardLayout';
 import FooterScreen from './FooterScreen';
+import SchemeClaimScreenLayout from './SchemeClaimScreenLayout'
 import Drawer from './SideBarLayout/Drawer';
 import NewRetailerLayout from './OrderListLayout';
 import ShreeListLayout from './Shree/ShreeListLayout';
@@ -230,6 +231,11 @@ class LayoutScreen extends React.Component {
       case 'CustomerCallFormScreen':
       case  'WarrantyRegistrationformScreen':
       case  'SubDealerFormScreen':  
+      case 'DealerSalespersonFormScreen':
+      case 'SchemeClaimFormScreen':
+      case 'SubDealerInfoScreen':
+      case  'SchemeClaimformScreen':
+      
         customLayoutNode = <NewRetailerLayout />
         break;
       case 'ActionablesScreen':
@@ -256,6 +262,9 @@ class LayoutScreen extends React.Component {
       case 'CustomersScreen':
         customLayoutNode = <CustomerListLayout />
         break;
+        
+          
+
       default:
         customLayoutNode = [];
 
