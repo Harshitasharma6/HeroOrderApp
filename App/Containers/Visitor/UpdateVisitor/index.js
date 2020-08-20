@@ -17,6 +17,7 @@ import {ApplicationStyles} from 'App/Theme'
 import GenericCheckBox from 'App/Components/GenericCheckBox'
 import VisitorActions from 'App/Stores/Visitor/Actions'
 import moment from 'moment';
+import GoogleAddress from 'App/Components/GoogleAddress'
 
 // address_line_1__c: null
 // age__c: 28
@@ -178,15 +179,11 @@ class UpdateVisitorScreen extends Component {
 						label={'Email'}
 					/>
 
-					<TextArea
-	                    placeholder={'Address'}
-	                    label={'Address'}
-	                    numberOfLines={2}
-	                    style={Style.mb10}
-	                    value={form.address_line_1__c}
-						onChange={(value) => changeForm({ edited_field: 'address_line_1__c', edited_value: value })}
+					<GoogleAddress
+						value={form.address_line_1__c}
+						changeForm={(value) => changeForm({ edited_field: 'address_line_1__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'address_line_1__c'}
-                	/>
+					/>
 
                 	<InputNumber
 						styles={Style.mb10}
@@ -197,25 +194,7 @@ class UpdateVisitorScreen extends Component {
 						label={'Age'}
 					/>
 
-					{
-					// 	<InputText
-					// 	style={Style.mb10}
-					// 	placeholder={'Purpose of Buying'}
-					// 	value={form.purpose_of_buying__c}
-					// 	onChange={(value) => changeForm({ edited_field: 'purpose_of_buying__c', edited_value: value })}
-					// 	error={validation.invalid && validation.invalid_field == 'purpose_of_buying__c'}
-					// 	label={'Purpose of Buying*'}
-					// />
-
-					// <InputText
-					// 	style={Style.mb10}
-					// 	placeholder={'Usage'}
-					// 	value={form.usage__c}
-					// 	onChange={(value) => changeForm({ edited_field: 'usage__c', edited_value: value })}
-					// 	error={validation.invalid && validation.invalid_field == 'usage__c'}
-					// 	label={'Usage*'}
-					// />
-				}
+					
 
 					<View style={{width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
 						<Text style={{...ApplicationStyles.label, marginBottom: '1%'}}>Gender</Text>

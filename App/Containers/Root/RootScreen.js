@@ -19,6 +19,7 @@ import CallDetectorManager from 'react-native-call-detection'
 import VIForegroundService from '@voximplant/react-native-foreground-service';
 import { Drawer } from 'native-base';
 import SideBar from 'App/Containers/Layout/SideBarLayout/SideBar';
+navigator.geolocation = require('react-native-geolocation-service');
 
 class RootScreen extends Component {
 

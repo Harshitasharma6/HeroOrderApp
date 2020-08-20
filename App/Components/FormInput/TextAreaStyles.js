@@ -1,5 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native'
 import { Colors, ApplicationStyles } from 'App/Theme'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default StyleSheet.create({
   input: {
@@ -8,8 +9,8 @@ export default StyleSheet.create({
     borderWidth: 1,
     color: Colors.inputText,
     fontFamily: ApplicationStyles.textMediumFont,
-    paddingLeft: 5,
-    width: '100%'
+    marginTop: hp('.5%')
+
   },
   inputError: {
     borderColor: Colors.error,

@@ -168,6 +168,9 @@ export default {
 	    justifyContent: 'center',
 	    padding: 0
   	},
+  	marginBottom10: {
+  		marginBottom: hp('2%'),
+  	},
   	picker: {
 	    borderRadius: 10,
 	    width: wp('88%'),

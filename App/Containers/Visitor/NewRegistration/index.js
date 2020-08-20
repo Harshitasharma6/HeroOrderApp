@@ -15,8 +15,13 @@ import SearchableDropdown from 'App/Components/SearchableDropdown';
 import InputDate from 'App/Components/FormInput/InputDate';
 import {ApplicationStyles} from 'App/Theme'
 import GenericCheckBox from 'App/Components/GenericCheckBox'
+import GenericIcon from 'App/Components/GenericIcon'
 import VisitorActions from 'App/Stores/Visitor/Actions'
+import CommonActions from 'App/Stores/Common/Actions'
 import moment from 'moment';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {Colors} from 'App/Theme'
+import GoogleAddress from 'App/Components/GoogleAddress'
 // "first_name__c": "test 12",	(*mandatory)
 // 	"last_name__c": "enquiry visit test",	(*mandatory)
 // 	"contact_number__c": "1646464944", 	(*mandatory)
@@ -76,6 +81,8 @@ class NewRegistrationFormScreen extends Component {
 		const { 
 			form,
 			loader,
+			openModal,
+			closeModal,
 			changeForm,
 			submitForm,
 			validation,
@@ -128,15 +135,16 @@ class NewRegistrationFormScreen extends Component {
 						label={'Email'}
 					/>
 
-					<TextArea
-	                    placeholder={'Address'}
-	                    label={'Address'}
-	                    numberOfLines={2}
-	                    style={Style.mb10}
-	                    value={form.address_line_1__c}
-						onChange={(value) => changeForm({ edited_field: 'address_line_1__c', edited_value: value })}
+
+					<GoogleAddress
+						value={form.address_line_1__c}
+						changeForm={(value) => changeForm({ edited_field: 'address_line_1__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'address_line_1__c'}
-                	/>
+					/>
+
+				
+
+
 
                 	<InputNumber
 						styles={Style.mb10}
@@ -377,7 +385,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 	changeForm: (params)       => dispatch(VisitorActions.changeRegisterCustomerForm(params)),
 	submitForm: (params)       => dispatch(VisitorActions.registerCustomer(params)),
-	clearRegistrationForm: ()  => dispatch(VisitorActions.clearRegistrationForm())
+	clearRegistrationForm: ()  => dispatch(VisitorActions.clearRegistrationForm()),
+	openModal:(params)		   => dispatch(CommonActions.openModal(params)),
+	closeModal:(params)		   => dispatch(CommonActions.closeModal(params)),
 });
 
 export default connect(
