@@ -52,5 +52,7 @@ export const INITIAL_STATE = {
     checkIn_status: false,
 
 
-    state__c: "a059D000000tNcxQAE"
+    state__c: "a059D000000tNcxQAE",
+   
+    
 }

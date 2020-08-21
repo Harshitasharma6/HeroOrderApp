@@ -8,6 +8,7 @@ import { ShreeTypes } from '../Stores/Shree/Actions';
 import { NonShreeTypes } from '../Stores/NonShree/Actions';
 import { VisitorTypes } from '../Stores/Visitor/Actions';
 import { ProductsTypes } from '../Stores/Products/Actions';
+import { DealersTypes } from '../Stores/Dealers/Actions';
 
 
 import {
@@ -97,6 +98,9 @@ import {
     addOffer
  } from './ProductsSaga'
 
+ import {
+     getAllDealers
+} from  './DealerSaga'
 
  import { 
     watchSearchCustomer,
@@ -191,7 +195,8 @@ export default function* root() {
         takeLatest(ProductsTypes.REMOVE_OFFER, removeOffer),
         takeLatest(ProductsTypes.ADD_OFFER, addOffer),
         takeLatest(ProductsTypes.CHANGE_DEALER_DISCOUNT, changeDealerDiscount),
-
+        
+        takeLatest(DealersTypes.GET_ALL_DEALERS, getAllDealers),
         
         fork(watchUpdateVisitor),
         fork(watchSearchCustomer),
