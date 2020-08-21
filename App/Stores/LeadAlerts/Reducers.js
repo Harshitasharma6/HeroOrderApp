@@ -21,7 +21,247 @@ export const selectActionable = (state, { payload }) => {
 }
 
 
+
+
+
+
+export const fetchHotLeadsSuccess = (state, {payload}) => ({
+  ...state,
+  hotLeads: payload,
+  loaders: {
+    ...state.loaders,
+    fetchHotLeadsLoader: false
+  }
+});
+
+
+export const fetchHotLeadsFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchHotLeadsLoader: false
+  }
+});
+
+
+export const fetchHotLeadsLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchHotLeadsLoader: true
+  }
+});
+
+
+export const fetchHotLeadsLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchHotLeadsLoader: false
+  }
+});
+
+
+
+
+
+export const fetchBookingConfirmFinanceLeadsSuccess = (state, {payload}) => ({
+  ...state,
+  bookingConfirmFinanceLeads: payload,
+  loaders: {
+    ...state.loaders,
+    fetchBookingConfirmFinanceLeadsLoader: false
+  }
+});
+
+
+export const fetchBookingConfirmFinanceLeadsFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchBookingConfirmFinanceLeadsLoader: false
+  }
+});
+
+
+export const fetchBookingConfirmFinanceLeadsLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchBookingConfirmFinanceLeadsLoader: true
+  }
+});
+
+
+export const fetchBookingConfirmFinanceLeadsLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchBookingConfirmFinanceLeadsLoader: false
+  }
+});
+
+
+
+
+export const fetchPurchaseOverdueSuccess = (state, {payload}) => ({
+  ...state,
+  purchaseOverdue: payload,
+  loaders: {
+    ...state.loaders,
+    fetchPurchaseOverdueLoader: false
+  }
+});
+
+
+export const fetchPurchaseOverdueFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchPurchaseOverdueLoader: false
+  }
+});
+
+
+export const fetchPurchaseOverdueLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchPurchaseOverdueLoader: true
+  }
+});
+
+
+export const fetchPurchaseOverdueLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchPurchaseOverdueLoader: false
+  }
+});
+
+
+
+
+export const fetchOpenLeadsSuccess = (state, {payload}) => ({
+  ...state,
+  openLeads: payload,
+  loaders: {
+    ...state.loaders,
+    fetchOpenLeadsLoader: false
+  }
+});
+
+
+export const fetchOpenLeadsFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchOpenLeadsLoader: false
+  }
+});
+
+
+export const fetchOpenLeadsLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchOpenLeadsLoader: true
+  }
+});
+
+
+export const fetchOpenLeadsLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchOpenLeadsLoader: false
+  }
+});
+
+
+
+
+export const fetchNoActionSuccess = (state, {payload}) => ({
+  ...state,
+  noAction: payload,
+  loaders: {
+    ...state.loaders,
+    fetchNoActionLoader: false
+  }
+});
+
+
+export const fetchNoActionFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchNoActionLoader: false
+  }
+});
+
+
+export const fetchNoActionLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchNoActionLoader: true
+  }
+});
+
+
+export const fetchNoActionLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchNoActionLoader: false
+  }
+});
+
+
+
+
+
+
+
+
+
 export const reducer = createReducer(INITIAL_STATE, {
    	[LeadAlertTypes.SELECT_ACTIONABLE]: selectActionable,
-	[LeadAlertTypes.SELECT_FOLLOW_UP] : selectFollowUp
+	[LeadAlertTypes.SELECT_FOLLOW_UP] : selectFollowUp,
+
+    //fetchHotLeads: ['payload'],
+    [LeadAlertTypes.FETCH_HOT_LEADS_SUCCESS]      : fetchHotLeadsSuccess,
+    [LeadAlertTypes.FETCH_HOT_LEADS_FAILURE]      : fetchHotLeadsFailure,
+    [LeadAlertTypes.FETCH_HOT_LEADS_LOADING]      : fetchHotLeadsLoading,
+    [LeadAlertTypes.FETCH_HOT_LEADS_LOADING_STOP] : fetchHotLeadsLoadingStop,
+
+
+    //fetchBookingConfirmFinanceLeads: ['payload'],
+    [LeadAlertTypes.FETCH_BOOKING_CONFIRM_FINANCE_LEADS_SUCCESS]      : fetchBookingConfirmFinanceLeadsSuccess,
+    [LeadAlertTypes.FETCH_BOOKING_CONFIRM_FINANCE_LEADS_FAILURE]      : fetchBookingConfirmFinanceLeadsFailure,
+    [LeadAlertTypes.FETCH_BOOKING_CONFIRM_FINANCE_LEADS_LOADING]      : fetchBookingConfirmFinanceLeadsLoading,
+    [LeadAlertTypes.FETCH_BOOKING_CONFIRM_FINANCE_LEADS_LOADING_STOP] : fetchBookingConfirmFinanceLeadsLoadingStop,
+
+
+    //fetchPurchaseOverdue,
+    [LeadAlertTypes.FETCH_PURCHASE_OVERDUE_SUCCESS]         : fetchPurchaseOverdueSuccess,
+    [LeadAlertTypes.FETCH_PURCHASE_OVERDUE_FAILURE]         : fetchPurchaseOverdueFailure,
+    [LeadAlertTypes.FETCH_PURCHASE_OVERDUE_LOADING]         : fetchPurchaseOverdueLoading,
+    [LeadAlertTypes.FETCH_PURCHASE_OVERDUE_LOADING_STOP]    : fetchPurchaseOverdueLoadingStop,
+
+
+    //fetchOpenLeadsFinanceLeads,
+    [LeadAlertTypes.FETCH_OPEN_LEADS_SUCCESS]         : fetchOpenLeadsSuccess,
+    [LeadAlertTypes.FETCH_OPEN_LEADS_FAILURE]         : fetchOpenLeadsFailure,
+    [LeadAlertTypes.FETCH_OPEN_LEADS_LOADING]         : fetchOpenLeadsLoading,
+    [LeadAlertTypes.FETCH_OPEN_LEADS_LOADING_STOP]    : fetchOpenLeadsLoadingStop,
+
+
+    //fetchNoAction,
+    [LeadAlertTypes.FETCH_NO_ACTION_SUCCESS]         : fetchNoActionSuccess,
+    [LeadAlertTypes.FETCH_NO_ACTION_FAILURE]         : fetchNoActionFailure,
+    [LeadAlertTypes.FETCH_NO_ACTION_LOADING]         : fetchNoActionLoading,
+    [LeadAlertTypes.FETCH_NO_ACTION_LOADING_STOP]    : fetchNoActionLoadingStop,
+
 });

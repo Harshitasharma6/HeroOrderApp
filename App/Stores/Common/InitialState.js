@@ -1,7 +1,6 @@
 export const INITIAL_STATE = {
 	isNetworkBannerVisible: false,
 	currentScreen: 'SplashScreen',
-	
 	genericActionModal: {
 		visible: false,
 		content: [],
@@ -12,6 +11,8 @@ export const INITIAL_STATE = {
 
 	loaders: {
 		getAllProductsLoader: false,
+		fetchLeadLostReasonsLoader: false,
+		fetchLeadSourcesLoader: false
 	},
 
 	occupationList: [
@@ -23,12 +24,7 @@ export const INITIAL_STATE = {
 	],
 
 
-	sourceEnquiryList: [
-		{ id: 'Showroom', name: 'Showroom' },
-		{ id: 'Website', name: 'Website' },
-		{ id: 'Reference', name: 'Reference' },
-		{ id: 'Event', name: 'Event' }
-	],
-
+	sourceEnquiryList: [],
+	leadLostReasonsList: [],
 	productsList: []
 }

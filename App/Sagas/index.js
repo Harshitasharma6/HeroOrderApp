@@ -8,6 +8,7 @@ import { ShreeTypes } from '../Stores/Shree/Actions';
 import { NonShreeTypes } from '../Stores/NonShree/Actions';
 import { VisitorTypes } from '../Stores/Visitor/Actions';
 import { ProductsTypes } from '../Stores/Products/Actions';
+import { CommonTypes } from '../Stores/Common/Actions';
 
 
 import {
@@ -23,7 +24,6 @@ import {
 import {
     runQueue
 } from './OfflineSaga';
-
 
 
 import {
@@ -77,17 +77,8 @@ import {
     fetchShreeRetailers
 } from './ShreeSaga'
 
+
 import { 
-    fetchNonShree,
-    createCompetitor,
-    watchCreateNonShreeRequest,
-    watchSubmitNonShreeVisitForm,
-    fetchNonShreePreviousVisits
- } from './NonShreeSaga'
-
-
-
- import { 
     getAllProducts,
     getProductSchemes,
     addItemToCart,
@@ -95,10 +86,10 @@ import {
     changeDealerDiscount,
     removeOffer,
     addOffer
- } from './ProductsSaga'
+} from './ProductsSaga'
 
 
- import { 
+import { 
     watchSearchCustomer,
     watchRegisterCustomer,
     watchRegisterCustomerCall,
@@ -106,7 +97,37 @@ import {
     watchUpdateVisitor,
     getAllVisits,
     getFeedbacks
- } from './VisitorSaga'
+} from './VisitorSaga'
+
+
+import {
+    fetchLeadSources,
+    fetchLeadLostReasons
+} from './CommonSaga'
+
+
+import {
+    fetchLeadSources,
+    fetchLeadLostReasons
+} from './LeadAlertsSaga'
+
+
+//fetchHotLeads: ['payload'],
+
+
+
+    //fetchBookingConfirmFinanceLeads: ['payload'],
+
+
+
+    //fetchPurchaseOverdue,
+
+
+    //fetchOpenLeadsFinanceLeads,
+
+
+
+    //fetchNoAction,
 
 
 
@@ -119,6 +140,9 @@ export default function* root() {
         takeLatest(StartupTypes.STARTUP, startup),// Run the startup saga when the application starts
         takeLatest(offlineActionTypes.CONNECTION_CHANGE, runQueue),
 
+
+
+
         fork(watchUserLoginRequest),
         fork(watchUserStartDayRequest),
         takeLatest(UserTypes.FETCH_ALL_AREAS, fetchAgentAreas),
@@ -127,6 +151,7 @@ export default function* root() {
         takeLatest(UserTypes.CHECK_ATTENDANCE, checkAttendance),
         takeLatest(UserTypes.FETCH_ALL_PSM, fetchAllPsm),
   
+
     
        
         fork(fetchGlobalTokenTaskWatcher),
@@ -143,6 +168,7 @@ export default function* root() {
 
 
 
+
         takeLatest(ShreeTypes.FETCH_SHREE, fetchShree),
         takeLatest(ShreeTypes.FETCH_SHREE_RETAILERS, fetchShreeRetailers),
         takeLatest(ShreeTypes.UPDATE_LOCATION, updateLocation),
@@ -152,29 +178,17 @@ export default function* root() {
         takeLatest(ShreeTypes.FETCH_LATEST_VISITS, fetchLatestVisits),
         takeLatest(ShreeTypes.GET_ALL_COUNTERS, getAllCounters),
         takeLatest(ShreeTypes.GET_ALL_DISTRICTS, getAllDistricts),
-
         takeLatest(ShreeTypes.FETCH_ALL_VISITS, fetchAllVisits),
         takeLatest(ShreeTypes.FETCH_ALL_SITE_VISITS, fetchAllSiteVisits),
         takeLatest(ShreeTypes.FETCH_SALES_INFO, fetchSalesInfo),
         takeLatest(ShreeTypes.FETCH_ALL_INFLUENCER_VISITS, fetchAllInfluencerVisits),
-
         fork(watchCreateShreeRetailerRequest),
         fork(watchCreateShreeDealerRequest),
         fork(watchSubmitShreeVisitForm),
         fork(watchCreateShreeVisitDetailRequest),
 
 
-        takeLatest(NonShreeTypes.FETCH_NON_SHREE, fetchNonShree),
-        takeLatest(NonShreeTypes.CREATE_COMPETITOR, createCompetitor),
-        takeLatest(NonShreeTypes.FETCH_NON_SHREE_PREVIOUS_VISITS, fetchNonShreePreviousVisits),
-
         
-        fork(watchSubmitNonShreeVisitForm),
-        //takeLatest(NonShreeTypes.SUBMIT_NON_SHREE_VISIT_FORM, submitNonShreeVisitForm),
-
-
-        fork(watchCreateNonShreeRequest),
-
 
         fork(watchCreateFeedBackRequest),
         fork(watchFinalObservationForm),
@@ -184,6 +198,14 @@ export default function* root() {
         takeLatest(DashboardTypes.FETCH_FINAL_OBSERVATION, fetchFinalObservation),
 
 
+
+
+        takeLatest(CommonTypes.FETCH_LEAD_SOURCES, fetchLeadSources),
+        takeLatest(CommonTypes.FETCH_LEAD_LOST_REASONS, fetchLeadLostReasons),
+
+
+
+
         takeLatest(ProductsTypes.GET_ALL_PRODUCTS, getAllProducts),
         takeLatest(ProductsTypes.GET_PRODUCT_SCHEMES, getProductSchemes),
         takeLatest(ProductsTypes.ADD_ITEM_TO_CART, addItemToCart),
@@ -191,6 +213,8 @@ export default function* root() {
         takeLatest(ProductsTypes.REMOVE_OFFER, removeOffer),
         takeLatest(ProductsTypes.ADD_OFFER, addOffer),
         takeLatest(ProductsTypes.CHANGE_DEALER_DISCOUNT, changeDealerDiscount),
+
+
 
         
         fork(watchUpdateVisitor),

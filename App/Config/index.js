@@ -16,7 +16,9 @@ export const Config = {
 
 
 	COMMON_SERVICE: {
-		FETCH_OCCUPATIONS: ''
+		FETCH_OCCUPATIONS: '',
+		FETCH_LEAD_SOURCES: 'visitors/getLeadSource',
+		FETCH_LEAD_LOST_REASONS: 'visitors/getLostReason'
 	},
 
 

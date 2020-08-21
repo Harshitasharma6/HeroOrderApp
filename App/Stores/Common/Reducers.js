@@ -64,6 +64,84 @@ export const makeProductsSearchableList = (state, { payload }) => ({
 
 
 
+export const fetchLeadLostReasonsSuccess = (state, {payload}) => ({
+  ...state,
+  leadLostReasonsList: payload,
+  loaders: {
+    ...state.loaders,
+    fetchLeadLostReasonsLoader: false
+  }
+});
+
+
+export const fetchLeadLostReasonsFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchLeadLostReasonsLoader: false
+  }
+});
+
+
+export const fetchLeadLostReasonsLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchLeadLostReasonsLoader: true
+  }
+});
+
+
+export const fetchLeadLostReasonsLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchLeadLostReasonsLoader: false
+  }
+});
+
+
+
+
+
+export const fetchLeadSourcesSuccess = (state, {payload}) => ({
+  ...state,
+  sourceEnquiryList: payload,
+  loaders: {
+    ...state.loaders,
+    fetchLeadSourcesLoader: false
+  }
+});
+
+
+export const fetchLeadSourcesFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchLeadSourcesLoader: false
+  }
+});
+
+
+export const fetchLeadSourcesLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchLeadSourcesLoader: true
+  }
+});
+
+
+export const fetchLeadSourcesLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchLeadSourcesLoader: false
+  }
+});
+
+
+
 export const reducer = createReducer(INITIAL_STATE, {
   [CommonTypes.CONNECTION_CHANGED]           : connectionChanged,
   [CommonTypes.SCREEN_CHANGED]               : screenChanged,
@@ -71,5 +149,19 @@ export const reducer = createReducer(INITIAL_STATE, {
   [CommonTypes.CLOSE_MODAL]                  : closeModal,
   [CommonTypes.DISABLE_MODAL]                : disableModal,
   [CommonTypes.ENABLE_MODAL]                 : enableModal,
-  [CommonTypes.MAKE_PRODUCTS_SEARCHABLE_LIST]: makeProductsSearchableList
+  [CommonTypes.MAKE_PRODUCTS_SEARCHABLE_LIST]: makeProductsSearchableList,
+
+  //[CommonTypes.FETCH_LEAD_LOST_REASONS]              : fetchLeadLostReasons,
+  [CommonTypes.FETCH_LEAD_LOST_REASONS_LOADING]      : fetchLeadLostReasonsLoading,
+  [CommonTypes.FETCH_LEAD_LOST_REASONS_LOADING_STOP] : fetchLeadLostReasonsLoadingStop,
+  [CommonTypes.FETCH_LEAD_LOST_REASONS_SUCCESS]      : fetchLeadLostReasonsSuccess,
+  [CommonTypes.FETCH_LEAD_LOST_REASONS_FAILURE]      : fetchLeadLostReasonsFailure,
+
+
+  //[CommonTypes.FETCH_LEAD_SOURCES]                   : fetchLeadSources,
+  [CommonTypes.FETCH_LEAD_SOURCES_LOADING]           : fetchLeadSourcesLoading,
+  [CommonTypes.FETCH_LEAD_SOURCES_LOADING_STOP]      : fetchLeadSourcesLoadingStop,
+  [CommonTypes.FETCH_LEAD_SOURCES_SUCCESS]           : fetchLeadLostReasonsSuccess,
+  [CommonTypes.FETCH_LEAD_SOURCES_FAILURE]           : fetchLeadLostReasonsFailure
+
 });

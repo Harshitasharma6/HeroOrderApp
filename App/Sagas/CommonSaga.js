@@ -11,7 +11,7 @@ import {Alert} from 'react-native'
 import _ from 'lodash';
 
 
-export function* getAllProducts({ payload }) {
+export function* fetchLeadSources({ payload }) {
 	const isOnline = yield select(getConnectionStatus);
 	if (!isOnline) {
 		yield put(CommonActions.doNothing());
@@ -19,23 +19,49 @@ export function* getAllProducts({ payload }) {
 	}
 
 	try {
-		yield put(CommonActions.getAllProductsLoading());
+		yield put(CommonActions.fetchLeadSourcesLoading());
 		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		let successData = yield call(CommonService.getAllProducts, payload);
+		let successData = yield call(CommonService.fetchLeadSources, payload);
 		if (successData) {
-			yield put(CommonActions.getAllProductsSuccess(successData));
-			yield put(CommonActions.makeProductsSearchableList(HelperService.convertToSearchableListFormat({
-				list: successData,
-				id_key: 'sfid',
-				label_key: 'name'
+			yield put(CommonActions.fetchLeadSourcesSuccess(HelperService.convertToSearchableListFormat({
+				list: successData
 			})));
 		} else {
-			yield put(CommonActions.getAllProductsFailure());
+			yield put(CommonActions.fetchLeadSourcesFailure());
 		}
 	} catch (error) {
-		yield put(CommonActions.getAllProductsFailure());
+		yield put(CommonActions.fetchLeadSourcesFailure());
 	}
 }
+
+
+export function* fetchLeadLostReasons({ payload }) {
+	const isOnline = yield select(getConnectionStatus);
+	if (!isOnline) {
+		yield put(CommonActions.doNothing());
+		return;
+	}
+
+	try {
+		yield put(CommonActions.fetchLeadLostReasonsLoading());
+		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
+		let successData = yield call(CommonService.fetchLeadLostReasons, payload);
+		if (successData) {
+			yield put(CommonActions.fetchLeadLostReasonsSuccess(HelperService.convertToSearchableListFormat({
+				list: successData
+			})));
+		} else {
+			yield put(CommonActions.fetchLeadLostReasonsFailure());
+		}
+	} catch (error) {
+		yield put(CommonActions.fetchLeadLostReasonsFailure());
+	}
+}
+
+
+
+    // fetchLeadSources,
+    // fetchLeadLostReasons
 
 
 

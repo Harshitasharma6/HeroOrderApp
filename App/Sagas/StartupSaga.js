@@ -66,6 +66,10 @@ export function* startup({ params }) {
             state_id
         }));
 
+        yield put(CommonActions.fetchLeadSources({}));
+
+        yield put(CommonActions.fetchLeadLostReasons({}));
+
         NavigationService.navigateAndReset('LoginScreen')
     //}
 }

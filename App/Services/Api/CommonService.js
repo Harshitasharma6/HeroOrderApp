@@ -10,8 +10,27 @@ const {
 
 
 
-function getAllProducts(params) {
-  let url = Config.VISITOR_SERVICE.FETCH_PRODUCTS;
+function fetchLeadSources(params) {
+  let url = Config.COMMON_SERVICE.FETCH_LEAD_SOURCES;
+  url += `?state_id=${params.state_id}`
+  return apiClient.get(url, {
+    headers: {
+      token: params.token
+    }
+  }).then((response) => {
+    if (in200s(response.status)) {
+      return response['data']['data']['products'];
+    }
+    return null
+  }).catch(error => {
+    //bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
+    return null
+  });
+}
+
+
+function fetchLeadLostReasons(params) {
+  let url = Config.COMMON_SERVICE.FETCH_LEAD_LOST_REASONS;
   url += `?state_id=${params.state_id}`
   return apiClient.get(url, {
     headers: {
@@ -31,5 +50,6 @@ function getAllProducts(params) {
 
 
 export const CommonService = {
-  getAllProducts
+  fetchLeadSources,
+  fetchLeadLostReasons
 }
