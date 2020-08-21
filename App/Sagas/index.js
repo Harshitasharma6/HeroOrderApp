@@ -110,10 +110,10 @@ import {
 } from './CommonSaga'
 
 
-import {
-    fetchLeadSources,
-    fetchLeadLostReasons
-} from './LeadAlertsSaga'
+// import {
+//     fetchLeadSources,
+//     fetchLeadLostReasons
+// } from './LeadAlertsSaga'
 
 
 //fetchHotLeads: ['payload'],
@@ -217,6 +217,7 @@ export default function* root() {
         takeLatest(ProductsTypes.REMOVE_OFFER, removeOffer),
         takeLatest(ProductsTypes.ADD_OFFER, addOffer),
         takeLatest(ProductsTypes.CHANGE_DEALER_DISCOUNT, changeDealerDiscount),
+
         takeLatest(DealersTypes.GET_ALL_DEALERS, getAllDealers),
         
         fork(watchUpdateVisitor),
