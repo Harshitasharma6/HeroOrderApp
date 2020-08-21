@@ -7,11 +7,12 @@ import BlueButton from 'App/Components/BlueButton';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { connect } from 'react-redux';
 import GenericIcon from 'App/Components/GenericIcon'
+import NoDataFound from 'App/Components/NoDataFound'
 import { HelperService } from 'App/Services/Utils/HelperService';
 import NavigationService from 'App/Services/NavigationService'
 import {ApplicationStyles,Colors} from 'App/Theme'
 import GenericCheckBox from 'App/Components/GenericCheckBox'
-import VisitorActions from 'App/Stores/Visitor/Actions'
+import DealersActions from 'App/Stores/Dealers/Actions';
 import Underline from 'App/Components/Underline';
 
 // "first_name__c": "test 12",	(*mandatory)
@@ -37,16 +38,29 @@ import Underline from 'App/Components/Underline';
 
 class DealerSalespersonFormScreen extends Component {
 	componentDidMount() {
-		
+		this.fetchCall()	
 	}
 
-	componentWillUnmount() {
+	fetchCall() {
+		const {
 		
-    }
+		  fetchData
+		} = this.props
+	
+		fetchData({
+		 
+		});
+	  }
+	
+
+	
     
     getDataNode() {
-        const data = [{name: 'Sunil Singla'}, {name: 'Ankur Kumar'}, {name: 'Ankita Sharma'}]
-        const dataLength = data.length;
+		const {
+			loader,
+			data
+		  } = this.props;
+
         
         let visibleNode = [];
     
@@ -58,18 +72,19 @@ class DealerSalespersonFormScreen extends Component {
                 renderItem={({ item }) => 
                     <GenericDisplayCard dark={false}
                       style={{ width: '88%', elevation: 0 }}
-                      heading={item.name}
-                      showTextAvatar={false}
+                      heading={item.sales_person_name__c}
+                      showTextAvatar={true}
                       //onPress={() => NavigationService.navigate('CustomerInfoScreen')}
                       content={[
-                        <BlueButton style={{width: wp('11%'),   borderRadius:wp('30%'), alignSelf: 'flex-end', marginTop: hp('-5%') , marginBottom: hp('1%'), marginRight: wp('2%')}} textStyle={{fontSize: wp('2.8%')}} onPress={() => HelperService.callNumber('9779897974')}><GenericIcon name="phone" style={{fontSize: wp('4%'), color: Colors.white}}/></BlueButton>,
-                          <GenericDisplayCardStrip key={'Contact Number' + item.name} label={'Contact Number:'} value={'8829592311'}/>
+                        <BlueButton style={{width: wp('11%'),   borderRadius:wp('30%'), alignSelf: 'flex-end', marginTop: hp('-5%') , marginBottom: hp('1%'), marginRight: wp('2%')}} textStyle={{fontSize: wp('2.8%')}} onPress={() => HelperService.callNumber(item.username__c)}><GenericIcon name="phone" style={{fontSize: wp('4%'), color: Colors.white}}/></BlueButton>,
+                          <GenericDisplayCardStrip key={'Contact Number' + item.name} label={'Contact Number:'} value={item.username__c}/>
                           
                         
                   ]}
                 />}
-                keyExtractor={item => item}
-                refreshing={false}
+				keyExtractor={item => item.sfid}
+				
+                refreshing={loader}
                 ListEmptyComponent={() => <NoDataFound text={'No Salesperson Found'} />}
               />
             );
@@ -85,30 +100,10 @@ class DealerSalespersonFormScreen extends Component {
         return visibleNode;
       }
 
-	submit() {
-		const { 
-			submitForm, 
-			form,
-		} = this.props;
-
-		Keyboard.dismiss();
-		submitForm({
-			...form,
-			dealers_sales_person__c: 'a0O9D000001hLV9UAM'
-		});
-	}
+	
 
     render() {
-		const { 
-			form,
-			loader,
-			changeForm,
-			submitForm,
-			validation,
-			occupationList,
-            sourceEnquiryList,
-            productsList
-		} = this.props;
+		
 		
 		return (
 			<View style={Style.container}>
@@ -128,19 +123,14 @@ class DealerSalespersonFormScreen extends Component {
 
 
 const mapStateToProps = (state) => ({
-	validation      			: state.visitor.registerCustomerValidation,
-	form 					 	: state.visitor.registerCustomerForm,
-	loader 			            : state.visitor.loaders.registerCustomerLoader,
-	occupationList 				: state.common.occupationList,
-  	sourceEnquiryList 			: state.common.sourceEnquiryList,
-  	productsList 				: state.common.productsList,
-  	contact_number              : state.visitor.searchCustomerForm.contact_number
+
+	data     : state.dealers.DealersData,
+	loader   : state.dealers.loaders.getAllDealersLoader,
 });
   
 const mapDispatchToProps = (dispatch) => ({
-	changeForm: (params)       => dispatch(VisitorActions.changeRegisterCustomerForm(params)),
-	submitForm: (params)       => dispatch(VisitorActions.registerCustomer(params)),
-	clearRegistrationForm: ()  => dispatch(VisitorActions.clearRegistrationForm())
+	fetchData:(params)                 => dispatch(DealersActions.getAllDealers(params)),
+  
 });
 
 export default connect(

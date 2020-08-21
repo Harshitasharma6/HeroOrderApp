@@ -27,6 +27,12 @@ export const Config = {
 		FETCH_SCHEMES: 'products/getScheme?product_id=a029D000002ZFPjQAO&state_id=a059D000000tNcxQAE&dealer_id=0019D000009ydMqQAI',
 	},
 
+	DEALER_SERVICE:{
+	
+	FETCH_ALL_DEALER_SALES_INFO: 'dealers/getDealerSalesPersonInfo?dealer_id=0019D000009zum3QAA',
+
+	},
+
 
 
 

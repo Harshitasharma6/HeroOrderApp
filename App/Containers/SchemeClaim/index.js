@@ -13,6 +13,7 @@ import {ApplicationStyles,Colors} from 'App/Theme'
 import GenericCheckBox from 'App/Components/GenericCheckBox'
 import VisitorActions from 'App/Stores/Visitor/Actions'
 import Underline from 'App/Components/Underline';
+import Filter from './filter';
 
 // "first_name__c": "test 12",	(*mandatory)
 // 	"last_name__c": "enquiry visit test",	(*mandatory)
@@ -124,7 +125,10 @@ class SchemeClaimFormScreen extends Component {
 		return (
 			<View style={Style.container}>
 				<Text style={Style.heading}>{'SCHEMES CLAIMS'}</Text>
-                <BlueButton  title={' FILTER BY'}style={{width: wp('26.5%'),    alignSelf: 'flex-end', marginTop: hp('3%') , marginBottom: hp('0%'), marginRight: wp('10%')}} textStyle={{fontSize: wp('3%')}} ><GenericIcon name="filter" style={{fontSize: wp('4%'), color: Colors.white}}/></BlueButton>
+       
+        <BlueButton  title={' FILTER BY'}style={{width: wp('26.5%'),    alignSelf: 'flex-end', marginTop: hp('3%') , marginBottom: hp('0%'), marginRight: wp('10%')}} textStyle={{fontSize: wp('3%')}}  
+        >
+              <GenericIcon name="filter" style={{fontSize: wp('4%'), color: Colors.white}}/></BlueButton>
                 
 				<ScrollView 
 					showsVerticalScrollIndicator={false}
