@@ -14,6 +14,7 @@ import { reducer as leadAlertsReducer} from './LeadAlerts/Reducers'
 import { reducer as visitorReducer} from './Visitor/Reducers'
 import { reducer as productsReducer} from './Products/Reducers'
 import { reducer as dealersReducer} from './Dealers/Reducers'
+import { reducer as subdealersReducer} from './SubDealers/Reducers'
 
 
 export default () => {
@@ -31,6 +32,7 @@ export default () => {
     visitor: visitorReducer,
     products: productsReducer,
     dealers: dealersReducer,
+    subdealers: subdealersReducer,
 
   });
 
