@@ -23,9 +23,7 @@ export function* fetchLeadSources({ payload }) {
 		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
 		let successData = yield call(CommonService.fetchLeadSources, payload);
 		if (successData) {
-			yield put(CommonActions.fetchLeadSourcesSuccess(HelperService.convertToSearchableListFormat({
-				list: successData
-			})));
+			yield put(CommonActions.fetchLeadSourcesSuccess(HelperService.convertArrayToSearchableListFormat(successData)));
 		} else {
 			yield put(CommonActions.fetchLeadSourcesFailure());
 		}
@@ -47,9 +45,7 @@ export function* fetchLeadLostReasons({ payload }) {
 		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
 		let successData = yield call(CommonService.fetchLeadLostReasons, payload);
 		if (successData) {
-			yield put(CommonActions.fetchLeadLostReasonsSuccess(HelperService.convertToSearchableListFormat({
-				list: successData
-			})));
+			yield put(CommonActions.fetchLeadLostReasonsSuccess(HelperService.convertArrayToSearchableListFormat(successData)));
 		} else {
 			yield put(CommonActions.fetchLeadLostReasonsFailure());
 		}

@@ -151,7 +151,7 @@ export default {
 	  },
 	  infoBox: {
 		borderWidth: 2,
-		width: '88%',
+		width: '95%',
 		elevation: 0
 	},
 

@@ -14,7 +14,7 @@ import LeadAlertsAction from 'App/Stores/LeadAlerts/Actions'
 
 class Actionables extends React.Component {
   scrollToIndex(index){
-    let distanceToBeScrolled = (index)*wp('50%');
+    let distanceToBeScrolled = (index)*wp('35%');
     if (this.flatListRef){
       this.flatListRef.scrollTo({x: distanceToBeScrolled, y: 0, animated: true});
     }
@@ -69,12 +69,12 @@ class Actionables extends React.Component {
               onPress={() => {selectFollowUp('3');  this.scrollToIndex(2)}}
               selected={selectedFollowUp == '3'}
               customSelectedStyle={Styles.customSelectedStyleRedPink}
-              customSelectedTextStyle={Styles.customSelectedTextStyle}
+              customSelectedTextStyle={{...Styles.customSelectedTextStyle, flexWrap: 'wrap'}}
             />
 
         
             <WhiteButton
-              title={'Open Hot Assigned Leads'}
+              title={'Open HO Assigned Leads'}
               style={{...Styles.actionButton, ...Styles.customSelectedStyleYellow}}
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('4');  this.scrollToIndex(3)}}
@@ -110,7 +110,7 @@ class Actionables extends React.Component {
             <WhiteButton
               title={"Follow Up's"}
               style={Styles.actionButton}
-              textStyle={Styles.actionButtonText}
+              textStyle={Styles.actionButtonTextHeading}
               onPress={() => {selectActionable('1')}}
               selected={selectedActionable == '1'}
               disabled={true}
@@ -184,6 +184,11 @@ const Styles = StyleSheet.create({
   },
   actionButtonText: {
     fontSize: wp('2.9%'),
+    fontFamily: ApplicationStyles.textMsgFont,
+    color: Colors.headingBlack
+  },
+   actionButtonTextHeading: {
+    fontSize: wp('4.9%'),
     fontFamily: ApplicationStyles.textMsgFont,
     color: Colors.headingBlack
   },

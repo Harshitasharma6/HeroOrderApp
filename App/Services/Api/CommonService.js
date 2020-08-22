@@ -12,14 +12,13 @@ const {
 
 function fetchLeadSources(params) {
   let url = Config.COMMON_SERVICE.FETCH_LEAD_SOURCES;
-  url += `?state_id=${params.state_id}`
   return apiClient.get(url, {
     headers: {
       token: params.token
     }
   }).then((response) => {
     if (in200s(response.status)) {
-      return response['data']['data']['products'];
+      return response['data']['lead_source'];
     }
     return null
   }).catch(error => {
@@ -31,14 +30,13 @@ function fetchLeadSources(params) {
 
 function fetchLeadLostReasons(params) {
   let url = Config.COMMON_SERVICE.FETCH_LEAD_LOST_REASONS;
-  url += `?state_id=${params.state_id}`
   return apiClient.get(url, {
     headers: {
       token: params.token
     }
   }).then((response) => {
     if (in200s(response.status)) {
-      return response['data']['data']['products'];
+      return response['data']['lost_status_reason'];
     }
     return null
   }).catch(error => {

@@ -18,7 +18,7 @@ class LeadAlertsLayout extends React.Component {
     return (
      <View style={{padding: hp('1%')}}>
        <BackArrowButton />
-       <View style={{alignItems:'flex-start', justifyContent: 'flex-start', width: wp('50%'), height: 100, marginHorizontal: wp('25%')}}>
+       <View style={{alignItems:'center', justifyContent: 'center', width: wp('50%'), height: 100, marginHorizontal: wp('23%')}}>
           <Image
               style={{ width: '100%', height: '100%', resizeMode: 'contain'}}
               source={require('App/Assets/Images/herologo.png')}

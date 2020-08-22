@@ -52,6 +52,15 @@ const { Types, Creators } = createActions({
 	fetchNoActionLoading: null,
 	fetchNoActionLoadingStop: null,
 
+
+	markLeadLost: ['payload'],
+	markLeadLostSuccess: ['payload'],
+	markLeadLostFailure: null,
+	markLeadLostLoading: null,
+	markLeadLostLoadingStop: null,
+	changeLeadLostForm: ['payload'],
+	clearLeadLostForm: null
+
 });
 
 export const LeadAlertTypes = Types

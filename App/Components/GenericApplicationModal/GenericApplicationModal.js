@@ -5,6 +5,7 @@ import BlueButton from 'App/Components/BlueButton'
 import WhiteButton from 'App/Components/WhiteButton'
 
 import { Colors, Metrics, Helpers, Fonts, ApplicationStyles } from 'App/Theme'
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 //onSubmit
 export default class ActionModal extends Component {
@@ -84,7 +85,7 @@ export default class ActionModal extends Component {
               </TouchableWithoutFeedback>
 		          <View style={{flex: bottomContainerFlexHeight, backgroundColor: Colors.white, zIndex: 4}}>
 		          		<View style={{flex: .2, alignItems: 'center', justifyContent: 'center'}}>
-		          			<Text style={{color: Colors.primary, alignSelf: 'center', fontFamily: ApplicationStyles.textMsgFont, fontSize: 18, textAlign: 'center', width: '80%'}}>{heading}</Text>
+		          			<Text style={{color: Colors.primary, alignSelf: 'center', fontFamily: ApplicationStyles.textMsgFont, fontSize: wp('5.4%'), textTransform: 'uppercase', textAlign: 'center', width: '80%'}}>{heading}</Text>
 				              <TouchableHighlight
 				              	style={{paddingTop: 2, position: 'absolute', left: 0, paddingLeft: 8}}
                         disabled={disabled}

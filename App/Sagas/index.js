@@ -3,13 +3,14 @@ import { StartupTypes } from 'App/Stores/Startup/Actions';
 import { UserTypes } from 'App/Stores/User/Actions';
 import { networkSaga, offlineActionTypes } from 'react-native-offline';
 import { all, fork, takeLatest } from 'redux-saga/effects';
-import { StartDayTypes } from '../Stores/StartDay/Actions'
-import { ShreeTypes } from '../Stores/Shree/Actions';
-import { NonShreeTypes } from '../Stores/NonShree/Actions';
-import { VisitorTypes } from '../Stores/Visitor/Actions';
-import { ProductsTypes } from '../Stores/Products/Actions';
-import { CommonTypes } from '../Stores/Common/Actions';
-import { DealersTypes } from '../Stores/Dealers/Actions';
+import { StartDayTypes } from 'App/Stores/StartDay/Actions'
+import { ShreeTypes } from 'App/Stores/Shree/Actions';
+import { NonShreeTypes } from 'App/Stores/NonShree/Actions';
+import { VisitorTypes } from 'App/Stores/Visitor/Actions';
+import { ProductsTypes } from 'App/Stores/Products/Actions';
+import { CommonTypes } from 'App/Stores/Common/Actions';
+import { DealersTypes } from 'App/Stores/Dealers/Actions';
+import { LeadAlertTypes } from 'App/Stores/LeadAlerts/Actions';
 
 
 import {
@@ -110,28 +111,14 @@ import {
 } from './CommonSaga'
 
 
-// import {
-//     fetchLeadSources,
-//     fetchLeadLostReasons
-// } from './LeadAlertsSaga'
-
-
-//fetchHotLeads: ['payload'],
-
-
-
-    //fetchBookingConfirmFinanceLeads: ['payload'],
-
-
-
-    //fetchPurchaseOverdue,
-
-
-    //fetchOpenLeadsFinanceLeads,
-
-
-
-    //fetchNoAction,
+import {
+    fetchHotLeads,
+    fetchBookingConfirmFinanceLeads,
+    fetchPurchaseOverdue,
+    fetchOpenLeads,
+    fetchNoAction,
+    watchMarkLeadLost
+} from './LeadAlertsSaga'
 
 
 
@@ -226,7 +213,16 @@ export default function* root() {
         fork(watchRegisterCustomerCall),
         fork(watchCreateFeedback),
         takeLatest(VisitorTypes.GET_ALL_VISITS, getAllVisits),
-        takeLatest(VisitorTypes.GET_FEEDBACKS, getFeedbacks)
+        takeLatest(VisitorTypes.GET_FEEDBACKS, getFeedbacks),
+
+
+        fork(watchMarkLeadLost),
+        takeLatest(LeadAlertTypes.FETCH_HOT_LEADS, fetchHotLeads),
+        takeLatest(LeadAlertTypes.FETCH_BOOKING_CONFIRM_FINANCE_LEADS, fetchBookingConfirmFinanceLeads),
+        takeLatest(LeadAlertTypes.FETCH_PURCHASE_OVERDUE, fetchPurchaseOverdue),
+        takeLatest(LeadAlertTypes.FETCH_OPEN_LEADS, fetchOpenLeads),
+        takeLatest(LeadAlertTypes.FETCH_NO_ACTION, fetchNoAction),
+
 
     ]);
 }

@@ -218,7 +218,79 @@ export const fetchNoActionLoadingStop = (state, {payload}) => ({
   }
 });
 
+    // [LeadAlertTypes.MARK_LEAD_LOST_SUCCESS]        : markLeadLostSuccess,
+    // [LeadAlertTypes.MARK_LEAD_LOST_FAILURE]        : markLeadLostFailure,
+    // [LeadAlertTypes.MARK_LEAD_LOST_LOADING]        : markLeadLostLoading,
+    // [LeadAlertTypes.MARK_LEAD_LOST_LOADING_STOP]   : markLeadLostLoadingStop,
+    // [LeadAlertTypes.CHANGE_LEAD_LOST_FORM]         : changeLeadLostForm,
+    // [LeadAlertTypes.CLEAR_LEAD_LOST_FORM]          : clearLeadLostForm
 
+    //  leadLostForm: {},
+    // leadLostFormValidation: {
+    //     invalid: false,
+    //     invalid_field: ''
+    // },
+    //markLeadLostLoader: false
+
+export const markLeadLostSuccess = (state, {payload}) => ({
+  ...state,
+  leadLostForm: INITIAL_STATE.leadLostForm,
+  loaders: {
+    ...state.loaders,
+    markLeadLostLoader: false
+  }
+});
+
+
+export const markLeadLostFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    markLeadLostLoader: false
+  }
+});
+
+
+export const markLeadLostLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    markLeadLostLoader: true
+  }
+});
+
+
+export const markLeadLostLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    markLeadLostLoader: false
+  }
+});
+
+
+export const changeLeadLostForm = (state, { payload }) => {
+      const {
+        edited_field,
+        edited_value
+    } = payload;
+
+    let changed_entity = {};
+    changed_entity[edited_field] = edited_value;
+    return {
+      ...state,
+      leadLostForm : {
+          ...state.leadLostForm,
+          ...changed_entity
+      },
+      leadLostFormValidation: INITIAL_STATE.leadLostFormValidation
+    }
+};
+
+export const clearLeadLostForm = (state) => ({
+    ...state,
+    leadLostForm: INITIAL_STATE.leadLostForm
+})
 
 
 
@@ -263,5 +335,15 @@ export const reducer = createReducer(INITIAL_STATE, {
     [LeadAlertTypes.FETCH_NO_ACTION_FAILURE]         : fetchNoActionFailure,
     [LeadAlertTypes.FETCH_NO_ACTION_LOADING]         : fetchNoActionLoading,
     [LeadAlertTypes.FETCH_NO_ACTION_LOADING_STOP]    : fetchNoActionLoadingStop,
+
+
+
+
+    [LeadAlertTypes.MARK_LEAD_LOST_SUCCESS]        : markLeadLostSuccess,
+    [LeadAlertTypes.MARK_LEAD_LOST_FAILURE]        : markLeadLostFailure,
+    [LeadAlertTypes.MARK_LEAD_LOST_LOADING]        : markLeadLostLoading,
+    [LeadAlertTypes.MARK_LEAD_LOST_LOADING_STOP]   : markLeadLostLoadingStop,
+    [LeadAlertTypes.CHANGE_LEAD_LOST_FORM]         : changeLeadLostForm,
+    [LeadAlertTypes.CLEAR_LEAD_LOST_FORM]          : clearLeadLostForm
 
 });

@@ -161,7 +161,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   //[CommonTypes.FETCH_LEAD_SOURCES]                   : fetchLeadSources,
   [CommonTypes.FETCH_LEAD_SOURCES_LOADING]           : fetchLeadSourcesLoading,
   [CommonTypes.FETCH_LEAD_SOURCES_LOADING_STOP]      : fetchLeadSourcesLoadingStop,
-  [CommonTypes.FETCH_LEAD_SOURCES_SUCCESS]           : fetchLeadLostReasonsSuccess,
-  [CommonTypes.FETCH_LEAD_SOURCES_FAILURE]           : fetchLeadLostReasonsFailure
+  [CommonTypes.FETCH_LEAD_SOURCES_SUCCESS]           : fetchLeadSourcesSuccess,
+  [CommonTypes.FETCH_LEAD_SOURCES_FAILURE]           : fetchLeadSourcesFailure
 
 });

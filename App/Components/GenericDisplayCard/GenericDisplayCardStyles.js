@@ -65,8 +65,9 @@ export default StyleSheet.create({
   title: {
     color: Colors.primary,
     fontFamily: ApplicationStyles.textMsgFont,
-    fontSize: wp('4.5%'),
-    textTransform: 'uppercase'
+    fontSize: wp('5%'),
+    textTransform: 'capitalize',
+    flexWrap: 'wrap'
   },
   ttl: {
     color: Colors.grey,
@@ -75,4 +76,10 @@ export default StyleSheet.create({
     marginTop: hp('.5%'),
     marginBottom: hp('.5%')
   },
+  titleContainer: {
+    width: '80%',
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    marginBottom: 10
+  }
 })

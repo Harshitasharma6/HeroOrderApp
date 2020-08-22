@@ -3,7 +3,7 @@ import { Container, Content, Spinner, Text, View } from 'native-base';
 import Style from './NoDataFoundStyles';
 
 const NoData = ({ style, onPress, title, disabled = false, text = 'No Data', children }) => (
-	<Container style={{ ...{ justifyContent: 'center', alignItems: 'center' }, ...style }}>
+	<Container style={{ ...{ justifyContent: 'flex-start', alignItems: 'center', paddingTop: '50%' }, ...style }}>
 		<Text style={{ ...Style.text }}>{text}</Text>
 		{children}
 	</Container>
