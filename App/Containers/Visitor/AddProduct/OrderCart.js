@@ -74,7 +74,7 @@ class OrderCartScreen extends Component {
 	                	textStyle={{color: Colors.blue, fontSize: wp('4%')}}
 	                	onPress={() => {
 						return openModal({
-								content: <ApplyOffers  selectedOffers={cart.offersApplied} availableOffers={productSchemes[product_id]} onPressSelect={(value) => addOffer(value)}/>, 
+								content: <ApplyOffers  selectedOffers={cart.offersApplied} availableOffers={productSchemes[product_id] || []} onPressSelect={(value) => addOffer(value)}/>, 
 								heading: 'APPLY OFFERS', 
 								bodyFlexHeight: 1
 						})}}

@@ -10,7 +10,7 @@ export default StyleSheet.create({
   text: {
     color: Colors.grey,
     fontFamily: ApplicationStyles.textMsgFont,
-    fontSize: wp('3.5%'),
+    fontSize: wp('4.4%'),
     textTransform: 'capitalize'
   }
 })

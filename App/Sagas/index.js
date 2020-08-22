@@ -3,14 +3,15 @@ import { StartupTypes } from 'App/Stores/Startup/Actions';
 import { UserTypes } from 'App/Stores/User/Actions';
 import { networkSaga, offlineActionTypes } from 'react-native-offline';
 import { all, fork, takeLatest } from 'redux-saga/effects';
-import { StartDayTypes } from 'App/Stores/StartDay/Actions'
-import { ShreeTypes } from 'App/Stores/Shree/Actions';
-import { NonShreeTypes } from 'App/Stores/NonShree/Actions';
-import { VisitorTypes } from 'App/Stores/Visitor/Actions';
-import { ProductsTypes } from 'App/Stores/Products/Actions';
-import { CommonTypes } from 'App/Stores/Common/Actions';
-import { DealersTypes } from 'App/Stores/Dealers/Actions';
+import { StartDayTypes } from '../Stores/StartDay/Actions'
+import { ShreeTypes } from '../Stores/Shree/Actions';
+import { NonShreeTypes } from '../Stores/NonShree/Actions';
+import { VisitorTypes } from '../Stores/Visitor/Actions';
+import { ProductsTypes } from '../Stores/Products/Actions';
+import { CommonTypes } from '../Stores/Common/Actions';
+import { DealersTypes } from '../Stores/Dealers/Actions';
 import { LeadAlertTypes } from 'App/Stores/LeadAlerts/Actions';
+import { SubDealersTypes } from '../Stores/SubDealers/Actions';
 
 
 import {
@@ -93,6 +94,10 @@ import {
  import {
      getAllDealers
 } from  './DealerSaga'
+
+import {
+    getAllSubDealers
+} from  './SubDealerSaga'
 
 import { 
     watchSearchCustomer,
@@ -206,6 +211,8 @@ export default function* root() {
         takeLatest(ProductsTypes.CHANGE_DEALER_DISCOUNT, changeDealerDiscount),
 
         takeLatest(DealersTypes.GET_ALL_DEALERS, getAllDealers),
+
+        takeLatest(SubDealersTypes.GET_ALL_SUB_DEALERS, getAllSubDealers),
         
         fork(watchUpdateVisitor),
         fork(watchSearchCustomer),

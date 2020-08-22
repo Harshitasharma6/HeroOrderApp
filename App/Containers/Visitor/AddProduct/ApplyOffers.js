@@ -4,6 +4,7 @@ import { Container, Header, Content, ListItem, Text, Radio, Right, Left } from '
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import {Colors, ApplicationStyles} from 'App/Theme'
 import { connect } from 'react-redux'
+import NoDataFound from 'App/Components/NoDataFound'
 class ApplyOffers extends Component {
 	isSelected(offer) {
 		const {
@@ -27,6 +28,7 @@ class ApplyOffers extends Component {
 	  	} = this.props;
 	    return (
 	      <View style={{flex: 1, marginBottom: 15, borderRadius: 10, width: wp('100%')}}>
+	      	{availableOffers.length ? 
 		    <ScrollView>
 		    	{
 		        	availableOffers.map((obj) => {
@@ -50,7 +52,8 @@ class ApplyOffers extends Component {
 		        		);
 		        	})
 			    }
-			</ScrollView>
+			</ScrollView> : <NoDataFound text={'No Offers Available'}/>
+		}
 		  </View>
 	    );
   }

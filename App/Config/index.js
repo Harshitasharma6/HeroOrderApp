@@ -30,6 +30,9 @@ export const Config = {
 		FETCH_ALL_DEALER_SALES_INFO: 'dealers/getDealerSalesPersonInfo?dealer_id=0019D000009zum3QAA',
 	},
 
+	SUB_DEALER_SERVICE:{
+		GET_SUB_DEALER: 'dealers/getSubDealers?dealer_id=0019D000009zum3QAA'
+	},
 
 	LEAD_ALERT_SERVICE: {
 		FETCH_HOT_LEADS                     : 'visitors/hotLeads',
@@ -38,6 +41,5 @@ export const Config = {
     	FETCH_OPEN_LEADS                    : 'visitors/openHOLeads',
     	FETCH_NO_ACTION                     : 'visitors/noAction',
     	MARK_LEAD_LOST                      : 'visitors/lost'
-    
 	}
 }
