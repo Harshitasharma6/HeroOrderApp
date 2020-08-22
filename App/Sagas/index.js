@@ -10,6 +10,7 @@ import { VisitorTypes } from '../Stores/Visitor/Actions';
 import { ProductsTypes } from '../Stores/Products/Actions';
 import { CommonTypes } from '../Stores/Common/Actions';
 import { DealersTypes } from '../Stores/Dealers/Actions';
+import { SubDealersTypes } from '../Stores/SubDealers/Actions';
 
 
 import {
@@ -92,6 +93,10 @@ import {
  import {
      getAllDealers
 } from  './DealerSaga'
+
+import {
+    getAllSubDealers
+} from  './SubDealerSaga'
 
 import { 
     watchSearchCustomer,
@@ -219,6 +224,8 @@ export default function* root() {
         takeLatest(ProductsTypes.CHANGE_DEALER_DISCOUNT, changeDealerDiscount),
 
         takeLatest(DealersTypes.GET_ALL_DEALERS, getAllDealers),
+
+        takeLatest(SubDealersTypes.GET_ALL_SUB_DEALERS, getAllSubDealers),
         
         fork(watchUpdateVisitor),
         fork(watchSearchCustomer),

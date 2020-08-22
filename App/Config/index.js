@@ -33,6 +33,10 @@ export const Config = {
 
 	},
 
+	SUB_DEALER_SERVICE:{
+
+		GET_SUB_DEALER: 'dealers/getSubDealers?dealer_id=0019D000009zum3QAA'
+	},
 
 
 
