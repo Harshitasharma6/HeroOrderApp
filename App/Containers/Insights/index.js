@@ -20,7 +20,7 @@ class InsightsScreen extends Component {
                 <SelectionButton 
                     icon="credit-card" 
                     title="Schemes" 
-                   	onPress={() => NavigationService.navigate('AvailableSchemesScreen')}
+                   	onPress={() => NavigationService.navigate('AvailableSchemesScreen', {product_id: ''})}
                 />
 
                 <SelectionButton 
