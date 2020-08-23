@@ -59,7 +59,7 @@ class SubDealerFormScreen extends Component {
 		Keyboard.dismiss();
 		submitForm({
 			...form,
-			sfid:'0129D000000ahCQQAZ',
+			sfid:'0129D000000ahCQQAW',
 			parentId:'0019D000009zum3QAA',
 			
 		});
@@ -121,7 +121,7 @@ class SubDealerFormScreen extends Component {
                 </View>
                 <View style={{flexDirection:'row', }}>
 						<View style={{width:'40%', marginLeft: '5%'}}>
-					<InputNumber
+					<InputText
 						styles={Style.mb10}
 						placeholder={'City'}
 						value={form.city__c}
@@ -131,7 +131,7 @@ class SubDealerFormScreen extends Component {
 					/>
 					</View>
 					<View style={{width:'40%', marginLeft:'7%'}}>
-					<InputNumber
+					<InputText
 						styles={Style.mb10}
 						placeholder={'State'}
 						value={form.state__c}
