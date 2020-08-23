@@ -26,9 +26,9 @@ class AvailableSchemes extends Component {
       fetchData
     } = this.props
 
-    // const {
-    //   product_id
-    // }= this.props.navigation.state.params;
+    const {
+      product_id
+    }= this.props.navigation.state.params;
 
     fetchData({
       state_id
@@ -71,9 +71,9 @@ class AvailableSchemes extends Component {
       data
     } = this.props;
 
-    const 
+    const {
       product_id
-     = this.props.navigation.state.params;
+    }= this.props.navigation.state.params;
 
     let visibleNode = [];
 
