@@ -111,7 +111,7 @@ class RootScreen extends Component {
         'If you have denied permanently then Go "App Permissions" and Turn on "Call Log" and "Phone State" Permission for HeroElectric.'
       );
     }
-    HelperService.startForegroundService();
+    //HelperService.startForegroundService();
   }
 
   componentWillUnmount() {

@@ -30,11 +30,10 @@ function getAllProducts(params) {
 
 
 function getProductSchemes(params) {
-  let url = Config.PRODUCTS_SERVICE.FETCH_SCHEMES;
-  url += params.state_id  ? `state_id=${params.state_id}` : '';
+  let url = Config.PRODUCTS_SERVICE.FETCH_SCHEMES ;
+  url += params.state_id  ? `?state_id=${params.state_id}` : '';
   url += params.product_id  ? `&product_id=${params.product_id}` : '';
   url += params.dealer_id  ? `&dealer_id=${params.dealer_id}` : '';
-  
   return apiClient.get(url, {
     headers: {
       token: params.token

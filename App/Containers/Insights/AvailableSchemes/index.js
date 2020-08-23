@@ -31,7 +31,8 @@ class AvailableSchemes extends Component {
     }= this.props.navigation.state.params;
 
     fetchData({
-      state_id
+      state_id,
+      product_id
     });
   }
   
@@ -104,6 +105,16 @@ class AvailableSchemes extends Component {
     } else if (loader) {
       visibleNode = <Loading />
     } else if (schemes && !schemes.length && !loader) {
+      visibleNode =  (
+          <NoDataFound text={'No Schemes Found'}>
+            <GenericIcon 
+              name={'refresh'}
+              onPress={() => this.fetchCall()}
+              style={ApplicationStyles.refreshIcon}
+            />
+          </NoDataFound>
+        );
+    }else {
       visibleNode =  (
           <NoDataFound text={'No Schemes Found'}>
             <GenericIcon 
