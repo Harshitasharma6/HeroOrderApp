@@ -3,6 +3,7 @@ import { View, Text , ScrollView, StyleSheet, Image, TouchableOpacity, Alert, Ke
 import Style from './styles'
 import GenericDisplayCard from 'App/Components/GenericDisplayCard'
 import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDisplayCardStrip';
+import NoDataFound from 'App/Components/NoDataFound'
 import BlueButton from 'App/Components/BlueButton';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { connect } from 'react-redux';
@@ -10,9 +11,7 @@ import GenericIcon from 'App/Components/GenericIcon'
 import { HelperService } from 'App/Services/Utils/HelperService';
 import NavigationService from 'App/Services/NavigationService'
 import {ApplicationStyles,Colors} from 'App/Theme'
-import GenericCheckBox from 'App/Components/GenericCheckBox'
-import VisitorActions from 'App/Stores/Visitor/Actions'
-import Underline from 'App/Components/Underline';
+import DealersActions from 'App/Stores/Dealers/Actions';
 import Filter from './filter';
 
 // "first_name__c": "test 12",	(*mandatory)
@@ -37,18 +36,28 @@ import Filter from './filter';
 
 
 class SchemeClaimFormScreen extends Component {
-	componentDidMount() {
-		
+  componentDidMount() {
+		this.fetchCall()	
 	}
 
-	componentWillUnmount() {
+	fetchCall() {
+		const {
 		
-    }
+		  fetchData
+		} = this.props
+	
+		fetchData({
+		 
+		});
+	  }
+
     
     getDataNode() {
-        const data = [{name: 'Sunil Singla'}, {name: 'Ankur Kumar'}, {name: 'Ankita Sharma'}]
-        const dataLength = data.length;
-        
+      const {
+        loader,
+        data
+        } = this.props;
+
         let visibleNode = [];
     
         if (data && data.length) {
@@ -64,24 +73,24 @@ class SchemeClaimFormScreen extends Component {
                       //onPress={() => NavigationService.navigate('CustomerInfoScreen')}
                       content={[
                             <View style={{flexDirection:'row'}}>
-                            <View style={{width:'50%'}}>
-                          <GenericDisplayCardStrip key={'Contact Number' + item.name} label={'Claim Number:'} value={'1000'} valueStyle={{marginRight:'15%', }}/>
+                            <View style={{width:'60%'}}>
+                          <GenericDisplayCardStrip key={'Claim Number' + item.name} label={'Claim Number:'} value={item.name} valueStyle={{marginRight:'10%', }}/>
                           </View>
-                          <View style={{width:'50%'}}>
-                          <GenericDisplayCardStrip key={'Contact Number' + item.name} label={'status:'} value={'Submitted'} labelStyle={{marginLeft:'12.5%'}} valueStyle={{marginRight:'5%', }} />
+                          <View style={{width:'45%',justifyContent:'flex-start'}}>
+                          <GenericDisplayCardStrip key={'status' + item.name} label={'status:'} value={item.status__c} labelStyle={{marginLeft:'0%'}} valueStyle={{marginRight:'15%', }} />
                           </View>
                           </View>,
-                            <GenericDisplayCardStrip key={'Contact Number' + item.name} label={'Claim Submission Date:'}   />,
-                            <GenericDisplayCardStrip key={'Contact Number' + item.name} label={'Expected Claim Amount:'}  value={'4000'}  />,
-                            <GenericDisplayCardStrip key={'Contact Number' + item.name} label={'Scheme Applicable:'}  value={'Festive Scheme Offer'}  />,
-                            <GenericDisplayCardStrip key={'Contact Number' + item.name} label={'Customer Name:'}  value={'Vijay Gupta'}  />,
-                            <GenericDisplayCardStrip key={'Contact Number' + item.name} label={'Warranty Registered:'}  value={'No'}  />,
+                            <GenericDisplayCardStrip key={'Claim Submission Date' + item.name} label={'Claim Submission Date:'}   value={ HelperService.dateReadableFormat(item.scheme_claim_submission_date__c)} />,
+                            <GenericDisplayCardStrip key={'Expected Claim Amount' + item.name} label={'Expected Claim Amount:'}  value={item.expected_claim_amount_by_dealer__c}  />,
+                            <GenericDisplayCardStrip key={'Scheme Applicable' + item.name} label={'Scheme Applicable:'}  value={item.scheme_applicable__c}  />,
+                            <GenericDisplayCardStrip key={'Customer Name' + item.name} label={'Customer Name:'}  value={item.customer_name__c}  />,
+                            <GenericDisplayCardStrip key={'Warranty Registered' + item.name} label={'Warranty Registered:'}  value={item.registered_for_warranty__c}  />,
 
                         
                   ]}
                 />}
-                keyExtractor={item => item}
-                refreshing={false}
+                keyExtractor={item => item.sfid}
+                refreshing={loader}
                 ListEmptyComponent={() => <NoDataFound text={'No Schemes Found'} />}
               />
             );
@@ -97,30 +106,10 @@ class SchemeClaimFormScreen extends Component {
         return visibleNode;
       }
 
-	submit() {
-		const { 
-			submitForm, 
-			form,
-		} = this.props;
-
-		Keyboard.dismiss();
-		submitForm({
-			...form,
-			dealers_sales_person__c: 'a0O9D000001hLV9UAM'
-		});
-	}
+	
 
     render() {
-		const { 
-			form,
-			loader,
-			changeForm,
-			submitForm,
-			validation,
-			occupationList,
-            sourceEnquiryList,
-            productsList
-		} = this.props;
+		
 		
 		return (
 			<View style={Style.container}>
@@ -156,19 +145,12 @@ class SchemeClaimFormScreen extends Component {
 
 
 const mapStateToProps = (state) => ({
-	validation      			: state.visitor.registerCustomerValidation,
-	form 					 	: state.visitor.registerCustomerForm,
-	loader 			            : state.visitor.loaders.registerCustomerLoader,
-	occupationList 				: state.common.occupationList,
-  	sourceEnquiryList 			: state.common.sourceEnquiryList,
-  	productsList 				: state.common.productsList,
-  	contact_number              : state.visitor.searchCustomerForm.contact_number
+  data     : state.dealers.DealerClaimsData,
+	loader   : state.dealers.loaders.getAllDealerClaimsLoader,
 });
   
 const mapDispatchToProps = (dispatch) => ({
-	changeForm: (params)       => dispatch(VisitorActions.changeRegisterCustomerForm(params)),
-	submitForm: (params)       => dispatch(VisitorActions.registerCustomer(params)),
-	clearRegistrationForm: ()  => dispatch(VisitorActions.clearRegistrationForm())
+	fetchData:(params)                 => dispatch(DealersActions.getAllDealerClaims(params)),
 });
 
 export default connect(

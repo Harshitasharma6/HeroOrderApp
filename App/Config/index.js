@@ -28,6 +28,7 @@ export const Config = {
 
 	DEALER_SERVICE:{
 		FETCH_ALL_DEALER_SALES_INFO: 'dealers/getDealerSalesPersonInfo?dealer_id=0019D000009zum3QAA',
+		GET_DEALER_CLAIM: 'dealers/getDealerClaims'
 	},
 
 	SUB_DEALER_SERVICE:{
@@ -41,5 +42,10 @@ export const Config = {
     	FETCH_OPEN_LEADS                    : 'visitors/openHOLeads',
     	FETCH_NO_ACTION                     : 'visitors/noAction',
     	MARK_LEAD_LOST                      : 'visitors/lost'
-	}
+	},
+	DASHBOARD_SERVICE:{
+
+	GET_DASHBOARD_SUMMARY					: 'dashboard/summary',
+
+	},
 }

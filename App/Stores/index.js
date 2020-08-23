@@ -15,6 +15,7 @@ import { reducer as visitorReducer} from './Visitor/Reducers'
 import { reducer as productsReducer} from './Products/Reducers'
 import { reducer as dealersReducer} from './Dealers/Reducers'
 import { reducer as subdealersReducer} from './SubDealers/Reducers'
+import { reducer as insightsReducer} from './Insights/Reducers'
 
 
 export default () => {
@@ -33,7 +34,7 @@ export default () => {
     products: productsReducer,
     dealers: dealersReducer,
     subdealers: subdealersReducer,
-
+    insights:insightsReducer,
   });
 
   return configureStore(rootReducer, rootSaga)

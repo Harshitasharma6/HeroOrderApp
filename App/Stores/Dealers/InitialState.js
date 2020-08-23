@@ -7,5 +7,11 @@ export const INITIAL_STATE = {
 	
 	  editDiscountEdit: false,
 	  
-	  
+	 DealerClaimsData: [],
+
+	 loaders: {
+		getAllDealerClaimsLoader: false,
+		
+	},
+
 }

@@ -11,21 +11,44 @@ import HeadingBox from 'App/Components/HeadingBox'
 import GenericDisplayCard from 'App/Components/GenericDisplayCard'
 import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDisplayCardStrip';
 import Separator from 'App/Components/Separator';
+import InsightsActions from 'App/Stores/Insights/Actions';
 
 
 class DashboardSummaryScreen extends React.Component {
+
+	componentDidMount() {
+		this.fetchCall()	
+	}
+
+	fetchCall() {
+		const {
+		
+		  fetchData
+		} = this.props
+	
+		fetchData({
+		 
+		});
+	  }
+  
+    
   render() {
     const {
-      currentScreen
-    } = this.props;
+			loader,
+			data
+		  } = this.props;
+
+    
+  
 
     return (
       	<ScrollView style={Styles.container}>
           	<HeadingBox value={'This Month'}/>
           		<GenericDisplayCard dark={false}
-	              style={{ width: '88%', elevation: 0 }}
+                style={{ width: '88%', elevation: 0 }}
+            
 	              content={[
-		                <GenericDisplayCardStrip key={'Total Walk Ins'} label={'Total Walk Ins'} value={'38'}/>,
+		                <GenericDisplayCardStrip key={'Total Walk Ins'} label={'Total Walk Ins'} value={'27'}/>,
 		                <Separator key={1}/>,
 		                <GenericDisplayCardStrip key={'Open Leads'} label={'Open Leads'} value={'15'}/>,
 		                <Separator key={2}/>,
@@ -75,11 +98,20 @@ class DashboardSummaryScreen extends React.Component {
 const mapStateToProps = (state) => ({
   isConnected: state.network.isConnected,
   isVisible: state.common.isNetworkBannerVisible,
-  currentScreen: state.common.currentScreen
+  currentScreen: state.common.currentScreen,
+  data     : state.insights.DashBoardSummaryData,
+  loader   : state.insights.loaders.getDashBoardSummaryLoader,
 })
 
+const mapDispatchToProps = (dispatch) => ({
+	fetchData:(params)            => dispatch(InsightsActions.getDashboardSummary(params)),
+  
+});
+
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(DashboardSummaryScreen)
 
 

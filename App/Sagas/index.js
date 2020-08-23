@@ -11,6 +11,7 @@ import { ProductsTypes } from '../Stores/Products/Actions';
 import { CommonTypes } from '../Stores/Common/Actions';
 import { DealersTypes } from '../Stores/Dealers/Actions';
 import { LeadAlertTypes } from 'App/Stores/LeadAlerts/Actions';
+import { InsightsTypes } from 'App/Stores/Insights/Actions';
 import { SubDealersTypes } from '../Stores/SubDealers/Actions';
 
 
@@ -92,12 +93,17 @@ import {
 } from './ProductsSaga'
 
  import {
-     getAllDealers
+     getAllDealers,
+     getDealerClaims,
 } from  './DealerSaga'
 
 import {
     getAllSubDealers
 } from  './SubDealerSaga'
+
+import {
+    getDashboardSummary
+} from  './InsightsSaga'
 
 import { 
     watchSearchCustomer,
@@ -211,8 +217,12 @@ export default function* root() {
         takeLatest(ProductsTypes.CHANGE_DEALER_DISCOUNT, changeDealerDiscount),
 
         takeLatest(DealersTypes.GET_ALL_DEALERS, getAllDealers),
+        takeLatest(DealersTypes.GET_ALL_DEALER_CLAIMS, getDealerClaims),
 
         takeLatest(SubDealersTypes.GET_ALL_SUB_DEALERS, getAllSubDealers),
+
+
+        takeLatest(InsightsTypes.GET_DASHBOARD_SUMMARY,  getDashboardSummary),
         
         fork(watchUpdateVisitor),
         fork(watchSearchCustomer),

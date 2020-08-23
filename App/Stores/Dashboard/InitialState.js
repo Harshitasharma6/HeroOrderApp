@@ -58,4 +58,6 @@ export const INITIAL_STATE = {
     searchFilters: {
         district: ''
     }
+
+    
 }
