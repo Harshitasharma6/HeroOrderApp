@@ -686,6 +686,22 @@ function getCurrentTimestamp() {
 	return (new Date()).getTime();
 }
 
+function getCurrentDate() {
+	return (new Date()).getDate();
+}
+
+function getCurrentMonth() {
+	return (new Date()).getMonth();
+}
+
+function getCurrentDay() {
+	return (new Date()).getDay();
+}
+
+
+
+
+
 function getPreviousNDayTimestamp(days, timestamp) {
 	if (!timestamp) {
 		timestamp = getCurrentTimestamp();
@@ -716,6 +732,12 @@ function removeField(obj, fieldName) {
 function getMonthMappingName(index) {
 	return monthMapping[index];
 }
+
+function getDayMappingName(index) {
+	return dayMapping[index];
+}
+
+
 
 function getMonthName(date) {
 	let dateObj = new Date();
@@ -1199,5 +1221,9 @@ export const HelperService = {
 	removeFieldsAndDateReadableFormat,
 	removeFieldsTimeReadableFormat,
 	findDayReadableFormat,
-	requestPhoneStatePermission
+	requestPhoneStatePermission,
+	getCurrentDate,
+	getCurrentMonth,
+	getCurrentDay,
+	getDayMappingName,
 }

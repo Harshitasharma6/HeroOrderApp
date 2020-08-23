@@ -61,7 +61,7 @@ class DealerSalespersonFormScreen extends Component {
 			data
 		  } = this.props;
 
-        
+       
         let visibleNode = [];
     
         if (data && data.length) {

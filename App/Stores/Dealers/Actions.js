@@ -7,6 +7,11 @@ const { Types, Creators } = createActions({
   getAllDealersLoading: null,
   getAllDealersLoadingStop: null,
   doNothing: null,
+  getAllDealerClaims: ['payload'],
+  getAllDealerClaimsSuccess:  ['payload'],
+  getAllDealerClaimsFailure: null,
+  getAllDealerClaimsLoading: null,
+  getAllDealerClaimsLoadingStop: null,
 
   
 

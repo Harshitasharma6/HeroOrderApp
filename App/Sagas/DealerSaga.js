@@ -39,3 +39,30 @@ export function* getAllDealers({ payload }) {
 }
 
 
+export function* getDealerClaims({ payload }) {
+	const isOnline = yield select(getConnectionStatus);
+	if (!isOnline) {
+		yield put(DealersActions.doNothing());
+		return;
+	}
+
+	try {
+		yield put(DealersActions.getAllDealerClaimsLoading());
+		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhME85RDAwMDAwMWhMVjlVQU0iLCJpYXQiOjE1OTQ0NjY5MzF9.zswVWSPfiaLOfxzuEDbaTsSRVt_QWQyduwAJejNCccY';
+		payload.dealer_id = '0019D000009zum3QAA'
+
+		let successData = yield call(DealersService.getDealerClaims, payload);
+		if (successData) {
+			yield put(DealersActions.getAllDealerClaimsSuccess(successData));
+			yield put(CommonActions.makeProductsSearchableList(HelperService.convertToSearchableListFormat({
+				list: successData,
+				id_key: 'sfid',
+				
+			})));
+		} else {
+			yield put(DealersActions.getAllDealerClaimsFailure());
+		}
+	} catch (error) {
+		yield put(DealersActions.getAllDealerClaimsFailure());
+	}
+}

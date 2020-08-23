@@ -43,6 +43,41 @@ export const doNothing = (state) => ({
   ...state
 });
 
+export const getAllDealerClaimsSuccess = (state, { payload }) => ({
+  ...state,
+  DealerClaimsData: payload,
+  loaders: {
+    ...state.loaders,
+    cLoader: false
+  }
+});
+
+export const getAllDealerClaimsFailure = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllDealerClaimsLoader: false
+  }
+});
+
+
+export const getAllDealerClaimsLoading = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllDealerClaimsLoader: true
+  }
+});
+
+
+export const getAllDealerClaimsLoadingStop = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllDealerClaimsLoader: false
+  }
+});
+
 
 
 
@@ -58,7 +93,10 @@ export const reducer = createReducer(INITIAL_STATE, {
   [DealersTypes.GET_ALL_DEALERS_LOADING]     : getAllDealersLoading,
   [DealersTypes.GET_ALL_DEALERS_LOADING_STOP]: getAllDealersLoadingStop,
   [DealersTypes.DO_NOTHING] 				                 :doNothing,
-
+  [DealersTypes.GET_ALL_DEALER_CLAIMS_SUCCESS]     : getAllDealerClaimsSuccess,
+  [DealersTypes.GET_ALL_DEALER_CLAIMS_FAILURE]     : getAllDealerClaimsFailure,
+  [DealersTypes.GET_ALL_DEALER_CLAIMS_LOADING]     : getAllDealerClaimsLoading,
+  [DealersTypes.GET_ALL_DEALER_CLAIMS_LOADING_STOP]: getAllDealerClaimsLoadingStop,
 
 
   
