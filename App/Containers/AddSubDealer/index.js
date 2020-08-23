@@ -11,13 +11,11 @@ import { connect } from 'react-redux';
 import ShreeActions from 'App/Stores/Shree/Actions';
 import { HelperService } from 'App/Services/Utils/HelperService';
 import NavigationService from 'App/Services/NavigationService'
-import SearchableDropdown from 'App/Components/SearchableDropdown';
-import InputDate from 'App/Components/FormInput/InputDate';
 import {ApplicationStyles} from 'App/Theme'
-import GenericCheckBox from 'App/Components/GenericCheckBox'
-import VisitorActions from 'App/Stores/Visitor/Actions'
+import SubDealersActions from 'App/Stores/SubDealers/Actions';
 import Underline from 'App/Components/Underline';
-import moment from 'moment';
+import GoogleAddress from 'App/Components/GoogleAddress'
+
 // "first_name__c": "test 12",	(*mandatory)
 // 	"last_name__c": "enquiry visit test",	(*mandatory)
 // 	"contact_number__c": "1646464944", 	(*mandatory)
@@ -45,7 +43,11 @@ class SubDealerFormScreen extends Component {
 	}
 
 	componentWillUnmount() {
-		
+		const {
+			clearRegistrationForm
+		} = this.props;
+
+		clearRegistrationForm();
 	}
 
 	submit() {
@@ -57,7 +59,9 @@ class SubDealerFormScreen extends Component {
 		Keyboard.dismiss();
 		submitForm({
 			...form,
-			dealers_sales_person__c: 'a0O9D000001hLV9UAM'
+			sfid:'0129D000000ahCQQAZ',
+			parentId:'0019D000009zum3QAA',
+			
 		});
 	}
 
@@ -86,31 +90,22 @@ class SubDealerFormScreen extends Component {
                 <View style={{ marginLeft: '5%', marginRight:'5%', marginTop:'5%'}}>
                      <InputText
 						style={Style.mb10}
-						placeholder={'First Name'}
-						value={form.first_name__c}
-						onChange={(value) => changeForm({ edited_field: 'first_name__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'first_name__c'}
-						label={'First Name*'}
+						placeholder={' Name'}
+						value={form.name}
+						onChange={(value) => changeForm({ edited_field: 'name', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'name'}
+						label={' Name*'}
 					/>
                 </View>
-                <View style={{ marginLeft: '5%', marginRight:'5%'}}>
-					<InputText
-						style={Style.mb10}
-						placeholder={'Last Name'}
-						value={form.last_name__c}
-						onChange={(value) => changeForm({ edited_field: 'last_name__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'last_name__c'}
-						label={'Last Name*'}
-					/>
-				</View>	
+               
                 <View style={{ marginLeft: '5%', marginRight:'5%'}}>
                     <InputMobile
 						styles={Style.mb10}
 						placeholder={'Phone No.'}
-						value={form.contact_number__c}
-						onChange={(value) => changeForm({ edited_field: 'contact_number__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'contact_number__c'}
-						label={'Phone No.'}
+						value={form.phone}
+						onChange={(value) => changeForm({ edited_field: 'phone', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'phone'}
+						label={'Phone No.*'}
 					/>
                 </View>
 
@@ -118,9 +113,9 @@ class SubDealerFormScreen extends Component {
                     <InputMobile
 						styles={Style.mb10}
 						placeholder={'Alternate Phone No.'}
-						value={form.contact_number__c}
-						onChange={(value) => changeForm({ edited_field: 'contact_number__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'contact_number__c'}
+						value={form.phone2__c}
+						onChange={(value) => changeForm({ edited_field: 'phone2__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'phone2__c'}
 						label={'Alternate Phone No.'}
 					/>
                 </View>
@@ -128,35 +123,31 @@ class SubDealerFormScreen extends Component {
 						<View style={{width:'40%', marginLeft: '5%'}}>
 					<InputNumber
 						styles={Style.mb10}
-						placeholder={'Pincode'}
-						value={form.age__c}
-						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'age__c'}
-						label={'Pincode*'}
+						placeholder={'City'}
+						value={form.city__c}
+						onChange={(value) => changeForm({ edited_field: 'city__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'city__c'}
+						label={'City'}
 					/>
 					</View>
 					<View style={{width:'40%', marginLeft:'7%'}}>
 					<InputNumber
 						styles={Style.mb10}
 						placeholder={'State'}
-						value={form.age__c}
-						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'age__c'}
-						label={'State*'}
+						value={form.state__c}
+						onChange={(value) => changeForm({ edited_field: 'state__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'state__c'}
+						label={'State'}
 					/>
 
 					</View>
                     </View>  
-                    <View style={{ marginLeft: '5%', marginRight:'5%'}}>
-					<TextArea
-	                    placeholder={'Address'}
-	                    label={'Address'}
-	                    numberOfLines={2}
-	                    style={Style.mb10}
-	                    value={form.address_line_1__c}
-						onChange={(value) => changeForm({ edited_field: 'address_line_1__c', edited_value: value })}
+                    <View style={{ marginLeft: '1%', marginRight:'1%', }}>
+					<GoogleAddress
+						value={form.address_line_1__c}
+						changeForm={(value) => changeForm({ edited_field: 'address_line_1__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'address_line_1__c'}
-                	/>
+					/>
                     </View>  
                 	
 
@@ -198,19 +189,19 @@ class SubDealerFormScreen extends Component {
 
 
 const mapStateToProps = (state) => ({
-	validation      			: state.visitor.registerCustomerValidation,
-	form 					 	: state.visitor.registerCustomerForm,
-	loader 			            : state.visitor.loaders.registerCustomerLoader,
+	validation      			: state.subdealers.createSubDealerValidation,
+	form 					 	: state.subdealers.createSubDealerForm,
+	loader 			            : state.subdealers.loaders.createSubDealerLoader,
 	occupationList 				: state.common.occupationList,
   	sourceEnquiryList 			: state.common.sourceEnquiryList,
   	productsList 				: state.common.productsList,
-  	contact_number              : state.visitor.searchCustomerForm.contact_number
+  	
 });
   
 const mapDispatchToProps = (dispatch) => ({
-	changeForm: (params)       => dispatch(VisitorActions.changeRegisterCustomerForm(params)),
-	submitForm: (params)       => dispatch(VisitorActions.registerCustomer(params)),
-	clearRegistrationForm: ()  => dispatch(VisitorActions.clearRegistrationForm())
+	changeForm: (params)       => dispatch(SubDealersActions.changeSubDealerForm(params)),
+	submitForm: (params)       => dispatch(SubDealersActions.createSubDealer(params)),
+	clearRegistrationForm: ()  => dispatch(SubDealersActions.clearRegistrationForm())
 });
 
 export default connect(

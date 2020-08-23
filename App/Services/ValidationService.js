@@ -139,10 +139,43 @@ function validateFieldIsEmpty(value) {
 }
 
 
+function validateCreateSubDealerForm(params) {
+	
+	if (!validateFieldIsEmpty(params.name)) {
+		return {
+			invalid: true,
+			invalid_field: 'name',
+			error_message: ' Name is empty.'
+		}
+	}
+
+	
+
+
+	if (!validatePhoneNumber(params.phone)) {
+		return {
+			invalid: true,
+			invalid_field: 'phone',
+			error_message: 'Contact Number is not valid.'
+		}
+	}
+
+
+	
+
+
+	
+
+	return false;
+}
+
+
+
 
 export const ValidationService = {
 	validateSearchCustomerForm,
 	validateRegisterCustomerForm,
 	validateCreateFeedbackForm,
-	validateRegisterCustomerCallForm
+	validateRegisterCustomerCallForm,
+	validateCreateSubDealerForm
 }

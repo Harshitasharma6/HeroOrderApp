@@ -81,7 +81,8 @@ class SubDealerInfoScreen extends Component {
                   ]}
                 />}
                 keyExtractor={item => item.sfid}
-                refreshing={loader}
+				refreshing={loader}
+				onRefresh={() => this.fetchCall()}
                 ListEmptyComponent={() => <NoDataFound text={'No SubDealer Found'} />}
               />
             );
