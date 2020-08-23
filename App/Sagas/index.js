@@ -98,7 +98,8 @@ import {
 } from  './DealerSaga'
 
 import {
-    getAllSubDealers
+    getAllSubDealers,
+    watchCreateSubDealer
 } from  './SubDealerSaga'
 
 import {
@@ -218,7 +219,8 @@ export default function* root() {
 
         takeLatest(DealersTypes.GET_ALL_DEALERS, getAllDealers),
         takeLatest(DealersTypes.GET_ALL_DEALER_CLAIMS, getDealerClaims),
-
+        
+        fork(watchCreateSubDealer),
         takeLatest(SubDealersTypes.GET_ALL_SUB_DEALERS, getAllSubDealers),
 
 

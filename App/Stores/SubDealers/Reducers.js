@@ -44,9 +44,76 @@ export const doNothing = (state) => ({
 });
 
 
+export const createSubDealerSuccess = (state, {payload}) => ({
+  ...state,
+  createSubDealerForm: INITIAL_STATE.createSubDealerForm,
+  currentSubDealerData: payload,
+  loaders: {
+  	...state.loaders,
+  	createSubDealerLoader: false
+  }
+});
+
+export const createSubDealerFailure = (state) => ({
+  ...state,
+  loaders: {
+  	...state.loaders,
+  	createSubDealerLoader: false
+  }
+});
+
+export const createSubDealerLoading = (state) => ({
+  ...state,
+  loaders: {
+  	...state.loaders,
+  	createSubDealerLoader: true
+  }
+});
+
+export const createSubDealerLoadingStop = (state) => ({
+  ...state,
+  loaders: {
+  	...state.loaders,
+  	createSubDealerLoader: false
+  }
+});
 
 
+export const changeSubDealerForm = (state, { payload }) => {
+  	const {
+		edited_field,
+		edited_value
+	} = payload;
 
+	let changed_entity = {};
+	changed_entity[edited_field] = edited_value;
+	return {
+	  ...state,
+	  createSubDealerForm : {
+	  	...state.createSubDealerForm,
+	  	...changed_entity
+	  },
+	  createSubDealerValidation: INITIAL_STATE.createSubDealerValidation
+	}
+};
+
+export const createSubDealerValidationFailed = (state, { payload }) => ({
+    ...state,
+    createSubDealerValidation: {
+        ...payload
+    }
+});
+
+export const setRegistrationForm = (state, {payload}) => ({
+  ...state,
+  createSubDealerForm: payload
+});
+
+export const clearRegistrationForm = (state, {payload}) => ({
+  ...state,
+  createSubDealerForm: INITIAL_STATE.createSubDealerForm,
+  
+});
 
 
 
@@ -59,6 +126,16 @@ export const reducer = createReducer(INITIAL_STATE, {
   [SubDealersTypes.GET_ALL_SUB_DEALERS_LOADING_STOP]: getAllSubDealersLoadingStop,
   [SubDealersTypes.DO_NOTHING] 				                 :doNothing,
 
+  [SubDealersTypes.CREATE_SUB_DEALER_SUCCESS] 	 		       : createSubDealerSuccess,
+	[SubDealersTypes.CREATE_SUB_DEALER_FAILURE] 	 		       : createSubDealerFailure,
+	[SubDealersTypes.CREATE_SUB_DEALER_LOADING]             : createSubDealerLoading,
+	[SubDealersTypes.CREATE_SUB_DEALER_LOADING_STOP]        : createSubDealerLoadingStop, 
+	[SubDealersTypes.CHANGE_SUB_DEALER_FORM] 		             : changeSubDealerForm,
+  [SubDealersTypes.CREATE_SUB_DEALER_VALIDATION_FAILED]   : createSubDealerValidationFailed,
+  
+
+  [SubDealersTypes.SET_REGISTRATION_FORM]  				       : setRegistrationForm,
+	[SubDealersTypes.CLEAR_REGISTRATION_FORM]  		         : clearRegistrationForm,
 
 
   

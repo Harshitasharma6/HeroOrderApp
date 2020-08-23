@@ -29,7 +29,25 @@ function getAllSubDealers(params) {
 	});
 }
 
+function CreateSubDealer(params) {
+	let url = Config.SUB_DEALER_SERVICE.CREATE_SUB_DEALER;
+	return apiClient.post(url, params,{
+		headers: {
+			token: params.token,
+			
+		}
+	}).then((response) => {
+		if (in200s(response.status)) {
+			return response['data']['data'][0];
+		}
+		return null
+	}).catch(error => {
+		console.log(error.response)
+		return null
+	});
+}
+
 export const SubDealersService = {
 	getAllSubDealers,
-	
+	CreateSubDealer,
   }
