@@ -35,7 +35,7 @@ import Filter from './filter';
 // 	"address_line_1__c" : “test address”
 
 
-class SchemeClaimFormScreen extends Component {
+class SchemeClaimInfoScreen extends Component {
   componentDidMount() {
 		this.fetchCall()	
 	}
@@ -67,17 +67,17 @@ class SchemeClaimFormScreen extends Component {
                 data={data}
                 renderItem={({ item }) => 
                     <GenericDisplayCard dark={false}
-                      style={{ width: '88%', elevation: 0 }}
+                      style={{ width: '98%', elevation: 0 }}
                      
                       showTextAvatar={false}
                       //onPress={() => NavigationService.navigate('CustomerInfoScreen')}
                       content={[
                             <View style={{flexDirection:'row'}}>
                             <View style={{width:'60%'}}>
-                          <GenericDisplayCardStrip key={'Claim Number' + item.name} label={'Claim Number:'} value={item.name} valueStyle={{marginRight:'10%', }}/>
+                          <GenericDisplayCardStrip key={'Claim Number' + item.name} label={'Claim Number:'} value={item.name} valueStyle={{marginRight:'20%', }}/>
                           </View>
                           <View style={{width:'45%',justifyContent:'flex-start'}}>
-                          <GenericDisplayCardStrip key={'status' + item.name} label={'status:'} value={item.status__c} labelStyle={{marginLeft:'0%'}} valueStyle={{marginRight:'15%', }} />
+                          <GenericDisplayCardStrip key={'status' + item.name} label={'status:'} value={item.status__c} labelStyle={{marginLeft:'7%'}} valueStyle={{marginRight:'15%', }} />
                           </View>
                           </View>,
                             <GenericDisplayCardStrip key={'Claim Submission Date' + item.name} label={'Claim Submission Date:'}   value={ HelperService.dateReadableFormat(item.scheme_claim_submission_date__c)} />,
@@ -91,6 +91,7 @@ class SchemeClaimFormScreen extends Component {
                 />}
                 keyExtractor={item => item.sfid}
                 refreshing={loader}
+                onRefresh={() => this.fetchCall()}
                 ListEmptyComponent={() => <NoDataFound text={'No Schemes Found'} />}
               />
             );
@@ -115,9 +116,10 @@ class SchemeClaimFormScreen extends Component {
 			<View style={Style.container}>
 				<Text style={Style.heading}>{'SCHEMES CLAIMS'}</Text>
        
-        <BlueButton  title={' FILTER BY'}style={{width: wp('26.5%'),    alignSelf: 'flex-end', marginTop: hp('3%') , marginBottom: hp('0%'), marginRight: wp('10%')}} textStyle={{fontSize: wp('3%')}}  
-        >
+        <BlueButton  title={' FILTER BY'}style={{width: wp('26.5%'),    alignSelf: 'flex-end', marginTop: hp('3%') , marginBottom: hp('0%'), marginRight: wp('7%')}} textStyle={{fontSize: wp('3%')}}  
+            >
               <GenericIcon name="filter" style={{fontSize: wp('4%'), color: Colors.white}}/></BlueButton>
+         
                 
 				<ScrollView 
 					showsVerticalScrollIndicator={false}
@@ -156,4 +158,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(SchemeClaimFormScreen)
+)(SchemeClaimInfoScreen)

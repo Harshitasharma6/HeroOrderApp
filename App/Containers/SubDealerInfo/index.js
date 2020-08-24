@@ -68,12 +68,12 @@ class SubDealerInfoScreen extends Component {
                 data={data}
                 renderItem={({ item }) => 
                     <GenericDisplayCard dark={false}
-                      style={{ width: '88%', elevation: 0 }}
+                      style={{ width: '98%', elevation: 0 }}
                       heading={item.name}
                       showTextAvatar={true}
                       //onPress={() => NavigationService.navigate('CustomerInfoScreen')}
                       content={[
-                        <BlueButton style={{width: wp('11%'),   borderRadius:wp('30%'), alignSelf: 'flex-end', marginTop: hp('-5%') , marginBottom: hp('1%'), marginRight: wp('2%')}} textStyle={{fontSize: wp('2.8%')}} onPress={() => HelperService.callNumber(item.phone)}><GenericIcon name="phone" style={{fontSize: wp('4%'), color: Colors.white}}/></BlueButton>,
+                        <BlueButton title={''} style={{width: wp('10%'), alignSelf: 'flex-end', marginTop: hp('1%'), borderRadius:  wp('100%'), paddingRight: 2, paddingLeft: 2, position: 'absolute', top: -hp('6%'), right: -wp('2%')}} textStyle={{fontSize: wp('3.8%')}} onPress={() => HelperService.callNumber(item.phone)}><GenericIcon name="phone" style={{fontSize: wp('5%'), color: Colors.white}}/></BlueButton>,
                           <GenericDisplayCardStrip key={'Contact Number' + item.name} label={'Contact Number:'} value={item.phone}/>,
                           <GenericDisplayCardStrip key={'Address' + item.name} label={'Address:'}  value={item.address_line_1__c}/>
                           

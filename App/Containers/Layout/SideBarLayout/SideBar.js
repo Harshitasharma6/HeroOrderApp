@@ -41,7 +41,7 @@ export default class SideBar extends Component {
 						<GenericIcon name={'user-o'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Dealer Salesperson'}</Text>
 					</ListItem>
 
-					<ListItem style={Styles.listItemDivider} onPress={() => this.navigate('SchemeClaimFormScreen')}>
+					<ListItem style={Styles.listItemDivider} onPress={() => this.navigate('SchemeClaimInfoScreen')}>
 						<Icon name={'brightness-percent'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Scheme Claim'}</Text>
 					</ListItem>
 

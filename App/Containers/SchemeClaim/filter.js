@@ -38,15 +38,17 @@ class Filter extends React.Component {
           this.setState({popoverVisible: false});
         }}
         from={
-          
-            <BlueButton  title={' FILTER BY'}style={{width: wp('26.5%'),    alignSelf: 'flex-end', marginTop: hp('3%') , marginBottom: hp('0%'), marginRight: wp('10%')}} textStyle={{fontSize: wp('3%')}}  
-             onPress={() => {
-              if (!this.props.disabled) {
-                this.setState({popoverVisible: true});
-              }
-            }}>
+          <TouchableOpacity
+          onPress={() => {
+            if (!this.props.disabled) {
+              this.setState({popoverVisible: true});
+            }
+          }}>
+            <BlueButton  title={' FILTER BY'}style={{width: wp('26.5%'),    alignSelf: 'flex-end', marginTop: hp('3%') , marginBottom: hp('0%'), marginRight: wp('0%')}} textStyle={{fontSize: wp('3%')}}  
+            >
               <GenericIcon name="filter" style={{fontSize: wp('4%'), color: Colors.white}}/></BlueButton>
          
+              </TouchableOpacity>
         }>
         <FilterPopupContent
           filters={this.props.filters}

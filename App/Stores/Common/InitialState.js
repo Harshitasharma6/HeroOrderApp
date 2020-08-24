@@ -23,6 +23,10 @@ export const INITIAL_STATE = {
 		{ id: 'Others', name: 'Others' }
 	],
 
+	schemeApplicableList: [
+		{ id: 'a0B9D000001HWnfUAG', name: 'a0B9D000001HWnfUAG' },
+		
+	],
 
 	sourceEnquiryList: [],
 	leadLostReasonsList: [],

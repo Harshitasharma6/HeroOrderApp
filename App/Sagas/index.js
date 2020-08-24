@@ -95,6 +95,7 @@ import {
  import {
      getAllDealers,
      getDealerClaims,
+     watchCreateDealerClaim,
 } from  './DealerSaga'
 
 import {
@@ -217,6 +218,7 @@ export default function* root() {
         takeLatest(ProductsTypes.ADD_OFFER, addOffer),
         takeLatest(ProductsTypes.CHANGE_DEALER_DISCOUNT, changeDealerDiscount),
 
+        fork(watchCreateDealerClaim),
         takeLatest(DealersTypes.GET_ALL_DEALERS, getAllDealers),
         takeLatest(DealersTypes.GET_ALL_DEALER_CLAIMS, getDealerClaims),
         
