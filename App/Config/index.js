@@ -11,7 +11,8 @@ export const Config = {
 		UPDATE_VISITOR   : 'visitors/update',
 		CREATE_FEEDBACK  : 'feedback/create',
 		GET_ALL_VISITS   : 'visit/getAll',
-		GET_FEEDBACKS    : 'feedback/get'
+		GET_FEEDBACKS    : 'feedback/get',
+		REGISTER_CUSTOMER_CALL: 'incomingCallLead/createLead'
 	}, 
 
 
@@ -41,6 +42,7 @@ export const Config = {
     	FETCH_BOOKING_CONFIRM_FINANCE_LEADS : 'visitors/bookingConfirmFinanceLead',
     	FETCH_PURCHASE_OVERDUE              : 'visitors/purchaseOverDue',
     	FETCH_OPEN_LEADS                    : 'visitors/openHOLeads',
+    	FETCH_CALL_LEADS                    : 'visitors/openHOLeads',
     	FETCH_NO_ACTION                     : 'visitors/noAction',
     	MARK_LEAD_LOST                      : 'visitors/lost'
 	},

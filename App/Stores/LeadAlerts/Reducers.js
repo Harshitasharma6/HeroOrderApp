@@ -181,6 +181,44 @@ export const fetchOpenLeadsLoadingStop = (state, {payload}) => ({
 
 
 
+export const fetchCallLeadsSuccess = (state, {payload}) => ({
+  ...state,
+  callLeads: payload,
+  loaders: {
+    ...state.loaders,
+    fetchCallLeadsLoader: false
+  }
+});
+
+
+export const fetchCallLeadsFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchCallLeadsLoader: false
+  }
+});
+
+
+export const fetchCallLeadsLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchCallLeadsLoader: true
+  }
+});
+
+
+export const fetchCallLeadsLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchCallLeadsLoader: false
+  }
+});
+
+
+
 
 export const fetchNoActionSuccess = (state, {payload}) => ({
   ...state,
@@ -298,6 +336,10 @@ export const clearLeadLostForm = (state) => ({
 
 
 
+
+
+
+
 export const reducer = createReducer(INITIAL_STATE, {
    	[LeadAlertTypes.SELECT_ACTIONABLE]: selectActionable,
 	[LeadAlertTypes.SELECT_FOLLOW_UP] : selectFollowUp,
@@ -328,6 +370,14 @@ export const reducer = createReducer(INITIAL_STATE, {
     [LeadAlertTypes.FETCH_OPEN_LEADS_FAILURE]         : fetchOpenLeadsFailure,
     [LeadAlertTypes.FETCH_OPEN_LEADS_LOADING]         : fetchOpenLeadsLoading,
     [LeadAlertTypes.FETCH_OPEN_LEADS_LOADING_STOP]    : fetchOpenLeadsLoadingStop,
+
+
+    [LeadAlertTypes.FETCH_CALL_LEADS_SUCCESS]         : fetchCallLeadsSuccess,
+    [LeadAlertTypes.FETCH_CALL_LEADS_FAILURE]         : fetchCallLeadsFailure,
+    [LeadAlertTypes.FETCH_CALL_LEADS_LOADING]         : fetchCallLeadsLoading,
+    [LeadAlertTypes.FETCH_CALL_LEADS_LOADING_STOP]    : fetchCallLeadsLoadingStop,
+
+
 
 
     //fetchNoAction,

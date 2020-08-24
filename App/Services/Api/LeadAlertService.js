@@ -88,6 +88,25 @@ function fetchOpenLeads(params) {
   });
 }
 
+
+function fetchCallLeads(params) {
+  let url = Config.LEAD_ALERT_SERVICE.FETCH_CALL_LEADS;
+  return apiClient.get(url, {
+    headers: {
+      token: params.token,
+      dealer_id: params.dealer_id
+    }
+  }).then((response) => {
+    if (in200s(response.status)) {
+      return response['data']['data']['open_HO_leads'];
+    }
+    return null
+  }).catch(error => {
+    //bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
+    return null
+  });
+}
+
 function fetchNoAction(params) {
   let url = Config.LEAD_ALERT_SERVICE.FETCH_NO_ACTION;
   return apiClient.get(url, {
@@ -132,5 +151,6 @@ export const LeadAlertService = {
     fetchPurchaseOverdue,
     fetchOpenLeads,
     fetchNoAction,
+    fetchCallLeads,
     markLeadLost
 }

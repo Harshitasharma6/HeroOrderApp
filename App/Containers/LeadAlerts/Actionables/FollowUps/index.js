@@ -11,6 +11,7 @@ import BookingConfirmed from './BookingConfirmed'
 import NoAction from './NoAction'
 import OpenHotAssignedLeads from './OpenHotAssignedLeads'
 import OpenHotLeads from './OpenHotLeads'
+import CallLeads from './CallLeads'
 import PurchaseDateOverDue from './PurchaseDateOverDue'
 
 
@@ -47,6 +48,9 @@ class FollowUps extends React.Component {
     	case '5':
     		visibleNode = <NoAction />
     		break;
+      case '6':
+        visibleNode = <CallLeads />
+        break;
     	default:
     		visibleNode = <OpenHotLeads />
     		break;

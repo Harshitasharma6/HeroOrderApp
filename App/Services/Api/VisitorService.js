@@ -131,26 +131,21 @@ function getFeedbacks(params) {
 
 
 function registerCustomerCall(params) {
-	// let url = Config.VISITOR_SERVICE.GET_FEEDBACKS;
-	// url += `?enquiry=${params.enquiry}`
-	// url += `&limit=${100}`
-	// url += `&offset=${0}`
-	// return apiClient.get(url, {
-	// 	headers: {
-	// 		token: params.token,
-	// 		dealer_id: params.dealer_id,
-	// 	}
-	// }).then((response) => {
-	// 	if (in200s(response.status)) {
-	// 		return response['data']['data'];
-	// 	}
-	// 	return null
-	// }).catch(error => {
-	// 	//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
-	// 	return null
-	// });
-
-	return {data: 'data'}
+	let url = Config.VISITOR_SERVICE.REGISTER_CUSTOMER_CALL;
+	return apiClient.post(url, params, {
+		headers: {
+			token: params.token,
+			dealer_id: params.dealer_id,
+		}
+	}).then((response) => {
+		if (in200s(response.status)) {
+			return response['data'];
+		}
+		return null
+	}).catch(error => {
+		//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
+		return null
+	});
 }
 
 

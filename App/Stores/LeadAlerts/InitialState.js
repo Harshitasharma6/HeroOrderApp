@@ -6,11 +6,13 @@ export const INITIAL_STATE = {
     purchaseOverdue: [],
     openLeads: [],
     noAction: [],
+    callLeads: [],
     loaders: {
     	fetchHotLeadsLoader: false,
     	fetchBookingConfirmFinanceLeadsLoader: false,
     	fetchPurchaseOverdueLoader: false,
     	fetchOpenLeadsLoader: false,
+        fetchCallsLeadsLoader: false,
     	fetchNoActionLoader: false,
     	markLeadLostLoader: false
     },

@@ -46,6 +46,15 @@ const { Types, Creators } = createActions({
 	fetchOpenLeadsLoadingStop: null,
 
 
+	fetchCallLeads: ['payload'],
+	fetchCallLeadsSuccess: ['payload'],
+	fetchCallLeadsFailure: null,
+	fetchCallLeadsLoading: null,
+	fetchCallLeadsLoadingStop: null,
+
+	
+
+
 	fetchNoAction: ['payload'],
 	fetchNoActionSuccess: ['payload'],
 	fetchNoActionFailure: null,

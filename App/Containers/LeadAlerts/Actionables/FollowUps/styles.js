@@ -27,5 +27,13 @@ export default StyleSheet.create({
 		...ApplicationStyles.infoBox,
 		backgroundColor: Colors.lightGreyWhite,
 		borderColor: Colors.darkGreyWhite
-	}
+	},
+	infoBoxCorpBlue: {
+		...ApplicationStyles.infoBox,
+		backgroundColor: Colors.lightCorpBlue,
+  		borderColor: Colors.darkCorpBlue
+  	}
 });
+
+
+

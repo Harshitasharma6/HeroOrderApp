@@ -14,7 +14,7 @@ import LeadAlertsAction from 'App/Stores/LeadAlerts/Actions'
 
 class Actionables extends React.Component {
   scrollToIndex(index){
-    let distanceToBeScrolled = (index)*wp('35%');
+    let distanceToBeScrolled = (index)*wp('39%');
     if (this.flatListRef){
       this.flatListRef.scrollTo({x: distanceToBeScrolled, y: 0, animated: true});
     }
@@ -83,7 +83,7 @@ class Actionables extends React.Component {
               customSelectedTextStyle={Styles.customSelectedTextStyle}
             />
 
-             <WhiteButton
+            <WhiteButton
               title={'No Action From Last 1 Week'}
               style={{...Styles.actionButton, ...Styles.customSelectedStyleGreyWhite}}
               textStyle={Styles.actionButtonText}
@@ -91,7 +91,21 @@ class Actionables extends React.Component {
               selected={selectedFollowUp == '5'}
               customSelectedStyle={Styles.customSelectedStyleGreyWhite}
               customSelectedTextStyle={Styles.customSelectedTextStyle}
-            />            
+            /> 
+
+
+            <WhiteButton
+              title={'Incoming Call Open Leads'}
+              style={{...Styles.actionButton, ...Styles.customSelectedStyleCorpBlue}}
+              textStyle={Styles.actionButtonText}
+              onPress={() => {selectFollowUp('6');  this.scrollToIndex(5)}}
+              selected={selectedFollowUp == '6'}
+              customSelectedStyle={Styles.customSelectedStyleCorpBlue}
+              customSelectedTextStyle={Styles.customSelectedTextStyle}
+            />   
+
+
+                   
           </ScrollView>
           <FollowUps /> 
         </View>
@@ -199,26 +213,35 @@ const Styles = StyleSheet.create({
     top: -10
   },
   customSelectedTextStyle: {
-    color: Colors.headingBlack
+    color: Colors.headingBlack,
+    width: wp('40%')
   },
   customSelectedStylePink: {
-    backgroundColor: Colors.darkPink
+    backgroundColor: Colors.darkPink,
+    width: wp('40%')
   },
 
   customSelectedStyleSeaGreen: {
-    backgroundColor: Colors.darkSeaGreen
+    backgroundColor: Colors.darkSeaGreen,
+    width: wp('40%')
   },
   
   customSelectedStyleRedPink: {
-    backgroundColor: Colors.darkRedPink
+    backgroundColor: Colors.darkRedPink,
+    width: wp('40%')
   },
 
   customSelectedStyleYellow: {
-    backgroundColor: Colors.darkYellow
+    backgroundColor: Colors.darkYellow,
+    width: wp('40%')
   },
-
   customSelectedStyleGreyWhite: {
-    backgroundColor: Colors.darkGreyWhite
+    backgroundColor: Colors.darkGreyWhite,
+    width: wp('40%')
+  },
+  customSelectedStyleCorpBlue: {
+    backgroundColor: Colors.darkCorpBlue,
+    width: wp('40%')
   }
 });
 

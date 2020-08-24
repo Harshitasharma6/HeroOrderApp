@@ -134,6 +134,29 @@ export function* fetchNoAction({ payload }) {
 }
 
 
+export function* fetchCallLeads({ payload }) {
+	const isOnline = yield select(getConnectionStatus);
+	if (!isOnline) {
+		yield put(LeadAlertActions.doNothing());
+		return;
+	}
+
+	try {
+		yield put(LeadAlertActions.fetchCallLeadsLoading());
+		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
+		payload.dealer_id = '0019D000009zum3QAA'
+		let successData = yield call(LeadAlertService.fetchCallLeads, payload);
+		if (successData) {
+			yield put(LeadAlertActions.fetchCallLeadsSuccess(successData));
+		} else {
+			yield put(LeadAlertActions.fetchCallLeadsFailure());
+		}
+	} catch (error) {
+		yield put(LeadAlertActions.fetchCallLeadsFailure());
+	}
+}
+
+
 function* markLeadLost(payload) {
 	yield put(LeadAlertActions.markLeadLostLoading());
 	try {
