@@ -103,7 +103,9 @@ import {
 } from  './SubDealerSaga'
 
 import {
-    getDashboardSummary
+    getDashboardSummary,
+    getDashboardTrendsSoldProducts,
+    getDashboardTrendsRevenue,
 } from  './InsightsSaga'
 
 import { 
@@ -225,6 +227,9 @@ export default function* root() {
 
 
         takeLatest(InsightsTypes.GET_DASHBOARD_SUMMARY,  getDashboardSummary),
+        takeLatest(InsightsTypes.GET_DASHBOARD_TRENDS_SOLD_PRODUCTS,  getDashboardTrendsSoldProducts),
+        takeLatest(InsightsTypes.GET_DASHBOARD_TRENDS_REVENUE,  getDashboardTrendsRevenue),
+
         
         fork(watchUpdateVisitor),
         fork(watchSearchCustomer),

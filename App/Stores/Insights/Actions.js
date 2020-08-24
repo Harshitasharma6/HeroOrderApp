@@ -7,6 +7,20 @@ const { Types, Creators } = createActions({
   getDashboardSummaryLoading: null,
   getDashboardSummaryLoadingStop: null,
   doNothing: null,
+
+
+  getDashboardTrendsSoldProducts: ['payload'],
+  getDashboardTrendsSoldProductsSuccess:  ['payload'],
+  getDashboardTrendsSoldProductsFailure: null,
+  getDashboardTrendsSoldProductsLoading: null,
+  getDashboardTrendsSoldProductsLoadingStop: null,
+
+
+  getDashboardTrendsRevenue: ['payload'],
+  getDashboardTrendsRevenueSuccess:  ['payload'],
+  getDashboardTrendsRevenueFailure: null,
+  getDashboardTrendsRevenueLoading: null,
+  getDashboardTrendsRevenueLoadingStop: null
   
 
   

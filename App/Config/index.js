@@ -45,8 +45,9 @@ export const Config = {
     	MARK_LEAD_LOST                      : 'visitors/lost'
 	},
 	DASHBOARD_SERVICE:{
-
-	GET_DASHBOARD_SUMMARY					: 'dashboard/summary',
+		GET_DASHBOARD_SUMMARY					: 'dashboard/summary',
+		GET_DASHBOARD_TRENDS_SOLD_PRODUCTS      : 'trends/getSoldProducts',
+		GET_DASHBOARD_TRENDS_REVENUE      		: 'trends/getRevenue',
 
 	},
 }

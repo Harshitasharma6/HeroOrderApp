@@ -1,62 +1,72 @@
 import React, {Component} from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native'
+import { View, StyleSheet, Dimensions, ScrollView, Text } from 'react-native'
 import { Picker } from 'native-base'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { Helpers, Metrics, Fonts, Colors, ApplicationStyles } from 'App/Theme'
-import { LineChart, Grid } from 'react-native-svg-charts'
- 
-export default class LineChartExample extends React.PureComponent {
-    render() {
-        const data = [50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80]
- 
-        return (
-            <LineChart
-                style={{ height: 200 }}
-                data={data}
-                svg={{ stroke: 'rgb(134, 65, 244)' }}
-                contentInset={{ top: 20, bottom: 20 }}
-            >
-                <Grid />
-            </LineChart>
-        )
-    }
-}
+import {LineChart} from 'react-native-chart-kit';
+import Loading from 'App/Components/Loading'
 
-// export default class BasicLineChart extends Component {
-//     render() {
-// 		<LineChart
-// 		  data={{
-// 		    labels: [
-// 		      'January',
-// 		      'February',
-// 		      'March',
-// 		      'April',
-// 		      'May',
-// 		      'June',
-// 		    ],
-// 		    datasets: [
-// 		      {
-// 		        data: [20, 45, 28, 80, 99, 43],
-// 		        strokeWidth: 2,
-// 		      },
-// 		    ],
-// 		  }}
-// 		  width={Dimensions.get('window').width - 16}
-// 		  height={220}
-// 		  chartConfig={{
-// 		    backgroundColor: '#1cc910',
-// 		    backgroundGradientFrom: '#eff3ff',
-// 		    backgroundGradientTo: '#efefef',
-// 		    decimalPlaces: 2,
-// 		    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-// 		    style: {
-// 		      borderRadius: 16,
-// 		    },
-// 		  }}
-// 		  style={{
-// 		    marginVertical: 8,
-// 		    borderRadius: 16,
-// 		  }}
-// 		/>
-// 	}
-// }
+
+export default class LineChartGraph extends React.Component {
+    render(){
+        const {
+            data,
+            labels,
+            legend,
+            loading,
+            yAxisInterval
+        } = this.props;
+      return (
+            <View style={{flex: 1, minHeight: 300, minWidth: Dimensions.get('window').width}}>
+            {
+                loading ?  <Loading />: 
+              <ScrollView horizontal={true}>
+                <LineChart
+                  data={{
+                    labels: labels,
+                    datasets: [
+                      {
+                        data: data,
+                      },
+                    ],
+                    legend: [legend]
+                  }}
+                  width={Dimensions.get('window').width * 1.1} // from react-native
+                  height={300}
+                  fromZero={true}
+                  yAxisInterval={yAxisInterval}
+                  //renderDotContent={(value) => <Text>{value}</Text>}
+                  //onDataPointClick={(value, dataset, getColor) => <Text>{value}</Text>}
+                  //hidePointsAtIndex={[0,1,2,3,4,5,8,9,10,11]}
+                  formatXLabel={(x) => `${x}`}
+                  yLabelsOffset={wp('1.4%')}
+                 
+                  chartConfig={{
+                    backgroundColor: '#e26a00',
+                    backgroundGradientFrom: '#D9D9D9',
+                    backgroundGradientTo: '#FFF',
+                    decimalPlaces: 0, // optional, defaults to 2dp
+                    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                    style: {
+                      borderRadius: 10,
+                    },
+                    propsForDots: {
+                      r: '5',
+                      strokeWidth: '2',
+                      stroke: Colors.primary,
+                    },
+                  }}
+                  bezier
+                  style={{
+                    marginVertical: 5,
+                    padding: 10,
+                    borderRadius: 10,
+                  }}
+                />
+              </ScrollView>
+          }
+            </View>
+      );
+    }
+};

@@ -56,9 +56,5 @@ export function* fetchLeadLostReasons({ payload }) {
 
 
 
-    // fetchLeadSources,
-    // fetchLeadLostReasons
-
-
 
 
