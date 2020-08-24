@@ -71,12 +71,12 @@ class DealerSalespersonFormScreen extends Component {
                 data={data}
                 renderItem={({ item }) => 
                     <GenericDisplayCard dark={false}
-                      style={{ width: '88%', elevation: 0 }}
+                      style={{ width: '98%', elevation: 0 }}
                       heading={item.sales_person_name__c}
                       showTextAvatar={true}
                       //onPress={() => NavigationService.navigate('CustomerInfoScreen')}
                       content={[
-                        <BlueButton style={{width: wp('11%'),   borderRadius:wp('30%'), alignSelf: 'flex-end', marginTop: hp('-5%') , marginBottom: hp('1%'), marginRight: wp('2%')}} textStyle={{fontSize: wp('2.8%')}} onPress={() => HelperService.callNumber(item.username__c)}><GenericIcon name="phone" style={{fontSize: wp('4%'), color: Colors.white}}/></BlueButton>,
+                        <BlueButton title={''} style={{width: wp('10%'), alignSelf: 'flex-end', marginTop: hp('1%'), borderRadius:  wp('100%'), paddingRight: 2, paddingLeft: 2, position: 'absolute', top: -hp('6%'), right: -wp('2%')}} textStyle={{fontSize: wp('3.8%')}} onPress={() => HelperService.callNumber(item.username__c)}><GenericIcon name="phone" style={{fontSize: wp('5%'), color: Colors.white}}/></BlueButton>,
                           <GenericDisplayCardStrip key={'Contact Number' + item.name} label={'Contact Number:'} value={item.username__c}/>
                           
                         
@@ -85,6 +85,7 @@ class DealerSalespersonFormScreen extends Component {
 				keyExtractor={item => item.sfid}
 				
                 refreshing={loader}
+                onRefresh={() => this.fetchCall()}
                 ListEmptyComponent={() => <NoDataFound text={'No Salesperson Found'} />}
               />
             );

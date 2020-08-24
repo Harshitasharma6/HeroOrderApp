@@ -1,6 +1,7 @@
 import {apiClientService} from './ApiService'
 import { HelperService } from 'App/Services/Utils/HelperService';
 import { Config } from 'App/Config'
+import _ from 'lodash';
 
 const {
   	apiClient,
@@ -11,7 +12,7 @@ const {
 
 function getAllDealers(params) {
 	let url = Config.DEALER_SERVICE.FETCH_ALL_DEALER_SALES_INFO;
-
+	
 	
 	return apiClient.get(url, {
 		headers: {
@@ -52,10 +53,31 @@ function getDealerClaims(params) {
 	});
 }
 
+function CreateDealerClaim(params) {
+	let url = Config.DEALER_SERVICE.CREATE_DEALER_CLAIM;
+	let formData = _.cloneDeep(params);
+	formData = HelperService.removeField(formData, 'token');
+	return apiClient.post(url, formData,{
+		headers: {
+			token: params.token,
+			
+		}
+	}).then((response) => {
+		if (in200s(response.status)) {
+			return response['data']['data'][0];
+		}
+		return null
+	}).catch(error => {
+		console.log(error.response)
+		return null
+	});
+}
+
 
 
 export const DealersService = {
 	getAllDealers,
 	getDealerClaims,
+	CreateDealerClaim,
 	
   }

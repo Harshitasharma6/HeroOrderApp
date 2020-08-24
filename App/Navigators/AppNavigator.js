@@ -111,7 +111,7 @@ import WarrantyRegistrationformScreen from 'App/Containers/WarrantyRegistration'
 import SubDealerFormScreen from 'App/Containers/AddSubDealer'
 import ProfileScreen from 'App/Containers/Profile'
 import DealerSalespersonFormScreen from 'App/Containers/DealerSalesperson'
-import SchemeClaimFormScreen from 'App/Containers/SchemeClaim'
+import SchemeClaimInfoScreen from 'App/Containers/SchemeClaim'
 import SubDealerInfoScreen from 'App/Containers/SubDealerInfo'
 import SchemeClaimformScreen from 'App/Containers/SchemeClaim/AddSchemeClaim'
 
@@ -229,7 +229,7 @@ const StackNavigator = createStackNavigator(
     SubDealerFormScreen,
     ProfileScreen,
     DealerSalespersonFormScreen,
-    SchemeClaimFormScreen,
+    SchemeClaimInfoScreen,
     SubDealerInfoScreen,
     SchemeClaimformScreen,
   },

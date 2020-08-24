@@ -7,11 +7,24 @@ const { Types, Creators } = createActions({
   getAllDealersLoading: null,
   getAllDealersLoadingStop: null,
   doNothing: null,
+  
   getAllDealerClaims: ['payload'],
   getAllDealerClaimsSuccess:  ['payload'],
   getAllDealerClaimsFailure: null,
   getAllDealerClaimsLoading: null,
   getAllDealerClaimsLoadingStop: null,
+  
+  createDealerClaim: ['payload'],
+	createDealerClaimSuccess:  ['payload'],
+	createDealerClaimFailure: null,
+	createDealerClaimLoading: null,
+	createDealerClaimLoadingStop: null,
+	changeDealerClaimForm: ['payload'],
+	createDealerClaimValidationFailed: ['payload'],
+	
+	setRegistrationForm: ['payload'],
+	clearRegistrationForm: null,
+
 
   
 

@@ -232,7 +232,7 @@ class LayoutScreen extends React.Component {
       case  'WarrantyRegistrationformScreen':
       case  'SubDealerFormScreen':  
       case 'DealerSalespersonFormScreen':
-      case 'SchemeClaimFormScreen':
+      case 'SchemeClaimInfoScreen':
       case 'SubDealerInfoScreen':
       case  'SchemeClaimformScreen':
       

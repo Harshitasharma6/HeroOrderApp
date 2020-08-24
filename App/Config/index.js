@@ -29,7 +29,8 @@ export const Config = {
 
 	DEALER_SERVICE:{
 		FETCH_ALL_DEALER_SALES_INFO: 'dealers/getDealerSalesPersonInfo?dealer_id=0019D000009zum3QAA',
-		GET_DEALER_CLAIM: 'dealers/getDealerClaims'
+		GET_DEALER_CLAIM: 'dealers/getDealerClaims',
+		CREATE_DEALER_CLAIM: 'dealers/createDealerClaim',
 	},
 
 	SUB_DEALER_SERVICE:{

@@ -19,7 +19,7 @@ import InputDate from 'App/Components/FormInput/InputDate';
 import {ApplicationStyles} from 'App/Theme'
 import {Colors} from 'App/Theme'
 import GenericCheckBox from 'App/Components/GenericCheckBox'
-import VisitorActions from 'App/Stores/Visitor/Actions'
+import DealersActions from 'App/Stores/Dealers/Actions'
 import moment from 'moment';
 
 // "first_name__c": "test 12",	(*mandatory)
@@ -49,7 +49,12 @@ class SchemeClaimformScreen extends Component {
 	}
 
 	componentWillUnmount() {
-		
+	
+		const {
+			clearRegistrationForm
+		} = this.props;
+
+		clearRegistrationForm();
 	}
 
 	submit() {
@@ -61,7 +66,28 @@ class SchemeClaimformScreen extends Component {
 		Keyboard.dismiss();
 		submitForm({
 			...form,
-			dealers_sales_person__c: 'a0O9D000001hLV9UAM'
+			status__c: 'Submitted',
+			dealer_name__c:"0019D000009zum3QAA",
+			scheme_claim_submission_date__c:  HelperService.dateReadableFormatWithHyphen(HelperService.getCurrentTimestamp()),
+			
+		});
+	}
+
+
+	saveasdraft() {
+		const { 
+			submitForm, 
+			form,
+		} = this.props;
+
+		Keyboard.dismiss();
+		submitForm({
+			...form,
+			status__c: 'Draft',
+			dealer_name__c:"0019D000009zum3QAA",
+			
+			scheme_claim_submission_date__c: HelperService.dateReadableFormatWithHyphen(HelperService.getCurrentTimestamp()),
+			
 		});
 	}
 
@@ -70,11 +96,13 @@ class SchemeClaimformScreen extends Component {
 			form,
 			loader,
 			changeForm,
+			productSchemes,
 			submitForm,
 			validation,
-			occupationList,
+			schemeApplicableList,
             sourceEnquiryList,
-            productsList
+			productsList,
+			draftloader	,
 		} = this.props;
 		
 		return (
@@ -87,10 +115,10 @@ class SchemeClaimformScreen extends Component {
 
                         <SearchableDropdown
 						
-				        
+						dataSource={schemeApplicableList}
 				        placeHolderText={'Select Scheme'}
-				        selectedValue={form.occupation__c}
-				        onChange={(value) => changeForm({ edited_field: 'occupation__c', edited_value: value })}
+				        selectedValue={form.scheme_applicable__c}
+				        onChange={(value) => changeForm({ edited_field: 'scheme_applicable__c', edited_value: value })}
 				        placeholder={'Select Scheme'}
 				        invalid={false}
 				        labelStyles={{ ...Style.pickerLabel }}
@@ -101,27 +129,27 @@ class SchemeClaimformScreen extends Component {
                     <InputNumber
 						styles={Style.mb10}
 						placeholder={'Online Order No.'}
-						value={form.age__c}
-						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'age__c'}
+						value={form.online_order_no__c}
+						onChange={(value) => changeForm({ edited_field: 'online_order_no__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'online_order_no__c'}
 						label={'Online Order No.* (For Online Schemes only)'}
 					/>
 
                     <InputNumber
 						styles={Style.mb10}
 						placeholder={'Refrence  No.'}
-						value={form.age__c}
-						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'age__c'}
+						value={form.ref_no_for_reference_schemes_only__c}
+						onChange={(value) => changeForm({ edited_field: 'ref_no_for_reference_schemes_only__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'ref_no_for_reference_schemes_only__c'}
 						label={'Reference No.* (For Refrence Schemes only)'}
 					/>
                
 				 	<InputText
 						style={Style.mb10}
 						placeholder={'Customer Name'}
-						value={form.first_name__c}
-						onChange={(value) => changeForm({ edited_field: 'first_name__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'first_name__c'}
+						value={form.customer_name__c}
+						onChange={(value) => changeForm({ edited_field: 'customer_name__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'customer_name__c'}
 						label={'Customer  Name*'}
 					/>
 
@@ -130,9 +158,9 @@ class SchemeClaimformScreen extends Component {
                     <InputMobile
 						styles={Style.mb10}
 						placeholder={'Customer Mobile'}
-						value={form.contact_number__c}
-						onChange={(value) => changeForm({ edited_field: 'contact_number__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'contact_number__c'}
+						value={form.customer_phone__c}
+						onChange={(value) => changeForm({ edited_field: 'customer_phone__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'customer_phone__c'}
 						label={'Customer Mobile*'}
 					/>
 					
@@ -161,13 +189,13 @@ class SchemeClaimformScreen extends Component {
                     <InputDate
                         style={Style.mb10}
                         placeholder={' Date of Invoice' }
-                        value={HelperService.removeFieldsAndDateReadableFormat(form.expected_close_date__c)}
+                        value={HelperService.removeFieldsAndDateReadableFormat(form.date_of_invoice__c)}
                         onChange={(value) => {
                             let formattedDate = HelperService.convertMomentDateToTimestamp(value);
                             formattedDate = HelperService.dateReadableFormatWithHyphen(formattedDate);
-                            this.props.changeForm({ edited_field: 'expected_close_date__c', edited_value: formattedDate })
+                            this.props.changeForm({ edited_field: 'date_of_invoice__c', edited_value: formattedDate })
                         }}
-                        error={validation.invalid && validation.invalid_field == 'expected_close_date__c'}
+                        error={validation.invalid && validation.invalid_field == 'date_of_invoice__c'}
 						label={' Date of Invoice* '}
 						mindate={moment.now()}
                     />
@@ -180,20 +208,20 @@ class SchemeClaimformScreen extends Component {
                             style={{marginRight: '10%', }}
                             style1={{marginRight:'4%'}}
 							label={'Yes'}
-							checked={form.genders__c == 'Male'}
+							checked={form.registered_for_warranty__c == 'true'}
 							onPress={(event)=>{
-			                	let value = form.genders__c == 'Male' ? 'Female' : 'Male';
-				                changeForm({ edited_field: 'genders__c', edited_value: value });
+			                	let value = form.registered_for_warranty__c == 'ture' ? 'false' : 'true';
+				                changeForm({ edited_field: 'registered_for_warranty__c', edited_value: value });
 			                }}
 						/>
 
 						<GenericCheckBox
 							style={{marginRight: '5%'}} 
 							label={'No'}
-							checked={form.genders__c == 'Female'}
+							checked={form.registered_for_warranty__c == 'false'}
 							onPress={(event)=>{
-			                	let value = form.genders__c == 'Female' ? 'Male' : 'Female';
-				                changeForm({ edited_field: 'genders__c', edited_value: value });
+			                	let value = form.registered_for_warranty__c == 'false' ? 'true' : 'false';
+				                changeForm({ edited_field: 'registered_for_warranty__c', edited_value: value });
 			                }}
 						/>
 						</View>
@@ -222,9 +250,9 @@ class SchemeClaimformScreen extends Component {
                      <InputNumber
 						styles={Style.mb10}
 						placeholder={'Invoice No.'}
-						value={form.age__c}
-						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'age__c'}
+						value={form.invoice_no__c}
+						onChange={(value) => changeForm({ edited_field: 'invoice_no__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'invoice_no__c'}
 						label={'Invoice No.*'}
 					/>
 
@@ -260,35 +288,35 @@ class SchemeClaimformScreen extends Component {
                      <InputNumber
 						styles={Style.mb10}
 						placeholder={'Id No.'}
-						value={form.age__c}
-						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'age__c'}
+						value={form.id_no_mentioned_as_per_id_card_1__c}
+						onChange={(value) => changeForm({ edited_field: 'id_no_mentioned_as_per_id_card_1__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'id_no_mentioned_as_per_id_card_1__c'}
 						label={'Id No. Mentioned as per ID Card 1*'}
 					/>
                     <InputNumber
 						styles={Style.mb10}
 						placeholder={'Id No.'}
-						value={form.age__c}
-						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'age__c'}
+						value={form.id_no_mentioned_as_per_id_card_2__c}
+						onChange={(value) => changeForm({ edited_field: 'id_no_mentioned_as_per_id_card_2__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'id_no_mentioned_as_per_id_card_2__c'}
 						label={'Id No. Mentioned as per ID Card 2*'}
 					/>
                     <InputNumber
 						styles={Style.mb10}
 						placeholder={'Claim Amount'}
-						value={form.age__c}
-						onChange={(value) => changeForm({ edited_field: 'age__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'age__c'}
+						value={form.expected_claim_amount_by_dealer__c}
+						onChange={(value) => changeForm({ edited_field: 'expected_claim_amount_by_dealer__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'expected_claim_amount_by_dealer__c'}
 						label={'Claim Amount*'}
 					/>
                     <View style={{flexDirection:'row'}}>
                     <GenericCheckBox
 							style={{marginRight: '5%'}} 
 							
-							checked={form.genders__c == 'Female'}
+							checked={form.declaration__c == 'true'}
 							onPress={(event)=>{
-			                	let value = form.genders__c == 'Female' ? 'Male' : 'Female';
-				                changeForm({ edited_field: 'genders__c', edited_value: value });
+			                	let value = form.declaration__c == 'true' ? 'false' : 'true';
+				                changeForm({ edited_field: 'declaration__c', edited_value: value });
 			                }}
 						/>
                 <View style={{maxWidth:'90%'}}>
@@ -299,15 +327,18 @@ class SchemeClaimformScreen extends Component {
                 <View style={{flexDirection:'row', justifyContent:'space-around',marginTop:'5%'}}>
                 <WhiteButton
                      title={'SAVE AS DRAFT'}
-                    style={Style.actionButton1}
-                     textStyle={Style.actionButtonText1}
-             
+                     style={Style.actionButton1}
+					 textStyle={Style.actionButtonText1}
+					 
+					 onPress={() => this.saveasdraft()}
                      />  
                      <WhiteButton
                      title={'SUBMIT'}
-                    style={Style.actionButton1}
-                     textStyle={Style.actionButtonText1}
-             
+                     style={Style.actionButton1}
+					 textStyle={Style.actionButtonText1}
+					
+					
+					onPress={() => this.submit()}
                      />   
 
 
@@ -321,19 +352,21 @@ class SchemeClaimformScreen extends Component {
 
 
 const mapStateToProps = (state) => ({
-	validation      			: state.visitor.registerCustomerValidation,
-	form 					 	: state.visitor.registerCustomerForm,
-	loader 			            : state.visitor.loaders.registerCustomerLoader,
-	occupationList 				: state.common.occupationList,
+	validation      			: state.dealers.createDealerClaimValidation,
+	form 					 	: state.dealers.createDealerClaimForm,
+	loader 			            : state.dealers.loaders.createDealerClaimLoader,
+	draftloader					: state.dealers.loaders.createDealerDraftLoader,
+	schemeApplicableList		: state.common.schemeApplicableList,
   	sourceEnquiryList 			: state.common.sourceEnquiryList,
-  	productsList 				: state.common.productsList,
-  	contact_number              : state.visitor.searchCustomerForm.contact_number
+	productsList 				: state.common.productsList,
+	productSchemes              : state.products.productSchemes,  
+  
 });
   
 const mapDispatchToProps = (dispatch) => ({
-	changeForm: (params)       => dispatch(VisitorActions.changeRegisterCustomerForm(params)),
-	submitForm: (params)       => dispatch(VisitorActions.registerCustomer(params)),
-	clearRegistrationForm: ()  => dispatch(VisitorActions.clearRegistrationForm())
+	changeForm: (params)       => dispatch(DealersActions.changeDealerClaimForm(params)),
+	submitForm: (params)       => dispatch(DealersActions.createDealerClaim(params)),
+	clearRegistrationForm: ()  => dispatch(DealersActions.clearRegistrationForm())
 });
 
 export default connect(
