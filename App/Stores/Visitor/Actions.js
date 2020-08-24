@@ -62,7 +62,19 @@ const { Types, Creators } = createActions({
 	registerCustomerCallLoading: null,
 	registerCustomerCallLoadingStop: null,
 	changeRegisterCustomerCallForm: ['payload'],
-	registerCustomerCallValidationFailed: ['payload']
+	registerCustomerCallValidationFailed: ['payload'],
+
+
+
+
+	payBooking: ['payload'],
+	payBookingSuccess:  ['payload'],
+	payBookingFailure: null,
+	payBookingLoading: null,
+	payBookingLoadingStop: null,
+	changePayBookingForm: ['payload'],
+	clearPayBookingForm: ['payload'],
+	payBookingValidationFailed: ['payload'],
 });
 
 export const VisitorTypes = Types

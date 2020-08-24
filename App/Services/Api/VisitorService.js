@@ -149,6 +149,27 @@ function registerCustomerCall(params) {
 }
 
 
+function payBooking(params) {
+	// let url = Config.VISITOR_SERVICE.REGISTER_CUSTOMER_CALL;
+	// return apiClient.post(url, params, {
+	// 	headers: {
+	// 		token: params.token,
+	// 		dealer_id: params.dealer_id,
+	// 	}
+	// }).then((response) => {
+	// 	if (in200s(response.status)) {
+	// 		return response['data'];
+	// 	}
+	// 	return null
+	// }).catch(error => {
+	// 	//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
+	// 	return null
+	// });
+
+	return {}
+}
+
+
 export const VisitorService = {
 	searchCustomer,
 	updateVisitor,
@@ -156,5 +177,6 @@ export const VisitorService = {
 	registerCustomerCall,
 	createFeedback,
 	getAllVisits,
+	payBooking,
 	getFeedbacks
 }

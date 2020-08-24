@@ -19,7 +19,7 @@ export default class App extends React.Component {
 		let permission = await HelperService.requestMultipleStoragePermission();
 
 		if (permission) {
-			ImagePicker.launchImageLibrary(options, (response) => {
+			ImagePicker.showImagePicker(options, (response) => {
 				if (response.didCancel) {
 				} else if (response.error) {
 					

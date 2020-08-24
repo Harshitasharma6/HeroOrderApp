@@ -9,7 +9,7 @@ export const getDashboardSummarySuccess = (state, { payload }) => ({
   DashboardSummaryData: payload,
   loaders: {
     ...state.loaders,
-    cLoader: false
+    getDashboardSummaryLoader: false
   }
 });
 

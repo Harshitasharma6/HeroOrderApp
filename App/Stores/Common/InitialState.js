@@ -24,7 +24,8 @@ export const INITIAL_STATE = {
 	],
 
 	schemeApplicableList: [
-		{ id: 'a0B9D000001HWnfUAG', name: 'a0B9D000001HWnfUAG' },
+		{ id: 'a0B9D000001HWiMUAW', name: 'Cash Discount Policy' },
+		{ id: 'a0e1e00000007QKAAY', name: 'Bajaj Finserv Scheme'}
 		
 	],
 

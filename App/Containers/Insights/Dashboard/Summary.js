@@ -4,7 +4,7 @@ import NavigationService from 'App/Services/NavigationService';
 import { ApplicationStyles, Colors } from 'App/Theme';
 import { Badge, Header, Text } from 'native-base';
 import React from 'react';
-import { StyleSheet, View, ScrollView, Image } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, RefreshControl } from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { connect } from 'react-redux';
 import HeadingBox from 'App/Components/HeadingBox'
@@ -43,7 +43,12 @@ class DashboardSummaryScreen extends React.Component {
    
 
     return (
-      	<ScrollView style={Styles.container}>
+      	<ScrollView 
+          style={Styles.container}
+          refreshControl={
+            <RefreshControl refreshing={loader} onRefresh={() => this.fetchCall()} />
+          }
+        >
           	<HeadingBox value={'This Month'}/>
           		<GenericDisplayCard dark={false}
                 style={{ width: '88%', elevation: 0 }}

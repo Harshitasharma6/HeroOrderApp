@@ -147,4 +147,35 @@ AttachDocButton:{
     fontSize: wp('2.9%'),
     fontFamily: ApplicationStyles.textMsgFont
   },
+  recurringActionButton: {
+    borderColor: Colors.primary,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    overflow: 'hidden',
+    borderRadius: 100,
+    borderWidth: 2, 
+    alignSelf: 'center', 
+    backgroundColor: Colors.lightGrey,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingLeft: wp('4%'),
+    paddingRight: wp('4%'),
+    marginRight: wp('6%')
+
+  },
+  recurringActionButtonText: {
+    color: Colors.primary,
+    fontSize: wp('4%'),
+    textTransform: 'capitalize',
+    fontFamily: ApplicationStyles.textMediumFont
+  },
+  recurringActionButtonIcon: {
+    color: Colors.primary, 
+    fontSize: wp('4%')
+  },
+  bottomMargin: {
+    marginBottom: hp('2%'),
+    width: '100%'
+  },
 })

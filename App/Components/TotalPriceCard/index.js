@@ -25,7 +25,7 @@ const TotalPriceCard = ({totalAmount, onPress}) => (
         	<Text style={Style.heading}>{HelperService.currencyValue(HelperService.numberWithCommas(totalAmount))}</Text>
         </View>
         <BlueButton 
-        	title={'Confirm Booking'} 
+        	title={'Checkout'} 
         	textStyle={Style.textStyle} 
         	style={Style.buttonStyle}
         	onPress={onPress}

@@ -397,6 +397,86 @@ export const registerCustomerCallValidationFailed = (state, {payload}) => ({
 });
 
 
+ //payBookingForm: {}
+//payBookingFormLoader: false
+//payBookingFormValidation
+
+
+  // payBooking: ['payload'],
+  // payBookingSuccess:  ['payload'],
+  // payBookingFailure: null,
+  // payBookingLoading: null,
+  // payBookingLoadingStop: null,
+  // changePayBookingForm: ['payload'],
+  // clearPayBookingForm
+  // payBookingValidationFailed: ['payload'],
+
+
+
+  export const payBookingSuccess = (state, {payload}) => ({
+  ...state,
+  payBookingForm: INITIAL_STATE.payBookingForm,
+  loaders: {
+    ...state.loaders,
+    payBookingLoader: false
+  }
+});
+
+export const payBookingFailure = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    payBookingLoader: false
+  }
+});
+
+export const payBookingLoading = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    payBookingLoader: true
+  }
+});
+
+export const payBookingLoadingStop = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    payBookingLoader: false
+  }
+});
+
+
+export const changePayBookingForm = (state, { payload }) => {
+    const {
+    edited_field,
+    edited_value
+  } = payload;
+
+  let changed_entity = {};
+  changed_entity[edited_field] = edited_value;
+  return {
+    ...state,
+    payBookingForm : {
+      ...state.payBookingForm,
+      ...changed_entity
+    },
+    payBookingValidation: INITIAL_STATE.payBookingValidation
+  }
+};
+
+export const clearPayBookingForm = (state, {payload}) => ({
+  ...state,
+  payBookingForm: INITIAL_STATE.payBookingForm
+});
+
+export const payBookingValidationFailed = (state, {payload}) => ({
+  ...state,
+    payBookingValidation: {
+        ...payload
+    }
+});
+
   // [VisitorTypes.REGISTER_CUSTOMER_CALL_SUCCESS]        : registerCustomerCallSuccess,
   // [VisitorTypes.REGISTER_CUSTOMER_CALL_FAILURE]        : registerCustomerCallFailure,
   // [VisitorTypes.REGISTER_CUSTOMER_CALL_LOADING]        : registerCustomerCallLoading,
@@ -451,6 +531,15 @@ export const reducer = createReducer(INITIAL_STATE, {
   [VisitorTypes.REGISTER_CUSTOMER_CALL_LOADING]        : registerCustomerCallLoading,
   [VisitorTypes.REGISTER_CUSTOMER_CALL_LOADING_STOP]   : registerCustomerCallLoadingStop,
   [VisitorTypes.CHANGE_REGISTER_CUSTOMER_CALL_FORM]    : changeRegisterCustomerCallForm,
-  [VisitorTypes.REGISTER_CUSTOMER_CALL_VALIDATION_FAILED]: registerCustomerCallValidationFailed
+  [VisitorTypes.REGISTER_CUSTOMER_CALL_VALIDATION_FAILED]: registerCustomerCallValidationFailed,
+
+
+  [VisitorTypes.PAY_BOOKING_SUCCESS]          : payBookingSuccess,
+  [VisitorTypes.PAY_BOOKING_FAILURE]          : payBookingFailure,
+  [VisitorTypes.PAY_BOOKING_LOADING]          : payBookingLoading,
+  [VisitorTypes.PAY_BOOKING_LOADING_STOP]     : payBookingLoadingStop,
+  [VisitorTypes.CHANGE_PAY_BOOKING_FORM]      : changePayBookingForm,
+  [VisitorTypes.CLEAR_PAY_BOOKING_FORM]      : clearPayBookingForm,
+  [VisitorTypes.PAY_BOOKING_VALIDATION_FAILED]: payBookingValidationFailed
 
 });

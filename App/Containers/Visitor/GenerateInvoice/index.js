@@ -67,7 +67,9 @@ class GenerateInvoiceformScreen extends Component {
 	}
 
     render() {
-		const { 
+		const {
+			data,
+			cart, 
 			form,
 			loader,
 			changeForm,
@@ -119,14 +121,14 @@ class GenerateInvoiceformScreen extends Component {
 	              style={{ width: '98%', elevation: 0, marginTop: '7%' }}
 	            
 	              content={[
-	                <GenericDisplayCardStrip key={'Invoice Date' } label={'Invoice Date:'}  />,
-	                <GenericDisplayCardStrip key={'Invoice Value'} label={'Invoice Value:'} />,
-	                  <GenericDisplayCardStrip key={'Invoice No. '} label={'Invoice No. :'} />,
-	                <GenericDisplayCardStrip key={'Tally Invoice No. '} label={'Tally Invoice No.:'}  />,
-					<GenericDisplayCardStrip key={'Customer Name'} label={'Customer Name:'} />,
-					<GenericDisplayCardStrip key={'Customer Address'} label={'Customer Address:'}  />,
-	                <GenericDisplayCardStrip key={'Customer Phone No.'} label={'Customer Phone No.:'}  />,
-	                  <GenericDisplayCardStrip key={'Customer Email Id '} label={'Customer Email Id :'} />,
+	                <GenericDisplayCardStrip key={'Invoice Date' } label={'Invoice Date:'}  value={`${HelperService.dateReadableFormatWithHyphen('')}`}/>,
+	                <GenericDisplayCardStrip key={'Invoice Value'} label={'Invoice Value:'} value={`${HelperService.currencyValue(cart.totalAmount)}`}/>,
+	                  <GenericDisplayCardStrip key={'Invoice No. '} label={'Invoice No. :'} value={`IN-00090`}/>,
+	                <GenericDisplayCardStrip key={'Tally Invoice No. '} label={'Tally Invoice No.:'}  value={`TIN-00090`}/>,
+					<GenericDisplayCardStrip key={'Customer Name'} label={'Customer Name:'} value={`${data.first_name__c} ${data.last_name__c}`}/>,
+					<GenericDisplayCardStrip key={'Customer Address'} label={'Customer Address:'}  value={`${data.address_line_1__c}`}/>,
+	                <GenericDisplayCardStrip key={'Customer Phone No.'} label={'Customer Phone No.:'}  value={`${data.contact_number__c}`}/>,
+	                  <GenericDisplayCardStrip key={'Customer Email Id '} label={'Customer Email Id :'} value={`${data.email_id__c}`}/>,
 	                <GenericDisplayCardStrip key={'Customer Chassis No.'} label={'Customer Chassis No.:'} />,
 	                <GenericDisplayCardStrip key={'Customer GSTIN'} label={'Customer GSTIN:'} />,
 	                <GenericDisplayCardStrip key={'Motor No.'} label={'Motor No.:'}  />,
@@ -166,7 +168,9 @@ const mapStateToProps = (state) => ({
 	occupationList 				: state.common.occupationList,
   	sourceEnquiryList 			: state.common.sourceEnquiryList,
   	productsList 				: state.common.productsList,
-  	contact_number              : state.visitor.searchCustomerForm.contact_number
+  	contact_number              : state.visitor.searchCustomerForm.contact_number,
+  	cart     					: state.products.cart,
+  	data: state.visitor.currentVisitorData,
 });
   
 const mapDispatchToProps = (dispatch) => ({

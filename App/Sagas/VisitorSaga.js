@@ -84,6 +84,30 @@ export function* watchRegisterCustomerCall() {
 	}
 }
 
+export function* watchPayBooking() {
+	while (true) {
+		const { payload } = yield take(VisitorTypes.PAY_BOOKING)
+		try {
+			const validationFailed = yield call(ValidationService.validateRegisterCustomerCallForm, payload);
+		
+			if (validationFailed) {
+				HelperService.showToast({ 
+					message: validationFailed.error_message, 
+					duration: 2000, 
+					buttonText: 'Okay' 
+				});
+
+				yield put(VisitorActions.registerCustomerCallValidationFailed(validationFailed));
+				continue;
+			}
+		} catch (err) {
+			console.log(err)
+		}
+
+		yield call(payBooking, payload)
+	}
+}
+
 
 export function* watchUpdateVisitor() {
 	while (true) {
@@ -294,6 +318,50 @@ function* registerCustomerCall(payload) {
 		yield put(VisitorActions.registerCustomerCallFailure());
 		HelperService.showToast({ 
 			message: 'Error!! Call Registration Failed.Verify fields and try again.', 
+			duration: 2000, 
+			buttonText: 'Okay' 
+		});
+	}
+}
+
+
+function* payBooking(payload) {
+	yield put(VisitorActions.payBookingLoading());
+	try {
+		const isOnline = yield select(getConnectionStatus);
+		if (!isOnline) {
+			yield put(VisitorActions.payBookingFailure());
+			HelperService.showToast({ 
+				message:  'No Internet connection.', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+			return;
+		}
+
+		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
+		payload.dealer_id = '0019D000009zum3QAA'
+		const successData = yield call(VisitorService.payBooking, payload);
+
+		if (successData) { 
+			yield put(VisitorActions.payBookingSuccess(successData));
+			HelperService.showToast({ 
+				message: 'Booking Payment done Successfully!!', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+		} else {
+			yield put(VisitorActions.payBookingFailure())
+			HelperService.showToast({ 
+				message: 'Error!! Payment Failed.Verify fields and try again.', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+		}
+	} catch (error) {
+		yield put(VisitorActions.payBookingFailure());
+		HelperService.showToast({ 
+			message: 'Error!! Payment Failed.Verify fields and try again.', 
 			duration: 2000, 
 			buttonText: 'Okay' 
 		});
