@@ -16,13 +16,6 @@ import PurchaseDateOverDue from './PurchaseDateOverDue'
 
 
 class FollowUps extends React.Component {
-  scrollToIndex(index){
-    let distanceToBeScrolled = (index)*wp('23%');
-    if (this.flatListRef){
-      this.flatListRef.scrollTo({x: distanceToBeScrolled, y: 0, animated: true});
-    }
-  }
-
   render() {
     const {
       currentScreen,

@@ -98,7 +98,7 @@ function fetchCallLeads(params) {
     }
   }).then((response) => {
     if (in200s(response.status)) {
-      return response['data']['data']['open_HO_leads'];
+      return response['data']['data']['enquiry'];
     }
     return null
   }).catch(error => {

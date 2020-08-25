@@ -43,7 +43,7 @@ export const Config = {
     	FETCH_BOOKING_CONFIRM_FINANCE_LEADS : 'visitors/bookingConfirmFinanceLead',
     	FETCH_PURCHASE_OVERDUE              : 'visitors/purchaseOverDue',
     	FETCH_OPEN_LEADS                    : 'visitors/openHOLeads',
-    	FETCH_CALL_LEADS                    : 'visitors/openHOLeads',
+    	FETCH_CALL_LEADS                    : 'incomingCallLead/getLead',
     	FETCH_NO_ACTION                     : 'visitors/noAction',
     	MARK_LEAD_LOST                      : 'visitors/lost'
 	},
