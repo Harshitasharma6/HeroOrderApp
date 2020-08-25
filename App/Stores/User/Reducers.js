@@ -16,7 +16,8 @@ export const userLoginLoading = (state) => ({
 export const userLoginSuccess = (state, { user }) => ({
   ...state,
   userLoginIsLoading: false,
-  userLoginErrorMessage: null
+  userLoginErrorMessage: null,
+  ...user
 });
 
 export const userLoginFailure = (state, { errorMessage }) => ({

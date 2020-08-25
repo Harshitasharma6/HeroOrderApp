@@ -21,7 +21,9 @@ export function* getAllDealers({ payload }) {
 
 	try {
 		yield put(DealersActions.getAllDealersLoading());
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 
 		let successData = yield call(DealersService.getAllDealers, payload);
 		if (successData) {
@@ -50,8 +52,9 @@ export function* getDealerClaims({ payload }) {
 
 	try {
 		yield put(DealersActions.getAllDealerClaimsLoading());
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhME85RDAwMDAwMWhMVjlVQU0iLCJpYXQiOjE1OTQ0NjY5MzF9.zswVWSPfiaLOfxzuEDbaTsSRVt_QWQyduwAJejNCccY';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 
 		let successData = yield call(DealersService.getDealerClaims, payload);
 		if (successData) {
@@ -100,7 +103,9 @@ function* CreateDealerClaim(payload) {
 			return;
 		}
 
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhME85RDAwMDAwMWhMVjlVQU0iLCJpYXQiOjE1OTQ0NjY5MzF9.zswVWSPfiaLOfxzuEDbaTsSRVt_QWQyduwAJejNCccY';
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 		
 		
 		const successData = yield call(DealersService.CreateDealerClaim, payload);

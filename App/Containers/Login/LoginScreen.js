@@ -14,17 +14,29 @@ import UserActions from 'App/Stores/User/Actions'
 import { Colors } from 'App/Theme';
 
 class LoginScreen extends Component {
-    submit = () => {
+    submit(){
         Keyboard.dismiss(); 
-        
-         this.props.loginUser({
-            mobile: this.props.mobile, 
-            password: this.props.password
+        const {
+            loginUser,
+            password,
+            mobile
+        } = this.props;
+
+        loginUser({
+            mobile: mobile, 
+            password: password
         });  
     }
    
 
     render() {
+        const {
+            validation,
+            changeForm,
+            password,
+            loading,
+            mobile
+        } = this.props;
         return (
             <View style={Style.container}>
                  <View style={Style.buttonBox}>
@@ -36,23 +48,23 @@ class LoginScreen extends Component {
                 <View style={Style.action}>
                     <InputText 
                         placeholder={'Username'} 
-                        value={this.props.mobile} 
-                        onChange={(value) => this.props.changeLoginForm({mobile: value, password: this.props.password})} 
-                        error={this.props.validation.mobile} 
+                        value={mobile} 
+                        onChange={(value) => changeForm({mobile: value, password: password})} 
+                        error={validation.mobile} 
                     />
 
                     <InputPassword 
                         placeholder={'Password'} 
-                        value={this.props.password} 
-                        onChange={(value) => this.props.changeLoginForm({password: value, mobile: this.props.mobile})} 
-                        error={this.props.validation.invalid_password} 
+                        value={password} 
+                        onChange={(value) => changeForm({password: value, mobile: mobile})} 
+                        error={validation.invalid_password} 
                     />
 
                     <BlueButton
                         style={Style.button}
-                        onPress={this.submit}
-                        disabled={this.props.userLoginIsLoading}
-                        loading={this.props.userLoginIsLoading}
+                        onPress={() => this.submit()}
+                        disabled={loading}
+                        loading={loading}
                         title={'Login'}
 
                     />
@@ -64,14 +76,14 @@ class LoginScreen extends Component {
 
 const mapStateToProps = (state) => ({
     mobile: state.user.mobile,
-  password: state.user.password,
-  userLoginIsLoading: state.user.userLoginIsLoading,
-  validation: state.user.validation
+    password: state.user.password,
+    loading: state.user.userLoginIsLoading,
+    validation: state.user.validation
 })
 
 const mapDispatchToProps = (dispatch) => ({
   loginUser: (data) => dispatch(UserActions.loginUser(data)),
-  changeLoginForm: (data) => dispatch(UserActions.changeLoginForm(data))
+  changeForm: (data) => dispatch(UserActions.changeLoginForm(data))
 });
 
 export default connect(

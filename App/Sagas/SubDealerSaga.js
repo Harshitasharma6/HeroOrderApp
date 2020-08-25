@@ -21,7 +21,9 @@ export function* getAllSubDealers({ payload }) {
 
 	try {
 		yield put(SubDealersActions.getAllSubDealersLoading());
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhME85RDAwMDAwMWhMVjlVQU0iLCJpYXQiOjE1OTQ0NjY5MzF9.zswVWSPfiaLOfxzuEDbaTsSRVt_QWQyduwAJejNCccY';
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 
 		let successData = yield call(SubDealersService.getAllSubDealers, payload);
 		if (successData) {
@@ -90,7 +92,9 @@ function* CreateSubDealer(payload) {
 			return;
 		}
 
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhME85RDAwMDAwMWhMVjlVQU0iLCJpYXQiOjE1OTQ0NjY5MzF9.zswVWSPfiaLOfxzuEDbaTsSRVt_QWQyduwAJejNCccY';
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 		
 		
 		const successData = yield call(SubDealersService.CreateSubDealer, payload);

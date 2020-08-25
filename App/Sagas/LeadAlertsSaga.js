@@ -26,8 +26,9 @@ export function* fetchHotLeads({ payload }) {
 
 	try {
 		yield put(LeadAlertActions.fetchHotLeadsLoading());
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 		let successData = yield call(LeadAlertService.fetchHotLeads, payload);
 		if (successData) {
 			yield put(LeadAlertActions.fetchHotLeadsSuccess(successData));
@@ -49,8 +50,9 @@ export function* fetchBookingConfirmFinanceLeads({ payload }) {
 
 	try {
 		yield put(LeadAlertActions.fetchBookingConfirmFinanceLeadsLoading());
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 		let successData = yield call(LeadAlertService.fetchBookingConfirmFinanceLeads, payload);
 		if (successData) {
 			yield put(LeadAlertActions.fetchBookingConfirmFinanceLeadsSuccess(successData));
@@ -72,8 +74,9 @@ export function* fetchPurchaseOverdue({ payload }) {
 
 	try {
 		yield put(LeadAlertActions.fetchPurchaseOverdueLoading());
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 		let successData = yield call(LeadAlertService.fetchPurchaseOverdue, payload);
 		if (successData) {
 			yield put(LeadAlertActions.fetchPurchaseOverdueSuccess(successData));
@@ -95,8 +98,9 @@ export function* fetchOpenLeads({ payload }) {
 
 	try {
 		yield put(LeadAlertActions.fetchOpenLeadsLoading());
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 		let successData = yield call(LeadAlertService.fetchOpenLeads, payload);
 		if (successData) {
 			yield put(LeadAlertActions.fetchOpenLeadsSuccess(successData));
@@ -120,8 +124,9 @@ export function* fetchNoAction({ payload }) {
 
 	try {
 		yield put(LeadAlertActions.fetchNoActionLoading());
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 		let successData = yield call(LeadAlertService.fetchNoAction, payload);
 		if (successData) {
 			yield put(LeadAlertActions.fetchNoActionSuccess(successData));
@@ -143,8 +148,9 @@ export function* fetchCallLeads({ payload }) {
 
 	try {
 		yield put(LeadAlertActions.fetchCallLeadsLoading());
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 		let successData = yield call(LeadAlertService.fetchCallLeads, payload);
 		if (successData) {
 			yield put(LeadAlertActions.fetchCallLeadsSuccess(successData));
@@ -166,8 +172,9 @@ function* markLeadLost(payload) {
 			
 			return;
 		}
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 		const successData = yield call(LeadAlertService.markLeadLost, payload);
 
 		if (successData) { 

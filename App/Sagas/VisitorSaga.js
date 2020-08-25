@@ -176,8 +176,9 @@ function* searchCustomer(payload) {
 			return;
 		}
 
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 		
 		const successData = yield call(VisitorService.searchCustomer, payload);
 
@@ -249,8 +250,9 @@ function* registerCustomer(payload) {
 			return;
 		}
 
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 		
 		const successData = yield call(VisitorService.registerCustomer, payload);
 
@@ -295,8 +297,9 @@ function* registerCustomerCall(payload) {
 			return;
 		}
 
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 		const successData = yield call(VisitorService.registerCustomerCall, payload);
 
 		if (successData) { 
@@ -339,8 +342,9 @@ function* payBooking(payload) {
 			return;
 		}
 
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 		const successData = yield call(VisitorService.payBooking, payload);
 
 		if (successData) { 
@@ -384,8 +388,9 @@ function* updateVisitor(payload) {
 			return;
 		}
 
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 		
 		const successData = yield call(VisitorService.updateVisitor, payload);
 
@@ -433,8 +438,9 @@ function* createFeedback(payload) {
 			return;
 		}
 
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 		payload.enquiry = payload.enquiry_id
 		
 		const successData = yield call(VisitorService.createFeedback, payload);
@@ -476,8 +482,9 @@ export function* getAllVisits({ payload }) {
 	
 	try {
 		yield put(VisitorActions.getAllVisitsLoading());
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 
 		let successData = yield call(VisitorService.getAllVisits, payload);
 		if (successData) {
@@ -502,8 +509,9 @@ export function* getFeedbacks({ payload }) {
 	
 	try {
 		yield put(VisitorActions.getFeedbacksLoading());
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 
 		let successData = yield call(VisitorService.getFeedbacks, payload);
 		if (successData) {

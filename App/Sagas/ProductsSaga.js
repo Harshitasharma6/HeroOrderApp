@@ -20,8 +20,9 @@ export function* getAllProducts({ payload }) {
 
 	try {
 		yield put(ProductsActions.getAllProductsLoading());
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009ydMqQAI'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 
 		let successData = yield call(ProductsService.getAllProducts, payload);
 		if (successData) {
@@ -49,8 +50,9 @@ export function* getProductSchemes({ payload }) {
 
 	try {
 		yield put(ProductsActions.getProductSchemesLoading());
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 
 		let successData = yield call(ProductsService.getProductSchemes, payload);
 		if (successData) {

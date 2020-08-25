@@ -21,8 +21,9 @@ export function* getDashboardSummary({ payload }) {
 
 	try {
 		yield put(InsightsActions.getDashboardSummaryLoading());
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 
 		let successData = yield call(InsightsService.getDashboardSummary, payload);
 		if (successData) {
@@ -46,8 +47,9 @@ export function* getDashboardTrendsSoldProducts({ payload }) {
 
 	try {
 		yield put(InsightsActions.getDashboardTrendsSoldProductsLoading());
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 
 		let successData = yield call(InsightsService.getDashboardTrendsSoldProducts, payload);
 		if (successData) {
@@ -71,8 +73,9 @@ export function* getDashboardTrendsRevenue({ payload }) {
 
 	try {
 		yield put(InsightsActions.getDashboardTrendsRevenueLoading());
-		payload.token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMDE5RDAwMDAwOXlYRUdRQTIiLCJpYXQiOjE1OTM0OTgxMjN9.2LA4v7rrhNWbUT18ZKk-h2OYlZ9eFqlH2IojHgO0MdI';
-		payload.dealer_id = '0019D000009zum3QAA'
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
 
 		let successData = yield call(InsightsService.getDashboardTrendsRevenue, payload);
 		if (successData) {

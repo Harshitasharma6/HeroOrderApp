@@ -109,8 +109,6 @@ const mapStateToProps = (state) => ({
   checkout:               state.user.checkout,
   data:                   state.startDay.userDetailList,
   finalObservationList:   state.dashboard.finalObservationList
-
-
 });
 
 
