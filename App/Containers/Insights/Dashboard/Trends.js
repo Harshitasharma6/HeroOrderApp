@@ -4,7 +4,7 @@ import NavigationService from 'App/Services/NavigationService';
 import { ApplicationStyles, Colors } from 'App/Theme';
 import { Badge, Header, Text } from 'native-base';
 import React from 'react';
-import { StyleSheet, View, ScrollView, Image } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, RefreshControl } from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { connect } from 'react-redux';
 import HeadingBox from 'App/Components/HeadingBox'
@@ -17,7 +17,11 @@ import _ from 'lodash'
 
 class DashboardTrendsScreen extends React.Component {
   componentDidMount() {
-     const {
+    this.fetchCall()
+  }
+
+  fetchCall() {
+    const {
       fetchTrends,
       fetchSoldProducts
     } = this.props;
@@ -92,12 +96,13 @@ class DashboardTrendsScreen extends React.Component {
     }
 
 
-    console.log('revenueData', revenueData);
-    console.log('productsData', productsData);
-
-
     return (
-      	<ScrollView style={Styles.container}>
+      	<ScrollView 
+          style={Styles.container}
+          refreshControl={
+            <RefreshControl refreshing={trendsDataLoader || soldProductsDataLoader} onRefresh={() => this.fetchCall()} />
+          }
+        >
           	<HeadingBox value={'Revenue Trend'} />
           		<LineChart 
                 labels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Aug', 'Nov', 'Dec']}

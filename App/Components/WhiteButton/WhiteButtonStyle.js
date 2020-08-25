@@ -27,6 +27,9 @@ export default StyleSheet.create({
     elevation: 0
   },
   selectedText: {
-    color: Colors.white
+    color: Colors.white,
+    fontFamily: ApplicationStyles.textMsgFont,
+    textTransform: 'uppercase',
+    textAlign: 'center'
   },
 })

@@ -42,12 +42,13 @@ class CallLeads extends Component {
       submitForm
     } = this.props;
 
-
+    console.log('data.length', data.length)
     if (data && data.length) {
       if (data.length) {
         visibleNode = (
           <FlatList
             data={data}
+            initialNumToRender={10}
             renderItem={({ item }) => 
               <GenericDisplayCard dark={false}
                 style={Styles.infoBoxCorpBlue}
@@ -97,7 +98,7 @@ class CallLeads extends Component {
 
   render() {
     return (
-      <View style={{height: hp('90%'), marginTop: hp('1%')}}>
+      <View>
         {this.getDataNode()}
       </View>
     );

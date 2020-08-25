@@ -16,7 +16,7 @@ class LeadAlertsLayout extends React.Component {
     } = this.props;
 
     return (
-     <View style={{padding: hp('1%')}}>
+     <Header transparent style={Styles.header}>
        <BackArrowButton />
        <View style={{alignItems:'center', justifyContent: 'center', width: wp('50%'), height: 100, marginHorizontal: wp('23%')}}>
           <Image
@@ -24,7 +24,7 @@ class LeadAlertsLayout extends React.Component {
               source={require('App/Assets/Images/herologo.png')}
           />
       </View>  
-    </View>
+    </Header>
     )
   }
 }  
@@ -42,7 +42,7 @@ export default connect(
 )(LeadAlertsLayout)
 
 
-const Style = StyleSheet.create({
+const Styles = StyleSheet.create({
    buttonBox: {
     ...Helpers.textCenter,
   },
@@ -59,6 +59,12 @@ const Style = StyleSheet.create({
     shadowOffset: { width: 20, height: 30 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
+  },
+   header: {
+    alignItems: 'flex-start',
+    height: hp('23%'),
+    flexDirection: 'column',
+    justifyContent: 'center'
   },
 });
 

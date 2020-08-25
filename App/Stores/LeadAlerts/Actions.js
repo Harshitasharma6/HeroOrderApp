@@ -1,18 +1,5 @@
 import { createActions } from 'reduxsauce'
 
-
-// hotLeads:[],
-//     bookingConfirmFinanceLead: [],
-//     purchaseOverdue: [],
-//     openLeads: [],
-//     noAction: [],
-
-//      fetchHotLeadsLoader: false,
-//     	fetchBookingConfirmFinanceLeadsLoader: false,
-//     	fetchPurchaseOverdueLoader: false,
-//     	fetchOpenLeadsLoader: false,
-//     	fetchNoActionLoader: false
-
 const { Types, Creators } = createActions({
 	selectActionable: ['payload'],
 	selectFollowUp: ['payload'],
@@ -53,8 +40,6 @@ const { Types, Creators } = createActions({
 	fetchCallLeadsLoadingStop: null,
 
 	
-
-
 	fetchNoAction: ['payload'],
 	fetchNoActionSuccess: ['payload'],
 	fetchNoActionFailure: null,

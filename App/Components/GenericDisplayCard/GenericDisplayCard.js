@@ -37,31 +37,3 @@ export default class GenericDisplayCard extends PureComponent {
     )
   }
 } 
-
-// const GenericDisplayCard = ({
-//   content,
-//   heading,
-//   subheading,
-//   dark = false,
-//   style,
-//   onPress
-// }) => (
-//     <TouchableWithoutFeedback onPress={onPress}>
-//       <View style={dark ? { ...Style.darkCard, ...style } : { ...Style.card, ...style }}>
-//         {
-//           heading ?
-//             (<View>
-//               <Text style={dark ? Style.darkTitle : Style.title}>{heading}</Text>
-//             </View>) : []
-//         }
-//         {
-//           subheading ? <Text style={Style.desc}>{subheading}</Text> : []
-//         }
-//         <View>
-//           {content}
-//         </View>
-//       </View>
-//     </TouchableWithoutFeedback>
-//   )
-
-// export default GenericDisplayCard

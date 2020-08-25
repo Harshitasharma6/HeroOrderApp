@@ -48,6 +48,7 @@ class OpenHotAssignedLeads extends Component {
         visibleNode = (
           <FlatList
             data={data}
+            initialNumToRender={7}
             renderItem={({ item }) => 
               <GenericDisplayCard dark={false}
                 style={Styles.infoBoxYellow}
@@ -97,7 +98,7 @@ class OpenHotAssignedLeads extends Component {
 
   render() {
     return (
-      <View style={{height: hp('90%'), marginTop: hp('1%')}}>
+      <View>
         {this.getDataNode()}
       </View>
     );

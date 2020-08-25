@@ -20,6 +20,11 @@ class Actionables extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.props.selectFollowUp('1')
+    this.scrollToIndex(0)
+  }
+
   render() {
     const {
       currentScreen,
@@ -35,8 +40,30 @@ class Actionables extends React.Component {
 
     if (selectedActionable == '1') {
       visible_node = (
-        <View style={{marginTop: hp('3%'),paddingHorizontal: wp('2%')}}>
-          <ScrollView 
+        <View style={{marginTop: hp('1%'),paddingHorizontal: wp('2%'), flex:1}}>
+           <FollowUps /> 
+        </View>
+       
+      );
+    }else {
+      visible_node = (<View style={{marginTop: hp('6%'), height: hp ('10%'),paddingHorizontal: wp('0%')}}><Segmentation /></View>);
+    }
+
+    return (
+        <View style={{flex: 1}}>
+          <View 
+            style={{justifyContent: 'center', alignItems:'center' }}
+           >
+            <WhiteButton
+              title={"Follow Up's"}
+              style={Styles.actionButton}
+              textStyle={Styles.actionButtonTextHeading}
+              onPress={() => {selectActionable('1')}}
+              selected={selectedActionable == '1'}
+              disabled={true}
+            />
+
+           <ScrollView 
             horizontal={true}
             style={{...Styles.scrollContainer}}
             ref={ref => {this.flatListRef = ref}}
@@ -48,7 +75,7 @@ class Actionables extends React.Component {
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('1'); this.scrollToIndex(0)}}
               selected={selectedFollowUp == '1'}
-              customSelectedStyle={Styles.customSelectedStylePink}
+              customSelectedStyle={{...Styles.customSelectedStylePink, ...Styles.selected}}
               customSelectedTextStyle={Styles.customSelectedTextStyle}
             />
 
@@ -58,7 +85,7 @@ class Actionables extends React.Component {
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('2');  this.scrollToIndex(1)}}
               selected={selectedFollowUp == '2'}
-              customSelectedStyle={Styles.customSelectedStyleSeaGreen}
+              customSelectedStyle={{...Styles.customSelectedStyleSeaGreen, ...Styles.selected}}
               customSelectedTextStyle={Styles.customSelectedTextStyle}
             />
 
@@ -68,8 +95,8 @@ class Actionables extends React.Component {
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('3');  this.scrollToIndex(2)}}
               selected={selectedFollowUp == '3'}
-              customSelectedStyle={Styles.customSelectedStyleRedPink}
-              customSelectedTextStyle={{...Styles.customSelectedTextStyle, flexWrap: 'wrap'}}
+              customSelectedStyle={{...Styles.customSelectedStyleRedPink, ...Styles.selected}}
+              customSelectedTextStyle={{...Styles.customSelectedTextStyle}}
             />
 
         
@@ -79,7 +106,7 @@ class Actionables extends React.Component {
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('4');  this.scrollToIndex(3)}}
               selected={selectedFollowUp == '4'}
-              customSelectedStyle={Styles.customSelectedStyleYellow}
+              customSelectedStyle={{...Styles.customSelectedStyleYellow, ...Styles.selected}}
               customSelectedTextStyle={Styles.customSelectedTextStyle}
             />
 
@@ -89,7 +116,7 @@ class Actionables extends React.Component {
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('5');  this.scrollToIndex(4)}}
               selected={selectedFollowUp == '5'}
-              customSelectedStyle={Styles.customSelectedStyleGreyWhite}
+              customSelectedStyle={{...Styles.customSelectedStyleGreyWhite, ...Styles.selected}}
               customSelectedTextStyle={Styles.customSelectedTextStyle}
             /> 
 
@@ -100,37 +127,10 @@ class Actionables extends React.Component {
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('6');  this.scrollToIndex(5)}}
               selected={selectedFollowUp == '6'}
-              customSelectedStyle={Styles.customSelectedStyleCorpBlue}
+              customSelectedStyle={{...Styles.customSelectedStyleCorpBlue, ...Styles.selected}}
               customSelectedTextStyle={Styles.customSelectedTextStyle}
-            />   
-
-
-                   
+            />       
           </ScrollView>
-          <FollowUps /> 
-        </View>
-      );
-    }else {
-      visible_node = (<View style={{marginTop: hp('6%'), flex: 1, paddingHorizontal: wp('0%')}}><Segmentation /></View>);
-    }
-
-    return (
-        <View style={{flex: 1}}>
-          <View 
-            horizontal={true}
-            style={{...Styles.container, justifyContent: 'center'}}
-            ref={ref => {this.flatListRef = ref}}
-           >
-            <WhiteButton
-              title={"Follow Up's"}
-              style={Styles.actionButton}
-              textStyle={Styles.actionButtonTextHeading}
-              onPress={() => {selectActionable('1')}}
-              selected={selectedActionable == '1'}
-              disabled={true}
-            />
-
-           
           </View>
           {visible_node}
         </View>
@@ -168,8 +168,8 @@ const Styles = StyleSheet.create({
   },
   scrollContainer: {
     flexDirection: 'row',
-    height: hp('7.5%'),
-    marginTop: hp('1%')
+    width: wp('100%'),
+    height: hp('6%')
   },
   header: {
     alignItems: 'flex-start',
@@ -194,7 +194,8 @@ const Styles = StyleSheet.create({
     marginLeft: wp('1%'),
     height: hp('5%'),
     minWidth: wp('25%'),
-    elevation: 0
+    elevation: 0,
+    width: wp('40%'),
   },
   actionButtonText: {
     fontSize: wp('2.9%'),
@@ -213,8 +214,9 @@ const Styles = StyleSheet.create({
     top: -10
   },
   customSelectedTextStyle: {
-    color: Colors.headingBlack,
-    width: wp('40%')
+    fontSize: wp('2.9%'),
+    fontFamily: ApplicationStyles.textMsgFont,
+    color: Colors.headingBlack
   },
   customSelectedStylePink: {
     backgroundColor: Colors.darkPink,
@@ -237,11 +239,16 @@ const Styles = StyleSheet.create({
   },
   customSelectedStyleGreyWhite: {
     backgroundColor: Colors.darkGreyWhite,
+    
     width: wp('40%')
   },
   customSelectedStyleCorpBlue: {
     backgroundColor: Colors.darkCorpBlue,
     width: wp('40%')
+  },
+  selected: {
+    borderWidth: 1,
+    borderColor: Colors.black
   }
 });
 
