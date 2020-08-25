@@ -6,6 +6,7 @@ import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDi
 import BlueButton from 'App/Components/BlueButton';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { connect } from 'react-redux';
+import Loading from 'App/Components/Loading'
 import GenericIcon from 'App/Components/GenericIcon'
 import NoDataFound from 'App/Components/NoDataFound'
 import { HelperService } from 'App/Services/Utils/HelperService';
@@ -92,8 +93,8 @@ class DealerSalespersonFormScreen extends Component {
           } else {
             visibleNode =<NoDataFound text={'No Salesperson Found'} />
           }
-        } else if (false) {
-          visibleNode = <Loading />
+        } else if (loader) {
+          visibleNode = <Loading/>
         } else if (data && !data.length) {
           visibleNode = <NoDataFound text={'No SalesPerson  Found'} />
         }
