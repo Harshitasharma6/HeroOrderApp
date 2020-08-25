@@ -66,7 +66,6 @@ class CustomerCallFormScreen extends Component {
 			<View style={ApplicationStyles.formContainer}>
 				<Text style={ApplicationStyles.formHeading}>{'Register Call Info'}</Text>
 				<ScrollView 
-					showsVerticalScrollIndicator={false}
 					style={ApplicationStyles.action}
 				>
 

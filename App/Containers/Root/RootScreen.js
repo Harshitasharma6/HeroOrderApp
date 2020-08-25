@@ -65,7 +65,6 @@ class RootScreen extends Component {
     startup();
 
     let phoneStatePermission = await HelperService.requestPhoneStatePermission();
-    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
     if (phoneStatePermission) {
         this.callDetector = new CallDetectorManager((event, phoneNumber)=> {
           if (event === 'Disconnected') {
@@ -115,14 +114,8 @@ class RootScreen extends Component {
   }
 
   componentWillUnmount() {
-      this.keyboardDidHideListener.remove();
-      HelperService.clearWatchLocation();
-      //this.callDetector && this.callDetector.dispose();
-    }
-
-  keyboardDidHide(){
-      Keyboard.dismiss()
-  };
+    HelperService.clearWatchLocation();
+  }
 
   closeDrawer(){
     this.drawer._root.close()
