@@ -2,7 +2,7 @@
  * The initial values for the redux state.
  */
 export const INITIAL_STATE = {
-    username: '', //
+    mobile: '', //
     password: '',//password for user
     token: '', //user token after user is logged in, indication that user is loggin or not.
     id: '',//agent id after generated.

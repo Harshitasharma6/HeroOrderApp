@@ -25,39 +25,25 @@ export function* loginUser(data) {
 		HelperService.showToast({ message: 'Cannot Login. No Internet connection.', duration: 2000, buttonText: 'Okay' });
 		return;
 	}
-
-	try {
-		const user = yield call(userService.loginUser, data)
-		if (user) {
-			yield put(StartDayActions.fetchGlobleTokenSuccess(user));
-			let userData = yield call(startDayService.fetchUserId, {url: user.id, access_token: user.access_token});
+		try {
+			
+			let userData = yield call(userService.loginUser, data)
 			if (userData) {
-				yield put(UserActions.updateLoginDetails({userId: userData.user_id}));
-				yield put(StartDayActions.fetchAgentDetails());
-				yield put(StartDayActions.fetchGlobleUserDetail({
-        			access_token: user.access_token
-      			}));
-			}else {
+				yield put(UserActions.userLoginSuccess(userData));
+				HelperService.showToast({ message: 'Logged in successfully!!', duration: 500, buttonText: '' });
+				// NavigationService.navigateAndReset('DashboardScreen');
+				// yield put(UserActions.fetchAllAreas({token: userData.token, agentid: userData.id}));//fetch all areas
+				// yield put(UserActions.fetchAgentDetails({token: userData.token, agentid: userData.id}));// //fetch agent details
+				NavigationService.navigate('InsightsScreen')
+			} else {
 				yield put(UserActions.userLoginFailure())
-				HelperService.showToast({ 
-					message: 'Login Failed!! Invalid Credentials', 
-					duration: 2000, 
-					buttonText: 'Okay' 
-				});
+				HelperService.showToast({ message: 'Cannot Login. Invalid Number or Password', duration: 2000, buttonText: 'Okay' });
 			}
-
-			const appData = yield call(startDayService.getAppVersion, {access_token: user.access_token}); 
-			appData ? HelperService.checkAppVersion(appData.Name) : '';
-			yield put(StartDayActions.fetchGlobleToken()); // to initiate fetch global token at regular intervals
-		} else {
+		} catch (error) {
 			yield put(UserActions.userLoginFailure())
-			HelperService.showToast({ message: 'Login Failed!! Invalid Credentials', duration: 2000, buttonText: 'Okay' });
+			HelperService.showToast({ message: error, duration: 2000, buttonText: 'Okay' });
 		}
-	} catch (error) {
-		yield put(UserActions.userLoginFailure())
-		HelperService.showToast({ message: 'Login Failed!! Invalid Credentials', duration: 2000, buttonText: 'Okay' });
 	}
-}
 
 export function* startDay(data) {
 	yield put(UserActions.userStartDayLoading());

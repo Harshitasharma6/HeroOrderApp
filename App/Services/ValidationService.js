@@ -169,6 +169,25 @@ function validateCreateSubDealerForm(params) {
 	return false;
 }
 
+function validateLoginForm(params) {
+	if (!validatePhoneNumber(params.mobile)) {
+		return {
+			invalid_number: true,
+			error_message: 'Invalid mobile Number'
+		}
+	}
+
+	if (!validateFieldIsEmpty(params.password)) {
+		return {
+			invalid_password: true,
+			error_message: 'Invalid Password'
+		}
+	}
+
+	return false;
+}
+
+
 
 
 
@@ -177,5 +196,6 @@ export const ValidationService = {
 	validateRegisterCustomerForm,
 	validateCreateFeedbackForm,
 	validateRegisterCustomerCallForm,
-	validateCreateSubDealerForm
+	validateCreateSubDealerForm,
+	validateLoginForm
 }

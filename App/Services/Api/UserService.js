@@ -1,12 +1,16 @@
 import axios from 'axios'
 import { Config } from 'App/Config'
 import { is, curryN, gte } from 'ramda'
+import {apiClientService} from './ApiService'
 
-const isWithin = curryN(3, (min, max, value) => {
-  const isNumber = is(Number)
-  return isNumber(min) && isNumber(max) && isNumber(value) && gte(value, min) && gte(max, value)
-})
-const in200s = isWithin(200, 299)
+const {
+  apiClient,
+  isWithin,
+  in200s
+} = apiClientService;
+
+
+
 
 /**
  * This is an example of a service that connects to a 3rd party API.
@@ -46,20 +50,16 @@ function fetchUser() {
 
 
 function loginUser(params) {
-  let url = Config.START_DAY_SERVICE.FETCH_GLOBLE_TOKEN_SERVICE_TEST;
-  url = url.replace('userId', params.username);
-  url = url.replace('passwordId', params.password);
-  return userApiClient.post(url, {
-    headers: {
-        'Content-Type': 'application/json'
-    }
-  }).then((response) => {
+  
+  let url = Config.USER_SERVICE.LOGIN;
+  console.log('im in service')
+  return apiClient.post(url, params).then((response) => {
       if (in200s(response.status)) {
           return response.data
       }
       return null
   }).catch(error => {
-      bugsnag.notify(new Error('loginUser: ' + JSON.stringify(error.response.data)));
+      
       return null
   });
 }
