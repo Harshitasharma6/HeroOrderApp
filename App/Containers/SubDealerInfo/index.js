@@ -8,6 +8,7 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 import { connect } from 'react-redux';
 import NoDataFound from 'App/Components/NoDataFound'
 import GenericIcon from 'App/Components/GenericIcon'
+import Loading from 'App/Components/Loading'
 import { HelperService } from 'App/Services/Utils/HelperService';
 import NavigationService from 'App/Services/NavigationService'
 import {ApplicationStyles,Colors} from 'App/Theme'
@@ -89,7 +90,7 @@ class SubDealerInfoScreen extends Component {
           } else {
             visibleNode =<NoDataFound text={'No SubDealer Found'} />
           }
-        } else if (false) {
+        } else if (loader) {
           visibleNode = <Loading />
         } else if (data && !data.length) {
           visibleNode = <NoDataFound text={'No SubDealer  Found'} />

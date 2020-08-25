@@ -16,11 +16,11 @@ import { Colors } from 'App/Theme';
 class LoginScreen extends Component {
     submit = () => {
         Keyboard.dismiss(); 
-        NavigationService.navigate('InsightsScreen')
-        // this.props.loginUser({
-        //     username: this.props.username, 
-        //     password: this.props.password
-        // });  
+        
+         this.props.loginUser({
+            mobile: this.props.mobile, 
+            password: this.props.password
+        });  
     }
    
 
@@ -36,15 +36,15 @@ class LoginScreen extends Component {
                 <View style={Style.action}>
                     <InputText 
                         placeholder={'Username'} 
-                        value={this.props.username} 
-                        onChange={(value) => this.props.changeLoginForm({username: value, password: this.props.password})} 
-                        error={this.props.validation.username} 
+                        value={this.props.mobile} 
+                        onChange={(value) => this.props.changeLoginForm({mobile: value, password: this.props.password})} 
+                        error={this.props.validation.mobile} 
                     />
 
                     <InputPassword 
                         placeholder={'Password'} 
                         value={this.props.password} 
-                        onChange={(value) => this.props.changeLoginForm({password: value, username: this.props.username})} 
+                        onChange={(value) => this.props.changeLoginForm({password: value, mobile: this.props.mobile})} 
                         error={this.props.validation.invalid_password} 
                     />
 
@@ -63,7 +63,7 @@ class LoginScreen extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  username: state.user.username,
+    mobile: state.user.mobile,
   password: state.user.password,
   userLoginIsLoading: state.user.userLoginIsLoading,
   validation: state.user.validation

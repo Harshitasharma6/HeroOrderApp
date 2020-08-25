@@ -29,7 +29,7 @@ export const userLoginFailure = (state, { errorMessage }) => ({
 
 export const changeLoginForm = (state, {user}) => ({
   ...state,
-  username: user.username,
+  mobile: user.mobile,
   password: user.password,
   userLoginIsLoading: false,
   validation: {...INITIAL_STATE.validation}

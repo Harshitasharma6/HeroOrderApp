@@ -13,6 +13,7 @@ import NavigationService from 'App/Services/NavigationService'
 import {ApplicationStyles,Colors} from 'App/Theme'
 import DealersActions from 'App/Stores/Dealers/Actions';
 import Filter from './filter';
+import Loading from 'App/Components/Loading'
 
 // "first_name__c": "test 12",	(*mandatory)
 // 	"last_name__c": "enquiry visit test",	(*mandatory)
@@ -98,7 +99,7 @@ class SchemeClaimInfoScreen extends Component {
           } else {
             visibleNode =<NoDataFound text={'No Schemes Found'} />
           }
-        } else if (false) {
+        } else if (loader) {
           visibleNode = <Loading />
         } else if (data && !data.length) {
           visibleNode = <NoDataFound text={'No Schemes Found'} />
