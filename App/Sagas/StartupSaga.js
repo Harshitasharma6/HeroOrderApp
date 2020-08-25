@@ -16,13 +16,14 @@ import CommonActions from 'App/Stores/Common/Actions';
 export function* startup({ params }) {
     let user = yield select(state => state.user); 
     if (user.token && user.dealer__c && user.state__c) { //user already logged in
+        NavigationService.navigateAndReset('InsightsScreen');
         let state_id = user.state__c;
         yield put(ProductsActions.getAllProducts({
             state_id
         }));
         yield put(CommonActions.fetchLeadSources({}));
         yield put(CommonActions.fetchLeadLostReasons({}));
-        NavigationService.navigateAndReset('InsightsScreen');
+        
     }else { //user not logged in or session expired
         NavigationService.navigateAndReset('LoginScreen')
     }

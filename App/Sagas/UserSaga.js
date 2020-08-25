@@ -31,11 +31,7 @@ export function* loginUser(data) {
 			if (userData) {
 				yield put(UserActions.userLoginSuccess(userData.data));
 				HelperService.showToast({ message: 'Logged in successfully!!', duration: 500, buttonText: '' });
-				yield put(StartDayActions.startup({}));
-				// NavigationService.navigateAndReset('DashboardScreen');
-				// yield put(UserActions.fetchAllAreas({token: userData.token, agentid: userData.id}));//fetch all areas
-				// yield put(UserActions.fetchAgentDetails({token: userData.token, agentid: userData.id}));// //fetch agent details
-				NavigationService.navigate('InsightsScreen')
+				yield put(StartupActions.startup({}));
 			} else {
 				yield put(UserActions.userLoginFailure())
 				HelperService.showToast({ message: 'Cannot Login. Invalid Number or Password', duration: 2000, buttonText: 'Okay' });
