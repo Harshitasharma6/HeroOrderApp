@@ -7,73 +7,41 @@ import { ScrollView, View, TouchableOpacity, Text, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import Style from './ProfileStyles';
 import StartDayAction from 'App/Stores/StartDay/Actions'
+import { ApplicationStyles, Colors, Helpers } from 'App/Theme';
 import GenericIcon from 'App/Components/GenericIcon'
 import BlueButton from 'App/Components/BlueButton'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import UserActions from 'App/Stores/User/Actions'
 
 class ProfileScreen extends Component {
-  async submit(){
+  submit(){
     const {
-      checkOutAction,
-      feedBackForm,
-      checkIn_id,
-      access_token,
-      finalObservationList
+      logoutUser
     } = this.props;
 
-
-    if (!finalObservationList.length) {
-      HelperService.showToast({
-        message: 'Please fill Final Observations before CheckOut',
-        duration: 3000
-      });
-      return;
-    }
-
-
-    let location = await HelperService.requestLocation();
-    if (location == 'DENIED'){
-      Alert.alert("Location permission is required to proceed.", 
-        "Go App Permissions and Turn on Location Permission for ShreeCementApp."
-      );
-      return;
-    }else if (!location) {
-      return;
-    }
-
-
-    checkOutAction({
-			...feedBackForm, 
-        ...{
-          access_token: access_token,
-          recordId: checkIn_id,
-          dateNtime: String(HelperService.getCurrentTimestamp()),
-          checkoutBox: true,
-          geoLatitude: String(location.latitude),
-          geoLongitude: String(location.longitude)
-  			}
-      });
-    }
-    
+      logoutUser()
+  }
 
   render() {
     const {
       data,
-      status,
-      checkIn_id,
-      checkout,
-      fetchCheckOutLoader
+      firstName,
+      LastName,
+      contactNo,
+      state,
+      loading,
+      login
     } = this.props
 
     let visibleNode = [];
-    if (!data) {
-      visibleNode = <Loading />
-    } else {
+      {
       visibleNode = (
         <ScrollView style={Style.box}>
-          <AgentInfo heading={'Contact No.'}  value={'8839592379'} />
-          <AgentInfo heading={'Employee ID'}  value={'100'} />
-          <AgentInfo heading={'Username'}  value={'Lav Agrawal'}/>
-          <AgentInfo heading={'State'}  value={'U.P'} />
+          <AgentInfo heading={'Contact No.'}  value={contactNo} />
+          <AgentInfo heading={'Employee ID'}  value={''} />
+          <AgentInfo heading={'Username'}  value={ login ?firstName+  "  "  +LastName :null}/>
+          <AgentInfo heading={'State'}  value={state} />
         </ScrollView>
       );
     }
@@ -81,19 +49,20 @@ class ProfileScreen extends Component {
     return (
       <View style={Style.header }>
         <View style={{ flex: 1, paddingBottom: 10 }}>
-            <ProfileCard data={data} /> 
-            {visibleNode}
+             <ProfileCard data={data} />          
+          {visibleNode}
         </View>
         
        
-          <BlueButton
-             style={{ ...Style.button }}
-             loading={fetchCheckOutLoader}
-             onPress={() => this.submit()}
-             title={'CheckOut'}
-             disabled ={fetchCheckOutLoader} 
-          >
-          </BlueButton> 
+          
+        <BlueButton  title={'LOG OUT'}style={{ ...Style.button
+ }} textStyle={{fontSize: wp('5%'),marginRight: wp('7%'),color: Colors.primary}}  
+           onPress={() => this.submit()}
+           disabled={loading}
+           loading={loading}
+           
+           >
+              <Icon name="logout" style={{fontSize: wp('6%'), color: Colors.primary}}/></BlueButton>
        
       </View>
     )
@@ -101,19 +70,19 @@ class ProfileScreen extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  fetchCheckOutList:      state.startDay.fetchCheckOutList,
-  fetchCheckOutLoader:    state.startDay.fetchCheckOutLoader,
-  access_token:           state.startDay.access_token,
-  checkIn_id:             state.user.checkIn_id,
-  status:                 state.user.status,
-  checkout:               state.user.checkout,
-  data:                   state.startDay.userDetailList,
-  finalObservationList:   state.dashboard.finalObservationList
+  data:                   state.user.name,
+  finalObservationList:   state.dashboard.finalObservationList,
+  firstName:              state.user.first_name__c,
+  LastName:               state.user.last_name__c,
+  contactNo:              state.user.mobile,
+  state:                  state.user.state,
+  loading:          state.user.userLoginIsLoading,
+  login:           state.user.is_logged_in,
 });
 
 
 const mapDispatchToProps = (dispatch) => ({
-  checkOutAction: (param) => dispatch(StartDayAction.checkOutAction(param))
+logoutUser: () => dispatch(UserActions.logoutUser()),
 })
 
 

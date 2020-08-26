@@ -1,4 +1,4 @@
-import { put, call, take, select } from 'redux-saga/effects'
+import { put, call, take, select, } from 'redux-saga/effects'
 import { UserTypes } from 'App/Stores/User/Actions'
 import UserActions from 'App/Stores/User/Actions'
 import { userService } from 'App/Services/Api/UserService'
@@ -41,6 +41,27 @@ export function* loginUser(data) {
 			HelperService.showToast({ message: error, duration: 2000, buttonText: 'Okay' });
 		}
 	}
+
+	
+	export function* logoutUser() {
+		yield put(UserActions.userLogoutLoading());
+		const isOnline = yield select(getConnectionStatus);// checks whether net is connected or not.
+		if (!isOnline) {
+			yield put(UserActions.userLogoutFailure());
+			HelperService.showToast({ message: 'Cannot Logout. No Internet connection.', duration: 2000, buttonText: 'Okay' });
+			return;
+		}
+			try {
+				
+				yield put(UserActions.userLogoutSuccess());
+					HelperService.showToast({ message: 'Logged Out successfully!!', duration: 500, buttonText: '' });
+					
+					NavigationService.navigateAndReset('LoginScreen');
+				} catch (error) {
+				yield put(UserActions.userLogoutFailure())
+				HelperService.showToast({ message: error, duration: 2000, buttonText: 'Okay' });
+			}
+		}
 
 export function* startDay(data) {
 	yield put(UserActions.userStartDayLoading());

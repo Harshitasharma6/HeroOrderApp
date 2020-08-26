@@ -17,6 +17,7 @@ export const userLoginSuccess = (state, { user }) => ({
   ...state,
   userLoginIsLoading: false,
   userLoginErrorMessage: null,
+  is_logged_in: true,
   ...user
 });
 
@@ -27,6 +28,24 @@ export const userLoginFailure = (state, { errorMessage }) => ({
   userLoginIsLoading: false,
   userLoginErrorMessage: errorMessage
 });
+
+export const userLogoutLoading = (state) => ({
+  ...state,
+  userLoginIsLoading: true
+});
+
+export const userLogoutSuccess = (state, user) => ({
+  ...INITIAL_STATE,
+});
+
+export const userLogoutFailure = (state, { errorMessage }) => ({
+  ...state,
+  id: null,
+  token: null,
+  userLoginIsLoading: false,
+  userLoginErrorMessage: errorMessage
+});
+
 
 export const changeLoginForm = (state, {user}) => ({
   ...state,
@@ -243,6 +262,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [UserTypes.USER_LOGIN_LOADING]              : userLoginLoading,
   [UserTypes.USER_LOGIN_SUCCESS]              : userLoginSuccess,
   [UserTypes.USER_LOGIN_FAILURE]              : userLoginFailure,
+  [UserTypes.USER_LOGOUT_LOADING]              : userLogoutLoading,
+  [UserTypes.USER_LOGOUT_SUCCESS]              : userLogoutSuccess,
+  [UserTypes.USER_LOGOUT_FAILURE]              : userLogoutFailure,
   [UserTypes.CHANGE_LOGIN_FORM]               : changeLoginForm,
   [UserTypes.USER_LOGIN_VALIDATION_FAILED]    : userLoginValidationFailed,
   [UserTypes.USER_START_DAY_VALIDATION_FAILED]: userStartDayValidationFailed,

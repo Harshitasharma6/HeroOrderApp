@@ -8,5 +8,7 @@ export const INITIAL_STATE = {
         invalid_area: false,
         error_message: '',
     },
-    is_logged_in: false
+    is_logged_in: false,
+
+    
 }

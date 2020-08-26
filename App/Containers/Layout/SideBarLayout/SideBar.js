@@ -1,4 +1,5 @@
 import GenericIcon from 'App/Components/GenericIcon';
+
 import NavigationService from 'App/Services/NavigationService';
 import { ApplicationStyles, Colors, Helpers } from 'App/Theme';
 import { ListItem } from 'native-base';
@@ -49,7 +50,7 @@ export default class SideBar extends Component {
 						<GenericIcon name={'users'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Sub Dealers'}</Text>
 					</ListItem>
 					<ListItem style={Styles.listItemDivider} >
-						<GenericIcon name={'user-circle-o'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Log Out'}</Text>
+						<Icon name={'logout'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Log Out'}</Text>
 					</ListItem>
 				</ScrollView>
 
@@ -81,6 +82,8 @@ const Styles = StyleSheet.create({
 		color: Colors.primary,
 		marginHorizontal: 15
 	},
+
+	
 	selectedListItemIcon: {
 		fontFamily: ApplicationStyles.textMsgFont,
 		fontSize: 18,
