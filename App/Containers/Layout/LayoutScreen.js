@@ -25,6 +25,7 @@ import DashboardScreenLayout  from './Insights/Dashboard/Layout'
 import CustomerListLayout from './Insights/Customers/list'
 import LeadAlertsLayout from './LeadAlerts'
 import FollowUpsLayout from './LeadAlerts/FollowUpsLayout'
+import ConfirmBookingLayout from './LeadAlerts/ConfirmedBookingLayout'
 
 
 
@@ -137,7 +138,9 @@ class LayoutScreen extends React.Component {
         customLayoutNode = [];
         break;
 
-   
+       case 'BookingConfirmed':
+        customLayoutNode = <ConfirmBookingLayout /> ;
+        break;
 
       case 'TravelUpdateScreen':
       case 'ConvenienceUpdateScreen':

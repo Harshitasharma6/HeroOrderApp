@@ -32,9 +32,9 @@ class LeadAlertsScreen extends Component {
 
                 
                 <SelectionButton 
-                    icon="motorcycle" 
-                    title="Vehicle Handovers" 
-                    onPress={() => NavigationService.navigate('HandoversScreen')}
+                    icon="check-square" 
+                    title="Booking Confirmed" 
+                    onPress={() => NavigationService.navigate('BookingConfirmed')}
                 />
 
                
