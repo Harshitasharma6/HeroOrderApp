@@ -25,7 +25,7 @@ const ProfileCard = ({data}) => (
 	            />
 	        </View>
 	        <View style={Style.userDtl}>
-	            <Text style={Style.title}>{data.Name}</Text>
+	            <Text style={Style.title}>{data}</Text>
 	        </View>
 	    </View>
     </View>
