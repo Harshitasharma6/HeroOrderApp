@@ -16,11 +16,9 @@ class LeadAlertsLayout extends React.Component {
     } = this.props;
 
     return (
-     <Header transparent style={Styles.header}>
-       <BackArrowButton />
-       
-      
-    </Header>
+      <View>
+     <Header transparent style={Styles.header}></Header>
+     </View>
     )
   }
 }  

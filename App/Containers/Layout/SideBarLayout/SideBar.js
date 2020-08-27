@@ -69,7 +69,7 @@ const Styles = StyleSheet.create({
 	},
 	selectedListItemText: {
 		fontFamily: ApplicationStyles.textMsgFont,
-		fontSize: wp('4.1%'),
+		fontSize: wp('4.2%'),
 		color: Colors.grey,
 		textTransform: 'uppercase'
 	},
@@ -97,11 +97,11 @@ const Styles = StyleSheet.create({
 		backgroundColor: Colors.lightGrey,
 		paddingHorizontal: 0,
 		marginLeft: '5%',
-		paddingTop: hp('2%'),
-		paddingBottom: hp('2%'),
-		width: '90%',
-		elevation: 5,
-		marginBottom: hp('.5%'),
+		paddingTop: hp('2.3%'),
+		paddingBottom: hp('2.3%'),
+		width: '88%',
+		elevation: 0,
+		marginBottom: hp('1%'),
 		marginTop: hp('.5%'),
 		borderRadius: 5
 	},

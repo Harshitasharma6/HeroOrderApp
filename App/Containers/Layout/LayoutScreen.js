@@ -36,7 +36,6 @@ class LayoutScreen extends React.Component {
     let showBackArrow = false;
     let showMoreIcon = false;
     switch (this.props.currentScreen) {
-
       case 'DealerInfoScreen':
         customLayoutNode = <DealerInfoLayout />;
         break;
@@ -44,18 +43,15 @@ class LayoutScreen extends React.Component {
       case 'DealerInfoScreen':
         customLayoutNode = <DealerInfoLayout />;
         break;
-
 
       case 'DealerInvoiceListScreen':
         customLayoutNode = <DealerInfoLayout />;
         break;
 
-
       case 'DealerOrdersListScreen':
         customLayoutNode = <DealerInfoLayout />;
         break;
 
-
       case 'DealerInfoScreen':
         customLayoutNode = <DealerInfoLayout />;
         break;
@@ -63,30 +59,27 @@ class LayoutScreen extends React.Component {
       case 'DealerInfoScreen':
         customLayoutNode = <DealerInfoLayout />;
         break;
-
 
       case 'DealerInvoiceListScreen':
         customLayoutNode = <DealerInfoLayout />;
         break;
 
-
       case 'DealerOrdersListScreen':
         customLayoutNode = <DealerInfoLayout />;
         break;
-
 
       case 'VisitsScreen':
         customLayoutNode = [];
         break;
 
-        case 'GenerateRecieptformScreen':
-        case 'GenerateInvoiceformScreen':
-          customLayoutNode = <VisitorRecieptScreenLayout/>;
-          break;
+      case 'GenerateRecieptformScreen':
+      case 'GenerateInvoiceformScreen':
+        customLayoutNode = <VisitorRecieptScreenLayout/>;
+        break;
           
-         case 'InvoiceDetailformScreen' :
-          customLayoutNode = <VisitorInvoiceDetailScreenLayout/>;
-          break; 
+      case 'InvoiceDetailformScreen' :
+        customLayoutNode = <VisitorInvoiceDetailScreenLayout/>;
+        break; 
 
       case 'DashboardScreen':
         customLayoutNode = <DashboardLayout/>;
@@ -138,7 +131,7 @@ class LayoutScreen extends React.Component {
         customLayoutNode = [];
         break;
 
-       case 'BookingConfirmed':
+      case 'BookingConfirmed':
         customLayoutNode = <ConfirmBookingLayout /> ;
         break;
 
@@ -227,7 +220,6 @@ class LayoutScreen extends React.Component {
       case 'ProductInfoScreen':
       case 'AvailableSchemesScreen':
       case 'CustomerInfoScreen':
-      case 'LeadAlertsScreen':
       case 'AddProductInfoScreen':
       case 'AddProductsSchemesScreen':
       case 'OrderCartScreen':
@@ -238,10 +230,10 @@ class LayoutScreen extends React.Component {
       case 'SchemeClaimInfoScreen':
       case 'SubDealerInfoScreen':
       case  'SchemeClaimformScreen':
-      
+      case 'ActionablesScreen':
         customLayoutNode = <NewRetailerLayout />
         break;
-      case 'ActionablesScreen':
+      
       case 'HandoversScreen':
         customLayoutNode = <LeadAlertsLayout />
         break;
@@ -265,9 +257,6 @@ class LayoutScreen extends React.Component {
       case 'CustomersScreen':
         customLayoutNode = <CustomerListLayout />
         break;
-        
-          
-
       default:
         customLayoutNode = [];
 

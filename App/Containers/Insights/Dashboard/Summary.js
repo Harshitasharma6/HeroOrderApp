@@ -43,6 +43,7 @@ class DashboardSummaryScreen extends React.Component {
    
 
     return (
+        <View style={Styles.container}>
       	<ScrollView 
           style={Styles.container}
           refreshControl={
@@ -95,6 +96,7 @@ class DashboardSummaryScreen extends React.Component {
               		]}
             	/>
         </ScrollView>
+        </View>
     );
   }
 }  

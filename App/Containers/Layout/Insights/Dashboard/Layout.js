@@ -24,19 +24,8 @@ class DashboardScreenLayout extends React.Component {
 
     return (
       <View>
-        <Header transparent style={Styles.header}>
-        	<View style={{paddingTop: hp('1.5%'), paddingBottom: hp('1.5%')}}>
-        		<BackArrowButton />
-        	</View>
-        	{
-        		// <View style={Styles.logoContainer}>
-        	 // <Image
-          //         style={Styles.logo}
-          //         source={require('App/Assets/Images/herologo.png')}
-          //     />
-          //   </View>
-        }
-
+        <Header style={Styles.header}>
+        
           	<ScrollView 
             	horizontal={true}
             	style={Styles.container}
@@ -84,8 +73,13 @@ const Styles = StyleSheet.create({
   	flexDirection: 'row'
   },
   header: {
-    height: hp('18%'),
-    flexDirection: 'column'
+    height: hp('14%'),
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.white,
+    borderBottomWidth: 0,
+    paddingTop: hp('4.5%')
   },
   arrowContainer: {
     width: wp('20%'),

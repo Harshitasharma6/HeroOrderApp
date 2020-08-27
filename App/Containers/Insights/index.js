@@ -14,9 +14,9 @@ class InsightsScreen extends Component {
             <View style={Styles.mainContainer}>
              <View style={Styles.progressContainer}>
                     <View style={Styles.textContainer}><Text style={Styles.name}>{`Hi, ${this.props.name}`}</Text></View>
-                    <View style={Styles.textContainer}><Text style={Styles.name}>{`You have 7 follow ups today`}</Text></View>
+                    <View style={Styles.textContainer}><Text style={Styles.info}>{`You have 7 follow ups today`}</Text></View>
                      <View style={Styles.textContainer}><Text style={Styles.countText}>{`Today: ${7} | Completed: ${3}`}</Text></View>
-                    <ProgressBar progress={.7}/>
+                    <ProgressBar progress={.4}/>
                 </View>
                 <View style={{...ApplicationStyles.container}}>
                     <SelectionButton 
@@ -80,11 +80,19 @@ const Styles = StyleSheet.create({
         borderRadius: wp('1.5%')
     },
     name: {
-        color: Colors.black,
-        fontSize: wp('3.2%'),
+        color: Colors.darkGrey,
+        fontSize: wp('3.8%'),
         fontFamily: ApplicationStyles.textMsgFont,
         textTransform: 'capitalize',
-        marginBottom: hp('.2%'),
+        marginBottom: hp('.1%'),
+    },
+
+    info: {
+        color: Colors.darkGrey,
+        fontSize: wp('3.3%'),
+        fontFamily: ApplicationStyles.textMsgFont,
+        textTransform: 'capitalize',
+        marginBottom: hp('.1%'),
     },
     textContainer: {
        // alignSelf: 'flex-start',
@@ -94,6 +102,7 @@ const Styles = StyleSheet.create({
         color: Colors.grey,
         fontSize: wp('3%'),
         marginBottom: hp('.5%'),
+        marginTop: hp('1%'),
         fontFamily: ApplicationStyles.textMsgFont,
     }
 });

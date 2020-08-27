@@ -332,7 +332,60 @@ export const clearLeadLostForm = (state) => ({
 
 
 
+ // allOpenLeads: [],
+ //    loaders: {
+ //      fetchHotLeadsLoader: false,
+ //      fetchBookingConfirmFinanceLeadsLoader: false,
+ //      fetchPurchaseOverdueLoader: false,
+ //      fetchOpenLeadsLoader: false,
+ //        fetchCallsLeadsLoader: false,
+ //        fetchAllOpenLeadsLoader: false,
+ //      fetchNoActionLoader: false,
+ //      markLeadLostLoader: false
+ //    },
 
+
+ // fetchAllOpenLeadsSuccess: ['payload'],
+ //  fetchAllOpenLeadsFailure: null,
+ //  fetchAllOpenLeadsLoading: null,
+ //  fetchAllOpenLeadsLoadingStop: null,
+
+
+ export const fetchAllOpenLeadsSuccess = (state, {payload}) => ({
+  ...state,
+  allOpenLeads: payload,
+  loaders: {
+    ...state.loaders,
+    fetchAllOpenLeadsLoader: false
+  }
+});
+
+
+export const fetchAllOpenLeadsFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchAllOpenLeadsLoader: false
+  }
+});
+
+
+export const fetchAllOpenLeadsLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchAllOpenLeadsLoader: true
+  }
+});
+
+
+export const fetchAllOpenLeadsLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchAllOpenLeadsLoader: false
+  }
+});
 
 
 
@@ -377,6 +430,12 @@ export const reducer = createReducer(INITIAL_STATE, {
     [LeadAlertTypes.FETCH_CALL_LEADS_LOADING]         : fetchCallLeadsLoading,
     [LeadAlertTypes.FETCH_CALL_LEADS_LOADING_STOP]    : fetchCallLeadsLoadingStop,
 
+
+
+    [LeadAlertTypes.FETCH_ALL_OPEN_LEADS_SUCCESS]         : fetchAllOpenLeadsSuccess,
+    [LeadAlertTypes.FETCH_ALL_OPEN_LEADS_FAILURE]         : fetchAllOpenLeadsFailure,
+    [LeadAlertTypes.FETCH_ALL_OPEN_LEADS_LOADING]         : fetchAllOpenLeadsLoading,
+    [LeadAlertTypes.FETCH_ALL_OPEN_LEADS_LOADING_STOP]    : fetchAllOpenLeadsLoadingStop,
 
 
 

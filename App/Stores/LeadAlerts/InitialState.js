@@ -7,12 +7,14 @@ export const INITIAL_STATE = {
     openLeads: [],
     noAction: [],
     callLeads: [],
+    allOpenLeads: [],
     loaders: {
     	fetchHotLeadsLoader: false,
     	fetchBookingConfirmFinanceLeadsLoader: false,
     	fetchPurchaseOverdueLoader: false,
     	fetchOpenLeadsLoader: false,
         fetchCallsLeadsLoader: false,
+        fetchAllOpenLeadsLoader: false,
     	fetchNoActionLoader: false,
     	markLeadLostLoader: false
     },

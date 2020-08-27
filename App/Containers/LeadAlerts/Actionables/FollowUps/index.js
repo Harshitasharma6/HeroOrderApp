@@ -12,6 +12,7 @@ import NoAction from './NoAction'
 import OpenHotAssignedLeads from './OpenHotAssignedLeads'
 import OpenHotLeads from './OpenHotLeads'
 import CallLeads from './CallLeads'
+import AllOpenLeads from './AllOpenLeads'
 import PurchaseDateOverDue from './PurchaseDateOverDue'
 
 
@@ -42,6 +43,9 @@ class FollowUps extends React.Component {
     		visibleNode = <NoAction />
     		break;
       case '6':
+        visibleNode = <AllOpenLeads />
+        break;
+      case '7':
         visibleNode = <CallLeads />
         break;
     	default:
@@ -55,7 +59,7 @@ class FollowUps extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-	isConnected: state.network.isConnected,
+	  isConnected: state.network.isConnected,
   	isVisible: state.common.isNetworkBannerVisible,
   	currentScreen: state.common.currentScreen,
   	selectedActionable:  state.leadAlerts.selectedActionable,

@@ -40,7 +40,7 @@ export default {
 	    alignSelf: 'center',
 	    color: Colors.white,
 	    fontFamily: 'Roboto_bold',
-	    fontSize: wp('6%'),
+	    fontSize: wp('7%'),
 	    marginBottom: hp('1%'),
 	    textTransform: 'capitalize'
 	},

@@ -125,6 +125,24 @@ function fetchNoAction(params) {
   });
 }
 
+function fetchAllOpenLeads(params) {
+  let url = Config.LEAD_ALERT_SERVICE.FETCH_ALL_OPEN_LEADS;
+  return apiClient.get(url, {
+    headers: {
+      token: params.token,
+      dealer_id: params.dealer_id
+    }
+  }).then((response) => {
+    if (in200s(response.status)) {
+      return response['data']['data']['leads'];
+    }
+    return null
+  }).catch(error => {
+    //bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
+    return null
+  });
+}
+
 
 function markLeadLost(params) {
 	let url = Config.LEAD_ALERT_SERVICE.MARK_LEAD_LOST;
@@ -152,5 +170,6 @@ export const LeadAlertService = {
     fetchOpenLeads,
     fetchNoAction,
     fetchCallLeads,
+    fetchAllOpenLeads,
     markLeadLost
 }

@@ -118,13 +118,23 @@ class Actionables extends React.Component {
               customSelectedTextStyle={Styles.customSelectedTextStyle}
             /> 
 
+            <WhiteButton
+              title={'All Open Leads'}
+              style={{...Styles.actionButton, ...Styles.customSelectedStyleCorpGreen}}
+              textStyle={Styles.actionButtonText}
+              onPress={() => {selectFollowUp('6');  this.scrollToIndex(5)}}
+              selected={selectedFollowUp == '6'}
+              customSelectedStyle={{...Styles.customSelectedStyleCorpGreen, ...Styles.selected}}
+              customSelectedTextStyle={Styles.customSelectedTextStyle}
+            /> 
+
 
             <WhiteButton
               title={'Incoming Call Open Leads'}
               style={{...Styles.actionButton, ...Styles.customSelectedStyleCorpBlue}}
               textStyle={Styles.actionButtonText}
-              onPress={() => {selectFollowUp('6');  this.scrollToIndex(5)}}
-              selected={selectedFollowUp == '6'}
+              onPress={() => {selectFollowUp('7');  this.scrollToIndex(6)}}
+              selected={selectedFollowUp == '7'}
               customSelectedStyle={{...Styles.customSelectedStyleCorpBlue, ...Styles.selected}}
               customSelectedTextStyle={Styles.customSelectedTextStyle}
             />       
@@ -249,11 +259,14 @@ const Styles = StyleSheet.create({
   },
   customSelectedStyleGreyWhite: {
     backgroundColor: Colors.darkGreyWhite,
-    
     width: wp('40%')
   },
   customSelectedStyleCorpBlue: {
     backgroundColor: Colors.darkCorpBlue,
+    width: wp('40%')
+  },
+  customSelectedStyleCorpGreen: {
+    backgroundColor: Colors.darkCorpGreen,
     width: wp('40%')
   },
   selected: {

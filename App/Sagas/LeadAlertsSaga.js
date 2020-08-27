@@ -10,13 +10,6 @@ import { offlineApiCall } from './OfflineSaga';
 import {Alert} from 'react-native'
 import _ from 'lodash';
 
-
- 	// fetchHotLeads,
-  //   fetchBookingConfirmFinanceLeads,
-  //   fetchPurchaseOverdue,
-  //   fetchOpenLeadsFinanceLeads,
-  //   fetchNoAction
-
 export function* fetchHotLeads({ payload }) {
 	const isOnline = yield select(getConnectionStatus);
 	if (!isOnline) {
@@ -129,6 +122,7 @@ export function* fetchNoAction({ payload }) {
 		payload.dealer_id = dealer__c
 		let successData = yield call(LeadAlertService.fetchNoAction, payload);
 		if (successData) {
+			successData  = _.uniqBy(successData, 'id');
 			yield put(LeadAlertActions.fetchNoActionSuccess(successData));
 		} else {
 			yield put(LeadAlertActions.fetchNoActionFailure());
@@ -159,6 +153,29 @@ export function* fetchCallLeads({ payload }) {
 		}
 	} catch (error) {
 		yield put(LeadAlertActions.fetchCallLeadsFailure());
+	}
+}
+
+export function* fetchAllOpenLeads({ payload }) {
+	const isOnline = yield select(getConnectionStatus);
+	if (!isOnline) {
+		yield put(LeadAlertActions.doNothing());
+		return;
+	}
+
+	try {
+		yield put(LeadAlertActions.fetchAllOpenLeadsLoading());
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
+		let successData = yield call(LeadAlertService.fetchAllOpenLeads, payload);
+		if (successData) {
+			yield put(LeadAlertActions.fetchAllOpenLeadsSuccess(successData));
+		} else {
+			yield put(LeadAlertActions.fetchAllOpenLeadsFailure());
+		}
+	} catch (error) {
+		yield put(LeadAlertActions.fetchAllOpenLeadsFailure());
 	}
 }
 

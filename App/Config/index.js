@@ -45,6 +45,7 @@ export const Config = {
     	FETCH_OPEN_LEADS                    : 'visitors/openHOLeads',
     	FETCH_CALL_LEADS                    : 'incomingCallLead/getLead',
     	FETCH_NO_ACTION                     : 'visitors/noAction',
+    	FETCH_ALL_OPEN_LEADS                : 'visitors/openHOLeads',
     	MARK_LEAD_LOST                      : 'visitors/lost'
 	},
 	DASHBOARD_SERVICE:{

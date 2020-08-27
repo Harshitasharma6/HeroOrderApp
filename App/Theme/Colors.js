@@ -49,6 +49,9 @@ export default {
   lightSeaGreen: '#C1E8E82E',
   darkSeaGreen: '#C1E8E8',
 
+  darkCorpGreen: '#A5FFBA',
+  lightCorpGreen: '#f3fff5',
+
 
   lightRedPink: '#F5ADC41F',
   darkRedPink: '#F5ADC4',

@@ -13,21 +13,22 @@ class LeadAlertsScreen extends Component {
     render() {
         return (
             <View style={{flex: 1}}>
-            <View style={{width: wp('80%'), marginHorizontal: wp('10%'), height: hp('21%'), backgroundColor: Colors.primary, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, alignItems: 'center', justifyContent: 'center'}}>
-                <View>
-        <Text style={{...ApplicationStyles.screenHeading, fontSize: wp('8.5%') }}>Today, {HelperService.getCurrentDate()} {HelperService.getMonthMappingName(HelperService.getCurrentMonth())}</Text>
-                </View>
+                <View style={{width: wp('90%'), marginHorizontal: wp('5%'), height: hp('21%'), backgroundColor: Colors.primary, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, alignItems: 'center', justifyContent: 'center'}}>
+                    <View>
+                        <Text style={{...ApplicationStyles.screenHeading, fontSize: wp('9%') }}>Today, {HelperService.getCurrentDate()} {HelperService.getMonthMappingName(HelperService.getCurrentMonth())}</Text>
+                    </View>
                
-                 <View>
-                    <Text style={ApplicationStyles.screenHeading}>{HelperService.getDayMappingName(HelperService.getCurrentDay())}</Text>
+                <View>
+                   <Text style={ApplicationStyles.screenHeading}>{HelperService.getDayMappingName(HelperService.getCurrentDay())}</Text>
                 </View>
             </View>
         
-            <View style={{flexDirection: 'row', justifyContent: 'center', marginTop: hp('8%')}}>
+            <View style={{flexDirection: 'column', justifyContent: 'center', marginTop: hp('8%')}}>
                 <SelectionButton
                     icon={require('App/Assets/Images/phone/phone.png')}
                     title="Actionables" 
                     onPress={() => NavigationService.navigate('ActionablesScreen')}
+                    style={{height: hp('18%'), width: wp('40%')}}
                 />
 
                 
@@ -35,6 +36,7 @@ class LeadAlertsScreen extends Component {
                     icon={require('App/Assets/Images/key/key.png')}
                     title="Booking Confirmed" 
                     onPress={() => NavigationService.navigate('BookingConfirmed')}
+                    style={{height: hp('18%'), width: wp('40%')}}
                 />
 
                

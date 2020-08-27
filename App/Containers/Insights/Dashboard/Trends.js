@@ -97,6 +97,7 @@ class DashboardTrendsScreen extends React.Component {
 
 
     return (
+      <View style={Styles.container}>
       	<ScrollView 
           style={Styles.container}
           refreshControl={
@@ -120,6 +121,7 @@ class DashboardTrendsScreen extends React.Component {
                 yAxisInterval={2}
               />
         </ScrollView>
+      </View>
     );
   }
 }  
