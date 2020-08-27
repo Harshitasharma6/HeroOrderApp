@@ -89,6 +89,35 @@ export function* getDashboardTrendsRevenue({ payload }) {
 	}
 }
 
+export function* getAllScheme({ payload }) {
+	const isOnline = yield select(getConnectionStatus);
+	if (!isOnline) {
+		yield put(InsightsActions.doNothing());
+		return;
+	}
+
+	try {
+		yield put(InsightsActions.getAllSchemeLoading());
+		let {token} = yield select(state => state.user)
+		payload.token = token
+		
+	let successData = yield call(InsightsService.getAllScheme, payload);
+		if (successData) {
+			yield put(InsightsActions.getAllSchemeLoadingStop());
+			yield put(InsightsActions.getAllSchemeSuccess(successData));
+			yield put(CommonActions.makeProductsSearchableList(HelperService.convertToSearchableListFormat({
+				list: successData,
+				id_key: 'sfid',
+				
+			})));
+		} else {
+			yield put(InsightsActions.getAllSchemeFailure());
+		}
+	} catch (error) {
+		yield put(InsightsActions.getAllSchemeFailure());
+	}
+}
+
 
     // getDashboardTrendsSoldProducts,
     // getDashboardTrendsRevenue,

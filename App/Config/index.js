@@ -54,4 +54,9 @@ export const Config = {
 		GET_DASHBOARD_TRENDS_REVENUE      		: 'trends/getRevenue',
 
 	},
+
+	SCHEME_SERVICE: {
+		GET_ALL_SCHEME							: 'schemeMaster/getAll'
+
+	},
 }

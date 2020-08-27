@@ -108,6 +108,7 @@ import {
     getDashboardSummary,
     getDashboardTrendsSoldProducts,
     getDashboardTrendsRevenue,
+    getAllScheme,
 } from  './InsightsSaga'
 
 import { 
@@ -237,6 +238,7 @@ export default function* root() {
         takeLatest(InsightsTypes.GET_DASHBOARD_SUMMARY,  getDashboardSummary),
         takeLatest(InsightsTypes.GET_DASHBOARD_TRENDS_SOLD_PRODUCTS,  getDashboardTrendsSoldProducts),
         takeLatest(InsightsTypes.GET_DASHBOARD_TRENDS_REVENUE,  getDashboardTrendsRevenue),
+        takeLatest(InsightsTypes.GET_ALL_SCHEME,  getAllScheme),
 
         
         fork(watchUpdateVisitor),

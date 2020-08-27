@@ -1,5 +1,6 @@
 export const INITIAL_STATE = {
 	loaders: {
+		getAllSchemeLoader: false,
 		getDashboardSummaryLoader: false,
 		getDashboardTrendsSoldProductsLoader: false,
 		getDashboardTrendsRevenueLoader: false
@@ -7,5 +8,6 @@ export const INITIAL_STATE = {
 	
 	DashboardSummaryData: [],
 	dashboardTrendsSoldProductsData: [],
-	dashboardTrendsRevenueData: []
+	dashboardTrendsRevenueData: [],
+	SchemeData: [],
 }
