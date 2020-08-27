@@ -24,15 +24,15 @@ class LeadAlertsScreen extends Component {
             </View>
         
             <View style={{flexDirection: 'row', justifyContent: 'center', marginTop: hp('8%')}}>
-                <SelectionButton 
-                    icon="tasks" 
+                <SelectionButton
+                    icon={require('App/Assets/Images/phone/phone.png')}
                     title="Actionables" 
                     onPress={() => NavigationService.navigate('ActionablesScreen')}
                 />
 
                 
-                <SelectionButton 
-                    icon="check-square" 
+                <SelectionButton
+                    icon={require('App/Assets/Images/key/key.png')}
                     title="Booking Confirmed" 
                     onPress={() => NavigationService.navigate('BookingConfirmed')}
                 />

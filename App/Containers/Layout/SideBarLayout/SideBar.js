@@ -49,9 +49,6 @@ export default class SideBar extends Component {
 					<ListItem style={Styles.listItemDivider} onPress={() => this.navigate('SubDealerInfoScreen')}>
 						<GenericIcon name={'users'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Sub Dealers'}</Text>
 					</ListItem>
-					<ListItem style={Styles.listItemDivider} >
-						<Icon name={'logout'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Log Out'}</Text>
-					</ListItem>
 				</ScrollView>
 
 			</View>

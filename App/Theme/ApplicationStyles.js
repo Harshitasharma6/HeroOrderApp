@@ -87,8 +87,7 @@ export default {
 	    flexWrap: 'wrap',
 	    justifyContent: 'center',
 	    alignItems: 'center',
-	    flex: 1,
-	    paddingTop: hp('15%')
+	    flex: 1
   	},
   	label: {
 	    color: Colors.primary,
