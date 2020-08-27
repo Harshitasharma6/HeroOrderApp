@@ -69,7 +69,7 @@ class SubDealerInfoScreen extends Component {
                 data={data}
                 renderItem={({ item }) => 
                     <GenericDisplayCard dark={false}
-                      style={{ width: '98%', elevation: 0 }}
+                      style={{ width: '98%', elevation: 0 , borderWidth: 2, borderColor: Colors.primary,}}
                       heading={item.name}
                       showTextAvatar={true}
                       //onPress={() => NavigationService.navigate('CustomerInfoScreen')}

@@ -7,9 +7,11 @@ import React from 'react';
 import { StyleSheet, View, ScrollView, Image } from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { connect } from 'react-redux';
+import SearchBar from 'App/Components/SearchBar'
+import Underline from 'App/Components/Underline';
 
 
-class LeadAlertsLayout extends React.Component {
+class ConfirmBookingLayout extends React.Component {
   render() {
     const {
       currentScreen
@@ -18,8 +20,21 @@ class LeadAlertsLayout extends React.Component {
     return (
      <Header transparent style={Styles.header}>
        <BackArrowButton />
+       <Text style={Styles.heading}>{"BOOKING CONFIRMED"}</Text>
+       <Underline/>
+
+       <View style={{alignItems:'center', justifyContent: 'center', width: wp('50%'), height: 100, marginHorizontal: wp('23%')}}>
        
-      
+       <SearchBar
+	            placeholder={`Search Customer`}
+	            onInputChange={(text) => console.log('text')}
+	            onInputSubmit={(text) => console.log('text')}
+	            onInputClear={(text) => console.log('text')}
+	            value={''}
+	            ContainerStyles={Styles.searchContainer}
+	            inputStyles={{fontSize: wp('4%')}}
+          />
+      </View>  
     </Header>
     )
   }
@@ -35,7 +50,7 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps
-)(LeadAlertsLayout)
+)(ConfirmBookingLayout)
 
 
 const Styles = StyleSheet.create({
@@ -56,11 +71,26 @@ const Styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 2,
   },
+
+  heading: {
+    
+    alignSelf: 'center',
+    color: Colors.black,
+    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
+    fontSize: wp('5.5%'),
+    marginTop: hp('0%'),
+    marginBottom:hp('0%'),
+    textTransform: 'uppercase',
+    },
    header: {
     alignItems: 'flex-start',
-    height: hp('9%'),
+    height: hp('29%'),
     flexDirection: 'column',
     justifyContent: 'center'
+  },
+
+  searchContainer: {
+    width: wp('95%')
   },
 });
 

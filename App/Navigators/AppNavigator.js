@@ -100,6 +100,7 @@ import CustomersScreen from 'App/Containers/Insights/Customers'
 import CustomerInfoScreen from 'App/Containers/Insights/Customers/CustomerInfo'
 import LeadAlertsScreen from 'App/Containers/LeadAlerts'
 import ActionablesScreen from 'App/Containers/LeadAlerts/Actionables'
+import BookingConfirmed from 'App/Containers/LeadAlerts/BookingConfirmed'
 import HandoversScreen from 'App/Containers/LeadAlerts/Handovers'
 import OpenHotLeadsScreen from 'App/Containers/LeadAlerts/Actionables/FollowUps/OpenHotLeads'
 import PurchaseDateOverDueScreen from 'App/Containers/LeadAlerts/Actionables/FollowUps/PurchaseDateOverDue'
@@ -114,6 +115,8 @@ import DealerSalespersonFormScreen from 'App/Containers/DealerSalesperson'
 import SchemeClaimInfoScreen from 'App/Containers/SchemeClaim'
 import SubDealerInfoScreen from 'App/Containers/SubDealerInfo'
 import SchemeClaimformScreen from 'App/Containers/SchemeClaim/AddSchemeClaim'
+
+
 
 //OpenHotLeadsScreen
 //PurchaseDateOverDueScreen
@@ -232,6 +235,7 @@ const StackNavigator = createStackNavigator(
     SchemeClaimInfoScreen,
     SubDealerInfoScreen,
     SchemeClaimformScreen,
+    BookingConfirmed,
   },
   {
     // By default the application will show the splash screen

@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import FollowUps from './FollowUps'
 import Segmentation from './Segmentation'
 import LeadAlertsAction from 'App/Stores/LeadAlerts/Actions'
+import Underline from 'App/Components/Underline';
 
 
 class Actionables extends React.Component {
@@ -54,14 +55,11 @@ class Actionables extends React.Component {
           <View 
             style={{justifyContent: 'center', alignItems:'center' }}
            >
-            <WhiteButton
-              title={"Follow Up's"}
-              style={Styles.actionButton}
-              textStyle={Styles.actionButtonTextHeading}
-              onPress={() => {selectActionable('1')}}
-              selected={selectedActionable == '1'}
-              disabled={true}
-            />
+             
+           	<Text style={Styles.heading}>{"FOLLOW UP'S"}</Text>
+            <Underline/>
+          
+             
 
            <ScrollView 
             horizontal={true}
@@ -166,10 +164,22 @@ const Styles = StyleSheet.create({
     height: hp('4%'),
     marginTop: hp('1%')
   },
+
+  heading: {
+    
+    alignSelf: 'center',
+    color: Colors.primary,
+    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
+    fontSize: wp('4.5%'),
+    marginTop: hp('1%'),
+    marginBottom:hp('1%'),
+    textTransform: 'uppercase',
+    },
   scrollContainer: {
     flexDirection: 'row',
     width: wp('100%'),
-    height: hp('6%')
+    height: hp('10%'),
+    
   },
   header: {
     alignItems: 'flex-start',
@@ -189,7 +199,7 @@ const Styles = StyleSheet.create({
     paddingLeft: wp('4%'),
     paddingRight: wp('4%'),
     marginBottom: hp('1%'),
-    marginTop: hp('1%'),
+    marginTop: hp('2.5%'),
     marginRight: wp('2%'),
     marginLeft: wp('1%'),
     height: hp('5%'),
