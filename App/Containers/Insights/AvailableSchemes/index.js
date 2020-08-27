@@ -8,6 +8,7 @@ import { HelperService } from 'App/Services/Utils/HelperService';
 import { Colors, ApplicationStyles } from 'App/Theme';
 import ProductCard from 'App/Components/ProductCard'
 import ProductsActions from 'App/Stores/Products/Actions';
+import InsightsActions from 'App/Stores/Insights/Actions';
 import BlueButton from 'App/Components/BlueButton';
 import GenericIcon from 'App/Components/GenericIcon';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
@@ -16,45 +17,40 @@ import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDi
 import NavigationService from 'App/Services/NavigationService'
 
 class AvailableSchemes extends Component {
+ 
   componentDidMount() {
-    this.fetchCall()
-  }
+		this.fetchCall()	
+	}
 
-  fetchCall() {
-    const {
-      state_id,
-      fetchData
-    } = this.props
-
-    const {
-      product_id
-    }= this.props.navigation.state.params;
-
-    fetchData({
-      state_id,
-      product_id
-    });
-  }
-  
+	fetchCall() {
+		const {
+		
+		  fetchData
+		} = this.props
+	
+		fetchData({
+		 
+		});
+	  }
 
   getDataCard(item) {
     return (
       <GenericDisplayCard dark={false}
           style={{ width: '95%', elevation: 0 }}
-          heading={item.scheme_name__c}
+          heading={item.name}
           content={[
             <GenericDisplayCardStrip 
-              key={'Scheme Amount' + item.scheme_name__c} 
+              key={'Scheme Amount' + item.name} 
               label={'Scheme Amount'} 
-              value={HelperService.currencyValue(item.scheme_amount__c)}
+              value={HelperService.currencyValue()}
              />,
              <GenericDisplayCardStrip 
-              key={'Valid From' + item.scheme_name__c} 
+              key={'Valid From' + item.name} 
               label={'Valid From'} 
               value={`${HelperService.removeFieldsAndDateReadableFormat(item.active_from__c)}`}
              />,
              <GenericDisplayCardStrip 
-              key={'Valid Till' + item.scheme_name__c} 
+              key={'Valid Till' + item.name} 
               label={'Valid Till'} 
               value={`${HelperService.removeFieldsAndDateReadableFormat(item.active_to__c)}`}
              />
@@ -72,21 +68,17 @@ class AvailableSchemes extends Component {
       data
     } = this.props;
 
-    const {
-      product_id
-    }= this.props.navigation.state.params;
-
     let visibleNode = [];
 
-    let schemes = data ? data[product_id] : []
+    
 
-    if (schemes && schemes.length) {
-      if (schemes.length) {
+    if (data && data.length) {
+      if (data.length) {
         visibleNode = (
           <FlatList
-            data={schemes}
+            data={data}
             renderItem={({ item }) => this.getDataCard(item)}
-            keyExtractor={item => item.scheme_name__c}
+            keyExtractor={item => item.id}
             onRefresh={() => this.fetchCall()}
             refreshing={loader}
           />
@@ -104,7 +96,7 @@ class AvailableSchemes extends Component {
       }
     } else if (loader) {
       visibleNode = <Loading />
-    } else if (schemes && !schemes.length && !loader) {
+    } else if (data && !data.length && !loader) {
       visibleNode =  (
           <NoDataFound text={'No Schemes Found'}>
             <GenericIcon 
@@ -140,14 +132,14 @@ class AvailableSchemes extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  loader   : state.products.loaders.getProductSchemesLoader,
+  loader: state.insights.loaders.getAllSchemeLoader,
   enquiry  : state.visitor.currentEnquiryId,
   state_id : state.user.state__c,
-  data     : state.products.productSchemes
+  data: state.insights.SchemeData,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchData:(params) => dispatch(ProductsActions.getProductSchemes(params))
+fetchData:(params) => dispatch(InsightsActions.getAllScheme(params))
 });
 
 export default connect(

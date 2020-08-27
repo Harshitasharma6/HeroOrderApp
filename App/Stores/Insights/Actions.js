@@ -20,9 +20,13 @@ const { Types, Creators } = createActions({
   getDashboardTrendsRevenueSuccess:  ['payload'],
   getDashboardTrendsRevenueFailure: null,
   getDashboardTrendsRevenueLoading: null,
-  getDashboardTrendsRevenueLoadingStop: null
+  getDashboardTrendsRevenueLoadingStop: null,
   
-
+  getAllScheme: ['payload'],
+  getAllSchemeSuccess:  ['payload'],
+  getAllSchemeFailure: null,
+  getAllSchemeLoading: null,
+  getAllSchemeLoadingStop: null,
   
 
 });

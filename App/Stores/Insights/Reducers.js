@@ -124,6 +124,42 @@ export const getDashboardTrendsRevenueLoadingStop = (state) => ({
 });
 
 
+export const getAllSchemeSuccess = (state, { payload }) => ({
+  ...state,
+  SchemeData: payload,
+  loaders: {
+    ...state.loaders,
+    cLoader: false
+  }
+});
+
+export const getAllSchemeFailure = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllSchemeLoader: false
+  }
+});
+
+
+export const getAllSchemeLoading = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllSchemeLoader: true
+  }
+});
+
+
+export const getAllSchemeLoadingStop = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllSchemeLoader: false
+  }
+});
+
+
 
 
 
@@ -150,7 +186,10 @@ export const reducer = createReducer(INITIAL_STATE, {
 
   [InsightsTypes.DO_NOTHING] 				                       : doNothing,
   
-
+  [InsightsTypes.GET_ALL_SCHEME_SUCCESS]     : getAllSchemeSuccess,
+  [InsightsTypes.GET_ALL_SCHEME_FAILURE]     : getAllSchemeFailure,
+  [InsightsTypes.GET_ALL_SCHEME_LOADING]     : getAllSchemeLoading,
+  [InsightsTypes.GET_ALL_SCHEME_LOADING_STOP]: getAllSchemeLoadingStop,
 
   
 });
