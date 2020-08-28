@@ -75,7 +75,7 @@ const Styles = StyleSheet.create({
   heading: {
     
     alignSelf: 'center',
-    color: Colors.black,
+    color: Colors.primary,
     fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
     fontSize: wp('5.5%'),
     marginTop: hp('0%'),
