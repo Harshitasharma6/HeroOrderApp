@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import NavigationService from 'App/Services/NavigationService'
 import CheckInAction from 'App/Stores/CheckIn/Actions';
 import SelectionButton from 'App/Components/SelectionButton'
@@ -8,6 +8,7 @@ import {ApplicationStyles, Colors} from 'App/Theme'
 import ProgressBar from 'App/Components/ProgressBar'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import InsightsActions from 'App/Stores/Insights/Actions';
+import LeadAlertsActions from 'App/Stores/LeadAlerts/Actions'
 
 class InsightsScreen extends Component {
 
@@ -17,34 +18,33 @@ class InsightsScreen extends Component {
 
 	fetchCall() {
 		const {
-		
-		  fetchData
+		  fetchData,
 		} = this.props
 	
-		fetchData({
-		 
-		});
-	  }
-  
-    
+		fetchData({});
+	}
  
 
-
     render() {
-
         const {
-			loader,
             data,
-            } = this.props;
+            loader,
+            selectFollowUp
+        } = this.props;
         
-            return (
+        return (
             <View style={Styles.mainContainer}>
-             <View style={Styles.progressContainer}>
-                    <View style={Styles.textContainer}><Text style={Styles.name}>{`Hi, ${this.props.name}`}</Text></View>
-                    <View style={Styles.textContainer}><Text style={Styles.info}>{`You have ${data&&data.count ?  data.count : 0} follow ups today`}</Text></View>
-                     <View style={Styles.textContainer}><Text style={Styles.countText}>{`Today: ${data&&data.count ?  data.count : 0} | Completed: ${3}`}</Text></View>
-                    <ProgressBar progress={.4}/>
-                </View>
+                <TouchableOpacity
+                    onPress={() => {selectFollowUp('7'); NavigationService.navigate('ActionablesScreen')}}
+
+                >
+                    <View style={Styles.progressContainer}>
+                        <View style={Styles.textContainer}><Text style={Styles.name}>{`Hi, ${this.props.name}`}</Text></View>
+                        <View style={Styles.textContainer}><Text style={Styles.info}>{`You have ${data&&data.count ?  data.count : 0} follow ups today`}</Text></View>
+                         <View style={Styles.textContainer}><Text style={Styles.countText}>{`Today: ${data&&data.count ?  data.count : 0} | Completed: ${3}`}</Text></View>
+                        <ProgressBar progress={.4}/>
+                    </View>
+                </TouchableOpacity>
                 <View style={{...ApplicationStyles.container}}>
                     <SelectionButton 
                         title="Dashboard" 
@@ -82,7 +82,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-fetchData:(params)            => dispatch(InsightsActions.getFollowUp(params)), 
+    fetchData:(params)            => dispatch(InsightsActions.getFollowUp(params)), 
+    selectFollowUp: (params)      => dispatch(LeadAlertsActions.selectFollowUp(params))
 })
 
 export default connect(

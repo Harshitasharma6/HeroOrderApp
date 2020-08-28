@@ -42,7 +42,6 @@ class CallLeads extends Component {
       submitForm
     } = this.props;
 
-    console.log('data.length', data.length)
     if (data && data.length) {
       if (data.length) {
         visibleNode = (

@@ -22,8 +22,13 @@ class Actionables extends React.Component {
   }
 
   componentDidMount() {
-    this.props.selectFollowUp('1')
-    this.scrollToIndex(0)
+    const {
+      selectedFollowUp
+    } = this.props;
+
+    setTimeout(() => {
+      this.scrollToIndex(Number(selectedFollowUp) - 1)
+    }, 50) 
   }
 
   render() {
@@ -54,13 +59,8 @@ class Actionables extends React.Component {
         <View style={{flex: 1}}>
           <View 
             style={{justifyContent: 'center', alignItems:'center' }}
-           >
-             
-           	<Text style={Styles.heading}>{"FOLLOW UP'S"}</Text>
-
-          
-             
-
+           > 
+           <Text style={Styles.heading}>{"FOLLOW UP'S"}</Text>
            <ScrollView 
             horizontal={true}
             style={{...Styles.scrollContainer}}
