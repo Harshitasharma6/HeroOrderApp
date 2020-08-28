@@ -78,9 +78,7 @@ function getDashboardTrendsRevenue(params) {
 
 function getAllScheme(params) {
 	let url = Config.SCHEME_SERVICE.GET_ALL_SCHEME;
-	
-	
-	
+	console.log('url', url)
 	return apiClient.get(url, {
 		headers: {
 			token: params.token,
@@ -92,7 +90,6 @@ function getAllScheme(params) {
 		}
 		return null
 	}).catch(error => {
-		console.log(error.response)
 		//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
 		return null
 	});

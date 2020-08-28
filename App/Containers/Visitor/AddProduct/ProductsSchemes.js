@@ -103,7 +103,7 @@ class ProductsSchemes extends Component {
       }
     } else if (loader) {
       visibleNode = <Loading />
-    } else if (schemes && !schemes.length && !loader) {
+    } else if ((!schemes || (schemes && !schemes.length)) && !loader) {
       visibleNode =  (
           <NoDataFound text={'No Schemes Found'}>
             <GenericIcon 

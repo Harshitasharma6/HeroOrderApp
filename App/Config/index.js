@@ -56,12 +56,7 @@ export const Config = {
 	},
 
 	SCHEME_SERVICE: {
-		GET_ALL_SCHEME							: 'schemeMaster/getAll'
-	
-	},
-
-	SCHEME_SERVICE: {
+		GET_ALL_SCHEME							: 'schemeMaster/getAll',
 		GET_FOLLOW_UP							: 'call-activities/callFollowup?dealer_id=0019D000009zum3QAA'
-	
-	},
+	}
 }

@@ -19,7 +19,7 @@ function getAllProducts(params) {
     }
   }).then((response) => {
     if (in200s(response.status)) {
-      return response['data']['data']['products'];
+      return response['data']['data'];
     }
     return null
   }).catch(error => {

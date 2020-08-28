@@ -231,6 +231,7 @@ class LayoutScreen extends React.Component {
       case 'SubDealerInfoScreen':
       case  'SchemeClaimformScreen':
       case 'ActionablesScreen':
+      case 'ProductInfoSchemesScreen':
         customLayoutNode = <NewRetailerLayout />
         break;
       

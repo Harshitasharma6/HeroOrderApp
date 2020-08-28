@@ -115,8 +115,9 @@ import DealerSalespersonFormScreen from 'App/Containers/DealerSalesperson'
 import SchemeClaimInfoScreen from 'App/Containers/SchemeClaim'
 import SubDealerInfoScreen from 'App/Containers/SubDealerInfo'
 import SchemeClaimformScreen from 'App/Containers/SchemeClaim/AddSchemeClaim'
+import ProductInfoSchemesScreen from 'App/Containers/Visitor/AddProduct/ProductsSchemes'
 
-
+//ProductInfoSchemesScreen
 
 //OpenHotLeadsScreen
 //PurchaseDateOverDueScreen
@@ -200,6 +201,7 @@ const StackNavigator = createStackNavigator(
     InsightsScreen,
     AddProductScreen,
     AddProductsSchemesScreen,
+    ProductInfoSchemesScreen,
     ProductInfoScreen,
     AddProductInfoScreen,
     VisitorInfoScreen,
