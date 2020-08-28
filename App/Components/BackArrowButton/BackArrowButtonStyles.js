@@ -7,6 +7,6 @@ export default StyleSheet.create({
    color: Colors.primary,
    paddingRight: 10,
    paddingLeft: 5,
-   fontSize: wp('8%')
+   fontSize: wp('7%')
   }
 })

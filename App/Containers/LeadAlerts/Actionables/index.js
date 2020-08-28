@@ -57,7 +57,7 @@ class Actionables extends React.Component {
            >
              
            	<Text style={Styles.heading}>{"FOLLOW UP'S"}</Text>
-            <Underline/>
+
           
              
 
@@ -176,11 +176,10 @@ const Styles = StyleSheet.create({
   },
 
   heading: {
-    
     alignSelf: 'center',
-    color: Colors.primary,
-    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
-    fontSize: wp('4.5%'),
+    color: Colors.darkGrey,
+    fontFamily: ApplicationStyles.textMsgFont,
+    fontSize: wp('5.5%'),
     marginTop: hp('1%'),
     marginBottom:hp('1%'),
     textTransform: 'uppercase',
@@ -188,7 +187,8 @@ const Styles = StyleSheet.create({
   scrollContainer: {
     flexDirection: 'row',
     width: wp('100%'),
-    height: hp('10%'),
+    height: hp('9%'),
+    paddingHorizontal: wp('1.5%')
     
   },
   header: {
@@ -272,6 +272,9 @@ const Styles = StyleSheet.create({
   selected: {
     borderWidth: 1,
     borderColor: Colors.black
+  },
+  underlineStyle: {
+    borderColor: Colors.grey
   }
 });
 

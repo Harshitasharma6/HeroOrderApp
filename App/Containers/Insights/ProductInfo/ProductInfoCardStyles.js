@@ -23,8 +23,12 @@ export default StyleSheet.create({
   },
   imageContainer: {
   	alignItems: 'center', 
-  	marginBottom: hp('5%'),
-  	marginTop: hp('2%')
+  	marginBottom: hp('1%'),
+  	marginTop: hp('1%'),
+    width: wp('90%'),
+    height: hp('37%'),
+    borderRadius: 5,
+    alignSelf: 'center'
   },
   desc: {
     color: Colors.clr66,
@@ -113,5 +117,9 @@ export default StyleSheet.create({
     marginHorizontal: wp('1%'),
     fontWeight: 'bold',
     marginLeft: 0
+  },
+  listItemIcon: {
+    color: Colors.blue, 
+    fontSize:  wp('5%')
   }
 })

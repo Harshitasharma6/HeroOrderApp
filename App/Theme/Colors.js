@@ -34,6 +34,7 @@ export default {
   blueHeadingColor: '#008EFF',
   theme: '#D71E22B3',
   grey: '#8b8e8e',
+  darkGrey: '#3d3e3e',
   lightGrey: '#f2f5f5',
   primarySecondary: '#007bff',
   lightBg1: "#f0aad9",

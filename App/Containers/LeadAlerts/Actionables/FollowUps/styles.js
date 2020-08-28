@@ -37,6 +37,44 @@ export default StyleSheet.create({
 		...ApplicationStyles.infoBox,
 		backgroundColor: Colors.lightCorpGreen,
   		borderColor: Colors.darkCorpGreen
+  	},
+  	callButton: {
+  		width: wp('10%'), 
+  		alignSelf: 'flex-end', 
+  		marginTop: hp('1%'), 
+  		borderRadius:  wp('100%'),
+  		paddingRight: 2, 
+  		paddingLeft: 2, 
+  		position: 'absolute', 
+  		top: -hp('6%'), 
+  		right: -wp('2%'), 
+  		borderColor: Colors.primary, 
+  		backgroundColor: 'transparent', 
+  		borderWidth: 1, 
+  		zIndex: 3
+  	},
+  	callButtonText: {
+  		fontSize: wp('3.8%')
+  	},
+  	callButtonIcon: {
+  		fontSize: wp('5%'), 
+  		color: Colors.primary
+  	},
+  	markLostButton: {
+  		width: wp('36%'), 
+  		alignSelf: 'flex-start', 
+  		marginTop: hp('1%'), 
+  		borderColor: Colors.primary, 
+  		backgroundColor: 'transparent', 
+  		borderWidth: 1
+  	},
+  	markLostButtonText: {
+  		fontSize: wp('3.8%'), 
+  		color: Colors.primary
+  	},
+  	markLostButtonIcon: {
+  		fontSize: wp('5%'), 
+  		color: Colors.primary
   	}
 });
 

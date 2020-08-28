@@ -54,7 +54,6 @@ class PurchaseDateOverDue extends Component {
                 style={Styles.infoSeaGreen}
                 heading={`${item.first_name__c} ${item.last_name__c}`}
                 showTextAvatar={true}
-                //onPress={() => NavigationService.navigate('CustomerInfoScreen')}
                 content={[
                   <GenericDisplayCardStrip key={'Status' + item.id} label={'Status'} value={item.lead_status__c}/>,
                   <GenericDisplayCardStrip key={'Stage' + item.id} label={'Stage'} value={item.lead_stage__c || ''}/>,
@@ -64,19 +63,19 @@ class PurchaseDateOverDue extends Component {
                  item.lead_status__c != 'Lost' ? <View style={{flexDirection: 'row', justifyContent: 'space-between' }} textStyle={{fontSize: wp('3.8%')}} key={'Action section' + item.id}>
                   <BlueButton 
                     title={'Mark Lost'} 
-                    style={{width: wp('36%'), alignSelf: 'flex-start', marginTop: hp('1%') }} 
-                    textStyle={{fontSize: wp('3.8%')}} 
+                    style={Styles.markLostButton} 
+                    textStyle={Styles.markLostButtonText} 
                     onPress={() => {
                     return openModal({
                         content: <LeadLostScreen id={item.id} onSubmit={(params) => {closeModal();submitForm(params)}}/>, 
                         heading: 'Mark as Lost', 
                         bodyFlexHeight: .4
                     })}}>
-                      <GenericIcon name="window-close-o" style={{fontSize: wp('5%'), color: Colors.white}}/>
+                      <GenericIcon name="window-close-o" style={Styles.markLostButtonIcon} />
                   </BlueButton>
                  
                   </View> : [],
-                   <BlueButton title={''} style={{width: wp('10%'), alignSelf: 'flex-end', marginTop: hp('1%'), borderRadius:  wp('100%'), paddingRight: 2, paddingLeft: 2, position: 'absolute', top: -hp('6%'), right: -wp('2%')}} textStyle={{fontSize: wp('3.8%')}} onPress={() => HelperService.callNumber(item.contact_number__c)}><GenericIcon name="phone" style={{fontSize: wp('5%'), color: Colors.white}}/></BlueButton>
+                  <BlueButton title={''} style={Styles.callButton} textStyle={Styles.callButtonText} onPress={() => HelperService.callNumber(item.contact_number__c)}><GenericIcon name="phone" style={Styles.callButtonIcon}/></BlueButton>
               ]}
             />}
             keyExtractor={item => item.id}

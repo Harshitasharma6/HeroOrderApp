@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, TouchableOpacity, Dimensions, Image} from 'react-native'
 import Style from './ProductInfoCardStyles'
-import { Icon, Input, Button } from 'native-base'
+import { Input, Button } from 'native-base'
 import { AREA, PREV_ORDER_VAL, VISIT_THIS_WEEK, MAIN_COMPETETOR } from 'App/Constants'
 import { Colors, Metrics, Helpers, Fonts, ApplicationStyles } from 'App/Theme'
 import NavigationService from 'App/Services/NavigationService'
@@ -17,15 +17,17 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import _ from 'lodash'
 import GenericDisplayCard from 'App/Components/GenericDisplayCard'
 import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDisplayCardStrip';
+import ImageSlider from 'App/Components/ImageSlider'
 
 
 const ProductInfoCard = ({data}) => (
 	<View style={Style.box}>
 		<View style={Style.imageContainer}>
-			<Image
-                style={Style.image}
-                resizeMode={'cover'}
-                source={require('App/Assets/Images/product.png')}
+			<ImageSlider 
+                images={[
+                    "https://heroelectric.in/wp-content/uploads/2018/10/Optima-hs500_blue_3-4-right-view-1.png",
+                    "https://heroelectric.in/wp-content/uploads/2018/10/100x.png"
+                ]}
             />
 		</View>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end'}}>

@@ -4,8 +4,8 @@ import { Picker } from 'native-base'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { Helpers, Metrics, Fonts, Colors, ApplicationStyles } from 'App/Theme'
 
-const Separator = () => (
-  <View style={Styles.view}></View>
+const Separator = ({style={}}) => (
+  <View style={{...Styles.view, ...style}}></View>
 )
 
 export default Separator;
