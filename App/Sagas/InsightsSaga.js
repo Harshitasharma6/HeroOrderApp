@@ -118,6 +118,31 @@ export function* getAllScheme({ payload }) {
 	}
 }
 
+export function* getFollowUp({ payload }) {
+	const isOnline = yield select(getConnectionStatus);
+	if (!isOnline) {
+		yield put(InsightsActions.doNothing());
+		return;
+	}
+
+	try {
+		yield put(InsightsActions.getFollowUpLoading());
+		let {token} = yield select(state => state.user)
+		payload.token = token
+		
+	let successData = yield call(InsightsService.getFollowUp, payload);
+		if (successData) {
+			yield put(InsightsActions.getFollowUpLoadingStop());
+			yield put(InsightsActions.getFollowUpSuccess(successData));
+			
+		} else {
+			yield put(InsightsActions.getFollowUpFailure());
+		}
+	} catch (error) {
+		yield put(InsightsActions.getFollowUpFailure());
+	}
+}
+
 
     // getDashboardTrendsSoldProducts,
     // getDashboardTrendsRevenue,
