@@ -78,7 +78,7 @@ function getDashboardTrendsRevenue(params) {
 
 function getAllScheme(params) {
 	let url = Config.SCHEME_SERVICE.GET_ALL_SCHEME;
-	console.log('im in Scheme')
+	
 	
 	
 	return apiClient.get(url, {
@@ -99,10 +99,36 @@ function getAllScheme(params) {
 }
 
 
+
+function getFollowUp(params) {
+	let url = Config.SCHEME_SERVICE.GET_FOLLOW_UP	;
+	
+	return apiClient.get(url, {
+		headers: {
+			token: params.token,
+			
+		}
+	}).then((response) => {
+		if (in200s(response.status)) {
+			return response['data'];
+		}
+		return null
+	}).catch(error => {
+		console.log(error.response)
+		//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
+		return null
+	});
+}
+
+
+
+
+
 export const InsightsService = {
 	getDashboardSummary,
 	getDashboardTrendsSoldProducts,
 	getDashboardTrendsRevenue,
 	getAllScheme,
+	getFollowUp,
 	
   }

@@ -126,6 +126,58 @@ class NewRegistrationFormScreen extends Component {
 						label={'Contact Number*'}
 					/>
 
+					<SearchableDropdown
+				        dataSource={productsList}
+				        placeHolderText={'Select Product'}
+				        selectedValue={form.product__c}
+				        onChange={(value) => changeForm({ edited_field: 'product__c', edited_value: value })}
+				        placeholder={'Type or Select Product'}
+				        invalid={false}
+				        labelStyles={{ ...Style.pickerLabel }}
+				        customPickerStyles={{ ...Style.picker }}
+				        label={'Product Interested*'}
+					/>
+
+					<InputDate
+                        style={Style.mb10}
+                        placeholder={'Expected Purchase Date'}
+                        value={HelperService.removeFieldsAndDateReadableFormat(form.expected_close_date__c)}
+                        onChange={(value) => {
+                            let formattedDate = HelperService.convertMomentDateToTimestamp(value);
+                            formattedDate = HelperService.dateReadableFormatWithHyphen(formattedDate);
+                            this.props.changeForm({ edited_field: 'expected_close_date__c', edited_value: formattedDate })
+                        }}
+                        error={validation.invalid && validation.invalid_field == 'expected_close_date__c'}
+						label={'Expected Purchase Date*'}
+						mindate={moment.now()}
+                    />
+
+
+					<View style={{ width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
+						<Text style={{...ApplicationStyles.label, marginBottom: '1%'}}>Was Test Drive Offered?*</Text>
+						<View style={{flexDirection: 'row', marginBottom: '2%'}}>
+						<GenericCheckBox 
+							style={{marginRight: '5%'}}
+							label={'Yes'}
+							checked={form.test_drive_offered__c == 'Yes'}
+							onPress={(event)=>{
+			                	let value = form.test_drive_offered__c == 'Yes' ? 'No' : 'Yes';
+				                changeForm({ edited_field: 'test_drive_offered__c', edited_value: value });
+			                }}
+						/>
+
+						<GenericCheckBox
+							style={{marginHorizontal: '5%'}} 
+							label={'No'}
+							checked={form.test_drive_offered__c == 'No'}
+							onPress={(event)=>{
+			                	let value = form.test_drive_offered__c == 'No' ? 'Yes' : 'No';
+				                changeForm({ edited_field: 'test_drive_offered__c', edited_value: value });
+			                }}
+						/>
+						</View>
+					</View>
+
 					<InputText
 						style={Style.mb10}
 						placeholder={'Email'}
@@ -143,10 +195,7 @@ class NewRegistrationFormScreen extends Component {
 					/>
 
 				
-
-
-
-                	<InputNumber
+					<InputNumber
 						styles={Style.mb10}
 						placeholder={'Age'}
 						value={form.age__c}
@@ -214,17 +263,7 @@ class NewRegistrationFormScreen extends Component {
 					/>
 
 
-					<SearchableDropdown
-				        dataSource={productsList}
-				        placeHolderText={'Select Product'}
-				        selectedValue={form.product__c}
-				        onChange={(value) => changeForm({ edited_field: 'product__c', edited_value: value })}
-				        placeholder={'Type or Select Product'}
-				        invalid={false}
-				        labelStyles={{ ...Style.pickerLabel }}
-				        customPickerStyles={{ ...Style.picker }}
-				        label={'Product Interested*'}
-					/>
+					
 
 					<View style={{width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
 						<Text style={{...ApplicationStyles.label, marginBottom: '1%'}}>Mode of Purchase</Text>
@@ -318,45 +357,8 @@ class NewRegistrationFormScreen extends Component {
 				        label={'Source of Enquiry'}
 					/>
 
-					<InputDate
-                        style={Style.mb10}
-                        placeholder={'Expected Purchase Date'}
-                        value={HelperService.removeFieldsAndDateReadableFormat(form.expected_close_date__c)}
-                        onChange={(value) => {
-                            let formattedDate = HelperService.convertMomentDateToTimestamp(value);
-                            formattedDate = HelperService.dateReadableFormatWithHyphen(formattedDate);
-                            this.props.changeForm({ edited_field: 'expected_close_date__c', edited_value: formattedDate })
-                        }}
-                        error={validation.invalid && validation.invalid_field == 'expected_close_date__c'}
-						label={'Expected Purchase Date*'}
-						mindate={moment.now()}
-                    />
-
-
-                    <View style={{ width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
-						<Text style={{...ApplicationStyles.label, marginBottom: '1%'}}>Was Test Drive Offered?*</Text>
-						<View style={{flexDirection: 'row', marginBottom: '2%'}}>
-						<GenericCheckBox 
-							style={{marginRight: '5%'}}
-							label={'Yes'}
-							checked={form.test_drive_offered__c == 'Yes'}
-							onPress={(event)=>{
-			                	let value = form.test_drive_offered__c == 'Yes' ? 'No' : 'Yes';
-				                changeForm({ edited_field: 'test_drive_offered__c', edited_value: value });
-			                }}
-						/>
-
-						<GenericCheckBox
-							style={{marginHorizontal: '5%'}} 
-							label={'No'}
-							checked={form.test_drive_offered__c == 'No'}
-							onPress={(event)=>{
-			                	let value = form.test_drive_offered__c == 'No' ? 'Yes' : 'No';
-				                changeForm({ edited_field: 'test_drive_offered__c', edited_value: value });
-			                }}
-						/>
-						</View>
-					</View>
+					
+			
 
 					<BlueButton
 						style={ApplicationStyles.formButton}

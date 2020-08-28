@@ -102,7 +102,7 @@ const PriceDetailsCard = ({basicPrice, taxes, offerAmount, subsidy, totalAmount,
         	/>
 
         	<GenericDisplayCardStrip 
-        		label={'Total Amount'} 
+        		label={'Ex Showroom Amount'} 
         		value={HelperService.currencyValue(HelperService.numberWithCommas(totalAmount))}
         		labelStyle={Style.blackLabelStyle}
   				valueStyle={Style.blackValueStyle}

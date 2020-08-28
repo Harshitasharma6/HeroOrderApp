@@ -159,6 +159,40 @@ export const getAllSchemeLoadingStop = (state) => ({
   }
 });
 
+export const getFollowUpSuccess = (state, { payload }) => ({
+  ...state,
+  FollowUpData: payload,
+  loaders: {
+    ...state.loaders,
+    cLoader: false
+  }
+});
+
+export const getFollowUpFailure = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getFollowUpLoader: false
+  }
+});
+
+
+export const getFollowUpLoading = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getFollowUpLoader: true
+  }
+});
+
+
+export const getFollowUpLoadingStop = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getFollowUpLoader: false
+  }
+});
 
 
 
@@ -190,6 +224,13 @@ export const reducer = createReducer(INITIAL_STATE, {
   [InsightsTypes.GET_ALL_SCHEME_FAILURE]     : getAllSchemeFailure,
   [InsightsTypes.GET_ALL_SCHEME_LOADING]     : getAllSchemeLoading,
   [InsightsTypes.GET_ALL_SCHEME_LOADING_STOP]: getAllSchemeLoadingStop,
+
+
+
+  [InsightsTypes.GET_FOLLOW_UP_SUCCESS]     : getFollowUpSuccess,
+  [InsightsTypes.GET_FOLLOW_UP_FAILURE]     : getFollowUpFailure,
+  [InsightsTypes.GET_FOLLOW_UP_LOADING]     : getFollowUpLoading,
+  [InsightsTypes.GET_FOLLOW_UP_LOADING_STOP]: getFollowUpLoadingStop,
 
   
 });

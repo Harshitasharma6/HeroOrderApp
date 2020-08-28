@@ -4,7 +4,8 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 
 export default StyleSheet.create({
   icon: {
-  	color: Colors.grey
+    color: Colors.grey,
+    
   },
   iconText: {
   	color:  Colors.grey,
@@ -13,7 +14,7 @@ export default StyleSheet.create({
     alignSelf: 'center',
     textAlign: 'center',
     overflow: 'hidden',
-    paddingLeft: 0, 
+    paddingLeft: 3.5, 
     paddingRight: 0
   },
   iconActive: {

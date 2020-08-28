@@ -477,8 +477,8 @@ class InvoiceDetailformScreen extends Component {
           		</View>
 
                     
-						<View style={{marginTop:'3%'}}>
-                    <BlueButton title={"SAVE"} style={{width: '40%', marginHorizontal: '30.5%',}} textStyle={{fontSize: 12}} >
+						<View style={{marginTop:'4%'}}>
+                    <BlueButton title={"SAVE"} style={{width: '40%', marginHorizontal: '30.5%', height: 40}} textStyle={{fontSize: 12}} >
 	            	
 	            </BlueButton>
 			</View>

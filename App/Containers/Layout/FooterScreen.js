@@ -33,7 +33,12 @@ class FooterScreen extends React.Component {
 
 
    
-    let profilesActive = currentScreen === 'ProfileScreen';
+    let profilesActive = 
+    currentScreen == 'ProfileScreen'||
+    currentScreen == 'DealerSalespersonFormScreen' ||
+    currentScreen == ' SubDealerInfoScreen'||
+    currentScreen == 'SchemeClaimInfoScreen' ||
+    currentScreen == 'SubDealerFormScreen'
    
 
     let visitorActive = 
@@ -49,7 +54,11 @@ class FooterScreen extends React.Component {
       currentScreen == 'AddProductInfoScreen' ||
       currentScreen == 'AddProductsSchemesScreen' ||
       currentScreen == 'OrderCartScreen' || 
-      currentScreen == 'CustomerCallFormScreen'
+      currentScreen == 'CustomerCallFormScreen' ||
+      currentScreen == 'GenerateRecieptformScreen' ||
+      currentScreen == 'GenerateInvoiceformScreen' ||
+      currentScreen == 'InvoiceDetailformScreen' 
+
 
     let insightsActive = 
       currentScreen == 'InsightsScreen' ||
@@ -69,7 +78,8 @@ class FooterScreen extends React.Component {
       currentScreen == 'PurchaseDateOverDueScreen' ||
       currentScreen == 'BookingConfirmedScreen' ||
       currentScreen == 'OpenHotAssignedLeadsScreen' ||
-      currentScreen == 'NoActionScreen'
+      currentScreen == 'NoActionScreen' ||
+      currentScreen == 'BookingConfirmed'
 
 
     return (
@@ -104,6 +114,7 @@ class FooterScreen extends React.Component {
           <FooterIcon
             icon={'menu'}
             iconText={'Menu'}
+            active={profilesActive} 
             disabled={false}
             onPress={() => this.props.openDrawer()}
           />
