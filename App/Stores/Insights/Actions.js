@@ -27,6 +27,12 @@ const { Types, Creators } = createActions({
   getAllSchemeFailure: null,
   getAllSchemeLoading: null,
   getAllSchemeLoadingStop: null,
+
+  getFollowUp: ['payload'],
+  getFollowUpSuccess:  ['payload'],
+  getFollowUpFailure: null,
+  getFollowUpLoading: null,
+  getFollowUpLoadingStop: null,
   
 
 });

@@ -7,15 +7,42 @@ import SelectionButton from 'App/Components/SelectionButton'
 import {ApplicationStyles, Colors} from 'App/Theme'
 import ProgressBar from 'App/Components/ProgressBar'
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import InsightsActions from 'App/Stores/Insights/Actions';
 
 class InsightsScreen extends Component {
+
+    componentDidMount() {
+		this.fetchCall()	
+	}
+
+	fetchCall() {
+		const {
+		
+		  fetchData
+		} = this.props
+	
+		fetchData({
+		 
+		});
+	  }
+  
+    
+ 
+
+
     render() {
-        return (
+
+        const {
+			loader,
+            data,
+            } = this.props;
+        
+            return (
             <View style={Styles.mainContainer}>
              <View style={Styles.progressContainer}>
                     <View style={Styles.textContainer}><Text style={Styles.name}>{`Hi, ${this.props.name}`}</Text></View>
-                    <View style={Styles.textContainer}><Text style={Styles.info}>{`You have 7 follow ups today`}</Text></View>
-                     <View style={Styles.textContainer}><Text style={Styles.countText}>{`Today: ${7} | Completed: ${3}`}</Text></View>
+                    <View style={Styles.textContainer}><Text style={Styles.info}>{`You have ${data&&data.count ?  data.count : 0} follow ups today`}</Text></View>
+                     <View style={Styles.textContainer}><Text style={Styles.countText}>{`Today: ${data&&data.count ?  data.count : 0} | Completed: ${3}`}</Text></View>
                     <ProgressBar progress={.4}/>
                 </View>
                 <View style={{...ApplicationStyles.container}}>
@@ -49,11 +76,13 @@ class InsightsScreen extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  name: `${state.user.first_name__c} ${state.user.last_name__c}`
+  name: `${state.user.first_name__c} ${state.user.last_name__c}`,
+  data: state.insights.FollowUpData,
+  loader: state.insights.loaders.getFollowUpLoader,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  
+fetchData:(params)            => dispatch(InsightsActions.getFollowUp(params)), 
 })
 
 export default connect(
