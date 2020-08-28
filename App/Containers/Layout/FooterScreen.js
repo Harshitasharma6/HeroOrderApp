@@ -36,7 +36,7 @@ class FooterScreen extends React.Component {
     let profilesActive = 
     currentScreen == 'ProfileScreen'||
     currentScreen == 'DealerSalespersonFormScreen' ||
-    currentScreen == ' SubDealerInfoScreen'||
+    currentScreen == 'SubDealerInfoScreen'||
     currentScreen == 'SchemeClaimInfoScreen' ||
     currentScreen == 'SubDealerFormScreen'
    

@@ -28,13 +28,13 @@ export const Config = {
 	},
 
 	DEALER_SERVICE:{
-		FETCH_ALL_DEALER_SALES_INFO: 'dealers/getDealerSalesPersonInfo?dealer_id=0019D000009zum3QAA',
+		FETCH_ALL_DEALER_SALES_INFO: 'dealers/getDealerSalesPersonInfo',
 		GET_DEALER_CLAIM: 'dealers/getDealerClaims',
 		CREATE_DEALER_CLAIM: 'dealers/createDealerClaim',
 	},
 
 	SUB_DEALER_SERVICE:{
-		GET_SUB_DEALER: 'dealers/getSubDealers?dealer_id=0019D000009zum3QAA',
+		GET_SUB_DEALER: 'dealers/getSubDealers',
 		CREATE_SUB_DEALER: 'dealers/createSubDealers'
 	},
 
@@ -57,6 +57,6 @@ export const Config = {
 
 	SCHEME_SERVICE: {
 		GET_ALL_SCHEME							: 'schemeMaster/getAll',
-		GET_FOLLOW_UP							: 'call-activities/callFollowup?dealer_id=0019D000009zum3QAA'
+		GET_FOLLOW_UP							: 'call-activities/callFollowup'
 	}
 }

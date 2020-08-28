@@ -136,7 +136,7 @@ class SubDealerInfoScreen extends Component {
 					>
 					<GenericIcon
 						name='plus-circle'
-						style={{ color: Colors.white, fontSize: 40, alignSelf: 'center' }}
+						style={{ color: Colors.primary,  fontSize: wp('14%'),  alignSelf: 'center' }}
 					/>
 				</TouchableOpacity>   
 			</View>

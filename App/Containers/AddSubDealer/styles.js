@@ -36,14 +36,14 @@ export default StyleSheet.create({
   },
   heading1: {
     
-    alignSelf: 'flex-start',
+    alignSelf: 'center',
     color: Colors.primary,
     fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
     fontSize: wp('5.0%'),
    
     marginTop: hp('5%'),
     textTransform: 'uppercase',
-    marginLeft: '5%',
+   
     
    
 

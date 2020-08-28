@@ -5,28 +5,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 export default StyleSheet.create({
   action: {
     width: wp('88%'),
-
-    marginTop:'8.5%',
-   
   },
-  plusIcon: {
-    borderRadius: 50,
-   bottom:75,
-  position: 'absolute',
-  right: 25,
-  borderRadius: 50,
-  height: hp('7.5%'),
-  width: wp('15%'),
-  right:20,
-  borderColor: Colors.primary, 
-  backgroundColor: 'transparent', 
-  borderWidth: 2, 
-  zIndex: 3,
-  flexDirection: 'row',
-  justifyContent: 'center',
-  alignItems: 'center'
-},
-
   button: {
     ...ApplicationStyles.formButton
   },
@@ -38,33 +17,8 @@ export default StyleSheet.create({
     flex: 1,
   },
   heading: {
-    
-	    alignSelf: 'center',
-	    color: Colors.primary,
-	    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
-	    fontSize: wp('5.5%'),
-	   
-	    marginTop: hp('1%'),
-        textTransform: 'uppercase',
-      
-        
-	
-
+    ...ApplicationStyles.formHeading
   },
-  heading1: {
-    
-    alignSelf: 'flex-start',
-    color: Colors.primary,
-    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
-    fontSize: wp('5.0%'),
-   
-    marginTop: hp('5%'),
-    textTransform: 'uppercase',
-    marginLeft: '5%',
-    
-   
-
-},
   link: {
     color: Colors.label,
     flexDirection: 'row',
@@ -77,7 +31,6 @@ export default StyleSheet.create({
   },
   mb10: {
     marginBottom: hp('2%'),
-    
     height: hp('5.5%'),
     fontSize: wp('3.7%'),
     justifyContent: 'center',

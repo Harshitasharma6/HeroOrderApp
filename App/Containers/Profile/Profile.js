@@ -31,7 +31,8 @@ class ProfileScreen extends Component {
       contactNo,
       state,
       loading,
-      login
+      login,
+      email
     } = this.props
 
     let visibleNode = [];
@@ -39,8 +40,8 @@ class ProfileScreen extends Component {
       visibleNode = (
         <ScrollView style={Style.box}>
           <AgentInfo heading={'Contact No.'}  value={contactNo} />
-          <AgentInfo heading={'Employee ID'}  value={''} />
-          <AgentInfo heading={'Username'}  value={ login ?firstName+  "  "  +LastName :null}/>
+          <AgentInfo heading={'Email ID'}  value={email} />
+          <AgentInfo heading={'Username'}  value={ login ? data :null}/>
           <AgentInfo heading={'State'}  value={state} />
         </ScrollView>
       );
@@ -70,7 +71,7 @@ class ProfileScreen extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  data:                   state.user.name,
+  data:           `${state.user.first_name__c} ${state.user.last_name__c}`,
   finalObservationList:   state.dashboard.finalObservationList,
   firstName:              state.user.first_name__c,
   LastName:               state.user.last_name__c,
@@ -78,6 +79,7 @@ const mapStateToProps = (state) => ({
   state:                  state.user.state,
   loading:          state.user.userLoginIsLoading,
   login:           state.user.is_logged_in,
+  email:            state.user.email_id__c,
 });
 
 
