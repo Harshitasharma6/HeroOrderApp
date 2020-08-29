@@ -15,11 +15,25 @@ import NavigationService from 'App/Services/NavigationService'
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import Styles from './styles'
 import CommonActions from 'App/Stores/Common/Actions';
+import VisitorActions from 'App/Stores/Visitor/Actions';
 import LeadLostScreen from '../LeadLostScreen'
 
 class CallLeads extends Component {
   componentDidMount() {
     this.fetchCall()
+  }
+
+  onPressCall(data) {
+     const {
+      changeForm,
+      showCallModal
+    } = this.props;
+
+    HelperService.callNumber(data.contact_number__c);
+    setTimeout(() => {
+      showCallModal(); 
+      changeForm({edited_field: 'enquiry_id', edited_value: data.sfid});
+    }, 2000)
   }
 
 
@@ -75,7 +89,7 @@ class CallLeads extends Component {
                   </BlueButton>
                  
                   </View> : [],
-                  <BlueButton title={''} style={Styles.callButton} textStyle={Styles.callButtonText} onPress={() => HelperService.callNumber(item.contact_number__c)}><GenericIcon name="phone" style={Styles.callButtonIcon}/></BlueButton>
+                  <BlueButton title={''} style={Styles.callButton} textStyle={Styles.callButtonText} onPress={() => this.onPressCall(item)}><GenericIcon name="phone" style={Styles.callButtonIcon}/></BlueButton>
               ]}
             />}
             keyExtractor={item => item.id}
@@ -114,7 +128,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetchData: (params)    => dispatch(LeadAlertActions.fetchCallLeads(params)),
   openModal:(params)     => dispatch(CommonActions.openModal(params)),
   closeModal:(params)    => dispatch(CommonActions.closeModal(params)),
-  submitForm: (params)   => dispatch(LeadAlertActions.markLeadLost(params))
+  submitForm: (params)   => dispatch(LeadAlertActions.markLeadLost(params)),
+  changeForm: (params)       => dispatch(VisitorActions.changeRegisterCustomerOutgoingCallForm(params)),
 });
 
 export default connect(

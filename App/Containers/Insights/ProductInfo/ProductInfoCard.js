@@ -24,10 +24,7 @@ const ProductInfoCard = ({data}) => (
 	<View style={Style.box}>
 		<View style={Style.imageContainer}>
 			<ImageSlider 
-                images={[
-                    "https://heroelectric.in/wp-content/uploads/2018/10/Optima-hs500_blue_3-4-right-view-1.png",
-                    "https://heroelectric.in/wp-content/uploads/2018/10/100x.png"
-                ]}
+                images={data.product_images && data.product_images.length ? data.product_images.map((x) => x.product_url__c) : []} 
             />
 		</View>
         <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end'}}>

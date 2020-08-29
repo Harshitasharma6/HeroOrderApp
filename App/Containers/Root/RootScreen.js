@@ -19,6 +19,7 @@ import CallDetectorManager from 'react-native-call-detection'
 import VIForegroundService from '@voximplant/react-native-foreground-service';
 import { Drawer } from 'native-base';
 import SideBar from 'App/Containers/Layout/SideBarLayout/SideBar';
+import CallsModal from 'App/Containers/CallsModal';
 navigator.geolocation = require('react-native-geolocation-service');
 
 class RootScreen extends Component {
@@ -54,7 +55,7 @@ class RootScreen extends Component {
     let locationPermission = await HelperService.requestLocationPermission();
 
     if (locationPermission) {
-      HelperService.watchLocation({callback: (fetchCurrentLocationSuccess)});
+      //HelperService.watchLocation({callback: (fetchCurrentLocationSuccess)});
     }else {
       Alert.alert(
         "Location permission Denied.Cannot Proceed",
@@ -114,7 +115,7 @@ class RootScreen extends Component {
   }
 
   componentWillUnmount() {
-    HelperService.clearWatchLocation();
+    //HelperService.clearWatchLocation();
   }
 
   closeDrawer(){
@@ -147,6 +148,8 @@ class RootScreen extends Component {
       modalContent,
       modalHeading,
       modalDisabled,
+      hideCallModal,
+      isCallModalVisible,
       modalBodyFlexHeight
     } = this.props;
     return (
@@ -172,6 +175,11 @@ class RootScreen extends Component {
                   heading={modalHeading}
                   bodyFlexHeight={modalBodyFlexHeight}
                   disabled={modalDisabled}
+                />
+
+                <CallsModal 
+                  isVisible={isCallModalVisible}
+                  onCloseModal={() => hideCallModal()}
                 />
          
                 <AppNavigator
@@ -213,6 +221,7 @@ const mapStateToProps = (state) => ({
   startedToday: state.user.startDayTime ? HelperService.isToday(state.user.startDayTime) : false,
   endedToday: state.user.endDayTime ? HelperService.isToday(state.user.endDayTime) : false,
   absentToday: state.user.absentDayTime ? HelperService.isToday(state.user.absentDayTime) : false,
+  isCallModalVisible: state.common.isCallModalVisible
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -220,7 +229,9 @@ const mapDispatchToProps = (dispatch) => ({
   screenChanged: (previousRouteName)  => dispatch(CommonActions.screenChanged(previousRouteName)),
   closeModal:()                       => dispatch(CommonActions.closeModal()),
   fetchCurrentLocationSuccess:(params)=> dispatch(StartDayActions.fetchCurrentLocationSuccess(params)),
-  changeForm: (params)                => dispatch(VisitorActions.changeRegisterCustomerCallForm(params))
+  changeForm: (params)                => dispatch(VisitorActions.changeRegisterCustomerCallForm(params)),
+  showCallModal: (params)             => dispatch(CommonActions.showCallModal(params)),
+  hideCallModal: (params)             => dispatch(CommonActions.hideCallModal(params))
 })
 
 export default connect(

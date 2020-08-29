@@ -465,6 +465,7 @@ export const changePayBookingForm = (state, { payload }) => {
   }
 };
 
+
 export const clearPayBookingForm = (state, {payload}) => ({
   ...state,
   payBookingForm: INITIAL_STATE.payBookingForm
@@ -477,11 +478,71 @@ export const payBookingValidationFailed = (state, {payload}) => ({
     }
 });
 
-  // [VisitorTypes.REGISTER_CUSTOMER_CALL_SUCCESS]        : registerCustomerCallSuccess,
-  // [VisitorTypes.REGISTER_CUSTOMER_CALL_FAILURE]        : registerCustomerCallFailure,
-  // [VisitorTypes.REGISTER_CUSTOMER_CALL_LOADING]        : registerCustomerCallLoading,
-  // [VisitorTypes.REGISTER_CUSTOMER_CALL_LOADING_STOP]   : registerCustomerCallLoadingStop,
-  // [VisitorTypes.CHANGE_REGISTER_CUSTOMER_CALL_FORM]    : changeRegisterCustomerCallForm
+
+
+
+export const registerCustomerOutgoingCallSuccess = (state, {payload}) => ({
+  ...state,
+  registerCustomerOutgoingCallForm: INITIAL_STATE.registerCustomerOutgoingCallForm,
+  loaders: {
+    ...state.loaders,
+    registerCustomerOutgoingCallLoader: false
+  }
+});
+
+export const registerCustomerOutgoingCallFailure = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    registerCustomerOutgoingCallLoader: false
+  }
+});
+
+export const registerCustomerOutgoingCallLoading = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    registerCustomerOutgoingCallLoader: true
+  }
+});
+
+export const registerCustomerOutgoingCallLoadingStop = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    registerCustomerOutgoingCallLoader: false
+  }
+});
+
+export const changeRegisterCustomerOutgoingCallForm = (state, { payload }) => {
+    const {
+    edited_field,
+    edited_value
+  } = payload;
+
+  let changed_entity = {};
+  changed_entity[edited_field] = edited_value;
+  return {
+    ...state,
+    registerCustomerOutgoingCallForm : {
+      ...state.registerCustomerOutgoingCallForm,
+      ...changed_entity
+    },
+    registerCustomerOutgoingCallValidation: INITIAL_STATE.registerCustomerOutgoingCallValidation
+  }
+};
+
+export const clearRegisterCustomerOutgoingCallForm = (state) => ({
+  ...state,
+  registerCustomerOutgoingCallForm: INITIAL_STATE.registerCustomerOutgoingCallForm
+});
+
+export const registerCustomerOutgoingCallValidationFailed = (state, {payload}) => ({
+  ...state,
+    registerCustomerOutgoingCallValidation: {
+        ...payload
+    }
+});
 
 
 export const reducer = createReducer(INITIAL_STATE, {
@@ -532,6 +593,15 @@ export const reducer = createReducer(INITIAL_STATE, {
   [VisitorTypes.REGISTER_CUSTOMER_CALL_LOADING_STOP]   : registerCustomerCallLoadingStop,
   [VisitorTypes.CHANGE_REGISTER_CUSTOMER_CALL_FORM]    : changeRegisterCustomerCallForm,
   [VisitorTypes.REGISTER_CUSTOMER_CALL_VALIDATION_FAILED]: registerCustomerCallValidationFailed,
+
+
+  [VisitorTypes.REGISTER_CUSTOMER_OUTGOING_CALL_SUCCESS]          : registerCustomerOutgoingCallSuccess,
+  [VisitorTypes.REGISTER_CUSTOMER_OUTGOING_CALL_FAILURE]          : registerCustomerOutgoingCallFailure,
+  [VisitorTypes.REGISTER_CUSTOMER_OUTGOING_CALL_LOADING]          : registerCustomerOutgoingCallLoading,
+  [VisitorTypes.REGISTER_CUSTOMER_OUTGOING_CALL_LOADING_STOP]     : registerCustomerOutgoingCallLoadingStop,
+  [VisitorTypes.CHANGE_REGISTER_CUSTOMER_OUTGOING_CALL_FORM]      : changeRegisterCustomerOutgoingCallForm,
+  [VisitorTypes.CLEAR_REGISTER_CUSTOMER_OUTGOING_CALL_FORM]       : clearRegisterCustomerOutgoingCallForm,
+  [VisitorTypes.REGISTER_CUSTOMER_OUTGOING_CALL_VALIDATION_FAILED]: registerCustomerOutgoingCallValidationFailed,
 
 
   [VisitorTypes.PAY_BOOKING_SUCCESS]          : payBookingSuccess,

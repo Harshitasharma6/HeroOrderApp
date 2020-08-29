@@ -15,6 +15,7 @@ import NavigationService from 'App/Services/NavigationService'
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import Styles from './styles'
 import CommonActions from 'App/Stores/Common/Actions';
+import VisitorActions from 'App/Stores/Visitor/Actions';
 import LeadLostScreen from '../LeadLostScreen'
 
 class OpenHotLeads extends Component {
@@ -31,6 +32,19 @@ class OpenHotLeads extends Component {
     fetchData({});
   }
 
+  onPressCall(data) {
+     const {
+      changeForm,
+      showCallModal
+    } = this.props;
+
+    HelperService.callNumber(data.contact_number__c);
+    setTimeout(() => {
+      showCallModal(); 
+      changeForm({edited_field: 'enquiry_id', edited_value: data.sfid});
+    }, 2000)
+  }
+
   getDataNode() {
     let visibleNode = [];
     const {
@@ -39,7 +53,10 @@ class OpenHotLeads extends Component {
       productsList,
       openModal,
       closeModal,
-      submitForm
+      submitForm,
+      changeForm,
+      showCallModal,
+      hideCallModal
     } = this.props;
 
 
@@ -76,7 +93,7 @@ class OpenHotLeads extends Component {
                   </BlueButton>
                  
                   </View> : [],
-                  <BlueButton title={''} style={Styles.callButton} textStyle={Styles.callButtonText} onPress={() => HelperService.callNumber(item.contact_number__c)}><GenericIcon name="phone" style={Styles.callButtonIcon}/></BlueButton>
+                  <BlueButton title={''} style={Styles.callButton} textStyle={Styles.callButtonText} onPress={() => this.onPressCall(item)}><GenericIcon name="phone" style={Styles.callButtonIcon}/></BlueButton>
               ]}
             />}
             keyExtractor={item => item.id}
@@ -115,7 +132,10 @@ const mapDispatchToProps = (dispatch) => ({
   fetchData: (params)    => dispatch(LeadAlertActions.fetchHotLeads(params)),
   openModal:(params)     => dispatch(CommonActions.openModal(params)),
   closeModal:(params)    => dispatch(CommonActions.closeModal(params)),
-  submitForm: (params)   => dispatch(LeadAlertActions.markLeadLost(params))
+  submitForm: (params)   => dispatch(LeadAlertActions.markLeadLost(params)),
+  showCallModal: (params)    => dispatch(CommonActions.showCallModal(params)),
+  hideCallModal: (params)    => dispatch(CommonActions.hideCallModal(params)),
+  changeForm: (params)       => dispatch(VisitorActions.changeRegisterCustomerOutgoingCallForm(params)),
 });
 
 export default connect(

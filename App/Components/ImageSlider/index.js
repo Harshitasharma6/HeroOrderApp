@@ -15,7 +15,33 @@ const styles = StyleSheet.create({
   image: {
   	width: '100%', 
   	height: '100%', 
-  	resizeMode: 'contain'
+  	resizeMode: 'contain',
+    borderRadius: 2
+  },
+  dot: {
+    backgroundColor:'rgba(0,0,0,.3)', 
+    width: 10, 
+    height: 10,
+    borderRadius: 5, 
+    marginLeft: 3, 
+    marginRight: 3, 
+    marginTop: 10, 
+    marginBottom: 1
+  },
+  activeDot: {
+    backgroundColor: '#007aff', 
+    width: 10, 
+    height: 10, 
+    borderRadius: 5, 
+    marginLeft: 3, 
+    marginRight: 3, 
+    marginTop: 10, 
+    marginBottom: 1
+  },
+  actionbuttons: {
+     color: Colors.grey, 
+     fontSize: wp('6.5%'), 
+     padding: wp('.3%')
   }
 })
 
@@ -25,17 +51,18 @@ export default class SwiperComponent extends Component {
   		images
   	} =  this.props
 
-  	let visible_node = images.map((url) => <View key={url} style={styles.slide1}><Image source={{uri: url}} style={styles.image}/></View>)
+    let visible_node  = images && images.length ? images.map((url) => <View key={url} style={styles.slide1}><Image source={{uri: url}} style={styles.image}/></View>) : <View style={styles.slide1}><Image source={require('App/Assets/Images/no_image_available.png')} style={styles.image}/></View>;
+
     return (
       <Swiper style={styles.wrapper} 
-      	showsButtons={true} 
+      	showsButtons={!!(images && images.length)} 
       	loop={true}
       	showsPagination={true}
-      	dot={<View style={{backgroundColor:'rgba(0,0,0,.3)', width: 10, height: 10,borderRadius: 5, marginLeft: 3, marginRight: 3, marginTop: 10, marginBottom: 1}} />}
-      	activeDot={<View style={{backgroundColor: '#007aff', width: 10, height: 10, borderRadius: 5, marginLeft: 3, marginRight: 3, marginTop: 10, marginBottom: 1}} />}
-      	nextButton={<GenericIcon name={'chevron-circle-right'} style={{color: Colors.grey, fontSize: wp('6.5%'), padding: wp('.3%')}}/>}
-      	prevButton={<GenericIcon name={'chevron-circle-left'} style={{color: Colors.grey, fontSize: wp('6.5%'), padding: wp('.3%')}}/>}
-      	>
+      	dot={<View style={styles.dot} />}
+      	activeDot={<View style={styles.activeDot} />}
+      	nextButton={<GenericIcon name={'chevron-circle-right'} style={styles.actionbuttons}/>}
+      	prevButton={<GenericIcon name={'chevron-circle-left'} style={styles.actionbuttons}/>}
+      >
        {visible_node}
       </Swiper>
     )

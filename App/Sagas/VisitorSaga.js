@@ -6,6 +6,7 @@ import { VisitorTypes } from 'App/Stores/Visitor/Actions';
 import { call, put, select, take } from 'redux-saga/effects';
 import { VisitorService } from 'App/Services/Api/VisitorService';
 import VisitorActions from 'App/Stores/Visitor/Actions';
+import CommonActions from 'App/Stores/Common/Actions';
 import { offlineApiCall } from './OfflineSaga';
 import {Alert} from 'react-native'
 import _ from 'lodash';
@@ -81,6 +82,30 @@ export function* watchRegisterCustomerCall() {
 		}
 
 		yield call(registerCustomerCall, payload)
+	}
+}
+
+export function* watchRegisterCustomerOutgoingCall() {
+	while (true) {
+		const { payload } = yield take(VisitorTypes.REGISTER_CUSTOMER_OUTGOING_CALL)
+		try {
+			const validationFailed = yield call(ValidationService.validateRegisterCustomerCallForm, payload);
+		
+			if (validationFailed) {
+				HelperService.showToast({ 
+					message: validationFailed.error_message, 
+					duration: 2000, 
+					buttonText: 'Okay' 
+				});
+
+				yield put(VisitorActions.registerCustomerOutgoingCallValidationFailed(validationFailed));
+				continue;
+			}
+		} catch (err) {
+			console.log(err)
+		}
+
+		yield call(registerCustomerOutgoingCall, payload)
 	}
 }
 
@@ -319,6 +344,53 @@ function* registerCustomerCall(payload) {
 		}
 	} catch (error) {
 		yield put(VisitorActions.registerCustomerCallFailure());
+		HelperService.showToast({ 
+			message: 'Error!! Call Registration Failed.Verify fields and try again.', 
+			duration: 2000, 
+			buttonText: 'Okay' 
+		});
+	}
+}
+
+
+function* registerCustomerOutgoingCall(payload) {
+	yield put(VisitorActions.registerCustomerOutgoingCallLoading());
+	try {
+		const isOnline = yield select(getConnectionStatus);
+		if (!isOnline) {
+			yield put(VisitorActions.registerCustomerOutgoingCallFailure());
+			HelperService.showToast({ 
+				message: 'Cannot Registration. No Internet connection.', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+			return;
+		}
+
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
+		payload.dealers_sales_person_login_info_id = dealer__c
+		const successData = yield call(VisitorService.registerCustomerOutgoingCall, payload);
+
+		if (successData) { 
+			yield put(VisitorActions.registerCustomerOutgoingCallSuccess(successData));
+			yield put(CommonActions.hideCallModal());
+			HelperService.showToast({ 
+				message: 'Call Registered Successfully!!', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+		} else {
+			yield put(VisitorActions.registerCustomerOutgoingCallFailure())
+			HelperService.showToast({ 
+				message: 'Error!! Call Registration Failed.Verify fields and try again.', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+		}
+	} catch (error) {
+		yield put(VisitorActions.registerCustomerOutgoingCallFailure());
 		HelperService.showToast({ 
 			message: 'Error!! Call Registration Failed.Verify fields and try again.', 
 			duration: 2000, 

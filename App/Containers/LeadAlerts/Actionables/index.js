@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import FollowUps from './FollowUps'
 import Segmentation from './Segmentation'
 import LeadAlertsAction from 'App/Stores/LeadAlerts/Actions'
+import CommonActions from 'App/Stores/Common/Actions'
 import Underline from 'App/Components/Underline';
 
 
@@ -158,7 +159,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   selectActionable: (params) => dispatch(LeadAlertsAction.selectActionable(params)),
-  selectFollowUp: (params)   => dispatch(LeadAlertsAction.selectFollowUp(params))
+  selectFollowUp: (params)   => dispatch(LeadAlertsAction.selectFollowUp(params)),
+  showCallModal: (params)    => dispatch(CommonActions.showCallModal(params)),
+  hideCallModal: (params)    => dispatch(CommonActions.hideCallModal(params))
 })
 
 

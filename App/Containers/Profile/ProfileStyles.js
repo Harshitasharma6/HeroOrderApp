@@ -34,6 +34,7 @@ export default StyleSheet.create({
   header: {
     flex: 1, 
     paddingBottom: 10, 
+    paddingTop: hp('1.5%'), 
     alignItems: 'center', 
     alignContent: 'center',
     justifyContent: 'center'

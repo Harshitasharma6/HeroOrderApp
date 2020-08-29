@@ -115,7 +115,7 @@ class FooterScreen extends React.Component {
           <FooterIcon
             icon={'menu'}
             iconText={'Menu'}
-            active={profilesActive} 
+            active={false} 
             disabled={false}
             onPress={() => this.props.openDrawer()}
           />

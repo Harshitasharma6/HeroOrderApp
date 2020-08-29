@@ -149,6 +149,25 @@ function registerCustomerCall(params) {
 }
 
 
+function registerCustomerOutgoingCall(params) {
+	let url = Config.VISITOR_SERVICE.REGISTER_CUSTOMER_OUTGOING_CALL;
+	url += `?enquiry_id=${params.enquiry_id}`
+	return apiClient.post(url, params, {
+		headers: {
+			token: params.token
+		}
+	}).then((response) => {
+		if (in200s(response.status)) {
+			return response['data'];
+		}
+		return null
+	}).catch(error => {
+		//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
+		return null
+	});
+}
+
+
 function payBooking(params) {
 	// let url = Config.VISITOR_SERVICE.REGISTER_CUSTOMER_CALL;
 	// return apiClient.post(url, params, {
@@ -175,6 +194,7 @@ export const VisitorService = {
 	updateVisitor,
 	registerCustomer,
 	registerCustomerCall,
+	registerCustomerOutgoingCall,
 	createFeedback,
 	getAllVisits,
 	payBooking,

@@ -31,5 +31,8 @@ export const INITIAL_STATE = {
 
 	sourceEnquiryList: [],
 	leadLostReasonsList: [],
-	productsList: []
+	productsList: [],
+	isCallModalVisible: false,
+	callConnected: false,
+	callDisconnected: false
 }

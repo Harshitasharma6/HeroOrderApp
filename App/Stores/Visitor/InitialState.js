@@ -9,11 +9,21 @@ export const INITIAL_STATE = {
 		getAllVisitsLoader: false,
 		getFeedbacksLoader: false,
 		registerCustomerCallLoader: false,
+        registerCustomerOutgoingCallLoader: false,
         payBookingLoader: false
 	},
 	searchCustomerForm: {},
 	registerCustomerForm: {},
-	registerCustomerCallForm: {},
+	registerCustomerOutgoingCallForm: {
+       "call_connected__c" : "",
+       "reasons_for_not_connected__c" : "Call not picked",
+       "purpose_of_call__c" : "For Test Drive",
+       "outcome_of_the_call__c" : "Customer Not Interested",
+       "dealer_id" : "",
+       "dealers_sales_person_login_info_id" : "",
+       "follow_up__c": "no",
+       "follow_up_date__c" : ""
+    },
 	currentVisitorData: {},
 	visitorSearchSuccessData: {},
 	searchCustomerValidation: {
@@ -24,12 +34,17 @@ export const INITIAL_STATE = {
     	invalid: false,
         invalid_field: ''
     },
+
     createFeedbackValidation: {
     	invalid: false,
         invalid_field: ''
     },
     registerCustomerCallValidation: {
     	invalid: false,
+        invalid_field: ''
+    },
+    registerCustomerOutgoingCallValidation: {
+        invalid: false,
         invalid_field: ''
     },
     payBookingFormValidation: {

@@ -141,6 +141,41 @@ export const fetchLeadSourcesLoadingStop = (state, {payload}) => ({
 });
 
 
+export const showCallModal = (state) => ({
+  ...state,
+  isCallModalVisible: true
+});
+
+
+export const hideCallModal = (state) => ({
+  ...state,
+  isCallModalVisible: false,
+  callConnected: false,
+  callDisconnected: false
+});
+
+
+export const showConnectedOptions = (state) => ({
+  ...state,
+  callConnected: true,
+  callDisconnected: false
+});
+
+
+export const showDisconnectedOptions = (state) => ({
+  ...state,
+  callConnected: false,
+  callDisconnected: true
+});
+
+export const clearCallModalData = (state) => ({
+  ...state,
+  callConnected: false,
+  callDisconnected: false,
+  isCallModalVisible: false
+});
+
+
 
 export const reducer = createReducer(INITIAL_STATE, {
   [CommonTypes.CONNECTION_CHANGED]           : connectionChanged,
@@ -157,11 +192,19 @@ export const reducer = createReducer(INITIAL_STATE, {
   [CommonTypes.FETCH_LEAD_LOST_REASONS_SUCCESS]      : fetchLeadLostReasonsSuccess,
   [CommonTypes.FETCH_LEAD_LOST_REASONS_FAILURE]      : fetchLeadLostReasonsFailure,
 
-
   //[CommonTypes.FETCH_LEAD_SOURCES]                   : fetchLeadSources,
   [CommonTypes.FETCH_LEAD_SOURCES_LOADING]           : fetchLeadSourcesLoading,
   [CommonTypes.FETCH_LEAD_SOURCES_LOADING_STOP]      : fetchLeadSourcesLoadingStop,
   [CommonTypes.FETCH_LEAD_SOURCES_SUCCESS]           : fetchLeadSourcesSuccess,
-  [CommonTypes.FETCH_LEAD_SOURCES_FAILURE]           : fetchLeadSourcesFailure
+  [CommonTypes.FETCH_LEAD_SOURCES_FAILURE]           : fetchLeadSourcesFailure,
+
+
+  [CommonTypes.SHOW_CALL_MODAL]   : showCallModal,
+  [CommonTypes.HIDE_CALL_MODAL]   : hideCallModal,
+
+
+  [CommonTypes.SHOW_CONNECTED_OPTIONS]      : showConnectedOptions,
+  [CommonTypes.SHOW_DISCONNECTED_OPTIONS]   : showDisconnectedOptions,
+  [CommonTypes.CLEAR_CALL_MODAL_DATA]       : clearCallModalData
 
 });

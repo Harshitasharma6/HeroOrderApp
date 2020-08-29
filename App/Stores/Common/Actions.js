@@ -20,7 +20,14 @@ const { Types, Creators } = createActions({
   fetchLeadSourcesLoading: null,
   fetchLeadSourcesLoadingStop: null,
   fetchLeadSourcesSuccess: ['payload'],
-  fetchLeadSourcesFailure: null
+  fetchLeadSourcesFailure: null,
+
+
+  showCallModal: null,
+  hideCallModal: null,
+  showConnectedOptions: null,
+  showDisconnectedOptions: null,
+  clearCallModalData: null
 })
 
 export const CommonTypes = Types

@@ -65,6 +65,14 @@ const { Types, Creators } = createActions({
 	registerCustomerCallValidationFailed: ['payload'],
 
 
+	registerCustomerOutgoingCall: ['payload'],
+	registerCustomerOutgoingCallSuccess:  ['payload'],
+	registerCustomerOutgoingCallFailure: null,
+	registerCustomerOutgoingCallLoading: null,
+	registerCustomerOutgoingCallLoadingStop: null,
+	clearRegisterCustomerOutgoingCallForm: null,
+	changeRegisterCustomerOutgoingCallForm: ['payload'],
+	registerCustomerOutgoingCallValidationFailed: ['payload'],
 
 
 	payBooking: ['payload'],
