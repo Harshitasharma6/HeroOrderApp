@@ -11,6 +11,7 @@ import { HelperService } from 'App/Services/Utils/HelperService';
 import GenericDisplayCard from 'App/Components/GenericDisplayCard'
 import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDisplayCardStrip';
 import {ApplicationStyles, Colors} from 'App/Theme'
+import Styles from './styles'
 import NavigationService from 'App/Services/NavigationService'
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
@@ -41,7 +42,7 @@ class CustomersScreen extends Component {
 	              content={[
 	                <GenericDisplayCardStrip key={'Product Purchased' + item.name} label={'Product Purchased'} value={'Optima'}/>,
 	                <GenericDisplayCardStrip key={'Purchased Date' + item.name} label={'Purchased Date'} value={'29/06/2020'}/>,
-	                <BlueButton title={'Call'} style={{width: wp('27%'), alignSelf: 'flex-end', marginTop: hp('1%') }} textStyle={{fontSize: wp('3.8%')}} onPress={() => HelperService.callNumber('9779897974')}><GenericIcon name="phone" style={{fontSize: wp('5%'), color: Colors.white}}/></BlueButton>
+                  <BlueButton title={''} style={Styles.callButton} textStyle={Styles.callButtonText} onPress={() => HelperService.callNumber()}><GenericIcon name="phone" style={Styles.callButtonIcon}/></BlueButton>
               ]}
             />}
             keyExtractor={item => item}

@@ -56,5 +56,28 @@ export default StyleSheet.create({
   buttonIcon: {
   	color: Colors.white,
   	fontSize: wp('5.5%')
-  }
+  },
+
+callButton: {
+    width: wp('10%'), 
+    alignSelf: 'flex-end', 
+    marginTop: hp('1%'), 
+    borderRadius:  wp('100%'),
+    paddingRight: 2, 
+    paddingLeft: 2, 
+    position: 'absolute', 
+    top: -hp('6%'), 
+    right: -wp('2%'), 
+    borderColor: Colors.primary, 
+    backgroundColor: 'transparent', 
+    borderWidth: 1, 
+    zIndex: 3
+  },
+  callButtonText: {
+    fontSize: wp('3.8%')
+  },
+  callButtonIcon: {
+    fontSize: wp('5%'), 
+    color: Colors.primary
+  },
 });

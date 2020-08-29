@@ -127,8 +127,9 @@ export function* getFollowUp({ payload }) {
 
 	try {
 		yield put(InsightsActions.getFollowUpLoading());
-		let {token} = yield select(state => state.user)
+		let {token, dealer__c} = yield select(state => state.user)
 		payload.token = token
+		payload.dealer_id = dealer__c
 		
 	let successData = yield call(InsightsService.getFollowUp, payload);
 		if (successData) {

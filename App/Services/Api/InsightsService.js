@@ -99,6 +99,7 @@ function getAllScheme(params) {
 
 function getFollowUp(params) {
 	let url = Config.SCHEME_SERVICE.GET_FOLLOW_UP	;
+	url += `?dealer_id=${params.dealer_id}`
 	
 	return apiClient.get(url, {
 		headers: {

@@ -12,7 +12,7 @@ const {
 
 function getAllDealers(params) {
 	let url = Config.DEALER_SERVICE.FETCH_ALL_DEALER_SALES_INFO;
-	
+	url += `?dealer_id=${params.dealer_id}`
 	
 	return apiClient.get(url, {
 		headers: {

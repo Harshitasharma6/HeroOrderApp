@@ -21,9 +21,9 @@ class ConfirmBookingLayout extends React.Component {
      <Header transparent style={Styles.header}>
        <BackArrowButton />
        <Text style={Styles.heading}>{"BOOKING CONFIRMED"}</Text>
-       <Underline/>
+      
 
-       <View style={{alignItems:'center', justifyContent: 'center', width: wp('50%'), height: 100, marginHorizontal: wp('23%')}}>
+       <View style={{alignItems:'center', justifyContent: 'center', width: wp('50%'),  marginHorizontal: wp('23%')}}>
        
        <SearchBar
 	            placeholder={`Search Customer`}
@@ -79,12 +79,12 @@ const Styles = StyleSheet.create({
     fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
     fontSize: wp('5.5%'),
     marginTop: hp('0%'),
-    marginBottom:hp('0%'),
+    marginBottom:hp('3%'),
     textTransform: 'uppercase',
     },
    header: {
     alignItems: 'flex-start',
-    height: hp('29%'),
+    height: hp('24%'),
     flexDirection: 'column',
     justifyContent: 'center'
   },

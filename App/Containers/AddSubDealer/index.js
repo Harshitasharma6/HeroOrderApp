@@ -14,7 +14,7 @@ import NavigationService from 'App/Services/NavigationService'
 import {ApplicationStyles} from 'App/Theme'
 import SubDealersActions from 'App/Stores/SubDealers/Actions';
 import Underline from 'App/Components/Underline';
-import GoogleAddress from 'App/Components/GoogleAddress'
+import SubDealerAddress from 'App/Components/subDealerAddress'
 
 // "first_name__c": "test 12",	(*mandatory)
 // 	"last_name__c": "enquiry visit test",	(*mandatory)
@@ -130,7 +130,7 @@ class SubDealerFormScreen extends Component {
 						label={'City'}
 					/>
 					</View>
-					<View style={{width:'40%', marginLeft:'7%'}}>
+					<View style={{width:'40%', marginLeft:'9%'}}>
 					<InputText
 						styles={Style.mb10}
 						placeholder={'State'}
@@ -142,13 +142,13 @@ class SubDealerFormScreen extends Component {
 
 					</View>
                     </View>  
-                    <View style={{ marginLeft: '1%', marginRight:'1%', }}>
-					<GoogleAddress
+					
+					<SubDealerAddress
 						value={form.address_line_1__c}
 						changeForm={(value) => changeForm({ edited_field: 'address_line_1__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'address_line_1__c'}
 					/>
-                    </View>  
+                    
                 	
 
 					{

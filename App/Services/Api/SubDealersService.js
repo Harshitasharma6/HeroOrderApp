@@ -11,6 +11,7 @@ const {
 
 function getAllSubDealers(params) {
 	let url = Config.SUB_DEALER_SERVICE.GET_SUB_DEALER;
+	url += `?dealer_id=${params.dealer_id}`
 	
 	return apiClient.get(url, {
 		headers: {
