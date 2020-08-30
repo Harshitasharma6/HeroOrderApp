@@ -145,5 +145,28 @@ export function* getFollowUp({ payload }) {
 }
 
 
-    // getDashboardTrendsSoldProducts,
-    // getDashboardTrendsRevenue,
+export function* getCompletedFollowUp({ payload }) {
+	const isOnline = yield select(getConnectionStatus);
+	if (!isOnline) {
+		yield put(InsightsActions.doNothing());
+		return;
+	}
+
+	try {
+		yield put(InsightsActions.getCompletedFollowUpLoading());
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
+		
+	let successData = yield call(InsightsService.getCompletedFollowUp, payload);
+		if (successData) {
+			yield put(InsightsActions.getCompletedFollowUpLoadingStop());
+			yield put(InsightsActions.getCompletedFollowUpSuccess(successData));
+			
+		} else {
+			yield put(InsightsActions.getCompletedFollowUpFailure());
+		}
+	} catch (error) {
+		yield put(InsightsActions.getCompletedFollowUpFailure());
+	}
+}

@@ -25,6 +25,7 @@ class CallsModal extends Component  {
 			showDisconnectedOptions,
 			changeForm,
 			submitForm,
+			updateForm,
 			form,
 			loading,
 			clearForm
@@ -33,7 +34,6 @@ class CallsModal extends Component  {
 	    let body = (
 	    	<View style={Style.container}>
 		        <View style={Style.modalContainer}>
-		            <Text style={Style.modalHeading}>Call Feedback</Text>
 		            <Text style={Style.questionHeading}>Did the call got connected?</Text>
 		            <View style={Style.actionContainer}>
 		                <BlueButton
@@ -64,7 +64,7 @@ class CallsModal extends Component  {
 	    				data={form} 
 	    				onChange={(params) => changeForm(params)} 
 	    				loading={loading} 
-	    				onSubmit={() => submitForm(form)}
+	    				onSubmit={() => {form.call_activity_sfid ? updateForm(form) : submitForm(form)}}
 	    			/>
 	    		</View>
 	    	)	
@@ -78,7 +78,7 @@ class CallsModal extends Component  {
 	    				data={form} 
 	    				onChange={(params) => changeForm(params)} 
 	    				loading={loading} 
-	    				onSubmit={() => submitForm(form)}
+	    				onSubmit={() => {form.call_activity_sfid ? updateForm(form) : submitForm(form)}}
 	    			/>
 	    		</View>
 	    	)
@@ -107,6 +107,7 @@ const mapDispatchToProps = (dispatch) => ({
 	showDisconnectedOptions: (params) => dispatch(CommonActions.showDisconnectedOptions(params)),
 	changeForm: (params)       		  => dispatch(VisitorActions.changeRegisterCustomerOutgoingCallForm(params)),
 	submitForm: (params)       		  => dispatch(VisitorActions.registerCustomerOutgoingCall(params)),
+	updateForm: (params) 		   	  => dispatch(VisitorActions.updateFollowUpCall(params)),
 	clearForm: () 					  => dispatch(VisitorActions.clearRegisterCustomerOutgoingCallForm(params))
   });
 
@@ -131,7 +132,7 @@ const Style = StyleSheet.create({
     },
     questionHeading: {
     	color: Colors.grey,
-    	fontSize: wp('4.5%'),
+    	fontSize: wp('4.8%'),
     	fontFamily: ApplicationStyles.textMsgFont
     },
     actionButtonTextStyle: {

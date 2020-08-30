@@ -33,7 +33,13 @@ const { Types, Creators } = createActions({
   getFollowUpFailure: null,
   getFollowUpLoading: null,
   getFollowUpLoadingStop: null,
-  
+
+
+  getCompletedFollowUp: ['payload'],
+  getCompletedFollowUpSuccess:  ['payload'],
+  getCompletedFollowUpFailure: null,
+  getCompletedFollowUpLoading: null,
+  getCompletedFollowUpLoadingStop: null,
 
 });
 

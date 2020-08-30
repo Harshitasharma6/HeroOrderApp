@@ -250,7 +250,6 @@ export function* fetchTodayFollowUp({ payload }) {
 		yield put(LeadAlertActions.doNothing());
 		return;
 	}
-
 	try {
 		yield put(LeadAlertActions.fetchTodayFollowUpLoading());
 		let {token, dealer__c} = yield select(state => state.user)
@@ -263,6 +262,7 @@ export function* fetchTodayFollowUp({ payload }) {
 			yield put(LeadAlertActions.fetchTodayFollowUpFailure());
 		}
 	} catch (error) {
+		console.log('error', error)
 		yield put(LeadAlertActions.fetchTodayFollowUpFailure());
 	}
 }

@@ -98,7 +98,29 @@ function getAllScheme(params) {
 
 
 function getFollowUp(params) {
-	let url = Config.SCHEME_SERVICE.GET_FOLLOW_UP	;
+	let url = Config.INSIGHTS_SERVICE.GET_FOLLOW_UP;
+	url += `?dealer_id=${params.dealer_id}`
+	
+	return apiClient.get(url, {
+		headers: {
+			token: params.token,
+			
+		}
+	}).then((response) => {
+		if (in200s(response.status)) {
+			return response['data'];
+		}
+		return null
+	}).catch(error => {
+		console.log(error.response)
+		//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
+		return null
+	});
+}
+
+
+function getCompletedFollowUp(params) {
+	let url = Config.INSIGHTS_SERVICE.GET_COMPLETED_FOLLOW_UP;
 	url += `?dealer_id=${params.dealer_id}`
 	
 	return apiClient.get(url, {
@@ -128,5 +150,5 @@ export const InsightsService = {
 	getDashboardTrendsRevenue,
 	getAllScheme,
 	getFollowUp,
-	
+	getCompletedFollowUp
   }

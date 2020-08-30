@@ -164,7 +164,7 @@ function markLeadLost(params) {
 
 
 function fetchTodayFollowUp(params) {
-	let url = Config.LEAD_ALERT_SERVICE.TODAY_FOLLOW_UP	;
+	let url = Config.LEAD_ALERT_SERVICE.TODAY_FOLLOW_UP;
 	url += `?dealer_id=${params.dealer_id}`
   return apiClient.get(url, {
     headers: {

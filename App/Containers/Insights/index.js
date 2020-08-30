@@ -19,9 +19,11 @@ class InsightsScreen extends Component {
 	fetchCall() {
 		const {
 		  fetchData,
+          fetchCompletedData,
 		} = this.props
 	
 		fetchData({});
+        fetchCompletedData({});
 	}
  
 
@@ -29,20 +31,23 @@ class InsightsScreen extends Component {
         const {
             data,
             loader,
+            completedData,
             selectFollowUp
         } = this.props;
         
+        let pending_count = data&&data.count ?  data.count : 0;
+        let completed_count = completedData&&completedData.count ?  completedData.count : 0
+        let progress =   pending_count ? (completed_count/pending_count) : 0
         return (
             <View style={Styles.mainContainer}>
                 <TouchableOpacity
                     onPress={() => {selectFollowUp('8'); NavigationService.navigate('ActionablesScreen')}}
-
                 >
                     <View style={Styles.progressContainer}>
                         <View style={Styles.textContainer}><Text style={Styles.name}>{`Hi, ${this.props.name}`}</Text></View>
-                        <View style={Styles.textContainer}><Text style={Styles.info}>{`You have ${data&&data.count ?  data.count : 0} follow ups today`}</Text></View>
-                         <View style={Styles.textContainer}><Text style={Styles.countText}>{`Today: ${data&&data.count ?  data.count : 0} | Completed: ${3}`}</Text></View>
-                        <ProgressBar progress={.4}/>
+                        <View style={Styles.textContainer}><Text style={Styles.info}>{`You have ${pending_count} follow ups today`}</Text></View>
+                         <View style={Styles.textContainer}><Text style={Styles.countText}>{`Today: ${pending_count} | Completed: ${completed_count}`}</Text></View>
+                        <ProgressBar progress={progress}/>
                     </View>
                 </TouchableOpacity>
                 <View style={{...ApplicationStyles.container}}>
@@ -78,11 +83,13 @@ class InsightsScreen extends Component {
 const mapStateToProps = (state) => ({
   name: `${state.user.first_name__c} ${state.user.last_name__c}`,
   data: state.insights.FollowUpData,
+  completedData: state.insights.completedFollowUpData,
   loader: state.insights.loaders.getFollowUpLoader,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchData:(params)            => dispatch(InsightsActions.getFollowUp(params)), 
+    fetchData:(params)            => dispatch(InsightsActions.getFollowUp(params)),
+    fetchCompletedData:(params)   => dispatch(InsightsActions.getCompletedFollowUp(params)),
     selectFollowUp: (params)      => dispatch(LeadAlertsActions.selectFollowUp(params))
 })
 

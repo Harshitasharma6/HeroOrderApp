@@ -13,7 +13,8 @@ export const Config = {
 		GET_ALL_VISITS   : 'visit/getAll',
 		GET_FEEDBACKS    : 'feedback/get',
 		REGISTER_CUSTOMER_CALL: 'incomingCallLead/createLead',
-		REGISTER_CUSTOMER_OUTGOING_CALL: 'outgoingCall/createCall'
+		REGISTER_CUSTOMER_OUTGOING_CALL: 'outgoingCall/createCall',
+		UPDATE_FOLLOW_UP_CALL: 'outgoingCall/updateFollowUp'
 	}, 
 
 
@@ -57,8 +58,12 @@ export const Config = {
 
 	},
 
+	INSIGHTS_SERVICE: {
+		GET_FOLLOW_UP							: 'call-activities/callFollowup',
+		GET_COMPLETED_FOLLOW_UP					: 'outgoingCall/getCompletedFollowUp',
+	},
+
 	SCHEME_SERVICE: {
-		GET_ALL_SCHEME							: 'schemeMaster/getAll',
-		GET_FOLLOW_UP							: 'call-activities/callFollowup'
+		GET_ALL_SCHEME							: 'schemeMaster/getAll'
 	}
 }

@@ -110,6 +110,7 @@ import {
     getDashboardTrendsRevenue,
     getAllScheme,
     getFollowUp,
+    getCompletedFollowUp
 } from  './InsightsSaga'
 
 import { 
@@ -117,6 +118,7 @@ import {
     watchRegisterCustomer,
     watchRegisterCustomerCall,
     watchRegisterCustomerOutgoingCall,
+    watchUpdateFollowUpCall,
     watchCreateFeedback,
     watchUpdateVisitor,
     watchPayBooking,
@@ -243,6 +245,7 @@ export default function* root() {
         takeLatest(InsightsTypes.GET_DASHBOARD_TRENDS_REVENUE,  getDashboardTrendsRevenue),
         takeLatest(InsightsTypes.GET_ALL_SCHEME,  getAllScheme),
         takeLatest(InsightsTypes.GET_FOLLOW_UP,  getFollowUp),
+        takeLatest(InsightsTypes.GET_COMPLETED_FOLLOW_UP,  getCompletedFollowUp),
 
         
         fork(watchUpdateVisitor),
@@ -250,6 +253,7 @@ export default function* root() {
         fork(watchRegisterCustomer),
         fork(watchRegisterCustomerCall),
         fork(watchRegisterCustomerOutgoingCall),
+        fork(watchUpdateFollowUpCall),
         fork(watchCreateFeedback),
         fork(watchPayBooking),
         takeLatest(VisitorTypes.GET_ALL_VISITS, getAllVisits),

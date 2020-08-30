@@ -31,8 +31,9 @@ class TodayFollowUps extends Component {
 
     HelperService.callNumber(data.contact_number__c);
     setTimeout(() => {
+      changeForm({edited_field: 'enquiry_id', edited_value: data.enquiry__c});
+      changeForm({edited_field: 'call_activity_sfid', edited_value: data.sfid});
       showCallModal(); 
-      changeForm({edited_field: 'enquiry_id', edited_value: data.sfid});
     }, 2000)
   }
 
@@ -82,12 +83,12 @@ class TodayFollowUps extends Component {
           />
         );
       } else {
-        visibleNode =<NoDataFound text={'No FollowUp Found'} />
+        visibleNode =<NoDataFound text={'No Follow ups Found'} />
       }
     } else if (loading) {
       visibleNode = <Loading />
     } else if ((!data || (data && !data.length) && !loading)) {
-      visibleNode = <NoDataFound text={'No FollowUp Found'} />
+      visibleNode = <NoDataFound text={'No Follow ups Found'} />
     }
 
     return visibleNode;

@@ -109,6 +109,33 @@ export function* watchRegisterCustomerOutgoingCall() {
 	}
 }
 
+
+export function* watchUpdateFollowUpCall() {
+	while (true) {
+		const { payload } = yield take(VisitorTypes.UPDATE_FOLLOW_UP_CALL)
+		try {
+			const validationFailed = yield call(ValidationService.validateRegisterCustomerCallForm, payload);
+			if (validationFailed) {
+				HelperService.showToast({ 
+					message: validationFailed.error_message, 
+					duration: 2000, 
+					buttonText: 'Okay' 
+				});
+
+				yield put(VisitorActions.registerCustomerOutgoingCallValidationFailed(validationFailed));
+				continue;
+			}
+		} catch (err) {
+			console.log(err)
+		}
+
+		yield call(updateFollowUpCall, payload)
+	}
+}
+
+
+//updateFollowUpCall
+
 export function* watchPayBooking() {
 	while (true) {
 		const { payload } = yield take(VisitorTypes.PAY_BOOKING)
@@ -400,6 +427,56 @@ function* registerCustomerOutgoingCall(payload) {
 }
 
 
+function* updateFollowUpCall(payload) {
+	yield put(VisitorActions.registerCustomerOutgoingCallLoading());
+	try {
+		const isOnline = yield select(getConnectionStatus);
+		if (!isOnline) {
+			yield put(VisitorActions.registerCustomerOutgoingCallFailure());
+			HelperService.showToast({ 
+				message: 'Cannot Registration. No Internet connection.', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+			return;
+		}
+
+		let {token, dealer__c, sfid} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
+		payload.dealers_sales_person_login_info_id = sfid
+		const successData = yield call(VisitorService.updateFollowUpCall, payload);
+
+		if (successData) { 
+			yield put(VisitorActions.registerCustomerOutgoingCallSuccess(successData));
+			yield put(CommonActions.hideCallModal());
+			HelperService.showToast({ 
+				message: 'Follow Up updated Successfully!!', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+		} else {
+			yield put(VisitorActions.registerCustomerOutgoingCallFailure())
+			HelperService.showToast({ 
+				message: 'Error!! Verify fields and try again.', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+		}
+	} catch (error) {
+		yield put(VisitorActions.registerCustomerOutgoingCallFailure());
+		HelperService.showToast({ 
+			message: 'Error!! Call Registration Failed.Verify fields and try again.', 
+			duration: 2000, 
+			buttonText: 'Okay' 
+		});
+	}
+}
+
+
+//updateFollowUpCall
+
+
 function* payBooking(payload) {
 	yield put(VisitorActions.payBookingLoading());
 	try {
@@ -510,9 +587,10 @@ function* createFeedback(payload) {
 			return;
 		}
 
-		let {token, dealer__c} = yield select(state => state.user)
+		let {token, dealer__c, sfid} = yield select(state => state.user)
 		payload.token = token
 		payload.dealer_id = dealer__c
+		payload.dealers_sales_person_login_info__c =  sfid;
 		payload.enquiry = payload.enquiry_id
 		
 		const successData = yield call(VisitorService.createFeedback, payload);

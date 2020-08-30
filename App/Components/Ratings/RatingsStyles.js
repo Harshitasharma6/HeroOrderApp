@@ -5,7 +5,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 export default StyleSheet.create({
   icon: {
   	color: Colors.primary,
-  	fontSize: wp('10%'),
-  	padding: wp('2%')
+  	fontSize: wp('8%'),
+  	padding: wp('1.5%')
   }
 });

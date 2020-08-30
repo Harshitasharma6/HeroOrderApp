@@ -40,8 +40,7 @@ class TestDriveFeedBackScreen extends Component {
 		Keyboard.dismiss(); 
 		submitForm({
 			...form, 
-			enquiry_id: currentEnquiryId, 
-			dealers_sales_person_login_info__c: "a0O9D000001hLV9UAM",
+			enquiry_id: currentEnquiryId,
 			date_of_test_drive: HelperService.dateReadableFormatWithHyphen()
 		});
 	}

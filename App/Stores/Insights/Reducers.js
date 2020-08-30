@@ -197,6 +197,44 @@ export const getFollowUpLoadingStop = (state) => ({
 
 
 
+export const getCompletedFollowUpSuccess = (state, { payload }) => ({
+  ...state,
+  completedFollowUpData: payload,
+  loaders: {
+    ...state.loaders,
+    getCompletedFollowUpLoader: false
+  }
+});
+
+export const getCompletedFollowUpFailure = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getCompletedFollowUpLoader: false
+  }
+});
+
+
+export const getCompletedFollowUpLoading = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getCompletedFollowUpLoader: true
+  }
+});
+
+
+export const getCompletedFollowUpLoadingStop = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getCompletedFollowUpLoader: false
+  }
+});
+
+
+
+
 
 export const reducer = createReducer(INITIAL_STATE, {
   [InsightsTypes.GET_DASHBOARD_SUMMARY_SUCCESS]     : getDashboardSummarySuccess,
@@ -218,8 +256,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [InsightsTypes.GET_DASHBOARD_TRENDS_REVENUE_LOADING_STOP]: getDashboardTrendsRevenueLoadingStop,
 
 
-  [InsightsTypes.DO_NOTHING] 				                       : doNothing,
-  
+  [InsightsTypes.DO_NOTHING] 				         : doNothing,
   [InsightsTypes.GET_ALL_SCHEME_SUCCESS]     : getAllSchemeSuccess,
   [InsightsTypes.GET_ALL_SCHEME_FAILURE]     : getAllSchemeFailure,
   [InsightsTypes.GET_ALL_SCHEME_LOADING]     : getAllSchemeLoading,
@@ -231,6 +268,13 @@ export const reducer = createReducer(INITIAL_STATE, {
   [InsightsTypes.GET_FOLLOW_UP_FAILURE]     : getFollowUpFailure,
   [InsightsTypes.GET_FOLLOW_UP_LOADING]     : getFollowUpLoading,
   [InsightsTypes.GET_FOLLOW_UP_LOADING_STOP]: getFollowUpLoadingStop,
+
+
+
+  [InsightsTypes.GET_COMPLETED_FOLLOW_UP_SUCCESS]     : getCompletedFollowUpSuccess,
+  [InsightsTypes.GET_COMPLETED_FOLLOW_UP_FAILURE]     : getCompletedFollowUpFailure,
+  [InsightsTypes.GET_COMPLETED_FOLLOW_UP_LOADING]     : getCompletedFollowUpLoading,
+  [InsightsTypes.GET_COMPLETED_FOLLOW_UP_LOADING_STOP]: getCompletedFollowUpLoadingStop,
 
   
 });

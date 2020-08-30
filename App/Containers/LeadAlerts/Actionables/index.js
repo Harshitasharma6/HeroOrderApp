@@ -141,7 +141,7 @@ class Actionables extends React.Component {
             />
 
              <WhiteButton
-              title={"Today's FollowUps"}
+              title={"Today's Follow ups"}
               style={{...Styles.actionButton, ...Styles.customSelectedStylelightCorpBlue}}
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('8');  this.scrollToIndex(7)}}
@@ -191,7 +191,7 @@ const Styles = StyleSheet.create({
 
   heading: {
     alignSelf: 'center',
-    color: Colors.darkGrey,
+    color: Colors.primary,
     fontFamily: ApplicationStyles.textMsgFont,
     fontSize: wp('5.5%'),
     marginTop: hp('1%'),

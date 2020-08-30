@@ -168,6 +168,26 @@ function registerCustomerOutgoingCall(params) {
 }
 
 
+function updateFollowUpCall(params) {
+	let url = Config.VISITOR_SERVICE.UPDATE_FOLLOW_UP_CALL;
+	url += `?enquiry_id=${params.enquiry_id}&call_activity_sfid=${params.call_activity_sfid}`
+	return apiClient.put(url, params, {
+		headers: {
+			token: params.token
+		}
+	}).then((response) => {
+		if (in200s(response.status)) {
+			return response['data'];
+		}
+		return null
+	}).catch(error => {
+		debugger
+		//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
+		return null
+	});
+}
+
+
 function payBooking(params) {
 	// let url = Config.VISITOR_SERVICE.REGISTER_CUSTOMER_CALL;
 	// return apiClient.post(url, params, {
@@ -195,6 +215,7 @@ export const VisitorService = {
 	registerCustomer,
 	registerCustomerCall,
 	registerCustomerOutgoingCall,
+	updateFollowUpCall,
 	createFeedback,
 	getAllVisits,
 	payBooking,
