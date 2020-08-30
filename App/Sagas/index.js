@@ -110,6 +110,7 @@ import {
     getDashboardTrendsRevenue,
     getAllScheme,
     getFollowUp,
+    getAllCustomer,
 } from  './InsightsSaga'
 
 import { 
@@ -243,6 +244,7 @@ export default function* root() {
         takeLatest(InsightsTypes.GET_DASHBOARD_TRENDS_REVENUE,  getDashboardTrendsRevenue),
         takeLatest(InsightsTypes.GET_ALL_SCHEME,  getAllScheme),
         takeLatest(InsightsTypes.GET_FOLLOW_UP,  getFollowUp),
+        takeLatest(InsightsTypes.GET_ALL_CUSTOMER, getAllCustomer),
 
         
         fork(watchUpdateVisitor),

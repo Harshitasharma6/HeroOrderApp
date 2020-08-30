@@ -2,6 +2,7 @@ import { INITIAL_STATE } from './InitialState'
 import { createReducer } from 'reduxsauce'
 import { offlineActionTypes, reducer as network } from "react-native-offline";
 import { InsightsTypes } from './Actions'
+import _ from 'lodash';
 
 
 export const getDashboardSummarySuccess = (state, { payload }) => ({
@@ -195,6 +196,56 @@ export const getFollowUpLoadingStop = (state) => ({
 });
 
 
+export const getAllCustomerSuccess = (state, { payload }) => ({
+  ...state,
+  AllCustomerData: payload,
+  loaders: {
+    ...state.loaders,
+    cLoader: false
+  }
+});
+
+export const getAllCustomerFailure = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllCustomerLoader: false
+  }
+});
+
+
+export const getAllCustomerLoading = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllCustomerLoader: true
+  }
+});
+
+
+export const getAllCustomerLoadingStop = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllCustomerLoader: false
+  }
+});
+
+export const updateCustomersSearchFilters = (state, { payload }) => {
+  let updated_search_filters = _.cloneDeep(state.customerSearchFilters);
+  updated_search_filters[payload.edited_field] = payload.edited_value;
+
+  return {
+      ...state,
+      customerSearchFilters: {
+          ...state.customerSearchFilters,
+          ...updated_search_filters
+      },
+      openMoreFilters: false
+  }
+};
+
+
 
 
 
@@ -231,6 +282,15 @@ export const reducer = createReducer(INITIAL_STATE, {
   [InsightsTypes.GET_FOLLOW_UP_FAILURE]     : getFollowUpFailure,
   [InsightsTypes.GET_FOLLOW_UP_LOADING]     : getFollowUpLoading,
   [InsightsTypes.GET_FOLLOW_UP_LOADING_STOP]: getFollowUpLoadingStop,
+
+
+
+  [InsightsTypes.GET_ALL_CUSTOMER_SUCCESS]     : getAllCustomerSuccess,
+  [InsightsTypes.GET_ALL_CUSTOMER_FAILURE]     : getAllCustomerFailure,
+  [InsightsTypes.GET_ALL_CUSTOMER_LOADING]     : getAllCustomerLoading,
+  [InsightsTypes.GET_ALL_CUSTOMER_LOADING_STOP]: getAllCustomerLoadingStop,
+
+  [InsightsTypes.UPDATE_CUSTOMERS_SEARCH_FILTERS]: updateCustomersSearchFilters,
 
   
 });

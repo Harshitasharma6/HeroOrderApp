@@ -8,12 +8,15 @@ import { StyleSheet, View, ScrollView, Image } from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { connect } from 'react-redux';
 import SearchBar from 'App/Components/SearchBar'
+import InsightsActions from 'App/Stores/Insights/Actions';
 
 
 class CustomerList extends React.Component {
   render() {
     const {
-      currentScreen
+      currentScreen,
+      customerSearchFilters,
+      updateSearchFilters
     } = this.props;
 
     return (
@@ -21,13 +24,16 @@ class CustomerList extends React.Component {
         <Header transparent style={Styles.header}>
         	<SearchBar
 	            placeholder={`Search Customer`}
-	            onInputChange={(text) => console.log('text')}
-	            onInputSubmit={(text) => console.log('text')}
-	            onInputClear={(text) => console.log('text')}
-	            value={''}
-	            ContainerStyles={Styles.searchContainer}
-	            inputStyles={{fontSize: wp('4%')}}
-          />
+              onInputChange={(text) => updateSearchFilters({ edited_field: 'searchValue', 'edited_value': text })}
+              onInputSubmit={(text) => updateSearchFilters({ edited_field: 'searchValue', 'edited_value': text })}
+              onInputClear={(text) => updateSearchFilters({ edited_field: 'searchValue', 'edited_value': '' })}
+              value={customerSearchFilters['searchValue']}
+              ContainerStyles={Styles.searchContainer}
+              inputStyles={{fontSize: wp('4%')}}
+              key={'SearchCustomersList'}
+              
+             
+              />
         </Header>
         {this.props.children}
       </View>
@@ -40,11 +46,18 @@ class CustomerList extends React.Component {
 const mapStateToProps = (state) => ({
   isConnected: state.network.isConnected,
   isVisible: state.common.isNetworkBannerVisible,
-  currentScreen: state.common.currentScreen
+  currentScreen: state.common.currentScreen,
+  customerSearchFilters: state.insights.customerSearchFilters,
+  
 })
 
+const mapDispatchToProps = (dispatch) => ({
+  updateSearchFilters : (params) => dispatch(InsightsActions.updateCustomersSearchFilters(params)),
+  });
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(CustomerList)
 
 

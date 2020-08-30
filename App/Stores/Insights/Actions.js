@@ -33,6 +33,16 @@ const { Types, Creators } = createActions({
   getFollowUpFailure: null,
   getFollowUpLoading: null,
   getFollowUpLoadingStop: null,
+
+
+  getAllCustomer: ['payload'],
+  getAllCustomerSuccess:  ['payload'],
+  getAllCustomerFailure: null,
+  getAllCustomerLoading: null,
+  getAllCustomerLoadingStop: null,
+
+
+  updateCustomersSearchFilters: ['payload'],
   
 
 });

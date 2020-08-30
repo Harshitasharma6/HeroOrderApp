@@ -4,12 +4,29 @@ export const INITIAL_STATE = {
 		getFollowUpLoader: false,
 		getDashboardSummaryLoader: false,
 		getDashboardTrendsSoldProductsLoader: false,
-		getDashboardTrendsRevenueLoader: false
+		getDashboardTrendsRevenueLoader: false,
+		getAllCustomerLoader: false,
+
+
 	},
+	openMoreFilters: false,
 	
 	DashboardSummaryData: [],
 	dashboardTrendsSoldProductsData: [],
 	dashboardTrendsRevenueData: [],
 	SchemeData: [],
 	FollowUpData: [],
+	AllCustomerData:[],
+
+	customerSearchFilters: {
+        area: '',
+        type: '',
+        sortType: 'ASC',
+        sortBy: '',
+        searchBy: 'name',
+        searchValue: '',
+       
+    },
+
+
 }
