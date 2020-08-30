@@ -129,6 +129,8 @@ const mapDispatchToProps = (dispatch) => ({
   openModal:(params)     => dispatch(CommonActions.openModal(params)),
   closeModal:(params)    => dispatch(CommonActions.closeModal(params)),
   submitForm: (params)   => dispatch(LeadAlertActions.markLeadLost(params)),
+  showCallModal: (params)    => dispatch(CommonActions.showCallModal(params)),
+  hideCallModal: (params)    => dispatch(CommonActions.hideCallModal(params)),
   changeForm: (params)       => dispatch(VisitorActions.changeRegisterCustomerOutgoingCallForm(params)),
 });
 
