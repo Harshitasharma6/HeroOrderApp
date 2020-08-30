@@ -35,7 +35,7 @@ class InsightsScreen extends Component {
         return (
             <View style={Styles.mainContainer}>
                 <TouchableOpacity
-                    onPress={() => {selectFollowUp('7'); NavigationService.navigate('ActionablesScreen')}}
+                    onPress={() => {selectFollowUp('8'); NavigationService.navigate('ActionablesScreen')}}
 
                 >
                     <View style={Styles.progressContainer}>

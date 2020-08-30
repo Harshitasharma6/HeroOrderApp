@@ -138,7 +138,18 @@ class Actionables extends React.Component {
               selected={selectedFollowUp == '7'}
               customSelectedStyle={{...Styles.customSelectedStyleCorpBlue, ...Styles.selected}}
               customSelectedTextStyle={Styles.customSelectedTextStyle}
-            />       
+            />
+
+             <WhiteButton
+              title={"Today's FollowUps"}
+              style={{...Styles.actionButton, ...Styles.customSelectedStylelightCorpBlue}}
+              textStyle={Styles.actionButtonText}
+              onPress={() => {selectFollowUp('8');  this.scrollToIndex(7)}}
+              selected={selectedFollowUp == '8'}
+              customSelectedStyle={{...Styles.customSelectedStylelightCorpBlue, ...Styles.selected}}
+              customSelectedTextStyle={Styles.customSelectedTextStyle}
+            /> 
+
           </ScrollView>
           </View>
           {visible_node}
@@ -266,6 +277,10 @@ const Styles = StyleSheet.create({
   },
   customSelectedStyleCorpBlue: {
     backgroundColor: Colors.darkCorpBlue,
+    width: wp('40%')
+  },
+  customSelectedStylelightCorpBlue: {
+    backgroundColor: Colors.lightCorpBlue,
     width: wp('40%')
   },
   customSelectedStyleCorpGreen: {

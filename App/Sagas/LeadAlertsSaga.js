@@ -244,5 +244,26 @@ export function* watchMarkLeadLost() {
 }
 
 
+export function* fetchTodayFollowUp({ payload }) {
+	const isOnline = yield select(getConnectionStatus);
+	if (!isOnline) {
+		yield put(LeadAlertActions.doNothing());
+		return;
+	}
 
+	try {
+		yield put(LeadAlertActions.fetchTodayFollowUpLoading());
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
+		let successData = yield call(LeadAlertService.fetchTodayFollowUp, payload);
+		if (successData) {
+			yield put(LeadAlertActions.fetchTodayFollowUpSuccess(successData));
+		} else {
+			yield put(LeadAlertActions.fetchTodayFollowUpFailure());
+		}
+	} catch (error) {
+		yield put(LeadAlertActions.fetchTodayFollowUpFailure());
+	}
+}
 

@@ -388,6 +388,42 @@ export const fetchAllOpenLeadsLoadingStop = (state, {payload}) => ({
 });
 
 
+export const fetchTodayFollowUpSuccess = (state, {payload}) => ({
+  ...state,
+  todayFollowUp: payload,
+  loaders: {
+    ...state.loaders,
+    fetchtodayFollowUpLoader: false
+  }
+});
+
+
+export const fetchTodayFollowUpFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchtodayFollowUpLoader: false
+  }
+});
+
+
+export const fetchTodayFollowUpLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchtodayFollowUpLoader: true
+  }
+});
+
+
+export const fetchTodayFollowUpLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchtodayFollowUpLoader: false
+  }
+});
+
 
 
 
@@ -444,6 +480,11 @@ export const reducer = createReducer(INITIAL_STATE, {
     [LeadAlertTypes.FETCH_NO_ACTION_FAILURE]         : fetchNoActionFailure,
     [LeadAlertTypes.FETCH_NO_ACTION_LOADING]         : fetchNoActionLoading,
     [LeadAlertTypes.FETCH_NO_ACTION_LOADING_STOP]    : fetchNoActionLoadingStop,
+
+    [LeadAlertTypes.FETCH_TODAY_FOLLOW_UP_SUCCESS]         : fetchTodayFollowUpSuccess,
+    [LeadAlertTypes.FETCH_TODAY_FOLLOW_UP_FAILURE]         : fetchTodayFollowUpFailure,
+    [LeadAlertTypes.FETCH_TODAY_FOLLOW_UP_LOADING]         : fetchTodayFollowUpLoading,
+    [LeadAlertTypes.FETCH_TODAY_FOLLOW_UP_LOADING_STOP]    : fetchTodayFollowUpLoadingStop,
 
 
 

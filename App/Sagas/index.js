@@ -139,7 +139,8 @@ import {
     fetchNoAction,
     fetchCallLeads,
     fetchAllOpenLeads,
-    watchMarkLeadLost
+    watchMarkLeadLost,
+    fetchTodayFollowUp,
 } from './LeadAlertsSaga'
 
 
@@ -262,7 +263,8 @@ export default function* root() {
         takeLatest(LeadAlertTypes.FETCH_OPEN_LEADS, fetchOpenLeads),
         takeLatest(LeadAlertTypes.FETCH_NO_ACTION, fetchNoAction),
         takeLatest(LeadAlertTypes.FETCH_CALL_LEADS, fetchCallLeads),
-        takeLatest(LeadAlertTypes.FETCH_ALL_OPEN_LEADS, fetchAllOpenLeads)
+        takeLatest(LeadAlertTypes.FETCH_ALL_OPEN_LEADS, fetchAllOpenLeads),
+        takeLatest(LeadAlertTypes.FETCH_TODAY_FOLLOW_UP, fetchTodayFollowUp),
 
 
     ]);
