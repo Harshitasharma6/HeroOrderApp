@@ -367,10 +367,10 @@ function* registerCustomerOutgoingCall(payload) {
 			return;
 		}
 
-		let {token, dealer__c} = yield select(state => state.user)
+		let {token, dealer__c, sfid} = yield select(state => state.user)
 		payload.token = token
 		payload.dealer_id = dealer__c
-		payload.dealers_sales_person_login_info_id = dealer__c
+		payload.dealers_sales_person_login_info_id = sfid
 		const successData = yield call(VisitorService.registerCustomerOutgoingCall, payload);
 
 		if (successData) { 
