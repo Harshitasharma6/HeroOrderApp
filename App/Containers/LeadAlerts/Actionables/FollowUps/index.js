@@ -14,6 +14,7 @@ import OpenHotLeads from './OpenHotLeads'
 import CallLeads from './CallLeads'
 import AllOpenLeads from './AllOpenLeads'
 import PurchaseDateOverDue from './PurchaseDateOverDue'
+import TodayFollowUps from './TodayFollowUp'
 
 
 class FollowUps extends React.Component {
@@ -47,6 +48,9 @@ class FollowUps extends React.Component {
         break;
       case '7':
         visibleNode = <CallLeads />
+        break;
+      case '8':
+        visibleNode = <TodayFollowUps/>  
         break;
     	default:
     		visibleNode = <OpenHotLeads />

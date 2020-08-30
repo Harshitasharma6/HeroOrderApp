@@ -8,6 +8,7 @@ export const INITIAL_STATE = {
     noAction: [],
     callLeads: [],
     allOpenLeads: [],
+    todayFollowUp: [],
     loaders: {
     	fetchHotLeadsLoader: false,
     	fetchBookingConfirmFinanceLeadsLoader: false,
@@ -16,7 +17,8 @@ export const INITIAL_STATE = {
         fetchCallsLeadsLoader: false,
         fetchAllOpenLeadsLoader: false,
     	fetchNoActionLoader: false,
-    	markLeadLostLoader: false
+        markLeadLostLoader: false,
+        fetchtodayFollowUpLoader: false,
     },
     leadLostForm: {},
     leadLostFormValidation: {

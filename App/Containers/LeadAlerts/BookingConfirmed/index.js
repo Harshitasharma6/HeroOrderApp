@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList } from 'react-native'
+import { View, Text, FlatList ,StyleSheet} from 'react-native'
 import { connect } from 'react-redux'
 import ItemDetail from 'App/Components/ItemDetail'
 import NoDataFound from 'App/Components/NoDataFound'
@@ -42,7 +42,7 @@ class BookingConfirmed extends Component {
 	              	<GenericDisplayCardStrip key={'Stage' + item.name} label={'Stage'} value={'Booking'}/>,
 	              	<GenericDisplayCardStrip key={'Product Purchased' + item.name} label={'Product Purchased'} value={'Optima LI'}/>,
 	                <GenericDisplayCardStrip key={'Expected Delivery Date' + item.name} label={'Expected Delivery Date'} value={'23/07/2020'}/>,
-                  <BlueButton title={''} style={{width: wp('10%'), alignSelf: 'flex-end', marginTop: hp('1%'), borderRadius:  wp('100%'), paddingRight: 2, paddingLeft: 2, position: 'absolute', top: -hp('6%'), right: -wp('2%')}} textStyle={{fontSize: wp('3.8%')}} onPress={() => HelperService.callNumber()}><GenericIcon name="phone" style={{fontSize: wp('5%'), color: Colors.white}}/></BlueButton>
+                  <BlueButton title={''} style={Styles.callButton} textStyle={Styles.callButtonText} ><GenericIcon name="phone" style={Styles.callButtonIcon}/></BlueButton>
               ]}
             />}
             keyExtractor={item => item}
@@ -85,3 +85,29 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(BookingConfirmed)
+
+const Styles = StyleSheet.create({
+  callButton: {
+    width: wp('10%'), 
+    alignSelf: 'flex-end', 
+    marginTop: hp('1%'), 
+    borderRadius:  wp('100%'),
+    paddingRight: 2, 
+    paddingLeft: 2, 
+    position: 'absolute', 
+    top: -hp('6%'), 
+    right: -wp('2%'), 
+    borderColor: Colors.primary, 
+    backgroundColor: 'transparent', 
+    borderWidth: 1, 
+    zIndex: 3
+  },
+  callButtonText: {
+    fontSize: wp('3.8%')
+  },
+  callButtonIcon: {
+    fontSize: wp('5%'), 
+    color: Colors.primary
+  },
+});
+

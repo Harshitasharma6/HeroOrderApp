@@ -66,6 +66,6 @@ export default {
   darkGreyWhite: '#CBD7E8',
 
   lightCorpBlue: '#ecf6fd',
-  darkCorpBlue: '#108ee9'
+  darkCorpBlue: '#00bfff'
   
 }
