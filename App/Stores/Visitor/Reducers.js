@@ -545,6 +545,45 @@ export const registerCustomerOutgoingCallValidationFailed = (state, {payload}) =
 });
 
 
+
+export const getAllFollowUpsSuccess = (state, {payload}) => ({
+  ...state,
+  followUpsMapping: payload,
+  loaders: {
+    ...state.loaders,
+    getAllFollowUpsLoader: false
+  }
+});
+
+
+export const getAllFollowUpsFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllFollowUpsLoader: false
+  }
+});
+
+
+export const getAllFollowUpsLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllFollowUpsLoader: true
+  }
+});
+
+
+export const getAllFollowUpsLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllFollowUpsLoader: false
+  }
+});
+//getFeedbacksLoader: false,
+//followUpsMapping
+
 export const reducer = createReducer(INITIAL_STATE, {
 	[VisitorTypes.SEARCH_CUSTOMER_SUCCESS] 	             : searchCustomerSuccess,
 	[VisitorTypes.SEARCH_CUSTOMER_FAILURE] 	             : searchCustomerFailure,
@@ -578,6 +617,14 @@ export const reducer = createReducer(INITIAL_STATE, {
   [VisitorTypes.GET_ALL_VISITS_FAILURE]                : getAllVisitsFailure,
   [VisitorTypes.GET_ALL_VISITS_LOADING]                : getAllVisitsLoading,
   [VisitorTypes.GET_ALL_VISITS_LOADING_STOP]           : getAllVisitsLoadingStop,
+
+
+  [VisitorTypes.GET_ALL_FOLLOW_UPS_SUCCESS]                : getAllFollowUpsSuccess,
+  [VisitorTypes.GET_ALL_FOLLOW_UPS_FAILURE]                : getAllFollowUpsFailure,
+  [VisitorTypes.GET_ALL_FOLLOW_UPS_LOADING]                : getAllFollowUpsLoading,
+  [VisitorTypes.GET_ALL_FOLLOW_UPS_LOADING_STOP]           : getAllFollowUpsLoadingStop,
+
+
 
 	[VisitorTypes.GET_FEEDBACKS_SUCCESS]                 : getFeedbacksSuccess,
 	[VisitorTypes.GET_FEEDBACKS_FAILURE]                 : getFeedbacksFailure,

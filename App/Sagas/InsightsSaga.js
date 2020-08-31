@@ -157,7 +157,7 @@ export function* getCompletedFollowUp({ payload }) {
 		payload.token = token
 		payload.dealer_id = dealer__c
 		
-	let successData = yield call(InsightsService.getFollowUp, payload);
+	let successData = yield call(InsightsService.getCompletedFollowUp, payload);
 		if (successData) {
 			yield put(InsightsActions.getCompletedFollowUpLoadingStop());
 			yield put(InsightsActions.getCompletedFollowUpSuccess(successData));

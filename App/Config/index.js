@@ -11,6 +11,7 @@ export const Config = {
 		UPDATE_VISITOR   : 'visitors/update',
 		CREATE_FEEDBACK  : 'feedback/create',
 		GET_ALL_VISITS   : 'visit/getAll',
+		GET_ALL_FOLLOW_UPS: 'getCustomer/getCustomerFollowUp',
 		GET_FEEDBACKS    : 'feedback/get',
 		REGISTER_CUSTOMER_CALL: 'incomingCallLead/createLead',
 		REGISTER_CUSTOMER_OUTGOING_CALL: 'outgoingCall/createCall',

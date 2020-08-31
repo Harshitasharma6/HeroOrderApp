@@ -62,7 +62,8 @@ class CustomersScreen extends Component {
             data={filteredCustomerList}
             renderItem={({ item }) => 
             	<GenericDisplayCard dark={false}
-	              style={{ width: '88%', elevation: 0 }}
+                style={{ width: '88%', elevation: 0 }}
+                
 	              heading={item.name}
 	              showTextAvatar={true}
 	              onPress={() => NavigationService.navigate('CustomerInfoScreen')}

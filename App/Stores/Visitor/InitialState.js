@@ -7,6 +7,7 @@ export const INITIAL_STATE = {
 		registerCustomerLoader: false,
 		createFeedbackLoader: false,
 		getAllVisitsLoader: false,
+        getAllFollowUpsLoader: false,
 		getFeedbacksLoader: false,
 		registerCustomerCallLoader: false,
         registerCustomerOutgoingCallLoader: false,
@@ -64,6 +65,6 @@ export const INITIAL_STATE = {
     },
     visitsMapping: {},
     feedbacksMapping: {},
-
+    followUpsMapping: {},
     payBookingForm: {}
 }

@@ -23,6 +23,16 @@ class PurchaseDateOverDue extends Component {
     this.fetchCall()
   }
 
+  onPressCard(data, enquiry_id) {
+    const {
+      registerCustomerSuccess,
+      setCurrentEnquiry
+    } = this.props;
+    registerCustomerSuccess(data);
+    setCurrentEnquiry(enquiry_id);
+    NavigationService.navigate('VisitorInfoScreen')
+  }
+
   onPressCall(data) {
      const {
       changeForm,
@@ -67,6 +77,7 @@ class PurchaseDateOverDue extends Component {
               <GenericDisplayCard dark={false}
                 style={Styles.infoSeaGreen}
                 heading={`${item.first_name__c} ${item.last_name__c}`}
+                onPress={() => this.onPressCard(item, item.sfid || item.id)}
                 showTextAvatar={true}
                 content={[
                   <GenericDisplayCardStrip key={'Status' + item.id} label={'Status'} value={item.lead_status__c}/>,
@@ -132,6 +143,8 @@ const mapDispatchToProps = (dispatch) => ({
   showCallModal: (params)    => dispatch(CommonActions.showCallModal(params)),
   hideCallModal: (params)    => dispatch(CommonActions.hideCallModal(params)),
   changeForm: (params)       => dispatch(VisitorActions.changeRegisterCustomerOutgoingCallForm(params)),
+  registerCustomerSuccess: (params) => dispatch(VisitorActions.registerCustomerSuccess(params)),
+  setCurrentEnquiry: (params)       => dispatch(VisitorActions.setCurrentEnquiry(params))
 });
 
 export default connect(

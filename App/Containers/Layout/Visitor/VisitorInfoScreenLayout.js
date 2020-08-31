@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 
 class VisitorInfoScreenLayout extends React.Component {
   scrollToIndex(index){
-    let distanceToBeScrolled = (index)*wp('23%');
+    let distanceToBeScrolled = (index)*wp('25%');
     if (this.flatListRef){
       this.flatListRef.scrollTo({x: distanceToBeScrolled, y: 0, animated: true});
     }
@@ -65,8 +65,18 @@ class VisitorInfoScreenLayout extends React.Component {
               onPress={() => {NavigationService.navigate('TestDriveHistoryScreen') ; this.scrollToIndex(3)}}
               selected={currentScreen == 'TestDriveHistoryScreen' }
             />
-           
-            
+
+
+            <WhiteButton
+              title={'Follow ups'}
+              style={Styles.actionButton}
+              textStyle={Styles.actionButtonText}
+              onPress={() => {NavigationService.navigate('AllFollowUpsScreen') ; this.scrollToIndex(4)}}
+              selected={currentScreen == 'AllFollowUpsScreen' }
+            />
+
+
+               
           </ScrollView>
         </Header>
         {this.props.children}

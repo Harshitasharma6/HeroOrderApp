@@ -112,7 +112,7 @@ class OrderCartScreen extends Component {
 						duration: 2000, 
 						buttonText: 'Okay' 
           }) ;
-          NavigationService.navigate('GenerateRecieptformScreen');
+          NavigationService.navigate('InvoiceDetailformScreen');
         
         }}
 		      	/>

@@ -22,6 +22,8 @@ import VisitorActions from 'App/Stores/Visitor/Actions'
 import moment from 'moment';
 import GoogleAddress from 'App/Components/GoogleAddress'
 import ImagePicker from 'App/Components/ImagePicker'
+import DetailCard from 'App/Components/DetailCard'
+
 
 // "first_name__c": "test 12",	(*mandatory)
 // 	"last_name__c": "enquiry visit test",	(*mandatory)
@@ -85,7 +87,27 @@ class InvoiceDetailformScreen extends Component {
 					showsVerticalScrollIndicator={false}
 					style={Style.action}
 				>
-               
+    	  <Text style={Style.heading}>{'Add Invoice Detail'}</Text> 
+      <View style={{flexDirection:'row', justifyContent:'space-around', marginBottom:'2%', }}>
+      <DetailCard
+       title=" Booking Date "
+       value="30/08/20"
+      />
+       <DetailCard
+       title=" Ex Showroom Price "
+       value="20000"
+      />
+      </View>
+      <View style={{flexDirection:'row', justifyContent:'space-around', marginBottom:'2%'}}>
+      <DetailCard
+       title=" Advance Recieved "
+       value="15000"
+      />
+       <DetailCard
+       title=" Outstanding Amount "
+       value="5000"
+      />
+      </View> 
 				
 			   <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
 					<InputNumber
@@ -108,6 +130,34 @@ class InvoiceDetailformScreen extends Component {
 
                     </View>  
 
+					<InputNumber
+						styles={Style.mb10}
+						placeholder={'Online Order No.'}
+						value={form.online_order_no__c}
+						onChange={(value) => changeForm({ edited_field: 'online_order_no__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'online_order_no__c'}
+						label={'Online Order No.* (For Online Schemes only)'}
+					/>
+
+                    <InputNumber
+						styles={Style.mb10}
+						placeholder={'Refrence  No.'}
+						value={form.ref_no_for_reference_schemes_only__c}
+						onChange={(value) => changeForm({ edited_field: 'ref_no_for_reference_schemes_only__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'ref_no_for_reference_schemes_only__c'}
+						label={'Reference No.* (For Refrence Schemes only)'}
+					/>	
+
+
+					<InputNumber
+						styles={Style.mb10}
+						placeholder={'Amount Paid at Booking'}
+						value={form.amount_paid}
+						onChange={(value) => changeForm({ edited_field: 'amount_paid', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'amount_paid'}
+						label={'Amount Paid at Booking'}
+					/>	
+
 
 
 			   <InputText
@@ -119,7 +169,7 @@ class InvoiceDetailformScreen extends Component {
 						label={'Customer  Name*'}
 					/>
 
-			   <View style={{flexDirection:'row', }}>
+			   
 			   <InputMobile
 						styles={Style.mb10}
 						placeholder={'Customer Phone No'}
@@ -128,18 +178,7 @@ class InvoiceDetailformScreen extends Component {
 						error={validation.invalid && validation.invalid_field == 'contact_number__c'}
 						label={'Customer Phone No*'}
 					/>
-					<View style={{marginLeft:'5%', width:'45%'}}>
-					<InputNumber
-						styles={Style.mb10}
-						placeholder={'Enter OTP'}
-						value={form.otp__c}
-						onChange={(value) => changeForm({ edited_field: 'otp__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'otp__c'}
-						label={' Enter OTP'}
-					/>
-
-					</View>
-                    </View>  
+					
 
 			 	  <InputText
 						style={Style.mb10}
@@ -149,13 +188,10 @@ class InvoiceDetailformScreen extends Component {
 						error={validation.invalid && validation.invalid_field == 'email_id__c'}
 						label={'Customer  Email'}
 					/>
-				 	<InputText
-						style={Style.mb10}
-						placeholder={'Customer Address'}
+				 	<GoogleAddress
 						value={form.address_line_1__c}
-						onChange={(value) => changeForm({ edited_field: 'address_line_1__c', edited_value: value })}
+						changeForm={(value) => changeForm({ edited_field: 'address_line_1__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'address_line_1__c'}
-						label={'Customer  Address'}
 					/>
 
 					 <InputText
@@ -200,6 +236,18 @@ class InvoiceDetailformScreen extends Component {
 						error={validation.invalid && validation.invalid_field == 'battery_no__c'}
 						label={'Battery No. *'}
 					/>
+
+					<SearchableDropdown
+				        dataSource={occupationList}
+				        placeHolderText={'Select Color'}
+				        selectedValue={form.Color__c}
+				        onChange={(value) => changeForm({ edited_field: 'Color__c', edited_value: value })}
+				        placeholder={'Type or Select Color'}
+				        invalid={false}
+				        labelStyles={{ ...Style.pickerLabel }}
+				        customPickerStyles={{ ...Style.picker }}
+				        label={'Model Color'}
+					 />
 
 
 					<InputText
@@ -259,7 +307,27 @@ class InvoiceDetailformScreen extends Component {
 						label={'Owners Handbook No.'}
 					/>
 					
-                   
+					<SearchableDropdown
+				        dataSource={occupationList}
+				        placeHolderText={'Select Financier'}
+				        selectedValue={form.Financier__c}
+				        onChange={(value) => changeForm({ edited_field: 'Financier__c', edited_value: value })}
+				        placeholder={'Type or Select Financier'}
+				        invalid={false}
+				        labelStyles={{ ...Style.pickerLabel }}
+				        customPickerStyles={{ ...Style.picker }}
+				        label={'Financier Name'}
+					 /> 
+
+
+					<InputText
+						style={Style.mb10}
+						placeholder={'Other Financier Name'}
+						value={form.other_Financier__c__c}
+						onChange={(value) => changeForm({ edited_field: 'other_Financier__c__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'other_Financier__c__c'}
+						label={'Other Financier Name*'}
+					/>
 
 {
 	// <BlueButton title={"ATTACH DOCUMENTS"} style={{width: '53%', marginHorizontal: '46%',}} textStyle={{fontSize: 12}} >
@@ -478,8 +546,10 @@ class InvoiceDetailformScreen extends Component {
 
                     
 						<View style={{marginTop:'4%'}}>
-                    <BlueButton title={"SAVE"} style={{width: '40%', marginHorizontal: '30.5%', height: 40}} textStyle={{fontSize: 12}} >
-	            	
+					<BlueButton title={"SAVE"} style={{width: '40%', marginHorizontal: '30.5%', height: 40}} textStyle={{fontSize: 12}}
+					onPress={() => 
+          NavigationService.navigate('GenerateInvoiceformScreen')}>
+
 	            </BlueButton>
 			</View>
 				</ScrollView>

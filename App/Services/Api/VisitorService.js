@@ -181,9 +181,28 @@ function updateFollowUpCall(params) {
 		}
 		return null
 	}).catch(error => {
-		debugger
 		//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
 		return null
+	});
+}
+
+function getAllFollowUps(params) {
+	let url = Config.VISITOR_SERVICE.GET_ALL_FOLLOW_UPS;
+	url += `?enquiry_id=${params.enquiry}&dealer_id=${params.dealer_id}`
+	return apiClient.get(url, {
+		headers: {
+			token: params.token,
+			dealer_id: params.dealer_id,
+		}
+	}).then((response) => {
+		if (in200s(response.status)) {
+			return response['data']['data'];
+		}
+		return null
+	}).catch(error => {
+		//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
+   		return null;
+
 	});
 }
 
@@ -218,6 +237,7 @@ export const VisitorService = {
 	updateFollowUpCall,
 	createFeedback,
 	getAllVisits,
+	getAllFollowUps,
 	payBooking,
 	getFeedbacks
 }

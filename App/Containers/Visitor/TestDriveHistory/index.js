@@ -48,7 +48,9 @@ class TestDriveHistoryScreen extends Component {
 //             "model_name__c": "a029D000002ZFPoQAO",
 //             "dealer__c": "0019D00000A0XjIQAV",
 //             "enquiry__c": "a009D000002ecHDQAY"
-
+  //           "getDayFromTimestamp",
+  //           "getTimeFromTimestamp"
+  //           "dateReadableFormat"
 
 
 
@@ -62,7 +64,6 @@ class TestDriveHistoryScreen extends Component {
     const data = feedbacksMapping[enquiry]
     let visibleNode = [];
 
-    console.log('productsList', productsList)
 
     if (data && data.length) {
       if (data.length) {
@@ -77,8 +78,8 @@ class TestDriveHistoryScreen extends Component {
                   content={[
                     <GenericDisplayCardStrip key={'Model Name' + item.id} label={'Model Name'} value={HelperService.findMatchingKeyValueInList(productsList, 'id', item.model_name__c, 'name')}/>,
                     item.vehicle_no__c ? <GenericDisplayCardStrip key={'Test Drive Vehicle' + item.id} label={'Test Drive Vehicle'} value={item.vehicle_no__c}/> : [],
-                    <GenericDisplayCardStrip key={'Test Drive Date' + item.id} label={'Test Drive Date'} value={HelperService.removeFieldsAndDateReadableFormat(item.test_drive_date__c)}/>,
-                    <GenericDisplayCardStrip key={'Test Drive Time' + item.id} label={'Test Drive Time'} value={HelperService.removeFieldsTimeReadableFormat(item.createddate) + ' (UTC)'}/>,
+                    <GenericDisplayCardStrip key={'Test Drive Date' + item.id} label={'Test Drive Date'} value={HelperService.dateReadableFormat(item.test_drive_date__c)}/>,
+                    <GenericDisplayCardStrip key={'Test Drive Time' + item.id} label={'Test Drive Time'} value={HelperService.getTimeFromTimestamp(item.createddate)}/>,
                     <GenericDisplayCardStrip key={'Overall Experience' + item.id} label={'Overall Experience'} value={item.overall_experience__c}/>,
                     <GenericDisplayCardStrip key={'Sales Person Name' + item.id} label={'Sales Person Name'} value={item.sales_person_name__c || ''}
                 />
@@ -103,7 +104,7 @@ class TestDriveHistoryScreen extends Component {
       }
     } else if (loader) {
       visibleNode = <Loading />
-    } else if (data && !data.length && !loader) {
+    } else if ((!data && !loader) || (data && !data.length && !loader)) {
       visibleNode =  (
           <NoDataFound text={'No History Found'}>
             <GenericIcon 

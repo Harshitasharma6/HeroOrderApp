@@ -36,7 +36,7 @@ class BookingConfirmed extends Component {
 	              style={{ width: '88%', elevation: 0, borderWidth: 2, borderColor: Colors.primary,backgroundColor: Colors.lightRedPink, }}
 	              heading={item.name}
 	              showTextAvatar={true}
-	              //onPress={() => NavigationService.navigate('CustomerInfoScreen')}
+	              onPress={() => NavigationService.navigate('InvoiceDetailformScreen',{data: item})}
 	              content={[
 	              	<GenericDisplayCardStrip key={'Status' + item.name} label={'Status'} value={'Open'}/>,
 	              	<GenericDisplayCardStrip key={'Stage' + item.name} label={'Stage'} value={'Booking'}/>,
@@ -48,6 +48,7 @@ class BookingConfirmed extends Component {
             keyExtractor={item => item}
             refreshing={false}
             ListEmptyComponent={() => <NoDataFound text={'No Handovers Found'} />}
+
           />
         );
       } else {

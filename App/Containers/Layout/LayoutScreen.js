@@ -72,10 +72,7 @@ class LayoutScreen extends React.Component {
         customLayoutNode = [];
         break;
 
-      case 'GenerateRecieptformScreen':
-      case 'GenerateInvoiceformScreen':
-        customLayoutNode = <VisitorRecieptScreenLayout/>;
-        break;
+      
           
       case 'InvoiceDetailformScreen' :
         customLayoutNode = <VisitorInvoiceDetailScreenLayout/>;
@@ -232,7 +229,8 @@ class LayoutScreen extends React.Component {
       case  'SchemeClaimformScreen':
       case 'ActionablesScreen':
       case 'ProductInfoSchemesScreen':
-        customLayoutNode = <NewRetailerLayout />
+      case 'GenerateInvoiceformScreen':
+      customLayoutNode = <NewRetailerLayout />
         break;
       
       case 'HandoversScreen':
@@ -249,6 +247,7 @@ class LayoutScreen extends React.Component {
       case 'VisitHistoryScreen':
       case 'AddProductScreen':
       case 'TestDriveHistoryScreen':
+      case 'AllFollowUpsScreen':
         customLayoutNode = <VisitorInfoScreenLayout />
         break;
       case 'DashboardSummaryScreen':

@@ -45,6 +45,13 @@ const { Types, Creators } = createActions({
 	getAllVisitsLoadingStop: null,
 
 
+	getAllFollowUps: ['payload'],
+	getAllFollowUpsSuccess:  ['payload'],
+	getAllFollowUpsFailure: null,
+	getAllFollowUpsLoading: null,
+	getAllFollowUpsLoadingStop: null,
+
+
 	getFeedbacks: ['payload'],
 	getFeedbacksSuccess:  ['payload'],
 	getFeedbacksFailure: null,

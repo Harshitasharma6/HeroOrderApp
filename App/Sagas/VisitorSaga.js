@@ -649,6 +649,32 @@ export function* getAllVisits({ payload }) {
 	}
 }
 
+export function* getAllFollowUps({ payload }) {
+	const isOnline = yield select(getConnectionStatus);
+	if (!isOnline) {
+		yield put(VisitorActions.doNothing());
+		return;
+	}
+	
+	try {
+		yield put(VisitorActions.getAllFollowUpsLoading());
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
+
+		let successData = yield call(VisitorService.getAllFollowUps, payload);
+		if (successData) {
+			let followUpsMapping = _.cloneDeep(yield select(state => state.visitor.followUpsMapping));
+			followUpsMapping[payload.enquiry] = successData;
+			yield put(VisitorActions.getAllFollowUpsSuccess(followUpsMapping));
+		} else {
+			yield put(VisitorActions.getAllFollowUpsFailure());
+		}
+	} catch (error) {
+		yield put(VisitorActions.getAllFollowUpsFailure());
+	}
+}
+
 
 export function* getFeedbacks({ payload }) {
 	const isOnline = yield select(getConnectionStatus);

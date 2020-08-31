@@ -86,6 +86,7 @@ import UpdateVisitorScreen from 'App/Containers/Visitor/UpdateVisitor'
 import CustomerRegistrationFormScreen from 'App/Containers/Visitor/CustomerRegistrationForm'
 import VisitorInfoScreen from 'App/Containers/Visitor/VisitorInfo'
 import VisitHistoryScreen from 'App/Containers/Visitor/VisitHistory'
+import AllFollowUpsScreen from 'App/Containers/Visitor/AllFollowUps'
 import AddProductScreen from 'App/Containers/Visitor/AddProduct'
 import AddProductsSchemesScreen from 'App/Containers/Visitor/AddProduct/ProductsSchemes'
 import ProductCatalogScreen from 'App/Containers/Insights/ProductCatalog'
@@ -206,6 +207,7 @@ const StackNavigator = createStackNavigator(
     AddProductInfoScreen,
     VisitorInfoScreen,
     VisitHistoryScreen,
+    AllFollowUpsScreen,
     ProductCatalogScreen,
     TestDriveHistoryScreen,
     AvailableSchemesScreen,

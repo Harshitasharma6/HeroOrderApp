@@ -57,7 +57,8 @@ class FooterScreen extends React.Component {
       currentScreen == 'CustomerCallFormScreen' ||
       currentScreen == 'GenerateRecieptformScreen' ||
       currentScreen == 'GenerateInvoiceformScreen' ||
-      currentScreen == 'InvoiceDetailformScreen' 
+      currentScreen == 'InvoiceDetailformScreen' ||
+      currentScreen == 'AllFollowUpsScreen'
 
 
     let insightsActive = 

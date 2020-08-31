@@ -23,6 +23,16 @@ class CallLeads extends Component {
     this.fetchCall()
   }
 
+  onPressCard(data, enquiry_id) {
+    const {
+      registerCustomerSuccess,
+      setCurrentEnquiry
+    } = this.props;
+    registerCustomerSuccess(data);
+    setCurrentEnquiry(enquiry_id);
+    NavigationService.navigate('VisitorInfoScreen')
+  }
+
   onPressCall(data) {
      const {
       changeForm,
@@ -67,7 +77,7 @@ class CallLeads extends Component {
                 style={Styles.infoBoxCorpBlue}
                 heading={`${item.first_name__c} ${item.last_name__c}`}
                 showTextAvatar={true}
-                //onPress={() => NavigationService.navigate('CustomerInfoScreen')}
+                onPress={() => this.onPressCard(item, item.sfid || item.id)}
                 content={[
                   <GenericDisplayCardStrip key={'Status' + item.id} label={'Status'} value={item.lead_status__c}/>,
                   <GenericDisplayCardStrip key={'Stage' + item.id} label={'Stage'} value={item.lead_stage__c || ''}/>,
@@ -132,6 +142,8 @@ const mapDispatchToProps = (dispatch) => ({
   showCallModal: (params)    => dispatch(CommonActions.showCallModal(params)),
   hideCallModal: (params)    => dispatch(CommonActions.hideCallModal(params)),
   changeForm: (params)       => dispatch(VisitorActions.changeRegisterCustomerOutgoingCallForm(params)),
+  registerCustomerSuccess: (params) => dispatch(VisitorActions.registerCustomerSuccess(params)),
+  setCurrentEnquiry: (params)       => dispatch(VisitorActions.setCurrentEnquiry(params))
 });
 
 export default connect(

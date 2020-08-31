@@ -9,6 +9,7 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 import { connect } from 'react-redux';
 import SearchBar from 'App/Components/SearchBar'
 import InsightsActions from 'App/Stores/Insights/Actions';
+import Select from 'App/Components/Select';
 
 
 class CustomerList extends React.Component {
@@ -34,6 +35,12 @@ class CustomerList extends React.Component {
               
              
               />
+            <Select style={Styles.selectPickerStyle}
+            placeholder={'Search By'}
+            list={customerSearchFilters.searchByOptions}
+            selected={customerSearchFilters['searchBy']}
+            onChange={(value) => updateSearchFilters({ edited_field: 'searchBy', 'edited_value': value })}
+          />   
         </Header>
         {this.props.children}
       </View>
@@ -66,8 +73,10 @@ const Styles = StyleSheet.create({
   	flexDirection: 'row'
   },
   header: {
-    height: hp('13%'),
-    flexDirection: 'column'
+    height: hp('12%'),
+    flexDirection: 'row',
+    marginTop:hp('3%')
+
   },
   arrowContainer: {
     width: wp('20%'),
@@ -117,7 +126,20 @@ const Styles = StyleSheet.create({
     top: 0
   },
   searchContainer: {
-    width: wp('95%')
+    width: wp('60%')
   },
+
+
+  selectPickerStyle: {
+    width: wp('30%'),
+    height: hp('4.2%'),
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: Colors.grey,
+    marginTop: hp('1%'),
+  },  
 });
 

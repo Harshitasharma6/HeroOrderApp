@@ -4,27 +4,26 @@ import NavigationService from 'App/Services/NavigationService';
 import { ApplicationStyles, Colors } from 'App/Theme';
 import { Badge, Header, Text } from 'native-base';
 import React from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView ,} from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { connect } from 'react-redux';
-
+import DetailCard from 'App/Components/DetailCard';
 
 class VisitorInvoiceDetailScreenLayout extends React.Component {
  
 
   render() {
-    const {
-      currentScreen
-    } = this.props;
-
-    return (
+   
+    
+    
+      return (
       <View >
         <Header transparent style={Styles.header}>
-        	<View style={{paddingTop: hp('1%'), paddingBottom: hp('1%')}}>
+        	<View style={{paddingTop: hp('1%'), paddingBottom: hp('0%')}}>
         		<BackArrowButton />
-        	</View>
-         
-        </Header>
+            	</View>
+      </Header>
+    
         {this.props.children}
       </View>
     )
@@ -95,5 +94,19 @@ const Styles = StyleSheet.create({
     backgroundColor: Colors.button,
     right: 0,
     top: -10
-  }
+  },
+
+  heading: {
+    
+    alignSelf: 'center',
+    color: Colors.black,
+    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
+    fontSize: wp('5.5%'),
+   
+    marginTop: hp('0%'),
+      textTransform: 'uppercase',
+      marginBottom: hp('2%'),  
+    
+    },
+
 });
