@@ -144,7 +144,6 @@ export function* getFollowUp({ payload }) {
 	}
 }
 
-
 export function* getCompletedFollowUp({ payload }) {
 	const isOnline = yield select(getConnectionStatus);
 	if (!isOnline) {
@@ -158,7 +157,7 @@ export function* getCompletedFollowUp({ payload }) {
 		payload.token = token
 		payload.dealer_id = dealer__c
 		
-	let successData = yield call(InsightsService.getCompletedFollowUp, payload);
+	let successData = yield call(InsightsService.getFollowUp, payload);
 		if (successData) {
 			yield put(InsightsActions.getCompletedFollowUpLoadingStop());
 			yield put(InsightsActions.getCompletedFollowUpSuccess(successData));
@@ -169,4 +168,31 @@ export function* getCompletedFollowUp({ payload }) {
 	} catch (error) {
 		yield put(InsightsActions.getCompletedFollowUpFailure());
 	}
+}
+
+
+export function* getAllCustomer({ payload }) {
+	const isOnline = yield select(getConnectionStatus);
+	if (!isOnline) {
+		yield put(InsightsActions.doNothing());
+		return;
+	}
+
+	try {
+		yield put(InsightsActions.getAllCustomerLoading());
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
+		
+	let successData = yield call(InsightsService.getAllCustomer, payload);
+		if (successData) {
+			yield put(InsightsActions.getAllCustomerLoadingStop());
+			yield put(InsightsActions.getAllCustomerSuccess(successData));
+			
+		} else {
+			yield put(InsightsActions.getAllCustomerFailure());
+		}
+	} catch (error) {
+		yield put(InsightsActions.getAllCustomerFailure());
+	}	
 }

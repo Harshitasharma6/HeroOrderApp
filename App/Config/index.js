@@ -65,5 +65,10 @@ export const Config = {
 
 	SCHEME_SERVICE: {
 		GET_ALL_SCHEME							: 'schemeMaster/getAll'
+	},
+
+	CUSTOMER_SERVICE:{
+		GET_ALL_CUSTOMER						:'getCustomer/getAll',
+
 	}
 }

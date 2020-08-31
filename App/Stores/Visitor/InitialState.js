@@ -14,6 +14,7 @@ export const INITIAL_STATE = {
 	},
 	searchCustomerForm: {},
 	registerCustomerForm: {},
+    registerCustomerCallForm:{},
 	registerCustomerOutgoingCallForm: {
        "call_connected__c" : "",
        "reasons_for_not_connected__c" : "Call not picked",

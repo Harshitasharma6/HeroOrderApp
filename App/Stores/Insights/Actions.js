@@ -41,6 +41,16 @@ const { Types, Creators } = createActions({
   getCompletedFollowUpLoading: null,
   getCompletedFollowUpLoadingStop: null,
 
+
+  getAllCustomer: ['payload'],
+  getAllCustomerSuccess:  ['payload'],
+  getAllCustomerFailure: null,
+  getAllCustomerLoading: null,
+  getAllCustomerLoadingStop: null,
+
+
+  updateCustomersSearchFilters: ['payload']
+
 });
 
 export const InsightsTypes = Types

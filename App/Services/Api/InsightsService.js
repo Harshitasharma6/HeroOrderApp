@@ -140,6 +140,26 @@ function getCompletedFollowUp(params) {
 	});
 }
 
+function getAllCustomer(params) {
+	let url = Config.CUSTOMER_SERVICE.GET_ALL_CUSTOMER	;
+	url += `?dealer_id=${params.dealer_id}`
+	
+	return apiClient.get(url, {
+		headers: {
+			token: params.token,
+			
+		}
+	}).then((response) => {
+		if (in200s(response.status)) {
+			return response['data']['data'];
+		}
+		return null
+	}).catch(error => {
+		console.log(error.response)
+		//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
+		return null
+	});
+}
 
 
 
@@ -150,5 +170,6 @@ export const InsightsService = {
 	getDashboardTrendsRevenue,
 	getAllScheme,
 	getFollowUp,
-	getCompletedFollowUp
+	getCompletedFollowUp,
+	getAllCustomer
   }

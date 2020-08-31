@@ -5,13 +5,27 @@ export const INITIAL_STATE = {
 		getCompletedFollowUpLoader: false,
 		getDashboardSummaryLoader: false,
 		getDashboardTrendsSoldProductsLoader: false,
-		getDashboardTrendsRevenueLoader: false
+		getDashboardTrendsRevenueLoader: false,
+		getAllCustomerLoader: false,
+
+
 	},
+	openMoreFilters: false,
 	
 	DashboardSummaryData: [],
 	dashboardTrendsSoldProductsData: [],
 	dashboardTrendsRevenueData: [],
 	SchemeData: [],
 	FollowUpData: [],
-	completedFollowUpData: []
+	completedFollowUpData: [],
+	AllCustomerData:[],
+	customerSearchFilters: {
+        area: '',
+        type: '',
+        sortType: 'ASC',
+        sortBy: '',
+        searchBy: 'name',
+        searchValue: '',
+       
+    }
 }

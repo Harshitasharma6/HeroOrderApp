@@ -6,7 +6,7 @@ import NoDataFound from 'App/Components/NoDataFound'
 import BlueButton from 'App/Components/BlueButton'
 import GenericIcon from 'App/Components/GenericIcon'
 import Loading from 'App/Components/Loading'
-import ShreeAction from 'App/Stores/Shree/Actions';
+import InsightsActions from 'App/Stores/Insights/Actions';
 import { HelperService } from 'App/Services/Utils/HelperService';
 import GenericDisplayCard from 'App/Components/GenericDisplayCard'
 import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDisplayCardStrip';
@@ -18,21 +18,48 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 
 class CustomersScreen extends Component {
   componentDidMount() {
+		this.fetchCall()	
+	}
 
-  }
+	fetchCall() {
+		const {
+		
+		  fetchData
+		} = this.props
+	
+		fetchData({
+		 
+		});
+    }
+    
+
+    filterResults(list) {
+      const {
+       customerSearchFilters
+      } = this.props;
+  let filteredList = HelperService.searchTextListFilter(list,  customerSearchFilters['searchBy'],  customerSearchFilters['searchValue']);
+  filteredList = HelperService.sortListFilter(filteredList, customerSearchFilters['sortBy'], customerSearchFilters['sortType']);    
+  return filteredList;
+    }  
 
   getDataNode() {
-    const data = [{name: 'Naina Garg'}, {name: 'Karan Singla'}, {name: 'Sanjay Chawla'}, {name: 'Anil Sharma'}, {name: 'Vikas Bajaj'}]
-    const dataLength = data.length;
+
+    const {
+     
+      loader,
+      data
+    } = this.props;
     
   
     let visibleNode = [];
 
     if (data && data.length) {
-      if (data.length) {
+    let filteredCustomerList = this.filterResults(data.map((obj) => obj));
+
+      if (filteredCustomerList.length) {
         visibleNode = (
           <FlatList
-            data={data}
+            data={filteredCustomerList}
             renderItem={({ item }) => 
             	<GenericDisplayCard dark={false}
 	              style={{ width: '88%', elevation: 0 }}
@@ -40,20 +67,19 @@ class CustomersScreen extends Component {
 	              showTextAvatar={true}
 	              onPress={() => NavigationService.navigate('CustomerInfoScreen')}
 	              content={[
-	                <GenericDisplayCardStrip key={'Product Purchased' + item.name} label={'Product Purchased'} value={'Optima'}/>,
-	                <GenericDisplayCardStrip key={'Purchased Date' + item.name} label={'Purchased Date'} value={'29/06/2020'}/>,
-                  <BlueButton title={''} style={Styles.callButton} textStyle={Styles.callButtonText} onPress={() => HelperService.callNumber()}><GenericIcon name="phone" style={Styles.callButtonIcon}/></BlueButton>
+	               <BlueButton title={''} style={Styles.callButton} textStyle={Styles.callButtonText} onPress={() => HelperService.callNumber()}><GenericIcon name="phone" style={Styles.callButtonIcon}/></BlueButton>
               ]}
             />}
             keyExtractor={item => item}
-            refreshing={false}
+            onRefresh={() => this.fetchCall()}
+            refreshing={loader}
             ListEmptyComponent={() => <NoDataFound text={'No Customers Found'} />}
           />
         );
       } else {
         visibleNode =<NoDataFound text={'No Customers Found'} />
       }
-    } else if (false) {
+    } else if (loader) {
       visibleNode = <Loading />
     } else if (data && !data.length) {
       visibleNode = <NoDataFound text={'No Customers Found'} />
@@ -72,13 +98,13 @@ class CustomersScreen extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	dealerId: state.shree.selectedShree.id,
-  	data    : state.shree.outstanding,
-  	loading : state.shree.fetchOutstandingLoader
+data: state.insights.AllCustomerData,
+loader: state.insights.loaders.getAllCustomerLoader,
+customerSearchFilters: state.insights.customerSearchFilters,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchData: (params) 	 => dispatch(ShreeAction.fetchOutstanding(params))
+fetchData:(params) => dispatch(InsightsActions.getAllCustomer(params))
 });
 
 export default connect(
