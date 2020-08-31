@@ -18,9 +18,9 @@ export const INITIAL_STATE = {
     registerCustomerCallForm:{},
 	registerCustomerOutgoingCallForm: {
        "call_connected__c" : "",
-       "reasons_for_not_connected__c" : "Call not picked",
-       "purpose_of_call__c" : "For Test Drive",
-       "outcome_of_the_call__c" : "Customer Not Interested",
+       "reasons_for_not_connected__c" : "",
+       "purpose_of_call__c" : "",
+       "outcome_of_the_call__c" : "",
        "dealer_id" : "",
        "dealers_sales_person_login_info_id" : "",
        "follow_up__c": "no",

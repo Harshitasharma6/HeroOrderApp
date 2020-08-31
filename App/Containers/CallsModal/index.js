@@ -34,7 +34,7 @@ class CallsModal extends Component  {
 	    let body = (
 	    	<View style={Style.container}>
 		        <View style={Style.modalContainer}>
-		            <Text style={Style.questionHeading}>Did the call got connected?</Text>
+		            <Text style={Style.questionHeading}>Did the call get connected?</Text>
 		            <View style={Style.actionContainer}>
 		                <BlueButton
 		                    onPress={() => {showConnectedOptions(); changeForm({edited_field: 'call_connected__c', edited_value: 'yes'})}}

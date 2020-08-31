@@ -60,7 +60,7 @@ export const Config = {
 	},
 
 	INSIGHTS_SERVICE: {
-		GET_FOLLOW_UP							: 'call-activities/callFollowup',
+		GET_FOLLOW_UP							: 'outgoingCall/getFollowUp',
 		GET_COMPLETED_FOLLOW_UP					: 'outgoingCall/getCompletedFollowUp',
 	},
 

@@ -72,15 +72,22 @@ const NotConnectedReasons = ({data, onChange, loading, onSubmit}) => {
 							checked={data.follow_up__c == 'yes'}
 							disabledOnCheck={false}
 							onPress={(event)=>{
-			                	onChange({edited_field: 'follow_up__c', edited_value: (data.follow_up__c == 'yes'?  'no' : 'yes')})}
-			                }
+								let updated_value = data.follow_up__c == 'yes'?  'no' : 'yes';
+			                	onChange({edited_field: 'follow_up__c', edited_value: updated_value})
+			                	if(updated_value == 'no') {
+			                		onChange({ edited_field: 'follow_up_date__c', edited_value: "" })
+			                	}
+			                }}
 						/>
 					</View>
 		       		
-		       		<View style={{marginTop: hp('0%'), paddingHorizontal: wp('3.8%')}}><Text style={{color: Colors.primary, fontFamily: ApplicationStyles.textMsgFont, fontSize: wp('4%')}}>Follow up Date</Text></View>
-		       		<View style={{paddingHorizontal: wp('3.5%')}}>
-		       		
-		       		<InputDate
+		       		{ data.follow_up__c == 'yes' ? 
+			       		<View style={{marginTop: hp('0%'), paddingHorizontal: wp('3.8%')}}><Text style={{color: Colors.primary, fontFamily: ApplicationStyles.textMsgFont, fontSize: wp('4%')}}>Follow up Date</Text></View>
+			       	: []}
+
+			       	{ data.follow_up__c == 'yes' ? 
+			       		<View style={{paddingHorizontal: wp('3.5%')}}>
+		       			<InputDate
                         placeholder={'Select date'}
                         value={HelperService.removeFieldsAndDateReadableFormat(data.follow_up_date__c)}
                         onChange={(value) => {
@@ -92,7 +99,8 @@ const NotConnectedReasons = ({data, onChange, loading, onSubmit}) => {
 						label={''}
 						mindate={moment.now()}
                     />
-                    </View>
+                    </View> : []
+                }
                     <BlueButton style={{...ApplicationStyles.formButton, height: hp('4.8%')}} title={'Submit'} onPress={onSubmit} loading={loading}/>
 		       	</ScrollView>
 	    </View>
