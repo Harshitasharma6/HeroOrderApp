@@ -45,9 +45,45 @@ function fetchLeadLostReasons(params) {
   });
 }
 
+function getAllStates(params) {
+  let url = Config.COMMON_SERVICE.GET_STATES;
+  return apiClient.get(url, {
+    headers: {
+      token: params.token
+    }
+  }).then((response) => {
+    if (in200s(response.status)) {
+      return response['data']['data']['states'];
+    }
+    return null
+  }).catch(error => {
+    //bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
+    return null
+  });
+}
+
+function getAllCities(params) {
+  let url = Config.COMMON_SERVICE.GET_CITIES;
+  return apiClient.get(url, {
+    headers: {
+      token: params.token
+    }
+  }).then((response) => {
+    if (in200s(response.status)) {
+      return response['data']['data']['cities'];
+    }
+    return null
+  }).catch(error => {
+    //bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
+    return null
+  });
+}
+
 
 
 export const CommonService = {
   fetchLeadSources,
-  fetchLeadLostReasons
+  fetchLeadLostReasons,
+  getAllStates,
+  getAllCities,
 }

@@ -62,6 +62,16 @@ export const makeProductsSearchableList = (state, { payload }) => ({
   productsList: payload
 });
 
+export const makeStatesSearchableList = (state, { payload }) => ({
+  ...state,
+  statesList: payload
+});
+
+export const makeCitiesSearchableList = (state, { payload }) => ({
+  ...state,
+  citiesList: payload
+});
+
 
 
 export const fetchLeadLostReasonsSuccess = (state, {payload}) => ({
@@ -141,6 +151,8 @@ export const fetchLeadSourcesLoadingStop = (state, {payload}) => ({
 });
 
 
+
+
 export const showCallModal = (state) => ({
   ...state,
   isCallModalVisible: true
@@ -176,6 +188,57 @@ export const clearCallModalData = (state) => ({
 });
 
 
+export const getAllStatesFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllStatesLoader: false
+  }
+});
+
+
+export const getAllStatesLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllStatesLoader: true
+  }
+});
+
+
+export const getAllStatesLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllStatesLoader: false
+  }
+});
+
+export const  getAllCitiesFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllCitiesLoader: false
+  }
+});
+
+
+export const  getAllCitiesLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllCitiesLoader: true
+  }
+});
+
+
+export const  getAllCitiesLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getAllCitiesLoader: false
+  }
+});
 
 export const reducer = createReducer(INITIAL_STATE, {
   [CommonTypes.CONNECTION_CHANGED]           : connectionChanged,
@@ -185,6 +248,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [CommonTypes.DISABLE_MODAL]                : disableModal,
   [CommonTypes.ENABLE_MODAL]                 : enableModal,
   [CommonTypes.MAKE_PRODUCTS_SEARCHABLE_LIST]: makeProductsSearchableList,
+  [CommonTypes.MAKE_STATES_SEARCHABLE_LIST]  : makeStatesSearchableList,
+  [CommonTypes.MAKE_CITIES_SEARCHABLE_LIST]  : makeCitiesSearchableList,
 
   //[CommonTypes.FETCH_LEAD_LOST_REASONS]              : fetchLeadLostReasons,
   [CommonTypes.FETCH_LEAD_LOST_REASONS_LOADING]      : fetchLeadLostReasonsLoading,
@@ -205,6 +270,16 @@ export const reducer = createReducer(INITIAL_STATE, {
 
   [CommonTypes.SHOW_CONNECTED_OPTIONS]      : showConnectedOptions,
   [CommonTypes.SHOW_DISCONNECTED_OPTIONS]   : showDisconnectedOptions,
-  [CommonTypes.CLEAR_CALL_MODAL_DATA]       : clearCallModalData
+  [CommonTypes.CLEAR_CALL_MODAL_DATA]       : clearCallModalData,
+
+  [CommonTypes.GET_ALL_STATES_LOADING]           : getAllStatesLoading,
+  [CommonTypes.GET_ALL_STATES_LOADING_STOP]      : getAllStatesLoadingStop,
+  [CommonTypes.GET_ALL_STATES_FAILURE]           : getAllStatesFailure,
+
+
+  [CommonTypes.GET_ALL_CITIES_LOADING]           : getAllCitiesLoading,
+  [CommonTypes.GET_ALL_CITIES_LOADING_STOP]      : getAllCitiesLoadingStop,
+  [CommonTypes.GET_ALL_CITIES_FAILURE]           : getAllCitiesFailure,
+
 
 });

@@ -131,7 +131,9 @@ import {
 
 import {
     fetchLeadSources,
-    fetchLeadLostReasons
+    fetchLeadLostReasons,
+    getAllStates,
+    getAllCities,
 } from './CommonSaga'
 
 
@@ -222,6 +224,8 @@ export default function* root() {
 
         takeLatest(CommonTypes.FETCH_LEAD_SOURCES, fetchLeadSources),
         takeLatest(CommonTypes.FETCH_LEAD_LOST_REASONS, fetchLeadLostReasons),
+        takeLatest(CommonTypes.GET_ALL_STATES, getAllStates),
+        takeLatest(CommonTypes.GET_ALL_CITIES, getAllCities),
 
 
 

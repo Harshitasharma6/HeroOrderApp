@@ -21,7 +21,9 @@ export const Config = {
 
 	COMMON_SERVICE: {
 		FETCH_LEAD_SOURCES: 'visitors/getLeadSource',
-		FETCH_LEAD_LOST_REASONS: 'visitors/getLostReason'
+		FETCH_LEAD_LOST_REASONS: 'visitors/getLostReason',
+		GET_STATES:	'states/getAll',
+		GET_CITIES: 'cities/getAll',
 	},
 
 
