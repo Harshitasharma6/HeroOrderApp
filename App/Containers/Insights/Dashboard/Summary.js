@@ -29,7 +29,70 @@ class DashboardSummaryScreen extends React.Component {
 		fetchData({
 		 
 		});
-	  }
+    }
+    
+    getIndexLeadSource(lead_source__c) {
+      const {
+        loader,
+        data,
+        currentScreen
+        } = this.props;
+
+      return data.currentMonth.findIndex(obj => obj.lead_source__c === lead_source__c);
+    }
+    getIndexPrevLeadSource(lead_source__c) {
+      const {
+        loader,
+        data,
+        currentScreen
+        } = this.props;
+
+      return data.prevMonth.findIndex(obj => obj.lead_source__c === lead_source__c);
+    }
+
+    getIndexLeadstatus(lead_status__c) {
+      const {
+        loader,
+        data,
+        currentScreen
+        } = this.props;
+
+      return data.currentMonth.findIndex(obj => obj.lead_status__c === lead_status__c);
+    }
+
+    getIndexPrevLeadstatus(lead_status__c) {
+      const {
+        loader,
+        data,
+        currentScreen
+        } = this.props;
+
+      return data.prevMonth.findIndex(obj => obj.lead_status__c === lead_status__c);
+    }
+
+    getIndexLeadfrom(lead_from__c) {
+      const {
+        loader,
+        data,
+        currentScreen
+        } = this.props;
+
+      return data.currentMonth.findIndex(obj => obj.lead_from__c === lead_from__c);
+    }
+
+
+    getIndexPrevLeadfrom(lead_from__c) {
+      const {
+        loader,
+        data,
+        currentScreen
+        } = this.props;
+
+      return data.prevMonth.findIndex(obj => obj.lead_from__c === lead_from__c);
+    }
+
+
+    
   
     
   render() {
@@ -55,30 +118,31 @@ class DashboardSummaryScreen extends React.Component {
                 style={{ width: '88%', elevation: 0 }}
             
 	              content={[
-		                <GenericDisplayCardStrip key={'Total Walk Ins'} label={'Total Walk Ins'} value={data&&data.currentMonth&&data.currentMonth[8] ?  data.currentMonth[8].count : 0}/>,
+		                <GenericDisplayCardStrip key={'Total Walk Ins'} label={'Total Walk Ins'} value={data&&data.currentMonth&&data.currentMonth[this.getIndexLeadSource("Walk Ins")] ?  data.currentMonth[this.getIndexLeadSource("Walk Ins")].count : 0}/>,
 		                <Separator key={1}/>,
-		                <GenericDisplayCardStrip key={'Open Leads'} label={'Open Leads'} value={data&&data.currentMonth&&data.currentMonth[4] ?  data.currentMonth[4].count : 0}/>,
+		                <GenericDisplayCardStrip key={'Open Leads'} label={'Open Leads'} value={data&&data.currentMonth&&data.currentMonth[this.getIndexLeadstatus("Open")] ?  data.currentMonth[this.getIndexLeadstatus("Open")].count : 0}/>,
 		                <Separator key={2}/>,
-		                <GenericDisplayCardStrip key={'Won Leads'} label={'Won Leads'} value={data&&data.currentMonth&&data.currentMonth[1] ?  data.currentMonth[1].count : 0}/>,
+		                <GenericDisplayCardStrip key={'Won Leads'} label={'Won Leads'} value={data&&data.currentMonth&&data.currentMonth[this.getIndexLeadstatus("Won")] ?  data.currentMonth[this.getIndexLeadstatus("Won")].count : 0}/>,
 		                <Separator key={3}/>,
-		                <GenericDisplayCardStrip key={'Lost Leads'} label={'Lost Leads'} value={data&&data.currentMonth&&data.currentMonth[2] ?  data.currentMonth[2].count : 0}/>,
+		                <GenericDisplayCardStrip key={'Lost Leads'} label={'Lost Leads'} value={data&&data.currentMonth&&data.currentMonth[this.getIndexLeadstatus("Lost")] ?  data.currentMonth[this.getIndexLeadstatus("Lost")].count : 0}/>,
 		                <Separator key={4}/>,
-		                <GenericDisplayCardStrip key={'Ho Assigned Leads'} label={'Ho Assigned Leads'} value={data&&data.currentMonth&&data.currentMonth[5] ?  data.currentMonth[5].count : 0}/>,
+		                <GenericDisplayCardStrip key={'Ho Assigned Leads'} label={'Ho Assigned Leads'} value={data&&data.currentMonth&&data.currentMonth[this.getIndexLeadfrom("HO")] ?  data.currentMonth[this.getIndexLeadfrom("HO")].count : 0}/>,
               		]}
             	/>
           	<HeadingBox value={'Previous Month'}/>
           		<GenericDisplayCard dark={false}
 	              style={{ width: '88%', elevation: 0 }}
 	              content={[
-		                <GenericDisplayCardStrip key={'Total Walk Insdwq'} label={'Total Walk Ins'} value={data&&data.prevMonth&&data.prevMonth[4] ?  data.prevMonth[4].count : 0}/>,
+                  <GenericDisplayCardStrip key={'Total Walk Insqw'} label={'Total Walk Ins'} value={data&&data.currentMonth&&data.currentMonth[this.getIndexPrevLeadSource("Walk Ins")] ?  data.currentMonth[this.getIndexPrevLeadSource("Walk Ins")].count : 0}/>,
 		                <Separator key={1}/>,
-		                <GenericDisplayCardStrip key={'Open Leadswqd'} label={'Open Leads'} value={data&&data.prevMonth&&data.prevMonth[1] ?  data.prevMonth[1].count : 0}/>,
+		                <GenericDisplayCardStrip key={'Open Leadsqw'} label={'Open Leads'} value={data&&data.currentMonth&&data.currentMonth[this.getIndexPrevLeadstatus("Open")] ?  data.currentMonth[this.getIndexPrevLeadstatus("Open")].count : 0}/>,
 		                <Separator key={2}/>,
-		                <GenericDisplayCardStrip key={'Won Leadswqdq'} label={'Won Leads'} value={data&&data.prevMonth&&data.prevMonth[2] ?  data.prevMonth[2].count : 0}/>,
+		                <GenericDisplayCardStrip key={'Won Leadsqw'} label={'Won Leads'} value={data&&data.currentMonth&&data.currentMonth[this.getIndexPrevLeadstatus("Won")] ?  data.currentMonth[this.getIndexPrevLeadstatus("Won")].count : 0}/>,
 		                <Separator key={3}/>,
-		                <GenericDisplayCardStrip key={'Lost Leadsqwd'} label={'Lost Leads'} value={data&&data.prevMonth&&data.prevMonth[0] ?  data.prevMonth[0].count : 0}/>,
+		                <GenericDisplayCardStrip key={'Lost Leadsqw'} label={'Lost Leads'} value={data&&data.currentMonth&&data.currentMonth[this.getIndexPrevLeadstatus("Lost")] ?  data.currentMonth[this.getIndexPrevLeadstatus("Lost")].count : 0}/>,
 		                <Separator key={4}/>,
-		                <GenericDisplayCardStrip key={'Ho Assigned Leadswd'} label={'Ho Assigned Leads'} value={data&&data.prevMonth&&data.prevMonth[3] ?  data.prevMonth[3].count : 0}/>
+		                <GenericDisplayCardStrip key={'Ho Assigned Leadsqw'} label={'Ho Assigned Leads'} value={data&&data.currentMonth&&data.currentMonth[this.getIndexPrevLeadfrom("HO")] ?  data.currentMonth[this.getIndexPrevLeadfrom("HO")].count : 0}/>,
+		                
               		]}
             	/>
           	<HeadingBox value={'Product Performance \n(This Month)'}/>

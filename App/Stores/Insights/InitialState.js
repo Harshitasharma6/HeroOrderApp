@@ -23,9 +23,18 @@ export const INITIAL_STATE = {
         type: '',
         sortType: 'ASC',
         sortBy: '',
-        searchBy: 'name',
+        searchBy: 'mobilephone',
         searchValue: '',
-       
+		searchByOptions: [
+            {
+                label: 'By Phone No.',
+                value: 'mobilephone'
+            },
+            {
+                label: 'By Chassis No.',
+                value: 'chassis_no__c'
+            }
+        ]
     },
 
 

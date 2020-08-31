@@ -140,6 +140,7 @@ class GenerateInvoiceformScreen extends Component {
 					<GenericDisplayCardStrip key={'Capacity of each Battery'} label={'Capacity of each Battery:'} />,
 					<GenericDisplayCardStrip key={'Type of Battery'} label={'Type of Battery:'} />,
 					<GenericDisplayCardStrip key={'Owners HAndbook No.'} label={'Owners Handbook No.:'} />,
+					<GenericDisplayCardStrip key={'Model Color'} label={'Model Color:'} />,
 					
 					
 	                

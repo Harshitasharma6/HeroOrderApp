@@ -178,4 +178,19 @@ AttachDocButton:{
     marginBottom: hp('2%'),
     width: '100%'
   },
+
+  heading: {
+    
+    alignSelf: 'center',
+    color: Colors.black,
+    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
+    fontSize: wp('5.5%'),
+   
+    marginTop: hp('0%'),
+      textTransform: 'uppercase',
+      marginBottom: hp('4%'),  
+    
+    },
+
+
 })
