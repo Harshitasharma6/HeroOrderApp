@@ -70,6 +70,7 @@ class InvoiceDetailformScreen extends Component {
 
     render() {
 		const { 
+			data,
 			form,
 			loader,
 			changeForm,
@@ -77,7 +78,10 @@ class InvoiceDetailformScreen extends Component {
 			validation,
 			occupationList,
             sourceEnquiryList,
-            productsList
+            productsList,
+            financier_name,
+  			model_color,
+  			payment_mode,
 		} = this.props;
 		
 		return (
@@ -163,7 +167,7 @@ class InvoiceDetailformScreen extends Component {
 			   <InputText
 						style={Style.mb10}
 						placeholder={'Customer Name'}
-						value={form.first_name__c}
+						value={form.first_name__c || data.first_name__c}
 						onChange={(value) => changeForm({ edited_field: 'first_name__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'first_name__c'}
 						label={'Customer  Name*'}
@@ -173,7 +177,7 @@ class InvoiceDetailformScreen extends Component {
 			   <InputMobile
 						styles={Style.mb10}
 						placeholder={'Customer Phone No'}
-						value={form.contact_number__c}
+						value={form.contact_number__c  || data.contact_number__c}
 						onChange={(value) => changeForm({ edited_field: 'contact_number__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'contact_number__c'}
 						label={'Customer Phone No*'}
@@ -183,13 +187,13 @@ class InvoiceDetailformScreen extends Component {
 			 	  <InputText
 						style={Style.mb10}
 						placeholder={'Customer Email'}
-						value={form.email_id__c}
+						value={form.email_id__c || data.email_id__c}
 						onChange={(value) => changeForm({ edited_field: 'email_id__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'email_id__c'}
 						label={'Customer  Email'}
 					/>
 				 	<GoogleAddress
-						value={form.address_line_1__c}
+						value={form.address_line_1__c || data.address_line_1__c}
 						changeForm={(value) => changeForm({ edited_field: 'address_line_1__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'address_line_1__c'}
 					/>
@@ -238,7 +242,7 @@ class InvoiceDetailformScreen extends Component {
 					/>
 
 					<SearchableDropdown
-				        dataSource={occupationList}
+				        dataSource={model_color}
 				        placeHolderText={'Select Color'}
 				        selectedValue={form.Color__c}
 				        onChange={(value) => changeForm({ edited_field: 'Color__c', edited_value: value })}
@@ -308,7 +312,7 @@ class InvoiceDetailformScreen extends Component {
 					/>
 					
 					<SearchableDropdown
-				        dataSource={occupationList}
+				        dataSource={financier_name}
 				        placeHolderText={'Select Financier'}
 				        selectedValue={form.Financier__c}
 				        onChange={(value) => changeForm({ edited_field: 'Financier__c', edited_value: value })}
@@ -326,7 +330,7 @@ class InvoiceDetailformScreen extends Component {
 						value={form.other_Financier__c__c}
 						onChange={(value) => changeForm({ edited_field: 'other_Financier__c__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'other_Financier__c__c'}
-						label={'Other Financier Name*'}
+						label={'Other Financier Name'}
 					/>
 
 {
@@ -565,7 +569,11 @@ const mapStateToProps = (state) => ({
 	loader 			            : state.visitor.loaders.payBookingLoader,
 	occupationList 				: state.common.occupationList,
   	sourceEnquiryList 			: state.common.sourceEnquiryList,
-  	productsList 				: state.common.productsList
+  	productsList 				: state.common.productsList,
+  	financier_name 				: state.common.financier_name,
+  	model_color 				: state.common.model_color,
+  	payment_mode 				: state.common.payment_mode,
+  	data 						: state.visitor.currentVisitorData,
 });
   
 const mapDispatchToProps = (dispatch) => ({

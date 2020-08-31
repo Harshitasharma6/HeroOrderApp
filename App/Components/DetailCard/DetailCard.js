@@ -32,14 +32,7 @@ const Styles = StyleSheet.create({
     alignSelf: 'center',
     height: hp('7.5%'),
     borderRadius: wp('1.2%'),
-    shadowColor: "#000",
     flexDirection: 'column',
-	  shadowOffset: {
-		width: 0
-	},
-	  shadowOpacity: 0.3,
-	  shadowRadius: 4,
-	  elevation: 2
   },
   menuIcon: {
     color: Colors.theme,

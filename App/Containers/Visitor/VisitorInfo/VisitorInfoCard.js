@@ -10,7 +10,7 @@ import GenericDisplayCard from 'App/Components/GenericDisplayCard'
 import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDisplayCardStrip';
 
 
-// "first_name__c": "test 12",  (*mandatory)
+//   "first_name__c": "test 12",  (*mandatory)
 //   "last_name__c": "enquiry visit test",  (*mandatory)
 //   "contact_number__c": "1646464944",   (*mandatory)
 //   "age__c":  "28",
@@ -21,9 +21,9 @@ import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDi
 //   "lead_source__c": "Event",
 //   "existing_two_wheelers__c": "Yes",
 //   "purpose_of_buying__c" : "Nothing",
-// "usage__c": "Nothing",
-// "expected_close_date__c": "2020-08-19",
-//  "dealers_sales_person__c": "a0O9D000001hLV9UAM",
+//   "usage__c": "Nothing",
+//   "expected_close_date__c": "2020-08-19",
+//   "dealers_sales_person__c": "a0O9D000001hLV9UAM",
 //   "email_id__c": "abc@gmail.com",
 //   "occupation__c" : "Business",
 //   "test_drive_offered__c": "Yes",    (*mandatory)

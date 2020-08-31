@@ -66,14 +66,16 @@ class NewRegistrationFormScreen extends Component {
 
 	submit() {
 		const { 
+			dealers_sales_person__c,
 			submitForm, 
 			form,
 		} = this.props;
 
 		Keyboard.dismiss();
+		
 		submitForm({
 			...form,
-			dealers_sales_person__c: 'a0O9D000001hLV9UAM'
+			dealers_sales_person__c
 		});
 	}
 
@@ -381,7 +383,8 @@ const mapStateToProps = (state) => ({
 	occupationList 				: state.common.occupationList,
   	sourceEnquiryList 			: state.common.sourceEnquiryList,
   	productsList 				: state.common.productsList,
-  	contact_number              : state.visitor.searchCustomerForm.contact_number
+  	contact_number              : state.visitor.searchCustomerForm.contact_number,
+  	dealers_sales_person__c     : state.user.sfid
 });
   
 const mapDispatchToProps = (dispatch) => ({

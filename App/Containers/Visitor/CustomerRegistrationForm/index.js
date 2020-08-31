@@ -61,6 +61,7 @@ class CustomerRegistrationForm extends Component {
 
 	submit() {
 		const { 
+			dealers_sales_person__c,
 			submitForm, 
 			form,
 		} = this.props;
@@ -68,7 +69,7 @@ class CustomerRegistrationForm extends Component {
 		Keyboard.dismiss();
 		submitForm({
 			...form,
-			dealers_sales_person__c: 'a0O9D000001hLV9UAM',
+			dealers_sales_person__c,
 			"customer__c": form.sfid
 		});
 	}
@@ -286,7 +287,8 @@ const mapStateToProps = (state) => ({
 	occupationList 				: state.common.occupationList,
   	sourceEnquiryList 			: state.common.sourceEnquiryList,
   	productsList 				: state.common.productsList,
-  	visitorData 				: state.visitor.visitorSearchSuccessData
+  	visitorData 				: state.visitor.visitorSearchSuccessData,
+  	dealers_sales_person__c     : state.user.sfid
 });
   
 const mapDispatchToProps = (dispatch) => ({
