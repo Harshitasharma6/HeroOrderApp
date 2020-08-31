@@ -60,6 +60,60 @@ export function* fetchLeadLostReasons({ payload }) {
 }
 
 
+export function* getAllStates({ payload }) {
+	const isOnline = yield select(getConnectionStatus);
+	if (!isOnline) {
+		yield put(CommonActions.doNothing());
+		return;
+	}
+
+	try {
+		yield put(CommonActions.getAllStatesLoading());
+		let {token} = yield select(state => state.user)
+		payload.token = token
+		
+		let successData = yield call(CommonService.getAllStates, payload);
+		if (successData) {
+			yield put(CommonActions.makeStatesSearchableList(HelperService.convertToSearchableListFormat({
+				list: successData,
+				id_key: 'sfid',
+				label_key: 'name'
+			})));
+		} else {
+			yield put(CommonActions.getAllStatesFailure());
+		}
+	} catch (error) {
+		yield put(CommonActions.getAllStatesFailure());
+	}
+}
+
+export function* getAllCities({ payload }) {
+	const isOnline = yield select(getConnectionStatus);
+	if (!isOnline) {
+		yield put(CommonActions.doNothing());
+		return;
+	}
+
+	try {
+		yield put(CommonActions.getAllCitiesLoading());
+		let {token} = yield select(state => state.user)
+		payload.token = token
+		
+		let successData = yield call(CommonService.getAllCities, payload);
+		if (successData) {
+			yield put(CommonActions.makeCitiesSearchableList(HelperService.convertToSearchableListFormat({
+				list: successData,
+				id_key: 'sfid',
+				label_key: 'name'
+			})));
+		} else {
+			yield put(CommonActions.getAllCitiesFailure());
+		}
+	} catch (error) {
+		yield put(CommonActions.getAllCitiesFailure());
+	}
+}
+
 
 
 

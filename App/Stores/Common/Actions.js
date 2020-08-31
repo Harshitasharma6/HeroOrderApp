@@ -7,6 +7,8 @@ const { Types, Creators } = createActions({
   disableModal: null,
   enableModal: null,
   makeProductsSearchableList: ['payload'],
+  makeStatesSearchableList: ['payload'],
+  makeCitiesSearchableList: ['payload'],
 
   fetchLeadLostReasons: ['payload'],
   fetchLeadLostReasonsLoading: null,
@@ -22,7 +24,18 @@ const { Types, Creators } = createActions({
   fetchLeadSourcesSuccess: ['payload'],
   fetchLeadSourcesFailure: null,
 
+  getAllStates: ['payload'],
+  getAllStatesLoading: null,
+  getAllStatesLoadingStop: null,
+  getAllStatesFailure: null,
 
+
+  getAllCities: ['payload'],
+  getAllCitiesLoading: null,
+  getAllCitiesLoadingStop: null,
+  getAllCitiesFailure: null,
+
+  
   showCallModal: null,
   hideCallModal: null,
   showConnectedOptions: null,

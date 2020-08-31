@@ -12,7 +12,10 @@ export const INITIAL_STATE = {
 	loaders: {
 		getAllProductsLoader: false,
 		fetchLeadLostReasonsLoader: false,
-		fetchLeadSourcesLoader: false
+		fetchLeadSourcesLoader: false,
+		getAllStatesLoader:		false,
+		getAllCitiesLoader:		false,
+
 	},
 
 	occupationList: [
@@ -59,6 +62,8 @@ export const INITIAL_STATE = {
 	sourceEnquiryList: [],
 	leadLostReasonsList: [],
 	productsList: [],
+	statesList: [],
+	citiesList: [],
 	isCallModalVisible: false,
 	callConnected: false,
 	callDisconnected: false

@@ -13,7 +13,9 @@ import { HelperService } from 'App/Services/Utils/HelperService';
 import NavigationService from 'App/Services/NavigationService'
 import {ApplicationStyles} from 'App/Theme'
 import SubDealersActions from 'App/Stores/SubDealers/Actions';
+import CommonActions from 'App/Stores/Common/Actions';
 import Underline from 'App/Components/Underline';
+import SearchableDropdown from 'App/Components/SearchableDropdown';
 import SubDealerAddress from 'App/Components/subDealerAddress'
 
 // "first_name__c": "test 12",	(*mandatory)
@@ -39,8 +41,19 @@ import SubDealerAddress from 'App/Components/subDealerAddress'
 
 class SubDealerFormScreen extends Component {
 	componentDidMount() {
-		
+		this.fetchCall()	
 	}
+
+	fetchCall() {
+		const {
+		
+		  fetchStates,
+		  fetchCities,
+		} = this.props
+	
+		fetchStates({});
+		fetchCities({});
+	  }
 
 	componentWillUnmount() {
 		const {
@@ -54,13 +67,13 @@ class SubDealerFormScreen extends Component {
 		const { 
 			submitForm, 
 			form,
+			dealerId,
 		} = this.props;
 
 		Keyboard.dismiss();
 		submitForm({
 			...form,
-			sfid:'0129D000000ahCQQAW',
-			parentId:'0019D000009zum3QAA',
+			parentId: dealerId,
 			
 		});
 	}
@@ -74,7 +87,10 @@ class SubDealerFormScreen extends Component {
 			validation,
 			occupationList,
             sourceEnquiryList,
-            productsList
+			productsList,
+			statesList,
+			citiesList,
+			
 		} = this.props;
 		
 		return (
@@ -119,29 +135,35 @@ class SubDealerFormScreen extends Component {
 						label={'Alternate Phone No.'}
 					/>
                 </View>
-                <View style={{flexDirection:'row', }}>
-						<View style={{width:'40%', marginLeft: '5%'}}>
-					<InputText
-						styles={Style.mb10}
-						placeholder={'City'}
-						value={form.city__c}
-						onChange={(value) => changeForm({ edited_field: 'city__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'city__c'}
-						label={'City'}
-					/>
+                
+				<View style={{ marginLeft: '6%', marginRight:'0%', }}>
+						<SearchableDropdown
+				        dataSource={citiesList}
+				        placeHolderText={'select City'}
+				        selectedValue={form.city__c}
+				        onChange={(value) => changeForm({ edited_field: 'city__c', edited_value: value })}
+				        placeholder={'Type or Select City'}
+				        invalid={false}
+				        labelStyles={{ ...Style.pickerLabel }}
+				        customPickerStyles={{ ...Style.picker }}
+				        label={'City'}
+						/>
 					</View>
-					<View style={{width:'40%', marginLeft:'9%'}}>
-					<InputText
-						styles={Style.mb10}
-						placeholder={'State'}
-						value={form.state__c}
-						onChange={(value) => changeForm({ edited_field: 'state__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'state__c'}
-						label={'State'}
+					<View style={{ marginLeft: '6%', marginRight:'0%'}}>
+					<SearchableDropdown
+				        dataSource={statesList}
+				        placeHolderText={'Select State'}
+				        selectedValue={form.state__c}
+				        onChange={(value) => changeForm({ edited_field: 'state__c', edited_value: value })}
+				        placeholder={'Type or Select State'}
+				        invalid={false}
+				        labelStyles={{ ...Style.pickerLabel }}
+				        customPickerStyles={{ ...Style.picker }}
+				        label={'State'}
 					/>
 
 					</View>
-                    </View>  
+                     
 					
 					<SubDealerAddress
 						value={form.address_line_1__c}
@@ -194,14 +216,20 @@ const mapStateToProps = (state) => ({
 	loader 			            : state.subdealers.loaders.createSubDealerLoader,
 	occupationList 				: state.common.occupationList,
   	sourceEnquiryList 			: state.common.sourceEnquiryList,
-  	productsList 				: state.common.productsList,
+	productsList 				: state.common.productsList,
+	statesList					: state.common.statesList,
+	citiesList					: state.common.citiesList,
+	 dealerId           		: state.user.dealer__c,
+	  
   	
 });
   
 const mapDispatchToProps = (dispatch) => ({
 	changeForm: (params)       => dispatch(SubDealersActions.changeSubDealerForm(params)),
 	submitForm: (params)       => dispatch(SubDealersActions.createSubDealer(params)),
-	clearRegistrationForm: ()  => dispatch(SubDealersActions.clearRegistrationForm())
+	clearRegistrationForm: ()  => dispatch(SubDealersActions.clearRegistrationForm()),
+	fetchStates:(params)         => dispatch(CommonActions.getAllStates(params)),
+	fetchCities:(params)         => dispatch(CommonActions.getAllCities(params)),
 });
 
 export default connect(

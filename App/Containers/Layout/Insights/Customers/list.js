@@ -32,8 +32,6 @@ class CustomerList extends React.Component {
               ContainerStyles={Styles.searchContainer}
               inputStyles={{fontSize: wp('4%')}}
               key={'SearchCustomersList'}
-              
-             
               />
             <Select style={Styles.selectPickerStyle}
             placeholder={'Search By'}

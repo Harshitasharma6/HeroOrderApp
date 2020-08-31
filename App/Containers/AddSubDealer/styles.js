@@ -74,7 +74,7 @@ export default StyleSheet.create({
 
   selectPickerStyle: {
     borderRadius: 100,
-    width: wp('88%'),
+    width: wp('80%'),
     height: hp('5.5%'),
     marginTop: 5,
     marginBottom: hp('2%'),
@@ -84,10 +84,12 @@ export default StyleSheet.create({
   },
   picker: {
     borderRadius: 10,
-    width: wp('88%'),
+    width: wp('80%'),
     height: hp('5.7%'),
     marginBottom: hp('3%'),
-    paddingHorizontal: 8
+    paddingHorizontal: 8,
+    marginRight: '5%',
+    backgroundColor: Colors.lightGrey,
   },
   pickerLabel: {
     color: Colors.grey,
