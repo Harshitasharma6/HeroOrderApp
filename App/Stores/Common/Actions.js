@@ -9,6 +9,12 @@ const { Types, Creators } = createActions({
   makeProductsSearchableList: ['payload'],
   makeStatesSearchableList: ['payload'],
   makeCitiesSearchableList: ['payload'],
+  makePurposeOfCallSearchableList: ['payload'],
+  makeOutPurposeOfCallSearchableList: ['payload'],
+  makeReasonNotConnectSearchableList: ['payload'],
+  makeFinancierNameSearchableList: ['payload'],
+  makeModelColorSearchableList: ['payload'],
+  makePaymentModeSearchableList: ['payload'],
 
   fetchLeadLostReasons: ['payload'],
   fetchLeadLostReasonsLoading: null,
@@ -34,6 +40,16 @@ const { Types, Creators } = createActions({
   getAllCitiesLoading: null,
   getAllCitiesLoadingStop: null,
   getAllCitiesFailure: null,
+
+  getCallOptions: ['payload'],
+  getCallOptionsLoading: null,
+  getCallOptionsLoadingStop: null,
+  getCallOptionsFailure: null,
+
+  getBookingPicklist: ['payload'],
+  getBookingPicklistLoading: null,
+  getBookingPicklistLoadingStop: null,
+  getBookingPicklistFailure: null,
 
   
   showCallModal: null,

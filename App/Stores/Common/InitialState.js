@@ -15,6 +15,8 @@ export const INITIAL_STATE = {
 		fetchLeadSourcesLoader: false,
 		getAllStatesLoader:		false,
 		getAllCitiesLoader:		false,
+		getCallOptionsLoader:   false,
+		getBookingPicklistLoader:     false,
 
 	},
 
@@ -34,32 +36,13 @@ export const INITIAL_STATE = {
 		
 	],
 
-	financier_name: [
-           {id: "Bajaj Finance",name: "Bajaj Finance"},
-           {id:  "Loan Tap",name:  "Loan Tap"},
-           {id: "HDFC",name: "HDFC"},
-           {id: "IDFC Bank",name: "IDFC Bank"},
-           {id: "Wheels EMI",name: "Wheels EMI"},
-           {id: "Pine Lab",name: "Pine Lab"},
-           {id: "Reds Money",name: "Reds Money"},
-           {id: "Others",name: "Others"}
-       ],
-       model_color: [
-       	   {id: "Red",name: "Red"},
-           {id:  "Green",name:  "Green"},
-           {id: "Blue",name: "Blue"},
-           {id: "Silver",name: "Silver"},
-           {id: "Black",name: "Black"},
-           {id: "White",name: "White"},
-           {id: "Grey",name: "Grey"},
-           {id: "Burgandy",name: "Burgandy"},
-           {id: "Bedge-Brown",name: "Bedge-Brown"}
-       ],
-       payment_mode: [
-       	  {id: "Digital",name: "Digital"},
-           {id:  "Cash",name:  "Cash"},
-           {id: "Cheque",name: "Cheque"}
-       ],
+	financier_name: [],
+    model_color:  [],
+	payment_mode: [],
+	
+	purpose_of_call: [],
+	outcome_purpose_of_call:[],
+	reasons_for_not_Connected:[],
 
 	sourceEnquiryList: [],
 	leadLostReasonsList: [],

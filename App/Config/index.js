@@ -17,7 +17,7 @@ export const Config = {
 		REGISTER_CUSTOMER_CALL: 'incomingCallLead/createLead',
 		REGISTER_CUSTOMER_OUTGOING_CALL: 'outgoingCall/createCall',
 		UPDATE_FOLLOW_UP_CALL: 'outgoingCall/updateFollowUp',
-		UPDATE_BOOKING	 :	'booking/updateBooking'
+		UPDATE_BOOKING	 :	'booking/updateBooking',
 	}, 
 
 
@@ -26,6 +26,8 @@ export const Config = {
 		FETCH_LEAD_LOST_REASONS: 'visitors/getLostReason',
 		GET_STATES:	'states/getAll',
 		GET_CITIES: 'cities/getAll',
+		GET_CALL_OPTIONS: 'call-activities/callOptions',
+		GET_BOOKING_PICKLIST: 'booking/bookingPickList',
 	},
 
 
