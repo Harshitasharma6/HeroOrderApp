@@ -18,7 +18,7 @@ class ConfirmBookingLayout extends React.Component {
     } = this.props;
 
     return (
-     <Header transparent style={Styles.header}>
+     <Header style={Styles.header}>
        <BackArrowButton />
        <Text style={Styles.heading}>{"BOOKING CONFIRMED"}</Text>
       
@@ -86,7 +86,8 @@ const Styles = StyleSheet.create({
     alignItems: 'flex-start',
     height: hp('24%'),
     flexDirection: 'column',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: Colors.white
   },
 
   searchContainer: {

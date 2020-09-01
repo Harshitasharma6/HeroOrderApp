@@ -30,6 +30,7 @@ export default StyleSheet.create({
   borderStyle: 'solid',
   borderWidth: 1,
   borderRadius: 10,
+  height: hp('5.5%')
   },
   header: {
     flex: 1, 

@@ -24,7 +24,7 @@ class VisitorInfoScreenLayout extends React.Component {
 
     return (
       <View>
-        <Header transparent style={Styles.header}>
+        <Header style={Styles.header}>
         	<View style={{paddingTop: hp('1%'), paddingBottom: hp('1%')}}>
         		<BackArrowButton />
         	</View>
@@ -107,7 +107,8 @@ const Styles = StyleSheet.create({
     alignItems: 'flex-start',
     height: hp('17%'),
     flexDirection: 'column',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: Colors.white
   },
   arrowContainer: {
     width: wp('20%'),
