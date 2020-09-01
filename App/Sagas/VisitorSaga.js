@@ -726,11 +726,10 @@ function* updateBooking(payload) {
 			return;
 		}
 
-		let {token, dealer__c, sfid} = yield select(state => state.user)
+		let {token, sfid} = yield select(state => state.user)
 		payload.token = token;
-		payload.dealer_id = dealer__c;
 		payload.dealers_sales_person_login_info_id = sfid;
-		payload.enquiry = payload.enquiry_id
+		
 	
 		const successData = yield call(VisitorService.updateBooking, payload);
 

@@ -72,7 +72,7 @@ class InvoiceDetailformScreen extends Component {
 		Keyboard.dismiss();
 		submitForm({
 			...form,
-			enquiry_id : currentEnquiryId,
+			
 			  
 		});
 	}

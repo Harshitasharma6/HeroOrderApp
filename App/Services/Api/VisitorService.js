@@ -228,8 +228,8 @@ function payBooking(params) {
 }
 
 function updateBooking(params) {
-	let url = Config.VISITOR_SERVICE.UPDATE_FOLLOW_UP_CALL;
-	url += `?sfid=${params.dealers_sales_person_login_info_id}&enquiry_id=${params.enquiry}` ;
+	let url = Config.VISITOR_SERVICE.UPDATE_BOOKING;
+	url += `?sfid=${params.dealers_sales_person_login_info_id}` ;
 	return apiClient.put(url, params, {
 		headers: {
 			token: params.token
