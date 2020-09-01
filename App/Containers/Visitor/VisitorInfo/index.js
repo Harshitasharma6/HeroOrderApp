@@ -60,11 +60,11 @@ class VisitorInfoScreen extends Component {
 	                <GenericDisplayCardStrip key={'Product Interested'+ data.id} label={'Product Interested'} value={HelperService.findMatchingKeyValueInList(productsList, 'id', data.product__c, 'name')} />,
 	                  <GenericDisplayCardStrip key={'Existing Two Wheeler'+ data.id} label={'Existing Two Wheeler'} value={data.existing_two_wheelers__c} />,
 	                <GenericDisplayCardStrip key={'Exchange Required'+ data.id} label={'Exchange Required'} value={data.exchange_required__c} />,
-	                <GenericDisplayCardStrip key={'Expected Purchase Date'+ data.id} label={'Expected Purchase Date'} value={HelperService.removeFieldsAndDateReadableFormat(data.expected_close_date__c)} />,
+	                <GenericDisplayCardStrip key={'Expected Purchase Date'+ data.id} label={'Expected Purchase Date'} value={HelperService.dateReadableFormat(data.expected_close_date__c)} />,
 	                <GenericDisplayCardStrip key={'Mode of Purchase'+ data.id} label={'Mode of Purchase'} value={data.mode_of_buying__c} />,
 	                <GenericDisplayCardStrip key={'Test Drice Offered'+ data.id} label={'Test Drive Offered'} value={data.test_drive_offered__c} />,
-	                data.customer_birthday__c ? <GenericDisplayCardStrip key={'Customer Birthday'+ data.id} label={'Customer Birthday'} value={HelperService.removeFieldsAndDateReadableFormat(data.customer_birthday__c)} /> : [],
-	                data.customer_anniversary__c  ? <GenericDisplayCardStrip key={'Customer Anniversary'+ data.id} label={'Customer Anniversary'} value={HelperService.removeFieldsAndDateReadableFormat(data.customer_anniversary__c)} /> : [],
+	                data.customer_birthday__c ? <GenericDisplayCardStrip key={'Customer Birthday'+ data.id} label={'Customer Birthday'} value={HelperService.dateReadableFormat(data.customer_birthday__c)} /> : [],
+	                data.customer_anniversary__c  ? <GenericDisplayCardStrip key={'Customer Anniversary'+ data.id} label={'Customer Anniversary'} value={HelperService.dateReadableFormat(data.customer_anniversary__c)} /> : [],
 
 	            ]}
             />

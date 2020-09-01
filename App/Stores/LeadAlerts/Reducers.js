@@ -37,6 +37,7 @@ export const fetchHotLeadsSuccess = (state, {payload}) => ({
 
 export const fetchHotLeadsFailure = (state, {payload}) => ({
   ...state,
+  hotLeads: [],
   loaders: {
     ...state.loaders,
     fetchHotLeadsLoader: false
@@ -77,6 +78,7 @@ export const fetchBookingConfirmFinanceLeadsSuccess = (state, {payload}) => ({
 
 export const fetchBookingConfirmFinanceLeadsFailure = (state, {payload}) => ({
   ...state,
+  bookingConfirmFinanceLeads: [],
   loaders: {
     ...state.loaders,
     fetchBookingConfirmFinanceLeadsLoader: false
@@ -116,6 +118,7 @@ export const fetchPurchaseOverdueSuccess = (state, {payload}) => ({
 
 export const fetchPurchaseOverdueFailure = (state, {payload}) => ({
   ...state,
+  purchaseOverdue: [],
   loaders: {
     ...state.loaders,
     fetchPurchaseOverdueLoader: false
@@ -155,6 +158,7 @@ export const fetchOpenLeadsSuccess = (state, {payload}) => ({
 
 export const fetchOpenLeadsFailure = (state, {payload}) => ({
   ...state,
+  openLeads: [],
   loaders: {
     ...state.loaders,
     fetchOpenLeadsLoader: false
@@ -193,6 +197,7 @@ export const fetchCallLeadsSuccess = (state, {payload}) => ({
 
 export const fetchCallLeadsFailure = (state, {payload}) => ({
   ...state,
+  callLeads: [],
   loaders: {
     ...state.loaders,
     fetchCallLeadsLoader: false
@@ -232,6 +237,7 @@ export const fetchNoActionSuccess = (state, {payload}) => ({
 
 export const fetchNoActionFailure = (state, {payload}) => ({
   ...state,
+  noAction: [],
   loaders: {
     ...state.loaders,
     fetchNoActionLoader: false

@@ -15,6 +15,7 @@ export const getAllProductsSuccess = (state, { payload }) => ({
 
 export const getAllProductsFailure = (state) => ({
   ...state,
+  productsData: [],
   loaders: {
     ...state.loaders,
     getAllProductsLoader: false
@@ -52,6 +53,7 @@ export const getProductSchemesSuccess = (state, { payload }) => ({
 
 export const getProductSchemesFailure = (state) => ({
   ...state,
+  productSchemes: {},
   loaders: {
     ...state.loaders,
     getProductSchemesLoader: false

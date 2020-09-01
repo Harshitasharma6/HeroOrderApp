@@ -15,6 +15,7 @@ export const getAllSubDealersSuccess = (state, { payload }) => ({
 
 export const getAllSubDealersFailure = (state) => ({
   ...state,
+  SubDealersData: [],
   loaders: {
     ...state.loaders,
     getAllSubDealersLoader: false

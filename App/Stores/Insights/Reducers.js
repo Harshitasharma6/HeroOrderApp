@@ -16,6 +16,7 @@ export const getDashboardSummarySuccess = (state, { payload }) => ({
 
 export const getDashboardSummaryFailure = (state) => ({
   ...state,
+  DashboardSummaryData: [],
   loaders: {
     ...state.loaders,
     getDashboardSummaryLoader: false
@@ -60,6 +61,7 @@ export const getDashboardTrendsSoldProductsSuccess = (state, { payload }) => ({
 
 export const getDashboardTrendsSoldProductsFailure = (state) => ({
   ...state,
+  dashboardTrendsSoldProductsData: [],
   loaders: {
     ...state.loaders,
     getDashboardTrendsSoldProductsLoader: false
@@ -100,6 +102,7 @@ export const getDashboardTrendsRevenueSuccess = (state, { payload }) => ({
 
 export const getDashboardTrendsRevenueFailure = (state) => ({
   ...state,
+  dashboardTrendsRevenueData: [],
   loaders: {
     ...state.loaders,
     getDashboardTrendsRevenueLoader: false
@@ -136,6 +139,7 @@ export const getAllSchemeSuccess = (state, { payload }) => ({
 
 export const getAllSchemeFailure = (state) => ({
   ...state,
+  SchemeData: [],
   loaders: {
     ...state.loaders,
     getAllSchemeLoader: false
@@ -171,6 +175,7 @@ export const getFollowUpSuccess = (state, { payload }) => ({
 
 export const getFollowUpFailure = (state) => ({
   ...state,
+  FollowUpData: [],
   loaders: {
     ...state.loaders,
     getFollowUpLoader: false
@@ -207,6 +212,7 @@ export const getAllCustomerSuccess = (state, { payload }) => ({
 
 export const getAllCustomerFailure = (state) => ({
   ...state,
+  AllCustomerData: [],
   loaders: {
     ...state.loaders,
     getAllCustomerLoader: false
@@ -259,6 +265,7 @@ export const getCompletedFollowUpSuccess = (state, { payload }) => ({
 
 export const getCompletedFollowUpFailure = (state) => ({
   ...state,
+  completedFollowUpData:[],
   loaders: {
     ...state.loaders,
     getCompletedFollowUpLoader: false
