@@ -28,6 +28,8 @@ export const INITIAL_STATE = {
         searchValue: '',
        
 		searchByOptions: [
+			
+			
 			{
 				label: 'By Phone No.',
 				value: 'mobilephone'
