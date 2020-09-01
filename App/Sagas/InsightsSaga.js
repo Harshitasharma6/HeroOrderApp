@@ -105,11 +105,7 @@ export function* getAllScheme({ payload }) {
 		if (successData) {
 			yield put(InsightsActions.getAllSchemeLoadingStop());
 			yield put(InsightsActions.getAllSchemeSuccess(successData));
-			yield put(CommonActions.makeProductsSearchableList(HelperService.convertToSearchableListFormat({
-				list: successData,
-				id_key: 'sfid',
-				
-			})));
+			
 		} else {
 			yield put(InsightsActions.getAllSchemeFailure());
 		}
