@@ -60,7 +60,7 @@ class AllFollowUpsScreen extends Component {
                 <GenericDisplayCard dark={false}
                   style={{ width: '88%', elevation: 0 }}
                   content={[
-                    <GenericDisplayCardStrip key={'Follow Up Date' + item.id} label={'Follow Up Date'} value={HelperService.removeFieldsAndDateReadableFormat(item.follow_up_date__c)}/>,
+                    <GenericDisplayCardStrip key={'Follow Up Date' + item.id} label={'Follow Up Date'} value={HelperService.dateReadableFormat(item.follow_up_date__c)}/>,
                     
                     <GenericDisplayCardStrip key={'Sales Person' + item.id} label={'Sales Person Name'} value={item.sales_person_name__c || ''}/>,
                     <GenericDisplayCardStrip key={'Purpose Of Call' + item.id} label={'Purpose Of Call'} value={item.purpose_of_call__c || ''}/>,

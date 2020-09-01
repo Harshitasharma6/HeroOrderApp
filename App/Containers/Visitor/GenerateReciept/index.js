@@ -220,7 +220,7 @@ class GenerateRecieptformScreen extends Component {
                     <InputDate
                         style={Style.mb10}
                         placeholder={'Expected Delievery Date'}
-                        value={HelperService.removeFieldsAndDateReadableFormat(form.expected_close_date__c)}
+                        value={HelperService.dateReadableFormat(form.expected_close_date__c)}
                         onChange={(value) => {
                             let formattedDate = HelperService.convertMomentDateToTimestamp(value);
                             formattedDate = HelperService.dateReadableFormatWithHyphen(formattedDate);

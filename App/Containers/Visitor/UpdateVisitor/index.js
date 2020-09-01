@@ -119,7 +119,10 @@ class UpdateVisitorScreen extends Component {
 
 		submitForm({
 			...form,
-			enquiry: enquiry
+			enquiry: enquiry,
+			customer_birthday__c: HelperService.dateReadableFormatWithHyphen(form.customer_birthday__c),
+			expected_close_date__c: HelperService.dateReadableFormatWithHyphen(form.expected_close_date__c),
+			customer_anniversary__c: HelperService.dateReadableFormatWithHyphen(form.customer_anniversary__c)
 		});
 	}
 
@@ -345,7 +348,7 @@ class UpdateVisitorScreen extends Component {
 					<InputDate
                         style={Style.mb10}
                         placeholder={'Expected Purchase Date'}
-                        value={HelperService.removeFieldsAndDateReadableFormat(form.expected_close_date__c)}
+                        value={HelperService.dateReadableFormat(form.expected_close_date__c)}
                         onChange={(value) => {
                             let formattedDate = HelperService.convertMomentDateToTimestamp(value);
                             formattedDate = HelperService.dateReadableFormatWithHyphen(formattedDate);
@@ -386,7 +389,7 @@ class UpdateVisitorScreen extends Component {
 					<InputDate
                         style={Style.mb10}
                         placeholder={'Customer Birthday'}
-                        value={HelperService.removeFieldsAndDateReadableFormat(form.customer_birthday__c)}
+                        value={HelperService.dateReadableFormat(form.customer_birthday__c)}
                         onChange={(value) => {
                             let formattedDate = HelperService.convertMomentDateToTimestamp(value);
                             formattedDate = HelperService.dateReadableFormatWithHyphen(formattedDate);
@@ -401,7 +404,7 @@ class UpdateVisitorScreen extends Component {
                     <InputDate
                         style={Style.mb10}
                         placeholder={'Customer Anniversary'}
-                        value={HelperService.removeFieldsAndDateReadableFormat(form.customer_anniversary__c)}
+                        value={HelperService.dateReadableFormat(form.customer_anniversary__c)}
                         onChange={(value) => {
                             let formattedDate = HelperService.convertMomentDateToTimestamp(value);
                             formattedDate = HelperService.dateReadableFormatWithHyphen(formattedDate);

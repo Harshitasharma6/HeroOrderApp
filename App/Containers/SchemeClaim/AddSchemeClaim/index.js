@@ -189,7 +189,7 @@ class SchemeClaimformScreen extends Component {
                     <InputDate
                         style={Style.mb10}
                         placeholder={' Date of Invoice' }
-                        value={HelperService.removeFieldsAndDateReadableFormat(form.date_of_invoice__c)}
+                        value={HelperService.dateReadableFormat(form.date_of_invoice__c)}
                         onChange={(value) => {
                             let formattedDate = HelperService.convertMomentDateToTimestamp(value);
                             formattedDate = HelperService.dateReadableFormatWithHyphen(formattedDate);

@@ -131,7 +131,7 @@ class ProductCatalogScreen extends Component {
 const mapStateToProps = (state) => ({
   loader   : state.products.loaders.getAllProductsLoader,
   enquiry  : state.visitor.currentEnquiryId,
-  state_id : state.user.state_c,
+  state_id : state.user.state__c,
   data     : state.products.productsData
 });
 

@@ -85,9 +85,9 @@ class OpenHotLeads extends Component {
                 content={[
                   <GenericDisplayCardStrip key={'Status' + item.id} label={'Status'} value={item.lead_status__c}/>,
                   <GenericDisplayCardStrip key={'Stage' + item.id} label={'Stage'} value={item.lead_stage__c || ''}/>,
-                   <GenericDisplayCardStrip key={'Lead Created on' + item.id} label={'Lead Created on'} value={HelperService.removeFieldsAndDateReadableFormat(item.createddate)}/>,
+                   <GenericDisplayCardStrip key={'Lead Created on' + item.id} label={'Lead Created on'} value={HelperService.dateReadableFormat(item.createddate)}/>,
                  <GenericDisplayCardStrip key={'Product Interested' + item.id} label={'Product Interested'} value={HelperService.findMatchingKeyValueInList(productsList, 'id', item.product__c, 'name')}/>,
-                  <GenericDisplayCardStrip key={'Expected Purchase Date' + item.id} label={'Expected Purchase Date'} value={HelperService.removeFieldsAndDateReadableFormat(item.expected_close_date__c)} />,
+                  <GenericDisplayCardStrip key={'Expected Purchase Date' + item.id} label={'Expected Purchase Date'} value={HelperService.dateReadableFormat(item.expected_close_date__c)} />,
                   item.lead_status__c != 'Lost' ? <View style={{flexDirection: 'row', justifyContent: 'space-between' }} textStyle={{fontSize: wp('3.8%')}} key={'Action section' + item.id}>
                   <BlueButton 
                     title={'Mark Lost'} 

@@ -47,12 +47,12 @@ class AvailableSchemes extends Component {
              <GenericDisplayCardStrip 
               key={'Valid From' + item.name} 
               label={'Valid From'} 
-              value={`${HelperService.removeFieldsAndDateReadableFormat(item.active_from__c)}`}
+              value={`${HelperService.dateReadableFormat(item.active_from__c)}`}
              />,
              <GenericDisplayCardStrip 
               key={'Valid Till' + item.name} 
               label={'Valid Till'} 
-              value={`${HelperService.removeFieldsAndDateReadableFormat(item.active_to__c)}`}
+              value={`${HelperService.dateReadableFormat(item.active_to__c)}`}
              />
           ]}
         />

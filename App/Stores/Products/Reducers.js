@@ -9,7 +9,7 @@ export const getAllProductsSuccess = (state, { payload }) => ({
   productsData: payload,
   loaders: {
     ...state.loaders,
-    cLoader: false
+    getAllProductsLoader: false
   }
 });
 
