@@ -31,7 +31,9 @@ class AvailableSchemes extends Component {
 		fetchData({
 		 
 		});
-	  }
+    }
+    
+    
 
   getDataCard(item) {
     return (

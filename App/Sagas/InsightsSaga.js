@@ -98,8 +98,10 @@ export function* getAllScheme({ payload }) {
 
 	try {
 		yield put(InsightsActions.getAllSchemeLoading());
-		let {token} = yield select(state => state.user)
+		let {token, dealer__c, state__c} = yield select(state => state.user)
 		payload.token = token
+		payload.dealer_id = dealer__c
+		payload.state_id  = state__c
 		
 	let successData = yield call(InsightsService.getAllScheme, payload);
 		if (successData) {

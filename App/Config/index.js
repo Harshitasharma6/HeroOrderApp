@@ -71,7 +71,7 @@ export const Config = {
 	},
 
 	SCHEME_SERVICE: {
-		GET_ALL_SCHEME							: 'schemeMaster/getAll'
+		GET_ALL_SCHEME							: 'schemeMaster/getScheme'
 	},
 
 	CUSTOMER_SERVICE:{
