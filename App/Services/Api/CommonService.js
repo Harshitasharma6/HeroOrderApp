@@ -80,10 +80,29 @@ function getAllCities(params) {
 }
 
 
+function uploadImage(params) {
+  let url = Config.COMMON_SERVICE.UPLOAD_IMAGE;
+  return apiClient.post(url, {image: params.image}, {
+    headers: {
+      token: params.token
+    }
+  }).then((response) => {
+    if (in200s(response.status)) {
+      return response['data']['url'];
+    }
+    return null
+  }).catch(error => {
+    //bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
+    return null
+  });
+}
+
+
 
 export const CommonService = {
   fetchLeadSources,
   fetchLeadLostReasons,
   getAllStates,
   getAllCities,
+  uploadImage
 }

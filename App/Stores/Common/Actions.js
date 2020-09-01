@@ -40,7 +40,16 @@ const { Types, Creators } = createActions({
   hideCallModal: null,
   showConnectedOptions: null,
   showDisconnectedOptions: null,
-  clearCallModalData: null
+  clearCallModalData: null,
+
+
+  uploadImage: ['payload'],
+  uploadImageLoading: null,
+  uploadImageLoadingStop: null,
+  uploadImageSuccess: ['payload'],
+  uploadImageFailure: null
+
+
 })
 
 export const CommonTypes = Types

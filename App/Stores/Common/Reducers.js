@@ -240,6 +240,43 @@ export const  getAllCitiesLoadingStop = (state, {payload}) => ({
   }
 });
 
+
+
+export const uploadImageSuccess = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    uploadImageLoader: false
+  }
+});
+
+
+export const uploadImageFailure = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    uploadImageLoader: false
+  }
+});
+
+
+export const uploadImageLoading = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    uploadImageLoader: true
+  }
+});
+
+
+export const uploadImageLoadingStop = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    uploadImageLoader: false
+  }
+});
+
 export const reducer = createReducer(INITIAL_STATE, {
   [CommonTypes.CONNECTION_CHANGED]           : connectionChanged,
   [CommonTypes.SCREEN_CHANGED]               : screenChanged,
@@ -282,4 +319,15 @@ export const reducer = createReducer(INITIAL_STATE, {
   [CommonTypes.GET_ALL_CITIES_FAILURE]           : getAllCitiesFailure,
 
 
+
+  [CommonTypes.UPLOAD_IMAGE_LOADING]      : uploadImageLoading,
+  [CommonTypes.UPLOAD_IMAGE_LOADING_STOP] : uploadImageLoadingStop,
+  [CommonTypes.UPLOAD_IMAGE_SUCCESS]      : uploadImageSuccess,
+  [CommonTypes.UPLOAD_IMAGE_FAILURE]      : uploadImageFailure
+
+  // //uploadImage: ['payload'],
+  // uploadImageLoading: null,
+  // uploadImageLoadingStop: null,
+  // uploadImageSuccess: ['payload'],
+  // uploadImageFailure: null
 });

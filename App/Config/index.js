@@ -26,6 +26,7 @@ export const Config = {
 		FETCH_LEAD_LOST_REASONS: 'visitors/getLostReason',
 		GET_STATES:	'states/getAll',
 		GET_CITIES: 'cities/getAll',
+		UPLOAD_IMAGE: 'images/upload'
 	},
 
 

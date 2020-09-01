@@ -15,7 +15,7 @@ export const INITIAL_STATE = {
 		fetchLeadSourcesLoader: false,
 		getAllStatesLoader:		false,
 		getAllCitiesLoader:		false,
-
+		uploadImageLoader: false
 	},
 
 	occupationList: [

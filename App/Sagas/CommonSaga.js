@@ -6,6 +6,7 @@ import { VisitorTypes } from 'App/Stores/Visitor/Actions';
 import { call, put, select, take } from 'redux-saga/effects';
 import { CommonService } from 'App/Services/Api/CommonService';
 import CommonActions from 'App/Stores/Common/Actions';
+import VisitorActions from 'App/Stores/Visitor/Actions';
 import { offlineApiCall } from './OfflineSaga';
 import {Alert} from 'react-native'
 import _ from 'lodash';
@@ -111,6 +112,31 @@ export function* getAllCities({ payload }) {
 		}
 	} catch (error) {
 		yield put(CommonActions.getAllCitiesFailure());
+	}
+}
+
+
+export function* uploadImage({ payload }) {
+	const isOnline = yield select(getConnectionStatus);
+	if (!isOnline) {
+		yield put(CommonActions.doNothing());
+		return;
+	}
+
+	try {
+		yield put(CommonActions.uploadImageLoading());
+		let {token} = yield select(state => state.user)
+		payload.token = token
+		let url = yield call(CommonService.uploadImage, payload);
+		if (url) {
+			yield put(CommonActions.uploadImageSuccess(url));
+			yield put(VisitorActions.changeUpdateBookingForm({...payload.params, edited_value: url}));
+		} else {
+			yield put(CommonActions.uploadImageFailure());
+		}
+	} catch (error) {
+		console.log('error', error)
+		yield put(CommonActions.uploadImageFailure());
 	}
 }
 

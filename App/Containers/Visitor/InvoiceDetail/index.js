@@ -17,33 +17,59 @@ import InputDate from 'App/Components/FormInput/InputDate';
 import WhiteButton from 'App/Components/WhiteButton';
 import {ApplicationStyles} from 'App/Theme'
 import {Colors} from 'App/Theme'
-import GenericCheckBox from 'App/Components/GenericCheckBox'
-import VisitorActions from 'App/Stores/Visitor/Actions'
+import GenericCheckBox from 'App/Components/GenericCheckBox';
+import VisitorActions from 'App/Stores/Visitor/Actions';
+import CommonActions from 'App/Stores/Common/Actions';
 import moment from 'moment';
-import GoogleAddress from 'App/Components/GoogleAddress'
+import GoogleAddress from 'App/Components/GoogleAddress';
 import ImagePicker from 'App/Components/ImagePicker'
 import DetailCard from 'App/Components/DetailCard'
+import {Spinner } from 'native-base';
 
 
-// "first_name__c": "test 12",	(*mandatory)
-// 	"last_name__c": "enquiry visit test",	(*mandatory)
-// 	"contact_number__c": "1646464944", 	(*mandatory)
-// 	"age__c":  "28",
-// 	"genders__c": "Male",
-// 	"product__c": "a029D000002ZFPtQAO", 	(*mandatory)
-// 	"mode_of_buying__c": "Cash",
-// 	"exchange_required__c":"No",
-// 	"lead_source__c": "Event",
-// 	"existing_two_wheelers__c": "Yes",
-// 	"purpose_of_buying__c" : "Nothing",
-// "usage__c": "Nothing",
-// "expected_close_date__c": "2020-08-19",
-//  "dealers_sales_person__c": "a0O9D000001hLV9UAM",
-// 	"email_id__c": "abc@gmail.com",
-// 	"occupation__c" : "Business",
-// 	"test_drive_offered__c": "Yes",		(*mandatory)
-// 	"customer__c": "0039D000008BMX2QAO",
-// 	"address_line_1__c" : “test address”
+// {
+//    "product__c":"a029D000002ZFPtQAO",
+//    "first_name__c": "Rohit",
+//    "last_name__c": "Shukla",
+//    "contact_number__c": "09818512785",
+//    "email_id__c":  "xyz@gmails.com",
+//    "address_line_1__c": "delhi",
+//    "recieved_advance__c": "1222",
+//    "payment_mode__c": "Cash",
+//    "booking_ref_no__c":"123",
+//    "expected_delivery_date__c" :"2020-08-28",
+//    "booking_date__c": "2020-08-30",
+//    "aadhar_card__c":"https://abc.com/a.png",
+//    "acknowledgement__c": "https://abc.com/a.png",
+//    "driving_license__c" : "https://abc.com/a.png",
+//    "insurance__c" :"https://abc.com/a.png",
+//    "rc__c" : "https://abc.com/a.png",
+//    "others__c" : ["https://abc.com/a.png","https://abc.com/a1.png"],
+//    "voter_id_card__c" :"https://abc.com/a.png",   
+//    "igst_in_rs__c":"",    
+//    "total_tax__c": "50",  
+//    "total_subsidy__c": "11",
+//    "dealer_discount__c" : "",
+//    "total_amount_payable__c": "22222",
+//    "tally_invoice_no__c" : "",
+//    "customer_gstin_no__c" : "sadasd",
+//    "battery_no__c": "asdasd",
+//    "charger_no__c": "ewewqeq",
+//    "chassis_no__c": "weweqwe",
+//    "motor_no__c": "qwewqe",
+//    "address_line_2__c":"qwewe",
+//    "online_order_no__c":"wewewe",
+//    "reference_no__c":"weqwewqe",
+//    "model_color__c":"Red",
+//    "make_of_battery__c":"wewewe",
+//    "capacity_of_each_battery__c":"xasasd",
+//    "type_of_battery__c":"wwewe",
+//    "owner_s_handbook_no__c":"wqewqewe",
+//    "other_financier_name__c":"IDFC",
+//    "amount_paid_at_booking__c":"222",
+//    "outstanding_amount__c":"222",
+//    "financier_name__c":"eeeee"
+// }
 
 
 class InvoiceDetailformScreen extends Component {
@@ -77,6 +103,10 @@ class InvoiceDetailformScreen extends Component {
 		});
 	}
 
+	changeImage(url, params) {
+		this.props.changeForm({...params, edited_value: url})
+	}
+
     render() {
 		const { 
 			data,
@@ -91,8 +121,11 @@ class InvoiceDetailformScreen extends Component {
             financier_name,
   			model_color,
   			payment_mode,
+  			uploadImage,
+  			uploadImageLoading
 		} = this.props;
 		
+		let _this = this;	
 		return (
 			<View style={Style.container}>
 				
@@ -100,28 +133,29 @@ class InvoiceDetailformScreen extends Component {
 					showsVerticalScrollIndicator={false}
 					style={Style.action}
 				>
-    	  <Text style={Style.heading}>{'Add Invoice Detail'}</Text> 
-      <View style={{flexDirection:'row', justifyContent:'space-around', marginBottom:'2%', }}>
-      <DetailCard
-       title=" Booking Date "
-       value="30/08/20"
-      />
-       <DetailCard
-       title=" Ex Showroom Price "
-       value="20000"
-      />
-      </View>
-      <View style={{flexDirection:'row', justifyContent:'space-around', marginBottom:'2%'}}>
-      <DetailCard
-       title=" Advance Recieved "
-       value="15000"
-      />
-       <DetailCard
-       title=" Outstanding Amount "
-       value="5000"
-      />
-      </View> 
-				
+    	  		<Text style={Style.heading}>{'Add Invoice Detail'}</Text> 
+			      {
+			      // 	<View style={{flexDirection:'row', justifyContent:'space-around', marginBottom:'2%', }}>
+			      // <DetailCard
+			      //  title=" Booking Date "
+			      //  value="30/08/20"
+			      // />
+			      //  <DetailCard
+			      //  title=" Ex Showroom Price "
+			      //  value="20000"
+			      // />
+			      // </View>
+			      // <View style={{flexDirection:'row', justifyContent:'space-around', marginBottom:'2%'}}>
+			      // <DetailCard
+			      //  title=" Advance Recieved "
+			      //  value="15000"
+			      // />
+			      //  <DetailCard
+			      //  title=" Outstanding Amount "
+			      //  value="5000"
+			      // />
+			      // </View> 
+				}
 			   <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
 					<InputNumber
 						styles={Style.mb10}
@@ -155,9 +189,9 @@ class InvoiceDetailformScreen extends Component {
                     <InputNumber
 						styles={Style.mb10}
 						placeholder={'Refrence  No.'}
-						value={form.ref_no_for_reference_schemes_only__c}
-						onChange={(value) => changeForm({ edited_field: 'ref_no_for_reference_schemes_only__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'ref_no_for_reference_schemes_only__c'}
+						value={form.reference_no__c}
+						onChange={(value) => changeForm({ edited_field: 'reference_no__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'reference_no__c'}
 						label={'Reference No.* (For Refrence Schemes only)'}
 					/>	
 
@@ -275,18 +309,18 @@ class InvoiceDetailformScreen extends Component {
 					<InputText
 						style={Style.mb10}
 						placeholder={'Make of Battery'}
-						value={form.make_of_battery}
-						onChange={(value) => changeForm({ edited_field: 'make_of_battery', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'make_of_battery'}
-						label={' Make of Battery'}
+						value={form.make_of_battery__c}
+						onChange={(value) => changeForm({ edited_field: 'make_of_battery__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'make_of_battery__c'}
+						label={'Make of Battery'}
 					/>
 
 					<InputText
 						style={Style.mb10}
 						placeholder={'Type of Battery'}
-						value={form.type_of_battery}
-						onChange={(value) => changeForm({ edited_field: 'type_of_battery', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'type_of_battery'}
+						value={form.type_of_battery__c}
+						onChange={(value) => changeForm({ edited_field: 'type_of_battery__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'type_of_battery__c'}
 						label={'Type of Battery'}
 					/>	
 
@@ -301,25 +335,7 @@ class InvoiceDetailformScreen extends Component {
 						label={'Capacity of Each Battery'}
 					/>
 
-					{
-					// 	<InputText
-					// 	style={Style.mb10}
-					// 	placeholder={'Purpose of Buying'}
-					// 	value={form.purpose_of_buying__c}
-					// 	onChange={(value) => changeForm({ edited_field: 'purpose_of_buying__c', edited_value: value })}
-					// 	error={validation.invalid && validation.invalid_field == 'purpose_of_buying__c'}
-					// 	label={'Purpose of Buying*'}
-					// />
-
-					// <InputText
-					// 	style={Style.mb10}
-					// 	placeholder={'Usage'}
-					// 	value={form.usage__c}
-					// 	onChange={(value) => changeForm({ edited_field: 'usage__c', edited_value: value })}
-					// 	error={validation.invalid && validation.invalid_field == 'usage__c'}
-					// 	label={'Usage*'}
-					// />
-				}
+					
 				<InputNumber
 						styles={Style.mb10, {marginBottom:'1%'}}
 						placeholder={'Owners Handbook No.'}
@@ -351,114 +367,17 @@ class InvoiceDetailformScreen extends Component {
 						label={'Other Financier Name'}
 					/>
 
-{
-	// <BlueButton title={"ATTACH DOCUMENTS"} style={{width: '53%', marginHorizontal: '46%',}} textStyle={{fontSize: 12}} >
-	//             	<GenericIcon name={'photo'} style={{color: Colors.white, fontSize: 15}}/>
-	//             </BlueButton>
-	        }
-
-
-				{
-					// <View style={{ width: '100%', justifyContent: 'flex-start', alignItems: 'flex-start', marginTop:'2%'}}>
-						
-					// 	<View style={{flexDirection: 'row',  }}>
-					// 	<GenericCheckBox 
-					// 		style={{marginRight: '5%', marginBottom:'0%'}}
-					// 		style1={{marginLeft:'12%'}}
-					// 		label={'Driving License'}
-					// 		checked={form.test_drive_offered__c == 'Yes'}
-					// 		onPress={(event)=>{
-			  //               	let value = form.test_drive_offered__c == 'Yes' ? 'No' : 'Yes';
-				 //                changeForm({ edited_field: 'test_drive_offered__c', edited_value: value });
-			  //               }}
-					// 	/>
-
-					// 	<GenericCheckBox
-					// 		style={{marginHorizontal: '0%', marginBottom:'0%'}} 
-					// 		label={'Aadhar Card'}
-					// 		checked={form.test_drive_offered__c == 'No'}
-					// 		onPress={(event)=>{
-			  //               	let value = form.test_drive_offered__c == 'No' ? 'Yes' : 'No';
-				 //                changeForm({ edited_field: 'test_drive_offered__c', edited_value: value });
-			  //               }}
-					// 	/>
-					// 	</View>
-					}
-                        {
-      //                   	<View style={{flexDirection: 'row',  }}>
-						// <GenericCheckBox 
-						// 	style={{marginRight: '5%',marginBottom:'0%'}}
-						// 	style1={{marginLeft:'20%'}}
-						// 	label={'Voter Id Card'}
-						// 	checked={form.test_drive_offered__c == 'Yes'}
-						// 	onPress={(event)=>{
-			   //              	let value = form.test_drive_offered__c == 'Yes' ? 'No' : 'Yes';
-				  //               changeForm({ edited_field: 'test_drive_offered__c', edited_value: value });
-			   //              }}
-						// />
-
-						// <GenericCheckBox
-						// 	style={{marginHorizontal: '-3.5%', marginBottom:'0%'}} 
-						// 	style1={{marginLeft:'38%'}}
-						// 	label={'RC'}
-						// 	checked={form.test_drive_offered__c == 'No'}
-						// 	onPress={(event)=>{
-			   //              	let value = form.test_drive_offered__c == 'No' ? 'Yes' : 'No';
-				  //               changeForm({ edited_field: 'test_drive_offered__c', edited_value: value });
-			   //              }}
-						// />
-						// </View>
-      //                   <View style={{flexDirection: 'row', }}>
-						// <GenericCheckBox 
-						// 	style={{marginRight: '5%',marginBottom:'0%'}}
-						// 	label={'Acknowledgement'}
-						// 	checked={form.test_drive_offered__c == 'Yes'}
-						// 	onPress={(event)=>{
-			   //              	let value = form.test_drive_offered__c == 'Yes' ? 'No' : 'Yes';
-				  //               changeForm({ edited_field: 'test_drive_offered__c', edited_value: value });
-			   //              }}
-						// />
-
-						// <GenericCheckBox
-						// 	style={{marginHorizontal: '4%', marginBottom:'0%'}} 
-						// 	style1={{marginLeft:'13%'}}
-						// 	label={'Insurance '}
-						// 	checked={form.test_drive_offered__c == 'No'}
-						// 	onPress={(event)=>{
-			   //              	let value = form.test_drive_offered__c == 'No' ? 'Yes' : 'No';
-				  //               changeForm({ edited_field: 'test_drive_offered__c', edited_value: value });
-			   //              }}
-						// />
-						// </View>
-      //                   <View style={{flexDirection: 'row', }}>
-						// <GenericCheckBox 
-						// 	style={{marginRight: '5%', }}
-						// 	style1={{marginLeft:'42%'}}
-						// 	label={'others'}
-						// 	checked={form.test_drive_offered__c == 'Yes'}
-						// 	onPress={(event)=>{
-			   //              	let value = form.test_drive_offered__c == 'Yes' ? 'No' : 'Yes';
-				  //               changeForm({ edited_field: 'test_drive_offered__c', edited_value: value });
-			   //              }}
-						// />
-
-						
-						// </View>
-					}
-					{
-						//</View>
-					}
-
 					<View style={{...Style.bottomMargin}}>
 		            <ImagePicker 
 		              image={form.aadhar_card__c} 
-		              onImageSuccess={({image}) => changeForm({edited_field: 'aadhar_card__c', edited_value: image})}>
+		              loading={uploadImageLoading}
+		              onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'aadhar_card__c'}, callback: (_this.changeImage)})}>
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
-		                <GenericIcon 
-		                    name="camera" 
-		                    style={Style.recurringActionButtonIcon}
-		                  />
+		                 <GenericIcon 
+				                    name="camera" 
+				                    style={Style.recurringActionButtonIcon}
+				                  />
 		                {' Aadhar Card'}
 		                </Text>
 		              </View>
@@ -467,8 +386,9 @@ class InvoiceDetailformScreen extends Component {
 
 	        	<View style={{...Style.bottomMargin}}>
 		            <ImagePicker 
-		              image={form.acknowledgement__c} 
-		              onImageSuccess={({image}) => changeForm({edited_field: 'acknowledgement__c', edited_value: image})}>
+		              image={form.acknowledgement__c}
+		              //loading={uploadImageLoading}
+		              onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'acknowledgement__c'}, callback: (_this.changeImage)})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                <GenericIcon 
@@ -483,8 +403,9 @@ class InvoiceDetailformScreen extends Component {
 
           		<View style={{...Style.bottomMargin}}>
 		            <ImagePicker 
-		              image={form.driving_license__c} 
-		              onImageSuccess={({image}) => changeForm({edited_field: 'driving_license__c', edited_value: image})}>
+		              image={form.driving_license__c}
+		              //loading={uploadImageLoading}
+		              onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'driving_license__c'}, callback: (_this.changeImage)})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                <GenericIcon 
@@ -499,8 +420,9 @@ class InvoiceDetailformScreen extends Component {
 
           		<View style={{...Style.bottomMargin}}>
 		            <ImagePicker 
-		              image={form.insurance__c} 
-		              onImageSuccess={({image}) => changeForm({edited_field: 'insurance__c', edited_value: image})}>
+		              image={form.insurance__c}
+		              //loading={uploadImageLoading} 
+		              onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'insurance__c'}, callback: (_this.changeImage)})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                <GenericIcon 
@@ -519,7 +441,7 @@ class InvoiceDetailformScreen extends Component {
           		<View style={{...Style.bottomMargin}}>
 		            <ImagePicker 
 		              image={form.rc__c} 
-		              onImageSuccess={({image}) => changeForm({edited_field: 'rc__c', edited_value: image})}>
+		              onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'rc__c'}, callback: (_this.changeImage)})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                <GenericIcon 
@@ -536,7 +458,8 @@ class InvoiceDetailformScreen extends Component {
           		<View style={{...Style.bottomMargin}}>
 		            <ImagePicker 
 		              image={form.voter_id_card__c} 
-		              onImageSuccess={({image}) => changeForm({edited_field: 'voter_id_card__c', edited_value: image})}>
+		              //onImageSuccess={({image}) => changeForm({edited_field: 'voter_id_card__c', edited_value: image})}>
+		               onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'voter_id_card__c'}, callback: (_this.changeImage)})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                <GenericIcon 
@@ -553,7 +476,7 @@ class InvoiceDetailformScreen extends Component {
           		<View style={{...Style.bottomMargin}}>
 		            <ImagePicker 
 		              image={form.others__c} 
-		              onImageSuccess={({image}) => changeForm({edited_field: 'others__c', edited_value: image})}>
+		              onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'others__c'}, callback: (_this.changeImage)})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                <GenericIcon 
@@ -567,13 +490,12 @@ class InvoiceDetailformScreen extends Component {
           		</View>
 
                     
-						<View style={{marginTop:'4%'}}>
+				<View style={{marginTop:'4%'}}>
 					<BlueButton title={"SAVE"} style={{width: '40%', marginHorizontal: '30.5%', height: 40}} textStyle={{fontSize: 12}}
 					loading={loader}
 					disabled={loader}
 					onPress={() => this.submit()}
 					>
-
 	            </BlueButton>
 			</View>
 				</ScrollView>
@@ -595,14 +517,15 @@ const mapStateToProps = (state) => ({
   	payment_mode 				: state.common.payment_mode,
 	data 						: state.visitor.currentVisitorData,
 	currentEnquiryId            : state.visitor.currentEnquiryId,
-	
+	uploadImageLoading			: state.common.loaders.uploadImageLoader
 	  
 });
   
 const mapDispatchToProps = (dispatch) => ({
 	changeForm: (params)       => dispatch(VisitorActions.changeUpdateBookingForm(params)),
 	submitForm: (params)       => dispatch(VisitorActions.updateBooking(params)),
-	clearRegistrationForm: ()  => dispatch(VisitorActions.clearUpdateBookingForm())
+	clearRegistrationForm: ()  => dispatch(VisitorActions.clearUpdateBookingForm()),
+	uploadImage: (params)      => dispatch(CommonActions.uploadImage(params))
 });
 
 export default connect(

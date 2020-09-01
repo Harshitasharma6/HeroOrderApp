@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Image, Alert, TouchableOpacity } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import { HelperService } from 'App/Services/Utils/HelperService'
+import {Spinner } from 'native-base';
+import {Colors} from 'App/Theme'
 export default class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -27,7 +29,7 @@ export default class App extends React.Component {
 					alert(response.customButton);
 				} else {
 					const source = { uri: response.uri };
-					this.props.onImageSuccess({ image: (response.data) });
+					this.props.onImageSuccess({ image: ('data:image/jpeg;base64,' + response.data) });
 				}
 			});
 		} else {
@@ -41,24 +43,31 @@ export default class App extends React.Component {
 	render() {
 		const {
 			image,
-			children
+			children,
+			loading
 		} = this.props;
 		let imageNode = (
+			<View style={{ borderWidth: 1, borderColor:  '#dddddd', borderRadius: 15}}>
 			<Image
 				source={{
-					uri: 'data:image/jpeg;base64,' + image //'data:image/jpeg;base64,' + this.state.filePath.data,
+					uri: image //'data:image/jpeg;base64,' + this.state.filePath.data,
 				}}
-				style={{ width: 60, height: 60, resizeMode: 'stretch', borderRadius: 15 }}
+				style={{ width: 60, height: 60, resizeMode: 'stretch', borderRadius: 15, borderWidth: 1, borderColor:  '#000000'}}
 			/>
+			</View>
 		);
 		if (!image) {
 			imageNode = [];
+		}
+
+		if(loading) {
+			imageNode = <Spinner color={Colors.primary} />
 		}
 		return (
 			<View>
 				<View style={styles.container}>
 					<View>
-						<TouchableOpacity transparent onPress={!this.props.enable ? () => this.chooseFile() : () => { }}>
+						<TouchableOpacity disabled={loading} transparent onPress={!this.props.enable ? () => this.chooseFile() : () => { }}>
 							{children}
 						</TouchableOpacity>
 					</View>
