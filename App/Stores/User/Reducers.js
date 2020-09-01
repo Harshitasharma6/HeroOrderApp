@@ -31,10 +31,10 @@ export const userLoginFailure = (state, { errorMessage }) => ({
 
 export const userLogoutLoading = (state) => ({
   ...state,
-  userLoginIsLoading: true
+  userLogoutIsLoading: true
 });
 
-export const userLogoutSuccess = (state, user) => ({
+export const userLogoutSuccess = (state, {user}) => ({
   ...INITIAL_STATE,
 });
 
@@ -42,7 +42,7 @@ export const userLogoutFailure = (state, { errorMessage }) => ({
   ...state,
   id: null,
   token: null,
-  userLoginIsLoading: false,
+  userLogoutIsLoading: false,
   userLoginErrorMessage: errorMessage
 });
 

@@ -2,6 +2,8 @@ export const INITIAL_STATE = {
     mobile: '', 
     password: '',
     userLoginIsLoading: false,
+    userLogoutIsLoading: false,
+
     validation: {
         invalid_number: false,
         invalid_password: false,

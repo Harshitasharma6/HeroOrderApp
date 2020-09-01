@@ -66,7 +66,7 @@ class CustomersScreen extends Component {
                 
 	              heading={item.name}
 	              showTextAvatar={true}
-	              onPress={() => NavigationService.navigate('CustomerInfoScreen')}
+	             
 	              content={[
 	               <BlueButton title={''} style={Styles.callButton} textStyle={Styles.callButtonText} onPress={() => HelperService.callNumber()}><GenericIcon name="phone" style={Styles.callButtonIcon}/></BlueButton>
               ]}

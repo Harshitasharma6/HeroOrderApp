@@ -11,7 +11,8 @@ export const INITIAL_STATE = {
 		getFeedbacksLoader: false,
 		registerCustomerCallLoader: false,
         registerCustomerOutgoingCallLoader: false,
-        payBookingLoader: false
+        payBookingLoader: false,
+        updateBookingLoader: false,
 	},
 	searchCustomerForm: {},
 	registerCustomerForm: {},
@@ -53,6 +54,12 @@ export const INITIAL_STATE = {
         invalid: false,
         invalid_field: ''
     },
+    updateBookingFormValidation: {
+        invalid: false,
+        invalid_field: ''
+    },
+
+
     showOpenLeadPrompt: false,
     currentEnquiryId: 133,
     feedbackForm: {
@@ -66,5 +73,6 @@ export const INITIAL_STATE = {
     visitsMapping: {},
     feedbacksMapping: {},
     followUpsMapping: {},
-    payBookingForm: {}
+    payBookingForm: {},
+    updateBookingForm: {},
 }

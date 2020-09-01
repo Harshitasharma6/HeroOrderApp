@@ -52,19 +52,28 @@ class InvoiceDetailformScreen extends Component {
 	}
 
 	componentWillUnmount() {
-		
+		const {
+			clearRegistrationForm
+		} = this.props;
+
+		clearRegistrationForm();
 	}
 
 	submit() {
 		const { 
 			submitForm, 
 			form,
+			currentEnquiryId ,
+			dealerId,
+			dealersalespersonId,
+			
 		} = this.props;
 
 		Keyboard.dismiss();
 		submitForm({
 			...form,
-			dealers_sales_person__c: 'a0O9D000001hLV9UAM'
+			
+			  
 		});
 	}
 
@@ -117,17 +126,17 @@ class InvoiceDetailformScreen extends Component {
 					<InputNumber
 						styles={Style.mb10}
 						placeholder={'Tally Invoice No.'}
-						value={form.tally}
-						onChange={(value) => changeForm({ edited_field: 'tally', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'tally'}
+						value={form.tally_invoice_no__c}
+						onChange={(value) => changeForm({ edited_field: 'tally_invoice_no__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'tally_invoice_no__c'}
 						label={'Tally Invoice No.'}
 					/>
 					<InputNumber
 						styles={Style.mb10}
 						placeholder={' GSTIN No.'}
-						value={form.gst}
-						onChange={(value) => changeForm({ edited_field: 'gst', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'gst'}
+						value={form.customer_gstin_no__c}
+						onChange={(value) => changeForm({ edited_field: 'customer_gstin_no__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'customer_gstin_no__c'}
 						label={'Customer GSTIN No.'}
 					/>
 
@@ -156,9 +165,9 @@ class InvoiceDetailformScreen extends Component {
 					<InputNumber
 						styles={Style.mb10}
 						placeholder={'Amount Paid at Booking'}
-						value={form.amount_paid}
-						onChange={(value) => changeForm({ edited_field: 'amount_paid', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'amount_paid'}
+						value={form.amount_paid_at_booking__c}
+						onChange={(value) => changeForm({ edited_field: 'amount_paid_at_booking__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'amount_paid_at_booking__c'}
 						label={'Amount Paid at Booking'}
 					/>	
 
@@ -166,12 +175,21 @@ class InvoiceDetailformScreen extends Component {
 
 			   <InputText
 						style={Style.mb10}
-						placeholder={'Customer Name'}
+						placeholder={'First Name'}
 						value={form.first_name__c || data.first_name__c}
 						onChange={(value) => changeForm({ edited_field: 'first_name__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'first_name__c'}
-						label={'Customer  Name*'}
+						label={'First Name*'}
 					/>
+
+				<InputText
+						style={Style.mb10}
+						placeholder={'Last Name'}
+						value={form.last_name__c || data.last_name__c}
+						onChange={(value) => changeForm({ edited_field: 'last_name__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'last_name__c'}
+						label={'Last  Name*'}
+					/>					
 
 			   
 			   <InputMobile
@@ -213,9 +231,9 @@ class InvoiceDetailformScreen extends Component {
 					<InputNumber
 						styles={Style.mb10}
 						placeholder={'Motor No.'}
-						value={form.motor}
-						onChange={(value) => changeForm({ edited_field: 'motor', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'motor'}
+						value={form.motor_no__c}
+						onChange={(value) => changeForm({ edited_field: 'motor_no__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'motor_no__c'}
 						label={'Motor No.'}
 					/>
 					</View>
@@ -226,7 +244,7 @@ class InvoiceDetailformScreen extends Component {
 						value={form.charger_no__c}
 						onChange={(value) => changeForm({ edited_field: 'charger_no__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'charger_no__c'}
-						label={'Charger No. *'}
+						label={'Charger No. '}
 					/>
 
 					</View>
@@ -238,14 +256,14 @@ class InvoiceDetailformScreen extends Component {
 						value={form.battery_no__c}
 						onChange={(value) => changeForm({ edited_field: 'battery_no__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'battery_no__c'}
-						label={'Battery No. *'}
+						label={'Battery No. '}
 					/>
 
 					<SearchableDropdown
 				        dataSource={model_color}
 				        placeHolderText={'Select Color'}
-				        selectedValue={form.Color__c}
-				        onChange={(value) => changeForm({ edited_field: 'Color__c', edited_value: value })}
+				        selectedValue={form.model_color__c}
+				        onChange={(value) => changeForm({ edited_field: 'model_color__c', edited_value: value })}
 				        placeholder={'Type or Select Color'}
 				        invalid={false}
 				        labelStyles={{ ...Style.pickerLabel }}
@@ -277,9 +295,9 @@ class InvoiceDetailformScreen extends Component {
                 	<InputNumber
 						styles={Style.mb10}
 						placeholder={'Capacity of Each Battery'}
-						value={form.capacity_battery}
-						onChange={(value) => changeForm({ edited_field: 'capacity_battery', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'capacity_battery'}
+						value={form.capacity_of_each_battery__c}
+						onChange={(value) => changeForm({ edited_field: 'capacity_of_each_battery__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'capacity_of_each_battery__c'}
 						label={'Capacity of Each Battery'}
 					/>
 
@@ -305,17 +323,17 @@ class InvoiceDetailformScreen extends Component {
 				<InputNumber
 						styles={Style.mb10, {marginBottom:'1%'}}
 						placeholder={'Owners Handbook No.'}
-						value={form.owner_handbook}
-						onChange={(value) => changeForm({ edited_field: 'owner_handbook', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'owner_handbook'}
+						value={form.owner_s_handbook_no__c}
+						onChange={(value) => changeForm({ edited_field: 'owner_s_handbook_no__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'owner_s_handbook_no__c'}
 						label={'Owners Handbook No.'}
 					/>
 					
 					<SearchableDropdown
 				        dataSource={financier_name}
 				        placeHolderText={'Select Financier'}
-				        selectedValue={form.Financier__c}
-				        onChange={(value) => changeForm({ edited_field: 'Financier__c', edited_value: value })}
+				        selectedValue={form.financier_name__c}
+				        onChange={(value) => changeForm({ edited_field: 'financier_name__c', edited_value: value })}
 				        placeholder={'Type or Select Financier'}
 				        invalid={false}
 				        labelStyles={{ ...Style.pickerLabel }}
@@ -327,9 +345,9 @@ class InvoiceDetailformScreen extends Component {
 					<InputText
 						style={Style.mb10}
 						placeholder={'Other Financier Name'}
-						value={form.other_Financier__c__c}
-						onChange={(value) => changeForm({ edited_field: 'other_Financier__c__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'other_Financier__c__c'}
+						value={form.other_financier_name__c}
+						onChange={(value) => changeForm({ edited_field: 'other_financier_name__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'other_financier_name__c'}
 						label={'Other Financier Name'}
 					/>
 
@@ -551,8 +569,10 @@ class InvoiceDetailformScreen extends Component {
                     
 						<View style={{marginTop:'4%'}}>
 					<BlueButton title={"SAVE"} style={{width: '40%', marginHorizontal: '30.5%', height: 40}} textStyle={{fontSize: 12}}
-					onPress={() => 
-          NavigationService.navigate('GenerateInvoiceformScreen')}>
+					loading={loader}
+					disabled={loader}
+					onPress={() => this.submit()}
+					>
 
 	            </BlueButton>
 			</View>
@@ -564,22 +584,25 @@ class InvoiceDetailformScreen extends Component {
 
 
 const mapStateToProps = (state) => ({
-	validation      			: state.visitor.payBookingFormValidation,
-	form 					 	: state.visitor.payBookingForm,
-	loader 			            : state.visitor.loaders.payBookingLoader,
+	validation      			: state.visitor.updateBookingFormValidation,
+	form 					 	: state.visitor.updateBookingForm,
+	loader 			            : state.visitor.loaders.updateBookingLoader,
 	occupationList 				: state.common.occupationList,
   	sourceEnquiryList 			: state.common.sourceEnquiryList,
   	productsList 				: state.common.productsList,
   	financier_name 				: state.common.financier_name,
   	model_color 				: state.common.model_color,
   	payment_mode 				: state.common.payment_mode,
-  	data 						: state.visitor.currentVisitorData,
+	data 						: state.visitor.currentVisitorData,
+	currentEnquiryId            : state.visitor.currentEnquiryId,
+	
+	  
 });
   
 const mapDispatchToProps = (dispatch) => ({
-	changeForm: (params)       => dispatch(VisitorActions.changePayBookingForm(params)),
-	submitForm: (params)       => dispatch(VisitorActions.payBooking(params)),
-	clearRegistrationForm: ()  => dispatch(VisitorActions.clearPayBookingForm())
+	changeForm: (params)       => dispatch(VisitorActions.changeUpdateBookingForm(params)),
+	submitForm: (params)       => dispatch(VisitorActions.updateBooking(params)),
+	clearRegistrationForm: ()  => dispatch(VisitorActions.clearUpdateBookingForm())
 });
 
 export default connect(

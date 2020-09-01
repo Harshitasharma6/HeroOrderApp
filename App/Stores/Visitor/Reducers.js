@@ -583,6 +583,71 @@ export const getAllFollowUpsLoadingStop = (state, {payload}) => ({
 });
 //getFeedbacksLoader: false,
 //followUpsMapping
+export const updateBookingSuccess = (state, {payload}) => ({
+  ...state,
+  updateBookingForm: INITIAL_STATE.updateBookingForm,
+  loaders: {
+    ...state.loaders,
+    updateBookingLoader: false
+  }
+});
+
+export const updateBookingFailure = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    updateBookingLoader: false
+  }
+});
+
+export const updateBookingLoading = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    updateBookingLoader: true
+  }
+});
+
+export const updateBookingLoadingStop = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    updateBookingLoader: false
+  }
+});
+
+
+export const changeUpdateBookingForm = (state, { payload }) => {
+    const {
+    edited_field,
+    edited_value
+  } = payload;
+
+  let changed_entity = {};
+  changed_entity[edited_field] = edited_value;
+  return {
+    ...state,
+    updateBookingForm : {
+      ...state.updateBookingForm,
+      ...changed_entity
+    },
+    updateBookingValidation: INITIAL_STATE.updateBookingValidation
+  }
+};
+
+
+export const clearUpdateBookingForm = (state, {payload}) => ({
+  ...state,
+  updateBookingForm: INITIAL_STATE.updateBookingForm
+});
+
+export const updateBookingValidationFailed = (state, {payload}) => ({
+  ...state,
+  updateBookingValidation: {
+        ...payload
+    }
+});
+
 
 export const reducer = createReducer(INITIAL_STATE, {
 	[VisitorTypes.SEARCH_CUSTOMER_SUCCESS] 	             : searchCustomerSuccess,
@@ -657,6 +722,15 @@ export const reducer = createReducer(INITIAL_STATE, {
   [VisitorTypes.PAY_BOOKING_LOADING_STOP]     : payBookingLoadingStop,
   [VisitorTypes.CHANGE_PAY_BOOKING_FORM]      : changePayBookingForm,
   [VisitorTypes.CLEAR_PAY_BOOKING_FORM]      : clearPayBookingForm,
-  [VisitorTypes.PAY_BOOKING_VALIDATION_FAILED]: payBookingValidationFailed
+  [VisitorTypes.PAY_BOOKING_VALIDATION_FAILED]: payBookingValidationFailed,
+
+  [VisitorTypes.UPDATE_BOOKING_SUCCESS]          : updateBookingSuccess,
+  [VisitorTypes.UPDATE_BOOKING_FAILURE]          : updateBookingFailure,
+  [VisitorTypes.UPDATE_BOOKING_LOADING]          : updateBookingLoading,
+  [VisitorTypes.UPDATE_BOOKING_LOADING_STOP]     : updateBookingLoadingStop,
+  [VisitorTypes.CHANGE_UPDATE_BOOKING_FORM]      : changeUpdateBookingForm,
+  [VisitorTypes.CLEAR_UPDATE_BOOKING_FORM]      : clearUpdateBookingForm,
+  [VisitorTypes.UPDATE_BOOKING_VALIDATION_FAILED]: updateBookingValidationFailed
+
 
 });

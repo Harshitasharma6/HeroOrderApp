@@ -42,7 +42,7 @@ import {
     markAbsent,
     watchUserLoginRequest,
     watchUserStartDayRequest,
-    logoutUser,
+    watchUserLogoutRequest,
 } from './UserSaga';
 
 import { 
@@ -125,7 +125,8 @@ import {
     watchPayBooking,
     getAllVisits,
     getAllFollowUps,
-    getFeedbacks
+    getFeedbacks,
+    watchUpdateBooking,
 } from './VisitorSaga'
 
 
@@ -165,12 +166,13 @@ export default function* root() {
 
         fork(watchUserLoginRequest),
         fork(watchUserStartDayRequest),
+        fork(watchUserLogoutRequest),
         takeLatest(UserTypes.FETCH_ALL_AREAS, fetchAgentAreas),
         takeLatest(UserTypes.END_USER_DAY, endDay),
         takeLatest(UserTypes.MARK_USER_ABSENT, markAbsent),
         takeLatest(UserTypes.CHECK_ATTENDANCE, checkAttendance),
         takeLatest(UserTypes.FETCH_ALL_PSM, fetchAllPsm),
-        takeLatest(UserTypes.LOGOUT_USER, logoutUser),
+        
 
   
 
@@ -263,6 +265,7 @@ export default function* root() {
         fork(watchUpdateFollowUpCall),
         fork(watchCreateFeedback),
         fork(watchPayBooking),
+        fork(watchUpdateBooking),
         takeLatest(VisitorTypes.GET_ALL_VISITS, getAllVisits),
         takeLatest(VisitorTypes.GET_ALL_FOLLOW_UPS, getAllFollowUps),
         takeLatest(VisitorTypes.GET_FEEDBACKS, getFeedbacks),

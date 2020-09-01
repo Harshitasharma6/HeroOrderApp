@@ -26,13 +26,15 @@ export const INITIAL_STATE = {
 		{ id: 'Others', name: 'Others' }
 	],
 
+
+
 	schemeApplicableList: [
 		{ id: 'a0B9D000001HWiMUAW', name: 'Cash Discount Policy' },
 		{ id: 'a0e1e00000007QKAAY', name: 'Bajaj Finserv Scheme'}
 		
 	],
 
-	"financier_name": [
+	financier_name: [
            {id: "Bajaj Finance",name: "Bajaj Finance"},
            {id:  "Loan Tap",name:  "Loan Tap"},
            {id: "HDFC",name: "HDFC"},
@@ -42,7 +44,7 @@ export const INITIAL_STATE = {
            {id: "Reds Money",name: "Reds Money"},
            {id: "Others",name: "Others"}
        ],
-       "model_color": [
+       model_color: [
        	   {id: "Red",name: "Red"},
            {id:  "Green",name:  "Green"},
            {id: "Blue",name: "Blue"},
@@ -53,7 +55,7 @@ export const INITIAL_STATE = {
            {id: "Burgandy",name: "Burgandy"},
            {id: "Bedge-Brown",name: "Bedge-Brown"}
        ],
-       "payment_mode": [
+       payment_mode: [
        	  {id: "Digital",name: "Digital"},
            {id:  "Cash",name:  "Cash"},
            {id: "Cheque",name: "Cheque"}

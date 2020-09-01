@@ -210,6 +210,15 @@ export function* watchCreateFeedback() {
 	}
 }
 
+export function* watchUpdateBooking() {
+	while (true) {
+		const { payload } = yield take(VisitorTypes.UPDATE_BOOKING)
+		
+
+		yield call(updateBooking, payload)
+	}
+}
+
 
 
 
@@ -703,5 +712,46 @@ export function* getFeedbacks({ payload }) {
 	}
 }
 
+function* updateBooking(payload) {
+	yield put(VisitorActions.updateBookingLoading());
+	try {
+		const isOnline = yield select(getConnectionStatus);
+		if (!isOnline) {
+			yield put(VisitorActions.updateBookingFailure());
+			HelperService.showToast({ 
+				message: 'Cannot Save. No Internet connection.', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+			return;
+		}
 
+		let {token, sfid} = yield select(state => state.user)
+		payload.token = token;
+		payload.dealers_sales_person_login_info_id = sfid;
+		
+	
+		const successData = yield call(VisitorService.updateBooking, payload);
+
+		if (successData) { 
+			yield put(VisitorActions.updateBookingSuccess(successData));
+			
+			NavigationService.navigate('GenerateInvoiceformScreen')
+		} else {
+			yield put(VisitorActions.updateBookingFailure())
+			HelperService.showToast({ 
+				message: 'Error!!  Failed.Verify fields and try again.', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+		}
+	} catch (error) {
+		yield put(VisitorActions.updateBookingFailure());
+		HelperService.showToast({ 
+			message: 'Error!! Failed.Verify fields and try again.', 
+			duration: 2000, 
+			buttonText: 'Okay' 
+		});
+	}
+}
 
