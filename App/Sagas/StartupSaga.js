@@ -23,6 +23,9 @@ export function* startup({ params }) {
         }));
         yield put(CommonActions.fetchLeadSources({}));
         yield put(CommonActions.fetchLeadLostReasons({}));
+        yield put(CommonActions.getCallOptions({}));
+        yield put(CommonActions.getBookingPicklist({}));
+        
         
     }else { //user not logged in or session expired
         NavigationService.navigateAndReset('LoginScreen')

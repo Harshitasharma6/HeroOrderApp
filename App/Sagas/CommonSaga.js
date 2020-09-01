@@ -115,6 +115,56 @@ export function* getAllCities({ payload }) {
 	}
 }
 
+export function* getCallOptions({ payload }) {
+	const isOnline = yield select(getConnectionStatus);
+	if (!isOnline) {
+		yield put(CommonActions.doNothing());
+		return;
+	}
+
+	try {
+		yield put(CommonActions.getCallOptionsLoading());
+		let {token} = yield select(state => state.user)
+		payload.token = token
+		
+		let successData = yield call(CommonService.getCallOptions, payload);
+		if (successData) {
+			yield put(CommonActions.makePurposeOfCallSearchableList(HelperService.convertArrayToSearchableListFormat(successData.purpose_of_call)));
+			yield put(CommonActions.makeOutPurposeOfCallSearchableList(HelperService.convertArrayToSearchableListFormat(successData.outcome_purpose_of_call)));
+			yield put(CommonActions.makeReasonNotConnectSearchableList(HelperService.convertArrayToSearchableListFormat(successData.reasons_for_not_Connected)));
+		} else {
+			yield put(CommonActions.getCallOptionsFailure());
+		}
+	} catch (error) {
+		yield put(CommonActions.getCallOptionsFailure());
+	}
+}
+
+export function* getBookingPicklist({ payload }) {
+	const isOnline = yield select(getConnectionStatus);
+	if (!isOnline) {
+		yield put(CommonActions.doNothing());
+		return;
+	}
+
+	try {
+		yield put(CommonActions.getBookingPicklistLoading());
+		let {token} = yield select(state => state.user)
+		payload.token = token
+		
+		let successData = yield call(CommonService.getBookingPicklist, payload);
+		if (successData) {
+			yield put(CommonActions.makeFinancierNameSearchableList(HelperService.convertArrayToSearchableListFormat(successData.financier_name)));
+			yield put(CommonActions.makeModelColorSearchableList(HelperService.convertArrayToSearchableListFormat(successData.model_color)));
+			yield put(CommonActions.makePaymentModeSearchableList(HelperService.convertArrayToSearchableListFormat(successData.payment_mode)));
+		} else {
+			yield put(CommonActions.getBookingPicklistFailure());
+		}
+	} catch (error) {
+		yield put(CommonActions.getBookingPicklistFailure());
+	}
+}
+
 
 export function* uploadImage({ payload }) {
 	const isOnline = yield select(getConnectionStatus);

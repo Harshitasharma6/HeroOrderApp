@@ -98,18 +98,16 @@ export function* getAllScheme({ payload }) {
 
 	try {
 		yield put(InsightsActions.getAllSchemeLoading());
-		let {token} = yield select(state => state.user)
+		let {token, dealer__c, state__c} = yield select(state => state.user)
 		payload.token = token
+		payload.dealer_id = dealer__c
+		payload.state_id  = state__c
 		
 	let successData = yield call(InsightsService.getAllScheme, payload);
 		if (successData) {
 			yield put(InsightsActions.getAllSchemeLoadingStop());
 			yield put(InsightsActions.getAllSchemeSuccess(successData));
-			yield put(CommonActions.makeProductsSearchableList(HelperService.convertToSearchableListFormat({
-				list: successData,
-				id_key: 'sfid',
-				
-			})));
+			
 		} else {
 			yield put(InsightsActions.getAllSchemeFailure());
 		}

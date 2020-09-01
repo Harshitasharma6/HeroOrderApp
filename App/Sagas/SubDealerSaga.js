@@ -30,12 +30,6 @@ export function* getAllSubDealers({ payload }) {
 			yield put(SubDealersActions.getAllSubDealersLoadingStop());
 			yield put(SubDealersActions.getAllSubDealersSuccess(successData));
 			
-
-			yield put(CommonActions.makeProductsSearchableList(HelperService.convertToSearchableListFormat({
-				list: successData,
-				id_key: 'sfid',
-				
-			})));
 		} else {
 			yield put(SubDealersActions.getAllSubDealersFailure());
 		}

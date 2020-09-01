@@ -135,7 +135,9 @@ import {
     fetchLeadLostReasons,
     getAllStates,
     getAllCities,
-    uploadImage
+    uploadImage,
+    getCallOptions,
+    getBookingPicklist,
 } from './CommonSaga'
 
 
@@ -230,7 +232,8 @@ export default function* root() {
         takeLatest(CommonTypes.GET_ALL_STATES, getAllStates),
         takeLatest(CommonTypes.GET_ALL_CITIES, getAllCities),
         takeLatest(CommonTypes.UPLOAD_IMAGE, uploadImage),
-
+        takeLatest(CommonTypes.GET_BOOKING_PICKLIST,  getBookingPicklist),
+        takeLatest(CommonTypes.GET_CALL_OPTIONS,getCallOptions),
 
 
 

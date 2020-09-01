@@ -72,6 +72,36 @@ export const makeCitiesSearchableList = (state, { payload }) => ({
   citiesList: payload
 });
 
+export const makePurposeOfCallSearchableList = (state, { payload }) => ({
+  ...state,
+  purpose_of_call: payload
+});
+
+export const makeOutPurposeOfCallSearchableList = (state, { payload }) => ({
+  ...state,
+  outcome_purpose_of_call: payload
+});
+
+export const makeReasonNotConnectSearchableList = (state, { payload }) => ({
+  ...state,
+  reasons_for_not_Connected: payload
+});
+
+export const makeFinancierNameSearchableList = (state, { payload }) => ({
+  ...state,
+  financier_name: payload
+});
+
+export const makeModelColorSearchableList = (state, { payload }) => ({
+  ...state,
+  model_color: payload
+});
+
+export const makePaymentModeSearchableList = (state, { payload }) => ({
+  ...state,
+  payment_mode: payload
+});
+
 
 
 export const fetchLeadLostReasonsSuccess = (state, {payload}) => ({
@@ -239,6 +269,57 @@ export const  getAllCitiesLoadingStop = (state, {payload}) => ({
     getAllCitiesLoader: false
   }
 });
+export const  getCallOptionsFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getCallOptionsLoader: false
+  }
+});
+
+
+export const  getCallOptionsLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getCallOptionsLoader: true
+  }
+});
+
+
+export const  getCallOptionsLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getCallOptionsLoader: false
+  }
+});
+
+export const  getBookingPicklistFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getBookingPicklistLoader: false
+  }
+});
+
+
+export const  getBookingPicklistLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getBookingPicklistLoader: true
+  }
+});
+
+
+export const  getBookingPicklistLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    getBookingPicklistLoader: false
+  }
+});
 
 
 
@@ -287,6 +368,12 @@ export const reducer = createReducer(INITIAL_STATE, {
   [CommonTypes.MAKE_PRODUCTS_SEARCHABLE_LIST]: makeProductsSearchableList,
   [CommonTypes.MAKE_STATES_SEARCHABLE_LIST]  : makeStatesSearchableList,
   [CommonTypes.MAKE_CITIES_SEARCHABLE_LIST]  : makeCitiesSearchableList,
+  [CommonTypes.MAKE_PURPOSE_OF_CALL_SEARCHABLE_LIST]  : makePurposeOfCallSearchableList,
+  [CommonTypes.MAKE_OUT_PURPOSE_OF_CALL_SEARCHABLE_LIST]  : makeOutPurposeOfCallSearchableList,
+  [CommonTypes.MAKE_REASON_NOT_CONNECT_SEARCHABLE_LIST]  : makeReasonNotConnectSearchableList,
+  [CommonTypes.MAKE_FINANCIER_NAME_SEARCHABLE_LIST]  : makeFinancierNameSearchableList,
+  [CommonTypes.MAKE_MODEL_COLOR_SEARCHABLE_LIST]  : makeModelColorSearchableList,
+  [CommonTypes.MAKE_PAYMENT_MODE_SEARCHABLE_LIST]  : makePaymentModeSearchableList,
 
   //[CommonTypes.FETCH_LEAD_LOST_REASONS]              : fetchLeadLostReasons,
   [CommonTypes.FETCH_LEAD_LOST_REASONS_LOADING]      : fetchLeadLostReasonsLoading,
@@ -317,6 +404,14 @@ export const reducer = createReducer(INITIAL_STATE, {
   [CommonTypes.GET_ALL_CITIES_LOADING]           : getAllCitiesLoading,
   [CommonTypes.GET_ALL_CITIES_LOADING_STOP]      : getAllCitiesLoadingStop,
   [CommonTypes.GET_ALL_CITIES_FAILURE]           : getAllCitiesFailure,
+
+  [CommonTypes.GET_CALL_OPTIONS_LOADING]           : getCallOptionsLoading,
+  [CommonTypes.GET_CALL_OPTIONS_LOADING_STOP]      : getCallOptionsLoadingStop,
+  [CommonTypes.GET_CALL_OPTIONS_FAILURE]           : getCallOptionsFailure,
+
+  [CommonTypes.GET_BOOKING_PICKLIST_LOADING]           : getBookingPicklistLoading,
+  [CommonTypes.GET_BOOKING_PICKLIST_LOADING_STOP]      : getBookingPicklistLoadingStop,
+  [CommonTypes.GET_BOOKING_PICKLIST_FAILURE]           : getBookingPicklistFailure,
 
 
 

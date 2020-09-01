@@ -29,11 +29,7 @@ export function* getAllDealers({ payload }) {
 		if (successData) {
 			yield put(DealersActions.getAllDealersLoadingStop());
 			yield put(DealersActions.getAllDealersSuccess(successData));
-			yield put(CommonActions.makeProductsSearchableList(HelperService.convertToSearchableListFormat({
-				list: successData,
-				id_key: 'sfid',
-				
-			})));
+			
 		} else {
 			yield put(DealersActions.getAllDealersFailure());
 		}
@@ -60,11 +56,7 @@ export function* getDealerClaims({ payload }) {
 		if (successData) {
 			yield put(DealersActions.getAllDealerClaimsLoadingStop());
 			yield put(DealersActions.getAllDealerClaimsSuccess(successData));
-			yield put(CommonActions.makeProductsSearchableList(HelperService.convertToSearchableListFormat({
-				list: successData,
-				id_key: 'sfid',
-				
-			})));
+			
 		} else {
 			yield put(DealersActions.getAllDealerClaimsFailure());
 		}

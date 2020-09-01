@@ -28,10 +28,50 @@ class AvailableSchemes extends Component {
 		  fetchData
 		} = this.props
 	
-		fetchData({
-		 
-		});
-	  }
+		fetchData({});
+    }
+
+// active_from__c: "2020-09-01T00:00:00.000Z"
+// active_to__c: "2020-09-15T00:00:00.000Z"
+// createddate: 1598988503000
+// id: 26
+// name: "Dealer specific scheme 1"
+// party__c: "Consumer"
+// pg_id__c: null
+// scheme_scope__c: "Dealer Specific"
+// scheme_type__c: "Cash Discount"
+// schemesDetails: Array(1)
+// 0:
+// active_from__c: "2020-09-01T00:00:00.000Z"
+// active_to__c: "2020-09-15T00:00:00.000Z"
+// createddate: 1598988544000
+// dealer__c: "0019D000009zum3QAA"
+// id: 51
+// name: "SD-00051"
+// pg_id__c: null
+// product__c: "a029D000002ZFPtQAO"
+// product_name: "Photon LP"
+// product_sfid: "a029D000002ZFPtQAO"
+// scheme__c: "a0B9D000001xrFCUAY"
+// scheme_amount__c: 1000
+// scheme_name__c: null
+// scheme_scope__c: "Dealer Specific"
+// sfid: "a0K9D000000vwnoUAA"
+// state__c: null
+// state_name: null
+// state_sfid: null
+// systemmodstamp: 1598988544000
+// _hc_err: null
+// _hc_lastop: "SYNCED"
+// __proto__: Object
+// length: 1
+// __proto__: Array(0)
+// sfid: "a0B9D000001xrFCUAY"
+// systemmodstamp: 1598988503000
+// _hc_err: null
+// _hc_lastop: "SYNCED"
+    
+    
 
   getDataCard(item) {
     return (
@@ -40,17 +80,17 @@ class AvailableSchemes extends Component {
           heading={item.name}
           content={[
             <GenericDisplayCardStrip 
-              key={'Scheme Amount' + item.name} 
+              key={'Scheme Amount' + item.sfid} 
               label={'Scheme Amount'} 
-              value={HelperService.currencyValue()}
+              value={HelperService.currencyValue(item.schemesDetails[0]['scheme_amount__c'])}
              />,
              <GenericDisplayCardStrip 
-              key={'Valid From' + item.name} 
+              key={'Valid From' + item.sfid} 
               label={'Valid From'} 
               value={`${HelperService.dateReadableFormat(item.active_from__c)}`}
              />,
              <GenericDisplayCardStrip 
-              key={'Valid Till' + item.name} 
+              key={'Valid Till' + item.sfid} 
               label={'Valid Till'} 
               value={`${HelperService.dateReadableFormat(item.active_to__c)}`}
              />
