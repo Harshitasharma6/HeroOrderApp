@@ -23,7 +23,7 @@ const { Types, Creators } = createActions({
 	userLoginLoading: null,
 	userLoginSuccess: ['user'],
 	userLoginFailure: ['errorMessage'],
-	logoutUser: null,
+	logoutUser: ['data'],
 	userLogoutLoading: null,
 	userLogoutSuccess: ['user'],
 	userLogoutFailure: ['errorMessage'],

@@ -43,7 +43,7 @@ export function* loginUser(data) {
 	}
 
 	
-	export function* logoutUser() {
+	export function* logoutUser(data) {
 		yield put(UserActions.userLogoutLoading());
 		const isOnline = yield select(getConnectionStatus);// checks whether net is connected or not.
 		if (!isOnline) {
@@ -52,15 +52,26 @@ export function* loginUser(data) {
 			return;
 		}
 			try {
+				let {sfid} = yield select(state => state.user)
+				data.dealers_sales_person_login_info_id = sfid
+
+				let userData = yield call(userService.logoutUser, data)
+				if (userData) {
 				
-				yield put(UserActions.userLogoutSuccess());
+				yield put(UserActions.userLogoutSuccess(userData.data));
 					HelperService.showToast({ message: 'Logged Out successfully!!', duration: 500, buttonText: '' });
-					
 					NavigationService.navigateAndReset('LoginScreen');
+				}else {
+					yield put(UserActions.userLogoutFailure())
+					HelperService.showToast({ message: 'Cannot Logout. ' , duration: 2000, buttonText: 'Okay' });
+				}	
+					
 				} catch (error) {
-				yield put(UserActions.userLogoutFailure())
+				
+					yield put(UserActions.userLogoutFailure())
 				HelperService.showToast({ message: error, duration: 2000, buttonText: 'Okay' });
 			}
+		
 		}
 
 export function* startDay(data) {
@@ -302,6 +313,14 @@ export function* watchUserLoginRequest() {
 		} catch (err) { }
 
 		yield call(loginUser, data)
+	}
+}
+
+export function* watchUserLogoutRequest() {
+	while (true) {
+		const { data } = yield take(UserTypes.LOGOUT_USER)
+
+		yield call(logoutUser, data)
 	}
 }
 

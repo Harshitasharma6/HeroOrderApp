@@ -65,6 +65,23 @@ function loginUser(params) {
 }
 
 
+function logoutUser(params) {
+  console.log('logout')
+  let url = Config.USER_SERVICE.LOGOUT;
+  url += `?sfid=${params.dealers_sales_person_login_info_id}`
+  
+  return apiClient.post(url, params).then((response) => {
+      if (in200s(response.status)) {
+          return response.data
+      }
+      return null
+  }).catch(error => {
+      
+      return null
+  });
+}
+
+
 function startDay(params) {
   let requestParams = {
     area: params.area,
@@ -217,5 +234,6 @@ export const userService = {
   getAgentAreas,
   getAgentDetails,
   checkAttendance,
-  getAllPSM
+  getAllPSM,
+  logoutUser,
 }

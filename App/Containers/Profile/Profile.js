@@ -20,7 +20,9 @@ class ProfileScreen extends Component {
       logoutUser
     } = this.props;
 
-      logoutUser()
+      logoutUser({
+        user_logged_in: false,
+      });
   }
 
   render() {
@@ -57,13 +59,12 @@ class ProfileScreen extends Component {
        
           
         <BlueButton  title={'LOG OUT'}style={{ ...Style.button
- }} textStyle={{fontSize: wp('5%'),marginRight: wp('7%'),color: Colors.primary}}  
+ }} textStyle={{fontSize: wp('5%'),marginRight: wp('0%'),color: Colors.primary}}  
            onPress={() => this.submit()}
            disabled={loading}
            loading={loading}
-           
            >
-              <Icon name="logout" style={{fontSize: wp('6%'), color: Colors.primary}}/></BlueButton>
+              </BlueButton>
        
       </View>
     )
@@ -77,14 +78,14 @@ const mapStateToProps = (state) => ({
   LastName:               state.user.last_name__c,
   contactNo:              state.user.mobile,
   state:                  state.user.state,
-  loading:          state.user.userLoginIsLoading,
+  loading:          state.user.userLogoutIsLoading,
   login:           state.user.is_logged_in,
   email:            state.user.email_id__c,
 });
 
 
 const mapDispatchToProps = (dispatch) => ({
-logoutUser: () => dispatch(UserActions.logoutUser()),
+logoutUser: (data) => dispatch(UserActions.logoutUser(data)),
 })
 
 

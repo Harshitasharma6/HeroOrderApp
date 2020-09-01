@@ -15,7 +15,7 @@ export default StyleSheet.create({
     // ...Metrics.mediumVerticalMargin,
     // ...Metrics.smallBottomMargin,
     width: wp('47.5%'), 
-    elevation: 5,
+    elevation: 4,
     shadowColor: "#000",  
     alignSelf: 'center', 
     marginTop: hp('3%') , 
@@ -23,7 +23,7 @@ export default StyleSheet.create({
     backgroundColor:Colors.lightGrey,
     shadowOffset: {
      width: 0,
-          height: 2,
+          height: 0,
         },
   zIndex: 2,
   borderColor: Colors.lightGrey,

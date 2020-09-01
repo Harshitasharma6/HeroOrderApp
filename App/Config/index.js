@@ -2,7 +2,8 @@ export const Config = {
 	API_URL: 'https://herodealersapp.herokuapp.com/',
 
 	USER_SERVICE: {
-		LOGIN: 'login/login'
+		LOGIN: 'login/login',
+		LOGOUT: 'login/logout',
 	},
 
 	VISITOR_SERVICE: {
