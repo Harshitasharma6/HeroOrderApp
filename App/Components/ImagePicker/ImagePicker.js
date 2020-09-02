@@ -29,7 +29,7 @@ export default class App extends React.Component {
 					alert(response.customButton);
 				} else {
 					const source = { uri: response.uri };
-					this.props.onImageSuccess({ image: ('data:image/jpeg;base64,' + response.data) });
+					this.props.onImageSuccess({ image: response.data });
 				}
 			});
 		} else {
@@ -47,14 +47,13 @@ export default class App extends React.Component {
 			loading
 		} = this.props;
 		let imageNode = (
-			<View style={{ borderWidth: 1, borderColor:  '#dddddd', borderRadius: 15}}>
+
 			<Image
 				source={{
 					uri: image //'data:image/jpeg;base64,' + this.state.filePath.data,
 				}}
-				style={{ width: 60, height: 60, resizeMode: 'stretch', borderRadius: 15, borderWidth: 1, borderColor:  '#000000'}}
+				style={{ width: 70, height: 70, resizeMode: 'stretch', borderRadius: 15}}
 			/>
-			</View>
 		);
 		if (!image) {
 			imageNode = [];

@@ -18,7 +18,7 @@ import { reducer as subdealersReducer} from './SubDealers/Reducers'
 import { reducer as insightsReducer} from './Insights/Reducers'
 
 export default () => {
-  const rootReducer = combineReducers({
+  const appReducer = combineReducers({
     network: network,
     common: CommonReducer,
     user: UserReducer,
@@ -35,6 +35,13 @@ export default () => {
     subdealers: subdealersReducer,
     insights:insightsReducer,
   });
+
+  const rootReducer = (state, action) => {
+    if (action.type === 'USER_LOGOUT_SUCCESS') {
+      state = undefined
+    }
+    return appReducer(state, action)
+  }
 
   return configureStore(rootReducer, rootSaga)
 }

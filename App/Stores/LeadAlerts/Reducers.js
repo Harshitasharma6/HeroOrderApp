@@ -369,6 +369,7 @@ export const clearLeadLostForm = (state) => ({
 
 export const fetchAllOpenLeadsFailure = (state, {payload}) => ({
   ...state,
+  allOpenLeads: [],
   loaders: {
     ...state.loaders,
     fetchAllOpenLeadsLoader: false
@@ -406,6 +407,7 @@ export const fetchTodayFollowUpSuccess = (state, {payload}) => ({
 
 export const fetchTodayFollowUpFailure = (state, {payload}) => ({
   ...state,
+  todayFollowUp:[],
   loaders: {
     ...state.loaders,
     fetchtodayFollowUpLoader: false
