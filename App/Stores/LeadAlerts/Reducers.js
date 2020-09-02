@@ -430,7 +430,55 @@ export const fetchTodayFollowUpLoadingStop = (state, {payload}) => ({
   }
 });
 
+export const fetchConfirmedBookingSuccess = (state, {payload}) => ({
+  ...state,
+  confirmedBooking: payload,
+  loaders: {
+    ...state.loaders,
+    fetchConfirmedBookingLoader: false
+  }
+});
 
+
+export const fetchConfirmedBookingFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchConfirmedBookingLoader: false
+  }
+});
+
+
+export const fetchConfirmedBookingLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchConfirmedBookingLoader: true
+  }
+});
+
+
+export const fetchConfirmedBookingLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    fetchConfirmedBookingLoader: false
+  }
+});
+
+export const updateBookingSearchFilters = (state, { payload }) => {
+  let updated_search_filters = _.cloneDeep(state.bookingSearchFilters);
+  updated_search_filters[payload.edited_field] = payload.edited_value;
+
+  return {
+      ...state,
+      bookingSearchFilters: {
+          ...state.bookingSearchFilters,
+          ...updated_search_filters
+      },
+      openMoreFilters: false
+  }
+};
 
 
 
@@ -492,6 +540,11 @@ export const reducer = createReducer(INITIAL_STATE, {
     [LeadAlertTypes.FETCH_TODAY_FOLLOW_UP_LOADING]         : fetchTodayFollowUpLoading,
     [LeadAlertTypes.FETCH_TODAY_FOLLOW_UP_LOADING_STOP]    : fetchTodayFollowUpLoadingStop,
 
+    [LeadAlertTypes.FETCH_CONFIRMED_BOOKING_SUCCESS]    : fetchConfirmedBookingSuccess,
+    [LeadAlertTypes.FETCH_CONFIRMED_BOOKING_FAILURE]         : fetchConfirmedBookingFailure,
+    [LeadAlertTypes.FETCH_CONFIRMED_BOOKING_LOADING]         : fetchConfirmedBookingLoading,
+    [LeadAlertTypes.FETCH_CONFIRMED_BOOKING_LOADING_STOP]    : fetchConfirmedBookingLoadingStop,
+
 
 
 
@@ -500,6 +553,8 @@ export const reducer = createReducer(INITIAL_STATE, {
     [LeadAlertTypes.MARK_LEAD_LOST_LOADING]        : markLeadLostLoading,
     [LeadAlertTypes.MARK_LEAD_LOST_LOADING_STOP]   : markLeadLostLoadingStop,
     [LeadAlertTypes.CHANGE_LEAD_LOST_FORM]         : changeLeadLostForm,
-    [LeadAlertTypes.CLEAR_LEAD_LOST_FORM]          : clearLeadLostForm
+    [LeadAlertTypes.CLEAR_LEAD_LOST_FORM]          : clearLeadLostForm,
+
+    [LeadAlertTypes.UPDATE_BOOKING_SEARCH_FILTERS]: updateBookingSearchFilters,
 
 });

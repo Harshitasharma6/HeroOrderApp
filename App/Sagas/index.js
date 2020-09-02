@@ -151,6 +151,7 @@ import {
     fetchAllOpenLeads,
     watchMarkLeadLost,
     fetchTodayFollowUp,
+    fetchConfirmedBooking,
 } from './LeadAlertsSaga'
 
 
@@ -286,6 +287,7 @@ export default function* root() {
         takeLatest(LeadAlertTypes.FETCH_CALL_LEADS, fetchCallLeads),
         takeLatest(LeadAlertTypes.FETCH_ALL_OPEN_LEADS, fetchAllOpenLeads),
         takeLatest(LeadAlertTypes.FETCH_TODAY_FOLLOW_UP, fetchTodayFollowUp),
+        takeLatest(LeadAlertTypes.FETCH_CONFIRMED_BOOKING, fetchConfirmedBooking), 
 
 
     ]);

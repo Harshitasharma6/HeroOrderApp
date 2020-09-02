@@ -7,6 +7,7 @@ import React from 'react';
 import { StyleSheet, View, ScrollView, Image, RefreshControl } from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { connect } from 'react-redux';
+import { HelperService } from 'App/Services/Utils/HelperService';
 import HeadingBox from 'App/Components/HeadingBox'
 import GenericDisplayCard from 'App/Components/GenericDisplayCard'
 import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDisplayCardStrip';
@@ -91,7 +92,16 @@ class DashboardSummaryScreen extends React.Component {
       return data.prevMonth.findIndex(obj => obj.lead_from__c === lead_from__c);
     }
 
+    getIndexProduct(product__c) {
+      const {
+        loader,
+        data,
+        productsList,
+        currentScreen
+        } = this.props;
 
+      return data.product.findIndex(obj => obj.product__c === product__c);
+    }
     
   
     
@@ -99,6 +109,7 @@ class DashboardSummaryScreen extends React.Component {
     const {
 			loader,
       data,
+      productsList,
       currentScreen
 		  } = this.props;
 
@@ -149,13 +160,13 @@ class DashboardSummaryScreen extends React.Component {
           		<GenericDisplayCard dark={false}
 	              style={{ width: '88%', elevation: 0 }}
 	              content={[
-		                <GenericDisplayCardStrip key={'Optima LI'} label={'Optima LI'} value={data&&data.product&&data.product[0] ?  data.product[0].count : 0}/>,
+		                <GenericDisplayCardStrip key={'Optima ER'} label={'Optima ER'} value={data&&data.product&&data.product[this.getIndexProduct(HelperService.findMatchingKeyValueInList(productsList, 'name', 'Optima ER', 'id'))] ?  data.product[this.getIndexProduct(HelperService.findMatchingKeyValueInList(productsList, 'name','Optima ER' , 'id'))].count : 0}/>,
 		                <Separator key={12}/>,
-		                <GenericDisplayCardStrip key={'Optima LA'} label={'Optima LA'} value={data&&data.product&&data.product[1] ?  data.product[1].count : 0} />,
+		                <GenericDisplayCardStrip key={'Optima E2'} label={'Optima E2'} value={data&&data.product&&data.product[this.getIndexProduct(HelperService.findMatchingKeyValueInList(productsList, 'name', 'Optima E2', 'id'))] ?  data.product[this.getIndexProduct(HelperService.findMatchingKeyValueInList(productsList, 'name','Optima E2' , 'id'))].count : 0 } />,
 		                <Separator key={2123}/>,
-		                <GenericDisplayCardStrip key={'Zion'} label={'Zion'} value={data&&data.product&&data.product[2] ?  data.product[2].count : 0}/>,
+		                <GenericDisplayCardStrip key={'Zion'} label={'Zion'} value={data&&data.product&&data.product[this.getIndexProduct(HelperService.findMatchingKeyValueInList(productsList, 'name', 'Zion', 'id'))] ?  data.product[this.getIndexProduct(HelperService.findMatchingKeyValueInList(productsList, 'name','Zion' , 'id'))].count : 0 }/>,
 		                <Separator key={3123}/>,
-		                <GenericDisplayCardStrip key={'Flash LA'} label={'Flash LA'} value={data&&data.product&&data.product[3] ?  data.product[3].count : 0}/>
+		                <GenericDisplayCardStrip key={'Flash E2'} label={'Flash E2'} value={data&&data.product&&data.product[this.getIndexProduct(HelperService.findMatchingKeyValueInList(productsList, 'name', 'Flash E2', 'id'))] ?  data.product[this.getIndexProduct(HelperService.findMatchingKeyValueInList(productsList, 'name','Flash E2' , 'id'))].count : 0 }/>
 		                
               		]}
             	/>
@@ -173,6 +184,7 @@ const mapStateToProps = (state) => ({
   currentScreen: state.common.currentScreen,
   data: state.insights.DashboardSummaryData,
   loader: state.insights.loaders.getDashboardSummaryLoader,
+  productsList: state.common.productsList,
 })
 
 const mapDispatchToProps = (dispatch) => ({

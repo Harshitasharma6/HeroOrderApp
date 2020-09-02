@@ -179,6 +179,29 @@ export function* fetchAllOpenLeads({ payload }) {
 	}
 }
 
+export function* fetchConfirmedBooking({ payload }) {
+	const isOnline = yield select(getConnectionStatus);
+	if (!isOnline) {
+		yield put(LeadAlertActions.doNothing());
+		return;
+	}
+
+	try {
+		yield put(LeadAlertActions.fetchConfirmedBookingLoading());
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
+		let successData = yield call(LeadAlertService.fetchConfirmedBooking, payload);
+		if (successData) {
+			yield put(LeadAlertActions.fetchConfirmedBookingSuccess(successData));
+		} else {
+			yield put(LeadAlertActions.fetchConfirmedBookingFailure());
+		}
+	} catch (error) {
+		yield put(LeadAlertActions.fetchConfirmedBookingFailure());
+	}
+}
+
 
 function* markLeadLost(payload) {
 	yield put(LeadAlertActions.markLeadLostLoading());

@@ -9,12 +9,16 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 import { connect } from 'react-redux';
 import SearchBar from 'App/Components/SearchBar'
 import Underline from 'App/Components/Underline';
+import LeadAlertActions from 'App/Stores/LeadAlerts/Actions';
+
 
 
 class ConfirmBookingLayout extends React.Component {
   render() {
     const {
-      currentScreen
+      currentScreen,
+      bookingSearchFilters,
+      updateSearchFilters
     } = this.props;
 
     return (
@@ -26,14 +30,15 @@ class ConfirmBookingLayout extends React.Component {
        <View style={{alignItems:'center', justifyContent: 'center', width: wp('50%'),  marginHorizontal: wp('23%')}}>
        
        <SearchBar
-	            placeholder={`Search Customer`}
-	            onInputChange={(text) => console.log('text')}
-	            onInputSubmit={(text) => console.log('text')}
-	            onInputClear={(text) => console.log('text')}
-	            value={''}
-	            ContainerStyles={Styles.searchContainer}
-	            inputStyles={{fontSize: wp('4%')}}
-          />
+	            placeholder={`Search Customer By Phone No.`}
+              onInputChange={(text) => updateSearchFilters({ edited_field: 'searchValue', 'edited_value': text })}
+              onInputSubmit={(text) => updateSearchFilters({ edited_field: 'searchValue', 'edited_value': text })}
+              onInputClear={(text) => updateSearchFilters({ edited_field: 'searchValue', 'edited_value': '' })}
+              value={bookingSearchFilters['searchValue']}
+              ContainerStyles={Styles.searchContainer}
+              inputStyles={{fontSize: wp('4%')}}
+              key={'SearchCustomersList'}
+              />
       </View>  
     </Header>
     )
@@ -45,11 +50,18 @@ class ConfirmBookingLayout extends React.Component {
 const mapStateToProps = (state) => ({
   isConnected: state.network.isConnected,
   isVisible: state.common.isNetworkBannerVisible,
-  currentScreen: state.common.currentScreen
+  currentScreen: state.common.currentScreen,
+  bookingSearchFilters: state.leadAlerts.bookingSearchFilters,
 })
 
+const mapDispatchToProps = (dispatch) => ({
+  updateSearchFilters : (params) => dispatch(LeadAlertActions.updateBookingSearchFilters(params)),
+  });
+
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(ConfirmBookingLayout)
 
 

@@ -9,6 +9,7 @@ export const INITIAL_STATE = {
     callLeads: [],
     allOpenLeads: [],
     todayFollowUp: [],
+    confirmedBooking: [],
     loaders: {
     	fetchHotLeadsLoader: false,
     	fetchBookingConfirmFinanceLeadsLoader: false,
@@ -19,10 +20,22 @@ export const INITIAL_STATE = {
     	fetchNoActionLoader: false,
         markLeadLostLoader: false,
         fetchtodayFollowUpLoader: false,
+        fetchConfirmedBookingLoader:  false,
     },
     leadLostForm: {},
     leadLostFormValidation: {
         invalid: false,
         invalid_field: ''
     },
+
+    bookingSearchFilters: {
+        area: '',
+        type: '',
+        sortType: 'ASC',
+        sortBy: '',
+        searchBy: 'contact_number__c',
+        searchValue: '',
+       
+	},
+
 }
