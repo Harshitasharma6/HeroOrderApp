@@ -95,7 +95,7 @@ class DealerSalespersonFormScreen extends Component {
           }
         } else if (loader) {
           visibleNode = <Loading/>
-        } else if (data && !data.length) {
+        } else if ((!data || (data && !data.length) && !loader)) {
           visibleNode = <NoDataFound text={'No SalesPerson  Found'} />
         }
     

@@ -9,7 +9,7 @@ export const getAllSubDealersSuccess = (state, { payload }) => ({
   SubDealersData: payload,
   loaders: {
     ...state.loaders,
-    cLoader: false
+    getAllSubDealersLoader: false
   }
 });
 

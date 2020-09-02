@@ -27,7 +27,6 @@ export function* getAllDealers({ payload }) {
 
 		let successData = yield call(DealersService.getAllDealers, payload);
 		if (successData) {
-			yield put(DealersActions.getAllDealersLoadingStop());
 			yield put(DealersActions.getAllDealersSuccess(successData));
 			
 		} else {
@@ -54,7 +53,6 @@ export function* getDealerClaims({ payload }) {
 
 		let successData = yield call(DealersService.getDealerClaims, payload);
 		if (successData) {
-			yield put(DealersActions.getAllDealerClaimsLoadingStop());
 			yield put(DealersActions.getAllDealerClaimsSuccess(successData));
 			
 		} else {

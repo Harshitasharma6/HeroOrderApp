@@ -27,7 +27,6 @@ export function* getAllSubDealers({ payload }) {
 
 		let successData = yield call(SubDealersService.getAllSubDealers, payload);
 		if (successData) {
-			yield put(SubDealersActions.getAllSubDealersLoadingStop());
 			yield put(SubDealersActions.getAllSubDealersSuccess(successData));
 			
 		} else {

@@ -38,7 +38,8 @@ class FooterScreen extends React.Component {
     currentScreen == 'DealerSalespersonFormScreen' ||
     currentScreen == 'SubDealerInfoScreen'||
     currentScreen == 'SchemeClaimInfoScreen' ||
-    currentScreen == 'SubDealerFormScreen'
+    currentScreen == 'SubDealerFormScreen' 
+   
    
 
     let visitorActive = 
@@ -70,7 +71,8 @@ class FooterScreen extends React.Component {
       currentScreen == 'DashboardTrendsScreen' ||
       currentScreen == 'CustomersScreen' ||
       currentScreen == 'CustomerInfoScreen' ||
-      currentScreen == 'ProductInfoSchemesScreen'
+      currentScreen == 'ProductInfoSchemesScreen'||
+      currentScreen == 'AvailableSchemesDetailScreen'
 
     let leadAlertsActive = 
       currentScreen == 'LeadAlertsScreen' ||

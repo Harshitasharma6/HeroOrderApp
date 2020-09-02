@@ -51,7 +51,17 @@ class SchemeClaimInfoScreen extends Component {
 		fetchData({
 		 
 		});
-	  }
+    }
+    
+
+    filterResults(list) {
+      const {
+        searchFilter
+      } = this.props;
+  let filteredList = HelperService.multiFieldSearchText(list,   searchFilter['searchBy'], );
+  
+  return filteredList;
+    }  
 
     
     getDataNode() {
@@ -63,10 +73,11 @@ class SchemeClaimInfoScreen extends Component {
         let visibleNode = [];
     
         if (data && data.length) {
-          if (data.length) {
+          let filteredClaimList = this.filterResults(data.map((obj) => obj));
+          if (filteredClaimList.length) {
             visibleNode = (
               <FlatList
-                data={data}
+                data={filteredClaimList}
                 renderItem={({ item }) => 
                     <GenericDisplayCard dark={false}
                       style={{ width: '98%', elevation: 0 }}
@@ -84,7 +95,7 @@ class SchemeClaimInfoScreen extends Component {
                           </View>,
                             <GenericDisplayCardStrip key={'Claim Submission Date' + item.name} label={'Claim Submission Date:'}   value={ HelperService.dateReadableFormat(item.scheme_claim_submission_date__c)} />,
                             <GenericDisplayCardStrip key={'Expected Claim Amount' + item.name} label={'Expected Claim Amount:'}  value={item.expected_claim_amount_by_dealer__c}  />,
-                            <GenericDisplayCardStrip key={'Scheme Applicable' + item.name} label={'Scheme Applicable:'}  value={item.scheme_applicable__c}  />,
+                            <GenericDisplayCardStrip key={'Scheme Applicable' + item.name} label={'Scheme Applicable:'}  value={item.scheme_applicable_name}  />,
                             <GenericDisplayCardStrip key={'Customer Name' + item.name} label={'Customer Name:'}  value={item.customer_name__c}  />,
                             <GenericDisplayCardStrip key={'Warranty Registered' + item.name} label={'Warranty Registered:'}  value={item.registered_for_warranty__c}  />,
 
@@ -94,15 +105,15 @@ class SchemeClaimInfoScreen extends Component {
                 keyExtractor={item => item.sfid}
                 refreshing={loader}
                 onRefresh={() => this.fetchCall()}
-                ListEmptyComponent={() => <NoDataFound text={'No Schemes Found'} />}
+                
               />
             );
           } else {
             visibleNode =<NoDataFound text={'No Schemes Found'} />
           }
         } else if (loader) {
-          visibleNode = <Loading />
-        } else if (data && !data.length) {
+          visibleNode = <Loading/>
+        } else if ((!data || (data && !data.length) && !loader)) {
           visibleNode = <NoDataFound text={'No Schemes Found'} />
         }
     
@@ -112,15 +123,22 @@ class SchemeClaimInfoScreen extends Component {
 	
 
     render() {
-		
+      const {
+        searchFilter,
+        updateSearchFilters
+        } = this.props;
 		
 		return (
 			<View style={Style.container}>
 				<Text style={Style.heading}>{'SCHEMES CLAIMS'}</Text>
        
-        <BlueButton  title={' FILTER BY'}style={{width: wp('26.5%'),    alignSelf: 'flex-end', marginTop: hp('3%') , marginBottom: hp('0%'), marginRight: wp('7%')}} textStyle={{fontSize: wp('3%')}}  
-            >
-              <GenericIcon name="filter" style={{fontSize: wp('4%'), color: Colors.white}}/></BlueButton>
+        <Select style={Style.selectPickerStyle}
+            placeholder={'Search By'}
+            list={searchFilter.searchByOptions}
+            selected={ searchFilter['searchBy']}
+            onChange={(value) => updateSearchFilters({ edited_field: 'searchBy', 'edited_value': value })}
+           
+          />   
          
                 
 				<ScrollView 
@@ -139,11 +157,13 @@ class SchemeClaimInfoScreen extends Component {
 
 const mapStateToProps = (state) => ({
   data     : state.dealers.DealerClaimsData,
-	loader   : state.dealers.loaders.getAllDealerClaimsLoader,
+  loader   : state.dealers.loaders.getAllDealerClaimsLoader,
+  searchFilter:  state.dealers.dealerSearchFilters,
 });
   
 const mapDispatchToProps = (dispatch) => ({
-	fetchData:(params)                 => dispatch(DealersActions.getAllDealerClaims(params)),
+  fetchData:(params)                 => dispatch(DealersActions.getAllDealerClaims(params)),
+  updateSearchFilters : (params) => dispatch(DealersActions.updateDealerClaimsSearchFilters(params)),
 });
 
 export default connect(

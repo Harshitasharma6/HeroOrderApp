@@ -16,7 +16,7 @@ import GenericDisplayCard from 'App/Components/GenericDisplayCard'
 import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDisplayCardStrip';
 import NavigationService from 'App/Services/NavigationService'
 
-class AvailableSchemes extends Component {
+class AvailableSchemesDetail extends Component {
  
   componentDidMount() {
 		this.fetchCall()	
@@ -77,30 +77,19 @@ class AvailableSchemes extends Component {
     return (
       <GenericDisplayCard dark={false}
           style={{ width: '95%', elevation: 0 }}
-          heading={item.name}
-          onPress={() => NavigationService.navigate('AvailableSchemesDetailScreen', {data: item.schemesDetails})}
           content={[
             <GenericDisplayCardStrip 
-            key={'Scheme Type' + item.sfid} 
-            label={'Scheme Type'} 
-            value={item.scheme_type__c}
-           />,
-             <GenericDisplayCardStrip 
-             key={'Scheme Scope' + item.sfid} 
-             label={'Scheme Scope'} 
-             value={item.scheme_scope__c}
-            />,
-
-            <GenericDisplayCardStrip 
-              key={'Valid From' + item.sfid} 
-              label={'Valid From'} 
-              value={`${HelperService.dateReadableFormat(item.active_from__c)}`}
+              key={'Scheme Amount' + item.sfid} 
+              label={'Scheme Amount'} 
+              value={HelperService.currencyValue(item.scheme_amount__c)}
              />,
              <GenericDisplayCardStrip 
-              key={'Valid Till' + item.sfid} 
-              label={'Valid Till'} 
-              value={`${HelperService.dateReadableFormat(item.active_to__c)}`}
-             />
+             key={'Product' + item.sfid} 
+             label={'Poduct'} 
+             value={item.product_name}
+            />,
+
+          
           ]}
         />
     );
@@ -112,8 +101,12 @@ class AvailableSchemes extends Component {
     const {
       enquiry,
       loader,
-      data
+      
     } = this.props;
+
+    const {
+        data
+      } = this.props.navigation.state.params;
 
     let visibleNode = [];
 
@@ -128,7 +121,6 @@ class AvailableSchemes extends Component {
             keyExtractor={item => item.id}
             onRefresh={() => this.fetchCall()}
             refreshing={loader}
-           
           />
         );
       } else {
@@ -171,8 +163,8 @@ class AvailableSchemes extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, paddingTop: 0, paddingHorizontal: 10}}>
-        <Text style={ApplicationStyles.formHeading}>{'Available Offers'}</Text>
+      <View style={{ flex: 1, paddingTop: 15, paddingHorizontal: 10}}>
+       
         {this.getDataNode()}
       </View>
     );
@@ -193,7 +185,7 @@ fetchData:(params) => dispatch(InsightsActions.getAllScheme(params))
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AvailableSchemes)
+)(AvailableSchemesDetail)
 
 
 
