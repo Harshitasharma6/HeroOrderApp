@@ -25,6 +25,8 @@ export function* startup({ params }) {
         yield put(CommonActions.fetchLeadLostReasons({}));
         yield put(CommonActions.getCallOptions({}));
         yield put(CommonActions.getBookingPicklist({}));
+        yield put(CommonActions.getAllStates({}));
+        yield put(CommonActions.getAllCities({}));
         
         
     }else { //user not logged in or session expired

@@ -70,6 +70,17 @@ const { Types, Creators } = createActions({
 	fetchTodayFollowUpLoading: null,
 	fetchTodayFollowUpLoadingStop: null,
 
+
+	fetchConfirmedBooking: ['payload'],
+	fetchConfirmedBookingSuccess: ['payload'],
+	fetchConfirmedBookingFailure: null,
+	fetchConfirmedBookingLoading: null,
+	fetchConfirmedBookingLoadingStop: null,
+
+	updateBookingSearchFilters: ['payload']
+
+	
+
 });
 
 export const LeadAlertTypes = Types

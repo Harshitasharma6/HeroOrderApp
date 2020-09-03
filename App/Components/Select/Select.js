@@ -5,10 +5,11 @@ import Style from './SelectStyle'
 import GenericIcon from 'App/Components/GenericIcon'
 import { Colors, ApplicationStyles } from 'App/Theme'
 
-const Select = ({ selected = '', list = [], onChange = () => { }, style = {}, label = '', editable = true, placeholder = "" }) => (
-  <View>
-    {label ? <Label style={{ ...Style.labelStyle }}>{label}</Label> : []}
+const Select = ({ selected = '', list = [], onChange = () => { }, style = {}, label = '', editable = true, placeholder = "", customLabelStyle={}, containerStyle={} }) => (
+  <View style={{...containerStyle}}>
+     {label ? <Label style={{ ...Style.labelStyle, ...Style.customLabelStyle }}>{label}</Label> : []}
     <View style={{ ...Style.select, ...style }}>
+
       <Picker 
         note 
         mode={'dropdown'}

@@ -2,14 +2,14 @@ import { INITIAL_STATE } from './InitialState'
 import { createReducer } from 'reduxsauce'
 import { offlineActionTypes, reducer as network } from "react-native-offline";
 import { DealersTypes } from './Actions'
-
+import _ from 'lodash';
 
 export const getAllDealersSuccess = (state, { payload }) => ({
   ...state,
   DealersData: payload,
   loaders: {
     ...state.loaders,
-    cLoader: false
+    getAllDealersLoader: false
   }
 });
 
@@ -48,7 +48,7 @@ export const getAllDealerClaimsSuccess = (state, { payload }) => ({
   DealerClaimsData: payload,
   loaders: {
     ...state.loaders,
-    cLoader: false
+    getAllDealerClaimsLoader: false
   }
 });
 
@@ -156,6 +156,21 @@ export const clearRegistrationForm = (state, {payload}) => ({
   
 });
 
+export const updatDealerClaimsSearchFilters = (state, { payload }) => {
+  let updated_search_filters = _.cloneDeep(state.dealerSearchFilters);
+  updated_search_filters[payload.edited_field] = payload.edited_value;
+
+  return {
+      ...state,
+      dealerSearchFilters: {
+          ...state.dealerSearchFilters,
+          ...updated_search_filters
+      },
+      openMoreFilters: false
+  }
+};
+
+
 
 
 
@@ -182,6 +197,7 @@ export const reducer = createReducer(INITIAL_STATE, {
 
   [DealersTypes.SET_REGISTRATION_FORM]  				       : setRegistrationForm,
 	[DealersTypes.CLEAR_REGISTRATION_FORM]  		         : clearRegistrationForm,
-
+  
+  [DealersTypes.UPDATE_DEALER_CLAIMS_SEARCH_FILTERS]      : updatDealerClaimsSearchFilters,
   
 });

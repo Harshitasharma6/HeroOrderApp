@@ -95,6 +95,7 @@ import AddProductInfoScreen from 'App/Containers/Visitor/AddProduct/AddProductIn
 import TestDriveHistoryScreen from 'App/Containers/Visitor/TestDriveHistory'
 import TestDriveFeedBackScreen from 'App/Containers/Visitor/TestDriveFeedBack'
 import AvailableSchemesScreen from 'App/Containers/Insights/AvailableSchemes'
+import AvailableSchemesDetailScreen from 'App/Containers/Insights/AvailableSchemes/AvailableSchemesDetail'
 import DashboardSummaryScreen from 'App/Containers/Insights/Dashboard/Summary'
 import DashboardTrendsScreen from 'App/Containers/Insights/Dashboard/Trends'
 import CustomersScreen from 'App/Containers/Insights/Customers'
@@ -240,6 +241,7 @@ const StackNavigator = createStackNavigator(
     SubDealerInfoScreen,
     SchemeClaimformScreen,
     BookingConfirmed,
+    AvailableSchemesDetailScreen,
   },
   {
     // By default the application will show the splash screen

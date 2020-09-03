@@ -127,17 +127,39 @@ function fetchNoAction(params) {
 
 function fetchAllOpenLeads(params) {
   let url = Config.LEAD_ALERT_SERVICE.FETCH_ALL_OPEN_LEADS;
+  url += `?dealer_id=${params.dealer_id}`
   return apiClient.get(url, {
     headers: {
       token: params.token,
-      dealer_id: params.dealer_id
+      
     }
   }).then((response) => {
     if (in200s(response.status)) {
-      return response['data']['data']['leads'];
+      return response['data']['data']['alertInfo'];
     }
     return null
   }).catch(error => {
+    console.log(error.response)
+    //bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
+    return null
+  });
+}
+
+function fetchConfirmedBooking(params) {
+  let url = Config.LEAD_ALERT_SERVICE.GET_CONFIRMED_BOOKING	;
+  url += `?dealer_id=${params.dealer_id}`
+  return apiClient.get(url, {
+    headers: {
+      token: params.token,
+      
+    }
+  }).then((response) => {
+    if (in200s(response.status)) {
+      return response['data']['data']['bookingInfo'];
+    }
+    return null
+  }).catch(error => {
+    console.log(error.response)
     //bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
     return null
   });
@@ -191,5 +213,6 @@ export const LeadAlertService = {
     fetchCallLeads,
     fetchAllOpenLeads,
     markLeadLost,
-    fetchTodayFollowUp
+    fetchTodayFollowUp,
+    fetchConfirmedBooking
 }

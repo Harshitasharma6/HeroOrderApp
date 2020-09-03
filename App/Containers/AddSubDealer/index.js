@@ -41,7 +41,7 @@ import SubDealerAddress from 'App/Components/subDealerAddress'
 
 class SubDealerFormScreen extends Component {
 	componentDidMount() {
-		this.fetchCall()	
+		
 	}
 
 	fetchCall() {

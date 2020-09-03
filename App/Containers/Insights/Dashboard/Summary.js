@@ -92,15 +92,24 @@ class DashboardSummaryScreen extends React.Component {
       return data.prevMonth.findIndex(obj => obj.lead_from__c === lead_from__c);
     }
 
+    getIndexProduct(product__c) {
+      const {
+        loader,
+        data,
+        productsList,
+        currentScreen
+        } = this.props;
 
+      return data.product.findIndex(obj => obj.product__c === product__c);
+    }
     
   
     
   render() {
     const {
-      productsList,
 			loader,
       data,
+      productsList,
       currentScreen
 		  } = this.props;
 
@@ -151,6 +160,7 @@ class DashboardSummaryScreen extends React.Component {
 	              style={{ width: '88%', elevation: 0 }}
 	              content={
                   data && data.product ? data.product.map((obj, index) => obj.product__c ? <View key={obj.product__c}><GenericDisplayCardStrip  label={HelperService.findMatchingKeyValueInList(productsList, 'id', obj.product__c, 'name')} value={obj.count}/><Separator /></View> : []) : [] }
+
             	/>
         </ScrollView>
         </View>

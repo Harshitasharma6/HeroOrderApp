@@ -25,7 +25,7 @@ const { Types, Creators } = createActions({
 	setRegistrationForm: ['payload'],
 	clearRegistrationForm: null,
 
-
+  updateDealerClaimsSearchFilters: ['payload']
   
 
 });

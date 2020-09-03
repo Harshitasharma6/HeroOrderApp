@@ -4,15 +4,16 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 export default StyleSheet.create({
   select: {
-    borderColor: Colors.primary,
+    borderColor: Colors.lightGrey,
     borderRadius: 30,
     borderStyle: 'solid',
-    borderWidth: 1,
-    color: Colors.grey,
+    borderWidth: 2,
+    color: Colors.primary,
     height: hp('6%'),
     textAlignVertical: 'center',
     marginBottom:15,
     fontFamily: ApplicationStyles.textMsgFont,
+    
   },
   labelStyle: {
     color: Colors.primary,

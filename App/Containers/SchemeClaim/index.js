@@ -39,19 +39,26 @@ import Select from 'App/Components/Select';
 
 class SchemeClaimInfoScreen extends Component {
   componentDidMount() {
-		this.fetchCall()	
+		this.fetchCall({})	
 	}
 
 	fetchCall() {
-		const {
-		
+		const {	
 		  fetchData
 		} = this.props
 	
-		fetchData({
-		 
-		});
-	  }
+		fetchData({});
+  }
+    
+
+  filterResults(list) {
+    const {
+      searchFilter
+    } = this.props;
+    let filteredList = HelperService.multiFieldSearchText(list, searchFilter['searchBy']);
+
+    return filteredList;
+  }  
 
     
     getDataNode() {
@@ -63,13 +70,14 @@ class SchemeClaimInfoScreen extends Component {
         let visibleNode = [];
     
         if (data && data.length) {
-          if (data.length) {
+          let filteredClaimList = this.filterResults(data.map((obj) => obj));
+          if (filteredClaimList.length) {
             visibleNode = (
               <FlatList
-                data={data}
+                data={filteredClaimList}
                 renderItem={({ item }) => 
                     <GenericDisplayCard dark={false}
-                      style={{ width: '98%', elevation: 0 }}
+                      style={{ width: '92%', elevation: 0 }}
                      
                       showTextAvatar={false}
                       //onPress={() => NavigationService.navigate('CustomerInfoScreen')}
@@ -79,12 +87,12 @@ class SchemeClaimInfoScreen extends Component {
                           <GenericDisplayCardStrip key={'Claim Number' + item.name} label={'Claim Number:'} value={item.name} valueStyle={{marginRight:'20%', }}/>
                           </View>
                           <View style={{width:'45%',justifyContent:'flex-start'}}>
-                          <GenericDisplayCardStrip key={'status' + item.name} label={'status:'} value={item.status__c} labelStyle={{marginLeft:'7%'}} valueStyle={{marginRight:'15%', }} />
+                          <GenericDisplayCardStrip key={'status' + item.name} label={'Status:'} value={item.status__c} labelStyle={{marginLeft:'7%'}} valueStyle={{marginRight:'15%', }} />
                           </View>
                           </View>,
                             <GenericDisplayCardStrip key={'Claim Submission Date' + item.name} label={'Claim Submission Date:'}   value={ HelperService.dateReadableFormat(item.scheme_claim_submission_date__c)} />,
                             <GenericDisplayCardStrip key={'Expected Claim Amount' + item.name} label={'Expected Claim Amount:'}  value={item.expected_claim_amount_by_dealer__c}  />,
-                            <GenericDisplayCardStrip key={'Scheme Applicable' + item.name} label={'Scheme Applicable:'}  value={item.scheme_applicable__c}  />,
+                            <GenericDisplayCardStrip key={'Scheme Applicable' + item.name} label={'Scheme Applicable:'}  value={item.scheme_applicable_name}  />,
                             <GenericDisplayCardStrip key={'Customer Name' + item.name} label={'Customer Name:'}  value={item.customer_name__c}  />,
                             <GenericDisplayCardStrip key={'Warranty Registered' + item.name} label={'Warranty Registered:'}  value={item.registered_for_warranty__c}  />,
 
@@ -94,15 +102,14 @@ class SchemeClaimInfoScreen extends Component {
                 keyExtractor={item => item.sfid}
                 refreshing={loader}
                 onRefresh={() => this.fetchCall()}
-                ListEmptyComponent={() => <NoDataFound text={'No Schemes Found'} />}
               />
             );
           } else {
             visibleNode =<NoDataFound text={'No Schemes Found'} />
           }
         } else if (loader) {
-          visibleNode = <Loading />
-        } else if (data && !data.length) {
+          visibleNode = <Loading/>
+        } else if ((!data || (data && !data.length) && !loader)) {
           visibleNode = <NoDataFound text={'No Schemes Found'} />
         }
     
@@ -112,24 +119,26 @@ class SchemeClaimInfoScreen extends Component {
 	
 
     render() {
-		
+      const {
+        searchFilter,
+        updateSearchFilters
+        } = this.props;
 		
 		return (
 			<View style={Style.container}>
 				<Text style={Style.heading}>{'SCHEMES CLAIMS'}</Text>
        
-        <BlueButton  title={' FILTER BY'}style={{width: wp('26.5%'),    alignSelf: 'flex-end', marginTop: hp('3%') , marginBottom: hp('0%'), marginRight: wp('7%')}} textStyle={{fontSize: wp('3%')}}  
-            >
-              <GenericIcon name="filter" style={{fontSize: wp('4%'), color: Colors.white}}/></BlueButton>
-         
-                
-				<ScrollView 
-					showsVerticalScrollIndicator={false}
-					style={Style.action}
-				>
-                     {this.getDataNode()}
-               
-				</ScrollView>
+        <Select 
+            style={Style.selectPickerStyle}
+            list={searchFilter.searchByOptions}
+            selected={ searchFilter['searchBy']}
+            customLabelStyle={Style.customLabelStyle}
+            containerStyle={Style.containerStyle}
+            onChange={(value) => updateSearchFilters({ edited_field: 'searchBy', 'edited_value': value })}
+          />   
+          <View style={{flex: 1}}>
+            {this.getDataNode()}
+          </View>    
       
 			</View>
 		)
@@ -139,11 +148,13 @@ class SchemeClaimInfoScreen extends Component {
 
 const mapStateToProps = (state) => ({
   data     : state.dealers.DealerClaimsData,
-	loader   : state.dealers.loaders.getAllDealerClaimsLoader,
+  loader   : state.dealers.loaders.getAllDealerClaimsLoader,
+  searchFilter:  state.dealers.dealerSearchFilters,
 });
   
 const mapDispatchToProps = (dispatch) => ({
-	fetchData:(params)                 => dispatch(DealersActions.getAllDealerClaims(params)),
+  fetchData:(params)   => dispatch(DealersActions.getAllDealerClaims(params)),
+  updateSearchFilters : (params) => dispatch(DealersActions.updateDealerClaimsSearchFilters(params)),
 });
 
 export default connect(

@@ -68,7 +68,7 @@ class CustomersScreen extends Component {
 	              showTextAvatar={true}
 	             
 	              content={[
-	               <BlueButton title={''} style={Styles.callButton} textStyle={Styles.callButtonText} onPress={() => HelperService.callNumber()}><GenericIcon name="phone" style={Styles.callButtonIcon}/></BlueButton>
+	               <BlueButton title={''} style={Styles.callButton} textStyle={Styles.callButtonText} onPress={() => HelperService.callNumber(item.mobilephone)}><GenericIcon name="phone" style={Styles.callButtonIcon}/></BlueButton>
               ]}
             />}
             keyExtractor={item => item}

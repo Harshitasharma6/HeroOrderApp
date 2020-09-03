@@ -87,14 +87,20 @@ export default StyleSheet.create({
   },
 
   selectPickerStyle: {
-    borderRadius: 100,
-    width: wp('88%'),
-    height: hp('5.5%'),
-    marginTop: 5,
-    marginBottom: hp('2%'),
-    fontSize: wp('2%'),
+    borderRadius: 10,
+    width: wp('42%'),
+    height: hp('4.5%'),
     justifyContent: 'center',
-    paddingHorizontal: 12
+    paddingHorizontal: 15,
+    backgroundColor: Colors.lightGrey,
+    color: Colors.primary,
+  },
+  customLabelStyle: {
+    color: Colors.grey
+  },
+  containerStyle: {
+    marginLeft: wp('46%'),
+    marginTop: hp('2%')
   },
   picker: {
     borderRadius: 10,

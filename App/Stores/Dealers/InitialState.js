@@ -3,7 +3,7 @@ export const INITIAL_STATE = {
 		getAllDealersLoader: false,
 		createDealerClaimLoader: false,
 		createDealerDraftLoader: false,
-		
+		getAllDealerClaimsLoader: false,
 		
 	},
 	DealersData: [],
@@ -12,11 +12,7 @@ export const INITIAL_STATE = {
 	  
 	 DealerClaimsData: [],
 
-	 loaders: {
-		getAllDealerClaimsLoader: false,
-		
-	},
-
+	
 	createDealerClaimValidation: {
     	invalid: false,
         invalid_field: ''
@@ -25,6 +21,37 @@ export const INITIAL_STATE = {
 	createDealerClaimForm: {},
 
 	currentDealerClaimData: {},
+
+	
+	dealerSearchFilters: {
+       
+        searchBy: '',
+        searchValue: '',
+		
+		searchByOptions: [
+			{
+				label: 'All',
+				value: ''
+			},
+			{
+				label: 'Submitted',
+				value: 'Submitted'
+			},
+			{
+				label: 'Approved',
+				value: 'Approved'
+			},
+	
+			{
+				label: 'Rejected',
+				value: 'Rejected'
+			},
+	
+		]
+		
+	
+	},
+	
 	  
 
 }
