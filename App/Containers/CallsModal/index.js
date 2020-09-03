@@ -28,7 +28,10 @@ class CallsModal extends Component  {
 			updateForm,
 			form,
 			loading,
-			clearForm
+			clearForm,
+			purpose_of_call,
+			outcome_purpose_of_call,
+			reasons_for_not_Connected
 		} =  this.props;
 
 	    let body = (
@@ -63,7 +66,10 @@ class CallsModal extends Component  {
 	    			<ConnectedReasons 
 	    				data={form} 
 	    				onChange={(params) => changeForm(params)} 
-	    				loading={loading} 
+	    				loading={loading}
+	    				purpose_of_call={purpose_of_call}
+						outcome_purpose_of_call={outcome_purpose_of_call}
+						reasons_for_not_Connected={reasons_for_not_Connected}
 	    				onSubmit={() => {form.call_activity_sfid ? updateForm(form) : submitForm(form)}}
 	    			/>
 	    		</View>
@@ -79,6 +85,9 @@ class CallsModal extends Component  {
 	    				onChange={(params) => changeForm(params)} 
 	    				loading={loading} 
 	    				onSubmit={() => {form.call_activity_sfid ? updateForm(form) : submitForm(form)}}
+	    				purpose_of_call={purpose_of_call}
+						outcome_purpose_of_call={outcome_purpose_of_call}
+						reasons_for_not_Connected={reasons_for_not_Connected}
 	    			/>
 	    		</View>
 	    	)
@@ -100,6 +109,9 @@ const mapStateToProps = (state) => ({
 	callDisconnected: state.common.callDisconnected,
 	form: state.visitor.registerCustomerOutgoingCallForm,
 	loading: state.visitor.loaders.registerCustomerOutgoingCallLoader,
+	purpose_of_call: state.common.purpose_of_call,
+	outcome_purpose_of_call: state.common.outcome_purpose_of_call,
+	reasons_for_not_Connected: state.common.reasons_for_not_Connected
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -51,5 +51,6 @@ export const INITIAL_STATE = {
 	citiesList: [],
 	isCallModalVisible: false,
 	callConnected: false,
-	callDisconnected: false
+	callDisconnected: false,
+	uploadImageField: ''
 }

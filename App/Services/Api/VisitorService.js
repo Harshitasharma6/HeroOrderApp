@@ -229,8 +229,28 @@ function payBooking(params) {
 
 function updateBooking(params) {
 	let url = Config.VISITOR_SERVICE.UPDATE_BOOKING;
-	url += `?sfid=${params.dealers_sales_person_login_info_id}` ;
+	url += `?sfid=${params.sfid}&id=${params.id}` ;
 	return apiClient.put(url, params, {
+		headers: {
+			token: params.token
+		}
+	}).then((response) => {
+		if (in200s(response.status)) {
+			debugger
+			return response['data'];
+		}
+		return null
+	}).catch(error => {
+		console.log(error.response)
+		//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
+		return null
+	});
+}
+
+
+function newBooking(params) {
+	let url = Config.VISITOR_SERVICE.NEW_BOOKING;
+	return apiClient.post(url, params, {
 		headers: {
 			token: params.token
 		}
@@ -260,4 +280,5 @@ export const VisitorService = {
 	payBooking,
 	getFeedbacks,
 	updateBooking,
+	newBooking
 }

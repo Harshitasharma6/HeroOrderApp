@@ -7,6 +7,7 @@ import {Colors} from 'App/Theme'
 export default class App extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {}
 	}
 
 	async chooseFile() {
@@ -31,13 +32,16 @@ export default class App extends React.Component {
 					alert(response.customButton);
 				} else {
 					const source = { uri: response.uri };
+					this.setState({
+						source: 'data:image/jpeg;base64,' + response.data
+					});
 					this.props.onImageSuccess({ image: response.data });
 				}
 			});
 		} else {
 			Alert.alert(
 				"Storage permission Denied.",
-				'If you have denied permanently then Go "App Permissions" and Turn on "Storage" Permission for Vikas.'
+				'If you have denied permanently then Go "App Permissions" and Turn on "Storage" Permission for HeroAVP.'
 			);
 		}
 	};
@@ -48,18 +52,20 @@ export default class App extends React.Component {
 			children,
 			loading
 		} = this.props;
-		let imageNode = (
 
+		let imageNode = (
 			<Image
 				source={{
-					uri: image //'data:image/jpeg;base64,' + this.state.filePath.data,
+					uri: this.state.source || image,
 				}}
 				style={{ width: 70, height: 70, resizeMode: 'stretch', borderRadius: 15}}
 			/>
 		);
-		if (!image) {
-			imageNode = [];
-		}
+
+		// if (!this.state.source && !image) {
+		// 	imageNode = [];
+		// }
+		
 
 		if(loading) {
 			imageNode = <Spinner color={Colors.primary} />

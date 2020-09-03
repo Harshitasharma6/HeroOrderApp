@@ -25,70 +25,55 @@ import moment from 'moment';
  //       "follow_up__c": "no",
  //       "follow_up_date__c" : ""
 
-const ConnectedReasons = ({data, onChange, loading, onSubmit}) => {
-	let options1 = [
-	   "Follow Up",
-       "Offer Discussion",
-       "Loan Related",
-       "For Test Drive"
-	];
-
-
-	let options2 = [
-	    "Customer Interested",
-        "Customer Not Interested",
-        "May Buy Later"
-
-	];
-
+const ConnectedReasons = ({data, onChange, loading, onSubmit, purpose_of_call, outcome_purpose_of_call}) => {
 	let optionsNode1 = []
 	let optionsNode2 = []
 
 	
-	optionsNode1 = options1.map((value) => {
+	optionsNode1 = purpose_of_call.map((obj) => {
 		return (
 			<ListItem 
-				selected={data.purpose_of_call__c == value} 
+				selected={data.purpose_of_call__c == obj.id} 
 				selectedColor={Colors.primary}
-				key={value} 
-				onPress={() => onChange({edited_field: 'purpose_of_call__c', edited_value: value})}
+				key={obj.id} 
+				onPress={() => onChange({edited_field: 'purpose_of_call__c', edited_value: obj.id})}
 				style={{borderColor: Colors.grey, paddingBottom: 2}}
 			>
 	            <Left>
-	              {data.purpose_of_call__c == value ? <Text style={{...{color: Colors.black, fontFamily: ApplicationStyles.textMsgFont, fontSize: wp('4.2%')}}}>{value}</Text>: <Text style={{...{color: Colors.grey, fontFamily: ApplicationStyles.textMsgFont, fontSize: wp('4%')}}}>{value}</Text>}
+	              {data.purpose_of_call__c == obj.id ? <Text style={{...{color: Colors.black, fontFamily: ApplicationStyles.textMsgFont, fontSize: wp('4.2%')}}}>{obj.name}</Text>: <Text style={{...{color: Colors.grey, fontFamily: ApplicationStyles.textMsgFont, fontSize: wp('4%')}}}>{obj.name}</Text>}
 	            </Left>
 	            <Right>
 	              <Radio
 	                selectedColor={Colors.primary}
 	                color= {Colors.grey}
-	                selected={data.purpose_of_call__c == value} 
+	                selected={data.purpose_of_call__c == obj.id} 
 	                style={{borderColor: Colors.grey, padding: 0}}
-	                onPress={() => onChange({edited_field: 'purpose_of_call__c', edited_value: value})}
+	                onPress={() => onChange({edited_field: 'purpose_of_call__c', edited_value: obj.id})}
 	              />
 	            </Right>
 	        </ListItem>
 	)});
 
 
-	optionsNode2 = options2.map((value) => {
+	optionsNode2 = outcome_purpose_of_call.map((obj) => {
 		return (
 			<ListItem 
-				selected={data.outcome_of_the_call__c == value} 
+				selected={data.outcome_of_the_call__c == obj.id} 
 				selectedColor={Colors.primary}
-				key={value} 
-				onPress={() => onChange({edited_field: 'outcome_of_the_call__c', edited_value: value})}
+				key={obj.id} 
+				onPress={() => onChange({edited_field: 'outcome_of_the_call__c', edited_value: obj.id})}
 				style={{borderColor: Colors.grey, paddingBottom: 2}}
 			>
 	            <Left>
-	              {data.outcome_of_the_call__c == value ? <Text style={{...{color: Colors.black, fontFamily: ApplicationStyles.textMsgFont, fontSize: wp('4.2%')}}}>{value}</Text>: <Text style={{...{color: Colors.grey, fontFamily: ApplicationStyles.textMsgFont, fontSize: wp('4%')}}}>{value}</Text>}
+	              {data.outcome_of_the_call__c == obj.id ? <Text style={{...{color: Colors.black, fontFamily: ApplicationStyles.textMsgFont, fontSize: wp('4.2%')}}}>{obj.name}</Text>: <Text style={{...{color: Colors.grey, fontFamily: ApplicationStyles.textMsgFont, fontSize: wp('4%')}}}>{obj.name}</Text>}
 	            </Left>
 	            <Right>
 	              <Radio
 	                selectedColor={Colors.primary}
 	                color= {Colors.grey}
-	                selected={data.outcome_of_the_call__c == value} 
+	                selected={data.outcome_of_the_call__c == obj.id} 
 	                style={{borderColor: Colors.grey, padding: 0}}
-	                onPress={() => onChange({edited_field: 'outcome_of_the_call__c', edited_value: value})}
+	                onPress={() => onChange({edited_field: 'outcome_of_the_call__c', edited_value: obj.id})}
 	              />
 	            </Right>
 	        </ListItem>

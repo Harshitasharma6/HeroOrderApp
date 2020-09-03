@@ -16,44 +16,28 @@ import InputDate from 'App/Components/FormInput/InputDate';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import moment from 'moment';
 
- // 	  "call_connected__c" : "",
- //       "reasons_for_not_connected__c" : "Call not picked",
- //       "purpose_of_call__c" : "For Test Drive",
- //       "outcome_of_the_call__c" : "Customer Not Interested",
- //       "dealer_id" : "",
- //       "dealers_sales_person_login_info_id" : "",
- //       "follow_up__c": "no",
- //       "follow_up_date__c" : ""
 
-const NotConnectedReasons = ({data, onChange, loading, onSubmit}) => {
-	let options = [
-	   "Call not picked",
-       "Call picked but disconnected",
-       "Call waiting",
-       "Phone not reachable",
-       "Switched off"
-	];
-
-	
-	let optionsNode = options.map((value) => {
+const NotConnectedReasons = ({data, onChange, loading, onSubmit, reasons_for_not_Connected}) => {
+	let optionsNode = [];
+	optionsNode = reasons_for_not_Connected.map((obj) => {
 		return (
 			<ListItem 
-				selected={data.reasons_for_not_connected__c == value} 
+				selected={data.reasons_for_not_connected__c == obj.id} 
 				selectedColor={Colors.primary}
-				key={value} 
-				onPress={() => onChange({edited_field: 'reasons_for_not_connected__c', edited_value: value})}
+				key={obj.id} 
+				onPress={() => onChange({edited_field: 'reasons_for_not_connected__c', edited_value: obj.id})}
 				style={{borderColor: Colors.grey, paddingBottom: 2}}
 			>
 	            <Left>
-	              {data.reasons_for_not_connected__c == value ? <Text style={{...{color: Colors.black, fontFamily: ApplicationStyles.textMsgFont, fontSize: wp('4.2%')}}}>{value}</Text>: <Text style={{...{color: Colors.grey, fontFamily: ApplicationStyles.textMsgFont, fontSize: wp('4%')}}}>{value}</Text>}
+	              {data.reasons_for_not_connected__c == obj.id ? <Text style={{...{color: Colors.black, fontFamily: ApplicationStyles.textMsgFont, fontSize: wp('4.2%')}}}>{obj.name}</Text>: <Text style={{...{color: Colors.grey, fontFamily: ApplicationStyles.textMsgFont, fontSize: wp('4%')}}}>{obj.name}</Text>}
 	            </Left>
 	            <Right>
 	              <Radio
 	                selectedColor={Colors.primary}
 	                color= {Colors.grey}
-	                selected={data.reasons_for_not_connected__c == value} 
+	                selected={data.reasons_for_not_connected__c == obj.id} 
 	                style={{borderColor: Colors.grey, padding: 0}}
-	                onPress={() => onChange({edited_field: 'reasons_for_not_connected__c', edited_value: value})}
+	                onPress={() => onChange({edited_field: 'reasons_for_not_connected__c', edited_value: obj.id})}
 	              />
 	            </Right>
 	        </ListItem>

@@ -98,9 +98,22 @@ const { Types, Creators } = createActions({
 	updateBookingFailure: null,
 	updateBookingLoading: null,
 	updateBookingLoadingStop: null,
+	setUpdateBookingForm: ['payload'],
 	changeUpdateBookingForm: ['payload'],
 	clearUpdateBookingForm: ['payload'],
 	updateBookingValidationFailed: ['payload'],
+
+
+	newBooking: ['payload'],
+	newBookingSuccess:  ['payload'],
+	newBookingFailure: null,
+	newBookingLoading: null,
+	newBookingLoadingStop: null,
+	setNewBookingForm: ['payload'],
+	changeNewBookingForm: ['payload'],
+	clearNewBookingForm: ['payload'],
+	newBookingValidationFailed: ['payload'],
+	orderCheckout: ['payload']
 
 });
 

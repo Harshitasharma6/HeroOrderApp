@@ -11,6 +11,7 @@ import ProductCard from 'App/Components/ProductCard';
 import PriceDetails from 'App/Components/PriceDetails';
 import TotalPriceCard from 'App/Components/TotalPriceCard';
 import ProductsActions from 'App/Stores/Products/Actions';
+import VisitorActions from 'App/Stores/Visitor/Actions';
 import CommonActions from 'App/Stores/Common/Actions';
 import BlueButton from 'App/Components/BlueButton';
 import GenericIcon from 'App/Components/GenericIcon';
@@ -43,6 +44,7 @@ class OrderCartScreen extends Component {
 	    const {
 	      cart,
 	      openModal,
+        orderCheckout,
 	      addOffer,
 	      removeOffer,
 	      productSchemes,
@@ -107,14 +109,10 @@ class OrderCartScreen extends Component {
 		      	
 		      	<TotalPriceCard 
 		      		totalAmount={cart.totalAmount}
-		      		onPress={() => {HelperService.showToast({ 
-						message: 'Booking Confirmed', 
-						duration: 2000, 
-						buttonText: 'Okay' 
-          }) ;
-          NavigationService.navigate('InvoiceDetailformScreen');
-        
-        }}
+		      		onPress={() => {
+                orderCheckout()
+                NavigationService.navigate('InvoiceDetailformScreen');
+              }}
 		      	/>
 		    </ScrollView>
 	    );
@@ -164,10 +162,12 @@ const mapDispatchToProps = (dispatch) => ({
   openDealerDiscountEdit:(params)    => dispatch(ProductsActions.openDealerDiscountEdit(params)),
   closeDealerDiscountEdit:(params)   => dispatch(ProductsActions.closeDealerDiscountEdit(params)),
   changeDealerDiscount:(params)      => dispatch(ProductsActions.changeDealerDiscount(params)),
-  addOffer:(params)      		     => dispatch(ProductsActions.addOffer(params)),
-  removeOffer:(params)      		 => dispatch(ProductsActions.removeOffer(params)),
-  openModal:(params)		 	     => dispatch(CommonActions.openModal(params)),
-  fetchProductSchemes:(params)       => dispatch(ProductsActions.getProductSchemes(params))
+  addOffer:(params)      		         => dispatch(ProductsActions.addOffer(params)),
+  removeOffer:(params)      		     => dispatch(ProductsActions.removeOffer(params)),
+  openModal:(params)		 	           => dispatch(CommonActions.openModal(params)),
+  fetchProductSchemes:(params)       => dispatch(ProductsActions.getProductSchemes(params)),
+  fetchProductSchemes:(params)       => dispatch(ProductsActions.getProductSchemes(params)),
+  orderCheckout:(params)             => dispatch(VisitorActions.orderCheckout(params)),
 });
 
 export default connect(

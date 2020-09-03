@@ -325,6 +325,7 @@ export const  getBookingPicklistLoadingStop = (state, {payload}) => ({
 
 export const uploadImageSuccess = (state, {payload}) => ({
   ...state,
+  uploadImageField: '',
   loaders: {
     ...state.loaders,
     uploadImageLoader: false
@@ -357,6 +358,14 @@ export const uploadImageLoadingStop = (state) => ({
     uploadImageLoader: false
   }
 });
+
+export const setUploadImageField = (state, {payload}) => ({
+  ...state,
+  uploadImageField: payload
+});
+
+
+//uploadImageField
 
 export const reducer = createReducer(INITIAL_STATE, {
   [CommonTypes.CONNECTION_CHANGED]           : connectionChanged,
@@ -418,7 +427,9 @@ export const reducer = createReducer(INITIAL_STATE, {
   [CommonTypes.UPLOAD_IMAGE_LOADING]      : uploadImageLoading,
   [CommonTypes.UPLOAD_IMAGE_LOADING_STOP] : uploadImageLoadingStop,
   [CommonTypes.UPLOAD_IMAGE_SUCCESS]      : uploadImageSuccess,
-  [CommonTypes.UPLOAD_IMAGE_FAILURE]      : uploadImageFailure
+  [CommonTypes.UPLOAD_IMAGE_FAILURE]      : uploadImageFailure,
+  [CommonTypes.SET_UPLOAD_IMAGE_FIELD]    : setUploadImageField,
+
 
   // //uploadImage: ['payload'],
   // uploadImageLoading: null,

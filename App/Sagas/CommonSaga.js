@@ -174,6 +174,7 @@ export function* uploadImage({ payload }) {
 	}
 
 	try {
+		yield put(CommonActions.setUploadImageField(payload.params.edited_field));
 		yield put(CommonActions.uploadImageLoading());
 		let {token} = yield select(state => state.user)
 		payload.token = token

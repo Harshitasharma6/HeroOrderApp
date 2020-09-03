@@ -18,6 +18,7 @@ export const Config = {
 		REGISTER_CUSTOMER_OUTGOING_CALL: 'outgoingCall/createCall',
 		UPDATE_FOLLOW_UP_CALL: 'outgoingCall/updateFollowUp',
 		UPDATE_BOOKING	 :	'booking/updateBooking',
+		NEW_BOOKING: 'booking/newBooking'
 	}, 
 
 

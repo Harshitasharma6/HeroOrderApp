@@ -444,6 +444,7 @@ export const fetchConfirmedBookingSuccess = (state, {payload}) => ({
 
 export const fetchConfirmedBookingFailure = (state, {payload}) => ({
   ...state,
+  confirmedBooking: [],
   loaders: {
     ...state.loaders,
     fetchConfirmedBookingLoader: false

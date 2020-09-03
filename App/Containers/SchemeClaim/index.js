@@ -126,7 +126,7 @@ class SchemeClaimInfoScreen extends Component {
 		
 		return (
 			<View style={Style.container}>
-				<Text style={Style.heading}>{'SCHEMES CLAIMS'}</Text>
+				<Text style={Style.heading}>{'SCHEME CLAIMS'}</Text>
        
         <Select 
             style={Style.selectPickerStyle}

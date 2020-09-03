@@ -641,9 +641,97 @@ export const clearUpdateBookingForm = (state, {payload}) => ({
   updateBookingForm: INITIAL_STATE.updateBookingForm
 });
 
+
+
+export const setUpdateBookingForm = (state, {payload}) => ({
+  ...state,
+  updateBookingForm: payload
+});
+
+
+
+
 export const updateBookingValidationFailed = (state, {payload}) => ({
   ...state,
   updateBookingValidation: {
+        ...payload
+    }
+});
+
+
+
+
+export const newBookingSuccess = (state, {payload}) => ({
+  ...state,
+  newBookingForm: INITIAL_STATE.newBookingForm,
+  loaders: {
+    ...state.loaders,
+    newBookingLoader: false
+  }
+});
+
+export const newBookingFailure = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    newBookingLoader: false
+  }
+});
+
+export const newBookingLoading = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    newBookingLoader: true
+  }
+});
+
+export const newBookingLoadingStop = (state) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    newBookingLoader: false
+  }
+});
+
+
+export const changeNewBookingForm = (state, { payload }) => {
+    const {
+    edited_field,
+    edited_value
+  } = payload;
+
+  let changed_entity = {};
+  changed_entity[edited_field] = edited_value;
+  return {
+    ...state,
+    newBookingForm : {
+      ...state.newBookingForm,
+      ...changed_entity
+    },
+    newBookingValidation: INITIAL_STATE.newBookingValidation
+  }
+};
+
+
+export const clearNewBookingForm = (state, {payload}) => ({
+  ...state,
+  newBookingForm: INITIAL_STATE.newBookingForm
+});
+
+
+
+export const setNewBookingForm = (state, {payload}) => ({
+  ...state,
+  newBookingForm: payload
+});
+
+
+
+
+export const newBookingValidationFailed = (state, {payload}) => ({
+  ...state,
+  newBookingValidation: {
         ...payload
     }
 });
@@ -716,21 +804,30 @@ export const reducer = createReducer(INITIAL_STATE, {
   [VisitorTypes.REGISTER_CUSTOMER_OUTGOING_CALL_VALIDATION_FAILED]: registerCustomerOutgoingCallValidationFailed,
 
 
-  [VisitorTypes.PAY_BOOKING_SUCCESS]          : payBookingSuccess,
-  [VisitorTypes.PAY_BOOKING_FAILURE]          : payBookingFailure,
-  [VisitorTypes.PAY_BOOKING_LOADING]          : payBookingLoading,
-  [VisitorTypes.PAY_BOOKING_LOADING_STOP]     : payBookingLoadingStop,
-  [VisitorTypes.CHANGE_PAY_BOOKING_FORM]      : changePayBookingForm,
-  [VisitorTypes.CLEAR_PAY_BOOKING_FORM]      : clearPayBookingForm,
-  [VisitorTypes.PAY_BOOKING_VALIDATION_FAILED]: payBookingValidationFailed,
+  [VisitorTypes.PAY_BOOKING_SUCCESS]           : payBookingSuccess,
+  [VisitorTypes.PAY_BOOKING_FAILURE]           : payBookingFailure,
+  [VisitorTypes.PAY_BOOKING_LOADING]           : payBookingLoading,
+  [VisitorTypes.PAY_BOOKING_LOADING_STOP]      : payBookingLoadingStop,
+  [VisitorTypes.CHANGE_PAY_BOOKING_FORM]       : changePayBookingForm,
+  [VisitorTypes.CLEAR_PAY_BOOKING_FORM]        : clearPayBookingForm,
+  [VisitorTypes.PAY_BOOKING_VALIDATION_FAILED] : payBookingValidationFailed,
 
   [VisitorTypes.UPDATE_BOOKING_SUCCESS]          : updateBookingSuccess,
   [VisitorTypes.UPDATE_BOOKING_FAILURE]          : updateBookingFailure,
   [VisitorTypes.UPDATE_BOOKING_LOADING]          : updateBookingLoading,
   [VisitorTypes.UPDATE_BOOKING_LOADING_STOP]     : updateBookingLoadingStop,
   [VisitorTypes.CHANGE_UPDATE_BOOKING_FORM]      : changeUpdateBookingForm,
-  [VisitorTypes.CLEAR_UPDATE_BOOKING_FORM]      : clearUpdateBookingForm,
-  [VisitorTypes.UPDATE_BOOKING_VALIDATION_FAILED]: updateBookingValidationFailed
+  [VisitorTypes.CLEAR_UPDATE_BOOKING_FORM]       : clearUpdateBookingForm,
+  [VisitorTypes.SET_UPDATE_BOOKING_FORM]         : setUpdateBookingForm,
+  [VisitorTypes.UPDATE_BOOKING_VALIDATION_FAILED]: updateBookingValidationFailed,
 
 
+  [VisitorTypes.NEW_BOOKING_SUCCESS]          : newBookingSuccess,
+  [VisitorTypes.NEW_BOOKING_FAILURE]          : newBookingFailure,
+  [VisitorTypes.NEW_BOOKING_LOADING]          : newBookingLoading,
+  [VisitorTypes.NEW_BOOKING_LOADING_STOP]     : newBookingLoadingStop,
+  [VisitorTypes.CHANGE_NEW_BOOKING_FORM]      : changeNewBookingForm,
+  [VisitorTypes.CLEAR_NEW_BOOKING_FORM]       : clearNewBookingForm,
+  [VisitorTypes.SET_NEW_BOOKING_FORM]         : setNewBookingForm,
+  [VisitorTypes.NEW_BOOKING_VALIDATION_FAILED]: newBookingValidationFailed
 });

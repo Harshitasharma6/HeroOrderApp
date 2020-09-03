@@ -27,49 +27,55 @@ import DetailCard from 'App/Components/DetailCard'
 import {Spinner } from 'native-base';
 
 
-// {
-//    "product__c":"a029D000002ZFPtQAO",
+// 	  "tally_invoice_no__c" : "",
+//    "customer_gstin_no__c" : "sadasd",
+//    "online_order_no__c":"wewewe",
+//    "reference_no__c":"weqwewqe",
+//    "amount_paid_at_booking__c":"amount paid at booking",
 //    "first_name__c": "Rohit",
 //    "last_name__c": "Shukla",
 //    "contact_number__c": "09818512785",
 //    "email_id__c":  "xyz@gmails.com",
 //    "address_line_1__c": "delhi",
-//    "recieved_advance__c": "1222",
-//    "payment_mode__c": "Cash",
-//    "booking_ref_no__c":"123",
-//    "expected_delivery_date__c" :"2020-08-28",
-//    "booking_date__c": "2020-08-30",
-//    "aadhar_card__c":"https://abc.com/a.png",
-//    "acknowledgement__c": "https://abc.com/a.png",
-//    "driving_license__c" : "https://abc.com/a.png",
-//    "insurance__c" :"https://abc.com/a.png",
-//    "rc__c" : "https://abc.com/a.png",
-//    "others__c" : ["https://abc.com/a.png","https://abc.com/a1.png"],
-//    "voter_id_card__c" :"https://abc.com/a.png",   
-//    "igst_in_rs__c":"",    
-//    "total_tax__c": "50",  
-//    "total_subsidy__c": "11",
-//    "dealer_discount__c" : "",
-//    "total_amount_payable__c": "22222",
-//    "tally_invoice_no__c" : "",
-//    "customer_gstin_no__c" : "sadasd",
-//    "battery_no__c": "asdasd",
-//    "charger_no__c": "ewewqeq",
+   
+   
 //    "chassis_no__c": "weweqwe",
 //    "motor_no__c": "qwewqe",
-//    "address_line_2__c":"qwewe",
-//    "online_order_no__c":"wewewe",
-//    "reference_no__c":"weqwewqe",
+//    "charger_no__c": "ewewqeq",
+//    "battery_no__c": "asdasd",
 //    "model_color__c":"Red",
 //    "make_of_battery__c":"wewewe",
 //    "capacity_of_each_battery__c":"xasasd",
 //    "type_of_battery__c":"wwewe",
 //    "owner_s_handbook_no__c":"wqewqewe",
 //    "other_financier_name__c":"IDFC",
-//    "amount_paid_at_booking__c":"222",
-//    "outstanding_amount__c":"222",
 //    "financier_name__c":"eeeee"
-// }
+   
+   
+//    "aadhar_card__c":"https://abc.com/a.png",
+//    "acknowledgement__c": "https://abc.com/a.png",
+//    "driving_license__c" : "https://abc.com/a.png",
+//    "insurance__c" :"https://abc.com/a.png",
+//    "rc__c" : "https://abc.com/a.png",
+//    "others__c" : ["https://abc.com/a.png","https://abc.com/a1.png"],
+//    "voter_id_card__c" :"https://abc.com/a.png",  
+   
+   
+//    "product__c":"a029D000002ZFPtQAO",
+   
+//   
+//   "amount_paid_at_booking__c":"amount paid at booking", [RENAME THIS FIELD ON PAGE ]
+//   "total_amount_payable__c": "TOTAL AMOUNT OF BOOKING AT THE TIME CHECKOUT"
+//   "basic_amount__c" = "BASIC PRICE "
+//    "total_tax__c": "taxes",  
+//    "total_subsidy__c": "FRAME SUBSODY",
+//    "dealer_discount__c" : "DEALE DISCONT",
+//    Offer_Applied__c = "true/false"
+//    ,
+   
+   
+//    MISSING , please add this. FOR BACKEND
+//  
 
 
 class InvoiceDetailformScreen extends Component {
@@ -88,6 +94,7 @@ class InvoiceDetailformScreen extends Component {
 	submit() {
 		const { 
 			submitForm, 
+			submitNewBookingForm,
 			form,
 			currentEnquiryId ,
 			dealerId,
@@ -96,10 +103,15 @@ class InvoiceDetailformScreen extends Component {
 		} = this.props;
 
 		Keyboard.dismiss();
+
+		submitNewBookingForm({
+			enquiry__c: form.sfid,
+			schemes: []
+		});
+		
 		submitForm({
 			...form,
-			
-			  
+			others__c: ["https://abc.com/a.png","https://abc.com/a1.png"]
 		});
 	}
 
@@ -109,12 +121,13 @@ class InvoiceDetailformScreen extends Component {
 
     render() {
 		const { 
-			data,
 			form,
 			loader,
+			newLoader,
 			changeForm,
 			submitForm,
 			validation,
+			orderCheckout,
 			occupationList,
             sourceEnquiryList,
             productsList,
@@ -122,10 +135,13 @@ class InvoiceDetailformScreen extends Component {
   			model_color,
   			payment_mode,
   			uploadImage,
-  			uploadImageLoading
+  			uploadImageField,
+  			uploadImageLoading,
+  			submitNewBookingForm
 		} = this.props;
 		
-		let _this = this;	
+		let _this = this;
+
 		return (
 			<View style={Style.container}>
 				
@@ -198,11 +214,11 @@ class InvoiceDetailformScreen extends Component {
 
 					<InputNumber
 						styles={Style.mb10}
-						placeholder={'Amount Paid at Booking'}
+						placeholder={'Amount'}
 						value={form.amount_paid_at_booking__c}
 						onChange={(value) => changeForm({ edited_field: 'amount_paid_at_booking__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'amount_paid_at_booking__c'}
-						label={'Amount Paid at Booking'}
+						label={'Amount'}
 					/>	
 
 
@@ -210,7 +226,7 @@ class InvoiceDetailformScreen extends Component {
 			   <InputText
 						style={Style.mb10}
 						placeholder={'First Name'}
-						value={form.first_name__c || data.first_name__c}
+						value={form.first_name__c}
 						onChange={(value) => changeForm({ edited_field: 'first_name__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'first_name__c'}
 						label={'First Name*'}
@@ -219,7 +235,7 @@ class InvoiceDetailformScreen extends Component {
 				<InputText
 						style={Style.mb10}
 						placeholder={'Last Name'}
-						value={form.last_name__c || data.last_name__c}
+						value={form.last_name__c}
 						onChange={(value) => changeForm({ edited_field: 'last_name__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'last_name__c'}
 						label={'Last  Name*'}
@@ -229,7 +245,7 @@ class InvoiceDetailformScreen extends Component {
 			   <InputMobile
 						styles={Style.mb10}
 						placeholder={'Customer Phone No'}
-						value={form.contact_number__c  || data.contact_number__c}
+						value={form.contact_number__c}
 						onChange={(value) => changeForm({ edited_field: 'contact_number__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'contact_number__c'}
 						label={'Customer Phone No*'}
@@ -239,13 +255,13 @@ class InvoiceDetailformScreen extends Component {
 			 	  <InputText
 						style={Style.mb10}
 						placeholder={'Customer Email'}
-						value={form.email_id__c || data.email_id__c}
+						value={form.email_id__c}
 						onChange={(value) => changeForm({ edited_field: 'email_id__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'email_id__c'}
 						label={'Customer  Email'}
 					/>
 				 	<GoogleAddress
-						value={form.address_line_1__c || data.address_line_1__c}
+						value={form.address_line_1__c}
 						changeForm={(value) => changeForm({ edited_field: 'address_line_1__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'address_line_1__c'}
 					/>
@@ -368,10 +384,10 @@ class InvoiceDetailformScreen extends Component {
 					/>
 
 					<View style={{...Style.bottomMargin}}>
-		            <ImagePicker 
-		              image={form.aadhar_card__c} 
-		              loading={uploadImageLoading}
-		              onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'aadhar_card__c'}, callback: (_this.changeImage)})}>
+		            <ImagePicker
+		              	image={form.aadhar_card__c} 
+		              	loading={uploadImageLoading && uploadImageField == 'aadhar_card__c'}
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'aadhar_card__c'}})}>
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                 <GenericIcon 
@@ -385,10 +401,10 @@ class InvoiceDetailformScreen extends Component {
           		</View>
 
 	        	<View style={{...Style.bottomMargin}}>
-		            <ImagePicker 
-		              image={form.acknowledgement__c}
-		              //loading={uploadImageLoading}
-		              onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'acknowledgement__c'}, callback: (_this.changeImage)})}> 
+		            <ImagePicker
+		              	image={form.acknowledgement__c}
+		              	loading={uploadImageLoading && uploadImageField == 'acknowledgement__c'}
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'acknowledgement__c'}})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                <GenericIcon 
@@ -403,9 +419,9 @@ class InvoiceDetailformScreen extends Component {
 
           		<View style={{...Style.bottomMargin}}>
 		            <ImagePicker 
-		              image={form.driving_license__c}
-		              //loading={uploadImageLoading}
-		              onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'driving_license__c'}, callback: (_this.changeImage)})}> 
+		              	image={form.driving_license__c}
+		              	loading={uploadImageLoading && uploadImageField == 'driving_license__c'}
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'driving_license__c'}})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                <GenericIcon 
@@ -420,9 +436,9 @@ class InvoiceDetailformScreen extends Component {
 
           		<View style={{...Style.bottomMargin}}>
 		            <ImagePicker 
-		              image={form.insurance__c}
-		              //loading={uploadImageLoading} 
-		              onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'insurance__c'}, callback: (_this.changeImage)})}> 
+		              	image={form.insurance__c}
+		              	loading={uploadImageLoading && uploadImageField == 'insurance__c'}
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'insurance__c'}})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                <GenericIcon 
@@ -440,8 +456,9 @@ class InvoiceDetailformScreen extends Component {
 
           		<View style={{...Style.bottomMargin}}>
 		            <ImagePicker 
-		              image={form.rc__c} 
-		              onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'rc__c'}, callback: (_this.changeImage)})}> 
+		              	image={form.rc__c} 
+		              	loading={uploadImageLoading && uploadImageField == 'rc__c'}
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'rc__c'}})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                <GenericIcon 
@@ -456,10 +473,10 @@ class InvoiceDetailformScreen extends Component {
 
 
           		<View style={{...Style.bottomMargin}}>
-		            <ImagePicker 
-		              image={form.voter_id_card__c} 
-		              //onImageSuccess={({image}) => changeForm({edited_field: 'voter_id_card__c', edited_value: image})}>
-		               onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'voter_id_card__c'}, callback: (_this.changeImage)})}> 
+		            <ImagePicker
+		              	image={form.voter_id_card__c} 
+		              	loading={uploadImageLoading && uploadImageField == 'voter_id_card__c'}
+		               	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'voter_id_card__c'}})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                <GenericIcon 
@@ -474,9 +491,10 @@ class InvoiceDetailformScreen extends Component {
 
 
           		<View style={{...Style.bottomMargin}}>
-		            <ImagePicker 
-		              image={form.others__c} 
-		              onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'others__c'}, callback: (_this.changeImage)})}> 
+		            <ImagePicker
+		              	image={form.others__c} 
+		              	loading={uploadImageLoading && uploadImageField == 'others__c'}
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'others__c'}})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                <GenericIcon 
@@ -492,8 +510,8 @@ class InvoiceDetailformScreen extends Component {
                     
 				<View style={{marginTop:'4%'}}>
 					<BlueButton title={"SAVE"} style={{width: '40%', marginHorizontal: '30.5%', height: 40}} textStyle={{fontSize: 12}}
-					loading={loader}
-					disabled={loader}
+					loading={loader || newLoader}
+					disabled={loader || newLoader}
 					onPress={() => this.submit()}
 					>
 	            </BlueButton>
@@ -509,23 +527,25 @@ const mapStateToProps = (state) => ({
 	validation      			: state.visitor.updateBookingFormValidation,
 	form 					 	: state.visitor.updateBookingForm,
 	loader 			            : state.visitor.loaders.updateBookingLoader,
+	newLoader					: state.visitor.loaders.newBookingLoader,
 	occupationList 				: state.common.occupationList,
   	sourceEnquiryList 			: state.common.sourceEnquiryList,
   	productsList 				: state.common.productsList,
   	financier_name 				: state.common.financier_name,
   	model_color 				: state.common.model_color,
   	payment_mode 				: state.common.payment_mode,
-	data 						: state.visitor.currentVisitorData,
 	currentEnquiryId            : state.visitor.currentEnquiryId,
-	uploadImageLoading			: state.common.loaders.uploadImageLoader
-	  
+	uploadImageLoading			: state.common.loaders.uploadImageLoader,
+	uploadImageField            : state.common.uploadImageField
 });
   
 const mapDispatchToProps = (dispatch) => ({
-	changeForm: (params)       => dispatch(VisitorActions.changeUpdateBookingForm(params)),
-	submitForm: (params)       => dispatch(VisitorActions.updateBooking(params)),
-	clearRegistrationForm: ()  => dispatch(VisitorActions.clearUpdateBookingForm()),
-	uploadImage: (params)      => dispatch(CommonActions.uploadImage(params))
+	changeForm: (params)       		 => dispatch(VisitorActions.changeUpdateBookingForm(params)),
+	submitForm: (params)       		 => dispatch(VisitorActions.updateBooking(params)),
+	submitNewBookingForm: (params)   => dispatch(VisitorActions.newBooking(params)),
+	clearRegistrationForm: ()  		 => dispatch(VisitorActions.clearUpdateBookingForm()),
+	uploadImage: (params)      		 => dispatch(CommonActions.uploadImage(params)),
+	orderCheckout: (params)    		 => dispatch(VisitorActions.orderCheckout(params)),
 });
 
 export default connect(

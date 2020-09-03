@@ -63,7 +63,9 @@ const { Types, Creators } = createActions({
   uploadImageLoading: null,
   uploadImageLoadingStop: null,
   uploadImageSuccess: ['payload'],
-  uploadImageFailure: null
+  uploadImageFailure: null,
+  setUploadImageField: ['payload']
+
 
 
 })

@@ -127,6 +127,8 @@ import {
     getAllFollowUps,
     getFeedbacks,
     watchUpdateBooking,
+    watchNewBooking,
+    orderCheckout
 } from './VisitorSaga'
 
 
@@ -273,9 +275,11 @@ export default function* root() {
         fork(watchCreateFeedback),
         fork(watchPayBooking),
         fork(watchUpdateBooking),
+        fork(watchNewBooking),
         takeLatest(VisitorTypes.GET_ALL_VISITS, getAllVisits),
         takeLatest(VisitorTypes.GET_ALL_FOLLOW_UPS, getAllFollowUps),
         takeLatest(VisitorTypes.GET_FEEDBACKS, getFeedbacks),
+        takeLatest(VisitorTypes.ORDER_CHECKOUT, orderCheckout),
 
 
         fork(watchMarkLeadLost),
