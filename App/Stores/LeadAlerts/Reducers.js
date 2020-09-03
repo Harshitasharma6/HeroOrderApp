@@ -337,6 +337,52 @@ export const clearLeadLostForm = (state) => ({
 })
 
 
+export const markLeadWonSuccess = (state, {payload}) => ({
+  ...state,
+  leadWonForm: payload,
+  loaders: {
+    ...state.loaders,
+    markLeadWonLoader: false
+  }
+});
+
+
+export const markLeadWonFailure = (state, {payload}) => ({
+  ...state,
+  leadWonForm: [],
+  loaders: {
+    ...state.loaders,
+    markLeadWonLoader: false
+  }
+});
+
+
+export const markLeadWonLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    markLeadWonLoader: payload.id
+  }
+ 
+});
+
+
+export const markLeadWonLoadingStop = (state, {payload}) => ({
+  ...state,
+
+  loaders: {
+    ...state.loaders,
+    markLeadWonLoader: false
+  }
+});
+
+
+
+
+
+
+
+
 
  // allOpenLeads: [],
  //    loaders: {
@@ -444,6 +490,7 @@ export const fetchConfirmedBookingSuccess = (state, {payload}) => ({
 
 export const fetchConfirmedBookingFailure = (state, {payload}) => ({
   ...state,
+  confirmedBooking:[],
   loaders: {
     ...state.loaders,
     fetchConfirmedBookingLoader: false
@@ -556,6 +603,12 @@ export const reducer = createReducer(INITIAL_STATE, {
     [LeadAlertTypes.MARK_LEAD_LOST_LOADING_STOP]   : markLeadLostLoadingStop,
     [LeadAlertTypes.CHANGE_LEAD_LOST_FORM]         : changeLeadLostForm,
     [LeadAlertTypes.CLEAR_LEAD_LOST_FORM]          : clearLeadLostForm,
+
+    [LeadAlertTypes.MARK_LEAD_WON_SUCCESS]        : markLeadWonSuccess,
+    [LeadAlertTypes.MARK_LEAD_WON_FAILURE]        : markLeadWonFailure,
+    [LeadAlertTypes.MARK_LEAD_WON_LOADING]        : markLeadWonLoading,
+    [LeadAlertTypes.MARK_LEAD_WON_LOADING_STOP]   : markLeadWonLoadingStop,
+    
 
     [LeadAlertTypes.UPDATE_BOOKING_SEARCH_FILTERS]: updateBookingSearchFilters,
 

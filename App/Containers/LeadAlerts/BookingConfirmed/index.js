@@ -16,7 +16,6 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp, widthPercentageT
 import Styles from './styles'
 import CommonActions from 'App/Stores/Common/Actions';
 import VisitorActions from 'App/Stores/Visitor/Actions';
-import LeadLostScreen from '../Actionables/LeadLostScreen'
 
 
 class BookingConfirmed extends Component {
@@ -75,7 +74,8 @@ return filteredList;
       productsList,
       openModal,
       closeModal,
-      submitForm
+      submitForm,
+      loader
     } = this.props;
 
 
@@ -94,22 +94,20 @@ return filteredList;
               
                 onPress={() => NavigationService.navigate('InvoiceDetailformScreen',{data: item})}
                 content={[
-                  <GenericDisplayCardStrip key={'Status' + item.sfid} label={'Status'} value={item.lead_status__c}/>,
-                  <GenericDisplayCardStrip key={'Stage' + item.sfid} label={'Stage'} value={item.lead_stage__c}/>,
-                  <GenericDisplayCardStrip key={'Product Purchased' + item.sfid} label={'Product Purchased'} value={HelperService.findMatchingKeyValueInList(productsList, 'id', item.product__c, 'name')}/>,
-                  <GenericDisplayCardStrip key={'Outstanding Amount' + item.sfid} label={'Outstanding Amount'} value={item.outstanding_amount__c}/>,
+                  <GenericDisplayCardStrip key={'Status' + item.id} label={'Status'} value={item.lead_status__c}/>,
+                  <GenericDisplayCardStrip key={'Stage' + item.id} label={'Stage'} value={item.lead_stage__c}/>,
+                  <GenericDisplayCardStrip key={'Product Purchased' + item.id} label={'Product Purchased'} value={HelperService.findMatchingKeyValueInList(productsList, 'id', item.product__c, 'name')}/>,
+                  <GenericDisplayCardStrip key={'Outstanding Amount' + item.id} label={'Outstanding Amount'} value={item.outstanding_amount__c}/>,
                   <BlueButton title={''} style={Styles.callButton} textStyle={Styles.callButtonText}  onPress={() => this.onPressCall(item)}><GenericIcon name="phone" style={Styles.callButtonIcon}/></BlueButton>,
-                  item.lead_status__c != 'Won' ? <View style={{flexDirection: 'row', justifyContent: 'space-between' }} textStyle={{fontSize: wp('3.8%')}} key={'Action section' + item.sfid}>
+                  item.lead_status__c != 'Won' ? <View style={{flexDirection: 'row', justifyContent: 'space-between' }} textStyle={{fontSize: wp('3.8%')}} key={'Action section' + item.id}>
                   <BlueButton 
                     title={'Mark Won'} 
                     style={Styles.markLostButton} 
                     textStyle={Styles.markLostButtonText} 
-                    onPress={() => {
-                    return openModal({
-                        content: <LeadLostScreen id={item.sfid} onSubmit={(params) => {closeModal();}}/>, 
-                        heading: 'Mark Won', 
-                        bodyFlexHeight: .4
-                    })}}>
+                    loading={loader&&loader==item.id}
+						        disabled={loader}
+                    onPress={() => submitForm({ id : item.id})}
+                   >
                       <GenericIcon name="check" style={Styles.markLostButtonIcon} />
                   </BlueButton>
                   </View> : [],
@@ -146,13 +144,14 @@ const mapStateToProps = (state) => ({
     loading : state.leadAlerts.loaders.fetchConfirmedBookingLoader,
     productsList: state.common.productsList,
     bookingSearchFilters: state.leadAlerts.bookingSearchFilters,
+    loader 	: state.leadAlerts.loaders.markLeadWonLoader,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchData: (params)    => dispatch(LeadAlertActions.fetchConfirmedBooking(params)),
   openModal:(params)     => dispatch(CommonActions.openModal(params)),
   closeModal:(params)    => dispatch(CommonActions.closeModal(params)),
-  submitForm: (params)   => dispatch(LeadAlertActions.markLeadLost(params)),
+  submitForm: (params)   => dispatch(LeadAlertActions.markLeadWon(params)),
   showCallModal: (params)    => dispatch(CommonActions.showCallModal(params)),
   hideCallModal: (params)    => dispatch(CommonActions.hideCallModal(params)),
   changeForm: (params)       => dispatch(VisitorActions.changeRegisterCustomerOutgoingCallForm(params)),

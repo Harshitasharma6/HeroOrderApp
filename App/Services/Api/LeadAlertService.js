@@ -184,6 +184,26 @@ function markLeadLost(params) {
 	});
 }
 
+function markLeadWon(params) {
+	let url = Config.LEAD_ALERT_SERVICE.UPDATE_MARK_WON	;
+	url += `?id=${params.id}`
+	return apiClient.put(url, params,{
+		headers: {
+			token: params.token,
+				}
+	}).then((response) => {
+		if (in200s(response.status)) {
+      console.log(response.data)
+      return response['data']['data'];
+     
+		}
+		return null
+	}).catch(error => {
+    
+		return null
+	});
+}
+
 
 function fetchTodayFollowUp(params) {
 	let url = Config.LEAD_ALERT_SERVICE.TODAY_FOLLOW_UP;
@@ -214,5 +234,6 @@ export const LeadAlertService = {
     fetchAllOpenLeads,
     markLeadLost,
     fetchTodayFollowUp,
-    fetchConfirmedBooking
+    fetchConfirmedBooking,
+    markLeadWon
 }

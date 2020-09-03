@@ -242,6 +242,45 @@ function* markLeadLost(payload) {
 	}
 }
 
+function* markLeadWon(payload) {
+	yield put(LeadAlertActions.markLeadWonLoading(payload));
+	try {
+		const isOnline = yield select(getConnectionStatus);
+		if (!isOnline) {
+			yield put(LeadAlertActions.markLeadWonFailure());
+			
+			return;
+		}
+		let {token} = yield select(state => state.user)
+		payload.token = token
+		
+		const successData = yield call(LeadAlertService.markLeadWon, payload);
+
+		if (successData) { 
+			yield put(LeadAlertActions.markLeadWonSuccess(successData));
+			HelperService.showToast({ 
+				message: 'Lead Status Updated successfully!!', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+			yield put(LeadAlertActions.fetchConfirmedBooking({}));
+		} else {
+			yield put(LeadAlertActions.markLeadWonFailure())
+			HelperService.showToast({ 
+				message: 'Lead Status Updation failed!!', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+		}
+	} catch (error) {
+		yield put(LeadAlertActions.markLeadWonFailure());
+		HelperService.showToast({ 
+			message: 'Lead Status Updation failed!!', 
+			duration: 2000, 
+			buttonText: 'Okay' 
+		});
+	}
+}
 
 export function* watchMarkLeadLost() {
 	while (true) {
@@ -266,6 +305,14 @@ export function* watchMarkLeadLost() {
 	}
 }
 
+export function* watchMarkLeadWon() {
+	while (true) {
+		const { payload } = yield take(LeadAlertTypes.MARK_LEAD_WON)
+		
+
+		yield call(markLeadWon, payload)
+	}
+}
 
 export function* fetchTodayFollowUp({ payload }) {
 	const isOnline = yield select(getConnectionStatus);

@@ -58,7 +58,8 @@ export const Config = {
     	FETCH_ALL_OPEN_LEADS                : 'outgoingCall/getOpenLeadAlert',
 		MARK_LEAD_LOST                      : 'visitors/lost',
 		TODAY_FOLLOW_UP						: 'outgoingCall/getFollowUp',
-		GET_CONFIRMED_BOOKING					: 'booking/getConfirmedBooking',
+		GET_CONFIRMED_BOOKING				: 'booking/getConfirmedBooking',
+		UPDATE_MARK_WON						:  'booking/updateMarkWon'
 	},
 	DASHBOARD_SERVICE:{
 		GET_DASHBOARD_SUMMARY					: 'dashboard/summary',

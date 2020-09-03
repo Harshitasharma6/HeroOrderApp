@@ -61,6 +61,8 @@ export function* fetchLeadLostReasons({ payload }) {
 }
 
 
+
+
 export function* getAllStates({ payload }) {
 	const isOnline = yield select(getConnectionStatus);
 	if (!isOnline) {

@@ -63,6 +63,13 @@ const { Types, Creators } = createActions({
 	changeLeadLostForm: ['payload'],
 	clearLeadLostForm: null,
 
+	markLeadWon: ['payload'],
+	markLeadWonSuccess: ['payload'],
+	markLeadWonFailure: null,
+	markLeadWonLoading: ['payload'],
+	markLeadWonLoadingStop: null,
+	
+	
 
 	fetchTodayFollowUp: ['payload'],
 	fetchTodayFollowUpSuccess: ['payload'],
