@@ -15,6 +15,7 @@ export const getAllDealersSuccess = (state, { payload }) => ({
 
 export const getAllDealersFailure = (state) => ({
   ...state,
+  DealersData:[],
   loaders: {
     ...state.loaders,
     getAllDealersLoader: false
@@ -54,6 +55,7 @@ export const getAllDealerClaimsSuccess = (state, { payload }) => ({
 
 export const getAllDealerClaimsFailure = (state) => ({
   ...state,
+  DealerClaimsData: [],
   loaders: {
     ...state.loaders,
     getAllDealerClaimsLoader: false

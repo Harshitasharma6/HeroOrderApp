@@ -154,6 +154,7 @@ import {
     watchMarkLeadLost,
     fetchTodayFollowUp,
     fetchConfirmedBooking,
+    watchMarkLeadWon,
 } from './LeadAlertsSaga'
 
 
@@ -283,6 +284,7 @@ export default function* root() {
 
 
         fork(watchMarkLeadLost),
+        fork(watchMarkLeadWon),
         takeLatest(LeadAlertTypes.FETCH_HOT_LEADS, fetchHotLeads),
         takeLatest(LeadAlertTypes.FETCH_BOOKING_CONFIRM_FINANCE_LEADS, fetchBookingConfirmFinanceLeads),
         takeLatest(LeadAlertTypes.FETCH_PURCHASE_OVERDUE, fetchPurchaseOverdue),

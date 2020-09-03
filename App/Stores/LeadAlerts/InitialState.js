@@ -19,14 +19,18 @@ export const INITIAL_STATE = {
         fetchAllOpenLeadsLoader: false,
     	fetchNoActionLoader: false,
         markLeadLostLoader: false,
+        markLeadWonLoader: false,
         fetchtodayFollowUpLoader: false,
         fetchConfirmedBookingLoader:  false,
     },
     leadLostForm: {},
+    leadWonForm:  {},
     leadLostFormValidation: {
         invalid: false,
         invalid_field: ''
     },
+
+    
 
     bookingSearchFilters: {
         area: '',

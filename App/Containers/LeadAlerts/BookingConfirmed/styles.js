@@ -68,7 +68,8 @@ export default StyleSheet.create({
   		marginTop: hp('1%'), 
   		borderColor: Colors.primary, 
   		backgroundColor: 'transparent', 
-  		borderWidth: 1
+		  borderWidth: 1,
+		  height: hp('5.5%'),
   	},
   	markLostButtonText: {
   		fontSize: wp('3.8%'), 

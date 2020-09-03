@@ -45,6 +45,8 @@ function fetchLeadLostReasons(params) {
   });
 }
 
+
+
 function getAllStates(params) {
   let url = Config.COMMON_SERVICE.GET_STATES;
   return apiClient.get(url, {
@@ -145,5 +147,6 @@ export const CommonService = {
   getAllCities,
   uploadImage,
   getCallOptions,
-  getBookingPicklist
-}
+  getBookingPicklist,
+  
+  }
