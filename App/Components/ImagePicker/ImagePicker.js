@@ -1,9 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image, Alert, TouchableOpacity } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import GenericIcon from 'App/Components/GenericIcon';
 import { HelperService } from 'App/Services/Utils/HelperService'
 import {Spinner } from 'native-base';
-import {Colors} from 'App/Theme'
+import {Colors, ApplicationStyles} from 'App/Theme'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 export default class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -50,7 +52,8 @@ export default class App extends React.Component {
 		const {
 			image,
 			children,
-			loading
+			loading,
+			title
 		} = this.props;
 
 		let imageNode = (
@@ -58,30 +61,35 @@ export default class App extends React.Component {
 				source={{
 					uri: this.state.source || image,
 				}}
-				style={{ width: 70, height: 70, resizeMode: 'stretch', borderRadius: 15}}
+				style={styles.image}
 			/>
 		);
 
-		// if (!this.state.source && !image) {
-		// 	imageNode = [];
-		// }
+		
 		
 
 		if(loading) {
-			imageNode = <Spinner color={Colors.primary} />
+			imageNode = <View style={styles.spinner}><Spinner color={Colors.primary} /></View>
 		}
 		return (
-			<View>
+			<View style={styles.uploadContainer}>
 				<View style={styles.container}>
-					<View>
-						<TouchableOpacity disabled={loading} transparent onPress={!this.props.enable ? () => this.chooseFile() : () => { }}>
-							{children}
-						</TouchableOpacity>
+					<View style={{flexDirection: 'row'}}>
+						<Text style={styles.title}>{title}</Text>
 					</View>
-					<View>
+					<View style={styles.imagePreviewContainer}>
 						{imageNode}
 					</View>
 				</View>
+				<View>
+					<TouchableOpacity 
+							disabled={loading} 
+							onPress={!this.props.enable ? () => this.chooseFile() : () => { }} 
+							style={styles.uploadButton}
+						>
+							<GenericIcon name={'plus-circle'} style={styles.addIcon}/>
+						</TouchableOpacity>
+					</View>
 			</View>
 		);
 	}
@@ -89,10 +97,48 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
 	container: {
-		flexDirection: 'row',
 		backgroundColor: '#fff',
-		alignItems: 'center',
-		justifyContent: 'flex-start',
-		width: '100%',
+		width: '85%',
+		borderRadius: 10,
+		borderWidth: .5,
+		borderColor: Colors.grey,
+		elevation: 3,
+		paddingVertical: hp('1%')
 	},
+	addIcon: {
+		color: Colors.primary,
+		fontSize: wp('9%')
+	},
+	uploadButton: {
+
+	},
+	uploadContainer: {
+		width: '100%',
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+	},
+	imagePreviewContainer: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+	},
+	title: {
+		fontSize: wp('4.4%'),
+		fontFamily: ApplicationStyles.textMsgFont,
+		color: Colors.primary,
+		paddingHorizontal: wp('2%'),
+		flexWrap: 'wrap'
+	},
+	image: {
+		width: hp('8%'),
+		height: hp('8%'),
+		resizeMode: 'stretch', 
+		borderRadius: 15,
+		marginHorizontal: wp('3%')
+	},
+	spinner: {
+		marginHorizontal: wp('8%'),
+		marginVertical: 0
+	}
 });

@@ -108,7 +108,7 @@ class InvoiceDetailformScreen extends Component {
 			enquiry__c: form.sfid,
 			schemes: []
 		});
-		
+
 		submitForm({
 			...form,
 			others__c: ["https://abc.com/a.png","https://abc.com/a1.png"]
@@ -385,6 +385,7 @@ class InvoiceDetailformScreen extends Component {
 
 					<View style={{...Style.bottomMargin}}>
 		            <ImagePicker
+		            	title={'Aadhar Card'}
 		              	image={form.aadhar_card__c} 
 		              	loading={uploadImageLoading && uploadImageField == 'aadhar_card__c'}
 		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'aadhar_card__c'}})}>
@@ -402,6 +403,7 @@ class InvoiceDetailformScreen extends Component {
 
 	        	<View style={{...Style.bottomMargin}}>
 		            <ImagePicker
+		            	title={'Acknowledgement'}
 		              	image={form.acknowledgement__c}
 		              	loading={uploadImageLoading && uploadImageField == 'acknowledgement__c'}
 		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'acknowledgement__c'}})}> 
@@ -419,6 +421,7 @@ class InvoiceDetailformScreen extends Component {
 
           		<View style={{...Style.bottomMargin}}>
 		            <ImagePicker 
+		            title={'Driving License'}
 		              	image={form.driving_license__c}
 		              	loading={uploadImageLoading && uploadImageField == 'driving_license__c'}
 		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'driving_license__c'}})}> 
@@ -436,6 +439,7 @@ class InvoiceDetailformScreen extends Component {
 
           		<View style={{...Style.bottomMargin}}>
 		            <ImagePicker 
+		            title={'Insurance'}
 		              	image={form.insurance__c}
 		              	loading={uploadImageLoading && uploadImageField == 'insurance__c'}
 		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'insurance__c'}})}> 
@@ -456,6 +460,7 @@ class InvoiceDetailformScreen extends Component {
 
           		<View style={{...Style.bottomMargin}}>
 		            <ImagePicker 
+		            title={'RC'}
 		              	image={form.rc__c} 
 		              	loading={uploadImageLoading && uploadImageField == 'rc__c'}
 		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'rc__c'}})}> 
@@ -474,6 +479,7 @@ class InvoiceDetailformScreen extends Component {
 
           		<View style={{...Style.bottomMargin}}>
 		            <ImagePicker
+		            title={'Voter Card'}
 		              	image={form.voter_id_card__c} 
 		              	loading={uploadImageLoading && uploadImageField == 'voter_id_card__c'}
 		               	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'voter_id_card__c'}})}> 
@@ -492,6 +498,7 @@ class InvoiceDetailformScreen extends Component {
 
           		<View style={{...Style.bottomMargin}}>
 		            <ImagePicker
+		            title={'Others'}
 		              	image={form.others__c} 
 		              	loading={uploadImageLoading && uploadImageField == 'others__c'}
 		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'others__c'}})}> 
