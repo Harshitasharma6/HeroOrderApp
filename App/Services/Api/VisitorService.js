@@ -236,7 +236,6 @@ function updateBooking(params) {
 		}
 	}).then((response) => {
 		if (in200s(response.status)) {
-			debugger
 			return response['data'];
 		}
 		return null

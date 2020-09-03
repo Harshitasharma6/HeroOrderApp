@@ -81,5 +81,6 @@ export const INITIAL_STATE = {
     followUpsMapping: {},
     payBookingForm: {},
     updateBookingForm: {},
-    newBookingForm: {}
+    newBookingForm: {},
+    bookingInfoForm: {}
 }

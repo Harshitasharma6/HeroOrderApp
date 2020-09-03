@@ -224,6 +224,43 @@ function* markLeadLost(payload) {
 				duration: 2000, 
 				buttonText: 'Okay' 
 			});
+			
+			let selectedFollowUp = yield select(state => state.leadAlerts.selectedFollowUp);
+			
+			switch(selectedFollowUp) {
+				case '1':
+	    		//fetchHotLeads
+	    		yield put(LeadAlertActions.fetchHotLeads({}));
+	    		break;
+		    	case '2':
+		    		//fetchPurchaseOverdue
+		    		yield put(LeadAlertActions.fetchPurchaseOverdue({}));
+		    		break;
+		    	case '3':
+		    		//fetchBookingConfirmFinanceLeads
+		    		yield put(LeadAlertActions.fetchBookingConfirmFinanceLeads({}));
+		    		break;
+		    	case '4':
+		    		//fetchOpenLeads
+		    		yield put(LeadAlertActions.fetchOpenLeads({}));
+		    		break;
+		    	case '5':
+		    		//fetchNoAction
+		    		yield put(LeadAlertActions.fetchNoAction({}));
+		    		break;
+		      	case '6':
+		        	//fetchAllOpenLeads
+		        	yield put(LeadAlertActions.fetchAllOpenLeads({}));
+		        break;
+		      	case '7':
+		        	//fetchCallLeads
+		        	yield put(LeadAlertActions.fetchCallLeads({}));
+		        break;
+		      	case '8':
+		       	 	//fetchTodayFollowUp
+		       	 	yield put(LeadAlertActions.fetchTodayFollowUp({}));
+		        break;
+			}
 		} else {
 			yield put(LeadAlertActions.markLeadLostFailure())
 			HelperService.showToast({ 

@@ -6,11 +6,11 @@ import { VisitorTypes } from 'App/Stores/Visitor/Actions';
 import { call, put, select, take } from 'redux-saga/effects';
 import { VisitorService } from 'App/Services/Api/VisitorService';
 import VisitorActions from 'App/Stores/Visitor/Actions';
+import ProductsActions from 'App/Stores/Products/Actions';
 import CommonActions from 'App/Stores/Common/Actions';
 import { offlineApiCall } from './OfflineSaga';
 import {Alert} from 'react-native'
 import _ from 'lodash';
-
 
 export function* watchSearchCustomer() {
 	while (true) {
@@ -257,6 +257,7 @@ function* searchCustomer(payload) {
 
 		if (successData) { 
 			yield put(VisitorActions.searchCustomerSuccess(successData));
+			yield put(ProductsActions.removeItemFromCartSuccess()); 
 			switch(successData.table) {
 				case 'Contact':
 					HelperService.showToast({ 
@@ -745,8 +746,15 @@ function* updateBooking(payload) {
 		const successData = yield call(VisitorService.updateBooking, payload);
 
 		if (successData) { 
+			HelperService.showToast({ 
+				message: 'Booking Updated Successfully!!', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+			NavigationService.navigateAndReset('BookingConfirmed');
+			yield put(ProductsActions.removeItemFromCartSuccess()); 
 			yield put(VisitorActions.updateBookingSuccess(successData));
-			NavigationService.navigate('BookingConfirmed')
+
 		} else {
 			yield put(VisitorActions.updateBookingFailure())
 			HelperService.showToast({ 
@@ -850,140 +858,140 @@ export function* orderCheckout({payload}) {
 	//    MISSING , please add this. FOR BACKEND
 	//    lead_satge__c ='Booking'
 
-//VISITOR DATA
-// aadhar_card__c: null
-// acknowledgement__c: null
-// address_line_1__c: "SST Nagar, Patiala, Punjab, India"
-// address_line_2__c: null
-// age__c: 28
-// amount_paid_at_booking__c: null
-// attach_documents__c: null
-// basic_amount__c: 0
-// battery_no__c: null
-// billing_date__c: null
-// billing_ref_no__c: null
-// booking_date__c: null
-// booking_ref_no__c: null
-// capacity_of_each_battery__c: null
-// cgst__c: null
-// cgst_in_rs__c: null
-// charger_no__c: null
-// chassis_no__c: null
-// city__c: null
-// competitor__c: null
-// contact_number__c: "9971710994"
-// createddate: 1598977614000
-// customer__c: "0039D000008CLk8QAG"
-// customer_anniversary__c: "2020-09-30T00:00:00.000Z"
-// customer_birthday__c: "2020-09-25T00:00:00.000Z"
-// customer_gstin_no__c: null
-// dealer__c: "0019D000009zum3QAA"
-// dealer_discount__c: null
-// dealers_sales_person__c: "a0O9D000001hLV9UAM"
-// designation__c: null
-// discount_percent__c: null
-// driving_license__c: null
-// email_id__c: "saurabhsg@gmail.co"
-// exchange_required__c: "Yes"
-// existing_two_wheelers__c: "Yes"
-// expected_close_date__c: 1600214400000
-// expected_delivery_date__c: null
-// expected_revenue__c: null
-// finance_required__c: null
-// financier_name__c: null
-// first_name__c: "Dinesh"
-// follow_up_date__c: null
-// genders__c: "Male"
-// id: 575
-// igst__c: null
-// igst_in_rs__c: null
-// insurance__c: null
-// isdeleted: false
-// last_name__c: "Kaushik"
-// lastmodifiedbyid: "0052v00000g1xfXAAQ"
-// lastmodifieddate: 1599123554000
-// lastvieweddate: 1599123554000
-// lead_from__c: "Non HO"
-// lead_source__c: "Head Office"
-// lead_stage__c: "Test Drive"
-// lead_status__c: "Open"
-// lead_status_reason__c: null
-// make_of_battery__c: null
-// mode_of_buying__c: "Cash"
-// model_color__c: null
-// motor_no__c: null
-// name: "ENQ-00571"
-// number_of_employees__c: null
-// occupation__c: "Retired"
-// online_order_no__c: null
-// other_financier_name__c: null
-// others__c: null
-// outstanding_amount__c: null
-// owner_s_handbook_no__c: null
-// payment_mode__c: null
-// pg_id__c: "442bbb1f-d191-41ae-949d-00f47770ecc4"
-// pincode__c: null
-// product__c: "a029D000002ZFPoQAO"
-// product_type__c: null
-// purchased_date__c: null
-// purpose_of_buying__c: null
-// rc__c: null
-// recieved_advance__c: null
-// recordtypeid: null
-// reference_no__c: null
-// scheme_applied__c: null
-// sfid: "a009D000002f6rmQAA"
-// sgst__c: null
-// sgst_in_rs__c: null
-// source_of_enquiry__c: null
-// state__c: "a059D000000tNcxQAE"
-// systemmodstamp: 1599123554000
-// tally_invoice_no__c: null
-// test_drive_offered__c: "No"
-// total_amount_payable__c: null
-// total_discount__c: null
-// total_subsidy__c: null
-// total_tax__c: null
-// type_of_battery__c: null
-// usage__c: null
-// visitor_type__c: null
-// voter_id_card__c: null
-// _hc_err: null
-// _hc_lastop: "SYNCED"
+	//VISITOR DATA
+	// aadhar_card__c: null
+	// acknowledgement__c: null
+	// address_line_1__c: "SST Nagar, Patiala, Punjab, India"
+	// address_line_2__c: null
+	// age__c: 28
+	// amount_paid_at_booking__c: null
+	// attach_documents__c: null
+	// basic_amount__c: 0
+	// battery_no__c: null
+	// billing_date__c: null
+	// billing_ref_no__c: null
+	// booking_date__c: null
+	// booking_ref_no__c: null
+	// capacity_of_each_battery__c: null
+	// cgst__c: null
+	// cgst_in_rs__c: null
+	// charger_no__c: null
+	// chassis_no__c: null
+	// city__c: null
+	// competitor__c: null
+	// contact_number__c: "9971710994"
+	// createddate: 1598977614000
+	// customer__c: "0039D000008CLk8QAG"
+	// customer_anniversary__c: "2020-09-30T00:00:00.000Z"
+	// customer_birthday__c: "2020-09-25T00:00:00.000Z"
+	// customer_gstin_no__c: null
+	// dealer__c: "0019D000009zum3QAA"
+	// dealer_discount__c: null
+	// dealers_sales_person__c: "a0O9D000001hLV9UAM"
+	// designation__c: null
+	// discount_percent__c: null
+	// driving_license__c: null
+	// email_id__c: "saurabhsg@gmail.co"
+	// exchange_required__c: "Yes"
+	// existing_two_wheelers__c: "Yes"
+	// expected_close_date__c: 1600214400000
+	// expected_delivery_date__c: null
+	// expected_revenue__c: null
+	// finance_required__c: null
+	// financier_name__c: null
+	// first_name__c: "Dinesh"
+	// follow_up_date__c: null
+	// genders__c: "Male"
+	// id: 575
+	// igst__c: null
+	// igst_in_rs__c: null
+	// insurance__c: null
+	// isdeleted: false
+	// last_name__c: "Kaushik"
+	// lastmodifiedbyid: "0052v00000g1xfXAAQ"
+	// lastmodifieddate: 1599123554000
+	// lastvieweddate: 1599123554000
+	// lead_from__c: "Non HO"
+	// lead_source__c: "Head Office"
+	// lead_stage__c: "Test Drive"
+	// lead_status__c: "Open"
+	// lead_status_reason__c: null
+	// make_of_battery__c: null
+	// mode_of_buying__c: "Cash"
+	// model_color__c: null
+	// motor_no__c: null
+	// name: "ENQ-00571"
+	// number_of_employees__c: null
+	// occupation__c: "Retired"
+	// online_order_no__c: null
+	// other_financier_name__c: null
+	// others__c: null
+	// outstanding_amount__c: null
+	// owner_s_handbook_no__c: null
+	// payment_mode__c: null
+	// pg_id__c: "442bbb1f-d191-41ae-949d-00f47770ecc4"
+	// pincode__c: null
+	// product__c: "a029D000002ZFPoQAO"
+	// product_type__c: null
+	// purchased_date__c: null
+	// purpose_of_buying__c: null
+	// rc__c: null
+	// recieved_advance__c: null
+	// recordtypeid: null
+	// reference_no__c: null
+	// scheme_applied__c: null
+	// sfid: "a009D000002f6rmQAA"
+	// sgst__c: null
+	// sgst_in_rs__c: null
+	// source_of_enquiry__c: null
+	// state__c: "a059D000000tNcxQAE"
+	// systemmodstamp: 1599123554000
+	// tally_invoice_no__c: null
+	// test_drive_offered__c: "No"
+	// total_amount_payable__c: null
+	// total_discount__c: null
+	// total_subsidy__c: null
+	// total_tax__c: null
+	// type_of_battery__c: null
+	// usage__c: null
+	// visitor_type__c: null
+	// voter_id_card__c: null
+	// _hc_err: null
+	// _hc_lastop: "SYNCED"
 
 	//CART
-// 	basicPrice: 71990
-// dealerDiscount: 0
-// offerAmount: 0
-// offersApplied: []
-// products: Array(1)
-// 0:
-// battery__c: "LI"
-// battery_capacity_in_v_ah__c: "250"
-// bldc_hub_motor_watt__c: "250"
-// charging_time__c: 4
-// color__c: null
-// ground_clearance_in_mm__c: null
-// id: 16
-// kerb_weight__c: null
-// licence_registration__c: null
-// name: "Optima ER"
-// price__c: 71990
-// product_category__c: null
-// product_images: []
-// quantity: 1
-// range_in_kmph__c: 50
-// sfid: "a029D000002ZFPjQAO"
-// state: "Delhi"
-// subsidy_amount__c: 17998
-// top_speed__c: 30
-// wheel_size_in_inch__c: null
-// __proto__: Object
-// length: 1
-// __proto__: Array(0)
-// subsidy: 17998
-// taxes: 3600
-// totalAmount: 57592
+	// 	basicPrice: 71990
+	// dealerDiscount: 0
+	// offerAmount: 0
+	// offersApplied: []
+	// products: Array(1)
+	// 0:
+	// battery__c: "LI"
+	// battery_capacity_in_v_ah__c: "250"
+	// bldc_hub_motor_watt__c: "250"
+	// charging_time__c: 4
+	// color__c: null
+	// ground_clearance_in_mm__c: null
+	// id: 16
+	// kerb_weight__c: null
+	// licence_registration__c: null
+	// name: "Optima ER"
+	// price__c: 71990
+	// product_category__c: null
+	// product_images: []
+	// quantity: 1
+	// range_in_kmph__c: 50
+	// sfid: "a029D000002ZFPjQAO"
+	// state: "Delhi"
+	// subsidy_amount__c: 17998
+	// top_speed__c: 30
+	// wheel_size_in_inch__c: null
+	// __proto__: Object
+	// length: 1
+	// __proto__: Array(0)
+	// subsidy: 17998
+	// taxes: 3600
+	// totalAmount: 57592
 	let form_data = {
 		first_name__c: visitor.first_name__c,
 		last_name__c: visitor.last_name__c,
@@ -999,18 +1007,36 @@ export function* orderCheckout({payload}) {
 		offer_applied__c: !!(cart.offersApplied && cart.offersApplied.length),
 		total_scheme_amount__c: cart.offerAmount,
 		id: visitor.id,
-		sfid: visitor.sfid,
-		// "aadhar_card__c":"https://abc.com/a.png",
-	 //   "acknowledgement__c": "https://abc.com/a.png",
-	 //   "driving_license__c" : "https://abc.com/a.png",
-	 //   "insurance__c" :"https://abc.com/a.png",
-	 //   "rc__c" : "https://abc.com/a.png",
-	 //   "others__c" : "https://abc.com/a.png",  
-	 //   "voter_id_card__c" :"https://abc.com/a.png",  
+		sfid: visitor.sfid, 
 	   "lead_stage__c": 'Booking'
+	}
+	//active_from__c: "2020-08-01T00:00:00.000Z"
+	// active_from__c: "2020-08-01T00:00:00.000Z"
+	// active_to__c: "2020-10-31T00:00:00.000Z"
+	// dealer__c: null
+	// p_scheme_id: "a0B9D000001xrM9UAI"
+	// scheme_amount__c: 2000
+	// scheme_name__c: "Offer 1"
+	// scheme_scope__c: "Pan India"
+	// scheme_type__c: "Cash Discount"
+	// sfid: "a0K9D000000vx0UUAQ"
+	// state__c: null
+
+	let new_booking_form_data = {
+		enquiry__c: visitor.sfid,
+		schemes: cart.offersApplied.map((obj) => {
+			return ({
+				p_scheme__c: obj.sfid,
+				Scheme_Details__c: obj.p_scheme_id, 
+				scheme_Amount__c: obj.scheme_amount__c
+			})
+		})
 	}
 
 
 	yield put(VisitorActions.setUpdateBookingForm(form_data));
+	yield put(VisitorActions.setNewBookingForm(new_booking_form_data));
+
+	
 }
 

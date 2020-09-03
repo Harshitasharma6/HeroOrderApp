@@ -96,18 +96,23 @@ class InvoiceDetailformScreen extends Component {
 			submitForm, 
 			submitNewBookingForm,
 			form,
+			newBookingForm,
 			currentEnquiryId ,
 			dealerId,
-			dealersalespersonId,
-			
+			dealersalespersonId
 		} = this.props;
+
+		let showInfo= ''
+
+		if (this.props.navigation.state.params) {
+			showInfo = this.props.navigation.state.params.showInfo
+		}
 
 		Keyboard.dismiss();
 
-		submitNewBookingForm({
-			enquiry__c: form.sfid,
-			schemes: []
-		});
+		if (!showInfo) {
+			submitNewBookingForm(newBookingForm);
+		}
 
 		submitForm({
 			...form,
@@ -122,6 +127,7 @@ class InvoiceDetailformScreen extends Component {
     render() {
 		const { 
 			form,
+			newBookingForm,
 			loader,
 			newLoader,
 			changeForm,
@@ -135,10 +141,17 @@ class InvoiceDetailformScreen extends Component {
   			model_color,
   			payment_mode,
   			uploadImage,
+  			bookingInfoForm,
   			uploadImageField,
   			uploadImageLoading,
   			submitNewBookingForm
 		} = this.props;
+
+		let showInfo= ''
+
+		if (this.props.navigation.state.params) {
+			showInfo = this.props.navigation.state.params.showInfo
+		}
 		
 		let _this = this;
 
@@ -151,26 +164,28 @@ class InvoiceDetailformScreen extends Component {
 				>
     	  		<Text style={Style.heading}>{'Add Invoice Detail'}</Text> 
 			      {
-			      // 	<View style={{flexDirection:'row', justifyContent:'space-around', marginBottom:'2%', }}>
-			      // <DetailCard
-			      //  title=" Booking Date "
-			      //  value="30/08/20"
-			      // />
-			      //  <DetailCard
-			      //  title=" Ex Showroom Price "
-			      //  value="20000"
-			      // />
-			      // </View>
-			      // <View style={{flexDirection:'row', justifyContent:'space-around', marginBottom:'2%'}}>
-			      // <DetailCard
-			      //  title=" Advance Recieved "
-			      //  value="15000"
-			      // />
-			      //  <DetailCard
-			      //  title=" Outstanding Amount "
-			      //  value="5000"
-			      // />
-			      // </View> 
+			      	showInfo ? 
+			      	<View>
+			      	<View style={{flexDirection:'row', justifyContent:'space-around', marginBottom:'2%', }}>
+				      <DetailCard
+				       title=" Booking Date "
+				       value={HelperService.dateReadableFormat(bookingInfoForm.purchased_date__c)}
+				      />
+				       <DetailCard
+				       title=" Ex Showroom Price "
+				       value={bookingInfoForm.total_amount_payable__c}
+				      />
+			      </View>
+			      <View style={{flexDirection:'row', justifyContent:'space-around', marginBottom:'2%'}}>
+				      <DetailCard
+				       title="Advance Recieved"
+				       value={bookingInfoForm.amount_paid_at_booking__c}
+				      />
+				       <DetailCard
+				       title=" Outstanding Amount "
+				       value={bookingInfoForm.outstanding_amount__c}
+				      />
+			      </View></View> : []
 				}
 			   <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
 					<InputNumber
@@ -214,7 +229,7 @@ class InvoiceDetailformScreen extends Component {
 
 					<InputNumber
 						styles={Style.mb10}
-						placeholder={'Amount'}
+						placeholder={`Total Amount Payable ${HelperService.currencyValue(form.total_amount_payable__c)}`}
 						value={form.amount_paid_at_booking__c}
 						onChange={(value) => changeForm({ edited_field: 'amount_paid_at_booking__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'amount_paid_at_booking__c'}
@@ -388,6 +403,7 @@ class InvoiceDetailformScreen extends Component {
 		            	title={'Aadhar Card'}
 		              	image={form.aadhar_card__c} 
 		              	loading={uploadImageLoading && uploadImageField == 'aadhar_card__c'}
+		              	onClearImage={(value) => changeForm({ edited_field: 'aadhar_card__c', edited_value: '' })}
 		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'aadhar_card__c'}})}>
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
@@ -406,6 +422,7 @@ class InvoiceDetailformScreen extends Component {
 		            	title={'Acknowledgement'}
 		              	image={form.acknowledgement__c}
 		              	loading={uploadImageLoading && uploadImageField == 'acknowledgement__c'}
+		              	onClearImage={(value) => changeForm({ edited_field: 'acknowledgement__c', edited_value: '' })}
 		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'acknowledgement__c'}})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
@@ -424,6 +441,7 @@ class InvoiceDetailformScreen extends Component {
 		            title={'Driving License'}
 		              	image={form.driving_license__c}
 		              	loading={uploadImageLoading && uploadImageField == 'driving_license__c'}
+		              	onClearImage={(value) => changeForm({ edited_field: 'driving_license__c', edited_value: '' })}
 		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'driving_license__c'}})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
@@ -442,6 +460,7 @@ class InvoiceDetailformScreen extends Component {
 		            title={'Insurance'}
 		              	image={form.insurance__c}
 		              	loading={uploadImageLoading && uploadImageField == 'insurance__c'}
+		              	onClearImage={(value) => changeForm({ edited_field: 'insurance__c', edited_value: '' })}
 		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'insurance__c'}})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
@@ -463,6 +482,7 @@ class InvoiceDetailformScreen extends Component {
 		            title={'RC'}
 		              	image={form.rc__c} 
 		              	loading={uploadImageLoading && uploadImageField == 'rc__c'}
+		              	onClearImage={(value) => changeForm({ edited_field: 'rc__c', edited_value: '' })}
 		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'rc__c'}})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
@@ -482,6 +502,7 @@ class InvoiceDetailformScreen extends Component {
 		            title={'Voter Card'}
 		              	image={form.voter_id_card__c} 
 		              	loading={uploadImageLoading && uploadImageField == 'voter_id_card__c'}
+		              	onClearImage={(value) => changeForm({ edited_field: 'voter_id_card__c', edited_value: '' })}
 		               	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'voter_id_card__c'}})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
@@ -501,6 +522,7 @@ class InvoiceDetailformScreen extends Component {
 		            title={'Others'}
 		              	image={form.others__c} 
 		              	loading={uploadImageLoading && uploadImageField == 'others__c'}
+		              	onClearImage={(value) => changeForm({ edited_field: 'others__c', edited_value: '' })}
 		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'others__c'}})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
@@ -516,7 +538,7 @@ class InvoiceDetailformScreen extends Component {
 
                     
 				<View style={{marginTop:'4%'}}>
-					<BlueButton title={"SAVE"} style={{width: '40%', marginHorizontal: '30.5%', height: 40}} textStyle={{fontSize: 12}}
+					<BlueButton title={"SAVE"} style={ApplicationStyles.formButton}
 					loading={loader || newLoader}
 					disabled={loader || newLoader}
 					onPress={() => this.submit()}
@@ -533,6 +555,7 @@ class InvoiceDetailformScreen extends Component {
 const mapStateToProps = (state) => ({
 	validation      			: state.visitor.updateBookingFormValidation,
 	form 					 	: state.visitor.updateBookingForm,
+	newBookingForm 				: state.visitor.newBookingForm,
 	loader 			            : state.visitor.loaders.updateBookingLoader,
 	newLoader					: state.visitor.loaders.newBookingLoader,
 	occupationList 				: state.common.occupationList,
@@ -543,7 +566,8 @@ const mapStateToProps = (state) => ({
   	payment_mode 				: state.common.payment_mode,
 	currentEnquiryId            : state.visitor.currentEnquiryId,
 	uploadImageLoading			: state.common.loaders.uploadImageLoader,
-	uploadImageField            : state.common.uploadImageField
+	uploadImageField            : state.common.uploadImageField,
+	bookingInfoForm             : state.visitor.bookingInfoForm
 });
   
 const mapDispatchToProps = (dispatch) => ({

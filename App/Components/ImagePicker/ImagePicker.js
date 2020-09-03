@@ -48,6 +48,15 @@ export default class App extends React.Component {
 		}
 	};
 
+
+	onClearImage() {
+		this.setState({
+			source: ''
+		});
+
+		this.props.onClearImage();
+	}
+
 	render() {
 		const {
 			image,
@@ -66,7 +75,6 @@ export default class App extends React.Component {
 		);
 
 		
-		
 
 		if(loading) {
 			imageNode = <View style={styles.spinner}><Spinner color={Colors.primary} /></View>
@@ -74,8 +82,9 @@ export default class App extends React.Component {
 		return (
 			<View style={styles.uploadContainer}>
 				<View style={styles.container}>
-					<View style={{flexDirection: 'row'}}>
-						<Text style={styles.title}>{title}</Text>
+					<View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
+						<Text style={styles.title}>{`${title}`}</Text>
+						{(this.state.source || image) ? <GenericIcon name={'times-circle-o'} style={styles.removeIcon} onPress={() => this.onClearImage()}/> : []}
 					</View>
 					<View style={styles.imagePreviewContainer}>
 						{imageNode}
@@ -108,6 +117,12 @@ const styles = StyleSheet.create({
 	addIcon: {
 		color: Colors.primary,
 		fontSize: wp('9%')
+	},
+	removeIcon: {
+		color: Colors.primary,
+		fontSize: wp('6.5%'),
+		paddingTop:  0
+
 	},
 	uploadButton: {
 

@@ -12,6 +12,7 @@ export default StyleSheet.create({
     flexDirection:'row',
     justifyContent: 'space-between',
     marginBottom: hp('7%'),
+    paddingVertical: hp('3%')
   },
 
   upperformButton:{
@@ -62,7 +63,8 @@ AttachDocButton:{
     flex: 1,
   },
   heading: {
-    ...ApplicationStyles.formHeading
+    ...ApplicationStyles.formHeading,
+    marginBottom: hp('4%')
   },
   link: {
     color: Colors.label,
@@ -177,20 +179,7 @@ AttachDocButton:{
   bottomMargin: {
     marginBottom: hp('2%'),
     width: '100%'
-  },
-
-  heading: {
-    
-    alignSelf: 'center',
-    color: Colors.black,
-    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
-    fontSize: wp('5.5%'),
-   
-    marginTop: hp('0%'),
-      textTransform: 'uppercase',
-      marginBottom: hp('4%'),  
-    
-    },
+  }
 
 
 })

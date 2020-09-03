@@ -113,7 +113,9 @@ const { Types, Creators } = createActions({
 	changeNewBookingForm: ['payload'],
 	clearNewBookingForm: ['payload'],
 	newBookingValidationFailed: ['payload'],
-	orderCheckout: ['payload']
+	orderCheckout: ['payload'],
+
+	setBookingInfoForm: ['payload']
 
 });
 

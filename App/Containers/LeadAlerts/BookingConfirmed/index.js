@@ -23,15 +23,6 @@ class BookingConfirmed extends Component {
     this.fetchCall()
   }
 
-  onPressCard(data, enquiry_id) {
-    const {
-      registerCustomerSuccess,
-      setCurrentEnquiry
-    } = this.props;
-    registerCustomerSuccess(data);
-    setCurrentEnquiry(enquiry_id);
-    NavigationService.navigate('VisitorInfoScreen')
-  }
 
   onPressCall(data) {
      const {
@@ -75,7 +66,9 @@ return filteredList;
       openModal,
       closeModal,
       submitForm,
-      loader
+      loader,
+      setBookingInfoForm,
+      setUpdateBookingForm
     } = this.props;
 
 
@@ -91,8 +84,7 @@ return filteredList;
                 style={Styles.infoRedPink}
                 heading={`${item.first_name__c} ${item.last_name__c}`}
                 showTextAvatar={true}
-              
-                onPress={() => NavigationService.navigate('InvoiceDetailformScreen',{data: item})}
+                onPress={() => {setUpdateBookingForm(item); NavigationService.navigate('InvoiceDetailformScreen', {showInfo: true}); setBookingInfoForm(item);}}
                 content={[
                   <GenericDisplayCardStrip key={'Status' + item.id} label={'Status'} value={item.lead_status__c}/>,
                   <GenericDisplayCardStrip key={'Stage' + item.id} label={'Stage'} value={item.lead_stage__c}/>,
@@ -156,7 +148,9 @@ const mapDispatchToProps = (dispatch) => ({
   hideCallModal: (params)    => dispatch(CommonActions.hideCallModal(params)),
   changeForm: (params)       => dispatch(VisitorActions.changeRegisterCustomerOutgoingCallForm(params)),
   registerCustomerSuccess: (params) => dispatch(VisitorActions.registerCustomerSuccess(params)),
-  setCurrentEnquiry: (params)       => dispatch(VisitorActions.setCurrentEnquiry(params))
+  setCurrentEnquiry: (params)       => dispatch(VisitorActions.setCurrentEnquiry(params)),
+  setUpdateBookingForm: (params)       => dispatch(VisitorActions.setUpdateBookingForm(params)),
+  setBookingInfoForm: (params)       => dispatch(VisitorActions.setBookingInfoForm(params))
 });
 
 export default connect(

@@ -586,6 +586,7 @@ export const getAllFollowUpsLoadingStop = (state, {payload}) => ({
 export const updateBookingSuccess = (state, {payload}) => ({
   ...state,
   updateBookingForm: INITIAL_STATE.updateBookingForm,
+  bookingInfoForm: {},
   loaders: {
     ...state.loaders,
     updateBookingLoader: false
@@ -737,6 +738,12 @@ export const newBookingValidationFailed = (state, {payload}) => ({
 });
 
 
+export const setBookingInfoForm = (state, {payload}) => ({
+  ...state,
+  bookingInfoForm: payload
+});
+
+
 export const reducer = createReducer(INITIAL_STATE, {
 	[VisitorTypes.SEARCH_CUSTOMER_SUCCESS] 	             : searchCustomerSuccess,
 	[VisitorTypes.SEARCH_CUSTOMER_FAILURE] 	             : searchCustomerFailure,
@@ -829,5 +836,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [VisitorTypes.CHANGE_NEW_BOOKING_FORM]      : changeNewBookingForm,
   [VisitorTypes.CLEAR_NEW_BOOKING_FORM]       : clearNewBookingForm,
   [VisitorTypes.SET_NEW_BOOKING_FORM]         : setNewBookingForm,
-  [VisitorTypes.NEW_BOOKING_VALIDATION_FAILED]: newBookingValidationFailed
+  [VisitorTypes.NEW_BOOKING_VALIDATION_FAILED]: newBookingValidationFailed,
+
+
+  [VisitorTypes.SET_BOOKING_INFO_FORM]         : setBookingInfoForm
 });
