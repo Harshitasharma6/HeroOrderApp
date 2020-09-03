@@ -362,6 +362,34 @@ async function requestLocationPermission() {
 	return Permission;
 }
 
+async function requestCameraPermission() {
+	let Permission = false;
+	if (Platform.OS === 'android') {
+		try {
+			const granted = await PermissionsAndroid.request(
+				PermissionsAndroid.PERMISSIONS.CAMERA,
+				{
+					title: 'Camera Permission',
+					message: 'App needs access to your camera.',
+					buttonNegative: 'Cancel',
+					buttonPositive: 'OK',
+				},
+			);
+			if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+				Permission = true
+			} else {
+				Permission = false
+			}
+		} catch (err) {
+			Permission = false
+		}
+	} else if (Platform.OS === 'ios') {
+		Permission = true;
+	}
+
+	return Permission;
+}
+
 function getGeolocation() {
 	try {
 		return new Promise((resolve, reject) => {
@@ -1245,6 +1273,7 @@ export const HelperService = {
 	requestMultipleStoragePermission,
 	requestStoragePermission,
 	requestLocationPermission,
+	requestCameraPermission,
 	searchArrayListFilter,
 	searchKeyValueInList,
 	searchTextListFilter,

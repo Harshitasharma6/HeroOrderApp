@@ -12,6 +12,7 @@ import GenericDisplayCard from 'App/Components/GenericDisplayCard'
 import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDisplayCardStrip';
 import Separator from 'App/Components/Separator';
 import InsightsActions from 'App/Stores/Insights/Actions';
+import { HelperService } from 'App/Services/Utils/HelperService';
 
 
 class DashboardSummaryScreen extends React.Component {
@@ -97,14 +98,14 @@ class DashboardSummaryScreen extends React.Component {
     
   render() {
     const {
+      productsList,
 			loader,
       data,
       currentScreen
 		  } = this.props;
 
     
-   
-
+  
     return (
         <View style={Styles.container}>
       	<ScrollView 
@@ -148,16 +149,8 @@ class DashboardSummaryScreen extends React.Component {
           	<HeadingBox value={'Product Performance \n(This Month)'}/>
           		<GenericDisplayCard dark={false}
 	              style={{ width: '88%', elevation: 0 }}
-	              content={[
-		                <GenericDisplayCardStrip key={'Optima LI'} label={'Optima LI'} value={data&&data.product&&data.product[0] ?  data.product[0].count : 0}/>,
-		                <Separator key={12}/>,
-		                <GenericDisplayCardStrip key={'Optima LA'} label={'Optima LA'} value={data&&data.product&&data.product[1] ?  data.product[1].count : 0} />,
-		                <Separator key={2123}/>,
-		                <GenericDisplayCardStrip key={'Zion'} label={'Zion'} value={data&&data.product&&data.product[2] ?  data.product[2].count : 0}/>,
-		                <Separator key={3123}/>,
-		                <GenericDisplayCardStrip key={'Flash LA'} label={'Flash LA'} value={data&&data.product&&data.product[3] ?  data.product[3].count : 0}/>
-		                
-              		]}
+	              content={
+                  data && data.product ? data.product.map((obj, index) => obj.product__c ? <View key={obj.product__c}><GenericDisplayCardStrip  label={HelperService.findMatchingKeyValueInList(productsList, 'id', obj.product__c, 'name')} value={obj.count}/><Separator /></View> : []) : [] }
             	/>
         </ScrollView>
         </View>
@@ -173,6 +166,7 @@ const mapStateToProps = (state) => ({
   currentScreen: state.common.currentScreen,
   data: state.insights.DashboardSummaryData,
   loader: state.insights.loaders.getDashboardSummaryLoader,
+  productsList: state.common.productsList,
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -19,8 +19,10 @@ export default class App extends React.Component {
 		};
 
 		let permission = await HelperService.requestMultipleStoragePermission();
+		let cameraPermission = await HelperService.requestCameraPermission();
 
-		if (permission) {
+
+		if (permission && cameraPermission) {
 			ImagePicker.showImagePicker(options, (response) => {
 				if (response.didCancel) {
 				} else if (response.error) {
