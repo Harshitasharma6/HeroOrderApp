@@ -107,6 +107,7 @@ function getFollowUp(params) {
 		headers: {
 			token: params.token,
 			
+			
 		}
 	}).then((response) => {
 		if (in200s(response.status)) {
@@ -144,16 +145,17 @@ function getCompletedFollowUp(params) {
 
 function getAllCustomer(params) {
 	let url = Config.CUSTOMER_SERVICE.GET_ALL_CUSTOMER	;
-	url += `?dealer_id=${params.dealer_id}`
+
 	
 	return apiClient.get(url, {
 		headers: {
 			token: params.token,
+			dealer__c: params.dealer_id,
 			
 		}
 	}).then((response) => {
 		if (in200s(response.status)) {
-			return response['data']['data'];
+			return response['data']['data']['result'];
 		}
 		return null
 	}).catch(error => {

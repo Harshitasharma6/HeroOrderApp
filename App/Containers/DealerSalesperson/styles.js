@@ -5,8 +5,8 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 export default StyleSheet.create({
   action: {
     width: wp('88%'),
-
-    marginTop:'8.5%',
+    flex:1,
+    marginTop:'5.5%',
    
   },
 

@@ -111,13 +111,13 @@ class DealerSalespersonFormScreen extends Component {
 			<View style={Style.container}>
 				<Text style={Style.heading}>{'DEALER SALESPERSON INFO'}</Text>
                 <Underline/>
-				<ScrollView 
-					showsVerticalScrollIndicator={false}
+				<View 
+					
 					style={Style.action}
 				>
                      {this.getDataNode()}
                
-				</ScrollView>
+				</View>
 			</View>
 		)
 	}

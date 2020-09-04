@@ -16,7 +16,7 @@ import GenericDisplayCard from 'App/Components/GenericDisplayCard'
 import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDisplayCardStrip';
 import NavigationService from 'App/Services/NavigationService'
 
-class AvailableSchemesDetail extends Component {
+class CustomerOfferAppliedScreen extends Component {
  
   componentDidMount() {
 	
@@ -78,16 +78,18 @@ class AvailableSchemesDetail extends Component {
       <GenericDisplayCard dark={false}
           style={{ width: '95%', elevation: 0 }}
           content={[
+
+            <GenericDisplayCardStrip 
+            key={'Scheme Name' + item.sfid} 
+            label={'Scheme Name'} 
+            value={item.scheme_name}
+           />,
             <GenericDisplayCardStrip 
               key={'Scheme Amount' + item.sfid} 
               label={'Scheme Amount'} 
               value={HelperService.currencyValue(item.scheme_amount__c)}
              />,
-             <GenericDisplayCardStrip 
-             key={'Product' + item.sfid} 
-             label={'Poduct'} 
-             value={item.product_name}
-            />,
+            
 
           
           ]}
@@ -139,21 +141,13 @@ class AvailableSchemesDetail extends Component {
     } else if (data && !data.length && !loader) {
       visibleNode =  (
           <NoDataFound text={'No Schemes Found'}>
-            <GenericIcon 
-              name={'refresh'}
-              onPress={() => this.fetchCall()}
-              style={ApplicationStyles.refreshIcon}
-            />
+            
           </NoDataFound>
         );
     }else {
       visibleNode =  (
           <NoDataFound text={'No Schemes Found'}>
-            <GenericIcon 
-              name={'refresh'}
-              onPress={() => this.fetchCall()}
-              style={ApplicationStyles.refreshIcon}
-            />
+            
           </NoDataFound>
         );
     }
@@ -185,7 +179,4 @@ fetchData:(params) => dispatch(InsightsActions.getAllScheme(params))
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AvailableSchemesDetail)
-
-
-
+)(CustomerOfferAppliedScreen)
