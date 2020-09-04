@@ -79,7 +79,7 @@ export const Config = {
 	},
 
 	CUSTOMER_SERVICE:{
-		GET_ALL_CUSTOMER						:'getCustomer/getAll',
+		GET_ALL_CUSTOMER						:'customers/getCustmoer',
 
 	}
 }

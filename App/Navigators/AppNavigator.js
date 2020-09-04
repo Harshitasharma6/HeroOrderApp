@@ -100,6 +100,9 @@ import DashboardSummaryScreen from 'App/Containers/Insights/Dashboard/Summary'
 import DashboardTrendsScreen from 'App/Containers/Insights/Dashboard/Trends'
 import CustomersScreen from 'App/Containers/Insights/Customers'
 import CustomerInfoScreen from 'App/Containers/Insights/Customers/CustomerInfo'
+import CustomerSummaryScreen  from 'App/Containers/Insights/Customers/CustomerSummary'
+import CustomerProductInfoScreen from 'App/Containers/Insights/CustomerProductInfo'
+import CustomerOfferAppliedScreen from 'App/Containers/Insights/CustomerProductInfo/CustomerOfferApplied'
 import LeadAlertsScreen from 'App/Containers/LeadAlerts'
 import ActionablesScreen from 'App/Containers/LeadAlerts/Actionables'
 import BookingConfirmed from 'App/Containers/LeadAlerts/BookingConfirmed'
@@ -242,6 +245,9 @@ const StackNavigator = createStackNavigator(
     SchemeClaimformScreen,
     BookingConfirmed,
     AvailableSchemesDetailScreen,
+    CustomerSummaryScreen,
+    CustomerProductInfoScreen,
+    CustomerOfferAppliedScreen,
   },
   {
     // By default the application will show the splash screen

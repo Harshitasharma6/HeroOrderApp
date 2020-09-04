@@ -72,7 +72,11 @@ class FooterScreen extends React.Component {
       currentScreen == 'CustomersScreen' ||
       currentScreen == 'CustomerInfoScreen' ||
       currentScreen == 'ProductInfoSchemesScreen'||
-      currentScreen == 'AvailableSchemesDetailScreen'
+      currentScreen == 'AvailableSchemesDetailScreen'||
+      currentScreen == 'CustomerSummaryScreen'||
+      currentScreen == 'CustomerProductInfoScreen'||
+      currentScreen == 'CustomerOfferAppliedScreen'
+     
 
     let leadAlertsActive = 
       currentScreen == 'LeadAlertsScreen' ||

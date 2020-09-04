@@ -23,7 +23,9 @@ class ConfirmBookingLayout extends React.Component {
 
     return (
      <Header style={Styles.header}>
+       	<View style={{paddingTop: hp('0%'), paddingBottom: hp('1%')}}>
        <BackArrowButton />
+       </View>
        <Text style={Styles.heading}>{"BOOKING CONFIRMED"}</Text>
       
 
