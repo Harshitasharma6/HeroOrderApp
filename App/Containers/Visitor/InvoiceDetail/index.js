@@ -187,6 +187,10 @@ class InvoiceDetailformScreen extends Component {
 				      />
 			      </View></View> : []
 				}
+
+			{
+				showInfo && form.outstanding_amount__c == 0  ? [] :  
+				<>
 			   <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
 					<InputNumber
 						styles={Style.mb10}
@@ -545,6 +549,8 @@ class InvoiceDetailformScreen extends Component {
 					>
 	            </BlueButton>
 			</View>
+			</>
+		}
 				</ScrollView>
 			</View>
 		)
