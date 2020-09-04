@@ -742,7 +742,7 @@ function* updateBooking(payload) {
 
 		let {token, sfid} = yield select(state => state.user)
 		payload.token = token;
-		
+		payload.amount_paid_at_booking__c  = Number(payload.amount_paid_at_booking__c);
 	
 		const successData = yield call(VisitorService.updateBooking, payload);
 
