@@ -1026,8 +1026,8 @@ export function* orderCheckout({payload}) {
 		enquiry__c: visitor.sfid,
 		schemes: cart.offersApplied.map((obj) => {
 			return ({
-				p_scheme__c: obj.sfid,
-				Scheme_Details__c: obj.p_scheme_id, 
+				p_scheme__c: obj.p_scheme_id,
+				Scheme_Details__c: obj.sfid, 
 				scheme_Amount__c: obj.scheme_amount__c
 			})
 		})
