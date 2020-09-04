@@ -258,6 +258,7 @@ function* searchCustomer(payload) {
 		if (successData) { 
 			yield put(VisitorActions.searchCustomerSuccess(successData));
 			yield put(ProductsActions.removeItemFromCartSuccess()); 
+			yield put(VisitorActions.clearSearchCustomerForm());
 			switch(successData.table) {
 				case 'Contact':
 					HelperService.showToast({ 
