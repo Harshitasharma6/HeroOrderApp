@@ -192,7 +192,7 @@ class InvoiceDetailformScreen extends Component {
 				showInfo && form.outstanding_amount__c == 0  ? [] :  
 				<>
 			   <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
-					<InputNumber
+					<InputText
 						styles={Style.mb10}
 						placeholder={'Tally Invoice No.'}
 						value={form.tally_invoice_no__c}
@@ -200,7 +200,7 @@ class InvoiceDetailformScreen extends Component {
 						error={validation.invalid && validation.invalid_field == 'tally_invoice_no__c'}
 						label={'Tally Invoice No.'}
 					/>
-					<InputNumber
+					<InputText
 						styles={Style.mb10}
 						placeholder={' GSTIN No.'}
 						value={form.customer_gstin_no__c}
@@ -212,7 +212,7 @@ class InvoiceDetailformScreen extends Component {
 
                     </View>  
 
-					<InputNumber
+					<InputText
 						styles={Style.mb10}
 						placeholder={'Online Order No.'}
 						value={form.online_order_no__c}
@@ -221,7 +221,7 @@ class InvoiceDetailformScreen extends Component {
 						label={'Online Order No.* (For Online Schemes only)'}
 					/>
 
-                    <InputNumber
+                    <InputText
 						styles={Style.mb10}
 						placeholder={'Refrence  No.'}
 						value={form.reference_no__c}
@@ -297,7 +297,7 @@ class InvoiceDetailformScreen extends Component {
 					
 					<View style={{flexDirection:'row', }}>
 						<View style={{width:'45%'}}>
-					<InputNumber
+					<InputText
 						styles={Style.mb10}
 						placeholder={'Motor No.'}
 						value={form.motor_no__c}
@@ -307,7 +307,7 @@ class InvoiceDetailformScreen extends Component {
 					/>
 					</View>
 					<View style={{width:'45%', marginLeft:'9%'}}>
-					<InputNumber
+					<InputText
 						styles={Style.mb10}
 						placeholder={'Charger No.'}
 						value={form.charger_no__c}
@@ -319,7 +319,7 @@ class InvoiceDetailformScreen extends Component {
 					</View>
                     </View>  
 
-					<InputNumber
+					<InputText
 						styles={Style.mb10}
 						placeholder={' Battery No. *'}
 						value={form.battery_no__c}
@@ -361,7 +361,7 @@ class InvoiceDetailformScreen extends Component {
 
 					
 
-                	<InputNumber
+                	<InputText
 						styles={Style.mb10}
 						placeholder={'Capacity of Each Battery'}
 						value={form.capacity_of_each_battery__c}
@@ -371,7 +371,7 @@ class InvoiceDetailformScreen extends Component {
 					/>
 
 					
-				<InputNumber
+				<InputText
 						styles={Style.mb10, {marginBottom:'1%'}}
 						placeholder={'Owners Handbook No.'}
 						value={form.owner_s_handbook_no__c}
