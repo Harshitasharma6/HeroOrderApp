@@ -70,6 +70,7 @@ export default StyleSheet.create({
   		backgroundColor: 'transparent', 
 		  borderWidth: 1,
 		  height: hp('5.5%'),
+      elevation: 0
   	},
   	markLostButtonText: {
   		fontSize: wp('3.8%'), 

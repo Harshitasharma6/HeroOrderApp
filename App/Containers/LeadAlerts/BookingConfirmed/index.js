@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import ItemDetail from 'App/Components/ItemDetail'
 import NoDataFound from 'App/Components/NoDataFound'
 import BlueButton from 'App/Components/BlueButton'
+import WhiteButton from 'App/Components/WhiteButton'
 import GenericIcon from 'App/Components/GenericIcon'
 import Loading from 'App/Components/Loading'
 import LeadAlertActions from 'App/Stores/LeadAlerts/Actions';
@@ -92,7 +93,7 @@ return filteredList;
                   <GenericDisplayCardStrip key={'Outstanding Amount' + item.id} label={'Outstanding Amount'} value={item.outstanding_amount__c}/>,
                   <BlueButton title={''} style={Styles.callButton} textStyle={Styles.callButtonText}  onPress={() => this.onPressCall(item)}><GenericIcon name="phone" style={Styles.callButtonIcon}/></BlueButton>,
                   item.lead_status__c != 'Won' ? <View style={{flexDirection: 'row', justifyContent: 'space-between' }} textStyle={{fontSize: wp('3.8%')}} key={'Action section' + item.id}>
-                  <BlueButton 
+                  <WhiteButton 
                     title={'Mark Won'} 
                     style={Styles.markLostButton} 
                     textStyle={Styles.markLostButtonText} 
@@ -101,7 +102,7 @@ return filteredList;
                     onPress={() => submitForm({ id : item.id})}
                    >
                       <GenericIcon name="check" style={Styles.markLostButtonIcon} />
-                  </BlueButton>
+                  </WhiteButton>
                   </View> : [],
               ]}
             />}
