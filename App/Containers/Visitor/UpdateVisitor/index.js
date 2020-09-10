@@ -112,14 +112,15 @@ class UpdateVisitorScreen extends Component {
 		const { 
 			submitForm, 
 			form,
-			enquiry
+			enquiry,
+			data
 		} = this.props;
 
 		Keyboard.dismiss(); 
 
 		submitForm({
 			...form,
-			enquiry: enquiry,
+			enquiry: data.id,
 			customer_birthday__c: form.customer_birthday__c  ? HelperService.dateReadableFormatWithHyphen(form.customer_birthday__c) : '',
 			expected_close_date__c: HelperService.dateReadableFormatWithHyphen(form.expected_close_date__c),
 			customer_anniversary__c: form.customer_anniversary__c ? HelperService.dateReadableFormatWithHyphen(form.customer_anniversary__c) : ''
@@ -226,7 +227,7 @@ class UpdateVisitorScreen extends Component {
 
 
 					<SearchableDropdown
-						key={form.occupation__c}
+						key={'occupation__c' + form.occupation__c}
 				        dataSource={occupationList}
 				        placeHolderText={'Select Occupation'}
 				        selectedValue={form.occupation__c}
@@ -240,7 +241,7 @@ class UpdateVisitorScreen extends Component {
 
 
 					<SearchableDropdown
-						key={form.product__c}
+						key={'product__c' + form.product__c}
 				        dataSource={productsList}
 				        placeHolderText={'Select Product'}
 				        selectedValue={form.product__c}
@@ -333,7 +334,7 @@ class UpdateVisitorScreen extends Component {
 
 
 					<SearchableDropdown
-						key={form.lead_source__c}
+						key={'lead_source__c' + form.lead_source__c}
 				        dataSource={sourceEnquiryList}
 				        placeHolderText={'Select Source'}
 				        selectedValue={form.lead_source__c}

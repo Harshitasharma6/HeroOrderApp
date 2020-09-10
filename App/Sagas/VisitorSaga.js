@@ -371,6 +371,9 @@ function* registerCustomerCall(payload) {
 		let {token, dealer__c} = yield select(state => state.user)
 		payload.token = token
 		payload.dealer_id = dealer__c
+		payload.contact_number__c = HelperService.removeCountryCodeFromPhoneNumber(payload.contact_number__c);
+
+
 		const successData = yield call(VisitorService.registerCustomerCall, payload);
 
 		if (successData) { 
@@ -1040,7 +1043,7 @@ export function* orderCheckout({payload}) {
 	// state__c: null
 
 	let new_booking_form_data = {
-		enquiry__c: visitor.sfid,
+		enquiry__c: visitor.sfid || visitor.sfid,
 		schemes: cart.offersApplied.map((obj) => {
 			return ({
 				p_scheme__c: obj.p_scheme_id,

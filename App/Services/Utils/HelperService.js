@@ -1211,6 +1211,11 @@ async function startForegroundService() {
     }
 }
 
+function removeCountryCodeFromPhoneNumber(number) {
+	var value = number;
+	return (value.replace(/\D/g, '').slice(-10));
+}
+
 
 
 
@@ -1301,5 +1306,6 @@ export const HelperService = {
 	getCurrentDay,
 	getDayMappingName,
 	getDayFromTimestamp,
-	getTimeFromTimestamp
+	getTimeFromTimestamp,
+	removeCountryCodeFromPhoneNumber
 }
