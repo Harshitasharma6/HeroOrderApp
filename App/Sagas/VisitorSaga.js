@@ -230,11 +230,6 @@ export function* watchNewBooking() {
 
 
 
-
-
-
-
-
 function* searchCustomer(payload) {
 	yield put(VisitorActions.searchCustomerLoading());
 	try {
@@ -252,12 +247,12 @@ function* searchCustomer(payload) {
 		let {token, dealer__c} = yield select(state => state.user)
 		payload.token = token
 		payload.dealer_id = dealer__c
-		
 		const successData = yield call(VisitorService.searchCustomer, payload);
-
 		if (successData) { 
 			yield put(VisitorActions.searchCustomerSuccess(successData));
-			yield put(ProductsActions.removeItemFromCartSuccess()); 
+			yield put(ProductsActions.removeItemFromCartSuccess());
+			let searchCustomerForm = yield select(state => state.visitor.searchCustomerForm);
+			yield put(VisitorActions.changeRegisterCustomerForm({edited_field: 'contact_number__c', edited_value: searchCustomerForm.contact_number}));
 			yield put(VisitorActions.clearSearchCustomerForm());
 			switch(successData.table) {
 				case 'Contact':
@@ -276,6 +271,7 @@ function* searchCustomer(payload) {
 					});
 
 					let data = successData.data[0];
+					
 					yield put(VisitorActions.registerCustomerSuccess(data));
 					yield put(VisitorActions.setCurrentEnquiry(data.id));
 					yield put(VisitorActions.showOpenLeadPrompt());
@@ -743,23 +739,25 @@ function* updateBooking(payload) {
 		let {token, sfid} = yield select(state => state.user)
 		payload.token = token;
 		payload.amount_paid_at_booking__c  = Number(payload.amount_paid_at_booking__c);
-	
 		const successData = yield call(VisitorService.updateBooking, payload);
 
-		if (successData) { 
-			HelperService.showToast({ 
-				message: 'Booking Updated Successfully!!', 
-				duration: 2000, 
-				buttonText: 'Okay' 
-			});
-			NavigationService.navigateAndReset('BookingConfirmed');
-			yield put(ProductsActions.removeItemFromCartSuccess()); 
-			yield put(VisitorActions.updateBookingSuccess(successData));
-
+		if (successData) {
+			if (payload.newBookingForm){
+				yield put(VisitorActions.newBooking(payload.newBookingForm));
+			}else {
+				HelperService.showToast({ 
+					message: 'Booking Updated Successfully!!', 
+					duration: 2000, 
+					buttonText: 'Okay' 
+				});
+				NavigationService.navigateAndReset('BookingConfirmed');
+				yield put(ProductsActions.removeItemFromCartSuccess()); 
+				yield put(VisitorActions.updateBookingSuccess(successData));
+			}
 		} else {
 			yield put(VisitorActions.updateBookingFailure())
 			HelperService.showToast({ 
-				message: 'Error!!  Failed.Verify fields and try again.', 
+				message: 'Booking Failed! Cannot update this booking.', 
 				duration: 2000, 
 				buttonText: 'Okay' 
 			});
@@ -796,12 +794,30 @@ function* newBooking(payload) {
 
 		if (successData) { 
 			yield put(VisitorActions.newBookingSuccess(successData));
+			HelperService.showToast({ 
+				message: 'Booking Created Successfully!!', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+			NavigationService.navigateAndReset('BookingConfirmed');
+			yield put(ProductsActions.removeItemFromCartSuccess()); 
+			yield put(VisitorActions.updateBookingSuccess());
 		} else {
-			yield put(VisitorActions.newBookingFailure())
+			yield put(VisitorActions.newBookingFailure());
+			HelperService.showToast({ 
+				message: 'Booking Failed! Cannot create this booking.Please try again', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
 			
 		}
 	} catch (error) {
 		yield put(VisitorActions.newBookingFailure());
+		HelperService.showToast({ 
+			message: 'Error!! Failed.Verify fields and try again.', 
+			duration: 2000, 
+			buttonText: 'Okay' 
+		});
 	}
 }
 

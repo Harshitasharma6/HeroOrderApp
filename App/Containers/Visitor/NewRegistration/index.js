@@ -44,18 +44,6 @@ import GoogleAddress from 'App/Components/GoogleAddress'
 
 
 class NewRegistrationFormScreen extends Component {
-	componentDidMount() {
-		const { 
-			changeForm,
-			contact_number
-		} = this.props;
-
-		changeForm({
-			edited_field: 'contact_number__c',
-			edited_value: contact_number
-		});
-	}
-
 	componentWillUnmount() {
 		const {
 			clearRegistrationForm

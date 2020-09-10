@@ -92,31 +92,26 @@ class InvoiceDetailformScreen extends Component {
 	}
 
 	submit() {
+		Keyboard.dismiss();
 		const { 
 			submitForm, 
 			submitNewBookingForm,
 			form,
 			newBookingForm,
-			currentEnquiryId ,
+			currentEnquiryId,
 			dealerId,
 			dealersalespersonId
 		} = this.props;
 
 		let showInfo= ''
-
 		if (this.props.navigation.state.params) {
 			showInfo = this.props.navigation.state.params.showInfo
 		}
 
-		Keyboard.dismiss();
-
-		if (!showInfo) {
-			submitNewBookingForm(newBookingForm);
-		}
-
 		submitForm({
 			...form,
-			others__c: ["https://abc.com/a.png","https://abc.com/a1.png"]
+			others__c: ["https://abc.com/a.png","https://abc.com/a1.png"],
+			newBookingForm: !showInfo ? newBookingForm : false
 		});
 	}
 

@@ -120,9 +120,9 @@ class UpdateVisitorScreen extends Component {
 		submitForm({
 			...form,
 			enquiry: enquiry,
-			customer_birthday__c: HelperService.dateReadableFormatWithHyphen(form.customer_birthday__c),
+			customer_birthday__c: form.customer_birthday__c  ? HelperService.dateReadableFormatWithHyphen(form.customer_birthday__c) : '',
 			expected_close_date__c: HelperService.dateReadableFormatWithHyphen(form.expected_close_date__c),
-			customer_anniversary__c: HelperService.dateReadableFormatWithHyphen(form.customer_anniversary__c)
+			customer_anniversary__c: form.customer_anniversary__c ? HelperService.dateReadableFormatWithHyphen(form.customer_anniversary__c) : ''
 		});
 	}
 

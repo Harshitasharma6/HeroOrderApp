@@ -20,8 +20,8 @@ class Visitor extends Component {
         } = this.props;
 
         hideOpenLeadPrompt();
-        clearSearchCustomerForm();
     }
+    
     submitForm(){
         const {
             form, 

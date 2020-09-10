@@ -38,8 +38,15 @@ class Actionables extends React.Component {
       selectActionable,
       selectedActionable,
       selectedFollowUp,
-      selectFollowUp
-
+      selectFollowUp,
+      allOpenLeads,
+      bookingConfirmFinanceLeads,
+      callLeads,
+      noAction,
+      openLeads,
+      hotLeads,
+      purchaseOverdue,
+      todayFollowUp
     } = this.props;
 
 
@@ -69,7 +76,7 @@ class Actionables extends React.Component {
 
            >
             <WhiteButton
-              title={'Open Hot Leads'}
+              title={`Open Hot Leads ${hotLeads ? '(' + hotLeads + ')' : ''}`}
               style={{...Styles.actionButton, ...Styles.customSelectedStylePink}}
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('1'); this.scrollToIndex(0)}}
@@ -79,7 +86,7 @@ class Actionables extends React.Component {
             />
 
             <WhiteButton
-              title={'Purchase Date Over Due'}
+              title={`Purchase Date Over Due ${purchaseOverdue ? '(' + purchaseOverdue + ')' : ''}`}
               style={{...Styles.actionButton, ...Styles.customSelectedStyleSeaGreen}}
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('2');  this.scrollToIndex(1)}}
@@ -89,7 +96,7 @@ class Actionables extends React.Component {
             />
 
           <WhiteButton
-              title={'Booking Confirmed & Finance Required'}
+              title={`Booking Confirmed & Finance Required ${bookingConfirmFinanceLeads ? '(' + bookingConfirmFinanceLeads  + ')': ''}`}
               style={{...Styles.actionButton, ...Styles.customSelectedStyleRedPink}}
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('3');  this.scrollToIndex(2)}}
@@ -100,7 +107,7 @@ class Actionables extends React.Component {
 
         
             <WhiteButton
-              title={'Open HO Assigned Leads'}
+              title={`Open HO Assigned Leads ${openLeads ? '(' + openLeads + ')' : '' }`}
               style={{...Styles.actionButton, ...Styles.customSelectedStyleYellow}}
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('4');  this.scrollToIndex(3)}}
@@ -110,7 +117,7 @@ class Actionables extends React.Component {
             />
 
             <WhiteButton
-              title={'No Action From Last 1 Week'}
+              title={`No Action From Last 1 Week ${noAction ? '(' + noAction + ')' : ''}`}
               style={{...Styles.actionButton, ...Styles.customSelectedStyleGreyWhite}}
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('5');  this.scrollToIndex(4)}}
@@ -120,7 +127,7 @@ class Actionables extends React.Component {
             /> 
 
             <WhiteButton
-              title={'All Open Leads'}
+              title={`All Open Leads ${allOpenLeads ? '(' + allOpenLeads + ')'  : ''}`}
               style={{...Styles.actionButton, ...Styles.customSelectedStyleCorpGreen}}
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('6');  this.scrollToIndex(5)}}
@@ -131,7 +138,7 @@ class Actionables extends React.Component {
 
 
             <WhiteButton
-              title={'Incoming Call Open Leads'}
+              title={`Incoming Call Open Leads ${callLeads ? '(' + callLeads + ')' : ''}`}
               style={{...Styles.actionButton, ...Styles.customSelectedStyleCorpBlue}}
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('7');  this.scrollToIndex(6)}}
@@ -141,7 +148,7 @@ class Actionables extends React.Component {
             />
 
              <WhiteButton
-              title={"Today's Follow ups"}
+              title={`Today's Follow ups ${todayFollowUp ? '(' + todayFollowUp + ')' : ''}`}
               style={{...Styles.actionButton, ...Styles.customSelectedStylelightCorpBlue}}
               textStyle={Styles.actionButtonText}
               onPress={() => {selectFollowUp('8');  this.scrollToIndex(7)}}
@@ -164,7 +171,16 @@ const mapStateToProps = (state) => ({
     isVisible: state.common.isNetworkBannerVisible,
     currentScreen: state.common.currentScreen,
     selectedActionable:  state.leadAlerts.selectedActionable,
-    selectedFollowUp:    state.leadAlerts.selectedFollowUp
+    selectedFollowUp:    state.leadAlerts.selectedFollowUp,
+    allOpenLeads    : state.leadAlerts.allOpenLeads.length || '',
+    bookingConfirmFinanceLeads: state.leadAlerts.bookingConfirmFinanceLeads.length  || '',
+    callLeads    : state.leadAlerts.callLeads.length  || '',
+    noAction    : state.leadAlerts.noAction.length  || '',
+    openLeads    : state.leadAlerts.openLeads.length  || '',
+    hotLeads    : state.leadAlerts.hotLeads.length  || '',
+    purchaseOverdue    : state.leadAlerts.purchaseOverdue.length|| '',
+    todayFollowUp    : state.leadAlerts.todayFollowUp.length|| '',
+
 });
 
 
@@ -227,9 +243,8 @@ const Styles = StyleSheet.create({
     marginRight: wp('2%'),
     marginLeft: wp('1%'),
     height: hp('5%'),
-    minWidth: wp('25%'),
     elevation: 0,
-    width: wp('40%'),
+    width: wp('43%'),
   },
   actionButtonText: {
     fontSize: wp('2.9%'),
@@ -254,30 +269,30 @@ const Styles = StyleSheet.create({
   },
   customSelectedStylePink: {
     backgroundColor: Colors.darkPink,
-    width: wp('40%')
+     width: wp('43%'),
   },
 
   customSelectedStyleSeaGreen: {
     backgroundColor: Colors.darkSeaGreen,
-    width: wp('40%')
+     width: wp('43%'),
   },
   
   customSelectedStyleRedPink: {
     backgroundColor: Colors.darkRedPink,
-    width: wp('40%')
+     width: wp('43%'),
   },
 
   customSelectedStyleYellow: {
     backgroundColor: Colors.darkYellow,
-    width: wp('40%')
+     width: wp('43%'),
   },
   customSelectedStyleGreyWhite: {
     backgroundColor: Colors.darkGreyWhite,
-    width: wp('40%')
+     width: wp('43%'),
   },
   customSelectedStyleCorpBlue: {
     backgroundColor: Colors.darkCorpBlue,
-    width: wp('40%')
+     width: wp('43%'),
   },
   customSelectedStylelightCorpBlue: {
     backgroundColor: Colors.lightCorpBlue,
@@ -285,7 +300,7 @@ const Styles = StyleSheet.create({
   },
   customSelectedStyleCorpGreen: {
     backgroundColor: Colors.darkCorpGreen,
-    width: wp('40%')
+     width: wp('43%'),
   },
   selected: {
     borderWidth: 1,
