@@ -9,7 +9,15 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 export default class MultipleImagePicker extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {}
+		this.state = {
+			sources: []
+		}
+	}
+
+	componentDidMount() {
+		this.setState({
+			sources: this.props.images
+		})
 	}
 
 	async chooseFile() {
@@ -34,8 +42,11 @@ export default class MultipleImagePicker extends React.Component {
 					alert(response.customButton);
 				} else {
 					const source = { uri: response.uri };
+					let sources = [].concat(this.state.sources);
+					sources.push('data:image/jpeg;base64,' + response.data)
+
 					this.setState({
-						source: 'data:image/jpeg;base64,' + response.data
+						sources: sources
 					});
 					this.props.onImageSuccess({ image: response.data });
 				}
@@ -51,7 +62,7 @@ export default class MultipleImagePicker extends React.Component {
 
 	onClearImage() {
 		this.setState({
-			source: ''
+			sources: []
 		});
 
 		this.props.onClearImage();
@@ -59,36 +70,42 @@ export default class MultipleImagePicker extends React.Component {
 
 	render() {
 		const {
-			image,
+			images,
 			children,
 			loading,
 			title
 		} = this.props;
 
-		let imageNode = (
-			<Image
-				source={{
-					uri: this.state.source || image,
-				}}
-				style={styles.image}
-			/>
-		);
+		let image_sources = this.state.sources && this.state.sources.length ? this.state.sources : images
+		let imageNode = image_sources.map((url) => <Image source={{uri: url}} style={styles.image} />);
+		let loading_node = [];
 
 		
 
-		if(loading) {
-			imageNode = <View style={styles.spinner}><Spinner color={Colors.primary} /></View>
+		
+
+		if(loading){
+			loading_node = (
+				<View style={styles.spinner}>
+					<Spinner color={Colors.primary} />
+					<Text style={{color: Colors.primary}}>Processing Image...</Text>
+					
+				</View>
+			);
 		}
+
+
 		return (
 			<View style={styles.uploadContainer}>
 				<View style={styles.container}>
 					<View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
 						<Text style={styles.title}>{`${title}`}</Text>
-						{(this.state.source || image) ? <GenericIcon name={'times-circle-o'} style={styles.removeIcon} onPress={() => this.onClearImage()}/> : []}
+						{(images.length) ? <GenericIcon name={'times-circle-o'} style={styles.removeIcon} onPress={() => this.onClearImage()}/> : []}
 					</View>
 					<View style={styles.imagePreviewContainer}>
 						{imageNode}
 					</View>
+					{loading_node}
 				</View>
 				<View>
 					<TouchableOpacity 
@@ -132,11 +149,15 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
+		position: 'relative'
 	},
 	imagePreviewContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		justifyContent: 'space-between',
+		justifyContent: 'flex-start',
+		flexWrap: 'wrap',
+		position: 'relative',
+		minHeight: hp('8%'),
 	},
 	title: {
 		fontSize: wp('4.4%'),
@@ -150,10 +171,19 @@ const styles = StyleSheet.create({
 		height: hp('8%'),
 		resizeMode: 'stretch', 
 		borderRadius: 15,
-		marginHorizontal: wp('3%')
+		marginHorizontal: wp('1.5%'),
+		marginVertical: wp('1.5%')
 	},
 	spinner: {
-		marginHorizontal: wp('8%'),
-		marginVertical: 0
+		marginVertical: 0,
+		position: 'absolute',
+		backgroundColor: 'rgba(232, 229, 229, 0.5)',
+		height: '117%',
+		width: '100%',
+		zIndex: 2,
+		alignItems: 'center',
+		flexDirection: 'row',
+		justifyContent: 'center',
+		borderRadius: 10
 	}
 });

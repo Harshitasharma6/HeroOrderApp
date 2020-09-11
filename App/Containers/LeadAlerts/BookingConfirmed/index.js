@@ -77,6 +77,17 @@ class BookingConfirmed extends Component {
   }
 
 
+  setForm(data) {
+    let others = data.others__c || [];
+    if (typeof(others) == 'string') {
+      others = others.split(',');
+    }
+
+    data.others__c = others;
+    this.props.setUpdateBookingForm(data);
+  }
+
+
   getDataNode() {
     let visibleNode = [];
     const {
@@ -104,7 +115,7 @@ class BookingConfirmed extends Component {
                 style={Styles.infoRedPink}
                 heading={`${item.first_name__c} ${item.last_name__c}`}
                 showTextAvatar={true}
-                onPress={() => {setUpdateBookingForm(item); NavigationService.navigate('InvoiceDetailformScreen', {showInfo: true}); setBookingInfoForm(item);}}
+                onPress={() => {this.setForm(item); NavigationService.navigate('InvoiceDetailformScreen', {showInfo: true}); setBookingInfoForm(item);}}
                 content={[
                   <GenericDisplayCardStrip key={'Status' + item.id} label={'Status'} value={item.lead_status__c}/>,
                   <GenericDisplayCardStrip key={'Stage' + item.id} label={'Stage'} value={item.lead_stage__c}/>,

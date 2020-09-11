@@ -23,6 +23,7 @@ import CommonActions from 'App/Stores/Common/Actions';
 import moment from 'moment';
 import GoogleAddress from 'App/Components/GoogleAddress';
 import ImagePicker from 'App/Components/ImagePicker'
+import MultipleImagePicker from 'App/Components/ImagePicker/MultipleImagePicker';
 import DetailCard from 'App/Components/DetailCard'
 import {Spinner } from 'native-base';
 
@@ -110,7 +111,6 @@ class InvoiceDetailformScreen extends Component {
 
 		submitForm({
 			...form,
-			others__c: ["https://abc.com/a.png","https://abc.com/a1.png"],
 			newBookingForm: !showInfo ? newBookingForm : false
 		});
 	}
@@ -517,12 +517,12 @@ class InvoiceDetailformScreen extends Component {
 
 
           		<View style={{...Style.bottomMargin}}>
-		            <ImagePicker
-		            title={'Others'}
-		              	image={form.others__c} 
+		            <MultipleImagePicker
+		            	title={'Others'}
+		              	images={form.others__c || []} 
 		              	loading={uploadImageLoading && uploadImageField == 'others__c'}
-		              	onClearImage={(value) => changeForm({ edited_field: 'others__c', edited_value: '' })}
-		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'others__c'}})}> 
+		              	onClearImage={(value) => changeForm({ edited_field: 'others__c', edited_value: [] })}
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'others__c'}, multiple: true, previous_value: form.others__c})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                <GenericIcon 
@@ -532,7 +532,7 @@ class InvoiceDetailformScreen extends Component {
 		                {' Others'}
 		                </Text>
 		              </View>
-		            </ImagePicker>
+		            </MultipleImagePicker>
           		</View>
 
                     

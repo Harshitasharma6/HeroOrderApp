@@ -183,7 +183,13 @@ export function* uploadImage({ payload }) {
 		let url = yield call(CommonService.uploadImage, payload);
 		if (url) {
 			yield put(CommonActions.uploadImageSuccess(url));
-			yield put(VisitorActions.changeUpdateBookingForm({...payload.params, edited_value: url}));
+			let new_value = url;
+			if (payload.multiple) {
+				payload.previous_value = payload.previous_value || [];
+				payload.previous_value.push(new_value);
+				new_value = payload.previous_value;
+			}
+			yield put(VisitorActions.changeUpdateBookingForm({...payload.params, edited_value: new_value}));
 		} else {
 			yield put(CommonActions.uploadImageFailure());
 		}
