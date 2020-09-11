@@ -41,7 +41,7 @@ class CustomerSummaryScreen extends Component {
         return (
           <GenericDisplayCard dark={false}
               style={{ width: '100%', elevation: 0 }}
-              onPress={() => NavigationService.navigate('CustomerProductInfoScreen', {data: item}, )}
+              onPress={() => NavigationService.navigate('CustomerProductInfoScreen', {data: item})}
               content={[
                 <GenericDisplayCardStrip 
                 key={'Product Name'+ item.id } 
@@ -57,12 +57,12 @@ class CustomerSummaryScreen extends Component {
                 <GenericDisplayCardStrip 
                  key={'Purchase Date' + item.id } 
                  label={'Purchase Date'} 
-                 value={HelperService.dateReadableFormat(item.Purchased_Date__c)}
+                 value={HelperService.dateReadableFormat(item.purchased_date__c)}
                 />,
                 <GenericDisplayCardStrip 
                  key={'Model Color'  + item.id} 
                  label={'Model Color'} 
-                 value={item.Model_Color__c}
+                 value={item.model_color__c}
                 />,
     
               ]}

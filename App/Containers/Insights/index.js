@@ -96,7 +96,7 @@ class InsightsScreen extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  name: `${state.user.first_name__c} ${state.user.last_name__c}`,
+  name: state.user.sales_person_name__c,
   data: state.insights.FollowUpData,
   completedData: state.insights.completedFollowUpData,
   loader: state.insights.loaders.getFollowUpLoader,
