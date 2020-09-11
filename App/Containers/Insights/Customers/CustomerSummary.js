@@ -45,7 +45,7 @@ class CustomerSummaryScreen extends Component {
               content={[
                 <GenericDisplayCardStrip 
                 key={'Product Name'+ item.id } 
-                label={'Poduct Name'} 
+                label={'Product Name'} 
                 value={item.name}
                />,
                 <GenericDisplayCardStrip 
