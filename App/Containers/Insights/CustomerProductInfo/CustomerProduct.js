@@ -122,7 +122,7 @@ const CustomerProductInfoCard = ({data}) => (
             <GenericDisplayCardStrip key={'Purchase Date'} label={'Purchase Date'} value={HelperService.dateReadableFormat(data.purchased_date__c) }/>
             <GenericDisplayCardStrip key={'Offer Applied'} label={'Offer Applied'} value={(!!data.offer_applied__c ? 'Yes' : 'No') }/>
             <GenericDisplayCardStrip key={'Aadhar Card'} label={'Aadhar Card'} value={<Text style={{textDecorationLine: 'underline', color: '#1890ff'}} onPress={() => Linking.openURL(data.aadhar_card__c)}>View</Text>}/>
-            <GenericDisplayCardStrip key={'Acknowlegment'} label={'Acknowlegment'} value={<Text style={{textDecorationLine: 'underline', color: '#1890ff'}} onPress={() => Linking.openURL(data.acknowledgement__c)}>View</Text>}/>
+            <GenericDisplayCardStrip key={'Acknowledgement'} label={'Acknowledgement'} value={<Text style={{textDecorationLine: 'underline', color: '#1890ff'}} onPress={() => Linking.openURL(data.acknowledgement__c)}>View</Text>}/>
             <GenericDisplayCardStrip key={'Driving Lincense'} label={'Driving Lincense'} value={<Text style={{textDecorationLine: 'underline', color: '#1890ff'}} onPress={() => Linking.openURL(data.acknowledgement__c)}>View</Text>}/>
             <GenericDisplayCardStrip key={'Insurance'} label={'Insurance'} value={<Text style={{textDecorationLine: 'underline', color: '#1890ff'}} onPress={() => Linking.openURL(data.insurance__c)}>View</Text>}/>
             <GenericDisplayCardStrip key={'RC'} label={'RC'} value={<Text style={{textDecorationLine: 'underline', color: '#1890ff'}} onPress={() => Linking.openURL(data.rc__c)}>View</Text>}/>
