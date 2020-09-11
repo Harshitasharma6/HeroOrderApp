@@ -213,7 +213,19 @@ export function* watchCreateFeedback() {
 export function* watchUpdateBooking() {
 	while (true) {
 		const { payload } = yield take(VisitorTypes.UPDATE_BOOKING)
-		
+		try {
+			const validationFailed = yield call(ValidationService.validateBookingForm, payload);
+			if (validationFailed) {
+				HelperService.showToast({ 
+					message: validationFailed.error_message, 
+					duration: 2000, 
+					buttonText: 'Okay' 
+				});
+				continue;
+			}
+		} catch (err) {
+			console.log(err)
+		}
 
 		yield call(updateBooking, payload)
 	}
@@ -807,6 +819,7 @@ function* newBooking(payload) {
 			yield put(VisitorActions.updateBookingSuccess());
 		} else {
 			yield put(VisitorActions.newBookingFailure());
+			yield put(VisitorActions.updateBookingFailure());
 			HelperService.showToast({ 
 				message: 'Booking Failed! Cannot create this booking.Please try again', 
 				duration: 2000, 
@@ -816,6 +829,7 @@ function* newBooking(payload) {
 		}
 	} catch (error) {
 		yield put(VisitorActions.newBookingFailure());
+		yield put(VisitorActions.updateBookingFailure());
 		HelperService.showToast({ 
 			message: 'Error!! Failed.Verify fields and try again.', 
 			duration: 2000, 
@@ -1043,7 +1057,7 @@ export function* orderCheckout({payload}) {
 	// state__c: null
 
 	let new_booking_form_data = {
-		enquiry__c: visitor.sfid || visitor.sfid,
+		enquiry__c: visitor.sfid || visitor.id,
 		schemes: cart.offersApplied.map((obj) => {
 			return ({
 				p_scheme__c: obj.p_scheme_id,

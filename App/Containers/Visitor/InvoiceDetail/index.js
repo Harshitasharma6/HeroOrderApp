@@ -228,7 +228,7 @@ class InvoiceDetailformScreen extends Component {
 
 					<InputNumber
 						styles={Style.mb10}
-						placeholder={`Total Amount Payable ${HelperService.currencyValue(form.total_amount_payable__c)}`}
+						placeholder={`Total Amount Payable ${form.outstanding_amount__c ? HelperService.currencyValue(form.outstanding_amount__c) : HelperService.currencyValue(form.total_amount_payable__c)}`}
 						value={form.amount_paid_at_booking__c}
 						onChange={(value) => changeForm({ edited_field: 'amount_paid_at_booking__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'amount_paid_at_booking__c'}

@@ -5,10 +5,15 @@ import { createNetworkMiddleware } from 'react-native-offline';
 import createSensitiveStorage from "redux-persist-sensitive-storage";
 import FilesystemStorage from 'redux-persist-filesystem-storage'
 import { createTransform, persistReducer, persistStore } from 'redux-persist';
-import { INITIAL_STATE as SHREE_INITIAL_STATE } from './Shree/InitialState';
-import { INITIAL_STATE as DASHBOARD_INITIAL_STATE } from './Dashboard/InitialState';
-import { INITIAL_STATE as NON_SHREE_INITIAL_STATE } from './NonShree/InitialState';
 import { INITIAL_STATE as VISITOR_INITIAL_STATE } from './Visitor/InitialState';
+import { INITIAL_STATE as LEAD_ALERTS_INITIAL_STATE } from './LeadAlerts/InitialState'; 
+import { INITIAL_STATE as DEALERS_INITIAL_STATE } from './Dealers/InitialState'; 
+import { INITIAL_STATE as INSIGHTS_INITIAL_STATE } from './Insights/InitialState';
+import { INITIAL_STATE as SUBDEALERS_INITIAL_STATE } from './SubDealers/InitialState'; 
+import { INITIAL_STATE as USER_INITIAL_STATE } from './User/InitialState'; 
+
+
+
 
 
 const sensitiveStorage = createSensitiveStorage({
@@ -33,8 +38,22 @@ const sensitiveStorage = createSensitiveStorage({
 //     }
 // }
 
+    // network: network,
+    // common: CommonReducer,
+    // user: UserReducer,
+    // dashboard: DashboardReducer,
+    // actionQueues: ActionQueuesReducer,
+    // checkIn: checkInReducer,
+    // startDay: StartDayReducer,
+    // nonShree: nonShreeReducer,
+    // shree: shreeReducer,
 
-
+    // leadAlerts: leadAlertsReducer,
+    // visitor: visitorReducer,
+    // products: productsReducer,
+    // dealers: dealersReducer,
+    // subdealers: subdealersReducer,
+    // insights:insightsReducer,
 
 const blacklistPaths = ['network', 'common', 'visitor', 'dealers'];
 let blacklistTransform = createTransform(
@@ -42,17 +61,47 @@ let blacklistTransform = createTransform(
     if (key === 'visitor') {
       return {
         ...inboundState,
-        searchCustomerForm: VISITOR_INITIAL_STATE.searchCustomerForm,
-        feedbackForm: VISITOR_INITIAL_STATE.feedbackForm,
-        registerCustomerForm: VISITOR_INITIAL_STATE.registerCustomerForm
+        searchCustomerForm   : VISITOR_INITIAL_STATE.searchCustomerForm,
+        feedbackForm         : VISITOR_INITIAL_STATE.feedbackForm,
+        registerCustomerForm : VISITOR_INITIAL_STATE.registerCustomerForm,
+        loaders              : VISITOR_INITIAL_STATE.loaders
       };
+    }else if (key === 'leadAlerts') {
+      return {
+        ...inboundState,
+        loaders              : LEAD_ALERTS_INITIAL_STATE.loaders
+      }
+    } else if (key === 'products') {
+      return {
+        ...inboundState,
+        loaders              : PRODUCTS_INITIAL_STATE.loaders
+      }
+    } else if (key === 'dealers') {
+      return {
+        ...inboundState,
+        loaders              : DEALERS_INITIAL_STATE.loaders
+      }
+    } else if (key === 'insights') {
+      return {
+        ...inboundState,
+        loaders              : INSIGHTS_INITIAL_STATE.loaders
+      }
+    }else if (key === 'subdealers') {
+      return {
+        ...inboundState,
+        loaders              : SUBDEALERS_INITIAL_STATE.loaders
+      }
+    }else if (key === 'user') {
+      return {
+        ...inboundState,
+        userLoginIsLoading   : USER_INITIAL_STATE.userLoginIsLoading,
+        userLogoutIsLoading   : USER_INITIAL_STATE.userLogoutIsLoading
+      }
     } else {
       return inboundState;
     }
   }
 );
-
-
 
 const persistConfig = {
   key: 'root',

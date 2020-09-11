@@ -114,6 +114,102 @@ function validateRegisterCustomerCallForm(params) {
 
 
 
+function validateBookingForm(params) {
+	// "tally_invoice_no__c" : "213213b12bnnbnb",
+	// "customer_gstin_no__c" : "sadasd",
+	// "online_order_no__c":"wewewe",
+	// "reference_no__c":"weqwewqe",
+	// "first_name__c": "Rohit New",
+	// "last_name__c": "Shukla",
+	// "contact_number__c": "09818512785",
+	// "email_id__c":  "xyz111@gmails.com",
+	// "address_line_1__c": "delhi",
+	// "chassis_no__c": "weweqwe",
+	// "motor_no__c": "qwewqe",
+	// "charger_no__c": "ewewqeq",
+	// "battery_no__c": "asdasd",
+	// "model_color__c":"Red",
+	// "make_of_battery__c":"wewewe",
+	// "capacity_of_each_battery__c":"xasasd",
+	// "type_of_battery__c":"wwewe",
+	// "owner_s_handbook_no__c":"wqewqewe",
+	// "other_financier_name__c":"IDFC",
+	// "financier_name__c":"HDFC",
+	// "aadhar_card__c":"https://abc.com/a.png",
+	// "acknowledgement__c": "https://abc.com/a.png",
+	// "driving_license__c" : "https://abc.com/a.png",
+	// "insurance__c" :"https://abc.com/a.png",
+	// "rc__c" : "https://abc.com/a.png",
+	// "others__c" : ["https://abc.com/a.png","https://abc.com/a1.png"],
+	// "voter_id_card__c" :"https://abc.com/a.png",  
+	// "product__c":"a029D000002ZFPtQAO",
+	// "amount_paid_at_booking__c":1000,
+	// "total_amount_payable__c": 2000,
+	// "basic_amount__c" : 25000,
+	// "total_tax__c": 100, 
+	// "total_subsidy__c": 50,
+	// "dealer_discount__c" : 100,
+	//  "offer_applied__c" : true,
+	// "total_scheme_amount__c": 100
+	// "outstanding_amount__c"
+
+	if (!validateFieldIsEmpty(params.first_name__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'first_name__c',
+			error_message: 'First Name cannot be empty.'
+		}
+	}
+
+	if (!validatePhoneNumber(params.contact_number__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'contact_number__c',
+			error_message: 'Contact Number is not valid.'
+		}
+	}
+
+	if (!validateFieldIsEmpty(params.amount_paid_at_booking__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'amount_paid_at_booking__c',
+			error_message: 'Amount cannot be empty. Please enter the amount.'
+		}
+	}
+
+
+	if (params.customer_gstin_no__c && !validateGstNumber(params.customer_gstin_no__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'customer_gstin_no__c',
+			error_message: 'Please Enter valid GST number.'
+		}
+	}
+
+
+	if (params.outstanding_amount__c && (Number(params.amount_paid_at_booking__c) > Number(params.outstanding_amount__c))) {
+		return {
+			invalid: true,
+			invalid_field: 'amount_paid_at_booking__c',
+			error_message: `Amount cannot be greater than outstanding amount. Max value can be ${params.outstanding_amount__c}`
+		}
+	}
+
+
+	if (!params.outstanding_amount__c && (Number(params.amount_paid_at_booking__c) > Number(params.total_amount_payable__c))) {
+		return {
+			invalid: true,
+			invalid_field: 'amount_paid_at_booking__c',
+			error_message: `Amount cannot be greater than payable amount. Max value can be ${params.total_amount_payable__c}`
+		}
+	}
+
+	return false;
+
+}
+
+
+
 
 function validatePhoneNumber(number) {
 	if (!number) return false;
@@ -130,6 +226,16 @@ function validateNumber(number) {
 function validateThreeDigitNumber(number) {
 	if (!number) return false;
 	return (Number(number) <= 999);
+}
+
+function validateGstNumber(number) {
+	return (number.length == 15)
+	// var gstinformat = new RegExp('^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]1}[1-9A-Z]{1}Z[0-9A-Z]{1}$');    
+	// if (gstinformat.test(number)) {    
+ //        return true;    
+ //    } else {    
+ //        return false;    
+ //    }    
 }
 
 
@@ -191,11 +297,13 @@ function validateLoginForm(params) {
 
 
 
+
 export const ValidationService = {
 	validateSearchCustomerForm,
 	validateRegisterCustomerForm,
 	validateCreateFeedbackForm,
 	validateRegisterCustomerCallForm,
 	validateCreateSubDealerForm,
+	validateBookingForm,
 	validateLoginForm
 }

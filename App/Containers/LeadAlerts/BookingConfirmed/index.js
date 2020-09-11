@@ -52,10 +52,29 @@ class BookingConfirmed extends Component {
     const {
       bookingSearchFilters
     } = this.props;
-let filteredList = HelperService.searchTextListFilter(list,  bookingSearchFilters['searchBy'],  bookingSearchFilters['searchValue']);
-filteredList = HelperService.sortListFilter(filteredList, bookingSearchFilters['sortBy'], bookingSearchFilters['sortType']);    
-return filteredList;
+    let filteredList = HelperService.searchTextListFilter(list,  bookingSearchFilters['searchBy'],  bookingSearchFilters['searchValue']);
+    filteredList = HelperService.sortListFilter(filteredList, bookingSearchFilters['sortBy'], bookingSearchFilters['sortType']);    
+    return filteredList;
   }  
+
+
+  submitMarkWon(data) {
+    const {
+      submitForm
+    } = this.props;
+
+    if (data.outstanding_amount__c > 0) {
+      HelperService.showToast({ 
+        message: 'Outstanding amount with this booking!! Cannot Mark Won',
+        duration: 3000, 
+        buttonText: 'Okay' 
+      });
+    }else {
+      submitForm({
+        id : data.id
+      });
+    }
+  }
 
 
   getDataNode() {
@@ -99,7 +118,7 @@ return filteredList;
                     textStyle={Styles.markLostButtonText} 
                     loading={loader&&loader==item.id}
 						        disabled={loader}
-                    onPress={() => submitForm({ id : item.id})}
+                    onPress={() => this.submitMarkWon(item)}
                    >
                       <GenericIcon name="check" style={Styles.markLostButtonIcon} />
                   </WhiteButton>
