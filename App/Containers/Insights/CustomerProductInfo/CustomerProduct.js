@@ -118,7 +118,7 @@ const CustomerProductInfoCard = ({data}) => (
             <GenericDisplayCardStrip key={'Capacity of Each Battery'} label={'Capacity of Each Battery'} value={(data.make_of_battery__c || '') }/>
             <GenericDisplayCardStrip key={'Battery No.'} label={'Battery No.'} value={(data.capacity_of_each_battery__c || '') }/>
             <GenericDisplayCardStrip key={'Type of Battery'} label={'Type of Battery'} value={(data.type_of_battery__c || '') }/>
-            <GenericDisplayCardStrip key={'Owners Handbook No.'} label={'Owmers Handbook No.'} value={(data.owner_s_handbook_no__c || '') }/>
+            <GenericDisplayCardStrip key={'Owners Handbook No.'} label={'Owners Handbook No.'} value={(data.owner_s_handbook_no__c || '') }/>
             <GenericDisplayCardStrip key={'Purchase Date'} label={'Purchase Date'} value={HelperService.dateReadableFormat(data.purchased_date__c) }/>
             <GenericDisplayCardStrip key={'Offer Applied'} label={'Offer Applied'} value={(!!data.offer_applied__c ? 'Yes' : 'No') }/>
             <GenericDisplayCardStrip key={'Aadhar Card'} label={'Aadhar Card'} value={<Text style={{textDecorationLine: 'underline', color: '#1890ff'}} onPress={() => Linking.openURL(data.aadhar_card__c)}>View</Text>}/>
