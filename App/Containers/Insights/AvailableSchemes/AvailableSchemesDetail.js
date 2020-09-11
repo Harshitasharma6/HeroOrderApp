@@ -85,7 +85,7 @@ class AvailableSchemesDetail extends Component {
              />,
              <GenericDisplayCardStrip 
              key={'Product' + item.sfid} 
-             label={'Poduct'} 
+             label={'Product'} 
              value={item.product_name}
             />,
 
