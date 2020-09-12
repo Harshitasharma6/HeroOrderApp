@@ -169,11 +169,11 @@ function validateBookingForm(params) {
 		}
 	}
 
-	if (!validateFieldIsEmpty(params.amount_paid_at_booking__c)) {
+	if (params.amount_paid_at_booking__c && params.amount_paid_at_booking__c < 0) {
 		return {
 			invalid: true,
 			invalid_field: 'amount_paid_at_booking__c',
-			error_message: 'Amount cannot be empty. Please enter the amount.'
+			error_message: 'Invalid Amount entered.'
 		}
 	}
 
@@ -206,6 +206,137 @@ function validateBookingForm(params) {
 
 	return false;
 
+}
+
+
+
+function validateMarkWonAction(params) {
+	// "tally_invoice_no__c" : "213213b12bnnbnb",
+	// "customer_gstin_no__c" : "sadasd",
+	// "online_order_no__c":"wewewe",
+	// "reference_no__c":"weqwewqe",
+	// "first_name__c": "Rohit New",
+	// "last_name__c": "Shukla",
+	// "contact_number__c": "09818512785",
+	// "email_id__c":  "xyz111@gmails.com",
+	// "address_line_1__c": "delhi",
+	// "chassis_no__c": "weweqwe",
+	// "motor_no__c": "qwewqe",
+	// "charger_no__c": "ewewqeq",
+	// "battery_no__c": "asdasd",
+	// "model_color__c":"Red",
+	// "make_of_battery__c":"wewewe",
+	// "capacity_of_each_battery__c":"xasasd",
+	// "type_of_battery__c":"wwewe",
+	// "owner_s_handbook_no__c":"wqewqewe",
+	// "other_financier_name__c":"IDFC",
+	// "financier_name__c":"HDFC",
+	// "aadhar_card__c":"https://abc.com/a.png",
+	// "acknowledgement__c": "https://abc.com/a.png",
+	// "driving_license__c" : "https://abc.com/a.png",
+	// "insurance__c" :"https://abc.com/a.png",
+	// "rc__c" : "https://abc.com/a.png",
+	// "others__c" : ["https://abc.com/a.png","https://abc.com/a1.png"],
+	// "voter_id_card__c" :"https://abc.com/a.png",  
+	// "product__c":"a029D000002ZFPtQAO",
+	// "amount_paid_at_booking__c":1000,
+	// "total_amount_payable__c": 2000,
+	// "basic_amount__c" : 25000,
+	// "total_tax__c": 100, 
+	// "total_subsidy__c": 50,
+	// "dealer_discount__c" : 100,
+	//  "offer_applied__c" : true,
+	// "total_scheme_amount__c": 100
+	// "outstanding_amount__c"
+
+	if (!validateFieldIsEmpty(params.chassis_no__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'chassis_no__c',
+			error_message: 'Cannot Mark Won!! Chassis No. is empty.'
+		}
+	}
+
+
+
+	if (!validateFieldIsEmpty(params.motor_no__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'motor_no__c',
+			error_message: 'Cannot Mark Won!! Motor No. is empty.'
+		}
+	}
+
+
+	if (!validateFieldIsEmpty(params.charger_no__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'charger_no__c',
+			error_message: 'Cannot Mark Won!! Charger No. is empty.'
+		}
+	}
+
+	if (!validateFieldIsEmpty(params.battery_no__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'battery_no__c',
+			error_message: 'Cannot Mark Won!! Battery No. is empty.'
+		}
+	}
+
+	if (!validateFieldIsEmpty(params.model_color__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'model_color__c',
+			error_message: 'Cannot Mark Won!! Model Color is empty.'
+		}
+	}
+
+	if (!validateFieldIsEmpty(params.make_of_battery__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'make_of_battery__c',
+			error_message: 'Cannot Mark Won!! Make of Battery is empty.'
+		}
+	}
+
+
+	if (!validateFieldIsEmpty(params.type_of_battery__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'type_of_battery__c',
+			error_message: 'Cannot Mark Won!! Type of Battery is empty.'
+		}
+	}
+
+	if (!validateFieldIsEmpty(params.capacity_of_each_battery__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'capacity_of_each_battery__c',
+			error_message: 'Cannot Mark Won!! Capacity of each Battery is empty.'
+		}
+	}
+
+
+	if (!validateFieldIsEmpty(params.owner_s_handbook_no__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'owner_s_handbook_no__c',
+			error_message: 'Cannot Mark Won!! Owners Handbook is empty.'
+		}
+	}
+
+
+	if (params.outstanding_amount__c > 0) {
+		return {
+			invalid: true,
+			invalid_field: 'outstanding_amount__c',
+			error_message: 'Outstanding amount with this booking!! Cannot Mark Won',
+		}
+	}
+
+
+	return false;
 }
 
 
@@ -304,6 +435,7 @@ export const ValidationService = {
 	validateCreateFeedbackForm,
 	validateRegisterCustomerCallForm,
 	validateCreateSubDealerForm,
+	validateMarkWonAction,
 	validateBookingForm,
 	validateLoginForm
 }

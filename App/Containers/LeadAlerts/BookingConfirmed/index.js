@@ -17,7 +17,7 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp, widthPercentageT
 import Styles from './styles'
 import CommonActions from 'App/Stores/Common/Actions';
 import VisitorActions from 'App/Stores/Visitor/Actions';
-
+import { ValidationService } from 'App/Services/ValidationService';
 
 class BookingConfirmed extends Component {
   componentDidMount() {
@@ -63,17 +63,20 @@ class BookingConfirmed extends Component {
       submitForm
     } = this.props;
 
-    if (data.outstanding_amount__c > 0) {
+
+    const validation = ValidationService.validateMarkWonAction(data);
+
+    if (validation) {
       HelperService.showToast({ 
-        message: 'Outstanding amount with this booking!! Cannot Mark Won',
+        message: validation.error_message,
         duration: 3000, 
         buttonText: 'Okay' 
       });
-    }else {
-      submitForm({
-        id : data.id
-      });
+      return;
     }
+    
+
+    submitForm({id : data.id});
   }
 
 

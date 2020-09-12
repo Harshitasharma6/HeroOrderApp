@@ -282,11 +282,11 @@ class InvoiceDetailformScreen extends Component {
 
 					 <InputText
 						style={Style.mb10}
-						placeholder={'Customer Chassis No.'}
+						placeholder={'Chassis No.'}
 						value={form.chassis_no__c}
 						onChange={(value) => changeForm({ edited_field: 'chassis_no__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'chassis_no__c'}
-						label={'Customer Chassis No.'}
+						label={'Chassis No.'}
 					/>
 
 					
