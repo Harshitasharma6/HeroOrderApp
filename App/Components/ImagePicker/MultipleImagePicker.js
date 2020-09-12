@@ -6,6 +6,7 @@ import { HelperService } from 'App/Services/Utils/HelperService'
 import {Spinner } from 'native-base';
 import {Colors, ApplicationStyles} from 'App/Theme'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import FastImage from 'react-native-fast-image'
 export default class MultipleImagePicker extends React.Component {
 	constructor(props) {
 		super(props);
@@ -77,7 +78,7 @@ export default class MultipleImagePicker extends React.Component {
 		} = this.props;
 
 		let image_sources = this.state.sources && this.state.sources.length ? this.state.sources : images
-		let imageNode = image_sources.map((url) => <Image source={{uri: url}} style={styles.image} />);
+		let imageNode = image_sources.map((url) => <FastImage source={{uri: url}} style={styles.image} resizeMode={FastImage.resizeMode.stretch} />);
 		let loading_node = [];
 
 		
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
 		width: hp('8%'),
 		height: hp('8%'),
 		resizeMode: 'stretch', 
-		borderRadius: 15,
+		borderRadius: 10,
 		marginHorizontal: wp('1.5%'),
 		marginVertical: wp('1.5%')
 	},

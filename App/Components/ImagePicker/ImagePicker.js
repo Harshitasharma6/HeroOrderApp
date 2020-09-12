@@ -6,6 +6,7 @@ import { HelperService } from 'App/Services/Utils/HelperService'
 import {Spinner } from 'native-base';
 import {Colors, ApplicationStyles} from 'App/Theme'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import FastImage from 'react-native-fast-image'
 export default class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -72,11 +73,10 @@ export default class App extends React.Component {
 		} = this.props;
 
 		let imageNode = (
-			<Image
-				source={{
-					uri: this.state.source || image,
-				}}
-				style={styles.image}
+			<FastImage 
+				source={{uri: this.state.source || image}} 
+				style={styles.image} 
+				resizeMode={FastImage.resizeMode.stretch} 
 			/>
 		);
 
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
 		width: hp('8%'),
 		height: hp('8%'),
 		resizeMode: 'stretch', 
-		borderRadius: 15,
+		borderRadius: 10,
 		marginHorizontal: wp('1.5%'),
 		marginVertical: wp('1.5%')
 	},
