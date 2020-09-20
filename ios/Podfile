@@ -1,8 +1,8 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'shree' do
-  # Pods for shree
+target 'HeroAPP' do
+  # Pods for HeroAPP
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -34,8 +34,7 @@ target 'shree' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-
-  target 'shreeTests' do
+  target 'HeroAPPTests' do
     inherit! :search_paths
     # Pods for testing
   end
@@ -43,10 +42,10 @@ target 'shree' do
   use_native_modules!
 end
 
-target 'shree-tvOS' do
-  # Pods for shree-tvOS
+target 'HeroAPP-tvOS' do
+  # Pods for HeroAPP-tvOS
 
-  target 'shree-tvOSTests' do
+  target 'HeroAPP-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

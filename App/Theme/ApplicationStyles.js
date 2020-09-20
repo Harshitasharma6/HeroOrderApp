@@ -5,9 +5,9 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import {Platform} from 'react-native';
 
 export default {
-	textFont:  'Roboto',
-	textMsgFont:  'Roboto_bold',
-	textMediumFont:  'Roboto_medium',
+	textFont:  Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto',
+	textMsgFont:  Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
+	textMediumFont: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_medium',
 	button: {
 		backgroundColor: Colors.primary
 	},
@@ -15,9 +15,10 @@ export default {
 		elevation: 5,
 	    shadowColor: "#000",
 	    shadowOffset: {
-	      width: 0,
-	      height: 0,
-	    },
+		  width: 0
+		},
+		  shadowOpacity: 0.3,
+		  shadowRadius: 4,
 	},
 	formButton: {
 		alignSelf: 'center',
@@ -30,7 +31,7 @@ export default {
 	formHeading: {
 	    alignSelf: 'center',
 	    color: Colors.primary,
-	    fontFamily: 'Roboto_bold',
+	    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
 	    fontSize: wp('5.5%'),
 	    marginBottom: hp('2%'),
 	    marginTop: hp('1%'),
@@ -39,7 +40,7 @@ export default {
 	screenHeading: {
 	    alignSelf: 'center',
 	    color: Colors.white,
-	    fontFamily: 'Roboto_bold',
+	    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
 	    fontSize: wp('7%'),
 	    marginBottom: hp('1%'),
 	    textTransform: 'capitalize'
@@ -91,7 +92,7 @@ export default {
   	},
   	label: {
 	    color: Colors.primary,
-	    fontFamily: 'Roboto_bold',
+	    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
 	    fontSize: wp('4.5%'),
 	    paddingLeft: wp('.5%'),
   	},
@@ -127,13 +128,13 @@ export default {
 	},
 	tabText: {
 	  	color: Colors.primary,
-	  	fontFamily: 'Roboto_bold',
+	  	fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
 	  	fontSize: wp('4%'),
 	  	elevation: 0
 	  },
 	  tabHeading: {
 	  	backgroundColor: Colors.lightGrey,
-	  	fontFamily: 'Roboto_bold',
+	  	fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
 	  	paddingHorizontal: 0,
 	  	elevation: 0,
 	  	boxShadow: 'none'
@@ -179,7 +180,7 @@ export default {
   	},
   	pickerLabel: {
 	    color: Colors.grey,
-	    fontFamily: 'Roboto',
+	    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto',
 	    textAlign: "left",
 	    width: "99%",
 	    padding: 10,

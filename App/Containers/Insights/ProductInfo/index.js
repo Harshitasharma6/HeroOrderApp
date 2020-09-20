@@ -26,7 +26,7 @@ class ProductInfoScreen extends Component {
         	<View style={{flex: 1, paddingVertical: hp('1%'), paddingHorizontal: wp('4%')}}>
 	            <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
 	                <WhiteButton title={"Available Offers"}  style={{width: wp('40%'), height: hp('4.5%')}} onPress={() => NavigationService.navigate('ProductInfoSchemesScreen', {product_id: data.sfid})} textStyle={{color: Colors.blue, textTransform: 'capitalize', fontSize: wp('3.5%')}}>
-                  <Icon name={'brightness-percent'} style={Styles.listItemIcon} />
+                  <GenericIcon name={'percent'} style={Styles.listItemIcon} />
 		            </WhiteButton>
 	            </View>
 	            <ScrollView style={{marginTop: hp('2%')}}>

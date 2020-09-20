@@ -38,7 +38,7 @@ const Styles = StyleSheet.create({
     shadowColor: "#000",
     flexDirection: 'column',
 	  shadowOffset: {
-		width: 0
+		  width: 0
 	},
 	  shadowOpacity: 0.3,
 	  shadowRadius: 4,

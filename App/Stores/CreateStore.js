@@ -11,6 +11,7 @@ import { INITIAL_STATE as DEALERS_INITIAL_STATE } from './Dealers/InitialState';
 import { INITIAL_STATE as INSIGHTS_INITIAL_STATE } from './Insights/InitialState';
 import { INITIAL_STATE as SUBDEALERS_INITIAL_STATE } from './SubDealers/InitialState'; 
 import { INITIAL_STATE as USER_INITIAL_STATE } from './User/InitialState'; 
+import { INITIAL_STATE as PRODUCTS_INITIAL_STATE } from './Products/InitialState'; 
 
 
 

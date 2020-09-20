@@ -37,6 +37,8 @@ class LoginScreen extends Component {
             loading,
             mobile
         } = this.props;
+
+        console.log('inside login screen');
         return (
             <View style={Style.container}>
                  <View style={Style.buttonBox}>

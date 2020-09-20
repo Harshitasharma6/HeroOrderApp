@@ -5,7 +5,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 export default StyleSheet.create({
   icon: {
     color: Colors.grey,
-    
+    fontSize: wp('4.2%')
   },
   iconText: {
   	color:  Colors.grey,

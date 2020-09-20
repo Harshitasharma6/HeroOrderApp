@@ -95,7 +95,7 @@ class FooterScreen extends React.Component {
       <Footer style={Style.footerContainer}>
         <FooterTab style={Style.footer}>
         <FooterIcon
-            icon={'person-add'}
+            icon={'user-plus'}
             iconText={'Visitor'}
             active={visitorActive} 
             disabled={false}
@@ -103,7 +103,7 @@ class FooterScreen extends React.Component {
           />
 
           <FooterIcon
-            icon={'podium'}
+            icon={'bar-chart'}
             iconText={'Insights'}
             active={insightsActive}
             disabled={false}
@@ -111,7 +111,7 @@ class FooterScreen extends React.Component {
           />
 
           <FooterIcon
-            icon={'notifications'}
+            icon={'bell'}
             iconText={'Lead Alerts'}
             active={leadAlertsActive}
             disabled={false}
@@ -120,7 +120,7 @@ class FooterScreen extends React.Component {
 
         
           <FooterIcon
-            icon={'menu'}
+            icon={'tasks'}
             iconText={'Menu'}
             active={false} 
             disabled={false}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import NavigationService from 'App/Services/NavigationService'
 import AppNavigator from 'App/Navigators/AppNavigator'
-import { View, Keyboard, StatusBar, Alert, Text } from 'react-native'
+import { View, Keyboard, StatusBar, Alert, Text, Platform } from 'react-native'
 import { Root } from "native-base";
 import { connect } from 'react-redux'
 import StartDayActions from 'App/Stores/StartDay/Actions'
@@ -20,10 +20,10 @@ import VIForegroundService from '@voximplant/react-native-foreground-service';
 import { Drawer } from 'native-base';
 import SideBar from 'App/Containers/Layout/SideBarLayout/SideBar';
 import CallsModal from 'App/Containers/CallsModal';
+import SplashScreen from 'react-native-splash-screen';
 navigator.geolocation = require('react-native-geolocation-service');
 
 class RootScreen extends Component {
-
   async componentDidMount() {
     const {
       id,
@@ -44,6 +44,7 @@ class RootScreen extends Component {
 
 
     let permission = await HelperService.requestMultipleStoragePermission();
+    let cameraPermission= await HelperService.requestCameraPermission();
     
     if (!permission) {
       Alert.alert(
@@ -52,70 +53,56 @@ class RootScreen extends Component {
       );
     }
 
-    let locationPermission = await HelperService.requestLocationPermission();
-
-    if (locationPermission) {
-      //HelperService.watchLocation({callback: (fetchCurrentLocationSuccess)});
-    }else {
-      Alert.alert(
-        "Location permission Denied.Cannot Proceed",
-        'If you have denied permanently then Go "App Permissions" and Turn on "Location" Permission for HeroElectric.'
-      );
-    }
-
     startup();
+    SplashScreen.hide();
+    if (Platform.OS == 'android') {
+      let phoneStatePermission = await HelperService.requestPhoneStatePermission();
+      if (phoneStatePermission) {
+          this.callDetector = new CallDetectorManager((event, phoneNumber)=> {
+            if (event === 'Disconnected') {
+              Alert.alert(
+                `Do you want to register the recent call from number ${phoneNumber} ?`,
+                'Pressing Yes will take you to screen where you can create record for this call.',
+                [
+                  {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel'
+                  },
+                  { text: 'Yes', onPress: () => {changeForm({edited_field: 'contact_number__c', edited_value: phoneNumber}); NavigationService.navigate('CustomerCallFormScreen') }}
+                ],
+                { cancelable: false }
+              );
+            }
+            else if (event === 'Connected') {
 
-    let phoneStatePermission = await HelperService.requestPhoneStatePermission();
-    if (phoneStatePermission) {
-        this.callDetector = new CallDetectorManager((event, phoneNumber)=> {
-          if (event === 'Disconnected') {
-            Alert.alert(
-              `Do you want to register the recent call from number ${phoneNumber} ?`,
-              'Pressing Yes will take you to screen where you can create record for this call.',
-              [
-                {
-                  text: 'Cancel',
-                  onPress: () => console.log('Cancel Pressed'),
-                  style: 'cancel'
-                },
-                { text: 'Yes', onPress: () => {changeForm({edited_field: 'contact_number__c', edited_value: phoneNumber}); NavigationService.navigate('CustomerCallFormScreen') }}
-              ],
-              { cancelable: false }
-            );
+            }
+            else if (event === 'Incoming') {
+              
+            }
+            else if (event === 'Dialing') {
+           
+            }
+            else if (event === 'Offhook') {
+           
+            }
+            else if (event === 'Missed') {
+            }
+          },
+          true, 
+          ()=>{},
+          {
+            title: 'Phone State Permission',
+            message: 'This app needs access to your phone state in order to react and/or to adapt to incoming calls.'
           }
-          else if (event === 'Connected') {
-
-          }
-          else if (event === 'Incoming') {
-            
-          }
-          else if (event === 'Dialing') {
-         
-          }
-          else if (event === 'Offhook') {
-         
-          }
-          else if (event === 'Missed') {
-          }
-        },
-        true, 
-        ()=>{},
-        {
-          title: 'Phone State Permission',
-          message: 'This app needs access to your phone state in order to react and/or to adapt to incoming calls.'
-        }
-      );
-    }else {
-      Alert.alert(
-        "Phone State and Call Logs Permission",
-        'If you have denied permanently then Go "App Permissions" and Turn on "Call Log" and "Phone State" Permission for HeroElectric.'
-      );
+        );
+      }else {
+        Alert.alert(
+          "Phone State and Call Logs Permission",
+          'If you have denied permanently then Go "App Permissions" and Turn on "Call Log" and "Phone State" Permission for HeroElectric.'
+        );
+      }
     }
-    //HelperService.startForegroundService();
-  }
-
-  componentWillUnmount() {
-    //HelperService.clearWatchLocation();
   }
 
   closeDrawer(){

@@ -27,9 +27,8 @@ export function* startup({ params }) {
         yield put(CommonActions.getBookingPicklist({}));
         yield put(CommonActions.getAllStates({}));
         yield put(CommonActions.getAllCities({}));
-        
-        
     }else { //user not logged in or session expired
+        console.log('inside startup');
         NavigationService.navigateAndReset('LoginScreen')
     }
 }

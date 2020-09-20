@@ -8,7 +8,6 @@ import { Image, ScrollView, StyleSheet, Text, View, TouchableOpacity } from "rea
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import BackArrowButton from 'App/Components/BackArrowButton';
 import BlueButton from 'App/Components/BlueButton';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class SideBar extends Component {
 	navigate(screen) {
@@ -43,7 +42,7 @@ export default class SideBar extends Component {
 					</ListItem>
 
 					<ListItem style={Styles.listItemDivider} onPress={() => this.navigate('SchemeClaimInfoScreen')}>
-						<Icon name={'brightness-percent'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Scheme Claim'}</Text>
+						<GenericIcon name={'percent'} style={Styles.listItemIcon} /><Text style={{ ...Styles.selectedListItemText }}>{'Scheme Claim'}</Text>
 					</ListItem>
 
 					<ListItem style={Styles.listItemDivider} onPress={() => this.navigate('SubDealerInfoScreen')}>
