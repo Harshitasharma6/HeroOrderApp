@@ -391,19 +391,19 @@ class InvoiceDetailformScreen extends Component {
 					<InputText
 						style={Style.mb10}
 						placeholder={'Other Financier Name'}
-						value={form.other_financier_name__c}
+						value={form.other_financier_name__c} 
 						onChange={(value) => changeForm({ edited_field: 'other_financier_name__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'other_financier_name__c'}
 						label={'Other Financier Name'}
 					/>
 
 					<View style={{...Style.bottomMargin}}>
-		            <ImagePicker
+		            <MultipleImagePicker
 		            	title={'Aadhar Card'}
-		              	image={form.aadhar_card__c} 
+		              	images={form.aadhar_card__c || []} 
 		              	loading={uploadImageLoading && uploadImageField == 'aadhar_card__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'aadhar_card__c', edited_value: '' })}
-		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'aadhar_card__c'}})}>
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'aadhar_card__c'}, multiple: true, previous_value: form.aadhar_card__c})}>
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                 <GenericIcon 
@@ -413,16 +413,16 @@ class InvoiceDetailformScreen extends Component {
 		                {' Aadhar Card'}
 		                </Text>
 		              </View>
-		            </ImagePicker>
+		            </MultipleImagePicker>
           		</View>
 
 	        	<View style={{...Style.bottomMargin}}>
-		            <ImagePicker
+		            <MultipleImagePicker
 		            	title={'Acknowledgement'}
-		              	image={form.acknowledgement__c}
+		              	images={form.acknowledgement__c || []} 
 		              	loading={uploadImageLoading && uploadImageField == 'acknowledgement__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'acknowledgement__c', edited_value: '' })}
-		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'acknowledgement__c'}})}> 
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'acknowledgement__c'}, multiple: true, previous_value: form.acknowledgement__c})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                <GenericIcon 
@@ -432,16 +432,16 @@ class InvoiceDetailformScreen extends Component {
 		                {' Acknowledgement'}
 		                </Text>
 		              </View>
-		            </ImagePicker>
+		            </MultipleImagePicker>
           		</View>
 
           		<View style={{...Style.bottomMargin}}>
-		            <ImagePicker 
+		            <MultipleImagePicker 
 		            title={'Driving License'}
-		              	image={form.driving_license__c}
+		              	images={form.driving_license__c || []} 
 		              	loading={uploadImageLoading && uploadImageField == 'driving_license__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'driving_license__c', edited_value: '' })}
-		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'driving_license__c'}})}> 
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'driving_license__c'}, multiple: true, previous_value: form.driving_license__c})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                <GenericIcon 
@@ -451,16 +451,16 @@ class InvoiceDetailformScreen extends Component {
 		                {' Driving License'}
 		                </Text>
 		              </View>
-		            </ImagePicker>
+		            </MultipleImagePicker>
           		</View>
 
           		<View style={{...Style.bottomMargin}}>
-		            <ImagePicker 
+		            <MultipleImagePicker 
 		            title={'Insurance'}
-		              	image={form.insurance__c}
+		              	images={form.insurance__c || []} 
 		              	loading={uploadImageLoading && uploadImageField == 'insurance__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'insurance__c', edited_value: '' })}
-		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'insurance__c'}})}> 
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'insurance__c'}, multiple: true, previous_value: form.insurance__c})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                <GenericIcon 
@@ -470,19 +470,19 @@ class InvoiceDetailformScreen extends Component {
 		                {' Insurance'}
 		                </Text>
 		              </View>
-		            </ImagePicker>
+		            </MultipleImagePicker>
           		</View>
 
 	            
 
 
           		<View style={{...Style.bottomMargin}}>
-		            <ImagePicker 
+		            <MultipleImagePicker 
 		            title={'RC'}
-		              	image={form.rc__c} 
+		              	images={form.rc__c || []} 
 		              	loading={uploadImageLoading && uploadImageField == 'rc__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'rc__c', edited_value: '' })}
-		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'rc__c'}})}> 
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'rc__c'}, multiple: true, previous_value: form.rc__c})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                <GenericIcon 
@@ -492,17 +492,17 @@ class InvoiceDetailformScreen extends Component {
 		                {' RC'}
 		                </Text>
 		              </View>
-		            </ImagePicker>
+		            </MultipleImagePicker>
           		</View>
 
 
           		<View style={{...Style.bottomMargin}}>
-		            <ImagePicker
+		            <MultipleImagePicker
 		            title={'Voter Card'}
-		              	image={form.voter_id_card__c} 
+		              	images={form.voter_id_card__c || []} 
 		              	loading={uploadImageLoading && uploadImageField == 'voter_id_card__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'voter_id_card__c', edited_value: '' })}
-		               	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'voter_id_card__c'}})}> 
+		               	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'voter_id_card__c'}, multiple: true, previous_value: form.voter_id_card__c})}> 
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                <GenericIcon 
@@ -512,7 +512,7 @@ class InvoiceDetailformScreen extends Component {
 		                {' Voter Card'}
 		                </Text>
 		              </View>
-		            </ImagePicker>
+		            </MultipleImagePicker>
           		</View>
 
 
