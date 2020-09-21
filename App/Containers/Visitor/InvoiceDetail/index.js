@@ -81,7 +81,17 @@ import {Spinner } from 'native-base';
 
 class InvoiceDetailformScreen extends Component {
 	componentDidMount() {
-		
+		const { 
+			form,
+			changeForm
+		} = this.props;
+
+		if (form.outstanding_amount__c == 0) {
+			changeForm({
+				edited_field: 'amount_paid_at_booking__c', 
+				edited_value: 0
+			})
+		}
 	}
 
 	componentWillUnmount() {
@@ -111,7 +121,8 @@ class InvoiceDetailformScreen extends Component {
 
 		submitForm({
 			...form,
-			newBookingForm: !showInfo ? newBookingForm : false
+			newBookingForm: !showInfo ? newBookingForm : false,
+			amount_paid_at_booking__c: form.outstanding_amount__c == 0 ? 0 : form.amount_paid_at_booking__c
 		});
 	}
 
@@ -184,7 +195,7 @@ class InvoiceDetailformScreen extends Component {
 				}
 
 			{
-				showInfo && form.outstanding_amount__c == 0  ? [] :  
+				(showInfo && form.outstanding_amount__c == 0 && bookingInfoForm.chassis_no__c &&  bookingInfoForm.motor_no__c && bookingInfoForm.charger_no__c && bookingInfoForm.battery_no__c && bookingInfoForm.make_of_battery__c && bookingInfoForm.type_of_battery__c &&  bookingInfoForm.capacity_of_each_battery__c) ? [] :  
 				<>
 			   <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
 					<InputText
@@ -225,15 +236,17 @@ class InvoiceDetailformScreen extends Component {
 						label={'Reference No.* (For Refrence Schemes only)'}
 					/>	
 
-
-					<InputNumber
-						styles={Style.mb10}
-						placeholder={`Total Amount Payable ${form.outstanding_amount__c ? HelperService.currencyValue(form.outstanding_amount__c) : HelperService.currencyValue(form.total_amount_payable__c)}`}
-						value={form.amount_paid_at_booking__c}
-						onChange={(value) => changeForm({ edited_field: 'amount_paid_at_booking__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'amount_paid_at_booking__c'}
-						label={'Amount'}
-					/>	
+					{
+						form.outstanding_amount__c == 0 ? [] : 
+							<InputNumber
+								styles={Style.mb10}
+								placeholder={`Total Amount Payable ${form.outstanding_amount__c ? HelperService.currencyValue(form.outstanding_amount__c) : HelperService.currencyValue(form.total_amount_payable__c)}`}
+								value={form.amount_paid_at_booking__c}
+								onChange={(value) => changeForm({ edited_field: 'amount_paid_at_booking__c', edited_value: value })}
+								error={validation.invalid && validation.invalid_field == 'amount_paid_at_booking__c'}
+								label={'Amount'}
+							/>	
+					}
 
 
 
