@@ -82,14 +82,12 @@ class SchemeClaimInfoScreen extends Component {
                       showTextAvatar={false}
                       //onPress={() => NavigationService.navigate('CustomerInfoScreen')}
                       content={[
-                            <View style={{flexDirection:'row'}}>
-                            <View style={{width:'60%'}}>
-                          <GenericDisplayCardStrip key={'Claim Number' + item.name} label={'Claim Number:'} value={item.name} valueStyle={{marginRight:'20%', }}/>
-                          </View>
-                          <View style={{width:'45%',justifyContent:'flex-start'}}>
-                          <GenericDisplayCardStrip key={'status' + item.name} label={'Status:'} value={item.status__c} labelStyle={{marginLeft:'7%'}} valueStyle={{marginRight:'15%', }} />
-                          </View>
-                          </View>,
+                          
+                          <GenericDisplayCardStrip key={'Claim Number' + item.name} label={'Claim Number:'} value={item.name} />,
+                         
+                         
+                          <GenericDisplayCardStrip key={'status' + item.name} label={'Status:'} value={item.status__c}  />,
+                         
                             <GenericDisplayCardStrip key={'Claim Submission Date' + item.name} label={'Claim Submission Date:'}   value={ HelperService.dateReadableFormat(item.scheme_claim_submission_date__c)} />,
                             <GenericDisplayCardStrip key={'Expected Claim Amount' + item.name} label={'Expected Claim Amount:'}  value={item.expected_claim_amount_by_dealer__c}  />,
                             <GenericDisplayCardStrip key={'Scheme Applicable' + item.name} label={'Scheme Applicable:'}  value={item.scheme_applicable_name}  />,

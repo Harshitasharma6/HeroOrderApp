@@ -71,7 +71,7 @@ const Styles = StyleSheet.create({
   	flexDirection: 'row'
   },
   header: {
-    height: hp('12%'),
+    height: hp('10%'),
     flexDirection: 'row',
     marginTop:hp('3%')
 

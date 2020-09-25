@@ -84,6 +84,22 @@ function validateRegisterCustomerForm(params) {
 		}
 	}
 
+	if (params.age__c&&!validateAgeNumber(params.age__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'age__c',
+			error_message: 'Please Enter valid Age '
+		}
+	}
+	if (params.email_id__c&&!validateEmail(params.email_id__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'email_id__c',
+			error_message: 'Please Enter valid Email Id'
+		}
+	}
+
+
 	return false;
 }
 
@@ -169,7 +185,7 @@ function validateBookingForm(params) {
 		}
 	}
 
-	if (params.amount_paid_at_booking__c && params.amount_paid_at_booking__c < 0) {
+	if (params.amount_paid_at_booking__c && params.amount_paid_at_booking__c < 0 ) {
 		return {
 			invalid: true,
 			invalid_field: 'amount_paid_at_booking__c',
@@ -178,11 +194,19 @@ function validateBookingForm(params) {
 	}
 
 
-	if (params.customer_gstin_no__c && !validateGstNumber(params.customer_gstin_no__c)) {
+	if (params.customer_gstin_no__c&&!validateGstNumber(params.customer_gstin_no__c)) {
 		return {
 			invalid: true,
 			invalid_field: 'customer_gstin_no__c',
 			error_message: 'Please Enter valid GST number.'
+		}
+	}
+
+	if (params.email_id__c&&!validateEmail(params.email_id__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'email_id__c',
+			error_message: 'Please Enter valid Email Id'
 		}
 	}
 
@@ -318,13 +342,7 @@ function validateMarkWonAction(params) {
 	}
 
 
-	if (!validateFieldIsEmpty(params.owner_s_handbook_no__c)) {
-		return {
-			invalid: true,
-			invalid_field: 'owner_s_handbook_no__c',
-			error_message: 'Cannot Mark Won!! Owners Handbook is empty.'
-		}
-	}
+	
 
 
 	if (params.outstanding_amount__c > 0) {
@@ -348,6 +366,11 @@ function validatePhoneNumber(number) {
 	return number.match(phoneNum);
 }
 
+function validateEmail(email) {
+	var userEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	return userEmail.test(email);
+}
+
 function validateNumber(number) {
 	if (!number) return false;
 	var numValue = "^[0-9]*$"
@@ -361,6 +384,16 @@ function validateThreeDigitNumber(number) {
 
 function validateGstNumber(number) {
 	return (number.length == 15)
+	// var gstinformat = new RegExp('^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]1}[1-9A-Z]{1}Z[0-9A-Z]{1}$');    
+	// if (gstinformat.test(number)) {    
+ //        return true;    
+ //    } else {    
+ //        return false;    
+ //    }    
+}
+
+function validateAgeNumber(number) {
+	return (number.length < 3)
 	// var gstinformat = new RegExp('^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]1}[1-9A-Z]{1}Z[0-9A-Z]{1}$');    
 	// if (gstinformat.test(number)) {    
  //        return true;    

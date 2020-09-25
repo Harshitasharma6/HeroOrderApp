@@ -15,7 +15,7 @@ const Select = ({ selected = '', list = [], onChange = () => { }, style = {}, la
         mode={'dropdown'}
         selectedValue={selected} 
         onValueChange={onChange} 
-        iosIcon={<GenericIcon name="arrow-down" />}
+      
         placeholder={placeholder}
         placeholderStyle={{ color: Colors.grey, fontFamily: ApplicationStyles.textMsgFont}}
         placeholderIconColor={Colors.grey}

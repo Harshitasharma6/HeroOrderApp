@@ -81,7 +81,7 @@ class OpenHotLeads extends Component {
                 style={Styles.infoBoxPink}
                 heading={`${item.first_name__c} ${item.last_name__c}`}
                 showTextAvatar={true}
-                onPress={() => this.onPressCard(item, item.sfid || item.id)}
+                onPress={() => this.onPressCard(item,  item.id)}
                 content={[
                   <GenericDisplayCardStrip key={'Status' + item.id} label={'Status'} value={item.lead_status__c}/>,
                   <GenericDisplayCardStrip key={'Stage' + item.id} label={'Stage'} value={item.lead_stage__c || ''}/>,

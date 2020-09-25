@@ -77,7 +77,7 @@ class PurchaseDateOverDue extends Component {
               <GenericDisplayCard dark={false}
                 style={Styles.infoSeaGreen}
                 heading={`${item.first_name__c} ${item.last_name__c}`}
-                onPress={() => this.onPressCard(item, item.sfid || item.id)}
+                onPress={() => this.onPressCard(item, item.id)}
                 showTextAvatar={true}
                 content={[
                   <GenericDisplayCardStrip key={'Status' + item.id} label={'Status'} value={item.lead_status__c}/>,
