@@ -77,7 +77,7 @@ class SchemeClaimInfoScreen extends Component {
                 data={filteredClaimList}
                 renderItem={({ item }) => 
                     <GenericDisplayCard dark={false}
-                      style={{ width: '92%', elevation: 0 }}
+                      style={{ width: '100%', elevation: 0 }}
                      
                       showTextAvatar={false}
                       //onPress={() => NavigationService.navigate('CustomerInfoScreen')}
