@@ -393,7 +393,14 @@ function validateGstNumber(number) {
 }
 
 function validateAgeNumber(number) {
-	return (number.length < 3)
+	
+	if(isNaN(number)||number<15||number>100){
+	return false
+	}
+	else
+	{
+		return true
+	}
 	// var gstinformat = new RegExp('^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]1}[1-9A-Z]{1}Z[0-9A-Z]{1}$');    
 	// if (gstinformat.test(number)) {    
  //        return true;    
