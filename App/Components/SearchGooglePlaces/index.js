@@ -120,7 +120,7 @@ export default class Map extends React.Component {
             return ""; // text input default value
           }}
           query={{
-            key: "AIzaSyDvBhKW53QCambhPRNSzOfDpQWaMZTvLNY",
+            key: "AIzaSyDmoWXBFhIIyD5BL3H9GFBOFM0YN5MGNSE",
             language: "en", // language of the results
             components: 'country:in' // added  manually
           }}

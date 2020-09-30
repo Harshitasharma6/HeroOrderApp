@@ -37,8 +37,8 @@ class CustomersScreen extends Component {
       const {
        customerSearchFilters
       } = this.props;
-  let filteredList = HelperService.searchTextListFilter(list,  customerSearchFilters['searchBy'],  customerSearchFilters['searchValue']);
-  filteredList = HelperService.sortListFilter(filteredList, customerSearchFilters['sortBy'], customerSearchFilters['sortType']);    
+      let filteredList = HelperService.searchTextListFilter(list,  customerSearchFilters['searchBy'],  customerSearchFilters['searchValue']);
+      filteredList = HelperService.sortListFilter(filteredList, customerSearchFilters['sortBy'], customerSearchFilters['sortType']);    
   return filteredList;
     }  
 

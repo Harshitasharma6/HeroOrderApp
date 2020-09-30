@@ -635,7 +635,12 @@ function searchTextListFilter(list, field, searchText, field2) {
 	} else {
 		filteredList = list.filter((item) => {
 			if (item[field]) {
-				return item[field].toLowerCase().match(text)
+				if (typeof(item[field]) == 'object') {
+					let x = item[field].filter((y) => y.toLowerCase().match(text));
+					return !!x.length
+				}else {
+					return item[field].toLowerCase().match(text)
+				}
 			} else {
 				return false
 			}
