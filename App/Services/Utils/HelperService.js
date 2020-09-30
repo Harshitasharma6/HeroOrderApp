@@ -636,7 +636,7 @@ function searchTextListFilter(list, field, searchText, field2) {
 		filteredList = list.filter((item) => {
 			if (item[field]) {
 				if (typeof(item[field]) == 'object') {
-					let x = item[field].filter((y) => y.toLowerCase().match(text));
+					let x = item[field].filter((y) => y && y.toLowerCase().match(text));
 					return !!x.length
 				}else {
 					return item[field].toLowerCase().match(text)
