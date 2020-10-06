@@ -6,6 +6,7 @@ import { LeadAlertTypes } from 'App/Stores/LeadAlerts/Actions';
 import { call, put, select, take } from 'redux-saga/effects';
 import { LeadAlertService } from 'App/Services/Api/LeadAlertService';
 import LeadAlertActions from 'App/Stores/LeadAlerts/Actions';
+import CommonActions from 'App/Stores/Common/Actions';
 import { offlineApiCall } from './OfflineSaga';
 import {Alert} from 'react-native'
 import _ from 'lodash';
@@ -204,7 +205,9 @@ export function* fetchConfirmedBooking({ payload }) {
 
 
 function* markLeadLost(payload) {
+	yield put(CommonActions.closeModal());
 	yield put(LeadAlertActions.markLeadLostLoading());
+
 	try {
 		const isOnline = yield select(getConnectionStatus);
 		if (!isOnline) {
@@ -323,15 +326,13 @@ export function* watchMarkLeadLost() {
 	while (true) {
 		const { payload } = yield take(LeadAlertTypes.MARK_LEAD_LOST)
 		try {
-			const validationFailed = false;
+			const validationFailed = yield call(ValidationService.validateMarkLost, payload);
 			if (validationFailed) {
 				HelperService.showToast({ 
 					message: validationFailed.error_message, 
 					duration: 2000, 
 					buttonText: 'Okay' 
 				});
-
-				//yield put(LeadAlertActions.searchCustomerValidationFailed(validationFailed));
 				continue;
 			}
 		} catch (err) {

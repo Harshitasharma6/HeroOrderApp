@@ -91,7 +91,7 @@ class CallLeads extends Component {
                     textStyle={Styles.markLostButtonText} 
                     onPress={() => {
                     return openModal({
-                        content: <LeadLostScreen id={item.id} onSubmit={(params) => {closeModal();submitForm(params)}}/>, 
+                        content: <LeadLostScreen id={item.id} onSubmit={(params) => {submitForm(params)}}/>, 
                         heading: 'Mark as Lost', 
                         bodyFlexHeight: .4
                     })}}>

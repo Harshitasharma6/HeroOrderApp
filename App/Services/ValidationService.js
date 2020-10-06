@@ -465,6 +465,17 @@ function validateLoginForm(params) {
 }
 
 
+function validateMarkLost(params) {
+	if (!validateFieldIsEmpty(params.lead_status_reason__c)) {
+		return {
+			invalid_number: true,
+			error_message: 'Cannot Submit.Please select the reason'
+		}
+	}
+
+	return false;
+}
+
 
 
 
@@ -477,5 +488,6 @@ export const ValidationService = {
 	validateCreateSubDealerForm,
 	validateMarkWonAction,
 	validateBookingForm,
-	validateLoginForm
+	validateLoginForm,
+	validateMarkLost
 }
