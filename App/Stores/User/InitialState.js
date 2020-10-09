@@ -12,5 +12,8 @@ export const INITIAL_STATE = {
     },
     is_logged_in: false,
 
+    Tax :[],
+    taxLoader :'false',
+
     
 }

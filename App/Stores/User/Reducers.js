@@ -254,6 +254,27 @@ export const updateUserStatus = (state, {payload}) => ({
 });
 
 
+export const 	getTaxDetailsLoading = (state) => ({
+  ...state,
+  taxLoader: true
+});
+
+export const 	getTaxDetailsLoadingStop =  (state) => ({
+  ...state,
+  taxLoader: false
+});
+
+export const 	getTaxDetailsSuccess = (state, {payload}) => ({
+  ...state,
+  taxLoader: false,
+  Tax: payload
+});
+
+export const	getTaxDetailsFailure = (state, {payload}) => ({
+  ...state,
+  taxLoader: false
+});
+
 
 
 
@@ -297,6 +318,13 @@ export const reducer = createReducer(INITIAL_STATE, {
 
   [UserTypes.UPDATE_USER_CHECK_IN_LOCATION]   : updateUserCheckInLocation,
   [UserTypes.UPDATE_LOGIN_DETAILS]            : updateLoginDetails,
-  [UserTypes.UPDATE_USER_STATUS]              : updateUserStatus
+  [UserTypes.UPDATE_USER_STATUS]              : updateUserStatus,
+
+
+  [UserTypes.GET_TAX_DETAILS_LOADING]           : getTaxDetailsLoading ,
+  [UserTypes.GET_TAX_DETAILS_LOADING_STOP]      : getTaxDetailsLoadingStop,
+  [UserTypes.GET_TAX_DETAILS_SUCCESS]           : getTaxDetailsSuccess,
+  [UserTypes.GET_TAX_DETAILS_FAILURE]           : getTaxDetailsFailure,
+
 
 });

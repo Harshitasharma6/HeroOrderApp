@@ -67,7 +67,13 @@ const { Types, Creators } = createActions({
 
 	updateUserCheckInLocation:['payload'] ,
 	updateLoginDetails: ['payload'],
-	updateUserStatus: ['payload']
+	updateUserStatus: ['payload'],
+
+	getTaxDetails: ['payload'],
+	getTaxDetailsLoading: null,
+	getTaxDetailsLoadingStop: null,
+	getTaxDetailsSuccess: ['payload'],
+	getTaxDetailsFailure: null,
 });
 
 export const UserTypes = Types

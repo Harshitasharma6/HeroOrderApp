@@ -81,6 +81,26 @@ function logoutUser(params) {
   });
 }
 
+function getTaxDetails(params) {
+	let url = Config.USER_SERVICE.GET_TAX_DETAILS;
+  
+  return apiClient.get(url, {
+		headers: {
+			token: params.token,
+			state__c: params.state__c,
+		}
+	}).then((response) => {
+		if (in200s(response.status)) {
+			return response['data']['tax'];
+		}
+		return null
+	}).catch(error => {
+		//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
+   		return null;
+
+	});
+}
+
 
 function startDay(params) {
   let requestParams = {
@@ -236,4 +256,5 @@ export const userService = {
   checkAttendance,
   getAllPSM,
   logoutUser,
+  getTaxDetails,
 }

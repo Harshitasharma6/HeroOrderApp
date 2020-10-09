@@ -74,6 +74,33 @@ export function* loginUser(data) {
 		
 		}
 
+export function* getTaxDetails({ payload }) {
+			const isOnline = yield select(getConnectionStatus);
+			if (!isOnline) {
+				yield put(UserActions.doNothing());
+				return;
+			}
+		
+			try {
+				yield put(UserActions.getTaxDetailsLoading());
+				let {token, state__c} = yield select(state => state.user)
+				payload.token = token
+				payload.state__c = state__c
+		
+				let successData = yield call(userService.getTaxDetails, payload);
+				if (successData) {
+					yield put(UserActions.getTaxDetailsSuccess(successData));
+					
+				} else {
+					yield put(UserActions.getTaxDetailsFailure());
+				}
+			} catch (error) {
+				yield put(UserActions.getTaxDetailsFailure());
+			}
+		}
+		
+
+
 export function* startDay(data) {
 	yield put(UserActions.userStartDayLoading());
 	try {

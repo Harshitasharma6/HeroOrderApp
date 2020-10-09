@@ -43,6 +43,7 @@ import {
     watchUserLoginRequest,
     watchUserStartDayRequest,
     watchUserLogoutRequest,
+    getTaxDetails,
 } from './UserSaga';
 
 import { 
@@ -179,6 +180,7 @@ export default function* root() {
         takeLatest(UserTypes.MARK_USER_ABSENT, markAbsent),
         takeLatest(UserTypes.CHECK_ATTENDANCE, checkAttendance),
         takeLatest(UserTypes.FETCH_ALL_PSM, fetchAllPsm),
+        takeLatest(UserTypes.GET_TAX_DETAILS,getTaxDetails),
         
 
   

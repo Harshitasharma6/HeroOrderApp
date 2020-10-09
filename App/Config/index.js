@@ -4,6 +4,7 @@ export const Config = {
 	USER_SERVICE: {
 		LOGIN: 'login/login',
 		LOGOUT: 'login/logout',
+		GET_TAX_DETAILS: 'dashboard/getTax',
 	},
 
 	VISITOR_SERVICE: {
