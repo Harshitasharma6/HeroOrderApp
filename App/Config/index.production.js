@@ -1,5 +1,5 @@
 export const Config = {
-	API_URL: 'https://cnsretailapp.herokuapp.com/',
+	API_URL: 'https://hero-dealers-app-production.herokuapp.com/',
 
 	USER_SERVICE: {
 		FETCH_AREAS_URL: 'agents/areas',

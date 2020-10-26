@@ -34,6 +34,7 @@ import VisitorInfoCard from './VisitorInfoCard';
 //   "test_drive_offered__c": "Yes",    (*mandatory)
 //   "customer__c": "0039D000008BMX2QAO",
 //   "address_line_1__c" : “test address”
+//   "pincode__c": null
 
 
 class VisitorInfoScreen extends Component {
@@ -54,7 +55,8 @@ class VisitorInfoScreen extends Component {
 	              content={[
 	                <GenericDisplayCardStrip key={'Phone Number' + data.id} label={'Phone Number'} value={data.contact_number__c} />,
 	                <GenericDisplayCardStrip key={'Email'+ data.id} label={'Email'} value={data.email_id__c} />,
-	                  <GenericDisplayCardStrip key={'Address'+ data.id} label={'Address'} value={data.address_line_1__c || ''} />,
+	                <GenericDisplayCardStrip key={'Address'+ data.id} label={'Address'} value={data.address_line_1__c || ''}/>,
+	               	<GenericDisplayCardStrip key={'Pincode'+ data.id} label={'Pincode'} value={data.pincode__c || ''} />,
 	                <GenericDisplayCardStrip key={'Occupation'+ data.id} label={'Occupation'} value={data.occupation__c} />,
 	                <GenericDisplayCardStrip key={'Source of Enquiry'+ data.id} label={'Source of Enquiry'} value={data.lead_source__c} />,
 	                <GenericDisplayCardStrip key={'Product Interested'+ data.id} label={'Product Interested'} value={HelperService.findMatchingKeyValueInList(productsList, 'id', data.product__c, 'name')} />,

@@ -189,6 +189,16 @@ class UpdateVisitorScreen extends Component {
 						error={validation.invalid && validation.invalid_field == 'address_line_1__c'}
 					/>
 
+					<InputNumber
+						styles={Style.mb10}
+						placeholder={'Pincode'}
+						value={form.pincode__c}
+						onChange={(value) => changeForm({ edited_field: 'pincode__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'pincode__c'}
+						label={'Pincode'}
+					/>
+
+
                 	<InputNumber
 						styles={Style.mb10}
 						placeholder={'Age'}

@@ -41,6 +41,7 @@ import GoogleAddress from 'App/Components/GoogleAddress'
 // 	"test_drive_offered__c": "Yes",		(*mandatory)
 // 	"customer__c": "0039D000008BMX2QAO",
 // 	"address_line_1__c" : “test address”
+//  "pincode__c": null
 
 
 class NewRegistrationFormScreen extends Component {
@@ -182,6 +183,16 @@ class NewRegistrationFormScreen extends Component {
 						value={form.address_line_1__c}
 						changeForm={(value) => changeForm({ edited_field: 'address_line_1__c', edited_value: value })}
 						error={validation.invalid && validation.invalid_field == 'address_line_1__c'}
+					/>
+
+
+					<InputNumber
+						styles={Style.mb10}
+						placeholder={'Pincode'}
+						value={form.pincode__c}
+						onChange={(value) => changeForm({ edited_field: 'pincode__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'pincode__c'}
+						label={'Pincode'}
 					/>
 
 				
