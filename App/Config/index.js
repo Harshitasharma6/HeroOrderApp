@@ -1,10 +1,11 @@
 export const Config = {
-	API_URL: 'https://hero-dealers-app-production.herokuapp.com/',
+	API_URL: 'https://herodealersapp.herokuapp.com/',
 
 	USER_SERVICE: {
 		LOGIN: 'login/login',
 		LOGOUT: 'login/logout',
 		GET_TAX_DETAILS: 'dashboard/getTax',
+		GET_APP_VERSION: 'products/version'
 	},
 
 	VISITOR_SERVICE: {

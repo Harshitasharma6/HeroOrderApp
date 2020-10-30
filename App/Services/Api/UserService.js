@@ -245,6 +245,22 @@ function getAllPSM(params) {
   });
 }
 
+function getAppVersion(params) { 
+    let url = Config.USER_SERVICE.GET_APP_VERSION;
+    return apiClient.get(url, {
+        headers: {
+            'token': params.token,
+        }
+    }).then((response) => {
+        if (in200s(response.status)) {
+            return response.data.data.version
+        }
+        return null
+    }).catch(error => {
+        return null
+    });
+}
+
 export const userService = {
   fetchUser,
   loginUser,
@@ -257,4 +273,5 @@ export const userService = {
   getAllPSM,
   logoutUser,
   getTaxDetails,
+  getAppVersion
 }

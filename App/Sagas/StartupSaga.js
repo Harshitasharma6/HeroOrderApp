@@ -7,6 +7,7 @@ import NonShreeActions from 'App/Stores/NonShree/Actions'
 import { HelperService } from 'App/Services/Utils/HelperService';
 import {oauth, net} from 'react-native-force';
 import { startDayService } from 'App/Services/Api/StartDayService'
+import { userService } from 'App/Services/Api/UserService'
 import {Alert} from 'react-native'
 import { fetchLocation } from './UserSaga';
 import ProductsActions from 'App/Stores/Products/Actions';
@@ -28,8 +29,17 @@ export function* startup({ params }) {
         yield put(CommonActions.getAllStates({}));
         yield put(CommonActions.getAllCities({}));
         yield put(UserActions.getTaxDetails({}));
+        const appData = yield call(userService.getAppVersion, {token: user.token}); 
+        let android_version = '';
+        appData.map((obj) => {
+            if(obj.device__c == 'android'){
+                android_version = obj.version__c;
+            }
+        })
+        
+        appData ? HelperService.checkAppVersion(android_version) : '';
+
     }else { //user not logged in or session expired
-        console.log('inside startup');
         NavigationService.navigateAndReset('LoginScreen')
     }
 }
