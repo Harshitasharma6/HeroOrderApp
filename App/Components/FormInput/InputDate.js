@@ -19,7 +19,7 @@ const InputDate = ({ placeholder = '', onChange = () => { }, style = {}, value =
                     textStyle={Style.textStyle}
                     placeHolderTextStyle={Style.placeHolderTextStyle}
                     onDateChange={onChange}
-                    minimumDate={mindate}
+                    minimumDate={mindate ? mindate : (new Date())}
                     disabled={editable}
                 />
             </View>

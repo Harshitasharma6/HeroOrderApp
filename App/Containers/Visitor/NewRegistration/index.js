@@ -140,7 +140,6 @@ class NewRegistrationFormScreen extends Component {
                         }}
                         error={validation.invalid && validation.invalid_field == 'expected_close_date__c'}
 						label={'Expected Purchase Date*'}
-						mindate={moment.now()}
                     />
 
 
