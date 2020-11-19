@@ -161,11 +161,12 @@ const styles = StyleSheet.create({
 		minHeight: hp('8%'),
 	},
 	title: {
-		fontSize: wp('4.4%'),
+		fontSize: wp('3.5%'),
 		fontFamily: ApplicationStyles.textMsgFont,
 		color: Colors.primary,
 		paddingHorizontal: wp('2%'),
-		flexWrap: 'wrap'
+		flexWrap: 'wrap',
+		width:'90%'
 	},
 	image: {
 		width: hp('8%'),

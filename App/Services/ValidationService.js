@@ -210,6 +210,38 @@ function validateBookingForm(params) {
 		}
 	}
 
+	if (!validateFieldIsEmpty(params.aadhar_card__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'aadhar_card__c',
+			error_message: 'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License cannot be empty.'
+		}
+	}
+
+	if (!validateFieldIsEmpty(params.insurance__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'insurance__c',
+			error_message: 'Insurance/Rc/Tax Token cannot be empty.'
+		}
+	}
+
+	if (!validateFieldIsEmpty(params.invoice__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'invoice__c',
+			error_message: 'Invoice cannot be empty.'
+		}
+	}
+
+	if (!validateFieldIsEmpty(params.acknowledgement__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'acknowledgement__c',
+			error_message: 'Customer Acknolegment cannot be empty.'
+		}
+	}
+
 
 	if (params.outstanding_amount__c && (Number(params.amount_paid_at_booking__c) > Number(params.outstanding_amount__c))) {
 		return {
@@ -476,6 +508,57 @@ function validateMarkLost(params) {
 	return false;
 }
 
+function validateEditClaimForm(params) {
+	
+
+	if (!validateFieldIsEmpty(params.aadhar_voter_pan_driving)) {
+		return {
+			invalid: true,
+			invalid_field: 'aadhar_voter_pan_driving',
+			error_message: 'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License cannot be empty.'
+		}
+	}
+
+	if (!validateFieldIsEmpty(params.insurance__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'insurance__c',
+			error_message: 'Insurance/Rc/Tax Token cannot be empty.'
+		}
+	}
+
+	if (!validateFieldIsEmpty(params.invoice__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'invoice__c',
+			error_message: 'Invoice cannot be empty.'
+		}
+	}
+
+	if (!validateFieldIsEmpty(params.acknowledgement__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'acknowledgement__c',
+			error_message: 'Customer Acknolegment cannot be empty.'
+		}
+	}
+
+	
+
+	
+	
+
+
+	
+
+	
+
+
+	
+
+	return false;
+
+}
 
 
 
@@ -489,5 +572,6 @@ export const ValidationService = {
 	validateMarkWonAction,
 	validateBookingForm,
 	validateLoginForm,
-	validateMarkLost
+	validateMarkLost,
+	validateEditClaimForm,
 }

@@ -59,6 +59,7 @@ function loginUser(params) {
       }
       return null
   }).catch(error => {
+    
       
       return null
   });
@@ -91,10 +92,12 @@ function getTaxDetails(params) {
 		}
 	}).then((response) => {
 		if (in200s(response.status)) {
+      
 			return response['data']['tax'];
 		}
 		return null
 	}).catch(error => {
+   
 		//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
    		return null;
 

@@ -39,6 +39,7 @@ export function* getAllDealers({ payload }) {
 
 
 export function* getDealerClaims({ payload }) {
+	
 	const isOnline = yield select(getConnectionStatus);
 	if (!isOnline) {
 		yield put(DealersActions.doNothing());
@@ -66,6 +67,19 @@ export function* getDealerClaims({ payload }) {
 export function* watchCreateDealerClaim() {
 	while (true) {
 		const { payload } = yield take(DealersTypes.CREATE_DEALER_CLAIM)
+		try {
+			const validationFailed = yield call(ValidationService.validateEditClaimForm, payload);
+			if (validationFailed) {
+				HelperService.showToast({ 
+					message: validationFailed.error_message, 
+					duration: 2000, 
+					buttonText: 'Okay' 
+				});
+				continue;
+			}
+		} catch (err) {
+			console.log(err)
+		}
 	
 		yield call(CreateDealerClaim, payload)
 	}
@@ -97,21 +111,26 @@ function* CreateDealerClaim(payload) {
 		payload.token = token
 		payload.dealer_id = dealer__c
 		
+
+		
 		
 		const successData = yield call(DealersService.CreateDealerClaim, payload);
 
 		if (successData) { 
 			yield put(DealersActions.createDealerClaimSuccess(successData));
 			HelperService.showToast({ 
-				message: 'Dealer Scheme Created Successfully!!', 
+				message: 'Dealer Claim Updated Successfully!!', 
 				duration: 2000, 
 				buttonText: 'Okay' 
 			});
+			let searchFilters = yield select(state => state.dealers.schemeClaimSearchFilters)
+			yield put(DealersActions.getAllDealerClaims({date: `${searchFilters['selectedYear']}-${searchFilters['selectedMonth']+1}-${HelperService.getCurrentDate()}`}));
+
 			NavigationService.navigate('SchemeClaimInfoScreen')
 		} else {
 			yield put(DealersActions.createDealerClaimFailure())
 			HelperService.showToast({ 
-				message: 'Error!! Dealer Claim Creation Failed.Verify fields and try again.', 
+				message: 'Error!! Dealer Claim Updation Failed.Verify fields and try again.', 
 				duration: 2000, 
 				buttonText: 'Okay' 
 			});
@@ -119,7 +138,7 @@ function* CreateDealerClaim(payload) {
 	} catch (error) {
 		yield put(DealersActions.createDealerClaimFailure());
 		HelperService.showToast({ 
-			message: 'Error!!  Dealer Claim Creation Failed.Verify fields and try again.', 
+			message: 'Error!!  Dealer Claim Updation  Failed.Verify fields and try again.', 
 			duration: 2000, 
 			buttonText: 'Okay' 
 		});

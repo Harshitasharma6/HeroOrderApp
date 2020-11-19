@@ -1,5 +1,5 @@
 export const Config = {
-	API_URL: 'https://hero-dealers-app-production.herokuapp.com/',
+	API_URL: 'https://herodealersapp.herokuapp.com/',
 
 	USER_SERVICE: {
 		LOGIN: 'login/login',
@@ -43,7 +43,7 @@ export const Config = {
 	DEALER_SERVICE:{
 		FETCH_ALL_DEALER_SALES_INFO: 'dealers/getDealerSalesPersonInfo',
 		GET_DEALER_CLAIM: 'dealers/getDealerClaims',
-		CREATE_DEALER_CLAIM: 'dealers/createDealerClaim',
+		CREATE_DEALER_CLAIM: 'dealers/reClaim',
 	},
 
 	SUB_DEALER_SERVICE:{

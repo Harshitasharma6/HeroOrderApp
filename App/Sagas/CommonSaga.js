@@ -7,6 +7,7 @@ import { call, put, select, take } from 'redux-saga/effects';
 import { CommonService } from 'App/Services/Api/CommonService';
 import CommonActions from 'App/Stores/Common/Actions';
 import VisitorActions from 'App/Stores/Visitor/Actions';
+import DealersActions from 'App/Stores/Dealers/Actions';
 import { offlineApiCall } from './OfflineSaga';
 import {Alert} from 'react-native'
 import _ from 'lodash';
@@ -188,8 +189,12 @@ export function* uploadImage({ payload }) {
 				payload.previous_value = payload.previous_value || [];
 				payload.previous_value.push(new_value);
 				new_value = payload.previous_value;
+			}if(payload.edit)
+			{
+				yield put(DealersActions.changeDealerClaimForm({...payload.params, edited_value: new_value}));
+
 			}
-			yield put(VisitorActions.changeUpdateBookingForm({...payload.params, edited_value: new_value}));
+			else{yield put(VisitorActions.changeUpdateBookingForm({...payload.params, edited_value: new_value}));}
 		} else {
 			yield put(CommonActions.uploadImageFailure());
 		}

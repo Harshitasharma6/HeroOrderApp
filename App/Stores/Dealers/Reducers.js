@@ -55,7 +55,7 @@ export const getAllDealerClaimsSuccess = (state, { payload }) => ({
 
 export const getAllDealerClaimsFailure = (state) => ({
   ...state,
-  DealerClaimsData: [],
+  DealerClaimsData: {},
   loaders: {
     ...state.loaders,
     getAllDealerClaimsLoader: false
@@ -159,16 +159,27 @@ export const clearRegistrationForm = (state, {payload}) => ({
 });
 
 export const updatDealerClaimsSearchFilters = (state, { payload }) => {
-  let updated_search_filters = _.cloneDeep(state.dealerSearchFilters);
+  let updated_search_filters = _.cloneDeep(state.schemeClaimSearchFilters);
   updated_search_filters[payload.edited_field] = payload.edited_value;
+  return {
+    ...state,
+    schemeClaimSearchFilters: updated_search_filters
+  }
+};
+
+export const changeClaimSearchFilters = (state, { payload }) => {
+  let updated_planned_search_filters = _.cloneDeep(state.schemeClaimSearchFilters.searchFilters);
+  updated_planned_search_filters[payload.edited_field] = payload.edited_value;
 
   return {
       ...state,
-      dealerSearchFilters: {
-          ...state.dealerSearchFilters,
-          ...updated_search_filters
-      },
-      openMoreFilters: false
+      schemeClaimSearchFilters: {
+          ...state.schemeClaimSearchFilters,
+          searchFilters: {
+              ...state.schemeClaimSearchFilters.searchFilters,
+              ...updated_planned_search_filters
+          }
+      }
   }
 };
 
@@ -201,5 +212,7 @@ export const reducer = createReducer(INITIAL_STATE, {
 	[DealersTypes.CLEAR_REGISTRATION_FORM]  		         : clearRegistrationForm,
   
   [DealersTypes.UPDATE_DEALER_CLAIMS_SEARCH_FILTERS]      : updatDealerClaimsSearchFilters,
+
+  [DealersTypes.CHANGE_CLAIM_SEARCH_FILTERS]      : changeClaimSearchFilters,
   
 });

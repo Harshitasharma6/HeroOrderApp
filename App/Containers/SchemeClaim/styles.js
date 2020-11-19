@@ -136,4 +136,22 @@ export default StyleSheet.create({
     fontFamily: ApplicationStyles.textFont,
     fontSize: 18
   },
+
+  callButton: {
+    width: wp('10%'), 
+    alignSelf: 'flex-end', 
+    marginTop: hp('1%'), 
+    borderRadius:  wp('100%'),
+    paddingRight: 2, 
+    paddingLeft: 2, 
+    position: 'absolute', 
+   
+    borderColor: Colors.primary, 
+    backgroundColor: 'transparent', 
+    borderWidth: 1, 
+    zIndex: 3
+  },
+  callButtonText: {
+    fontSize: wp('3.3%')
+  },
 })

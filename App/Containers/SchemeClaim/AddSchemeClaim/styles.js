@@ -25,6 +25,17 @@ export default StyleSheet.create({
 	
 
   },
+  heading: {
+    alignSelf: 'center',
+    color: Colors.black,
+    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
+    fontSize: wp('5.5%'),
+   
+    marginTop: hp('0%'),
+      textTransform: 'uppercase',
+      marginBottom: hp('1%'),
+  },
+  
 
   lowerformButton:{
      
@@ -61,16 +72,7 @@ AttachDocButton:{
     backgroundColor: Colors.white,
     flex: 1,
   },
-  heading: {
-    alignSelf: 'center',
-    color: Colors.black,
-    fontFamily: Platform.OS === 'ios' ? 'Montserrat-Bold' : 'Roboto_bold',
-    fontSize: wp('5.5%'),
-   
-    marginTop: hp('0%'),
-      textTransform: 'uppercase',
-      marginBottom: hp('4%'),
-  },
+  
   middleheading: {
     alignSelf: 'flex-start',
     color: Colors.grey,
@@ -222,5 +224,18 @@ AttachDocButton:{
     fontSize: wp('2.9%'),
     fontFamily: ApplicationStyles.textMsgFont,
     
+  },
+  bottomMargin: {
+    marginBottom: hp('2%'),
+    width: '100%'
+  },
+  recurringActionButtonText: {
+    color: Colors.primary,
+    fontSize: wp('4%'),
+    textTransform: 'capitalize',
+    fontFamily: ApplicationStyles.textMediumFont
+  },
+  callButtonText: {
+    fontSize: wp('3.3%')
   },
 })

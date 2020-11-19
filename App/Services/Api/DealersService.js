@@ -25,7 +25,7 @@ function getAllDealers(params) {
 		}
 		return null
 	}).catch(error => {
-		console.log(error.response)
+		
 		//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
 		return null
 	});
@@ -35,6 +35,7 @@ function getAllDealers(params) {
 function getDealerClaims(params) {
 	let url = Config.DEALER_SERVICE.GET_DEALER_CLAIM;
 	url += `?dealer_id=${params.dealer_id}`
+	url += `&date=${params.date}`
 	
 	return apiClient.get(url, {
 		headers: {
@@ -43,11 +44,11 @@ function getDealerClaims(params) {
 		}
 	}).then((response) => {
 		if (in200s(response.status)) {
-			return response['data']['data']['dealerClaims'];
+			return response.data;
 		}
 		return null
 	}).catch(error => {
-		console.log(error.response)
+	
 		//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
 		return null
 	});
@@ -55,8 +56,12 @@ function getDealerClaims(params) {
 
 function CreateDealerClaim(params) {
 	let url = Config.DEALER_SERVICE.CREATE_DEALER_CLAIM;
+	url += `?dealer_id=${params.dealer_id}`
+	url += `&sfid=${params.sfid}`
 	let formData = _.cloneDeep(params);
 	formData = HelperService.removeField(formData, 'token');
+	formData = HelperService.removeField(formData, 'dealer_id');
+	formData = HelperService.removeField(formData, 'sfid');
 	return apiClient.post(url, formData,{
 		headers: {
 			token: params.token,
@@ -64,11 +69,11 @@ function CreateDealerClaim(params) {
 		}
 	}).then((response) => {
 		if (in200s(response.status)) {
-			return response['data']['data'][0];
+			return response['data']['data'];
 		}
 		return null
 	}).catch(error => {
-		console.log(error.response)
+		
 		return null
 	});
 }

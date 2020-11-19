@@ -69,6 +69,8 @@ export function* getProductSchemes({ payload }) {
 }
 
 export function* addItemToCart({payload}) {
+	
+	try{
 	let cart = _.cloneDeep(yield select(state => state.products.cart));
 	let products = cart.products;
 	if (products.length) {
@@ -81,8 +83,10 @@ export function* addItemToCart({payload}) {
 	}
 
 	products.push(payload);
+	
 	cart.products = products;
-	let tax = yield select(state => state.user.Tax ? state.user.Tax[0] : {});
+	let tax = yield select(state => state.user.Tax&&state.user.Tax.length ? state.user.Tax[0] : {});
+	
 	let tax_calculation = Number(tax['tatal__c'] || 5)/100
 
 	let basicPrice = cart.basicPrice;
@@ -101,7 +105,10 @@ export function* addItemToCart({payload}) {
 	cart.taxes      += Math.round(Number(payload.price__c)*tax_calculation);
 	cart.subsidy    += Number(payload.subsidy_amount__c);
 	cart.totalAmount+= cart.basicPrice + cart.taxes  - cart.subsidy - Number(offerAmount) - cart.dealerDiscount
-	yield put(ProductsActions.addItemToCartSuccess(cart));
+	yield put(ProductsActions.addItemToCartSuccess(cart));}
+	catch (error) {
+		console.log(error)
+	}
 }
 
 export function* removeItemFromCart({payload}) {

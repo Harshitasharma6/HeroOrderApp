@@ -26,6 +26,7 @@ import CustomerListLayout from './Insights/Customers/list'
 import LeadAlertsLayout from './LeadAlerts'
 import FollowUpsLayout from './LeadAlerts/FollowUpsLayout'
 import ConfirmBookingLayout from './LeadAlerts/ConfirmedBookingLayout'
+import SchemeClaimInfoLayout from './SchemeClaimInfoLayout'
 
 
 
@@ -224,7 +225,7 @@ class LayoutScreen extends React.Component {
       case  'WarrantyRegistrationformScreen':
       case  'SubDealerFormScreen':  
       case 'DealerSalespersonFormScreen':
-      case 'SchemeClaimInfoScreen':
+    
       case 'SubDealerInfoScreen':
       case  'SchemeClaimformScreen':
       case 'ActionablesScreen':
@@ -254,10 +255,17 @@ class LayoutScreen extends React.Component {
       case 'AllFollowUpsScreen':
         customLayoutNode = <VisitorInfoScreenLayout />
         break;
+
+        
       case 'DashboardSummaryScreen':
       case 'DashboardTrendsScreen':
         customLayoutNode = <DashboardScreenLayout />
         break;
+      
+      case 'SchemeClaimInfoScreen':
+      customLayoutNode = <SchemeClaimInfoLayout />
+      break; 
+
       case 'CustomersScreen':
         customLayoutNode = <CustomerListLayout />
         break;
