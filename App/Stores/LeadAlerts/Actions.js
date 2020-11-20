@@ -84,7 +84,16 @@ const { Types, Creators } = createActions({
 	fetchConfirmedBookingLoading: null,
 	fetchConfirmedBookingLoadingStop: null,
 
-	updateBookingSearchFilters: ['payload']
+	updateBookingSearchFilters: ['payload'],
+
+
+	cancelBooking: ['payload'],
+	cancelBookingSuccess: ['payload'],
+	cancelBookingFailure: null,
+	cancelBookingLoading: null,
+	cancelBookingLoadingStop: null,
+	changeCancelBookingForm: ['payload'],
+	clearCancelBookingForm: null,
 
 	
 

@@ -184,6 +184,24 @@ function markLeadLost(params) {
 	});
 }
 
+function cancelBooking(params) {
+	let url = Config.LEAD_ALERT_SERVICE.CANCEL_BOOKING;
+	url += `?enquiry_id=${params.id}`
+	return apiClient.post(url, params,{
+		headers: {
+			token: params.token,
+			dealer_id: params.dealer_id,
+		}
+	}).then((response) => {
+		if (in200s(response.status)) {
+			return response['data']['data'];
+		}
+		return null
+	}).catch(error => {
+		return null
+	});
+}
+
 function markLeadWon(params) {
 	let url = Config.LEAD_ALERT_SERVICE.UPDATE_MARK_WON	;
 	url += `?id=${params.id}`
@@ -235,5 +253,6 @@ export const LeadAlertService = {
     markLeadLost,
     fetchTodayFollowUp,
     fetchConfirmedBooking,
-    markLeadWon
+    markLeadWon,
+    cancelBooking
 }

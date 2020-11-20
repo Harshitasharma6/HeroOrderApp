@@ -18,6 +18,7 @@ import Styles from './styles'
 import CommonActions from 'App/Stores/Common/Actions';
 import VisitorActions from 'App/Stores/Visitor/Actions';
 import { ValidationService } from 'App/Services/ValidationService';
+import CancelBookingScreen from './CancelBookingScreen'
 
 class BookingConfirmed extends Component {
   componentDidMount() {
@@ -100,6 +101,7 @@ class BookingConfirmed extends Component {
       openModal,
       closeModal,
       submitForm,
+      submitCancelForm,
       loader,
       setBookingInfoForm,
       setUpdateBookingForm
@@ -126,6 +128,7 @@ class BookingConfirmed extends Component {
                   <GenericDisplayCardStrip key={'Outstanding Amount' + item.id} label={'Outstanding Amount'} value={item.outstanding_amount__c}/>,
                   <BlueButton title={''} style={Styles.callButton} textStyle={Styles.callButtonText}  onPress={() => this.onPressCall(item)}><GenericIcon name="phone" style={Styles.callButtonIcon}/></BlueButton>,
                   item.lead_status__c != 'Won' ? <View style={{flexDirection: 'row', justifyContent: 'space-between' }} textStyle={{fontSize: wp('3.8%')}} key={'Action section' + item.id}>
+                 
                   <WhiteButton 
                     title={'Mark Won'} 
                     style={Styles.markLostButton} 
@@ -134,9 +137,25 @@ class BookingConfirmed extends Component {
 						        disabled={loader}
                     onPress={() => this.submitMarkWon(item)}
                    >
-                      <GenericIcon name="check" style={Styles.markLostButtonIcon} />
+                    <GenericIcon name="check" style={Styles.markLostButtonIcon} />
                   </WhiteButton>
+                 {  item.lead_status__c == 'Open'&&item.lead_stage__c=='Booking' ?        
+                 <BlueButton 
+          title={'Cancel Booking'} 
+         style={Styles.markLostButton} 
+         textStyle={Styles.markLostButtonText1} 
+         onPress={() => {
+          return openModal({
+              content: <CancelBookingScreen  id={item.id} onSubmit={(params) => {submitCancelForm(params)}}/>, 
+              heading: 'Cancel Booking', 
+              bodyFlexHeight: .4
+          })}}>
+
+  <GenericIcon name="window-close-o" style={Styles.markLostButtonIcon} />
+</BlueButton>: []}
                   </View> : [],
+
+
               ]}
             />}
             keyExtractor={item => item.id}
@@ -178,6 +197,7 @@ const mapDispatchToProps = (dispatch) => ({
   openModal:(params)     => dispatch(CommonActions.openModal(params)),
   closeModal:(params)    => dispatch(CommonActions.closeModal(params)),
   submitForm: (params)   => dispatch(LeadAlertActions.markLeadWon(params)),
+  submitCancelForm: (params)   => dispatch(LeadAlertActions.cancelBooking(params)),
   showCallModal: (params)    => dispatch(CommonActions.showCallModal(params)),
   hideCallModal: (params)    => dispatch(CommonActions.hideCallModal(params)),
   changeForm: (params)       => dispatch(VisitorActions.changeRegisterCustomerOutgoingCallForm(params)),

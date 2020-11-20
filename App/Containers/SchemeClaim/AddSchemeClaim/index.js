@@ -170,10 +170,10 @@ class SchemeClaimformScreen extends Component {
 <View style={{...Style.bottomMargin}}>
 		            <MultipleImagePicker
 		            	title={'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License*'}
-		              	images={form.aadhar_voter_pan_driving || []} 
-		              	loading={uploadImageLoading && uploadImageField == 'aadhar_voter_pan_driving'}
-		              	onClearImage={(value) => changeForm({ edited_field: 'aadhar_voter_pan_driving', edited_value: '' })}
-		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'aadhar_voter_pan_driving'}, multiple: true, previous_value: form.aadhar_voter_pan_driving,edit:true})}>
+		              	images={form.adhaar_card_front_and_back__c  || []} 
+		              	loading={uploadImageLoading && uploadImageField == 'adhaar_card_front_and_back__c'}
+		              	onClearImage={(value) => changeForm({ edited_field: 'adhaar_card_front_and_back__c', edited_value: '' })}
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'adhaar_card_front_and_back__c'}, multiple: true, previous_value: form.adhaar_card_front_and_back__c,edit:true})}>
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                 <GenericIcon 

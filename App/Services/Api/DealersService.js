@@ -69,11 +69,12 @@ function CreateDealerClaim(params) {
 		}
 	}).then((response) => {
 		if (in200s(response.status)) {
+			console.log(response)
 			return response['data']['data'];
 		}
 		return null
 	}).catch(error => {
-		
+		console.log(error.response)
 		return null
 	});
 }

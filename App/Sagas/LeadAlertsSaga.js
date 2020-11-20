@@ -282,6 +282,49 @@ function* markLeadLost(payload) {
 	}
 }
 
+function* cancelBooking(payload) {
+	yield put(CommonActions.closeModal());
+	yield put(LeadAlertActions.cancelBookingLoading());
+
+	try {
+		const isOnline = yield select(getConnectionStatus);
+		if (!isOnline) {
+			yield put(LeadAlertActions.cancelBookingFailure());
+			
+			return;
+		}
+		let {token, dealer__c} = yield select(state => state.user)
+		payload.token = token
+		payload.dealer_id = dealer__c
+		const successData = yield call(LeadAlertService.cancelBooking, payload);
+
+		if (successData) { 
+			yield put(LeadAlertActions.cancelBookingSuccess(payload));
+			HelperService.showToast({ 
+				message: 'Lead Status Updated successfully!!', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+			yield put(LeadAlertActions.fetchConfirmedBooking({}));
+			
+		} else {
+			yield put(LeadAlertActions.cancelBookingFailure())
+			HelperService.showToast({ 
+				message: 'Lead Status Updation failed!!', 
+				duration: 2000, 
+				buttonText: 'Okay' 
+			});
+		}
+	} catch (error) {
+		yield put(LeadAlertActions.cancelBookingFailure());
+		HelperService.showToast({ 
+			message: 'Lead Status Updation failed!!', 
+			duration: 2000, 
+			buttonText: 'Okay' 
+		});
+	}
+}
+
 function* markLeadWon(payload) {
 	yield put(LeadAlertActions.markLeadWonLoading(payload));
 	try {
@@ -340,6 +383,27 @@ export function* watchMarkLeadLost() {
 		}
 
 		yield call(markLeadLost, payload)
+	}
+}
+
+export function* watchCancelBooking() {
+	while (true) {
+		const { payload } = yield take(LeadAlertTypes.CANCEL_BOOKING)
+		try {
+			const validationFailed = yield call(ValidationService.validateCancelBooking, payload);
+			if (validationFailed) {
+				HelperService.showToast({ 
+					message: validationFailed.error_message, 
+					duration: 2000, 
+					buttonText: 'Okay' 
+				});
+				continue;
+			}
+		} catch (err) {
+			console.log(err)
+		}
+
+		yield call(cancelBooking, payload)
 	}
 }
 

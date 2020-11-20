@@ -22,14 +22,19 @@ export const INITIAL_STATE = {
         markLeadWonLoader: false,
         fetchtodayFollowUpLoader: false,
         fetchConfirmedBookingLoader:  false,
+        cancelBookingLoader: false,
     },
     leadLostForm: {},
     leadWonForm:  {},
+    cancelBookingForm:{},
     leadLostFormValidation: {
         invalid: false,
         invalid_field: ''
     },
-
+    cancelBookingFormValidation:{
+        invalid: false,
+        invalid_field: ''
+    },
     
 
     bookingSearchFilters: {

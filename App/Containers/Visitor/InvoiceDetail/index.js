@@ -195,7 +195,7 @@ class InvoiceDetailformScreen extends Component {
 				}
 
 			{
-				(showInfo && form.outstanding_amount__c == 0 && bookingInfoForm.chassis_no__c &&  bookingInfoForm.motor_no__c && bookingInfoForm.charger_no__c && bookingInfoForm.battery_no__c && bookingInfoForm.make_of_battery__c && bookingInfoForm.type_of_battery__c &&  bookingInfoForm.capacity_of_each_battery__c) ? [] :  
+				(showInfo && form.outstanding_amount__c == 0 && bookingInfoForm.chassis_no__c &&  bookingInfoForm.motor_no__c && bookingInfoForm.charger_no__c && bookingInfoForm.battery_no__c && bookingInfoForm.make_of_battery__c && bookingInfoForm.type_of_battery__c &&  bookingInfoForm.capacity_of_each_battery__c && bookingInfoForm.adhaar_card_front_and_back__c && bookingInfoForm.insurance__c && bookingInfoForm.invoice__c &&bookingInfoForm.acknowledgement__c) ? [] :  
 				<>
 			   <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
 					<InputText
@@ -426,10 +426,10 @@ class InvoiceDetailformScreen extends Component {
 <View style={{...Style.bottomMargin}}>
 		            <MultipleImagePicker
 		            	title={'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License*'}
-		              	images={form.aadhar_card__c || []} 
-		              	loading={uploadImageLoading && uploadImageField == 'aadhar_card__c'}
-		              	onClearImage={(value) => changeForm({ edited_field: 'aadhar_card__c', edited_value: '' })}
-		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'aadhar_card__c'}, multiple: true, previous_value: form.aadhar_card__c,})}>
+		              	images={form.adhaar_card_front_and_back__c || []} 
+		              	loading={uploadImageLoading && uploadImageField == 'adhaar_card_front_and_back__c'}
+		              	onClearImage={(value) => changeForm({ edited_field: 'adhaar_card_front_and_back__c', edited_value: '' })}
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'adhaar_card_front_and_back__c'}, multiple: true, previous_value: form.adhaar_card_front_and_back__c,})}>
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                 <GenericIcon 

@@ -210,37 +210,7 @@ function validateBookingForm(params) {
 		}
 	}
 
-	if (!validateFieldIsEmpty(params.aadhar_card__c)) {
-		return {
-			invalid: true,
-			invalid_field: 'aadhar_card__c',
-			error_message: 'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License cannot be empty.'
-		}
-	}
-
-	if (!validateFieldIsEmpty(params.insurance__c)) {
-		return {
-			invalid: true,
-			invalid_field: 'insurance__c',
-			error_message: 'Insurance/Rc/Tax Token cannot be empty.'
-		}
-	}
-
-	if (!validateFieldIsEmpty(params.invoice__c)) {
-		return {
-			invalid: true,
-			invalid_field: 'invoice__c',
-			error_message: 'Invoice cannot be empty.'
-		}
-	}
-
-	if (!validateFieldIsEmpty(params.acknowledgement__c)) {
-		return {
-			invalid: true,
-			invalid_field: 'acknowledgement__c',
-			error_message: 'Customer Acknolegment cannot be empty.'
-		}
-	}
+	
 
 
 	if (params.outstanding_amount__c && (Number(params.amount_paid_at_booking__c) > Number(params.outstanding_amount__c))) {
@@ -370,6 +340,38 @@ function validateMarkWonAction(params) {
 			invalid: true,
 			invalid_field: 'capacity_of_each_battery__c',
 			error_message: 'Cannot Mark Won!! Capacity of each Battery is empty.'
+		}
+	}
+
+	if (!validateFieldIsEmpty(params.adhaar_card_front_and_back__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'adhaar_card_front_and_back__c',
+			error_message: 'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License cannot be empty.'
+		}
+	}
+
+	if (!validateFieldIsEmpty(params.insurance__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'insurance__c',
+			error_message: 'Insurance/Rc/Tax Token cannot be empty.'
+		}
+	}
+
+	if (!validateFieldIsEmpty(params.invoice__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'invoice__c',
+			error_message: 'Invoice cannot be empty.'
+		}
+	}
+
+	if (!validateFieldIsEmpty(params.acknowledgement__c)) {
+		return {
+			invalid: true,
+			invalid_field: 'acknowledgement__c',
+			error_message: 'Customer Acknolegment cannot be empty.'
 		}
 	}
 
@@ -508,13 +510,24 @@ function validateMarkLost(params) {
 	return false;
 }
 
+function validateCancelBooking(params) {
+	if (!validateFieldIsEmpty(params.lead_status_reason__c)) {
+		return {
+			invalid_number: true,
+			error_message: 'Cannot Submit.Please select the reason'
+		}
+	}
+
+	return false;
+}
+
 function validateEditClaimForm(params) {
 	
 
-	if (!validateFieldIsEmpty(params.aadhar_voter_pan_driving)) {
+	if (!validateFieldIsEmpty(params.adhaar_card_front_and_back__c)) {
 		return {
 			invalid: true,
-			invalid_field: 'aadhar_voter_pan_driving',
+			invalid_field: 'adhaar_card_front_and_back__c',
 			error_message: 'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License cannot be empty.'
 		}
 	}
@@ -574,4 +587,5 @@ export const ValidationService = {
 	validateLoginForm,
 	validateMarkLost,
 	validateEditClaimForm,
+	validateCancelBooking
 }

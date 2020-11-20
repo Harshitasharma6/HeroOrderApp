@@ -60,6 +60,7 @@ export const Config = {
     	FETCH_NO_ACTION                     : 'visitors/noAction',
     	FETCH_ALL_OPEN_LEADS                : 'outgoingCall/getOpenLeadAlert',
 		MARK_LEAD_LOST                      : 'visitors/lost',
+		CANCEL_BOOKING						: 'visitors/cancelBooking',
 		TODAY_FOLLOW_UP						: 'outgoingCall/getFollowUp',
 		GET_CONFIRMED_BOOKING				: 'booking/getConfirmedBooking',
 		UPDATE_MARK_WON						:  'booking/updateMarkWon'
