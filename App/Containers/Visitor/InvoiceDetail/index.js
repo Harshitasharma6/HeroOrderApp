@@ -425,7 +425,7 @@ class InvoiceDetailformScreen extends Component {
 
 <View style={{...Style.bottomMargin}}>
 		            <MultipleImagePicker
-		            	title={'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License*'}
+		            	title={'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License'}
 		              	images={form.adhaar_card_front_and_back__c || []} 
 		              	loading={uploadImageLoading && uploadImageField == 'adhaar_card_front_and_back__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'adhaar_card_front_and_back__c', edited_value: '' })}
@@ -444,7 +444,7 @@ class InvoiceDetailformScreen extends Component {
                       
 				  <View style={{...Style.bottomMargin}}>
 		            <MultipleImagePicker
-		            	title={'Insurance/Rc/Tax Token*'}
+		            	title={'Insurance/Rc/Tax Token'}
 		              	images={form.insurance__c || []} 
 		              	loading={uploadImageLoading && uploadImageField == 'insurance__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'insurance__c', edited_value: '' })}
@@ -463,7 +463,7 @@ class InvoiceDetailformScreen extends Component {
 
 				  <View style={{...Style.bottomMargin}}>
 		            <MultipleImagePicker
-		            	title={'Invoice*'}
+		            	title={'Invoice'}
 		              	images={form.invoice__c || []} 
 		              	loading={uploadImageLoading && uploadImageField == 'invoice__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'invoice__c', edited_value: '' })}
@@ -482,7 +482,7 @@ class InvoiceDetailformScreen extends Component {
 
 				  <View style={{...Style.bottomMargin}}>
 		            <MultipleImagePicker
-		            	title={'Customer Acknolegment* (in case of Subsidy)'}
+		            	title={'Customer Acknolegment (in case of Subsidy)'}
 		              	images={form.acknowledgement__c || []} 
 		              	loading={uploadImageLoading && uploadImageField == 'acknowledgement__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'acknowledgement__c', edited_value: '' })}
