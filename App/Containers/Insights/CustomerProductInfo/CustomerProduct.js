@@ -124,21 +124,13 @@ const CustomerProductInfoCard = ({data}) => (
 
             <GenericDisplayCardStrip key={'Offer Applied'} label={'Offer Applied'} value={(!!data.offer_applied__c ? 'Yes' : 'No') }/>
 
-            <GenericDisplayCardStrip key={'Aadhar Card'} label={'Aadhar Card'} value={<Text style={data.aadhar_card__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.aadhar_card__c)}>{data.aadhar_card__c ? 'View' : 'No file'}</Text>}/>
+            <GenericDisplayCardStrip key={'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License'} label={'Aadhar Card/VoterId/ PAN Card/Driving License'} value={<Text style={data.adhaar_card_front_and_back__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.adhaar_card_front_and_back__c)}>{data.adhaar_card_front_and_back__c ? 'View' : 'No file'}</Text>}/>
 
-            <GenericDisplayCardStrip key={'Acknowledgement'} label={'Acknowledgement'} value={<Text style={data.acknowledgement__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.acknowledgement__c)}>{data.acknowledgement__c ? 'View' : 'No file'}</Text>}/>
+            <GenericDisplayCardStrip key={'Insurance/Rc/Tax Token'} label={'Insurance/Rc/Tax Token'} value={<Text style={data.insurance__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.insurance__c)}>{data.insurance__c ? 'View' : 'No file'}</Text>}/>
 
-            <GenericDisplayCardStrip key={'Driving Lincense'} label={'Driving Lincense'} value={<Text style={data.driving_license__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.driving_license__c)}>{data.driving_license__c ? 'View' : 'No file'}</Text>}/>
-
-            <GenericDisplayCardStrip key={'Insurance'} label={'Insurance'} value={<Text style={data.insurance__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.insurance__c)}>{data.insurance__c ? 'View' : 'No file'}</Text>}/>
-
-            <GenericDisplayCardStrip key={'RC'} label={'RC'} value={<Text style={data.rc__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.rc__c)}>{data.rc__c ? 'View' : 'No file'}</Text>}/>
-
-            <GenericDisplayCardStrip key={'Voter Id'} label={'Voter Id'} value={<Text style={data.voter_id_card__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.voter_id_card__c)}>{data.voter_id_card__c ? 'View' : 'No file'}</Text>}/>
-
-            {
-                data.others__c && data.others__c.length  ? <GenericDisplayCardStrip key={'Others'} label={'Others'} value={<Text style={{textDecorationLine: 'underline', color: '#1890ff'}} onPress={() => Linking.openURL(data.others__c[0])}>View</Text>}/> : <GenericDisplayCardStrip key={'Others'} label={'Others'} value={'No file'}/>
-            }
+          <GenericDisplayCardStrip key={'Invoice'} label={'Invoice'} value={<Text style={data.invoice__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.invoice__c)}>{data.invoice__c ? 'View' : 'No file'}</Text>}/>
+<GenericDisplayCardStrip key={'Acknowledgement'} label={'Acknowledgement'} value={<Text style={data.acknowledgement__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.acknowledgement__c)}>{data.acknowledgement__c ? 'View' : 'No file'}</Text>}/>
+           
         </View>
     </View>   
 )

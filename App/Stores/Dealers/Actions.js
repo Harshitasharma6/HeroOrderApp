@@ -20,7 +20,10 @@ const { Types, Creators } = createActions({
 	createDealerClaimLoading: null,
 	createDealerClaimLoadingStop: null,
 	changeDealerClaimForm: ['payload'],
-	createDealerClaimValidationFailed: ['payload'],
+  createDealerClaimValidationFailed: ['payload'],
+  
+
+  setDealerClaimInfoForm: ['payload'],
 	
 	setRegistrationForm: ['payload'],
 	clearRegistrationForm: null,

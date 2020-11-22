@@ -183,7 +183,10 @@ export const changeClaimSearchFilters = (state, { payload }) => {
   }
 };
 
-
+export const setDealerClaimInfoForm = (state, {payload}) => ({
+  ...state,
+  createDealerClaimForm: payload
+});
 
 
 
@@ -214,5 +217,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [DealersTypes.UPDATE_DEALER_CLAIMS_SEARCH_FILTERS]      : updatDealerClaimsSearchFilters,
 
   [DealersTypes.CHANGE_CLAIM_SEARCH_FILTERS]      : changeClaimSearchFilters,
+
+  [DealersTypes.SET_DEALER_CLAIM_INFO_FORM]      : setDealerClaimInfoForm,
+  
   
 });

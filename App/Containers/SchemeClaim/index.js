@@ -59,7 +59,8 @@ class SchemeClaimInfoScreen extends Component {
       const {
         loader,
         data,
-        claimSearchFilters
+        claimSearchFilters,
+        setDealerClaimInfoForm
         } = this.props;
 
      
@@ -104,7 +105,7 @@ class SchemeClaimInfoScreen extends Component {
                             <GenericDisplayCardStrip key={'Scheme Applicable' + item.name} label={'Scheme Applicable:'}  value={item.scheme_applicable_name}  />,
                             <GenericDisplayCardStrip key={'Customer Name' + item.name} label={'Customer Name:'}  value={item.customer_name__c}  />,
                             <GenericDisplayCardStrip key={'Warranty Registered' + item.name} label={'Warranty Registered:'}  value={item.registered_for_warranty__c  ? 'Yes' : 'No'}  />,
-                       (item.field_team_status__c=='Rejected')  ?   <BlueButton title={'ReSubmit'}  style={{alignSelf: 'center', width: '32%' , zIndex: 3}} textStyle={Style.callButtonText} onPress={() => NavigationService.navigate('SchemeClaimformScreen',{data: item}) }/> :[]
+                       (item.field_team_status__c=='Rejected')  ?   <BlueButton title={'ReSubmit'}  style={{alignSelf: 'center', width: '32%' , zIndex: 3}} textStyle={Style.callButtonText} onPress={() => {NavigationService.navigate('SchemeClaimformScreen',{data: item}); setDealerClaimInfoForm(item);} }/> :[]
 
 
                         
@@ -164,6 +165,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchData:(params)   => dispatch(DealersActions.getAllDealerClaims(params)),
   updateSearchFilters : (params) => dispatch(DealersActions.updateDealerClaimsSearchFilters(params)),
+  setDealerClaimInfoForm : (params) => dispatch(DealersActions.setDealerClaimInfoForm(params)),
 });
 
 export default connect(

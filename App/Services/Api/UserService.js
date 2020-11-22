@@ -52,7 +52,7 @@ function fetchUser() {
 function loginUser(params) {
   
   let url = Config.USER_SERVICE.LOGIN;
-  console.log('im in service')
+  
   return apiClient.post(url, params).then((response) => {
       if (in200s(response.status)) {
           return response.data
@@ -67,7 +67,7 @@ function loginUser(params) {
 
 
 function logoutUser(params) {
-  console.log('logout')
+  
   let url = Config.USER_SERVICE.LOGOUT;
   url += `?sfid=${params.dealers_sales_person_login_info_id}`
   

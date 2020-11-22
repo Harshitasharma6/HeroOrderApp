@@ -139,7 +139,7 @@ function fetchAllOpenLeads(params) {
     }
     return null
   }).catch(error => {
-    console.log(error.response)
+
     //bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
     return null
   });
@@ -159,7 +159,7 @@ function fetchConfirmedBooking(params) {
     }
     return null
   }).catch(error => {
-    console.log(error.response)
+   
     //bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
     return null
   });
@@ -211,7 +211,7 @@ function markLeadWon(params) {
 				}
 	}).then((response) => {
 		if (in200s(response.status)) {
-      console.log(response.data)
+      
       return response['data']['data'];
      
 		}

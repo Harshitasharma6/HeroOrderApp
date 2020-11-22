@@ -101,7 +101,7 @@ function getCallOptions(params) {
 
 
 function getBookingPicklist(params) {
-  console.log('in booking');
+  
   let url = Config.COMMON_SERVICE.GET_BOOKING_PICKLIST;
   url += `?model_color=yes&financier_name=yes&payment_mode=yes`
   return apiClient.get(url, {
@@ -114,7 +114,7 @@ function getBookingPicklist(params) {
     }
     return null
   }).catch(error => {
-    console.log(error.response)
+   
     //bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
     return null
   });
