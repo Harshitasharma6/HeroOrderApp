@@ -136,7 +136,7 @@ class SchemeClaimformScreen extends Component {
                             <GenericDisplayCardStrip key={'Scheme Applicable' +  data.name} label={'Scheme Applicable:'}  value={data.scheme_applicable_name}  />,
                             <GenericDisplayCardStrip key={'Customer Name' +  data.name} label={'Customer Name:'}  value={data.customer_name__c}  />,
 							<GenericDisplayCardStrip key={'Warranty Registered' +  data.name} label={'Warranty Registered:'}  value={data.registered_for_warranty__c  ? 'Yes' : 'No'}  />,
-							<GenericDisplayCardStrip key={'Field Team Rejection Reason' +  data.name} label={'Field Team Rejection Reason:'}  value={data.Rejection_Re__c? data.Rejection_Re__c:''}  />,
+							<GenericDisplayCardStrip key={'Field Team Rejection Reason' +  data.name} label={'Field Team Rejection Reason:'}  value={data.rejection_re__c}  />,
                  
                         
                   ]}
