@@ -154,7 +154,15 @@ visiblePickerNode1 = (<View style={{ flexDirection: 'row', width: wp('43%'), mar
             style={{...Styles.scrollContainer}}
             ref={ref => {this.flatListRef = ref}}
        >
-            
+             <WhiteButton
+              title={`Available For Resubmission ${data&&data.count&&data.count.approved_reClaim ? '(' + data.count.approved_reClaim+ ')'  : ''}`}
+              onPress={() =>  changeClaimSearchFilters({ edited_field: 'claim_type', 'edited_value': 'approved_reClaim' })}
+              style={{...Styles.actionButton1, ...Styles.customSelectedStylelightCorpBlue}}
+              textStyle={Styles.actionButtonText1}
+              selected={claimSearchFilters['claim_type'] == 'approved_reClaim'}
+              customSelectedStyle={{...Styles.customSelectedStylelightCorpBlue, ...Styles.selected}}
+              customSelectedTextStyle={Styles.customSelectedTextStyle}
+            />
 
             <WhiteButton
               title={`Submitted ${data&&data.count&&data.count.Submitted ? '(' + data.count.Submitted + ')'  : ''}`}

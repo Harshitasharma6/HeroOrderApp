@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, Keyboard, TouchableOpacity} from 'react-native'
+import { View, Text, Image, Keyboard, TextInput, TouchableOpacity} from 'react-native'
 import { Item, Input, Button, Spinner } from 'native-base'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -12,6 +12,7 @@ import { SEND_OTP } from 'App/Constants'
 import NavigationService from 'App/Services/NavigationService'
 import UserActions from 'App/Stores/User/Actions'
 import { Colors } from 'App/Theme';
+
 
 class LoginScreen extends Component {
     submit(){

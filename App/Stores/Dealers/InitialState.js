@@ -32,7 +32,7 @@ export const INITIAL_STATE = {
        searchFilters: {
 			name: '',
 			area: '',
-			claim_type: 'Submitted'
+			claim_type: 'approved_reClaim'
 		},
         selectedDateType: 'Date', //or Month,
         selectedMonth: (new Date(HelperService.getCurrentTimestamp())).getMonth(),

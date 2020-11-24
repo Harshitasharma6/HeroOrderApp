@@ -70,6 +70,11 @@ class SchemeClaimInfoScreen extends Component {
         if (data&&data.claims) {
 
           let filteredClaimList ='';
+          if(claimSearchFilters['claim_type'] == 'approved_reClaim')
+          {
+            filteredClaimList=data.claims&&data.claims.approved_reClaim?data.claims.approved_reClaim:''
+            
+          }
           if(claimSearchFilters['claim_type'] == 'Submitted')
           {
             filteredClaimList=data.claims&&data.claims.Submitted?data.claims.Submitted:''
