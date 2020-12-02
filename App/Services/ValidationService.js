@@ -347,7 +347,7 @@ function validateMarkWonAction(params) {
 		return {
 			invalid: true,
 			invalid_field: 'adhaar_card_front_and_back__c',
-			error_message: 'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License cannot be empty.'
+			error_message: 'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License cannot be empty/GST Registration for B2B.'
 		}
 	}
 
@@ -528,7 +528,7 @@ function validateEditClaimForm(params) {
 		return {
 			invalid: true,
 			invalid_field: 'adhaar_card_front_and_back__c',
-			error_message: 'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License cannot be empty.'
+			error_message: 'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License cannot be empty/GST Registration for B2B.'
 		}
 	}
 

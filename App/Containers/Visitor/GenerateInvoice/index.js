@@ -113,7 +113,7 @@ class GenerateInvoiceformScreen extends Component {
 					
                         
 <View style={{marginTop:'0%'}}>             
-<BlueButton title={"ADD INVOCE DETAILS"} style={{width: '48%', marginHorizontal: '52%', }} textStyle={{fontSize: 10, }} onPress={() => NavigationService.navigate('InvoiceDetailformScreen') }>
+<BlueButton title={"ADD DEALER INVOCE DETAILS"} style={{width: '48%', marginHorizontal: '52%', }} textStyle={{fontSize: 10, }} onPress={() => NavigationService.navigate('InvoiceDetailformScreen') }>
 	            	<GenericIcon name={'pencil'} style={{color: Colors.white, fontSize: 15,}}/>
 	            </BlueButton>
 					</View>
