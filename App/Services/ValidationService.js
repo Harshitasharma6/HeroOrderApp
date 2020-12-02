@@ -367,7 +367,7 @@ function validateMarkWonAction(params) {
 		}
 	}
 
-	if (!validateFieldIsEmpty(params.acknowledgement__c)) {
+	if (params.total_subsidy__c!=null&&!validateFieldIsEmpty(params.acknowledgement__c)) {
 		return {
 			invalid: true,
 			invalid_field: 'acknowledgement__c',
@@ -548,13 +548,7 @@ function validateEditClaimForm(params) {
 		}
 	}
 
-	if (!validateFieldIsEmpty(params.acknowledgement__c)) {
-		return {
-			invalid: true,
-			invalid_field: 'acknowledgement__c',
-			error_message: 'Customer Acknolegment cannot be empty.'
-		}
-	}
+	
 
 	
 
