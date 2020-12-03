@@ -53,8 +53,9 @@ class CancelBookingScreen extends Component {
 						customPickerStyles={{ ...Style.picker }}
 						label={'Reason'}
 					/>
-					{others ?
+					{form.lead_status_reason__c =='Others' ?
 						<InputText
+							value={form.lead_status_reason__c}
 							onChange={(value) => changeForm({ edited_field: 'lead_status_reason__c', edited_value: value })}
 
 						/>
