@@ -124,7 +124,7 @@ const CustomerProductInfoCard = ({data}) => (
 
             <GenericDisplayCardStrip key={'Offer Applied'} label={'Offer Applied'} value={(!!data.offer_applied__c ? 'Yes' : 'No') }/>
 
-            <GenericDisplayCardStrip key={'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License'} label={'Aadhar Card/VoterId/ PAN Card/Driving License'} value={<Text style={data.adhaar_card_front_and_back__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.adhaar_card_front_and_back__c)}>{data.adhaar_card_front_and_back__c ? 'View' : 'No file'}</Text>}/>
+            <GenericDisplayCardStrip key={'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)'} label={'Aadhar Card/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)'} value={<Text style={data.adhaar_card_front_and_back__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.adhaar_card_front_and_back__c)}>{data.adhaar_card_front_and_back__c ? 'View' : 'No file'}</Text>}/>
 
             <GenericDisplayCardStrip key={'Insurance/Rc/Tax Token'} label={'Insurance/Rc/Tax Token'} value={<Text style={data.insurance__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.insurance__c)}>{data.insurance__c ? 'View' : 'No file'}</Text>}/>
 

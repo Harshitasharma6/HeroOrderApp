@@ -99,16 +99,15 @@ class SchemeClaimInfoScreen extends Component {
                     
                       //onPress={() => NavigationService.navigate('CustomerInfoScreen')}
                       content={[
-                          
-                          <GenericDisplayCardStrip key={'Claim Number' + item.name} label={'Claim Number:'} value={item.name} />,
-                         
-                         
+                        <GenericDisplayCardStrip key={'Claim Number' + item.name} label={'Claim Number:'} value={item.name} />,
+                        <GenericDisplayCardStrip key={'Customer Name' + item.name} label={'Customer Name:'}  value={item.customer_name__c}  />,
+                                
                           <GenericDisplayCardStrip key={'status' + item.name} label={'Status:'} value={item.status__c}  />,
                          
                             <GenericDisplayCardStrip key={'Claim Submission Date' + item.name} label={'Claim Submission Date:'}   value={ HelperService.dateReadableFormat(item.scheme_claim_submission_date__c)} />,
                             <GenericDisplayCardStrip key={'Expected Claim Amount' + item.name} label={'Expected Claim Amount:'}  value={item.expected_claim_amount_by_dealer__c}  />,
                             <GenericDisplayCardStrip key={'Scheme Applicable' + item.name} label={'Scheme Applicable:'}  value={item.scheme_applicable_name}  />,
-                            <GenericDisplayCardStrip key={'Customer Name' + item.name} label={'Customer Name:'}  value={item.customer_name__c}  />,
+                           
                             <GenericDisplayCardStrip key={'Warranty Registered' + item.name} label={'Warranty Registered:'}  value={item.registered_for_warranty__c  ? 'Yes' : 'No'}  />,
                        (item.field_team_status__c=='Rejected')  ?   <BlueButton title={'ReSubmit'}  style={{alignSelf: 'center', width: '32%' , zIndex: 3}} textStyle={Style.callButtonText} onPress={() => {NavigationService.navigate('SchemeClaimformScreen',{data: item}); setDealerClaimInfoForm(item);} }/> :[]
 

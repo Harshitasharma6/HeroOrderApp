@@ -168,7 +168,7 @@ class InvoiceDetailformScreen extends Component {
 					showsVerticalScrollIndicator={false}
 					style={Style.action}
 				>
-    	  		<Text style={Style.heading}>{'Add Invoice Detail'}</Text> 
+    	  		<Text style={Style.heading}>{'Add Dealer Invoice Detail'}</Text> 
 			      {
 			      	showInfo ? 
 			      	<View>
@@ -425,7 +425,7 @@ class InvoiceDetailformScreen extends Component {
 
 <View style={{...Style.bottomMargin}}>
 		            <MultipleImagePicker
-		            	title={'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License'}
+		            	title={'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)*'}
 		              	images={form.adhaar_card_front_and_back__c || []} 
 		              	loading={uploadImageLoading && uploadImageField == 'adhaar_card_front_and_back__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'adhaar_card_front_and_back__c', edited_value: '' })}
@@ -436,7 +436,7 @@ class InvoiceDetailformScreen extends Component {
 				                    name="camera" 
 				                    style={Style.recurringActionButtonIcon}
 				                  />
-		                {'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License*'}
+		                {'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)*'}
 		                </Text>
 		              </View>
 		            </MultipleImagePicker>
