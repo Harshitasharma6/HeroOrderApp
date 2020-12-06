@@ -148,7 +148,7 @@ class BookingConfirmed extends Component {
           return openModal({
               content: <CancelBookingScreen  id={item.id} onSubmit={(params) => {submitCancelForm(params)}}/>, 
               heading: 'Cancel Booking', 
-              bodyFlexHeight: .4
+              bodyFlexHeight: .44
           })}}>
 
   <GenericIcon name="window-close-o" style={Styles.markLostButtonIcon} />
