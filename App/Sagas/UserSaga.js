@@ -37,6 +37,7 @@ export function* loginUser(data) {
 				HelperService.showToast({ message: 'Cannot Login. Invalid Number or Password', duration: 2000, buttonText: 'Okay' });
 			}
 		} catch (error) {
+			console.log('error', error)
 			yield put(UserActions.userLoginFailure())
 			HelperService.showToast({ message: error, duration: 2000, buttonText: 'Okay' });
 		}

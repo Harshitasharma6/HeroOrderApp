@@ -58,9 +58,7 @@ function loginUser(params) {
           return response.data
       }
       return null
-  }).catch(error => {
-    
-      
+  }).catch(error => {      
       return null
   });
 }
@@ -77,7 +75,6 @@ function logoutUser(params) {
       }
       return null
   }).catch(error => {
-      
       return null
   });
 }
