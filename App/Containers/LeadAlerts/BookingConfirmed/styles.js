@@ -75,11 +75,43 @@ export default StyleSheet.create({
   	markLostButtonText: {
   		fontSize: wp('3.8%'), 
   		color: Colors.primary
-  	},
+	  },
+	  markLostButtonText1: {
+		fontSize: wp('3.3%'), 
+		color: Colors.primary
+	},
   	markLostButtonIcon: {
   		fontSize: wp('5%'), 
   		color: Colors.primary
-  	}
+	  },
+	  action: {
+		width: wp('88%'),
+	  },
+	  selectPickerStyle: {
+		borderRadius: 100,
+		width: wp('88%'),
+		height: hp('5.5%'),
+		marginTop: 5,
+		marginBottom: hp('2%'),
+		fontSize: wp('2%'),
+		justifyContent: 'center',
+		paddingHorizontal: 12
+	  },
+	  picker: {
+		borderRadius: 10,
+		width: wp('88%'),
+		height: hp('5.7%'),
+		marginBottom: hp('3%'),
+		paddingHorizontal: 8
+	  },
+	  pickerLabel: {
+		color: Colors.grey,
+		fontFamily: ApplicationStyles.textFont,
+		textAlign: "left",
+		width: "99%",
+		padding: 10,
+		flexDirection: "row"
+	  },
 });
 
 

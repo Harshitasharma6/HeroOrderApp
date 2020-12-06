@@ -139,7 +139,7 @@ function fetchAllOpenLeads(params) {
     }
     return null
   }).catch(error => {
-    console.log(error.response)
+
     //bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
     return null
   });
@@ -159,7 +159,7 @@ function fetchConfirmedBooking(params) {
     }
     return null
   }).catch(error => {
-    console.log(error.response)
+   
     //bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
     return null
   });
@@ -168,6 +168,24 @@ function fetchConfirmedBooking(params) {
 
 function markLeadLost(params) {
 	let url = Config.LEAD_ALERT_SERVICE.MARK_LEAD_LOST;
+	url += `?enquiry_id=${params.id}`
+	return apiClient.post(url, params,{
+		headers: {
+			token: params.token,
+			dealer_id: params.dealer_id,
+		}
+	}).then((response) => {
+		if (in200s(response.status)) {
+			return response['data']['data'];
+		}
+		return null
+	}).catch(error => {
+		return null
+	});
+}
+
+function cancelBooking(params) {
+	let url = Config.LEAD_ALERT_SERVICE.CANCEL_BOOKING;
 	url += `?enquiry_id=${params.id}`
 	return apiClient.post(url, params,{
 		headers: {
@@ -193,7 +211,7 @@ function markLeadWon(params) {
 				}
 	}).then((response) => {
 		if (in200s(response.status)) {
-      console.log(response.data)
+      
       return response['data']['data'];
      
 		}
@@ -235,5 +253,6 @@ export const LeadAlertService = {
     markLeadLost,
     fetchTodayFollowUp,
     fetchConfirmedBooking,
-    markLeadWon
+    markLeadWon,
+    cancelBooking
 }

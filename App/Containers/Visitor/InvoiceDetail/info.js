@@ -162,7 +162,7 @@ class InvoiceDetailformScreen extends Component {
 					showsVerticalScrollIndicator={false}
 					style={Style.action}
 				>
-    	  		<Text style={Style.heading}>{'Add Invoice Detail'}</Text> 
+    	  		<Text style={Style.heading}>{'Add D Invoice Detail'}</Text> 
 			      {
 			      	showInfo ? 
 			      	<View>

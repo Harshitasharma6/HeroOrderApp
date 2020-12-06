@@ -19,10 +19,12 @@ function getAllProducts(params) {
     }
   }).then((response) => {
     if (in200s(response.status)) {
+     
       return response['data']['data'];
     }
     return null
   }).catch(error => {
+  
     //bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
     return null
   });

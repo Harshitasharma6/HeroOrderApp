@@ -1,3 +1,5 @@
+import { HelperService } from 'App/Services/Utils/HelperService';
+
 export const INITIAL_STATE = {
 	loaders: {
 		getAllDealersLoader: false,
@@ -10,7 +12,7 @@ export const INITIAL_STATE = {
 	
 	  editDiscountEdit: false,
 	  
-	 DealerClaimsData: [],
+	 DealerClaimsData: {},
 
 	
 	createDealerClaimValidation: {
@@ -23,34 +25,20 @@ export const INITIAL_STATE = {
 	currentDealerClaimData: {},
 
 	
-	dealerSearchFilters: {
+	
+
+	schemeClaimSearchFilters: {
+
+       searchFilters: {
+			name: '',
+			area: '',
+			claim_type: 'approved_reClaim'
+		},
+        selectedDateType: 'Date', //or Month,
+        selectedMonth: (new Date(HelperService.getCurrentTimestamp())).getMonth(),
+        selectedYear: (new Date(HelperService.getCurrentTimestamp())).getFullYear(),
        
-        searchBy: '',
-        searchValue: '',
-		
-		searchByOptions: [
-			{
-				label: 'All',
-				value: ''
-			},
-			{
-				label: 'Submitted',
-				value: 'Submitted'
-			},
-			{
-				label: 'Approved',
-				value: 'Approved'
-			},
-	
-			{
-				label: 'Rejected',
-				value: 'Rejected'
-			},
-	
-		]
-		
-	
-	},
+    },
 	
 	  
 

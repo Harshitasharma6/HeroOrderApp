@@ -52,13 +52,14 @@ function fetchUser() {
 function loginUser(params) {
   
   let url = Config.USER_SERVICE.LOGIN;
-  console.log('im in service')
+  
   return apiClient.post(url, params).then((response) => {
       if (in200s(response.status)) {
           return response.data
       }
       return null
   }).catch(error => {
+    
       
       return null
   });
@@ -66,7 +67,7 @@ function loginUser(params) {
 
 
 function logoutUser(params) {
-  console.log('logout')
+  
   let url = Config.USER_SERVICE.LOGOUT;
   url += `?sfid=${params.dealers_sales_person_login_info_id}`
   
@@ -91,10 +92,12 @@ function getTaxDetails(params) {
 		}
 	}).then((response) => {
 		if (in200s(response.status)) {
+      
 			return response['data']['tax'];
 		}
 		return null
 	}).catch(error => {
+   
 		//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
    		return null;
 

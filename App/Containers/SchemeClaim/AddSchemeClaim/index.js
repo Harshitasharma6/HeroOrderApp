@@ -15,13 +15,16 @@ import { HelperService } from 'App/Services/Utils/HelperService';
 import NavigationService from 'App/Services/NavigationService'
 import SearchableDropdown from 'App/Components/SearchableDropdown';
 import InputDate from 'App/Components/FormInput/InputDate';
-
+import GenericDisplayCard from 'App/Components/GenericDisplayCard'
+import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDisplayCardStrip';
 import {ApplicationStyles} from 'App/Theme'
 import {Colors} from 'App/Theme'
 import GenericCheckBox from 'App/Components/GenericCheckBox'
 import DealersActions from 'App/Stores/Dealers/Actions'
 import moment from 'moment';
-
+import ImagePicker from 'App/Components/ImagePicker'
+import MultipleImagePicker from 'App/Components/ImagePicker/MultipleImagePicker';
+import CommonActions from 'App/Stores/Common/Actions';
 // "first_name__c": "test 12",	(*mandatory)
 // 	"last_name__c": "enquiry visit test",	(*mandatory)
 // 	"contact_number__c": "1646464944", 	(*mandatory)
@@ -62,13 +65,15 @@ class SchemeClaimformScreen extends Component {
 			submitForm, 
 			form,
 		} = this.props;
+		const {
+			data
+		  } = this.props.navigation.state.params;	
 
 		Keyboard.dismiss();
 		submitForm({
 			...form,
-			status__c: 'Submitted',
-			dealer_name__c:"0019D000009zum3QAA",
-			scheme_claim_submission_date__c:  HelperService.dateReadableFormatWithHyphen(HelperService.getCurrentTimestamp()),
+			sfid : data.sfid
+			
 			
 		});
 	}
@@ -103,247 +108,147 @@ class SchemeClaimformScreen extends Component {
             sourceEnquiryList,
 			productsList,
 			draftloader	,
+			uploadImageField,
+			  uploadImageLoading,
+			  uploadImage
 		} = this.props;
-		
+	 const {
+			data
+		  } = this.props.navigation.state.params;
 		return (
 			<View style={Style.container}>
-					<Text style={Style.heading}>{'SCHEME CLAIM FORM'}</Text>
+					<Text style={Style.heading}>{'SCHEME CLAIM '}</Text>
+
+					<GenericDisplayCard dark={false}
+                      style={{ width: '98%', elevation: 0 , backgroundColor: Colors.white, zIndex: 3,}}
+                     
+                     key={data.sfid}
+                      //onPress={() => NavigationService.navigate('CustomerInfoScreen')}
+                      content={[
+                          
+                          <GenericDisplayCardStrip key={'Claim Number' +  data.name} label={'Claim Number:'} value={data.name} />,
+                         
+                         
+                          <GenericDisplayCardStrip key={'status' + data.name} label={'Status:'} value={data.status__c}  />,
+                         
+                            <GenericDisplayCardStrip key={'Claim Submission Date' +  data.name} label={'Claim Submission Date:'}   value={HelperService.dateReadableFormat(data.scheme_claim_submission_date__c)} />,
+                            <GenericDisplayCardStrip key={'Expected Claim Amount' +  data.name} label={'Expected Claim Amount:'}  value={data.expected_claim_amount_by_dealer__c}  />,
+                            <GenericDisplayCardStrip key={'Scheme Applicable' +  data.name} label={'Scheme Applicable:'}  value={data.scheme_applicable_name}  />,
+                            <GenericDisplayCardStrip key={'Customer Name' +  data.name} label={'Customer Name:'}  value={data.customer_name__c}  />,
+							<GenericDisplayCardStrip key={'Warranty Registered' +  data.name} label={'Warranty Registered:'}  value={data.registered_for_warranty__c  ? 'Yes' : 'No'}  />,
+							<GenericDisplayCardStrip key={'Field Team Rejection Reason' +  data.name} label={'Field Team Rejection Reason:'}  value={data.rejection_re__c}  />,
+                 
+                        
+                  ]}
+                />
 				<ScrollView 
 					showsVerticalScrollIndicator={false}
 					style={Style.action}
 				>
-
-                        <SearchableDropdown
-						
-						dataSource={schemeApplicableList}
-				        placeHolderText={'Select Scheme'}
-				        selectedValue={form.scheme_applicable__c}
-				        onChange={(value) => changeForm({ edited_field: 'scheme_applicable__c', edited_value: value })}
-				        placeholder={'Select Scheme'}
-				        invalid={false}
-				        labelStyles={{ ...Style.pickerLabel }}
-				        customPickerStyles={{ ...Style.picker }}
-				        label={'Scheme Applicable*'}
-					/>
-
-                    <InputNumber
-						styles={Style.mb10}
-						placeholder={'Online Order No.'}
-						value={form.online_order_no__c}
-						onChange={(value) => changeForm({ edited_field: 'online_order_no__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'online_order_no__c'}
-						label={'Online Order No.* (For Online Schemes only)'}
-					/>
-
-                    <InputNumber
-						styles={Style.mb10}
-						placeholder={'Refrence  No.'}
-						value={form.ref_no_for_reference_schemes_only__c}
-						onChange={(value) => changeForm({ edited_field: 'ref_no_for_reference_schemes_only__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'ref_no_for_reference_schemes_only__c'}
-						label={'Reference No.* (For Refrence Schemes only)'}
-					/>
-               
-				 	<InputText
+					 <InputText
 						style={Style.mb10}
-						placeholder={'Customer Name'}
-						value={form.customer_name__c}
-						onChange={(value) => changeForm({ edited_field: 'customer_name__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'customer_name__c'}
-						label={'Customer  Name*'}
+						placeholder={'Chassis No.'}
+						value={form.chassis_no__c}
+						onChange={(value) => changeForm({ edited_field: 'chassis_no__c', edited_value: value })}
+						error={validation.invalid && validation.invalid_field == 'chassis_no__c'}
+						label={'Chassis No.'}
 					/>
 
-					
-					
-                    <InputMobile
-						styles={Style.mb10}
-						placeholder={'Customer Mobile'}
-						value={form.customer_phone__c}
-						onChange={(value) => changeForm({ edited_field: 'customer_phone__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'customer_phone__c'}
-						label={'Customer Mobile*'}
-					/>
-					
-                          
-
-					{
-					// 	<InputText
-					// 	style={Style.mb10}
-					// 	placeholder={'Purpose of Buying'}
-					// 	value={form.purpose_of_buying__c}
-					// 	onChange={(value) => changeForm({ edited_field: 'purpose_of_buying__c', edited_value: value })}
-					// 	error={validation.invalid && validation.invalid_field == 'purpose_of_buying__c'}
-					// 	label={'Purpose of Buying*'}
-					// />
-
-					// <InputText
-					// 	style={Style.mb10}
-					// 	placeholder={'Usage'}
-					// 	value={form.usage__c}
-					// 	onChange={(value) => changeForm({ edited_field: 'usage__c', edited_value: value })}
-					// 	error={validation.invalid && validation.invalid_field == 'usage__c'}
-					// 	label={'Usage*'}
-					// />
-				}
-
-                    <InputDate
+<InputDate
                         style={Style.mb10}
-                        placeholder={' Date of Invoice' }
-                        value={HelperService.dateReadableFormat(form.date_of_invoice__c)}
+                        placeholder={'Delivery Date'}
+                        value={HelperService.dateReadableFormat(form.delivery_date__c)}
                         onChange={(value) => {
                             let formattedDate = HelperService.convertMomentDateToTimestamp(value);
                             formattedDate = HelperService.dateReadableFormatWithHyphen(formattedDate);
-                            this.props.changeForm({ edited_field: 'date_of_invoice__c', edited_value: formattedDate })
+                            this.props.changeForm({ edited_field: 'delivery_date__c', edited_value: formattedDate })
                         }}
-                        error={validation.invalid && validation.invalid_field == 'date_of_invoice__c'}
-						label={' Date of Invoice* '}
+                        error={validation.invalid && validation.invalid_field == 'delivery_date__c'}
+						label={'Delivery Date'}
 						mindate={moment.now()}
                     />
 
-                    
-                    <View style={{width: '100%', justifyContent: 'space-between', alignItems: 'flex-start', flexDirection:'row'}}>
-						<Text style={{...ApplicationStyles.label, marginBottom: '1%', marginRight:'4%'}}>Registered For Warranty*</Text>
-						<View style={{flexDirection: 'row', marginBottom: '2%'}}>
-						<GenericCheckBox 
-                            style={{marginRight: '10%', }}
-                            style1={{marginRight:'4%'}}
-							label={'Yes'}
-							checked={form.registered_for_warranty__c == 'true'}
-							onPress={(event)=>{
-			                	let value = form.registered_for_warranty__c == 'ture' ? 'false' : 'true';
-				                changeForm({ edited_field: 'registered_for_warranty__c', edited_value: value });
-			                }}
-						/>
+<View style={{...Style.bottomMargin}}>
+		            <MultipleImagePicker
+		            	title={'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)*'}
+		              	images={form.adhaar_card_front_and_back__c  || []} 
+		              	loading={uploadImageLoading && uploadImageField == 'adhaar_card_front_and_back__c'}
+		              	onClearImage={(value) => changeForm({ edited_field: 'adhaar_card_front_and_back__c', edited_value: '' })}
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'adhaar_card_front_and_back__c'}, multiple: true, previous_value: form.adhaar_card_front_and_back__c,edit:true})}>
+		              <View style={Style.recurringActionButton}>
+		                <Text style={Style.recurringActionButtonText}>
+		                 <GenericIcon 
+				                    name="camera" 
+				                    style={Style.recurringActionButtonIcon}
+				                  />
+		                {'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)*'}
+		                </Text>
+		              </View>
+		            </MultipleImagePicker>
+          		</View>
+                      
+				  <View style={{...Style.bottomMargin}}>
+		            <MultipleImagePicker
+		            	title={'Insurance/Rc/Tax Token*'}
+		              	images={form.insurance__c || []} 
+		              	loading={uploadImageLoading && uploadImageField == 'insurance__c'}
+		              	onClearImage={(value) => changeForm({ edited_field: 'insurance__c', edited_value: '' })}
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'insurance__c'}, multiple: true, previous_value: form.insurance__c,edit:true})}>
+		              <View style={Style.recurringActionButton}>
+		                <Text style={Style.recurringActionButtonText}>
+		                 <GenericIcon 
+				                    name="camera" 
+				                    style={Style.recurringActionButtonIcon}
+				                  />
+		                {'Insurance/Rc/Tax Token'}
+		                </Text>
+		              </View>
+		            </MultipleImagePicker>
+          		</View>
 
-						<GenericCheckBox
-							style={{marginRight: '5%'}} 
-							label={'No'}
-							checked={form.registered_for_warranty__c == 'false'}
-							onPress={(event)=>{
-			                	let value = form.registered_for_warranty__c == 'false' ? 'true' : 'false';
-				                changeForm({ edited_field: 'registered_for_warranty__c', edited_value: value });
-			                }}
-						/>
-						</View>
-					</View>
-					<Text style={Style.middleheading}>{'If Not Registered Please Register Before Submission of Claim.'}</Text>
-                    
-                    <View style={{marginTop: '0%', marginBottom:'1%'}}>
-					<BlueButton title={"Register"} style={{width: '40%', marginHorizontal: '59%',}} textStyle={{fontSize: 12}}   onPress={() => {
-          NavigationService.navigate('WarrantyRegistrationformScreen');
-        
-        }}>
-	            	
-	            </BlueButton>
-               
-                    </View>
-                    <View style={{flexDirection:'row', justifyContent:'space-between', marginTop:'4%'}}>
-                    <Text style={Style.middletext}>{'Invoice Copy*'}</Text>
-                    <WhiteButton
-                     title={'Choose File'}
-                    style={Style.actionButton}
-                     textStyle={Style.actionButtonText}
-             
-                     />
-                     </View>
+				  <View style={{...Style.bottomMargin}}>
+		            <MultipleImagePicker
+		            	title={'Invoice*'}
+		              	images={form.invoice__c || []} 
+		              	loading={uploadImageLoading && uploadImageField == 'invoice__c'}
+		              	onClearImage={(value) => changeForm({ edited_field: 'invoice__c', edited_value: '' })}
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'invoice__c'}, multiple: true, previous_value: form.invoice__c,edit:true})}>
+		              <View style={Style.recurringActionButton}>
+		                <Text style={Style.recurringActionButtonText}>
+		                 <GenericIcon 
+				                    name="camera" 
+				                    style={Style.recurringActionButtonIcon}
+				                  />
+		                {'Invoice'}
+		                </Text>
+		              </View>
+		            </MultipleImagePicker>
+          		</View>
 
-                     <InputNumber
-						styles={Style.mb10}
-						placeholder={'Invoice No.'}
-						value={form.invoice_no__c}
-						onChange={(value) => changeForm({ edited_field: 'invoice_no__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'invoice_no__c'}
-						label={'Invoice No.*'}
-					/>
-
-                     <View style={{flexDirection:'row', justifyContent:'space-between', marginTop:'0%', marginBottom:'2%'}}>
-                    <View>
-                    <Text style={Style.middletext}>{'Customer'}</Text>
-                    <Text style={Style.middletext1}>{'Acknowledgement'}</Text>
-                    </View>
-                    <WhiteButton
-                     title={'Choose File'}
-                    style={Style.actionButton}
-                     textStyle={Style.actionButtonText}
-             
-                     />
-                     </View>
-                     <Text style={Style.middletext}>{'Customer Id*(Any two)'}</Text>
-                     <View style={{flexDirection:'row', justifyContent:'space-between'}}> 
-                     <WhiteButton
-                     title={'Choose File'}
-                    style={Style.actionButton}
-                     textStyle={Style.actionButtonText}
-             
-                     />  
-                     <WhiteButton
-                     title={'Choose File'}
-                    style={Style.actionButton}
-                     textStyle={Style.actionButtonText}
-             
-                     />   
-
-                     </View>
-
-                     <InputNumber
-						styles={Style.mb10}
-						placeholder={'Id No.'}
-						value={form.id_no_mentioned_as_per_id_card_1__c}
-						onChange={(value) => changeForm({ edited_field: 'id_no_mentioned_as_per_id_card_1__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'id_no_mentioned_as_per_id_card_1__c'}
-						label={'Id No. Mentioned as per ID Card 1*'}
-					/>
-                    <InputNumber
-						styles={Style.mb10}
-						placeholder={'Id No.'}
-						value={form.id_no_mentioned_as_per_id_card_2__c}
-						onChange={(value) => changeForm({ edited_field: 'id_no_mentioned_as_per_id_card_2__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'id_no_mentioned_as_per_id_card_2__c'}
-						label={'Id No. Mentioned as per ID Card 2*'}
-					/>
-                    <InputNumber
-						styles={Style.mb10}
-						placeholder={'Claim Amount'}
-						value={form.expected_claim_amount_by_dealer__c}
-						onChange={(value) => changeForm({ edited_field: 'expected_claim_amount_by_dealer__c', edited_value: value })}
-						error={validation.invalid && validation.invalid_field == 'expected_claim_amount_by_dealer__c'}
-						label={'Claim Amount*'}
-					/>
-                    <View style={{flexDirection:'row'}}>
-                    <GenericCheckBox
-							style={{marginRight: '5%'}} 
-							
-							checked={form.declaration__c == 'true'}
-							onPress={(event)=>{
-			                	let value = form.declaration__c == 'true' ? 'false' : 'true';
-				                changeForm({ edited_field: 'declaration__c', edited_value: value });
-			                }}
-						/>
-                <View style={{maxWidth:'90%'}}>
-                <Text style={Style.middleheading1}>{'I/We hereby confirm that the information Provided here is accurate, correct and complete and the documents submitted along with this claim form are genuine'}</Text>    
-                </View>
-                </View>
-
-                <View style={{flexDirection:'row', justifyContent:'space-around',marginTop:'5%'}}>
-                <WhiteButton
-                     title={'SAVE AS DRAFT'}
-                     style={Style.actionButton1}
-					 textStyle={Style.actionButtonText1}
-					 
-					 onPress={() => this.saveasdraft()}
-                     />  
-                     <WhiteButton
-                     title={'SUBMIT'}
-                     style={Style.actionButton1}
-					 textStyle={Style.actionButtonText1}
-					
-					
-					onPress={() => this.submit()}
-                     />   
-
-
-                </View>
-                   
+				  <View style={{...Style.bottomMargin}}>
+		            <MultipleImagePicker
+		            	title={'Customer Acknolegment* (in case of Subsidy)'}
+		              	images={form.acknowledgement__c || []} 
+		              	loading={uploadImageLoading && uploadImageField == 'acknowledgement__c'}
+		              	onClearImage={(value) => changeForm({ edited_field: 'acknowledgement__c', edited_value: '' })}
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'acknowledgement__c'}, multiple: true, previous_value: form.acknowledgement__c,edit:true})}>
+		              <View style={Style.recurringActionButton}>
+		                <Text style={Style.recurringActionButtonText}>
+		                 <GenericIcon 
+				                    name="camera" 
+				                    style={Style.recurringActionButtonIcon}
+				                  />
+		                {'Customer Acknolegment'}
+		                </Text>
+		              </View>
+		            </MultipleImagePicker>
+          		</View>
+                      		  
+				  <BlueButton title={'ReSubmit'}  style={{alignSelf: 'center', width: '36%' , zIndex: 3,height:'5%', }} textStyle={Style.callButtonText}
+				  loading={loader }
+				  disabled={loader }
+				  onPress={() => this.submit()}
+				  />   
 				</ScrollView>
 			</View>
 		)
@@ -360,13 +265,16 @@ const mapStateToProps = (state) => ({
   	sourceEnquiryList 			: state.common.sourceEnquiryList,
 	productsList 				: state.common.productsList,
 	productSchemes              : state.products.productSchemes,  
+	uploadImageLoading			: state.common.loaders.uploadImageLoader,
+	uploadImageField            : state.common.uploadImageField,
   
 });
   
 const mapDispatchToProps = (dispatch) => ({
 	changeForm: (params)       => dispatch(DealersActions.changeDealerClaimForm(params)),
 	submitForm: (params)       => dispatch(DealersActions.createDealerClaim(params)),
-	clearRegistrationForm: ()  => dispatch(DealersActions.clearRegistrationForm())
+	clearRegistrationForm: ()  => dispatch(DealersActions.clearRegistrationForm()),
+	uploadImage: (params)      		 => dispatch(CommonActions.uploadImage(params)),
 });
 
 export default connect(

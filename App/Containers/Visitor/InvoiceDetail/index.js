@@ -168,7 +168,7 @@ class InvoiceDetailformScreen extends Component {
 					showsVerticalScrollIndicator={false}
 					style={Style.action}
 				>
-    	  		<Text style={Style.heading}>{'Add Invoice Detail'}</Text> 
+    	  		<Text style={Style.heading}>{'Add Dealer Invoice Detail'}</Text> 
 			      {
 			      	showInfo ? 
 			      	<View>
@@ -195,7 +195,7 @@ class InvoiceDetailformScreen extends Component {
 				}
 
 			{
-				(showInfo && form.outstanding_amount__c == 0 && bookingInfoForm.chassis_no__c &&  bookingInfoForm.motor_no__c && bookingInfoForm.charger_no__c && bookingInfoForm.battery_no__c && bookingInfoForm.make_of_battery__c && bookingInfoForm.type_of_battery__c &&  bookingInfoForm.capacity_of_each_battery__c) ? [] :  
+				(showInfo && form.outstanding_amount__c == 0 && bookingInfoForm.chassis_no__c &&  bookingInfoForm.motor_no__c && bookingInfoForm.charger_no__c && bookingInfoForm.battery_no__c && bookingInfoForm.make_of_battery__c && bookingInfoForm.type_of_battery__c &&  bookingInfoForm.capacity_of_each_battery__c && bookingInfoForm.adhaar_card_front_and_back__c && bookingInfoForm.insurance__c && bookingInfoForm.invoice__c &&bookingInfoForm.acknowledgement__c) ? [] :  
 				<>
 			   <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
 					<InputText
@@ -409,140 +409,91 @@ class InvoiceDetailformScreen extends Component {
 						error={validation.invalid && validation.invalid_field == 'other_financier_name__c'}
 						label={'Other Financier Name'}
 					/>
+					<InputDate
+                        style={Style.mb10}
+                        placeholder={'Delivery Date'}
+                        value={HelperService.dateReadableFormat(form.delivery_date__c)}
+                        onChange={(value) => {
+                            let formattedDate = HelperService.convertMomentDateToTimestamp(value);
+                            formattedDate = HelperService.dateReadableFormatWithHyphen(formattedDate);
+                            this.props.changeForm({ edited_field: 'delivery_date__c', edited_value: formattedDate })
+                        }}
+                        error={validation.invalid && validation.invalid_field == 'delivery_date__c'}
+						label={'Delivery Date'}
+						mindate={moment.now()}
+                    />
 
-					<View style={{...Style.bottomMargin}}>
+<View style={{...Style.bottomMargin}}>
 		            <MultipleImagePicker
-		            	title={'Aadhar Card'}
-		              	images={form.aadhar_card__c || []} 
-		              	loading={uploadImageLoading && uploadImageField == 'aadhar_card__c'}
-		              	onClearImage={(value) => changeForm({ edited_field: 'aadhar_card__c', edited_value: '' })}
-		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'aadhar_card__c'}, multiple: true, previous_value: form.aadhar_card__c})}>
+		            	title={'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)*'}
+		              	images={form.adhaar_card_front_and_back__c || []} 
+		              	loading={uploadImageLoading && uploadImageField == 'adhaar_card_front_and_back__c'}
+		              	onClearImage={(value) => changeForm({ edited_field: 'adhaar_card_front_and_back__c', edited_value: '' })}
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'adhaar_card_front_and_back__c'}, multiple: true, previous_value: form.adhaar_card_front_and_back__c,})}>
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
 		                 <GenericIcon 
 				                    name="camera" 
 				                    style={Style.recurringActionButtonIcon}
 				                  />
-		                {' Aadhar Card'}
+		                {'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)*'}
 		                </Text>
 		              </View>
 		            </MultipleImagePicker>
           		</View>
-
-	        	<View style={{...Style.bottomMargin}}>
+                      
+				  <View style={{...Style.bottomMargin}}>
 		            <MultipleImagePicker
-		            	title={'Acknowledgement'}
-		              	images={form.acknowledgement__c || []} 
-		              	loading={uploadImageLoading && uploadImageField == 'acknowledgement__c'}
-		              	onClearImage={(value) => changeForm({ edited_field: 'acknowledgement__c', edited_value: '' })}
-		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'acknowledgement__c'}, multiple: true, previous_value: form.acknowledgement__c})}> 
-		              <View style={Style.recurringActionButton}>
-		                <Text style={Style.recurringActionButtonText}>
-		                <GenericIcon 
-		                    name="camera" 
-		                    style={Style.recurringActionButtonIcon}
-		                  />
-		                {' Acknowledgement'}
-		                </Text>
-		              </View>
-		            </MultipleImagePicker>
-          		</View>
-
-          		<View style={{...Style.bottomMargin}}>
-		            <MultipleImagePicker 
-		            title={'Driving License'}
-		              	images={form.driving_license__c || []} 
-		              	loading={uploadImageLoading && uploadImageField == 'driving_license__c'}
-		              	onClearImage={(value) => changeForm({ edited_field: 'driving_license__c', edited_value: '' })}
-		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'driving_license__c'}, multiple: true, previous_value: form.driving_license__c})}> 
-		              <View style={Style.recurringActionButton}>
-		                <Text style={Style.recurringActionButtonText}>
-		                <GenericIcon 
-		                    name="camera" 
-		                    style={Style.recurringActionButtonIcon}
-		                  />
-		                {' Driving License'}
-		                </Text>
-		              </View>
-		            </MultipleImagePicker>
-          		</View>
-
-          		<View style={{...Style.bottomMargin}}>
-		            <MultipleImagePicker 
-		            title={'Insurance'}
+		            	title={'Insurance/Rc/Tax Token'}
 		              	images={form.insurance__c || []} 
 		              	loading={uploadImageLoading && uploadImageField == 'insurance__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'insurance__c', edited_value: '' })}
-		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'insurance__c'}, multiple: true, previous_value: form.insurance__c})}> 
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'insurance__c'}, multiple: true, previous_value: form.insurance__c,})}>
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
-		                <GenericIcon 
-		                    name="camera" 
-		                    style={Style.recurringActionButtonIcon}
-		                  />
-		                {' Insurance'}
+		                 <GenericIcon 
+				                    name="camera" 
+				                    style={Style.recurringActionButtonIcon}
+				                  />
+		                {'Insurance/Rc/Tax Token'}
 		                </Text>
 		              </View>
 		            </MultipleImagePicker>
           		</View>
 
-	            
-
-
-          		<View style={{...Style.bottomMargin}}>
-		            <MultipleImagePicker 
-		            title={'RC'}
-		              	images={form.rc__c || []} 
-		              	loading={uploadImageLoading && uploadImageField == 'rc__c'}
-		              	onClearImage={(value) => changeForm({ edited_field: 'rc__c', edited_value: '' })}
-		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'rc__c'}, multiple: true, previous_value: form.rc__c})}> 
-		              <View style={Style.recurringActionButton}>
-		                <Text style={Style.recurringActionButtonText}>
-		                <GenericIcon 
-		                    name="camera" 
-		                    style={Style.recurringActionButtonIcon}
-		                  />
-		                {' RC'}
-		                </Text>
-		              </View>
-		            </MultipleImagePicker>
-          		</View>
-
-
-          		<View style={{...Style.bottomMargin}}>
+				  <View style={{...Style.bottomMargin}}>
 		            <MultipleImagePicker
-		            title={'Voter Card'}
-		              	images={form.voter_id_card__c || []} 
-		              	loading={uploadImageLoading && uploadImageField == 'voter_id_card__c'}
-		              	onClearImage={(value) => changeForm({ edited_field: 'voter_id_card__c', edited_value: '' })}
-		               	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'voter_id_card__c'}, multiple: true, previous_value: form.voter_id_card__c})}> 
+		            	title={'Invoice'}
+		              	images={form.invoice__c || []} 
+		              	loading={uploadImageLoading && uploadImageField == 'invoice__c'}
+		              	onClearImage={(value) => changeForm({ edited_field: 'invoice__c', edited_value: '' })}
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'invoice__c'}, multiple: true, previous_value: form.invoice__c,})}>
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
-		                <GenericIcon 
-		                    name="camera" 
-		                    style={Style.recurringActionButtonIcon}
-		                  />
-		                {' Voter Card'}
+		                 <GenericIcon 
+				                    name="camera" 
+				                    style={Style.recurringActionButtonIcon}
+				                  />
+		                {'Invoice'}
 		                </Text>
 		              </View>
 		            </MultipleImagePicker>
           		</View>
 
-
-          		<View style={{...Style.bottomMargin}}>
+				  <View style={{...Style.bottomMargin}}>
 		            <MultipleImagePicker
-		            	title={'Others'}
-		              	images={form.others__c || []} 
-		              	loading={uploadImageLoading && uploadImageField == 'others__c'}
-		              	onClearImage={(value) => changeForm({ edited_field: 'others__c', edited_value: [] })}
-		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'others__c'}, multiple: true, previous_value: form.others__c})}> 
+		            	title={'Customer Acknolegment (in case of Subsidy)'}
+		              	images={form.acknowledgement__c || []} 
+		              	loading={uploadImageLoading && uploadImageField == 'acknowledgement__c'}
+		              	onClearImage={(value) => changeForm({ edited_field: 'acknowledgement__c', edited_value: '' })}
+		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'acknowledgement__c'}, multiple: true, previous_value: form.acknowledgement__c,})}>
 		              <View style={Style.recurringActionButton}>
 		                <Text style={Style.recurringActionButtonText}>
-		                <GenericIcon 
-		                    name="camera" 
-		                    style={Style.recurringActionButtonIcon}
-		                  />
-		                {' Others'}
+		                 <GenericIcon 
+				                    name="camera" 
+				                    style={Style.recurringActionButtonIcon}
+				                  />
+		                {'Customer Acknolegment'}
 		                </Text>
 		              </View>
 		            </MultipleImagePicker>

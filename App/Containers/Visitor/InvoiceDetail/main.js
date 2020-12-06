@@ -157,7 +157,7 @@ class InvoiceDetailformScreen extends Component {
 
 		return (
 			<View style={Style.container}>
-    	  		<Text style={Style.heading}>{'Add Invoice Detail'}</Text>  
+    	  		<Text style={Style.heading}>{'Add Dealer Invoice Detail'}</Text>  
 				<View style={{marginTop:'4%'}}>
 					<Tabs tabBarUnderlineStyle={Style.tabUnderLine} style={Style.mainTabs} initialPage={'1'} >
 				        <Tab selected={false} underlineStyle={Style.tabUnderLine} heading={<TabHeading style={Style.tabHeading} ><Text style={Style.tabText}>Targets</Text></TabHeading>}>

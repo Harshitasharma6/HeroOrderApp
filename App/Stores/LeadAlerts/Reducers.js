@@ -529,6 +529,66 @@ export const updateBookingSearchFilters = (state, { payload }) => {
   }
 };
 
+export const cancelBookingSuccess = (state, {payload}) => ({
+  ...state,
+  cancelBookingForm: INITIAL_STATE.cancelBookingForm,
+  loaders: {
+    ...state.loaders,
+    cancelBookingLoader: false
+  }
+});
+
+
+export const cancelBookingFailure = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    cancelBookingLoader: false
+  }
+});
+
+
+export const cancelBookingLoading = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    cancelBookingLoader: false
+  }
+});
+
+
+export const cancelBookingLoadingStop = (state, {payload}) => ({
+  ...state,
+  loaders: {
+    ...state.loaders,
+    cancelBookingLoader: false
+  }
+});
+
+
+export const changeCancelBookingForm = (state, { payload }) => {
+      const {
+        edited_field,
+        edited_value
+    } = payload;
+
+    let changed_entity = {};
+    changed_entity[edited_field] = edited_value;
+    return {
+      ...state,
+      cancelBookingForm : {
+          ...state.cancelBookingForm,
+          ...changed_entity
+      },
+      cancelBookingFormValidation: INITIAL_STATE.cancelBookingFormValidation
+    }
+};
+
+export const clearCancelBookingForm = (state) => ({
+    ...state,
+    cancelBookingForm: INITIAL_STATE.cancelBookingForm
+})
+
 
 
 
@@ -611,5 +671,13 @@ export const reducer = createReducer(INITIAL_STATE, {
     
 
     [LeadAlertTypes.UPDATE_BOOKING_SEARCH_FILTERS]: updateBookingSearchFilters,
+
+
+    [LeadAlertTypes.CANCEL_BOOKING_SUCCESS]        : cancelBookingSuccess,
+    [LeadAlertTypes.CANCEL_BOOKING_FAILURE]        : cancelBookingFailure,
+    [LeadAlertTypes.CANCEL_BOOKING_LOADING]        : cancelBookingLoading,
+    [LeadAlertTypes.CANCEL_BOOKING_LOADING_STOP]   :cancelBookingLoadingStop,
+    [LeadAlertTypes.CHANGE_CANCEL_BOOKING_FORM]         : changeCancelBookingForm,
+    [LeadAlertTypes.CLEAR_CANCEL_BOOKING_FORM]          : clearCancelBookingForm,
 
 });

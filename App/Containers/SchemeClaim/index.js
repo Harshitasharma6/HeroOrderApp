@@ -44,33 +44,50 @@ class SchemeClaimInfoScreen extends Component {
 
 	fetchCall() {
 		const {	
-		  fetchData
+      fetchData,
+      searchFilters
 		} = this.props
 	
-		fetchData({});
+		fetchData({date: `${searchFilters['selectedYear']}-${searchFilters['selectedMonth']+1}-${HelperService.getCurrentDate()}`});
   }
     
 
-  filterResults(list) {
-    const {
-      searchFilter
-    } = this.props;
-    let filteredList = HelperService.multiFieldSearchText(list, searchFilter['searchBy']);
-
-    return filteredList;
-  }  
+  
 
     
     getDataNode() {
       const {
         loader,
-        data
+        data,
+        claimSearchFilters,
+        setDealerClaimInfoForm
         } = this.props;
 
+     
+        
         let visibleNode = [];
     
-        if (data && data.length) {
-          let filteredClaimList = this.filterResults(data.map((obj) => obj));
+        if (data&&data.claims) {
+
+          let filteredClaimList ='';
+          if(claimSearchFilters['claim_type'] == 'approved_reClaim')
+          {
+            filteredClaimList=data.claims&&data.claims.approved_reClaim?data.claims.approved_reClaim:''
+            
+          }
+          if(claimSearchFilters['claim_type'] == 'Submitted')
+          {
+            filteredClaimList=data.claims&&data.claims.Submitted?data.claims.Submitted:''
+            
+          }
+          if(claimSearchFilters['claim_type'] == 'Approved')
+          {
+            filteredClaimList=data.claims&&data.claims.Approved?data.claims.Approved:''
+          }
+          if(claimSearchFilters['claim_type'] == 'Rejected')
+          {
+            filteredClaimList=data.claims&&data.claims.Rejected?data.claims.Rejected:''
+          }
           if (filteredClaimList.length) {
             visibleNode = (
               <FlatList
@@ -79,20 +96,21 @@ class SchemeClaimInfoScreen extends Component {
                     <GenericDisplayCard dark={false}
                       style={{ width: '100%', elevation: 0 }}
                      
-                      showTextAvatar={false}
+                    
                       //onPress={() => NavigationService.navigate('CustomerInfoScreen')}
                       content={[
-                          
-                          <GenericDisplayCardStrip key={'Claim Number' + item.name} label={'Claim Number:'} value={item.name} />,
-                         
-                         
+                        <GenericDisplayCardStrip key={'Claim Number' + item.name} label={'Claim Number:'} value={item.name} />,
+                        <GenericDisplayCardStrip key={'Customer Name' + item.name} label={'Customer Name:'}  value={item.customer_name__c}  />,
+                                
                           <GenericDisplayCardStrip key={'status' + item.name} label={'Status:'} value={item.status__c}  />,
                          
                             <GenericDisplayCardStrip key={'Claim Submission Date' + item.name} label={'Claim Submission Date:'}   value={ HelperService.dateReadableFormat(item.scheme_claim_submission_date__c)} />,
                             <GenericDisplayCardStrip key={'Expected Claim Amount' + item.name} label={'Expected Claim Amount:'}  value={item.expected_claim_amount_by_dealer__c}  />,
                             <GenericDisplayCardStrip key={'Scheme Applicable' + item.name} label={'Scheme Applicable:'}  value={item.scheme_applicable_name}  />,
-                            <GenericDisplayCardStrip key={'Customer Name' + item.name} label={'Customer Name:'}  value={item.customer_name__c}  />,
+                           
                             <GenericDisplayCardStrip key={'Warranty Registered' + item.name} label={'Warranty Registered:'}  value={item.registered_for_warranty__c  ? 'Yes' : 'No'}  />,
+                       (item.field_team_status__c=='Rejected')  ?   <BlueButton title={'ReSubmit'}  style={{alignSelf: 'center', width: '32%' , zIndex: 3}} textStyle={Style.callButtonText} onPress={() => {NavigationService.navigate('SchemeClaimformScreen',{data: item}); setDealerClaimInfoForm(item);} }/> :[]
+
 
                         
                   ]}
@@ -107,8 +125,14 @@ class SchemeClaimInfoScreen extends Component {
           }
         } else if (loader) {
           visibleNode = <Loading/>
-        } else if ((!data || (data && !data.length) && !loader)) {
-          visibleNode = <NoDataFound text={'No Schemes Found'} />
+        } else if ((!data || (data && !data.claims) && !loader)) {
+          visibleNode = (    <NoDataFound text={'No Schemes Found'}>
+          <GenericIcon 
+            name={'refresh'}
+            onPress={() => this.fetchCall()}
+            style={ApplicationStyles.refreshIcon}
+          />
+        </NoDataFound>)
         }
     
         return visibleNode;
@@ -124,16 +148,7 @@ class SchemeClaimInfoScreen extends Component {
 		
 		return (
 			<View style={Style.container}>
-				<Text style={Style.heading}>{'SCHEME CLAIMS'}</Text>
-       
-        <Select 
-            style={Style.selectPickerStyle}
-            list={searchFilter.searchByOptions}
-            selected={ searchFilter['searchBy']}
-            customLabelStyle={Style.customLabelStyle}
-            containerStyle={Style.containerStyle}
-            onChange={(value) => updateSearchFilters({ edited_field: 'searchBy', 'edited_value': value })}
-          />   
+			  
           <View style={{flex: 1}}>
             {this.getDataNode()}
           </View>    
@@ -147,12 +162,14 @@ class SchemeClaimInfoScreen extends Component {
 const mapStateToProps = (state) => ({
   data     : state.dealers.DealerClaimsData,
   loader   : state.dealers.loaders.getAllDealerClaimsLoader,
-  searchFilter:  state.dealers.dealerSearchFilters,
+  searchFilters: state.dealers.schemeClaimSearchFilters,
+  claimSearchFilters: state.dealers.schemeClaimSearchFilters.searchFilters,
 });
   
 const mapDispatchToProps = (dispatch) => ({
   fetchData:(params)   => dispatch(DealersActions.getAllDealerClaims(params)),
   updateSearchFilters : (params) => dispatch(DealersActions.updateDealerClaimsSearchFilters(params)),
+  setDealerClaimInfoForm : (params) => dispatch(DealersActions.setDealerClaimInfoForm(params)),
 });
 
 export default connect(
