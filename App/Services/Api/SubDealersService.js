@@ -24,7 +24,6 @@ function getAllSubDealers(params) {
 		}
 		return null
 	}).catch(error => {
-		console.log(error.response)
 		//bugsnag.notify(new Error('fetchFinalObservation: ' + JSON.stringify(error.response.data[0])));
 		return null
 	});
@@ -43,7 +42,6 @@ function CreateSubDealer(params) {
 		}
 		return null
 	}).catch(error => {
-		console.log(error.response)
 		return null
 	});
 }

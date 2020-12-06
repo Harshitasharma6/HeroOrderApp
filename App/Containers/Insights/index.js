@@ -47,7 +47,7 @@ class InsightsScreen extends Component {
                 <TouchableOpacity onPress={() => {selectFollowUp('8'); NavigationService.navigate('ActionablesScreen')}}>
                     <View style={Styles.progressContainer}>
                         <View style={Styles.textContainer}>
-                            <Text style={Styles.name}>{`Hi, ${this.props.name}`}</Text>
+                            <Text style={Styles.name}>{`${this.props.name ? 'Hi, ' + this.props.name : ''}`}</Text>
                         </View>
                         <View style={Styles.textContainer}>
                             <Text style={Styles.info}>{`You have ${pending_count} follow ups today`}</Text>
@@ -96,7 +96,7 @@ class InsightsScreen extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  name: state.user.sales_person_name__c,
+  name: state.user.sales_person_name__c || '',
   data: state.insights.FollowUpData,
   completedData: state.insights.completedFollowUpData,
   loader: state.insights.loaders.getFollowUpLoader,

@@ -7,6 +7,7 @@
 import { INITIAL_STATE } from './InitialState'
 import { createReducer } from 'reduxsauce'
 import { UserTypes } from './Actions'
+import { HelperService } from 'App/Services/Utils/HelperService';
 
 export const userLoginLoading = (state) => ({
   ...state,
@@ -17,7 +18,7 @@ export const userLoginSuccess = (state, { user }) => ({
   ...state,
   userLoginIsLoading: false,
   userLoginErrorMessage: null,
-  is_logged_in: true,
+  is_logged_in: HelperService.getCurrentTimestamp(),
   ...user
 });
 
