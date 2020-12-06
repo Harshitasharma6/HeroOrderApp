@@ -518,6 +518,13 @@ function validateCancelBooking(params) {
 		}
 	}
 
+	if (params.lead_status_reason__c=="Other"&&!validateFieldIsEmpty(params.other)) {
+		return {
+			invalid_number: true,
+			error_message: 'Cannot Submit.Please fill the reason'
+		}
+	}
+
 	return false;
 }
 
