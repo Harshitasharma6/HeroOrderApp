@@ -53,6 +53,17 @@ class RootScreen extends Component {
       );
     }
 
+    let locationPermission = await HelperService.requestLocationPermission();
+
+    if (locationPermission) {
+      HelperService.watchLocation({callback: (fetchCurrentLocationSuccess)});
+    }else {
+      Alert.alert(
+        "Location permission Denied.Cannot Proceed",
+        'If you have denied permanently then Go "App Permissions" and Turn on "Location" Permission for Shree.'
+      );
+    }
+
     startup();
     SplashScreen.hide();
     if (Platform.OS == 'android') {

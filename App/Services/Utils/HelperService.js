@@ -914,18 +914,18 @@ function getNearbyList(params) {
 	return filteredList;
 }
 
-function showAlert({ heading, message }) {
+function showAlert({ heading, message, cancelText, confirmText }) {
 	return new Promise((resolve, reject) => {
 		Alert.alert(
 			heading,
 			message,
 			[
 				{
-					text: 'Cancel',
+					text: cancelText || 'Cancel',
 					onPress: () => reject('canceled'),
 					style: 'cancel',
 				},
-				{ text: 'Yes', onPress: () => resolve('confirmed') },
+				{ text: confirmText || 'Yes', onPress: () => resolve('confirmed') },
 			],
 			{ cancelable: false }
 		);

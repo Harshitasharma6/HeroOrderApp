@@ -12,6 +12,7 @@ import { SEND_OTP } from 'App/Constants'
 import NavigationService from 'App/Services/NavigationService'
 import UserActions from 'App/Stores/User/Actions'
 import { Colors } from 'App/Theme';
+import { HelperService } from 'App/Services/Utils/HelperService';
 
 
 class LoginScreen extends Component {
@@ -23,10 +24,23 @@ class LoginScreen extends Component {
             mobile
         } = this.props;
 
-        loginUser({
-            mobile: mobile, 
-            password: password
-        });  
+         HelperService.showAlert({
+           heading: 'Are you at Dealer Location?',
+           message: 'You should nearby dealer location to login.',
+           cancelText: "No", 
+           confirmText: "Yes"
+         }).then(() => {
+             loginUser({
+                mobile: mobile, 
+                password: password
+            });  
+         }).catch(() => {
+              HelperService.showToast({
+                message: 'Please login from dealer location.'
+             })
+         })
+
+        
     }
    
 
