@@ -128,7 +128,7 @@ const CustomerProductInfoCard = ({data}) => (
 
             <GenericDisplayCardStrip key={'Insurance/Rc/Tax Token'} label={'Insurance/Rc/Tax Token'} value={<Text style={data.insurance__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.insurance__c)}>{data.insurance__c ? 'View' : 'No file'}</Text>}/>
 
-          <GenericDisplayCardStrip key={'Invoice'} label={'Invoice'} value={<Text style={data.invoice__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.invoice__c)}>{data.invoice__c ? 'View' : 'No file'}</Text>}/>
+          <GenericDisplayCardStrip key={'Invoice'} label={'Dealer Invoice'} value={<Text style={data.invoice__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.invoice__c)}>{data.invoice__c ? 'View' : 'No file'}</Text>}/>
 <GenericDisplayCardStrip key={'Acknowledgement'} label={'Acknowledgement'} value={<Text style={data.acknowledgement__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.acknowledgement__c)}>{data.acknowledgement__c ? 'View' : 'No file'}</Text>}/>
            
         </View>
