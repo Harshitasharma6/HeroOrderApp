@@ -26,7 +26,17 @@ export function* loginUser(data) {
 		return;
 	}
 		try {
-			
+			let location = yield call(fetchLocation)
+			if (location) {
+				data['latitude'] = location.latitude;
+				data['longitude'] = location.longitude;
+			} else {
+				yield put(UserActions.doNothing());
+			    yield put(UserActions.userLoginFailure());
+			    HelperService.showToast({ message: 'Cannot fetch location. Please try again', duration: 2000, buttonText: 'Okay' });
+			    return;
+			}
+
 			let userData = yield call(userService.loginUser, data)
 			if (userData) {
 				yield put(UserActions.userLoginSuccess(userData.data));
