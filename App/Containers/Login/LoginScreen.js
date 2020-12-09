@@ -30,14 +30,17 @@ class LoginScreen extends Component {
            cancelText: "No", 
            confirmText: "Yes"
          }).then(() => {
-             loginUser({
+            loginUser({
                 mobile: mobile, 
-                password: password
+                password: password,
+                are_you_at_dealer_location__c: 'Yes'
             });  
          }).catch(() => {
-              HelperService.showToast({
-                message: 'Please login from dealer location.'
-             })
+            loginUser({
+                mobile: mobile, 
+                password: password,
+                are_you_at_dealer_location__c: 'No'
+            });  
          })
 
         

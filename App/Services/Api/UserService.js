@@ -50,9 +50,7 @@ function fetchUser() {
 
 
 function loginUser(params) {
-  
   let url = Config.USER_SERVICE.LOGIN;
-  
   return apiClient.post(url, params).then((response) => {
       if (in200s(response.status)) {
           return response.data

@@ -28,8 +28,8 @@ export function* loginUser(data) {
 		try {
 			let location = yield call(fetchLocation)
 			if (location) {
-				data['latitude'] = location.latitude;
-				data['longitude'] = location.longitude;
+				data['check_in_location__latitude__s'] = location.latitude;
+				data['check_in_location__longitude__s'] = location.longitude;
 			} else {
 				yield put(UserActions.doNothing());
 			    yield put(UserActions.userLoginFailure());
