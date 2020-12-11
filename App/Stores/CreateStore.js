@@ -56,7 +56,8 @@ const sensitiveStorage = createSensitiveStorage({
     // subdealers: subdealersReducer,
     // insights:insightsReducer,
 
-const blacklistPaths = ['network', 'common', 'visitor', 'dealers',  'leadAlerts'];
+
+const blacklistPaths = ['network', 'common', 'visitor', 'dealers',  'leadAlerts', 'dashboard', 'checkIn', 'startDay', 'products', 'subdealers', 'insights'];
 let blacklistTransform = createTransform(
   (inboundState, key) => {
     if (key === 'visitor') {
