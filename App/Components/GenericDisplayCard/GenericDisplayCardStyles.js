@@ -34,7 +34,8 @@ export default StyleSheet.create({
   darkDetail: {
     fontSize: wp('3.5%'),
     color: Colors.clrF1F9FF,
-    fontFamily: ApplicationStyles.textMediumFont
+    fontFamily: ApplicationStyles.textMediumFont,
+    width: wp('40%')
   },
   darkTitle: {
     color: Colors.white,
@@ -46,7 +47,8 @@ export default StyleSheet.create({
   darkTtl: {
     color: Colors.clrF1F9FF,
     fontSize: wp('3.5%'),
-    fontFamily: ApplicationStyles.textFont
+    fontFamily: ApplicationStyles.textFont,
+    width: wp('60%')
   },
   detail: {
     fontFamily: ApplicationStyles.textMediumFont,
@@ -54,7 +56,7 @@ export default StyleSheet.create({
     fontSize: wp('3.5%'),
     flexWrap: 'wrap',
     flexShrink: 1,
-    width: '50%',
+    width: wp('40%'),
     textAlign: 'right',
     marginTop: hp('.5%')
   },
@@ -74,7 +76,8 @@ export default StyleSheet.create({
     fontFamily: ApplicationStyles.textMsgFont,
     fontSize: wp('3.5%'),
     marginTop: hp('.5%'),
-    marginBottom: hp('.5%')
+    marginBottom: hp('.5%'),
+    width: wp('60%')
   },
   titleContainer: {
     width: '80%',

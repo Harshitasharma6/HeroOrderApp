@@ -21,7 +21,7 @@ class SchemeClaimScreenLayout extends React.Component {
 
     return (
       <View>
-        <Header transparent style={Styles.header}>
+        <Header style={Styles.header}>
         	<View style={{paddingTop: hp('1%'), paddingBottom: hp('1%')}}>
         		<BackArrowButton />
         	</View>

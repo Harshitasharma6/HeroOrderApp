@@ -36,8 +36,6 @@ class CustomerSummaryScreen extends Component {
     }
 
     getDataCard(item) {
-       
-        
         return (
           <GenericDisplayCard dark={false}
               style={{ width: '100%', elevation: 0 }}

@@ -72,8 +72,8 @@ class DealerSalespersonFormScreen extends Component {
                 data={data}
                 renderItem={({ item }) => 
                     <GenericDisplayCard dark={false}
-                      style={{ width: '98%', elevation: 0 }}
-                      heading={item.sales_person_name__c}
+                      style={{ width: '98%', elevation: 0}}
+                      heading={item.sales_person_name__c || 'No Name'}
                       showTextAvatar={true}
                       //onPress={() => NavigationService.navigate('CustomerInfoScreen')}
                       content={[

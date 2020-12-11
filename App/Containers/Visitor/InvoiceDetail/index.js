@@ -482,7 +482,7 @@ class InvoiceDetailformScreen extends Component {
 
 				  <View style={{...Style.bottomMargin}}>
 		            <MultipleImagePicker
-		            	title={'Customer Acknolegment (in case of Subsidy)'}
+		            	title={'Customer Acknowlegment (in case of Subsidy)'}
 		              	images={form.acknowledgement__c || []} 
 		              	loading={uploadImageLoading && uploadImageField == 'acknowledgement__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'acknowledgement__c', edited_value: '' })}

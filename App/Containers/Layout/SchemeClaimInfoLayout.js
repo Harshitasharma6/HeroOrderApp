@@ -139,7 +139,7 @@ visiblePickerNode1 = (<View style={{ flexDirection: 'row', width: wp('43%'), mar
 
     return (
       <View>
-        <Header transparent style={Styles.header}>
+        <Header style={Styles.header}>
         	<View style={{paddingTop: hp('1%'), paddingBottom: hp('1%')}}>
         		<BackArrowButton />
         	</View>
@@ -262,7 +262,8 @@ const Styles = StyleSheet.create({
     alignItems: 'flex-start',
     height: hp('30%'),
     flexDirection: 'column',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: Colors.white
   },
   arrowContainer: {
     width: wp('20%'),
