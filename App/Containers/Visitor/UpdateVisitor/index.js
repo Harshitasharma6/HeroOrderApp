@@ -18,6 +18,7 @@ import GenericCheckBox from 'App/Components/GenericCheckBox'
 import VisitorActions from 'App/Stores/Visitor/Actions'
 import moment from 'moment';
 import GoogleAddress from 'App/Components/GoogleAddress'
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 // address_line_1__c: null
 // age__c: 28
@@ -426,7 +427,15 @@ class UpdateVisitorScreen extends Component {
 						mindate={new Date(1950, 1, 1)}
                     />
 
-
+            <TextArea
+	                placeholder={'Remarks'}
+	                label={'Remarks'}
+	                numberOfLines={4}
+	                style={{marginBottom: hp('2%'),width: wp('87.5%')}}
+					value={form.remark__c}
+					onChange={(value) => changeForm({ edited_field: 'remark__c', edited_value: value })}
+					error={validation.invalid && validation.invalid_field == 'remark__c'}
+	        	/>
 
 					<BlueButton
 						style={ApplicationStyles.formButton}

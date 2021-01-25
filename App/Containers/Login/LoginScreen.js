@@ -25,8 +25,8 @@ class LoginScreen extends Component {
         } = this.props;
 
          HelperService.showAlert({
-           heading: 'Are you at Dealership ?',
-           message: 'You should nearby dealership login.',
+    // heading: 'Are you at Dealership ?',
+           message: 'Are you at Dealership ?',
            cancelText: "No", 
            confirmText: "Yes"
          }).then(() => {

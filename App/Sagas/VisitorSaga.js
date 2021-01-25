@@ -1042,6 +1042,7 @@ export function* orderCheckout({payload}) {
 		total_scheme_amount__c: cart.offerAmount,
 		id: visitor.id,
 		sfid: visitor.sfid, 
+		remark__c: visitor.remark__c,
 	   "lead_stage__c": 'Booking'
 	}
 	//active_from__c: "2020-08-01T00:00:00.000Z"
@@ -1062,7 +1063,8 @@ export function* orderCheckout({payload}) {
 			return ({
 				p_scheme__c: obj.p_scheme_id,
 				Scheme_Details__c: obj.sfid, 
-				scheme_Amount__c: obj.scheme_amount__c
+				scheme_Amount__c: obj.scheme_amount__c,
+				claim_amount__c: obj.he_share__c
 			})
 		})
 	}

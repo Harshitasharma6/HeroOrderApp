@@ -26,6 +26,7 @@ import ImagePicker from 'App/Components/ImagePicker'
 import MultipleImagePicker from 'App/Components/ImagePicker/MultipleImagePicker';
 import DetailCard from 'App/Components/DetailCard'
 import {Spinner } from 'native-base';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
 // 	  "tally_invoice_no__c" : "",
@@ -422,6 +423,16 @@ class InvoiceDetailformScreen extends Component {
 						label={'Delivery Date'}
 						mindate={moment.now()}
                     />
+
+                <TextArea
+	                placeholder={'Remarks'}
+	                label={'Remarks'}
+	                numberOfLines={4}
+	                style={{marginBottom: hp('2%'),width: wp('87.5%')}}
+					value={form.remark__c}
+					onChange={(value) => changeForm({ edited_field: 'remark__c', edited_value: value })}
+					error={validation.invalid && validation.invalid_field == 'remark__c'}
+	        	/>
 
 <View style={{...Style.bottomMargin}}>
 		            <MultipleImagePicker

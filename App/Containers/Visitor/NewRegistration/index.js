@@ -356,6 +356,17 @@ class NewRegistrationFormScreen extends Component {
 				        customPickerStyles={{ ...Style.picker }}
 				        label={'Source of Enquiry'}
 					/>
+			
+
+                 <TextArea
+	                placeholder={'Remarks'}
+	                label={'Remarks'}
+	                numberOfLines={4}
+	                style={{width: wp('87.5%')}}
+					value={form.remark__c}
+					onChange={(value) => changeForm({ edited_field: 'remark__c', edited_value: value })}
+					error={validation.invalid && validation.invalid_field == 'remark__c'}
+	        	/>
 
 					
 			

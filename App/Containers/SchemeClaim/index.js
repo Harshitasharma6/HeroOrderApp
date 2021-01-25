@@ -106,6 +106,7 @@ class SchemeClaimInfoScreen extends Component {
                          
                             <GenericDisplayCardStrip key={'Claim Submission Date' + item.name} label={'Claim Submission Date:'}   value={ HelperService.dateReadableFormat(item.scheme_claim_submission_date__c)} />,
                             <GenericDisplayCardStrip key={'Expected Claim Amount' + item.name} label={'Expected Claim Amount:'}  value={item.expected_claim_amount_by_dealer__c}  />,
+                            <GenericDisplayCardStrip key={'Claim Amount' + item.name} label={'Claim Amount:'}  value={item.rm_approval_amount__c}  />,
                             <GenericDisplayCardStrip key={'Scheme Applicable' + item.name} label={'Scheme Applicable:'}  value={item.scheme_applicable_name}  />,
                            
                             <GenericDisplayCardStrip key={'Warranty Registered' + item.name} label={'Warranty Registered:'}  value={item.registered_for_warranty__c  ? 'Yes' : 'No'}  />,

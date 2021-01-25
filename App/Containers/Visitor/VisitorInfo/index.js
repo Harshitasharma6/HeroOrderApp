@@ -67,7 +67,7 @@ class VisitorInfoScreen extends Component {
 	                <GenericDisplayCardStrip key={'Test Drice Offered'+ data.id} label={'Test Drive Offered'} value={data.test_drive_offered__c} />,
 	                data.customer_birthday__c ? <GenericDisplayCardStrip key={'Customer Birthday'+ data.id} label={'Customer Birthday'} value={HelperService.dateReadableFormat(data.customer_birthday__c)} /> : [],
 	                data.customer_anniversary__c  ? <GenericDisplayCardStrip key={'Customer Anniversary'+ data.id} label={'Customer Anniversary'} value={HelperService.dateReadableFormat(data.customer_anniversary__c)} /> : [],
-
+					<GenericDisplayCardStrip key={'Remark'+ data.id} label={'Remark'} value={data.remark__c} />,
 	            ]}
             />
             </ScrollView>
