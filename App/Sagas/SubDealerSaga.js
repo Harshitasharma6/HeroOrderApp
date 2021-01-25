@@ -59,6 +59,7 @@ export function* watchCreateSubDealer() {
 			console.log(err)
 		}
 
+		payload = HelperService.trimAllValues(payload);
 		yield call(CreateSubDealer, payload)
 	}
 }

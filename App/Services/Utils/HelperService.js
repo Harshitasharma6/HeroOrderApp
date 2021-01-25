@@ -1222,6 +1222,17 @@ function removeCountryCodeFromPhoneNumber(number) {
 }
 
 
+function trimAllValues(obj) {
+	for (var prop in obj) {
+	    if((typeof obj[prop] === 'string' || obj[prop] instanceof String)){
+			obj[prop] = obj[prop].trim()
+		}
+	}
+
+	return obj
+}
+
+
 
 
 
@@ -1312,5 +1323,6 @@ export const HelperService = {
 	getDayMappingName,
 	getDayFromTimestamp,
 	getTimeFromTimestamp,
-	removeCountryCodeFromPhoneNumber
+	removeCountryCodeFromPhoneNumber,
+	trimAllValues
 }

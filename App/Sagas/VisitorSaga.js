@@ -30,7 +30,7 @@ export function* watchSearchCustomer() {
 		} catch (err) {
 			console.log(err)
 		}
-
+		payload = HelperService.trimAllValues(payload);
 		yield call(searchCustomer, payload)
 	}
 }
@@ -56,6 +56,7 @@ export function* watchRegisterCustomer() {
 			console.log(err)
 		}
 
+		payload = HelperService.trimAllValues(payload);
 		yield call(registerCustomer, payload)
 	}
 }
@@ -81,6 +82,7 @@ export function* watchRegisterCustomerCall() {
 			console.log(err)
 		}
 
+		payload = HelperService.trimAllValues(payload);
 		yield call(registerCustomerCall, payload)
 	}
 }
@@ -105,6 +107,7 @@ export function* watchRegisterCustomerOutgoingCall() {
 			console.log(err)
 		}
 
+		payload = HelperService.trimAllValues(payload);
 		yield call(registerCustomerOutgoingCall, payload)
 	}
 }
@@ -129,6 +132,7 @@ export function* watchUpdateFollowUpCall() {
 			console.log(err)
 		}
 
+		payload = HelperService.trimAllValues(payload);
 		yield call(updateFollowUpCall, payload)
 	}
 }
@@ -156,6 +160,7 @@ export function* watchPayBooking() {
 			console.log(err)
 		}
 
+		payload = HelperService.trimAllValues(payload);
 		yield call(payBooking, payload)
 	}
 }
@@ -181,6 +186,7 @@ export function* watchUpdateVisitor() {
 			console.log(err)
 		}
 
+		payload = HelperService.trimAllValues(payload);
 		yield call(updateVisitor, payload)
 	}
 }
@@ -206,6 +212,7 @@ export function* watchCreateFeedback() {
 			console.log(err)
 		}
 
+		payload = HelperService.trimAllValues(payload);
 		yield call(createFeedback, payload)
 	}
 }
@@ -227,6 +234,7 @@ export function* watchUpdateBooking() {
 			console.log(err)
 		}
 
+		payload = HelperService.trimAllValues(payload);
 		yield call(updateBooking, payload)
 	}
 }
@@ -235,7 +243,7 @@ export function* watchNewBooking() {
 	while (true) {
 		const { payload } = yield take(VisitorTypes.NEW_BOOKING)
 		
-
+		payload = HelperService.trimAllValues(payload);
 		yield call(newBooking, payload)
 	}
 }

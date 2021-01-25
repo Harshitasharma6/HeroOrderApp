@@ -350,6 +350,7 @@ export function* watchUserLoginRequest() {
 			}
 		} catch (err) { }
 
+		data = HelperService.trimAllValues(data);
 		yield call(loginUser, data)
 	}
 }

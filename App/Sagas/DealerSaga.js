@@ -80,7 +80,8 @@ export function* watchCreateDealerClaim() {
 		} catch (err) {
 			console.log(err)
 		}
-	
+		
+		payload = HelperService.trimAllValues(payload);
 		yield call(CreateDealerClaim, payload)
 	}
 }

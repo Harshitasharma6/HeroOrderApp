@@ -55,7 +55,7 @@ export const changeSearchCustomerForm = (state, { payload }) => {
 	  } = payload;
 
 	let changed_entity = {};
-	changed_entity[edited_field] = (typeof edited_value === 'string' || edited_value instanceof String) ? (edited_value + '').trim() : edited_value
+	changed_entity[edited_field] = edited_value
 	return {
 	  ...state,
 	  searchCustomerForm : {
@@ -135,7 +135,7 @@ export const changeRegisterCustomerForm = (state, { payload }) => {
 	} = payload;
 
 	let changed_entity = {};
-	changed_entity[edited_field] = (typeof edited_value === 'string'&& edited_field !='remark__c' || edited_value instanceof String&& edited_field !='remark__c') ? (edited_value + '').trim() : edited_value
+	changed_entity[edited_field] = edited_value
 	return {
 	  ...state,
 	  registerCustomerForm : {
@@ -208,7 +208,7 @@ export const changeCreateFeedbackForm = (state, { payload }) => {
   } = payload;
 
   let changed_entity = {};
-  changed_entity[edited_field] = (typeof edited_value === 'string' || edited_value instanceof String) ? (edited_value + '').trim() : edited_value
+  changed_entity[edited_field] = edited_value
   return {
     ...state,
     feedbackForm: {
@@ -373,7 +373,7 @@ export const changeRegisterCustomerCallForm = (state, { payload }) => {
   } = payload;
 
   let changed_entity = {};
-  changed_entity[edited_field] = (typeof edited_value === 'string' || edited_value instanceof String) ? (edited_value + '').trim() : edited_value
+  changed_entity[edited_field] = edited_value
   return {
     ...state,
     registerCustomerCallForm : {
@@ -454,7 +454,7 @@ export const changePayBookingForm = (state, { payload }) => {
   } = payload;
 
   let changed_entity = {};
-  changed_entity[edited_field] = (typeof edited_value === 'string' || edited_value instanceof String) ? (edited_value + '').trim() : edited_value
+  changed_entity[edited_field] = edited_value
   return {
     ...state,
     payBookingForm : {
@@ -521,7 +521,7 @@ export const changeRegisterCustomerOutgoingCallForm = (state, { payload }) => {
   } = payload;
 
   let changed_entity = {};
-  changed_entity[edited_field] = (typeof edited_value === 'string' || edited_value instanceof String) ? (edited_value + '').trim() : edited_value
+  changed_entity[edited_field] = edited_value
   return {
     ...state,
     registerCustomerOutgoingCallForm : {
@@ -625,7 +625,7 @@ export const changeUpdateBookingForm = (state, { payload }) => {
   } = payload;
 
   let changed_entity = {};
-  changed_entity[edited_field] = (typeof edited_value === 'string'&& edited_field !='remark__c'|| edited_value instanceof String&& edited_field !='remark__c') ? (edited_value + '').trim() : edited_value
+  changed_entity[edited_field] = edited_value
   return {
     ...state,
     updateBookingForm : {
@@ -703,7 +703,7 @@ export const changeNewBookingForm = (state, { payload }) => {
   } = payload;
 
   let changed_entity = {};
-  changed_entity[edited_field] = (typeof edited_value === 'string' || edited_value instanceof String) ? (edited_value + '').trim() : edited_value
+  changed_entity[edited_field] = edited_value
   return {
     ...state,
     newBookingForm : {
