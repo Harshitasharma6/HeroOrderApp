@@ -56,7 +56,7 @@ class RootScreen extends Component {
     let locationPermission = await HelperService.requestLocationPermission();
 
     if (locationPermission) {
-      HelperService.watchLocation({callback: (fetchCurrentLocationSuccess)});
+      //HelperService.watchLocation({callback: (fetchCurrentLocationSuccess)});
     }else {
       Alert.alert(
         "Location permission Denied.Cannot Proceed",

@@ -393,6 +393,7 @@ async function requestCameraPermission() {
 function getGeolocation() {
 	try {
 		return new Promise((resolve, reject) => {
+			Geolocation.requestAuthorization();
 			Geolocation.getCurrentPosition(
 				position => {
 					const location = position;
@@ -400,12 +401,11 @@ function getGeolocation() {
 				},
 				error => {
 					if (Platform.OS === 'ios') {
-						Alert.alert("Cant get Location, Make sure GPS is on.");
+						Alert.alert(error.code + ' '  + error.message);
 						reject(error)
 					} else if (Platform.OS === 'android') {
 						reject(error);
 					}
-					console.log(error.code, error.message);
 				},
 				{ enableHighAccuracy: true, timeout: 15000, maximumAge: 10000, forceRequestLocation: true }
 			)
