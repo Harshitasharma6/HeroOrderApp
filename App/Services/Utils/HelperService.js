@@ -198,6 +198,10 @@ async function requestLocation() {
 
 		}
 	} else if (Platform.OS === 'ios') {
+		// const iosGranted = Geolocation.requestAuthorization('when');
+		// if (iosGranted == '') {
+
+		// }
 		geolocation = await getGeolocation();
 	}
 
@@ -356,6 +360,7 @@ async function requestLocationPermission() {
 			Permission = false
 		}
 	} else if (Platform.OS === 'ios') {
+		Geolocation.requestAuthorization();
 		Permission = true;
 	}
 
@@ -393,7 +398,6 @@ async function requestCameraPermission() {
 function getGeolocation() {
 	try {
 		return new Promise((resolve, reject) => {
-			Geolocation.requestAuthorization();
 			Geolocation.getCurrentPosition(
 				position => {
 					const location = position;
@@ -401,13 +405,13 @@ function getGeolocation() {
 				},
 				error => {
 					if (Platform.OS === 'ios') {
-						Alert.alert(error.code + ' '  + error.message);
+						//Alert.alert(error.code + ' '  + error.message);
 						reject(error)
 					} else if (Platform.OS === 'android') {
 						reject(error);
 					}
 				},
-				{ enableHighAccuracy: true, timeout: 15000, maximumAge: 10000, forceRequestLocation: true }
+				{ enableHighAccuracy: true, timeout: 20000, maximumAge: 10000, forceRequestLocation: true }
 			)
 		});
 	} catch (err) {

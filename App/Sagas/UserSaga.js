@@ -30,12 +30,13 @@ export function* loginUser(data) {
 			if (location) {
 				data['check_in_location__latitude__s'] = location.latitude;
 				data['check_in_location__longitude__s'] = location.longitude;
-			} else {
-				yield put(UserActions.doNothing());
-			    yield put(UserActions.userLoginFailure());
-			    HelperService.showToast({ message: 'Cannot fetch location. Please try again', duration: 2000, buttonText: 'Okay' });
-			    return;
-			}
+			} 
+			// else {
+			// 	yield put(UserActions.doNothing());
+			//     yield put(UserActions.userLoginFailure());
+			//     HelperService.showToast({ message: 'Cannot fetch location. Please try again', duration: 2000, buttonText: 'Okay' });
+			//     return;
+			// }
 
 			let userData = yield call(userService.loginUser, data)
 			if (userData) {
