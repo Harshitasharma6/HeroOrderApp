@@ -77,7 +77,7 @@ export default StyleSheet.create({
   		color: Colors.primary
 	  },
 	  markLostButtonText1: {
-		fontSize: wp('3.3%'), 
+		fontSize: wp('3.7%'), 
 		color: Colors.primary
 	},
   	markLostButtonIcon: {
