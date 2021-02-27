@@ -26,6 +26,9 @@ class MultipleImagePicker extends Component {
 	async chooseFile() {
 		var options = {
 			title: 'Select Image',
+			 quality: 0.9,
+             maxWidth: 1200,
+             maxHeight: 1200,
 			storageOptions: {
 				skipBackup: true,
 				path: 'images',
