@@ -27,6 +27,7 @@ import MultipleImagePicker from 'App/Components/ImagePicker/MultipleImagePicker'
 import DetailCard from 'App/Components/DetailCard'
 import {Spinner } from 'native-base';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import _ from 'lodash';
 
 
 // 	  "tally_invoice_no__c" : "",
@@ -436,9 +437,10 @@ class InvoiceDetailformScreen extends Component {
 
 <View style={{...Style.bottomMargin}}>
 		            <MultipleImagePicker
+		            	//key={form.adhaar_card_front_and_back__c }
 		            	title={'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)*'}
 		              	images={form.adhaar_card_front_and_back__c || []} 
-		              	loading={uploadImageLoading && uploadImageField == 'adhaar_card_front_and_back__c'}
+		              	//loading={uploadImageLoading && uploadImageField == 'adhaar_card_front_and_back__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'adhaar_card_front_and_back__c', edited_value: '' })}
 		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'adhaar_card_front_and_back__c'}, multiple: true, previous_value: form.adhaar_card_front_and_back__c,})}>
 		              <View style={Style.recurringActionButton}>
@@ -455,9 +457,10 @@ class InvoiceDetailformScreen extends Component {
                       
 				  <View style={{...Style.bottomMargin}}>
 		            <MultipleImagePicker
+		            	//key={form.insurance__c }
 		            	title={'Insurance/Rc/Tax Token'}
 		              	images={form.insurance__c || []} 
-		              	loading={uploadImageLoading && uploadImageField == 'insurance__c'}
+		              	//loading={uploadImageLoading && uploadImageField == 'insurance__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'insurance__c', edited_value: '' })}
 		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'insurance__c'}, multiple: true, previous_value: form.insurance__c,})}>
 		              <View style={Style.recurringActionButton}>
@@ -474,9 +477,10 @@ class InvoiceDetailformScreen extends Component {
 
 				  <View style={{...Style.bottomMargin}}>
 		            <MultipleImagePicker
+		            	//key={form.invoice__c }
 		            	title={'Dealer Invoice'}
 		              	images={form.invoice__c || []} 
-		              	loading={uploadImageLoading && uploadImageField == 'invoice__c'}
+		              	//loading={uploadImageLoading && uploadImageField == 'invoice__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'invoice__c', edited_value: '' })}
 		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'invoice__c'}, multiple: true, previous_value: form.invoice__c,})}>
 		              <View style={Style.recurringActionButton}>
@@ -493,9 +497,10 @@ class InvoiceDetailformScreen extends Component {
 
 				  <View style={{...Style.bottomMargin}}>
 		            <MultipleImagePicker
+		            	//key={form.acknowledgement__c}
 		            	title={'Customer Acknowlegment (in case of Subsidy)'}
 		              	images={form.acknowledgement__c || []} 
-		              	loading={uploadImageLoading && uploadImageField == 'acknowledgement__c'}
+		              	//loading={uploadImageLoading && uploadImageField == 'acknowledgement__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'acknowledgement__c', edited_value: '' })}
 		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'acknowledgement__c'}, multiple: true, previous_value: form.acknowledgement__c,})}>
 		              <View style={Style.recurringActionButton}>

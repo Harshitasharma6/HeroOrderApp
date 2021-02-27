@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react'
 import { StyleSheet, Text, View, Button, Image, Alert, TouchableOpacity } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import GenericIcon from 'App/Components/GenericIcon';
@@ -7,7 +7,9 @@ import {Spinner } from 'native-base';
 import {Colors, ApplicationStyles} from 'App/Theme'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FastImage from 'react-native-fast-image'
-export default class MultipleImagePicker extends React.Component {
+import { connect } from 'react-redux'
+import CommonActions from 'App/Stores/Common/Actions'
+class MultipleImagePicker extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -44,12 +46,17 @@ export default class MultipleImagePicker extends React.Component {
 				} else {
 					const source = { uri: response.uri };
 					let sources = [].concat(this.state.sources);
-					sources.push('data:image/jpeg;base64,' + response.data)
+					sources.push(response.uri)
 
 					this.setState({
 						sources: sources
 					});
-					this.props.onImageSuccess({ image: response.data });
+					const file = {
+				        uri: response.uri,
+				        name: response.fileName,
+				        type: 'image/jpeg',
+				     };
+					this.props.onImageSuccess({ image: response.uri });
 				}
 			});
 		} else {
@@ -74,11 +81,18 @@ export default class MultipleImagePicker extends React.Component {
 			images,
 			children,
 			loading,
-			title
+			title,
+			openModal
 		} = this.props;
 
+
 		let image_sources = this.state.sources && this.state.sources.length ? this.state.sources : images
-		let imageNode = image_sources.map((url) => <FastImage source={{uri: url}} style={styles.image} resizeMode={FastImage.resizeMode.stretch} />);
+		let imageNode = image_sources.map((url) => <TouchableOpacity onPress={() => {
+							return openModal({
+									content:<View style={{flex: 1}}><FastImage style={styles.previewImage}  source={{uri: url}} resizeMode={FastImage.resizeMode.stretch} /></View>, 
+									heading: 'Preview', 
+									bodyFlexHeight: .7
+							})}}><FastImage source={{uri: url}} style={styles.image} resizeMode={FastImage.resizeMode.stretch} /></TouchableOpacity>);
 		let loading_node = [];
 
 		
@@ -101,7 +115,7 @@ export default class MultipleImagePicker extends React.Component {
 				<View style={styles.container}>
 					<View style={{flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start'}}>
 						<Text style={styles.title}>{`${title}`}</Text>
-						{(images.length) ? <GenericIcon name={'times-circle-o'} style={styles.removeIcon} onPress={() => this.onClearImage()}/> : []}
+						{(this.state.sources.length) ? <GenericIcon name={'times-circle-o'} style={styles.removeIcon} onPress={() => this.onClearImage()}/> : []}
 					</View>
 					<View style={styles.imagePreviewContainer}>
 						{imageNode}
@@ -110,7 +124,7 @@ export default class MultipleImagePicker extends React.Component {
 				</View>
 				<View>
 					<TouchableOpacity 
-							disabled={loading} 
+							//disabled={loading} 
 							onPress={!this.props.enable ? () => this.chooseFile() : () => { }} 
 							style={styles.uploadButton}
 						>
@@ -121,6 +135,22 @@ export default class MultipleImagePicker extends React.Component {
 		);
 	}
 }
+
+
+const mapStateToProps = (state) => ({
+  id: state.user.id,
+  token: state.user.token
+});
+
+const mapDispatchToProps = (dispatch) => ({
+ 	openModal:(params)		   => dispatch(CommonActions.openModal(params)),
+	closeModal:(params)		   => dispatch(CommonActions.closeModal(params))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MultipleImagePicker)
 
 const styles = StyleSheet.create({
 	container: {
@@ -187,5 +217,13 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'center',
 		borderRadius: 10
+	}, 
+	previewImage: {
+		width: wp('90%'),
+		height: hp('50%'),
+		resizeMode: 'stretch', 
+		borderRadius: 10,
+		marginHorizontal: wp('1.5%'),
+		marginVertical: wp('1.5%')
 	}
 });

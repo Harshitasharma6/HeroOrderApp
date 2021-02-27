@@ -1,6 +1,9 @@
 import {apiClientService} from './ApiService'
 import { HelperService } from 'App/Services/Utils/HelperService';
 import { Config } from 'App/Config'
+import S3 from 'aws-sdk/clients/s3';
+import {decode} from 'base64-arraybuffer';
+import fs from 'react-native-fs';
 
 const {
     apiClient,
@@ -123,9 +126,18 @@ function getBookingPicklist(params) {
 
 function uploadImage(params) {
   let url = Config.COMMON_SERVICE.UPLOAD_IMAGE;
-  return apiClient.post(url, {image: params.image}, {
+  const formData = new FormData();
+  formData.append('image', {
+    uri: params.image,
+    name: `image.png`,
+    type: `image/png`,
+  });
+
+  return apiClient.post('https://herodealersapp.herokuapp.com/images/single', formData, {
     headers: {
-      token: params.token
+      token: params.token,
+      Accept: 'application/json',
+      'Content-Type': 'multipart/form-data',
     }
   }).then((response) => {
     if (in200s(response.status)) {
@@ -139,6 +151,50 @@ function uploadImage(params) {
 }
 
 
+// async function uploadImageS3(params) {
+//   let file = params.image;
+//   const s3bucket = new S3({
+//      accessKeyId: 'AKIA37SVVXBH4HUFQTXH',
+//      secretAccessKey: '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',
+//      Bucket:  'cloud-cube',
+//      signatureVersion: 'v4',
+//      region: 'us-east-1',
+//      destination: 'undrl5nijfej/public/',
+//      bucketPath: 'undrl5nijfej/public/',
+//      BucketPath: 'undrl5nijfej/public/',
+//    });
+
+
+//   let contentType = 'image/jpeg';
+//   let contentDeposition = 'inline;filename="' + file.name + '"';
+//   const base64 = await fs.readFile(file.uri, 'base64');
+
+//   const arrayBuffer = decode(base64);
+//   s3bucket.createBucket(() => {
+//      const params = {
+//        Bucket: 'cloud-cube',
+//        Key: file.name,
+//        Body: arrayBuffer,
+//        ContentDisposition: contentDeposition,
+//        ContentType: contentType,
+//    };
+
+
+
+//   return s3bucket.upload(params, (err, data) => {
+//      if (err) {
+//        console.log('error in callback');
+//      }
+//     debugger
+//    console.log('success');
+//    console.log("Response URL : "+ data.Location);
+//    });
+//  });
+
+
+// }
+
+
 
 export const CommonService = {
   fetchLeadSources,
@@ -148,5 +204,5 @@ export const CommonService = {
   uploadImage,
   getCallOptions,
   getBookingPicklist,
-  
-  }
+  //uploadImageS3
+}

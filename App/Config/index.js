@@ -29,7 +29,7 @@ export const Config = {
 		FETCH_LEAD_LOST_REASONS: 'visitors/getLostReason',
 		GET_STATES:	'states/getAll',
 		GET_CITIES: 'cities/getAll',
-		UPLOAD_IMAGE: 'images/upload',
+		UPLOAD_IMAGE: 'images/single',
 		GET_CALL_OPTIONS: 'call-activities/callOptions',
 		GET_BOOKING_PICKLIST: 'booking/bookingPickList',
 	},
