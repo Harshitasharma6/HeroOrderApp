@@ -27,8 +27,8 @@ class MultipleImagePicker extends Component {
 		var options = {
 			title: 'Select Image',
 			 quality: 0.9,
-             maxWidth: 1200,
-             maxHeight: 1200,
+             maxWidth: 1080,
+             maxHeight: 1080,
              mediaType: 'photo',
 			storageOptions: {
 				skipBackup: true,
