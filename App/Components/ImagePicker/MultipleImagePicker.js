@@ -29,6 +29,7 @@ class MultipleImagePicker extends Component {
 			 quality: 0.9,
              maxWidth: 1200,
              maxHeight: 1200,
+             mediaType: 'photo',
 			storageOptions: {
 				skipBackup: true,
 				path: 'images',
