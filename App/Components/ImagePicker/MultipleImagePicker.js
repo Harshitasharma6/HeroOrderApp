@@ -26,7 +26,7 @@ class MultipleImagePicker extends Component {
 	async chooseFile() {
 		var options = {
 			title: 'Select Image',
-			 quality: 0.9,
+			 quality: .9,
              maxWidth: 1080,
              maxHeight: 1080,
              mediaType: 'photo',
@@ -107,7 +107,7 @@ class MultipleImagePicker extends Component {
 			loading_node = (
 				<View style={styles.spinner}>
 					<Spinner color={Colors.primary} />
-					<Text style={{color: Colors.primary}}>Processing Image...</Text>
+					<Text style={{color: Colors.primary}}>Uploading Image...</Text>
 					
 				</View>
 			);
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
 	spinner: {
 		marginVertical: 0,
 		position: 'absolute',
-		backgroundColor: 'rgba(232, 229, 229, 0.5)',
+		backgroundColor: 'transparent',
 		height: '117%',
 		width: '100%',
 		zIndex: 2,

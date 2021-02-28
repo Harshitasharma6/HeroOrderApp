@@ -172,7 +172,7 @@ class SchemeClaimformScreen extends Component {
 		            <MultipleImagePicker
 		            	title={'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)*'}
 		              	images={form.adhaar_card_front_and_back__c  || []} 
-		              	loading={uploadImageLoading && uploadImageField == 'adhaar_card_front_and_back__c'}
+		              	//loading={uploadImageLoading && uploadImageField == 'adhaar_card_front_and_back__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'adhaar_card_front_and_back__c', edited_value: '' })}
 		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'adhaar_card_front_and_back__c'}, multiple: true, previous_value: form.adhaar_card_front_and_back__c,edit:true})}>
 		              <View style={Style.recurringActionButton}>
@@ -191,7 +191,7 @@ class SchemeClaimformScreen extends Component {
 		            <MultipleImagePicker
 		            	title={'Insurance/Rc/Tax Token*'}
 		              	images={form.insurance__c || []} 
-		              	loading={uploadImageLoading && uploadImageField == 'insurance__c'}
+		             	loading={uploadImageLoading && uploadImageField == 'insurance__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'insurance__c', edited_value: '' })}
 		              	onImageSuccess={({image}) => uploadImage({image, params: {edited_field: 'insurance__c'}, multiple: true, previous_value: form.insurance__c,edit:true})}>
 		              <View style={Style.recurringActionButton}>
