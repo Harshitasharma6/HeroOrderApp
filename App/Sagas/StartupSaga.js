@@ -16,7 +16,7 @@ import CommonActions from 'App/Stores/Common/Actions';
 
 export function* startup({ params }) {
     let user = yield select(state => state.user);
-    if (user.token && HelperService.datesAreOnSameDay(HelperService.getCurrentTimestamp(), user.is_logged_in)) { //user already logged in
+    if (user.token ) { //user already logged in
         NavigationService.navigateAndReset('InsightsScreen');
         let state_id = user.state__c;
         yield put(ProductsActions.getAllProducts({
