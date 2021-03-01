@@ -233,40 +233,40 @@ function validateBookingForm(params) {
 	}
    
 
-   	if (!params.adhaar_card_front_and_back__c) {
-   		return {
-			invalid: true,
-			invalid_field: 'adhaar_card_front_and_back__c',
-			error_message: `Please upload Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)`
-		}
-   	}
+  //  	if (!params.adhaar_card_front_and_back__c) {
+  //  		return {
+		// 	invalid: true,
+		// 	invalid_field: 'adhaar_card_front_and_back__c',
+		// 	error_message: `Please upload Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)`
+		// }
+  //  	}
 
 
-   	if (params.adhaar_card_front_and_back__c && !params.adhaar_card_front_and_back__c.length) {
-   		return {
-			invalid: true,
-			invalid_field: 'adhaar_card_front_and_back__c',
-			error_message: `Please upload Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)`
-		}
-   	}
+  //  	if (params.adhaar_card_front_and_back__c && !params.adhaar_card_front_and_back__c.length) {
+  //  		return {
+		// 	invalid: true,
+		// 	invalid_field: 'adhaar_card_front_and_back__c',
+		// 	error_message: `Please upload Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)`
+		// }
+  //  	}
 
 
-   	if (!params.invoice__c) {
-   		return {
-			invalid: true,
-			invalid_field: 'invoice__c',
-			error_message: `Please upload Dealer Invoice`
-		}
-   	}
+  //  	if (!params.invoice__c) {
+  //  		return {
+		// 	invalid: true,
+		// 	invalid_field: 'invoice__c',
+		// 	error_message: `Please upload Dealer Invoice`
+		// }
+  //  	}
 
 
-   	if (params.invoice__c && !params.invoice__c.length) {
-   		return {
-			invalid: true,
-			invalid_field: 'invoice__c',
-			error_message: `Please upload Dealer Invoice`
-		}
-   	}
+  //  	if (params.invoice__c && !params.invoice__c.length) {
+  //  		return {
+		// 	invalid: true,
+		// 	invalid_field: 'invoice__c',
+		// 	error_message: `Please upload Dealer Invoice`
+		// }
+  //  	}
 
 
 	return false;
@@ -386,33 +386,55 @@ function validateMarkWonAction(params) {
 		return {
 			invalid: true,
 			invalid_field: 'adhaar_card_front_and_back__c',
-			error_message: 'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License cannot be empty/GST Registration certificate(for B2B)'
+			error_message: `Please upload Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)`
 		}
 	}
 
-	if (!validateFieldIsEmpty(params.insurance__c)) {
-		return {
-			invalid: true,
-			invalid_field: 'insurance__c',
-			error_message: 'Insurance/Rc/Tax Token cannot be empty.'
-		}
-	}
+	
 
 	if (!validateFieldIsEmpty(params.invoice__c)) {
 		return {
 			invalid: true,
 			invalid_field: 'invoice__c',
-			error_message: 'Invoice cannot be empty.'
+			error_message: `Please upload Dealer Invoice`
 		}
 	}
 
-	if (params.total_subsidy__c!=null&&!validateFieldIsEmpty(params.acknowledgement__c)) {
-		return {
+
+	//  	if (!params.adhaar_card_front_and_back__c) {
+  //  		return {
+		// 	invalid: true,
+		// 	invalid_field: 'adhaar_card_front_and_back__c',
+		// 	error_message: `Please upload Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)`
+		// }
+  //  	}
+
+
+   	if (params.adhaar_card_front_and_back__c && !params.adhaar_card_front_and_back__c.length) {
+   		return {
 			invalid: true,
-			invalid_field: 'acknowledgement__c',
-			error_message: 'Customer Acknolegment cannot be empty.'
+			invalid_field: 'adhaar_card_front_and_back__c',
+			error_message: `Please upload Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)`
 		}
-	}
+   	}
+
+
+  //  	if (!params.invoice__c) {
+  //  		return {
+		// 	invalid: true,
+		// 	invalid_field: 'invoice__c',
+		// 	error_message: `Please upload Dealer Invoice`
+		// }
+  //  	}
+
+
+   	if (params.invoice__c && !params.invoice__c.length) {
+   		return {
+			invalid: true,
+			invalid_field: 'invoice__c',
+			error_message: `Please upload Dealer Invoice`
+		}
+   	}
 
 
 	

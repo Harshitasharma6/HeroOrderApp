@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, Dimensions, Image, Linking} from 'react-native'
 import Style from './CustomerProductStyles'
 import { Input, Button } from 'native-base'
@@ -18,6 +18,8 @@ import _ from 'lodash'
 import GenericDisplayCard from 'App/Components/GenericDisplayCard'
 import GenericDisplayCardStrip from 'App/Components/GenericDisplayCard/GenericDisplayCardStrip';
 import ImageSlider from 'App/Components/ImageSlider'
+import { connect } from 'react-redux'
+import CommonActions from 'App/Stores/Common/Actions'
 
 
 // aadhar_card__c: "https://cloud-cube.s3.amazonaws.com/g0ze5gjzv4jf/public/1599747201305_662099.png"
@@ -103,38 +105,82 @@ import ImageSlider from 'App/Components/ImageSlider'
 // reference_no__c: "123"
 // scheme_applied__c: null
 
+class CustomerProductInfoCard extends Component {
+render(){
+    const {
+        data,
+        openModal
+    } = this.props;
 
-const CustomerProductInfoCard = ({data}) => (
-	<View style={Style.box}>
-		
-        
-        <View>
-        	<GenericDisplayCardStrip key={'Tally Invoice No. '} label={'Tally Invoice No.'} value={(data.tally_invoice_no__c|| '') }/>
-            <GenericDisplayCardStrip key={'Chassis No.'} label={'Chassis No.'} value={(data.chassis_no__c|| '') }/>
-            <GenericDisplayCardStrip key={'Motor No.'} label={'Motor No.'} value={(data.motor_no__c || '')}/>
-            <GenericDisplayCardStrip key={'Model Color'} label={'Model Color'} value={(data.model_color__c || '')}/>
-            <GenericDisplayCardStrip key={'Battery No.'} label={'Battery No.'} value={(data.charger_no__c || '') }/>
-            <GenericDisplayCardStrip key={'Make Of Battery'} label={'Make Of Battery'} value={(data.battery_no__c|| '') }/>
-            <GenericDisplayCardStrip key={'Capacity of Each Battery'} label={'Capacity of Each Battery'} value={(data.make_of_battery__c || '') }/>
-            <GenericDisplayCardStrip key={'Battery No.'} label={'Battery No.'} value={(data.capacity_of_each_battery__c || '') }/>
-            <GenericDisplayCardStrip key={'Type of Battery'} label={'Type of Battery'} value={(data.type_of_battery__c || '') }/>
-            <GenericDisplayCardStrip key={'Owners Handbook No.'} label={'Owners Handbook No.'} value={(data.owner_s_handbook_no__c || '') }/>
+    console.log('data', data)
 
-            <GenericDisplayCardStrip key={'Purchase Date'} label={'Purchase Date'} value={HelperService.dateReadableFormat(data.purchased_date__c) }/>
+    return (
+    	<View style={Style.box}>
+    		
+            
+            <View>
+            	<GenericDisplayCardStrip key={'Tally Invoice No. '} label={'Tally Invoice No.'} value={(data.tally_invoice_no__c|| '') }/>
+                <GenericDisplayCardStrip key={'Chassis No.'} label={'Chassis No.'} value={(data.chassis_no__c|| '') }/>
+                <GenericDisplayCardStrip key={'Motor No.'} label={'Motor No.'} value={(data.motor_no__c || '')}/>
+                <GenericDisplayCardStrip key={'Model Color'} label={'Model Color'} value={(data.model_color__c || '')}/>
+                <GenericDisplayCardStrip key={'Battery No.'} label={'Battery No.'} value={(data.charger_no__c || '') }/>
+                <GenericDisplayCardStrip key={'Make Of Battery'} label={'Make Of Battery'} value={(data.make_of_battery__c|| '') }/>
+                <GenericDisplayCardStrip key={'Capacity of Each Battery'} label={'Capacity of Each Battery'} value={(data.capacity_of_each_battery__c || '') }/>
+                <GenericDisplayCardStrip key={'Battery No.'} label={'Battery No.'} value={(data.battery_no__c || '') }/>
+                <GenericDisplayCardStrip key={'Type of Battery'} label={'Type of Battery'} value={(data.type_of_battery__c || '') }/>
+                <GenericDisplayCardStrip key={'Owners Handbook No.'} label={'Owners Handbook No.'} value={(data.owner_s_handbook_no__c || '') }/>
 
-            <GenericDisplayCardStrip key={'Offer Applied'} label={'Offer Applied'} value={(!!data.offer_applied__c ? 'Yes' : 'No') }/>
+                <GenericDisplayCardStrip key={'Purchase Date'} label={'Purchase Date'} value={HelperService.dateReadableFormat(data.purchased_date__c) }/>
 
-            <GenericDisplayCardStrip key={'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)'} label={'Aadhar Card/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)'} value={<Text style={data.adhaar_card_front_and_back__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.adhaar_card_front_and_back__c)}>{data.adhaar_card_front_and_back__c ? 'View' : 'No file'}</Text>}/>
+                <GenericDisplayCardStrip key={'Offer Applied'} label={'Offer Applied'} value={(!!data.offer_applied__c ? 'Yes' : 'No') }/>
 
-            <GenericDisplayCardStrip key={'Insurance/Rc/Tax Token'} label={'Insurance/Rc/Tax Token'} value={<Text style={data.insurance__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.insurance__c)}>{data.insurance__c ? 'View' : 'No file'}</Text>}/>
+                <GenericDisplayCardStrip key={'Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)'} label={'Aadhar Card/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)'} value={<Text style={data.adhaar_card_front_and_back__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => {
+                            return openModal({
+                                    content:<View style={{flex: 1}}><ImageSlider images={data.adhaar_card_front_and_back__c ? data.adhaar_card_front_and_back__c.split(' ') : []} /></View>, 
+                                    heading: 'Preview', 
+                                    bodyFlexHeight: .7
+                            })}}>{data.adhaar_card_front_and_back__c ? 'View' : 'No file'}</Text>}/>
 
-          <GenericDisplayCardStrip key={'Invoice'} label={'Dealer Invoice'} value={<Text style={data.invoice__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.invoice__c)}>{data.invoice__c ? 'View' : 'No file'}</Text>}/>
-<GenericDisplayCardStrip key={'Acknowledgement'} label={'Acknowledgement'} value={<Text style={data.acknowledgement__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => Linking.openURL(data.acknowledgement__c)}>{data.acknowledgement__c ? 'View' : 'No file'}</Text>}/>
-           
-        </View>
-    </View>   
-)
+                <GenericDisplayCardStrip key={'Insurance/Rc/Tax Token'} label={'Insurance/Rc/Tax Token'} value={<Text style={data.insurance__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => {
+                            return openModal({
+                                    content:<View style={{flex: 1}}><ImageSlider images={data.insurance__c ? data.insurance__c.split(' ') : []} /></View>, 
+                                    heading: 'Preview', 
+                                    bodyFlexHeight: .7
+                            })}}>{data.insurance__c ? 'View' : 'No file'}</Text>}/>
 
-export default CustomerProductInfoCard
+              <GenericDisplayCardStrip key={'Invoice'} label={'Dealer Invoice'} value={<Text style={data.invoice__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => {
+                            return openModal({
+                                    content:<View style={{flex: 1}}><ImageSlider images={data.invoice__c ? data.invoice__c.split(' ') : []} /></View>, 
+                                    heading: 'Preview', 
+                                    bodyFlexHeight: .7
+                            })}}>{data.invoice__c ? 'View' : 'No file'}</Text>}/>
+                <GenericDisplayCardStrip key={'Acknowledgement'} label={'Acknowledgement'} value={<Text style={data.acknowledgement__c ? {textDecorationLine: 'underline', color: '#1890ff'} : {}} onPress={() => {
+                            return openModal({
+                                    content:<View style={{flex: 1}}><ImageSlider images={data.acknowledgement__c ? data.acknowledgement__c.split(' ') : []} /></View>, 
+                                    heading: 'Preview', 
+                                    bodyFlexHeight: .7
+                            })}}>{data.acknowledgement__c ? 'View' : 'No file'}</Text>}/>
+                           
+                        </View>
+                    </View>   
+                )
+
+    }}
+
+
+const mapStateToProps = (state) => ({
+  id: state.user.id,
+  token: state.user.token
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    openModal:(params)           => dispatch(CommonActions.openModal(params)),
+    closeModal:(params)           => dispatch(CommonActions.closeModal(params))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CustomerProductInfoCard)
 
 
