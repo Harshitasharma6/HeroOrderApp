@@ -130,7 +130,7 @@ function uploadImage(params) {
     type: `image/png`,
   });
 
-  return apiClient.post('https://herodealersapp.herokuapp.com/images/single', formData, {
+  return apiClient.post(url, formData, {
     headers: {
       token: params.token,
       Accept: 'application/json',
