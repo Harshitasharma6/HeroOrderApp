@@ -168,6 +168,8 @@ function validateBookingForm(params) {
 	//  "offer_applied__c" : true,
 	// "total_scheme_amount__c": 100
 	// "outstanding_amount__c"
+	//adhaar_card_front_and_back__c
+	//invoice__c
 
 	if (!validateFieldIsEmpty(params.first_name__c)) {
 		return {
@@ -229,6 +231,43 @@ function validateBookingForm(params) {
 			error_message: `Amount cannot be greater than payable amount. Max value can be ${params.total_amount_payable__c}`
 		}
 	}
+   
+
+   	if (!params.adhaar_card_front_and_back__c) {
+   		return {
+			invalid: true,
+			invalid_field: 'adhaar_card_front_and_back__c',
+			error_message: `Please upload Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)`
+		}
+   	}
+
+
+   	if (params.adhaar_card_front_and_back__c && !params.adhaar_card_front_and_back__c.length) {
+   		return {
+			invalid: true,
+			invalid_field: 'adhaar_card_front_and_back__c',
+			error_message: `Please upload Aadhar Card(front & back)/VoterId/ PAN Card/Driving License/GST Registration certificate(for B2B)`
+		}
+   	}
+
+
+   	if (!params.invoice__c) {
+   		return {
+			invalid: true,
+			invalid_field: 'invoice__c',
+			error_message: `Please upload Dealer Invoice`
+		}
+   	}
+
+
+   	if (params.invoice__c && !params.invoice__c.length) {
+   		return {
+			invalid: true,
+			invalid_field: 'invoice__c',
+			error_message: `Please upload Dealer Invoice`
+		}
+   	}
+
 
 	return false;
 

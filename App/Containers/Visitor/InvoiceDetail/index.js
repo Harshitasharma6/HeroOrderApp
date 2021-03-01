@@ -478,7 +478,7 @@ class InvoiceDetailformScreen extends Component {
 				  <View style={{...Style.bottomMargin}}>
 		            <MultipleImagePicker
 		            	//key={form.invoice__c }
-		            	title={'Dealer Invoice'}
+		            	title={'Dealer Invoice*'}
 		              	images={form.invoice__c || []} 
 		              	loading={uploadImageLoading && uploadImageField == 'invoice__c'}
 		              	onClearImage={(value) => changeForm({ edited_field: 'invoice__c', edited_value: '' })}
