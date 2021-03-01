@@ -182,25 +182,33 @@ export function* uploadImage({ payload }) {
 		let {token} = yield select(state => state.user)
 		payload.token = token
 		let url = yield call(CommonService.uploadImage, payload);
+		let new_value = '';
 		if (url) {
 			yield put(CommonActions.uploadImageSuccess(url));
-			let new_value = url;
-			if (payload.multiple) {
-				payload.previous_value = payload.previous_value || [];
-				payload.previous_value.push(new_value);
-				new_value = payload.previous_value;
-			}if(payload.edit)
-			{
-				yield put(DealersActions.changeDealerClaimForm({...payload.params, edited_value: new_value}));
-
-			}
-			else{yield put(VisitorActions.changeUpdateBookingForm({...payload.params, edited_value: new_value}));}
+			new_value = url;
 		} else {
+			new_value = '';
 			yield put(CommonActions.uploadImageFailure());
+			HelperService.showToast({ message: 'Upload Failed! Please Upload again.', duration: 2000, buttonText: 'Okay' });
 		}
+		
+		if (payload.multiple) {
+			payload.previous_value = payload.previous_value || [];
+			payload.previous_value.push(new_value);
+			new_value = payload.previous_value;
+		}
+
+
+		if(payload.edit){
+			yield put(DealersActions.changeDealerClaimForm({...payload.params, edited_value: new_value}));
+		}else{
+			yield put(VisitorActions.changeUpdateBookingForm({...payload.params, edited_value: new_value}));
+		}
+
 	} catch (error) {
 		console.log('error', error)
 		yield put(CommonActions.uploadImageFailure());
+		HelperService.showToast({ message: 'Upload Failed! Please Upload again.', duration: 2000, buttonText: 'Okay' });
 	}
 }
 

@@ -90,7 +90,18 @@ class MultipleImagePicker extends Component {
 		} = this.props;
 
 
+
 		let image_sources = this.state.sources && this.state.sources.length ? this.state.sources : images
+
+
+		if (images && images.length){
+			images.map((val, index) => {
+				if(val == '') {
+					image_sources.splice(index, 1);
+				}
+			});
+		}
+
 		let imageNode = image_sources.map((url) => <TouchableOpacity onPress={() => {
 							return openModal({
 									content:<View style={{flex: 1}}><FastImage style={styles.previewImage}  source={{uri: url}} resizeMode={FastImage.resizeMode.stretch} /></View>, 
