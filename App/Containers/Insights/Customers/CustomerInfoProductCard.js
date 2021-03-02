@@ -44,7 +44,7 @@ const CustomerInfoProductCard = ({ onPress, data, id, showEditButton=true}) => (
       <View style={Styles.btmBox}>
       
 	      <GenericDisplayCardStrip key={'Phone'+ data.id} label={'Phone'} value={data.mobilephone} />
-        {data.gender__c? <GenericDisplayCardStrip key={'Gender'+data.id} label={'Gemder'} value={data.gender__c} /> : []}
+        {data.gender__c? <GenericDisplayCardStrip key={'Gender'+data.id} label={'Gender'} value={data.gender__c} /> : []}
         {data.age__c ? <GenericDisplayCardStrip key={'Age'+ data.id} label={'Age'} value={data.age__c} /> : []}
         {data.address_line_1__c ? <GenericDisplayCardStrip key={'Address'+ data.id} label={'Address'} value={data.address_line_1__c} /> : []}
        

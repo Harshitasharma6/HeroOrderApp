@@ -201,15 +201,15 @@ class InvoiceDetailformScreen extends Component {
 				<>
 			   <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
 					<InputText
-						styles={Style.mb10}
+						styles={{...Style.mb10, ...ApplicationStyles.uppercase}}
 						placeholder={'Tally Invoice No.'}
 						value={form.tally_invoice_no__c}
-						onChange={(value) => changeForm({ edited_field: 'tally_invoice_no__c', edited_value: value })}
+						onChange={(value) => changeForm({ edited_field: 'tally_invoice_no__c', edited_value: value.toUpperCase() })}
 						error={validation.invalid && validation.invalid_field == 'tally_invoice_no__c'}
 						label={'Tally Invoice No.'}
 					/>
 					<InputText
-						styles={Style.mb10}
+						styles={{...Style.mb10, ...ApplicationStyles.uppercase}}
 						placeholder={' GSTIN No.'}
 						value={form.customer_gstin_no__c}
 						onChange={(value) => changeForm({ edited_field: 'customer_gstin_no__c', edited_value: value })}
@@ -221,19 +221,19 @@ class InvoiceDetailformScreen extends Component {
                     </View>  
 
 					<InputText
-						styles={Style.mb10}
+						styles={{...Style.mb10, ...ApplicationStyles.uppercase}}
 						placeholder={'Online Order No.'}
 						value={form.online_order_no__c}
-						onChange={(value) => changeForm({ edited_field: 'online_order_no__c', edited_value: value })}
+						onChange={(value) => changeForm({ edited_field: 'online_order_no__c', edited_value: value.toUpperCase() })}
 						error={validation.invalid && validation.invalid_field == 'online_order_no__c'}
 						label={'Online Order No.* (For Online Schemes only)'}
 					/>
 
                     <InputText
-						styles={Style.mb10}
+						styles={{...Style.mb10, ...ApplicationStyles.uppercase}}
 						placeholder={'Refrence  No.'}
 						value={form.reference_no__c}
-						onChange={(value) => changeForm({ edited_field: 'reference_no__c', edited_value: value })}
+						onChange={(value) => changeForm({ edited_field: 'reference_no__c', edited_value: value.toUpperCase() })}
 						error={validation.invalid && validation.invalid_field == 'reference_no__c'}
 						label={'Reference No.* (For Refrence Schemes only)'}
 					/>	
@@ -296,10 +296,10 @@ class InvoiceDetailformScreen extends Component {
 					/>
 
 					 <InputText
-						style={Style.mb10}
+						styles={{...Style.mb10, ...ApplicationStyles.uppercase}}
 						placeholder={'Chassis No.'}
 						value={form.chassis_no__c}
-						onChange={(value) => changeForm({ edited_field: 'chassis_no__c', edited_value: value })}
+						onChange={(value) => changeForm({ edited_field: 'chassis_no__c', edited_value: value.toUpperCase() })}
 						error={validation.invalid && validation.invalid_field == 'chassis_no__c'}
 						label={'Chassis No.'}
 					/>
@@ -308,20 +308,20 @@ class InvoiceDetailformScreen extends Component {
 					<View style={{flexDirection:'row', }}>
 						<View style={{width:'45%'}}>
 					<InputText
-						styles={Style.mb10}
+						styles={{...Style.mb10, ...ApplicationStyles.uppercase}}
 						placeholder={'Motor No.'}
 						value={form.motor_no__c}
-						onChange={(value) => changeForm({ edited_field: 'motor_no__c', edited_value: value })}
+						onChange={(value) => changeForm({ edited_field: 'motor_no__c', edited_value: value.toUpperCase() })}
 						error={validation.invalid && validation.invalid_field == 'motor_no__c'}
 						label={'Motor No.'}
 					/>
 					</View>
 					<View style={{width:'45%', marginLeft:'9%'}}>
 					<InputText
-						styles={Style.mb10}
+						styles={{...Style.mb10, ...ApplicationStyles.uppercase}}
 						placeholder={'Charger No.'}
 						value={form.charger_no__c}
-						onChange={(value) => changeForm({ edited_field: 'charger_no__c', edited_value: value })}
+						onChange={(value) => changeForm({ edited_field: 'charger_no__c', edited_value: value.toUpperCase() })}
 						error={validation.invalid && validation.invalid_field == 'charger_no__c'}
 						label={'Charger No. '}
 					/>
@@ -330,10 +330,10 @@ class InvoiceDetailformScreen extends Component {
                     </View>  
 
 					<InputText
-						styles={Style.mb10}
+						styles={{...Style.mb10, ...ApplicationStyles.uppercase}}
 						placeholder={' Battery No. *'}
 						value={form.battery_no__c}
-						onChange={(value) => changeForm({ edited_field: 'battery_no__c', edited_value: value })}
+						onChange={(value) => changeForm({ edited_field: 'battery_no__c', edited_value: value.toUpperCase() })}
 						error={validation.invalid && validation.invalid_field == 'battery_no__c'}
 						label={'Battery No. '}
 					/>
@@ -352,19 +352,19 @@ class InvoiceDetailformScreen extends Component {
 
 
 					<InputText
-						style={Style.mb10}
+						styles={{...Style.mb10, ...ApplicationStyles.uppercase}}
 						placeholder={'Make of Battery'}
 						value={form.make_of_battery__c}
-						onChange={(value) => changeForm({ edited_field: 'make_of_battery__c', edited_value: value })}
+						onChange={(value) => changeForm({ edited_field: 'make_of_battery__c', edited_value: value.toUpperCase() })}
 						error={validation.invalid && validation.invalid_field == 'make_of_battery__c'}
 						label={'Make of Battery'}
 					/>
 
 					<InputText
-						style={Style.mb10}
+						styles={{...Style.mb10, ...ApplicationStyles.uppercase}}
 						placeholder={'Type of Battery'}
 						value={form.type_of_battery__c}
-						onChange={(value) => changeForm({ edited_field: 'type_of_battery__c', edited_value: value })}
+						onChange={(value) => changeForm({ edited_field: 'type_of_battery__c', edited_value: value.toUpperCase() })}
 						error={validation.invalid && validation.invalid_field == 'type_of_battery__c'}
 						label={'Type of Battery'}
 					/>	
@@ -372,10 +372,10 @@ class InvoiceDetailformScreen extends Component {
 					
 
                 	<InputText
-						styles={Style.mb10}
+						styles={{...Style.mb10, ...ApplicationStyles.uppercase}}
 						placeholder={'Capacity of Each Battery'}
 						value={form.capacity_of_each_battery__c}
-						onChange={(value) => changeForm({ edited_field: 'capacity_of_each_battery__c', edited_value: value })}
+						onChange={(value) => changeForm({ edited_field: 'capacity_of_each_battery__c', edited_value: value.toUpperCase() })}
 						error={validation.invalid && validation.invalid_field == 'capacity_of_each_battery__c'}
 						label={'Capacity of Each Battery'}
 					/>

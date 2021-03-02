@@ -195,5 +195,8 @@ export default {
 	    ...Helpers.center,
 	    backgroundColor: Colors.white,
 	    flex: 1
+  	},
+  	uppercase: {
+  		textTransform: 'uppercase'
   	}
 }
