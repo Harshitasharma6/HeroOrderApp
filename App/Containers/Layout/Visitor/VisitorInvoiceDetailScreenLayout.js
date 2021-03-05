@@ -18,7 +18,7 @@ class VisitorInvoiceDetailScreenLayout extends React.Component {
     
       return (
       <View >
-        <Header transparent style={Styles.header}>
+        <Header style={Styles.header}>
         	<View style={{paddingTop: hp('1%'), paddingBottom: hp('0%')}}>
         		<BackArrowButton />
             	</View>
@@ -53,7 +53,8 @@ const Styles = StyleSheet.create({
     alignItems: 'flex-start',
     height: hp('10%'),
     flexDirection: 'column',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: Colors.white
   },
   arrowContainer: {
     width: wp('20%'),

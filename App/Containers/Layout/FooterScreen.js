@@ -18,7 +18,7 @@ class FooterScreen extends React.Component {
       checkout
     } = this.props;
 
-    NavigationService.navigate(screen);
+    NavigationService.navigateAndReset(screen);
 
   }
 
