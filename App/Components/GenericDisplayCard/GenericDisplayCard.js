@@ -16,6 +16,8 @@ export default class GenericDisplayCard extends PureComponent {
       showTextAvatar
     } = this.props;
 
+    
+
     return(
       <TouchableWithoutFeedback onPress={onPress}>
         <View style={dark ? { ...Style.darkCard, ...style } : { ...Style.card, ...style }}>

@@ -18,19 +18,24 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 
 class CustomersScreen extends Component {
   componentDidMount() {
-		this.fetchCall()	
+    const {
+      data
+    } = this.props;
+    if(data && data.length) {
+    }else {
+      this.fetchCall()  
+    }
+		
 	}
 
 	fetchCall() {
 		const {
-		
+      data,
 		  fetchData
 		} = this.props
-	
-		fetchData({
-		 
-		});
-    }
+
+    fetchData({});
+  }
     
 
     filterResults(list) {
@@ -39,7 +44,7 @@ class CustomersScreen extends Component {
       } = this.props;
       let filteredList = HelperService.searchTextListFilter(list,  customerSearchFilters['searchBy'],  customerSearchFilters['searchValue']);
       filteredList = HelperService.sortListFilter(filteredList, customerSearchFilters['sortBy'], customerSearchFilters['sortType']);    
-  return filteredList;
+      return filteredList;
     }  
 
   getDataNode() {
@@ -60,18 +65,20 @@ class CustomersScreen extends Component {
         visibleNode = (
           <FlatList
             data={filteredCustomerList}
+            initialNumToRender={20}
+            maxToRenderPerBatch={20}
             renderItem={({ item }) => 
-            	<GenericDisplayCard dark={false}
+            	<GenericDisplayCard 
+                dark={false}
                 style={{ width: '88%', elevation: 0 }}
-                
 	              heading={item.name}
 	              showTextAvatar={true}
-	              onPress={() => { NavigationService.navigate('CustomerSummaryScreen', {data: item});}}
-	              content={[
+	              onPress={() => NavigationService.navigate('CustomerSummaryScreen', {data: item})}
+	              content={
 	               <BlueButton title={''} style={Styles.callButton} textStyle={Styles.callButtonText} onPress={() => HelperService.callNumber(item.mobilephone)}><GenericIcon name="phone" style={Styles.callButtonIcon}/></BlueButton>
-              ]}
+              }
             />}
-            keyExtractor={item => item}
+            keyExtractor={item => item.id}
             onRefresh={() => this.fetchCall()}
             refreshing={loader}
             ListEmptyComponent={() => <NoDataFound text={'No Customers Found'} />}

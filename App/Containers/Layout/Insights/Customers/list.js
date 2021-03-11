@@ -22,7 +22,7 @@ class CustomerList extends React.Component {
 
     return (
       <View>
-        <Header transparent style={Styles.header}>
+        <Header style={Styles.header}>
         	<SearchBar
 	            placeholder={`Search Customer`}
               onInputChange={(text) => updateSearchFilters({ edited_field: 'searchValue', 'edited_value': text })}
@@ -73,7 +73,8 @@ const Styles = StyleSheet.create({
   header: {
     height: hp('10%'),
     flexDirection: 'row',
-    marginTop:hp('3%')
+    paddingTop:hp('3%'),
+    backgroundColor: Colors.white
 
   },
   arrowContainer: {
