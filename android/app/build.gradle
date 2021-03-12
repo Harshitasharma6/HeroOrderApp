@@ -83,6 +83,12 @@ project.ext.react = [
 
 apply from: "../../node_modules/react-native/react.gradle"
 
+configurations.all {
+    resolutionStrategy {
+       force "com.facebook.soloader:soloader:0.8.0"
+    }
+}
+
 /**
  * Set this to true to create two separate APKs instead of one:
  *   - An APK that only works on ARM devices
@@ -135,8 +141,8 @@ android {
         applicationId "com.heroelectric"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1400
-        versionName "1.6.0"
+        versionCode 1600
+        versionName "1.8.0"
         multiDexEnabled = true
     }
     splits {
@@ -184,6 +190,12 @@ android {
                 output.versionCodeOverride =
                         versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
             }
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy {
+           force "com.facebook.soloader:soloader:0.8.0"
         }
     }
 }
