@@ -121,6 +121,7 @@ import SchemeClaimInfoScreen from 'App/Containers/SchemeClaim'
 import SubDealerInfoScreen from 'App/Containers/SubDealerInfo'
 import SchemeClaimformScreen from 'App/Containers/SchemeClaim/AddSchemeClaim'
 import ProductInfoSchemesScreen from 'App/Containers/Visitor/AddProduct/ProductsSchemes'
+import {Easing, Animated} from 'react-native'
 
 //ProductInfoSchemesScreen
 
@@ -253,6 +254,31 @@ const StackNavigator = createStackNavigator(
     // By default the application will show the splash screen
     initialRouteName: 'SplashScreen',
     headerMode: 'none',
+    transitionConfig: () => ({
+      transitionSpec: {
+        duration: 300,
+        easing: Easing.out(Easing.poly(4)),
+        timing: Animated.timing,
+        useNativeDriver: true
+      },
+      screenInterpolator: sceneProps => {
+                const {layout, position, scene} = sceneProps;
+                const {index} = scene;
+
+                const width = layout.initWidth;
+                const translateX = position.interpolate({
+                    inputRange: [index - 1, index, index + 1],
+                    outputRange: [width, 0, 0],
+                });
+
+                const opacity = position.interpolate({
+                    inputRange: [index - 1, index - 0.99, index],
+                    outputRange: [0, 1, 1],
+                });
+
+                return {opacity, transform: [{translateX: translateX}]};
+            },
+    })
   }
 )
 
